@@ -1,0 +1,13 @@
+<div class="card p-0" *ngIf="!eventStarted">
+  <!-- <ngx-datatable [rows]="datasource.Connection">
+    <ngx-datatable-column
+    name="Network Quality"
+    prop="Network Quality"
+    [width]="250"
+  ></ngx-datatable-column>
+  </ngx-datatable> -->
+  <app-previous-events-connection [datasource]="datasource.Connection"></app-previous-events-connection>
+</div>
+<div *ngIf="eventStarted">
+  <router-outlet></router-outlet>
+</div>

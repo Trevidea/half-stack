@@ -1,0 +1,35 @@
+@import "@core/scss/angular/libs/form-wizard.component.scss";
+@import "@core/scss/angular/libs/select.component.scss";
+
+.vertical-line {
+  border-left: 1px solid #ccc; /* Adjust the color and width as needed */
+  padding-left: 10px; /* Adjust the padding to control the gap between columns and the line */
+}
+
+.custome-stepper-header{
+    padding: 1em;
+    border-radius: 10%;
+}
+.custome-stepper-title{
+    color: #6e6b7b;
+    font-weight: 600;
+    line-height: 1rem;
+    margin-bottom: 0rem
+}
+
+.custome-stepper-sub-title{
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: #b9b9c3;
+}
+.custome-stepper{
+    cursor: pointer;
+}
+.custome-stepper:hover{
+    .custome-stepper-header {
+        
+        background-color: antiquewhite;
+        padding: 1em;
+        border-radius: 10%;
+      }
+}

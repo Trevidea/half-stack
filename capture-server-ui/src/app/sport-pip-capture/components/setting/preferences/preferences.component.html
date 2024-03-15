@@ -1,0 +1,191 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-xxl-3  col-lg-12 col-md-12 col-sm-12">
+        <h5>Display</h5>
+      </div>
+      <div class="col-xxl-9 col-lg-12 col-lg-9 col-md-12 col-sm-12">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-4 mb-1">
+            <div class="row">
+              <div class="col-2 p-1">
+                <div class="custom-control custom-control-warning custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="lightModeCheckbox" value="default"
+                    name="Light" (change)="setLightMode();onCheckboxSelected('default') " />
+                  <label class="custom-control-label" for="lightModeCheckbox"></label>
+                </div>
+              </div>
+              <div class="col-10 p-1" style="background-color: rgba(242, 193, 56, 0.1); border-radius:  5px; ">
+                <div class="d-flex">
+                  <i class="bi bi-sun-fill" style="color: rgba(242, 193, 56, 1)"></i>
+                  <h5 class="ml-1">Light Mode</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-4 mb-1">
+            <div class="row">
+              <div class="col-2 p-1">
+                <div class="custom-control custom-control-secondary custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="darkModeCheckbox" value="dark" name="dMode"
+                    (click)="setDarkMode();onCheckboxSelected('dark') " />
+                  <label class="custom-control-label" for="darkModeCheckbox"></label>
+                </div>
+              </div>
+              <div class="col-10 p-1"
+                style="background-color: rgba(74, 74, 74, 1) ;  border-radius:  5px; border: 1px solid rgba(0, 0, 0, 1);">
+                <div class="d-flex">
+                  <i class="bi bi-moon-fill" style="color: rgba(255, 255, 255, 1)"></i>
+                  <h5 class="ml-1" style="color: rgba(255, 255, 255, 1)">
+                    Dark Mode
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 mb-1">
+            <div class="row">
+              <div class="col-2 p-1">
+                <div class="custom-control custom-control-secondary custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="autoSwitchCheckbox" value="autoSwitch"
+                    [(ngModel)]="autoSwitchEnabled" (click)="showTime();toggleAutoSwitch()" name="auto" />
+                  <label class="custom-control-label" for="autoSwitchCheckbox"></label>
+                </div>
+              </div>
+              <div class="col-10 p-1"
+                style="background-color: rgba(248, 248, 248, 1) ; border-radius:  5px; border: 1px solid rgba(0, 0, 0, 1);">
+                <div class="d-flex">
+                  <i class="bi bi-arrow-repeat " style="color: rgba(0, 0, 0, 1); font-size: 17px;"></i>
+                  <h5 class="ml-1" style="color: rgba(0, 0, 0, 1); ">
+                    Auto switch
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-1" *ngIf="showTimePicker">
+        <div class="row ">
+          <div class="col-9 d-flex justify-content-end align-items-end">
+            <h4>Light Mode turns on</h4>
+          </div>
+          <div class="col-3 pl-md-2 pr-0 ">
+            <ng2-flatpickr [config]="timeOptions" name="time"></ng2-flatpickr>
+          </div>
+        </div>
+      </div>
+      <div class="col-12" *ngIf="showTimePicker">
+        <div class="row ">
+          <div class="col-9 d-flex justify-content-end align-items-end">
+            <h4>Dark Mode turns on</h4>
+          </div>
+          <div class="col-3 pl-md-2  pr-0  ">
+            <ng2-flatpickr [config]="timeOptions2" name="time"></ng2-flatpickr>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+
+    <div class="row mt-2">
+      <div class="col-3 ">
+        <h5>Customization</h5>
+      </div>
+      <div class="col-9">
+        <div class="d-flex d-inline-flex">
+          <div class="p-1">
+            <button (click)="file.click()" type="button" class="btn btn-warning btn-sm" rippleEffect>
+              Change Logo
+            </button>
+            <input type="file" #file id="account-upload" hidden accept="image/*"
+              (change)="extractDominantColors($event)" />
+          </div>
+
+          <div class=" d-flex align-items-center justify-content-center pl-1 pr-1"
+            style="border: 1px solid rgba(195, 195, 195, 1); border-radius: 10px; ">
+            <img [src]="avatarImage" class="rounded p-0 m-0" alt="profile image" height="35" />
+          </div>
+          <div class="ml-1 d-inline-flex p-1">
+            <ngx-colors class="m-0" ngx-colors-trigger [(ngModel)]="color1"></ngx-colors>
+          </div>
+
+          <div class="form-group ml-1 mt-1" style="width:max-content">
+            <input type="text" class="form-control" id="basicInput" placeholder="" value="{{ color1}}" />
+          </div>
+          <div class="ml-1 d-inline-flex p-1">
+            <ngx-colors class="m-0" ngx-colors-trigger [(ngModel)]="color2"></ngx-colors>
+          </div>
+
+          <div class="form-group ml-1 mt-1" style="width:max-content">
+            <input type="text" class="form-control" id="basicInput" placeholder="" value="{{ color2}}" />
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="row mt-2">
+      <div class="col-3 ">
+        <h5>Notification</h5>
+      </div>
+      <div class="col-9">
+        <div class="rounded border-secondary p-1">
+          <div class="d-flex justify-content-between mt-1">
+            <h4>Related to event</h4>
+            <div class="custom-control custom-control-secondary custom-switch">
+              <input type="checkbox" checked class="custom-control-input" id="customSwitch44" />
+              <label class="custom-control-label" for="customSwitch44"></label>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between mt-1">
+            <h4>Related to queries</h4>
+            <div class="custom-control custom-control-secondary custom-switch">
+              <input type="checkbox" checked class="custom-control-input" id="customSwitch44" />
+              <label class="custom-control-label" for="customSwitch44"></label>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between mt-1">
+            <h4>Related to updates/log</h4>
+            <div class="custom-control custom-control-secondary custom-switch">
+              <input type="checkbox" checked class="custom-control-input" id="customSwitch44" />
+              <label class="custom-control-label" for="customSwitch44"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-3 ">
+        <h5>Video Resolution</h5>
+      </div>
+      <div class="col-9">
+        <div class="btn-group">
+          <div ngbDropdown>
+            <button ngbDropdownToggle class="btn btn-outline-secondary" type="button" id="dropdownMenuButton7"
+              rippleEffect>
+              Auto
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton7">
+              <a ngbDropdownItem href="javascript:void(0)">Auto</a>
+              <a ngbDropdownItem href="javascript:void(0)">144p</a>
+              <a ngbDropdownItem href="javascript:void(0)">360p</a>
+              <a ngbDropdownItem href="javascript:void(0)">720p</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

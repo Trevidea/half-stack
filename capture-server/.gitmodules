@@ -1,0 +1,9 @@
+[submodule "dependency/cpprestsdk"]
+	path = dependency/cpprestsdk
+	url = https://github.com/microsoft/cpprestsdk.git
+[submodule "dependency/jsoncpp"]
+	path = dependency/jsoncpp
+	url = https://github.com/open-source-parsers/jsoncpp.git
+[submodule "dependency/spdlog"]
+	path = dependency/spdlog
+	url = https://github.com/gabime/spdlog.git

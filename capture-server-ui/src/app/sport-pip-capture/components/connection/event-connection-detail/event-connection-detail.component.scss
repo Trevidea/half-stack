@@ -1,0 +1,195 @@
+.event-connection-detail {
+  border: 1px solid #ccc;
+  .connection-detail-header {
+    h6 {
+      background-color: rgba(233, 241, 244, 1);
+      border-top-left-radius: 0.428rem;
+    }
+    .cus-bi-chevron-down {
+      cursor: pointer;
+    }
+    .cus-bi-chevron-down:hover {
+      cursor: pointer;
+      background-color: #ccc;
+    }
+    
+  }
+  
+  .card-body{
+    .phone-connection{
+      .media-body{
+        .cus-bi-arrow-down-left {
+          color: rgba(33, 96, 147, 1);
+        }
+      }
+    }
+    .camcorder-connection{
+      .media-body{
+        .cus-bi-arrow-up-right {
+          color: rgba(245, 163, 10, 1);
+        }
+      }
+    }
+    .last-active-device{
+      background-color: rgba(255, 242, 194, 0.2)
+    }
+    .most-active-device{
+      background-color: rgba(233, 241, 244, 0.5)
+    }
+    .connection-long-duration{
+      background-color: rgba(143, 171, 7, 0.05)
+    }
+  }
+}
+
+
+
+
+
+.dark-layout{
+  .event-connection-detail {
+    border: 1px solid #ccc;
+    .connection-detail-header {
+      h6 {
+        background-color: rgba(233, 241, 244, 1);
+        border-top-left-radius: 0.428rem;
+        color: black;
+      }
+      .cus-bi-chevron-down {
+        cursor: pointer;
+      }
+      .cus-bi-chevron-down:hover {
+        cursor: pointer;
+        background-color: #ccc;
+      }
+      
+    }
+    
+    .card-body{
+      .phone-connection{
+        .media-body{
+          .cus-bi-arrow-down-left {
+            color: rgba(33, 96, 147, 1);
+          }
+        }
+      }
+      .camcorder-connection{
+        .media-body{
+          .cus-bi-arrow-up-right {
+            color: rgba(245, 163, 10, 1);
+          }
+        }
+      }
+      .last-active-device{
+        background-color: rgba(255, 242, 194, 0.2)
+      }
+      .most-active-device{
+        background-color: rgba(173, 224, 243, 0.5);
+        color:black
+      }
+      .connection-long-duration{
+        background-color: rgba(143, 171, 7, 0.05)
+      }
+    }
+  }
+}
+@media(max-width: 767px) {
+  .event-connection-detail {
+    border: 1px solid #ccc;
+    .connection-detail-header {
+      h6 {
+        background-color: rgba(233, 241, 244, 1);
+        border-top-left-radius: 0.428rem;
+      }
+      .cus-bi-chevron-down {
+        cursor: pointer;
+      }
+      .cus-bi-chevron-down:hover {
+        cursor: pointer;
+        background-color: #ccc;
+      }
+      
+    }
+    
+    .card-body{
+      .phone-connection{
+        .media-body{
+          .cus-bi-arrow-down-left {
+            color: rgba(33, 96, 147, 1);
+          }
+        }
+      }
+      .camcorder-connection{
+        .media-body{
+          .cus-bi-arrow-up-right {
+            color: rgba(245, 163, 10, 1);
+          }
+        }
+      }
+      .last-active-device{
+      
+        background-color: rgba(255, 242, 194, 0.2)
+      }
+      .most-active-device{
+        margin-top: 1rem;
+        background-color: rgba(233, 241, 244, 0.5)
+      }
+      .connection-long-duration{
+        margin-top: 1rem;
+        background-color: rgba(143, 171, 7, 0.05)
+      }
+    }
+  }
+}
+
+
+@media(max-width: 575px) {
+  .event-connection-detail {
+    border: 1px solid #ccc;
+    .connection-detail-header {
+      h6 {
+        background-color: rgba(233, 241, 244, 1);
+        border-top-left-radius: 0.428rem;
+      }
+      .cus-bi-chevron-down {
+        cursor: pointer;
+      }
+      .cus-bi-chevron-down:hover {
+        cursor: pointer;
+        background-color: #ccc;
+      }
+      
+    }
+    
+    .card-body{
+      .phone-connection{
+        margin-top: 1rem;
+        .media-body{
+          .cus-bi-arrow-down-left {
+            color: rgba(33, 96, 147, 1);
+          }
+        }
+      }
+      .camcorder-connection{
+        margin-top: 1rem;
+        .media-body{
+          .cus-bi-arrow-up-right {
+            color: rgba(245, 163, 10, 1);
+          }
+        }
+      }
+      .last-active-device{
+      
+        background-color: rgba(255, 242, 194, 0.2)
+      }
+      .most-active-device{
+        margin-top: 1rem;
+        background-color: rgba(233, 241, 244, 0.5)
+      }
+      .connection-long-duration{
+        margin-top: 1rem;
+        background-color: rgba(143, 171, 7, 0.05)
+      }
+    }
+  }
+}

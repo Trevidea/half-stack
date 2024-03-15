@@ -1,0 +1,30 @@
+<!-- <div class="row match-height">
+  <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-12 col-sm-12 col-12">
+    <div class="card">
+      <app-setting-header></app-setting-header>
+    </div>
+  </div>
+  <div class="col-xxl-10 col-xl-10 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div> -->
+
+<div class="content-area-wrapper">
+  <core-sidebar
+    class="sidebar-left"
+    name="setting-header"
+    overlayClass="body-content-overlay"
+    collapsibleSidebar="bs-gt-lg"
+  >
+  <app-setting-header></app-setting-header>
+  </core-sidebar>
+  <div class="content-right">
+    <div class="content-wrapper container-xxl p-0">
+      <div class="content-body">
+        <app-setting-body></app-setting-body>
+      </div>
+    </div>
+  </div>
+</div>

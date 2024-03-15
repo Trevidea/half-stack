@@ -1,0 +1,32 @@
+
+
+.file {
+    border: 1px solid rgba(195, 195, 195, 1);
+    border-radius: 5px;
+
+}
+
+// @media (max-width:320px) {
+//     .file2 {
+   
+      
+//     }
+// }
+
+p {
+  
+    font-size: 14px;
+    //  color: rgba(58, 58, 58, 1);
+
+}
+::ng-deep .progress-bar {
+    background-color: rgba(33, 96, 147, 1) !important;
+  }
+ 
+  @media (min-width: 1441px) {
+    .file1 {
+        flex-basis: 25%;
+        max-width: 25%;
+    }
+}
+

@@ -1,0 +1,124 @@
+<div class="card custom-card-border mb-2">
+    <nav class="navbar pl-0 ">
+        <div class="container-fluid pr-0 ">
+            <a class="navbar-brand" [routerLink]="'/event'"> <i class="feather " data-feather="arrow-left"
+                    [size]="24"></i></a>
+            <div class="d-flex justify-content-between align-items-center">
+                 <button class="uploadbut btn-gradient-warning mr-1" type="submit">Upload to server</button>
+                <div ngbDropdown>
+                    <button class="btn btn-sm btn-light menuitem-but float-right" id="menuDropdown" ngbDropdownToggle>
+                        <i class="bi bi-three-dots-vertical" style="font-size: 1.5rem;"></i>
+                    </button>
+                    <div ngbDropdownMenu style="left: auto; right: 0;">
+                        <button ngbDropdownItem class="pr-4"> <i class="feather " data-feather="share"></i>&nbsp;Share
+                            Event </button>
+
+                        <button ngbDropdownItem class="pr-4"> <i class="feather" data-feather="trash-2"></i>&nbsp;Delete
+                            Event</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </nav>
+
+</div>
+
+<div class="card custom-card-border">
+    <div class="row m-2">
+        <!-- content-header component -->
+        <div class="col-12 mt-1 mb-1">
+            <h4>Austin Peay Governors vs Liberty Flames</h4>
+        </div>
+        <div class="col-md-12 col-lg-8 mb-md-2 mb-2  p-0">
+
+
+            <div class="mr-lg-1">
+                <!-- plyr video -->
+                <div plyr plyrTitle="Video" [plyrPlaysInline]="true" [plyrPoster]="poster" [plyrSources]="videoSources"
+                    [plyrTracks]="tracks" [plyrOptions]="plyrOptions"></div>
+                <!--/ plyr video -->
+            </div>
+
+        </div>
+        <div class="col-lg-4 col-md-12   mb-2 p-0">
+
+            <div class="row ">
+                <div class="col-md-12 ">
+                    <div class="card custom-card-border ">
+                        <div class="card-header bg-transparent "
+                            style="border-bottom: 1px solid rgba(236, 236, 237, 1) ; padding: 8px;">
+                            <h5> Event Details</h5>
+                        </div>
+                        <div class="card-body">
+
+                            <p class="card-text  mt-1  margin-bottom" >
+                                <i class="bi bi-clock " style="font-size: 12px;"></i>
+                                Saturday, Sept 15th, 2:00 pm, Varsity
+                            </p>
+                            <p class="card-text ">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                Fairport High School, 33 Union Street, Fairport
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card custom-card-border ">
+                        <div class="card-header bg-transparent "
+                            style="border-bottom: 1px solid rgba(236, 236, 237, 1);  padding: 8px;">
+                            <h5> File Type & details</h5>
+                        </div>
+                        <div class="card-body mt-1 ">
+                            <div class="d-flex justify-content-between margin-bottom ">
+                                <div>
+                                    <p class="card-text " style="margin-bottom: 5px;">
+                                        <i class="bi bi-file-earmark-fill custom-icon " style="font-size: 12px;  "></i>
+                                        TAR File
+                                    </p>
+                                </div>
+                                <div>
+                                    2 GB
+                                </div>
+
+                            </div>
+                            <div class="d-flex justify-content-between margin-bottom">
+                                <div>
+                                    <p class="card-text " style="margin-bottom: 5px;">
+                                        Video clips
+                                    </p>
+                                </div>
+                                <div>
+                                    250
+                                </div>
+
+                            </div>
+                            <div class="d-flex justify-content-between ">
+                                <div>
+                                    <p class="card-text " style="margin-bottom: 5px;">
+                                        Shared with
+                                    </p>
+                                </div>
+                                <div>
+                                    -
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

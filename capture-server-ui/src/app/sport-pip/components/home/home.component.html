@@ -1,0 +1,536 @@
+<div class="row match-height">
+    <div class="col-xl-6">
+        <div class="card" style="background-color:#216093">
+            <div class="card-body">
+            <ngb-carousel [showNavigationArrows]="false" class="carousel-fade" style="height: 200px;">
+                    <ng-template ngbSlide>
+                        <div class="carousel-img-wrapper">
+                            <h5 style="color: #E0E0E0;font-weight:300">Event Happening</h5>
+                            <div class="badge badge-pill badge-light-dark mt-1" style="background-color:#E7E7E7"><i
+                                    class="bi bi-clock-history"></i>2.02.00</div>
+                            <h1 class="mt-1" style="color: #E0E0E0;font-weight:400">McQuaid vs Fairfort</h1>
+                            <div class="combined-elements mt-1">
+                                <div class="badge badge-pill badge-light-dark " style="background-color:#FFFFFF">
+                                    <i class="bi bi-geo-alt"></i>
+                                </div>
+                                <h6 style="color:#E0E0E0;font-weight:400; margin-left: 10px;margin-top:5px">Fairport
+                                    High School, 33 Union Street,
+                                    Fairport</h6>
+                            </div>
+                        </div>
+                        <div class="carousel-caption"></div>
+                    </ng-template>
+                    <ng-template ngbSlide>
+                        <div class="carousel-img-wrapper">
+                            <h5 style="color: #E0E0E0;font-weight:300">Event Happening</h5>
+                            <div class="badge badge-pill badge-light-dark mt-1" style="background-color:#E7E7E7"><i
+                                    class="bi bi-clock-history"></i>2.02.00</div>
+                            <h1 class="mt-1" style="color: #E0E0E0;font-weight:400">McQuaid vs Fairfort</h1>
+                            <div class="combined-elements mt-1">
+                                <div class="badge badge-pill badge-light-dark " style="background-color:#FFFFFF">
+                                    <i class="bi bi-geo-alt"></i>
+                                </div>
+                                <h6 style="color: #E0E0E0;font-weight:400; margin-left: 10px;margin-top:5px">Fairport
+                                    High School, 33 Union Street,
+                                    Fairport</h6>
+                            </div>
+                        </div>
+                        <div class="carousel-caption"></div>
+                    </ng-template>
+                    <ng-template ngbSlide>
+                        <div class="carousel-img-wrapper">
+                            <h5 style="color: #E0E0E0;font-weight:300">Event Happening</h5>
+                            <div class="badge badge-pill badge-light-dark mt-1" style="background-color:#E7E7E7"><i
+                                    class="bi bi-clock-history"></i>2.02.00</div>
+                            <h1 class="mt-1" style="color: #E0E0E0;font-weight:400">McQuaid vs Fairfort</h1>
+                            <div class="combined-elements mt-1">
+                                <div class="badge badge-pill badge-light-dark " style="background-color:#FFFFFF">
+                                    <i class="bi bi-geo-alt"></i>
+                                </div>
+                                <h6 style="color: #E0E0E0;font-weight:400; margin-left: 10px;margin-top:5px">Fairport
+                                    High School, 33 Union Street,
+                                    Fairport</h6>
+                            </div>
+                        </div>
+                        <div class="carousel-caption"></div>
+                    </ng-template>
+                </ngb-carousel> 
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3">
+        <div class="card" style="height: 240px;">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <img src="../../../../assets/images/pip-image/icon_1.png" alt="" style="border-radius: 10px;">
+                        <h1 class="mt-1">16</h1>
+                        <h3 class="mt-1">Teams</h3>
+                        <div class="badge badge-pill  mt-1"
+                            style="background-color: rgba(245, 163, 10, 0.1); color: rgba(245, 163, 10, 1);">
+                            <i class="bi bi-clock-history "></i>Basketball team added recently
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3">
+        <div class="card" style="height: 240px;">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <img src="../../../../assets/images/pip-image/icon_4.png" alt="" style="border-radius: 10px;">
+                        <h1 class="mt-1">112</h1>
+                        <h3 class="mt-1">Players</h3>
+                        <div class="badge badge-pill badge-success mt-1"
+                            style="background-color:rgba(143, 171, 7, 0.1);color:  rgba(143, 171, 7, 1);"><i
+                                class="bi bi-clock-history"></i>Player name
+                            Sam added</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row match-height">
+    <div class="col-xl-8">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"> Performance by games </h4>
+                <div id="bar-chart" #apexBarChartRef>
+                    <apx-chart [series]="apexBarChart.series" [chart]="{
+                        height: 400,
+                        width: isMenuToggled === false ? apexBarChartRef.offsetWidth : apexBarChart.chart.width,
+                        type: 'bar',
+                        toolbar: {
+                          show: false
+                        }
+                      }" [dataLabels]="apexBarChart.dataLabels" [plotOptions]="apexBarChart.plotOptions"
+                        [xaxis]="apexBarChart.xaxis" [colors]="apexBarChart.colors"
+                        [grid]="apexBarChart.grid"></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+
+                        <h2>Logs</h2>
+                    </div>
+                    <div class="col-6">
+
+                        <h5 class="text-right">View full detail</h5>
+                    </div>
+                </div>
+                <table class="table">
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="d-flex">
+                                    <i class="bi bi-pencil-fill mr-75"
+                                        style="font-size: 1.5rem;width: 20px; height: 20px; background-color: rgba(255, 247, 232, 1);"></i>
+                                    <div>
+                                        <span class="font-weight-bold; margin-left: 100px;">Edit Event</span><br>
+                                        <span style="font-weight: 300; color: rgba(0, 0, 0, 1);">Event</span>
+                                    </div>
+                                </div>
+
+
+
+                            </td>
+
+                            <td style="text-align: end">
+                                <div>
+                                    <h5>Today, 05:08 </h5>
+                                </div>
+                                <img class="mr-1" src="assets/images/portrait/small/avatar-s-5.jpg" alt="Avatar"
+                                    height="30" width="30" style="border-radius: 50%;" /> Garry
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex">
+                                    <i class="bi bi-plus-circle mr-75"
+                                        style="font-size: 2rem;width: 20px; height: 20px; background: rgba(233, 239, 244, 1);"></i>
+
+                                    <div>
+                                        <span class="font-weight-bold">Add Event</span><br>
+                                        <span style=" font-weight: 300; color: rgba(0, 0, 0, 1);">Event</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td style="text-align: end">
+                                <div>
+                                    <h5>Today, 05:08 </h5>
+                                </div>
+                                <img class="mr-1" src="assets/images/portrait/small/avatar-s-5.jpg" alt="Avatar"
+                                    height="30" width="30" style="border-radius: 50%;" /> Garry
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row match-height">
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Event Distribution</h4>
+                <div id="donut-chart" #apexDonutChartRef>
+                    <apx-chart [series]="apexDonutChart.series" [chart]="{
+                      height: 350,
+                      width: isMenuToggled === false ? apexDonutChartRef.offsetWidth : apexDonutChart.chart.width,
+                      type: 'donut'
+                    }" [labels]="apexDonutChart.labels" [plotOptions]="apexDonutChart.plotOptions"
+                        [responsive]="apexDonutChart.responsive" [colors]="apexDonutChart.colors"
+                        [legend]="apexDonutChart.legend"></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-header flex-column align-items-start">
+                <h4 class="card-title mb-75">Performance Statistics
+                </h4>
+            </div>
+            <div class="card-body">
+                <div id="bar-chart" #apexBarChartRef2>
+                    <apx-chart [series]="apexBarChart2.series" [chart]="{
+                        height: 400,
+                        width: 450,
+                        type: 'bar',
+                        toolbar: {
+                          show: false
+                        }
+                      }" [dataLabels]="apexBarChart2.dataLabels" [plotOptions]="apexBarChart2.plotOptions"
+                        [xaxis]="apexBarChart2.xaxis" [colors]="apexBarChart2.colors"
+                        [grid]="apexBarChart2.grid"></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+
+                        <h2 style="color: rgba(0, 0, 0, 1);font-weight: 400;font-size: 19px;">Queries</h2>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn  float-right"
+                            style="background-color: rgba(245, 163, 10, 1); color: rgba(255, 255, 255, 1);">Create
+                            Query</button>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-8">
+                        <h6 style="color: rgba(0, 0, 0, 1);">McQuaid vs Fairfort</h6>
+                        <div class="d-flex">
+                            <p>Football</p>
+                            <p>Result</p>
+                            <p>Firstdown</p>
+                            <p>Touchdown</p>
+                        </div>
+
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-dark btn-sm float-right" rippleEffect>View</button>
+                    </div>
+                    <div class="col-8">
+                        <h6 style="color: rgba(0, 0, 0, 1);">McQuaid vs Fairfort</h6>
+                        <div class="d-flex">
+                            <p>Football</p>
+                            <p>Result</p>
+                            <p>Firstdown</p>
+                            <p>Touchdown</p>
+                        </div>
+
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-dark btn-sm float-right" rippleEffect>View</button>
+                    </div>
+                    <div class="col-8">
+                        <h6 style="color: rgba(0, 0, 0, 1);">McQuaid vs Fairfort</h6>
+                        <div class="d-flex">
+                            <p>Football</p>
+                            <p>Result</p>
+                            <p>Firstdown</p>
+                            <p>Touchdown</p>
+                        </div>
+
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-dark btn-sm float-right" rippleEffect>View</button>
+                    </div>
+                    <div class="col-8">
+                        <h6 style="color: rgba(0, 0, 0, 1);">McQuaid vs Fairfort</h6>
+                        <div class="d-flex">
+                            <p>Football</p>
+                            <p>Result</p>
+                            <p>Firstdown</p>
+                            <p>Touchdown</p>
+                        </div>
+
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-dark btn-sm float-right" rippleEffect>View</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row match-height">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-75">Latest Videos</h4>
+                <div class="row">
+                    <div class="col-12 mt-1 d-flex">
+                        <video width="200" height="150" poster="placeholder.png" controls>
+                            <source src="../../../../assets/pip-videos/crk.mp4#t=0.1" type="video/mp4">
+                            <source src="video.ogg" type="video/ogg">
+                            <source src="video.webm" type="video/webm">
+                            <object data="../../../../assets/pip-videos/crk.mp4#t=0.1" width="470" height="255">
+                                <embed src="video.swf" width="470" height="255">
+                            </object>
+                        </video>
+                       
+                        <div class="mt-auto ml-1">
+                            <h5 >Free Throw Practice</h5>
+                            <i class="bi bi-calendar4"> May 01, 2020</i>
+                        </div>
+
+                    </div>
+                  
+                    <div class="col-12 mt-1 d-flex">
+                        <video width="200" height="150" poster="placeholder.png" controls>
+                            <source src="../../../../assets/pip-videos/crk.mp4#t=0.1" type="video/mp4">
+                            <source src="video.ogg" type="video/ogg">
+                            <source src="video.webm" type="video/webm">
+                            <object data="../../../../assets/pip-videos/crk.mp4#t=0.1" width="470" height="255">
+                                <embed src="video.swf" width="470" height="255">
+                            </object>
+                        </video>
+                        <div class="mt-auto ml-1">
+                            <h5 >Free Throw Practice</h5>
+                            <i class="bi bi-calendar4"> May 01, 2020</i>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="form-group mt-1">
+                    <button type="button" class="btn btn-outline-dark btn-block" rippleEffect>
+                        View all videos <i class="bi bi-arrow-up-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h4 style="color: #000000;font-weight: 400;">Upcoming Events</h4>
+                    </div>
+                    <div class="col-6">
+                        <!-- <button type="button" class="btn btn-outline-dark btn-sm round float-right" rippleEffect> June
+                            <i class="bi bi-chevron-down"></i>
+                        </button> -->
+                        <div class="btn-group float-right">
+                            <div ngbDropdown>
+                                <button ngbDropdownToggle class="btn btn-outline-dark btn-sm round " type="button"
+                                    id="dropdownMenuButton" rippleEffect>
+                                    June
+                                </button>
+                                <div ngbDropdownMenu aria-labelledby="dropdownMenuButton" class="hover-drop-down">
+                                    <a ngbDropdownItem href="javascript:void(0)">July</a>
+                                    <a ngbDropdownItem href="javascript:void(0)">August</a>
+                                    <a ngbDropdownItem href="javascript:void(0)">September</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="mt-1">
+                    <div class="row mt-1">
+                        <div class="col-2">
+                            <h6 style="align-items: center; text-align: center;">SAT</h6>
+                            <h3 style="align-items: center; text-align: center;">15</h3>
+                        </div>
+                        <div class="col-7">
+                            <h6 style="color: rgba(0, 0, 0, 1);">McQuaid vs Fairfort</h6>
+                            <div class="d-flex">
+                                <span style="size: 10px;">Fairport High School, 33 Union Street, Fairfort</span>
+                            </div>
+
+                        </div>
+                        <div class="col-3">
+                            <i class="bi bi-clock"> 02.00 pm</i>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="mt-1">
+                    <div class="row mt-1">
+                        <div class="col-2">
+                            <h6 style="align-items: center; text-align: center;">SAT</h6>
+                            <h3 style="align-items: center; text-align: center;">15</h3>
+                        </div>
+                        <div class="col-7">
+                            <h6 style="color: rgba(0, 0, 0, 1);">McQuaid vs Fairfort</h6>
+                            <div class="d-flex">
+                                <span style="size: 10px;">Fairport High School, 33 Union Street, Fairfort</span>
+                            </div>
+
+                        </div>
+                        <div class="col-3">
+                            <i class="bi bi-clock"> 02.00 pm</i>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="mt-1">
+                    <div class="row mt-1">
+                        <div class="col-2">
+                            <h6 style="align-items: center; text-align: center;">SAT</h6>
+                            <h3 style="align-items: center; text-align: center;">15</h3>
+                        </div>
+                        <div class="col-7">
+                            <h6 style="color: rgba(0, 0, 0, 1);">McQuaid vs Fairfort</h6>
+                            <div class="d-flex">
+                                <span style="size: 10px;">Fairport High School, 33 Union Street, Fairfort</span>
+                            </div>
+
+                        </div>
+                        <div class="col-3">
+                            <i class="bi bi-clock"> 02.00 pm</i>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group mt-1">
+                    <button type="button" class="btn btn-outline-dark btn-block" rippleEffect>
+                        Go to events <i class="bi bi-arrow-up-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card ">
+
+            <div class="card-body">
+                <h5 class="card-title">Forms</h5>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card" style="border: 0.3px solid 
+                    #C3C3C3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6 d-flex">
+                                        <i class="bi bi-file-earmark-richtext" style="font-size: 2rem;"></i>
+                                        <h6 class="mt-1">Event</h6>
+                                    </div>
+                                    <div class="col-6" ngbDropdown>
+                                        <i class="bi bi-three-dots float-right"
+                                            style="font-size: 2rem;width: 20px; height: 20px; " ngbDropdownToggle
+                                            id="dropdownMenuButton"></i>
+                                        <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+                                            <i class="bi bi-pencil-square p-1"> Edit</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card" style="border: 0.3px solid 
+                    #C3C3C3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6 d-flex">
+                                        <i class="bi bi-file-earmark-richtext" style="font-size: 2rem;"></i>
+                                        <h6 class="mt-1">Tagging</h6>
+                                    </div>
+                                    <div class="col-6" ngbDropdown>
+                                        <i class="bi bi-three-dots float-right"
+                                            style="font-size: 2rem;width: 20px; height: 20px; " ngbDropdownToggle
+                                            id="dropdownMenuButton"></i>
+                                        <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+                                            <i class="bi bi-pencil-square p-1"> Edit</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card" style="border: 0.3px solid 
+                    #C3C3C3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6 d-flex">
+                                        <i class="bi bi-file-earmark-richtext" style="font-size: 2rem;"></i>
+                                        <h6 class="mt-1">Player</h6>
+                                    </div>
+                                    <div class="col-6" ngbDropdown>
+                                        <i class="bi bi-three-dots float-right"
+                                            style="font-size: 2rem;width: 20px; height: 20px; " ngbDropdownToggle
+                                            id="dropdownMenuButton"></i>
+                                        <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+                                            <i class="bi bi-pencil-square p-1"> Edit</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card" style="border: 0.3px solid 
+                    #C3C3C3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6 d-flex">
+                                        <i class="bi bi-file-earmark-richtext" style="font-size: 2rem;"></i>
+                                        <h6 class="mt-1">Coach</h6>
+                                    </div>
+                                    <div class="col-6" ngbDropdown>
+                                        <i class="bi bi-three-dots float-right"
+                                            style="font-size: 2rem;width: 20px; height: 20px; " ngbDropdownToggle
+                                            id="dropdownMenuButton"></i>
+                                        <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+                                            <i class="bi bi-pencil-square p-1"> Edit</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-1">
+                    <button type="button" class="btn btn-outline-dark btn-block" rippleEffect>
+                        Go to forms <i class="bi bi-arrow-up-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

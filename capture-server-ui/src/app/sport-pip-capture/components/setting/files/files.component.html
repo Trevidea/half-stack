@@ -1,0 +1,34 @@
+<div class="card">
+    <div class="row m-2">
+        <div class="col-12 d-flex justify-content-end mt-2 mb-3">
+            <div class="progress-wrapper">
+                <div class="mb-25"> <b>200 Files</b>&nbsp; &nbsp; 6.9 GB/ 20 GB is used</div>
+                <ngb-progressbar type="rgba(33, 96, 147, 1)" [value]="29"></ngb-progressbar>
+            </div>
+        </div>
+
+
+        <div class="col-xl-4  col-md-6 mb-1 file1 " *ngFor="let file of this.datasource.file">
+            <div class="d-flex align-items-center justify-content-between  file">
+                <div class="d-flex align-items-center m-1 "> <!-- Create a nested flex container for left column -->
+                    <div class="">
+                        <img src="../../../../../assets/images/spip-icons/file.svg" alt="">
+                    </div>
+        
+                    <div class="ml-1 mt-1">
+                        <h4 [ngbTooltip]="file.fileName" triggers="mouseenter:mouseleave" tooltipClass="my-custom-class"
+                            placement="right" class="mb-0">{{ showFullFileName ? file.fileName :
+                            file.fileName.substring(0, file.fileName.length / 2) + '...' }}</h4>
+                        <p>{{file.date}}</p>
+                    </div>
+                </div>
+        
+                <div class="text-right m-1 mt-1"> 
+                    <p >{{file.size}}kb</p>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+</div>

@@ -1,0 +1,100 @@
+<ul class="grid-view">
+  <div *ngFor="let item of datasource">
+    <li>
+      <a class="a1">
+        <div class="card custom-card  ">
+          <div class="card-img">
+            <img class="left img-fluid" src="assets/images/pip-image/400-300/130-130/fairport.png" />
+            <img class="right img-fluid" src="assets/images/pip-image/400-300/130-130/mcquaid.png" />
+          </div>
+
+          <div class="card-img-overlay" ngbDropdown>
+            <a class="btn btn-light btn-sm float-right p-0" id="menuDropdown" ngbDropdownToggle data-bs-toggle="popover"
+              data-bs-content="Edit image" data-bs-trigger="hover focus">
+              <i class="bi bi-three-dots-vertical h3"></i>
+            </a>
+            <div ngbDropdownMenu aria-labelledby="menuDropdown">
+              <button ngbDropdownItem class="pr-4" (click)="eventShareModalOpen(eventShareModal)">
+                <i class="feather" data-feather="share"></i>&nbsp;Share Event
+              </button>
+              <button ngbDropdownItem>
+                <i class="feather" data-feather="upload-cloud"></i>&nbsp;Upload to
+                server
+              </button>
+              <button ngbDropdownItem class="pr-4">
+                <i class="feather" data-feather="trash-2"></i>&nbsp;Delete Event
+              </button>
+            </div>
+          </div>
+          <div class="card-body pt-1 custom-card-body">
+            <div class="row mb-1">
+              <div class="col-4">
+                <div class="badge badge-past-event">{{item.detail.type ? '': item.detail.type }}</div>
+              </div>
+              <div class="col-8">
+                <div class="float-right">
+                  <button type="button" class="btn btn-gradient-warning ml-auto btn-sm" routerLink="/past-event-view">
+                    View
+                  </button>
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 mb-1">
+                <h4>{{item.title}}</h4>
+                <p class="card-text">
+                  <i class="bi bi-clock"></i>
+                  {{item.dttEvent | date }} {{ item.time | timeFormat }}{{' , '}}{{item.level}}
+                </p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between tar-file">
+              <p class="card-text">
+                <i class="bi bi-file-earmark-fill icon-color"></i>
+                TAR File
+              </p>
+
+              <div>
+                <div class="avatar-group">
+                  <P>Shared with &nbsp; &nbsp;</P>
+                  <div data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom"
+                    style="width: 19px; height: 19px" data-original-title="Billy Hopkins" class="avatar pull-up">
+                    <img src="assets/images/portrait/small/avatar-s-9.jpg" alt="Avatar" width="18" height="18" />
+                  </div>
+                  <div data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom"
+                    style="width: 19px; height: 19px" data-original-title="Amy Carson" class="avatar pull-up">
+                    <img src="assets/images/portrait/small/avatar-s-6.jpg" alt="Avatar" width="18" height="18" />
+                  </div>
+                  <div data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom"
+                    style="width: 19px; height: 19px" data-original-title="Brandon Miles" class="avatar pull-up">
+                    <img src="assets/images/portrait/small/avatar-s-8.jpg" alt="Avatar" width="18" height="18" />
+                  </div>
+                  <P>+12</P>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </a>
+    </li>
+  </div>
+
+
+</ul>
+
+<ng-template #eventShareModal let-modal>
+  <div class="modal-header">
+
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" tabindex="0" ngbAutofocus>
+    <h2 class="mt-1 mb-1">Share event</h2>
+    <h4 class="modal-title" id="myModalLabel160">McQuaid vs Fairport, Football</h4>
+    <app-share-event></app-share-event>
+  </div>
+
+</ng-template>

@@ -1,0 +1,149 @@
+@import "@core/scss/angular/libs/select.component.scss";
+
+// h6 {
+//   padding: 9px;
+//   font-size: 14px;
+//   color: rgba(0, 0, 0, 1);
+// }
+
+// // @media (min-width: 1440px) and (max-width: 1970px) {
+// //   .custom-1440 {
+// //     flex-basis: 33.33%;
+// //     max-width: 33.33%;
+// //   }
+// // }
+
+// h4 {
+//   font-size: 16px;
+//   color: rgba(0, 0, 0, 1);
+// }
+
+
+///////////////////////////////// SCSS Past-Event////////////////////////
+// .past-event {
+//   .card {
+//     border: 0.5px solid rgba(154, 154, 154, 1);
+
+
+
+//     .card-body {
+//       padding-right: 10px;
+//       padding-left: 10px;
+
+//      
+
+//       .col-12 {
+//         p {
+//           margin-bottom: 5px;
+
+//           .bi-clock {
+//             font-size: 12px;
+//           }
+//         }
+//       }
+
+//       .tar-file {
+//         p {
+//           margin-bottom: 5px;
+
+//           .i-file-earmark-fill {
+//             font-size: 12px;
+//           }
+
+//           .icon-color {
+//             color: rgba(33, 96, 147, 1) !important;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+// @media (min-width:1440px) and (max-width:1477px) {
+//   .tar-file {
+//     flex-direction: column;
+//   }
+
+// }
+
+
+// @media (min-width:992px) and (max-width:1063px) {
+//   .tar-file {
+//     flex-direction: column;
+//   }
+
+// }
+
+//css for grid view 
+.grid-view {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 1rem;
+
+  li .a1 {
+    position: relative;
+    width: 100%;
+    // border: 0.5px solid rgba(154, 154, 154, 1);
+    border-radius: 1rem;
+    // padding: 1rem;
+    // color: black;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media screen and (max-width: 768px) {
+    ul {
+      grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    }
+  }
+}
+
+.card-img {
+  overflow: hidden;
+
+  .right {
+    position: absolute;
+    // left: 50%;
+    // top: 0%;
+    -webkit-clip-path: polygon(3% 0, 100% 0%, 100% 100%, 0% 100%);
+    clip-path: polygon(3% 0, 100% 0%, 100% 100%, 0% 100%);
+    shape-outside: polygon(3% 0, 100% 0%, 100% 100%, 0% 100%);
+    width: 50%;
+    height: auto;
+
+  }
+
+  .left {
+    -webkit-clip-path: polygon(0% 0%, 100% 0%, 97% 100%, 0 100%);
+    clip-path: polygon(0% 0%, 100% 0%, 97% 100%, 0 100%);
+    shape-outside: polygon(0% 0%, 100% 0%, 97% 100%, 0 100%);
+    width: 50%;
+    height: auto;
+  }
+}
+
+.card-img-overlay {
+  padding: 1rem;
+
+  .dropdown-toggle::after {
+    content: none;
+  }
+
+  a {
+    i {
+      padding: 0.4rem;
+    }
+  }
+}
+.custom-card-body {
+  padding-right: 10px;
+  padding-left: 10px;
+  .badge-past-event {
+            background-color: rgba(143, 171, 7, 1);
+            color: rgba(255, 255, 255, 1);
+            font-weight: 400;
+          }
+}

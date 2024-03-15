@@ -1,0 +1,17 @@
+<table class="table table-borderless">
+    <tbody>
+        <tr>
+            <div class="row" >
+                <div class="col-md-4" *ngFor="let row of rows">
+                    <div class="card">
+                        <div class="card-body  ">
+                            <div *ngFor="let col of columns" >
+                                <th  *ngIf="col.prop !=='code'" scope="row" > {{row[col.prop]}} <br></th>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tr>
+    </tbody>
+</table>

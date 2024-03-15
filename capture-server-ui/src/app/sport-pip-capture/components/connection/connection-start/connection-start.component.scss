@@ -1,0 +1,52 @@
+
+.cust-button{
+  display: flex;
+  align-items: center;
+}
+.badge {
+  padding: 5px 10px;
+}
+.cus-columns-gap {
+  font-size: 19px;
+  cursor: pointer;
+}
+.cus-columns-gap:hover {
+  background-color: rgba(240, 240, 240, 1);
+}
+.cus-bi-list {
+  font-size: 25px;
+  cursor: pointer;
+}
+.cus-bi-list:hover {
+  background-color: rgba(240, 240, 240, 1);
+}
+.table:not(.table-dark):not(.table-light) thead:not(.thead-dark) th, .table:not(.table-dark):not(.table-light) tfoot:not(.thead-dark) th {
+    background-color: #fff;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}
+.custom-btn{
+  padding: 5px;
+}

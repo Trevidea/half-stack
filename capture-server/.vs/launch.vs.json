@@ -1,0 +1,13 @@
+{
+  "configurations": [
+    {
+      "exe": "",
+      "name": "cpprest_2_10d.dll (dependency\\cpprestsdk\\Release\\Binaries\\cpprest_2_10d.dll)",
+      "project": "CMakeLists.txt",
+      "projectTarget": "cpprest_2_10d.dll (dependency\\cpprestsdk\\Release\\Binaries\\cpprest_2_10d.dll)",
+      "type": "dll"
+    }
+  ],
+  "defaults": {},
+  "version": "0.2.1"
+}

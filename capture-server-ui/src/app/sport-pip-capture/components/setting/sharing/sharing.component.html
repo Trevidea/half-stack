@@ -1,0 +1,52 @@
+<div class="card ">
+  <div class="card-body">
+    <div class="float-right">
+      <button type="button" class="btn btn-warning" rippleEffect (click)="_openModal()">
+        <i class="bi bi-plus-circle-fill"></i> Create Distribution List
+      </button>
+    </div>
+  </div>
+  <div class="row m-1">
+    <div class="custom-col col-xl-4 col-md-6 col-sm-6 " *ngFor="let data of datasource.distribution">
+      <div class="card cust-card">
+        <div class="card-body pb-0">
+          <a (click)="distributionDetail(data)">
+            <div class="d-flex justify-content-between">
+              <p class="text-muted">Total {{data.emails.length}} People</p>
+              <div class="avatar-group">
+                <div data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom"
+                  data-original-title="Billy Hopkins" class="avatar pull-up">
+                  <img src="assets/images/portrait/small/avatar-s-9.jpg" alt="Avatar" width="32" height="32" />
+                </div>
+                <div data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom"
+                  data-original-title="Amy Carson" class="avatar pull-up">
+                  <img src="assets/images/portrait/small/avatar-s-6.jpg" alt="Avatar" width="32" height="32" />
+                </div>
+                <div data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom"
+                  data-original-title="Brandon Miles" class="avatar pull-up">
+                  <img src="assets/images/portrait/small/avatar-s-8.jpg" alt="Avatar" width="32" height="32" />
+                </div>
+              </div>
+            </div>
+            <h4>{{data.name}}</h4>
+          </a>
+          <div class="d-flex justify-content-between mt-2">
+            <p style="color: rgba(245, 163, 10, 1); cursor: pointer" (click)="openModal(data.id)">
+              Edit
+            </p>
+            <p style="color: rgba(254, 0, 0, 1); cursor: pointer" (click)="deleteDistribution(data.id)">Delete</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+</div>
+
+<core-sidebar class="modal modal-slide-in fade event-sidebar" name="coach-home-sidebar" overlayClass="modal-backdrop" 
+  hideOnEsc="true">
+  <app-coach-home-sidebar *ngIf="coachHomeSidebarData" [data]="coachHomeSidebarData"></app-coach-home-sidebar>
+</core-sidebar>

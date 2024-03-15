@@ -1,0 +1,94 @@
+<div class="form-title">
+    <h3>monthly Attendance</h3>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+              
+                    <div class="form-group">
+                        <label>Employee Code</label>
+                        <input type="number" class="form-control" [(ngModel)]="datasource.employeeCode" disabled/>
+                        <!-- <ng-select aria-label="Default select example" [(ngModel)]="datasource.employees.SelectedItem" disabled>
+                            <ng-option *ngFor="let item of datasource.employees"
+                                [value]="item">{{item.value}} </ng-option>
+                        </ng-select> -->
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>payroll Month</label>
+                    <!-- <ng-select aria-label="Default select example" [(ngModel)]="datasource.payRoll.SelectedItem" disabled>
+                        <ng-option *ngFor="let item of datasource.payRoll"
+                            [value]="item">{{item.value}}</ng-option>
+                    </ng-select> -->
+                    <input type="text" class="form-control" [(ngModel)]="datasource.payrollMonth" disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Total Salary Days</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.totalSalaryDays" disabled />
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Attendance Salary Days</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.attendanceSalaryDays" disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Paid Leaves</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.paidLeaves" disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Sick Leaves</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.sickLeaves" disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Cumulative Paid Balance</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.cummPaidbal" disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Cumulative Leaves Balance</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.cummSickbal" disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Loss of Pay Days</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.lossOfPayDays"disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Late Arrivals</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.lateArrivals"disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Early Departures</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.earlyDepartures"disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Average Hours</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.averageHours"disabled/>
+                </div>
+            </div>
+        </div>
+        <!-- <app-form-footer (save)="save.emit()"  (close)="cancelBtn()"  ></app-form-footer> -->
+        <div class="float-right">
+            <button type="submit" class="btn btn-outline-danger" rippleEffect (click)="cancel.emit()">Back</button>
+        </div>
+    </div>
+</div>

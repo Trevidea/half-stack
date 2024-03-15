@@ -1,0 +1,105 @@
+<div
+  class="card"
+  style="box-shadow: none; border: 0.4px solid rgba(217, 217, 217, 1)"
+>
+  <div class="row">
+    <div class="col-12">
+      <app-event-header [datasource]="datasource"></app-event-header>
+    </div>
+
+    <div class="button-container col-12 d-flex justify-content-end">
+      <button
+        type="button"
+        class="btn "
+        id="mobile-button"
+        style="
+          background-color: rgba(143, 171, 7, 1);
+          color: #fff;
+          margin-right: 27px;
+        "
+        rippleEffect
+        (click)="CreateOnDemandEvent()"
+      >
+        <i class="bi bi-plus-circle-fill"></i> Create On-Demand Event
+      </button>
+    </div>
+
+    <div class="col-12">
+      <div class="d-flex flex-column m-2">
+        <ul ngbNav #nav="ngbNav" class="nav-tabs">
+          <li ngbNavItem>
+            <a ngbNavLink>Ongoing Events</a>
+
+            <ng-template ngbNavContent >
+              <app-on-going-event [datasource]="datasource.ongoingEvent"></app-on-going-event>
+            </ng-template>
+          </li>
+          <li ngbNavItem>
+            <a ngbNavLink>Upcoming Events</a>
+            <ng-template ngbNavContent>
+              <app-up-coming-event [datasource]="datasource"></app-up-coming-event>
+            </ng-template>
+          </li>
+
+          <li ngbNavItem>
+            <a ngbNavLink>Past Events</a>
+            <ng-template ngbNavContent>
+              <app-past-event [datasource]="datasource.pastEvent"></app-past-event>
+            </ng-template>
+          </li>
+          <li class="ml-lg-auto button-container">
+            <button
+              type="button"
+              class="but cus-Create-On-Demand-Event"
+              id="xl-to-tablet-button"
+              style="background-color: rgba(143, 171, 7, 1); color: #fff"
+              rippleEffect
+              (click)="CreateOnDemandEvent()"
+            >
+              <i class="bi bi-plus-circle-fill"></i> Create On-Demand Event
+            </button>
+          </li>
+        </ul>
+
+        <div [ngbNavOutlet]="nav"></div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="btn-group m-2">
+        <div ngbDropdown>
+          <button
+            ngbDropdownToggle
+            class="btn btn-outline-dark cus-btn-sm"
+            type="button"
+            id="dropdownMenuButton700"
+            rippleEffect
+          >
+            10
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownMenuButton700">
+            <a ngbDropdownItem href="javascript:void(0)">10</a>
+            <a ngbDropdownItem href="javascript:void(0)">20</a>
+            <a ngbDropdownItem href="javascript:void(0)">30</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <core-sidebar
+    class="modal modal-slide-in fade event-sidebar"
+    name="scheduled-event-sidebar"
+    overlayClass="modal-backdrop"
+    hideOnEsc="true"
+  >
+    <app-scheduled-event-sidebar></app-scheduled-event-sidebar>
+  </core-sidebar>
+
+  <core-sidebar
+    class="modal modal-slide-in fade event-sidebar"
+    name="on-demand-event-sidebar"
+    overlayClass="modal-backdrop"
+    hideOnEsc="true"
+  >
+    <app-on-demand-event-sidebar></app-on-demand-event-sidebar>
+  </core-sidebar>
+</div>

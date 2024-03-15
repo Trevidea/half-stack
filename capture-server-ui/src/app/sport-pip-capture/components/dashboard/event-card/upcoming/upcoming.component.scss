@@ -1,0 +1,67 @@
+.card {
+  .custom-card {
+    .team-name {
+      color: rgba(0, 0, 0, 1);
+    }
+    .game-name {
+      size: 10px;
+    }
+    .i-drop-down{
+        cursor: pointer;
+        .dropdown-toggle::after {
+            display:none;
+        }
+    }
+    .i-clock-box{
+        padding: 5px 10px 5px 10px;
+        background-color: rgba(245, 163, 10, 0.1);
+        border-radius: 2px;
+        i{
+            font-size: 25px;
+        }
+    }
+    .date-text{
+        color: rgba(0, 0, 0, 1)
+    }
+    .time-text{
+        size: 10px
+    }
+    .i-geo-box{
+        padding: 5px 10px 5px 10px;
+        background-color: rgba(245, 163, 10, 0.1);
+        border-radius: 2px;
+        i{
+            font-size: 25px;
+        }
+    }
+    .add-text{
+        color: rgba(0, 0, 0, 1) 
+    }
+    .add-text-span{
+        size: 10px
+    }
+  }
+}
+
+.dark-layout {
+  .custom-card {
+    .team-name {
+      color: white;
+    }
+    .game-name {
+      size: 10px;
+    }
+    .date-text{
+        color:white
+    }
+    .time-text{
+        size: 10px
+    }
+    .add-text{
+        color: white
+    }
+    .add-text-span{
+        size: 10px
+    }
+  }
+}

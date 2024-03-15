@@ -1,0 +1,40 @@
+@import '@core/scss/angular/libs/media-player.component.scss';
+
+.custom-card-border{
+    border: 1px solid rgba(217, 217, 217, 1);
+    border-radius: 6px;
+}
+.custom-icon {
+    color:
+      rgba(33, 96, 147, 1);
+  }
+  .menuitem-but {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+  }
+  a {
+    color:     rgba(0, 0, 0, 1);
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.uploadbut{
+
+  padding-top: 0.3rem;
+  padding-right: 0.5rem;
+  padding-bottom: 0.3rem;
+  padding-left: 0.5rem;
+  border-radius: 5px;
+  border: none;
+}
+::ng-deep.m-2 {
+  margin: 1rem !important;
+}
+
+.margin-bottom{
+margin-bottom: 5px;
+}

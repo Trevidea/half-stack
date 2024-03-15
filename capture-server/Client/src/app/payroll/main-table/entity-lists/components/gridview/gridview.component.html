@@ -1,0 +1,49 @@
+<ul class="employee-list">
+   
+  <li *ngFor="let item of items" class="employee-item">
+   <a routerLink="/emp-details-personal/{{item.code}}" style=" 
+    text-decoration: none;">
+    <mat-card style="padding: 0px;">
+
+      <div class="empCod">
+        <h6 style="margin-left:5px;"> Employee Code:{{item.code}}</h6>
+      </div>
+
+      <br>
+
+      <div class="img" style="  display: flex; 
+        justify-content: center;
+        align-items: center;
+        height: 89px;
+        width: 89px;
+        border-radius: 50%;
+        overflow: hidden;
+       margin-left: 4rem;;">
+        <img mat-card-image src="../../../../../../assets/user.jpeg" alt="img" style="  border-radius: 50%;
+          width: 50px;
+          height: 50px;">
+      </div>
+
+      <div class="card-content">
+        <mat-card-content>
+          <mat-card-subtitle style="font-family: sans-serif;">
+            <h1>{{item.firstname}} {{item.lastname}}</h1>
+          </mat-card-subtitle>
+          <mat-card-subtitle style="color:black;">{{item.designation}}</mat-card-subtitle>
+          <div
+            style="
+            background: #253097;height: 25px; border-radius: 10px;align-self: center; margin-left: 2rem; min-width: 95px;">
+            <mat-card-subtitle class="department" style="color: #FFFFFF;">{{item.department}}</mat-card-subtitle>
+          </div>
+          <mat-card-subtitle>
+            <div class="joined">Joined on:</div>
+          </mat-card-subtitle>
+          <mat-card-subtitle>{{item.dtjoining}}</mat-card-subtitle>
+        </mat-card-content>
+      </div>
+
+    </mat-card>
+  </a>
+  </li>
+
+</ul>

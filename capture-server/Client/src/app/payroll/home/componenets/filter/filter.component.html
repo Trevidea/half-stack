@@ -1,0 +1,27 @@
+<div class="form-group">
+    <label>{{ filter.name }}</label>
+    <ng-container [ngSwitch]="filter.controlType">
+        <span *ngSwitchCase="0" >
+            <ng-select [(ngModel)]="filter.datasource.SelectedItem" name="{{filter.field}}" [clearable]="true" (clear)="onClearSelection()">
+                <ng-option *ngFor="let item of filter.datasource" [value]="item">{{ item.value }} 
+                </ng-option>
+            </ng-select>
+        </span>
+        <span *ngSwitchCase="1">
+            <div class="input-group mb-2">
+                <input class="form-control" id="{{filter.name}}" maxlength="10" type="text" ngbDatepicker placeholder="mm-dd-yyyy"
+                    [minDate]="{year: 2000, month:1, day: 1}" [maxDate]="{year: 2040, month:1, day: 1}"
+                    #issuedDate="ngbDatepicker" [(ngModel)]="filter.value" (ngModelChange)="onDateChange($event)"/>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="issuedDate.toggle()" type="button">
+                        <i class="bi bi-calendar-range-fill"></i>
+                    </button>
+                </div>
+            </div>
+        </span>
+        <span *ngSwitchDefault style="padding:10px">
+            {{ filter.field }} requires control {{ filter.controlType }}
+          </span>
+    </ng-container>
+</div>
+

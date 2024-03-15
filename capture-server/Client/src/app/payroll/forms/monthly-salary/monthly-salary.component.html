@@ -1,0 +1,104 @@
+
+<div class="form-title">
+    <h3>Monthly-Salary</h3>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Employee Code</label>
+                    <input type="number" class="form-control"  [(ngModel)]="datasource.employeeCode" disabled/>
+                    <!-- <ng-select aria-label="Default select example" [(ngModel)]="datasource.employees.SelectedItem">
+                      
+                        <ng-option *ngFor="let item of datasource.employees"
+                            [value]="item">{{item.value}}</ng-option>
+                    </ng-select> -->
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>payroll Id</label>
+                    <input type="text" class="form-control"  [(ngModel)]="datasource.payrollMonthYear" disabled/>
+                    <!-- <ng-select aria-label="Default select example" [(ngModel)]="datasource.payRoll.SelectedItem">
+                        <ng-option *ngFor="let item of datasource.payRoll"
+                            [value]="item">{{item.value}}</ng-option>
+                    </ng-select> -->
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Basic</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.basic" disabled />
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>HRA</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.hra"disabled />
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Actual Conveyance Allowance</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.actconveyance" disabled />
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Actual Medical Allowance</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.actMedicalall" disabled />
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Actual Special Allowance</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.actSpecialall" disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>EPF</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.epf" disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>TDS</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.tds" disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Advances</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.advances" disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Income</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.income" disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Deducation</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.deduction" disabled/>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12 mb-3">
+                <div class="form-group">
+                    <label>Net Salary</label>
+                    <input type="number" class="form-control" [(ngModel)]="datasource.netSalary"disabled/>
+                    
+                    <!-- [(ngModel)]="datasource.netSalary" -->
+                </div>
+                
+            </div>
+        </div>
+        <div class="float-right">
+            <button type="submit" class="btn btn-outline-danger" rippleEffect (click)="cancel.emit()">Back</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+@import '@core/scss/base/bootstrap-extended/include'; // Bootstrap includes
+@import '@core/scss/base/pages/page-auth.scss';
+
+.auth-help-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+// img {
+//   /* adjust the below to control the 3D effect */
+//   --x: 10px;
+//   --y: 20px;
+//   transform: perspective(1000px) rotateX(var(--_a,40deg));
+//   /* */
+//   clip-path: polygon(       
+//      var(--y)              var(--y),       
+//      calc(100% - var(--y)) var(--y),       
+//      calc(100% - var(--y)) calc(100% - var(--y)),       
+//      calc(100% - var(--y) - var(--x)) var(--_c,100%),       
+//      calc(var(--x) + var(--y))        var(--_c,100%),      
+//      var(--y)        calc(100% - var(--y))       
+//      );
+//   outline: var(--y) solid rgba(0,0,0,0.4);
+//   outline-offset: calc(-1*var(--y));
+//   padding: var(--y) var(--y) 0 var(--y);
+//   transition: 1s;
+// }
+
+.z-text:hover {
+	animation: wobble 10s ease-in-out infinite;
+	transform: rotateX(30deg) rotateY(-30deg);
+}
+
+.z-layer:hover {
+   filter: brightness(0.7);
+}
+
+.z-layer:first-child {
+   filter: brightness(1);
+}
+
+@keyframes wobble {
+	0%,
+	100% {
+		transform: rotate3d(-1, 1, 0, 30deg);
+	}
+	25% {
+		transform: rotate3d(1, 1, 0, 30deg);
+	}
+	50% {
+		transform: rotate3d(1, -1, 0, 30deg);
+	}
+	75% {
+		transform: rotate3d(-1, -1, 0, 30deg);
+	}
+}

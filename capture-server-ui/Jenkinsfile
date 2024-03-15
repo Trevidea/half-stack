@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs "node"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+ 
+        stage('Build and Test') {
+            steps {
+                sh 'npm install --force'
+                sh 'npm run build --prod'
+            }
+        } 
+
+        stage('Deploy') {
+            steps {
+		// Remove the existing contents pof the directory
+                sh 'rm -r /var/www/capture-server-ui/*'
+
+                // Copy the build artifacts
+                sh 'cp -r dist/vuexy/* /var/www/capture-server-ui/'
+
+            }
+        }
+    }
+}

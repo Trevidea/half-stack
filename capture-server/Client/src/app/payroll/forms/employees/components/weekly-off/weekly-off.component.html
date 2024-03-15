@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label>Arrival (24 Hours Format)</label>
+                <input type="number" placeholder="0000" class="form-control" [(ngModel)]="datasource.workHrsIn" required />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label>Departure (24 Hours Format)</label>
+                <input type="number" placeholder="0000" class="form-control" [(ngModel)]="datasource.workHrsOut" required />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label>Weekly Off</label>
+            <div class="container-fluid">
+
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="Sunday" (change)="onChecked($event)"
+                    [(ngModel)]="week.Sunday.checked" />
+                <label class="form-check-label" for="Sunday">Sunday</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="Monday" (change)="onChecked($event)"
+                    [(ngModel)]="week.Monday.checked" />
+                <label class="form-check-label" for="Monday">Monday</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="Tuesday" (change)="onChecked($event)"
+                    [(ngModel)]="week.Tuesday.checked" />
+                <label class="form-check-label" for="Tuesday">Tuesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="Wednesday" (change)="onChecked($event)"
+                    [(ngModel)]="week.Wednesday.checked" />
+                <label class="form-check-label" for="Wednesday">Wednesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="Thursday" (change)="onChecked($event)"
+                    [(ngModel)]="week.Thursday.checked" />
+                <label class="form-check-label" for="Thursday">Thursday</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="Friday" (change)="onChecked($event)"
+                    [(ngModel)]="week.Friday.checked" />
+                <label class="form-check-label" for="Friday">Friday</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="Saturday" (change)="onChecked($event)"
+                    [(ngModel)]="week.Saturday.checked" />
+                <label class="form-check-label" for="Saturday">Saturday</label>
+            </div>
+            
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+app-scheduled-event-sidebar {
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+}
+
+// @media (max-width:768px) {
+//   .card{
+//     .card-body{
+//       ul{
+//         li{
+//           a{
+//             font-size: 0.8rem;
+//           }
+//         }
+//         .btn-ondemand{
+//           margin-top: 5px;
+//           margin-right: auto;
+//           .cus-btn-sm{
+//             padding: 0.486rem 1rem;
+//             font-size: 0.9rem;
+//             line-height: 1;
+//             border-radius: 0.358rem;
+//           }
+//           .cus-Create-On-Demand-Event{
+//             padding: 0.486rem 1rem;
+//             font-size: 0.9rem;
+//             line-height: 1;
+//             border-radius: 0.358rem;
+//           }
+//         }
+//       }
+//     }
+//   }
+
+// }
+.but {
+
+  padding-top: 0.786rem;
+  padding-right: 1rem;
+  padding-bottom: 0.786rem;
+  padding-left: 1rem;
+  border-radius: 5px;
+  border: none;
+}
+.button-container {
+  text-align: center; 
+
+  button {
+      display: none; 
+  }
+}
+
+/* Media Query for XL to Tablet screens */
+@media (min-width: 768px) and (max-width: 3000px) {
+  .button-container button#xl-to-tablet-button {
+      display: inline-block; 
+  }
+}
+
+/* Media Query for Mobile screens */
+@media (max-width: 767px) {
+  .button-container button#mobile-button {
+      display: inline-block; 
+  }
+}

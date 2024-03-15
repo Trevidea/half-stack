@@ -1,0 +1,41 @@
+GET http://localhost:8283
+
+### POST
+POST http://localhost:8283 HTTP/1.1
+content-type: application/json
+
+{
+    "Action":":",
+    "Image":"rakesh.jpg",
+    "First_Name":"Rakesh",
+    "Last_name":"Rajan",
+    "Designation":"Employee",
+    "Department":"Developer",
+    "Joining_Date":"12Sep2018",
+    "employee_code":"23456"
+}
+
+### PUT
+PUT http://localhost:8283 HTTP/1.1
+content-type: application/json
+
+{
+    "Action":":",
+    "Image":"deep.jpg",
+    "First_Name":"Deep",
+    "Last_name":"Sharan",
+    "Designation":"Intern",
+    "Department":"Developer",
+    "Joining_Date":"12Sep2018",
+    "employee_code":"23456"
+}
+    
+
+### PUT
+PUT http://localhost:8283/employee/update/10 HTTP/1.1
+content-type: application/json
+
+{
+    "one":"10",
+    "two":"20"
+}

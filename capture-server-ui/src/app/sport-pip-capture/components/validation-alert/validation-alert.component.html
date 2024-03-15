@@ -1,0 +1,24 @@
+<div *ngIf="control.invalid && (control.dirty || control.touched)" class="alert">
+
+    <div *ngIf="control.errors?.['required']" class="text-color">
+       <p class="text-color"> {{ controlName }} is required.</p>
+    </div>
+    <div *ngIf="control.errors?.['minlength']" class="text-color">
+        {{ controlName }} must be at least 4 characters long.
+    </div>
+    <div *ngIf="control.errors?.['forbiddenName']" class="text-color">
+        Invalid value for {{ controlName }}.
+    </div>
+
+    <div *ngIf="control.errors?.['pattern']" class="text-color">
+        Invalid value for {{ controlName }}.
+    </div>
+    
+    <div *ngIf="control.errors?.['email']" class="text-color">
+        Invalid value for {{ controlName }}.
+    </div>
+    
+    <div *ngIf="control.errors?.['alreadyExist']" class="text-color">
+        This {{ controlName }} already exists.
+    </div>
+</div>

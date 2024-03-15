@@ -1,0 +1,71 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-3">
+        <div *ngFor="let item of datasource.metatype; let i = index">
+          <div
+            class="d-flex bd-highlight mt-1 custome-stepper"
+            (click)="OnChangeType(i,item)"
+          >
+            <div
+              class="bd-highlight custome-stepper-header"
+              [ngStyle]="{ 'background-color': item.backgroundColor,'color':item.color }"
+            >
+              {{ i + 1 }}
+            </div>
+            <div class="bd-highlight ml-1 mt-1">
+              <div class="custome-stepper-title">{{ item.name }}</div>
+              <div class="custome-stepper-sub-title">{{ item.name }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-9 vertical-line">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Button on right"
+            [(ngModel)]="newValue"
+            aria-describedby="button-addon2"
+          />
+          <!-- (keyup)="onKeyUp()" -->
+          <div class="input-group-append" id="button-addon2">
+            <button class="btn btn-outline-primary" type="button" rippleEffect (click)="UpdateRow(newValue)">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+
+          </div>
+        </div>
+        <div
+          class="input-group mt-1"
+          *ngFor="let data of metaType.values; let i = index"
+        >
+
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Button on right"
+            aria-describedby="button-addon2"
+            disabled
+            id="{{ data }}"
+            value="{{ data }}"
+          />
+    
+          <div class="input-group-append" id="button-addon2">
+            <button
+              class="btn btn-outline-primary"
+              type="button"
+              (click)="UpdateRow(data)"
+              rippleEffect
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+         
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,65 @@
+<div class="row ml-1 mr-1 mt-1 mb-0">
+  <div class="col-md-4 col-12">
+    <label>&nbsp;</label>
+    <div class="input-group input-group-merge">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i data-feather="search"></i></span>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        id="searchbar"
+        name="searchbar"
+        placeholder="Search..."
+      />
+    </div>
+  </div>
+  <div class="col-md-2 col-6">
+    <label>Sport</label>
+    <div class="form-group">
+      <ng-select [loading]="selectBasicLoading" [(ngModel)]="datasource.sports.SelectedItem">
+        <ng-option *ngFor="let item of datasource.sports">
+          {{ item }}
+        </ng-option>
+      </ng-select>
+    </div>
+  </div>
+  <div class="col-md-2 col-6">
+    <label>Level</label>
+    <div class="form-group">
+      <ng-select
+      [(ngModel)]="datasource.levels.SelectedItem"
+      >
+      <ng-option *ngFor="let item of datasource.levels">
+        {{item}}
+      </ng-option>
+      </ng-select>
+    </div>
+  </div>
+  <div class="col-md-2 col-6">
+    <label>Program</label>
+    <div class="form-group">
+      <ng-select
+      [(ngModel)]="datasource.programs.SelectedItem"
+      >
+      <ng-option *ngFor="let item of datasource.programs">
+        {{item}}
+      </ng-option>
+      </ng-select>
+    </div>
+  </div>
+  <div class="col-md-2 col-6">
+    <label>Year</label>
+    <div class="form-group">
+      <ng-select
+      [(ngModel)]="datasource.years.SelectedItem"
+      >
+      <ng-option *ngFor="let item of datasource.years">
+        {{item}}
+      </ng-option>
+      
+      </ng-select>
+    </div>
+  </div>
+</div>
+<hr />

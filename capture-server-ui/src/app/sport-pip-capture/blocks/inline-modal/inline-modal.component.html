@@ -1,0 +1,13 @@
+<ng-template #modal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ modalTitle }}</h5>
+  </div>
+  <div class="modal-body">
+    <!-- <app-types></app-types> -->
+    <app-form-host [data]="properties" [component]="component"
+      (close)="close($event)"></app-form-host>
+  </div> 
+  <!--  [data]="properties" -->
+</ng-template>
+<!-- <app-form-host [component]="component" [data]="properties"
+(close)="close($event)"></app-form-host> -->

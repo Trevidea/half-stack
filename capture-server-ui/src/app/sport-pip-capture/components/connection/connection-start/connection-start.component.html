@@ -1,0 +1,82 @@
+<div class="card">
+  <div class="mb-2 mt-2">
+    <app-connection-header></app-connection-header>
+
+  </div>
+  <div class="table-responsive p-0">
+    <table class="table">
+      <thead style="background-color: #fff">
+        <tr>
+          <th scope="col" *ngFor="let item of header">{{ item }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div ngbDropdown container="body">
+              <button ngbDropdownToggle type="button" class="btn icon-btn btn-light custom-btn btn-sm hide-arrow"
+                rippleEffect>
+                <span [data-feather]="'more-vertical'" [class]="'cursor-pointer'"></span>
+              </button>
+              <div ngbDropdownMenu>
+                <a ngbDropdownItem><span [data-feather]="'pause'" [size]="16" [class]="'mr-50'"></span> Pause</a>
+                <a ngbDropdownItem><i class="bi bi-arrow-down-up mr-50"></i> Reorder</a>
+                <a ngbDropdownItem><span [data-feather]="'slash'" [size]="16" [class]="'mr-50'"></span> Disable</a>
+                <a ngbDropdownItem><span [data-feather]="'trash'" [size]="16" [class]="'mr-50'"></span> Remove</a>
+              </div>
+            </div>
+          </td>
+          <td>
+            1
+          </td>
+          <td>
+            Coach S.
+          </td>
+          <td>Press Box</td>
+          <td>iPad15</td>
+          <td>iPad</td>
+          <td>Penfield-5..</td>
+          <td>
+            <span class="badge badge-pill badge-light-danger">Poor</span>
+          </td>
+          <td>192.168.1.10</td>
+          <td><i class="bi bi-arrow-down-left" style="color:rgba(33, 96, 147, 1)"></i>&nbsp; Receiving</td>
+          <td>22 files</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>
+            <div ngbDropdown container="body">
+              <button ngbDropdownToggle type="button" class="btn icon-btn btn-light custom-btn btn-sm hide-arrow"
+                rippleEffect>
+                <span [data-feather]="'more-vertical'" [class]="'cursor-pointer'"></span>
+              </button>
+              <div ngbDropdownMenu>
+                <a ngbDropdownItem><span [data-feather]="'pause'" [size]="16" [class]="'mr-50'"></span> Pause</a>
+                <a ngbDropdownItem><i
+                      class="bi bi-arrow-down-up mr-50"></i> Reorder</a>
+                <a ngbDropdownItem><span [data-feather]="'slash'" [size]="16" [class]="'mr-50'"></span> Disable</a>
+                <a ngbDropdownItem><span [data-feather]="'trash'" [size]="16" [class]="'mr-50'"></span> Remove</a>
+              </div>
+            </div>
+          </td>
+          <td>
+            1
+          </td>
+          <td>
+            Coach S.
+          </td>
+          <td>Press Box</td>
+          <td>iPad15</td>
+          <td>iPad</td>
+          <td>Penfield-5..</td>
+          <td> <span class="badge badge-pill badge-light-success">Good</span> </td>
+          <td>192.168.1.10</td>
+          <td><span [data-feather]="'slash'" [size]="16" [class]="'mr-50'" stroke="'rgba(222, 46, 33, 1)'" ></span>Pause</td>
+          <td>22 files</td>
+          <td>2</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

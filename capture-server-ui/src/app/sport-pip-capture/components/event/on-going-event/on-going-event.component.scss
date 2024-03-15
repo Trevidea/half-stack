@@ -1,0 +1,89 @@
+@import "@core/scss/angular/libs/select.component.scss";
+
+.custom-card {
+   border: 0.5px solid rgba(154, 154, 154, 1);
+   position: relative
+}
+
+.custom-card-body {
+   padding-right: 10px;
+   padding-left: 10px
+}
+
+.Progress {
+   background: rgba(254, 246, 231, 1);
+   border-radius: 5px 5px 0px 0px;
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+}
+
+.scheduled-event {
+   background-color: rgba(233, 240, 245, 1);
+   color: rgba(0, 0, 0, 1);
+   font-weight: 400;
+}
+
+p {
+
+   font-size: 14px;
+   font-weight: 400;
+   color: rgba(165, 165, 165, 1)
+}
+
+.Progress-text {
+   padding: 9px;
+   font-size: 14px;
+   // color: rgba(0, 0, 0, 1);
+}
+
+
+h4 {
+   font-size: 16px;
+   color: rgba(0, 0, 0, 1);
+}
+
+.menu-container {
+   position: absolute;
+   bottom: 77%;
+   right: 10px;
+
+   .menuitem-but {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 7px;
+      background: rgba(248, 248, 248, 1);
+   }
+
+}
+
+//css for grid view 
+.grid-view {
+   list-style-type: none;
+   padding: 0;
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+   gap: 1rem;
+
+   li .a1 {
+      position: relative;
+      width: 100%;
+      // border: 0.5px solid rgba(154, 154, 154, 1);
+      border-radius: 1rem;
+      // padding: 1rem;
+      // color: black;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+   }
+
+   @media screen and (max-width: 768px) {
+      ul {
+         grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+      }
+   }
+}

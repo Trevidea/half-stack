@@ -1,0 +1,65 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12" style="  display: flex;
+        justify-content: left;
+        align-items: center;
+        height: 100%;">
+            <button type="button" class="btn button  btn-outline btn-sm" (click)="openModelScreen(content)">Import
+                Attendance Data</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<ng-template #content let-modal>
+    <div class="modal-header d-flex align-items-center">
+        <h1 class="modal-title mb-0">Import Attendance Data</h1>
+        <button type="button" class="btn-close m-0" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    
+    <div class="modal-body ">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Month</label>
+                    <!-- <input type="number" class="form-control" [(ngModel)]="datasource.month" name="month" placeholder="e.g. 10" /> -->
+                    <select class="form-select" [(ngModel)]="month" name="month">
+                        <option value="01">January</option>
+                        <option value="02">February</option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-6">
+                <!-- <div class="form-group">
+                    <label>Year</label>
+                    <input class="form-control" [(ngModel)]="year" name="year" />
+                </div> -->
+                <div class="form-group">
+                    <label>Year</label>
+                    <select class="form-select" [(ngModel)]="selectedYear" name="year">
+                        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm"
+            (click)="modal.close('Save click');datasource.onImportAttendance(month,selectedYear)">Import</button>
+    </div>
+
+</ng-template>
+
+<!-- (click)="datasource.onImportAttendance()" -->

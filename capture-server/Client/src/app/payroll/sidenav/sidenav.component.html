@@ -1,0 +1,41 @@
+<mat-nav-list>
+    <div class="logo py-1 mb-3" style="display: flex ;justify-content: left;">
+        <img src="../../../assets/logo.png" alt="" style="width: 160px;">
+    </div>
+    <div *ngFor="let item of menu">
+        <h2 *ngIf="item.ShowGroup" matSubheader class="mt-1 mb-0 sub-headeing">{{item.title}}</h2>
+        <div *ngIf="item.type !== 'collapsible' && !item.ShowGroup">
+            <a mat-list-item routerLink="/{{item.url}}" routerLinkActive="list-item-active">
+                <i *ngIf="!ShowGroup" class="feather-icon feather-icons " stroke-width="2"
+                    [attr.data-feather]="item.icon"></i>&nbsp;{{item.title}}
+            </a>
+        </div>
+
+        <div *ngIf="item.type == 'collapsible'" class=" mb-1 removePanalBodyPadding">
+
+            <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+                    <mat-expansion-panel-header>
+
+                        <mat-panel-title>
+
+                            <i class="feather-icon feather-icons" stroke-width="2"
+                                [attr.data-feather]="item.icon"></i>&nbsp;{{item.title}}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div *ngFor=" let child of item.children">
+                        <a mat-list-item routerLink="/{{child.url}}" routerLinkActive="list-item-active" class="link">
+                            <mat-icon>{{child.icon}}</mat-icon>&nbsp;{{child.title}}
+                        </a>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+    <a mat-list-item routerLink=""  class='mt-5 log-out' (click)="logout()">
+        <i  class="feather-icon feather-icons " stroke-width="2"
+            data-feather="log-out"></i>&nbsp;Log Out
+    </a>
+</mat-nav-list>

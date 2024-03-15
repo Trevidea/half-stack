@@ -1,0 +1,32 @@
+img {
+  display: block;
+  margin: auto;
+}
+
+.dropdown-toggle::after {
+  content: none;
+}
+
+@import '@core/scss/base/bootstrap-extended/include'; // Bootstrap includes
+@import '@core/scss/base/components/include';
+
+.dark-mode {
+  background-color: rgba(74, 74, 74, 1);
+  color: rgba(255, 255, 255, 1);
+  border-radius: 4px;
+  border: none;
+  box-shadow: none;
+
+}
+
+.light-Mode {
+  background-color: rgba(242, 193, 56, 0.1);
+  color: rgba(255, 255, 255, 1);
+  border-radius: 4px;
+  border: none;
+  box-shadow: none;
+}
+
+::ng-deep .form-control {
+   padding-left: 10px;
+}
