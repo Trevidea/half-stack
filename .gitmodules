@@ -1,0 +1,9 @@
+[submodule "capture-server/dependency/cpprestsdk"]
+	path = capture-server/dependency/cpprestsdk
+	url = https://github.com/microsoft/cpprestsdk.git
+[submodule "capture-server/dependency/jsoncpp"]
+	path = capture-server/dependency/jsoncpp
+	url = https://github.com/open-source-parsers/jsoncpp.git
+[submodule "capture-server/dependency/spdlog"]
+	path = capture-server/dependency/spdlog
+	url = https://github.com/gabime/spdlog.git

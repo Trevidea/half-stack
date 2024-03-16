@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "dependency/cpprestsdk/Release/tests/functional/http/utilities",
+		"source" : "dependency/cpprestsdk/Release/tests/functional/http/utilities"
+	}
+}

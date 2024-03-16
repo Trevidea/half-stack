@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "dependency/cpprestsdk/Release/samples",
+		"source" : "dependency/cpprestsdk/Release/samples"
+	}
+}

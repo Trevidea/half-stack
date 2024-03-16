@@ -3,7 +3,7 @@ if(NOT TARGET spdlog)
     find_package(spdlog REQUIRED)
 endif()
 add_executable(capture-server server.cpp)
-target_link_libraries(payroll-server PUBLIC
+target_link_libraries(capture-server PUBLIC
     spdlog::spdlog
     cpprest
     jsoncpp_lib

@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "dependency/jsoncpp/src/test_lib_json",
+		"source" : "dependency/jsoncpp/src/test_lib_json"
+	}
+}

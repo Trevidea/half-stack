@@ -2,17 +2,7 @@
 #include "employee.h"
 #include "config.h"
 #include "holiday.h"
-#include "attendance.h"
 #include "spdlog/spdlog.h"
-#include "payroll.h"
-#include "salary-rate.h"
-#include "payroll-leave.h"
-#include "privilege.h"
-#include "sick-leave.h"
-#include "monthly-attendance.h"
-#include "payroll-exceptions.h"
-#include "salary-slip-field.h"
-#include "monthly-salary.h"
 #include "metatype.h"
 
 Gateway::Gateway()
@@ -23,17 +13,8 @@ void Gateway::init()
 {
     spdlog::trace("Registering handlers..");
     this->m_entities.push_back(new Employee());
-    this->m_entities.push_back(new Attendance());
     this->m_entities.push_back(new Config());
     this->m_entities.push_back(new Holiday());
-    this->m_entities.push_back(new Payroll());
-    this->m_entities.push_back(new SalaryRate());
-    this->m_entities.push_back(new PayrollLeave());
-    this->m_entities.push_back(new Privilege());
-    this->m_entities.push_back(new SickLeave());
-    this->m_entities.push_back(new MonthlyAttendance());
-    this->m_entities.push_back(new SalarySlipField());
-    this->m_entities.push_back(new MonthlySalary());
     this->m_entities.push_back(new MetaType());
     for (auto &&e : this->m_entities)
     {

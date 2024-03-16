@@ -1,0 +1,68 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"build/_deps/libpqxx-src/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 44,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 48,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/libpqxx",
+			"paths" : 
+			[
+				"build/_deps/libpqxx-src/cmake/libpqxx-config.cmake",
+				"build/_deps/libpqxx-build/libpqxx-config-version.cmake"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/libpqxx",
+			"exportName" : "libpqxx-targets",
+			"exportTargets" : 
+			[
+				{
+					"id" : "pqxx::@c5360a51501d58d409fd",
+					"index" : 51
+				}
+			],
+			"paths" : 
+			[
+				"_deps/libpqxx-build/CMakeFiles/Export/d6b66e93f8212dd1f00debf9f6654819/libpqxx-targets.cmake"
+			],
+			"type" : "export"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "_deps/libpqxx-build",
+		"source" : "build/_deps/libpqxx-src"
+	}
+}

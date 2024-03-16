@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/manishverma/git/half-stack/capture-server/build/_deps/libpqxx-subbuild/CMakeFiles/libpqxx-populate"
+		},
+		{
+			"file" : "/Users/manishverma/git/half-stack/capture-server/build/_deps/libpqxx-subbuild/CMakeFiles/libpqxx-populate.rule"
+		},
+		{
+			"file" : "/Users/manishverma/git/half-stack/capture-server/build/_deps/libpqxx-subbuild/CMakeFiles/libpqxx-populate-complete.rule"
+		},
+		{
+			"file" : "/Users/manishverma/git/half-stack/capture-server/build/_deps/libpqxx-subbuild/libpqxx-populate-prefix/src/libpqxx-populate-stamp/libpqxx-populate-build.rule"
+		},
+		{
+			"file" : "/Users/manishverma/git/half-stack/capture-server/build/_deps/libpqxx-subbuild/libpqxx-populate-prefix/src/libpqxx-populate-stamp/libpqxx-populate-configure.rule"
+		},
+		{
+			"file" : "/Users/manishverma/git/half-stack/capture-server/build/_deps/libpqxx-subbuild/libpqxx-populate-prefix/src/libpqxx-populate-stamp/libpqxx-populate-download.rule"
+		},
+		{
+			"file" : "/Users/manishverma/git/half-stack/capture-server/build/_deps/libpqxx-subbuild/libpqxx-populate-prefix/src/libpqxx-populate-stamp/libpqxx-populate-install.rule"
+		},
+		{
+			"file" : "/Users/manishverma/git/half-stack/capture-server/build/_deps/libpqxx-subbuild/libpqxx-populate-prefix/src/libpqxx-populate-stamp/libpqxx-populate-mkdir.rule"
+		},
+		{
+			"file" : "/Users/manishverma/git/half-stack/capture-server/build/_deps/libpqxx-subbuild/libpqxx-populate-prefix/src/libpqxx-populate-stamp/libpqxx-populate-patch.rule"
+		},
+		{
+			"file" : "/Users/manishverma/git/half-stack/capture-server/build/_deps/libpqxx-subbuild/libpqxx-populate-prefix/src/libpqxx-populate-stamp/libpqxx-populate-test.rule"
+		},
+		{
+			"file" : "/Users/manishverma/git/half-stack/capture-server/build/_deps/libpqxx-subbuild/libpqxx-populate-prefix/src/libpqxx-populate-stamp/libpqxx-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"libpqxx-populate"
+		],
+		"name" : "libpqxx-populate"
+	}
+}

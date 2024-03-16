@@ -9,7 +9,7 @@
 #include "sqlhelper.h"
 #include "handler.h"
 #include "pgresult.h"
-#include "payroll-exceptions.h"
+#include "half-stack-exceptions.h"
 
 class EntityBase : public Handler
 {

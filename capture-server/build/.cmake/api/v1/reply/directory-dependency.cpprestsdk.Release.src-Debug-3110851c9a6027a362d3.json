@@ -1,0 +1,217 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"dependency/cpprestsdk/Release/src/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 100,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 239,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 240,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 241,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 275,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 286,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 290,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "include/pplx",
+			"paths" : 
+			[
+				"dependency/cpprestsdk/Release/src/../include/pplx/threadpool.h"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "include/cpprest",
+			"paths" : 
+			[
+				"dependency/cpprestsdk/Release/src/../include/cpprest/astreambuf.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/asyncrt_utils.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/base_uri.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/containerstream.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/filestream.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/http_client.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/http_compression.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/http_headers.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/http_listener.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/http_msg.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/interopstream.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/json.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/oauth1.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/oauth2.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/producerconsumerstream.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/rawptrstream.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/streams.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/uri.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/uri_builder.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/version.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/ws_client.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/ws_msg.h"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "include/pplx",
+			"paths" : 
+			[
+				"dependency/cpprestsdk/Release/src/../include/pplx/pplx.h",
+				"dependency/cpprestsdk/Release/src/../include/pplx/pplxcancellation_token.h",
+				"dependency/cpprestsdk/Release/src/../include/pplx/pplxconv.h",
+				"dependency/cpprestsdk/Release/src/../include/pplx/pplxinterface.h",
+				"dependency/cpprestsdk/Release/src/../include/pplx/pplxlinux.h",
+				"dependency/cpprestsdk/Release/src/../include/pplx/pplxtasks.h",
+				"dependency/cpprestsdk/Release/src/../include/pplx/pplxwin.h"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "Unspecified",
+			"destination" : "include/cpprest/details",
+			"paths" : 
+			[
+				"dependency/cpprestsdk/Release/src/../include/cpprest/details/SafeInt3.hpp",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/details/basic_types.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/details/cpprest_compat.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/details/fileio.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/details/http_constants.dat",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/details/http_helpers.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/details/http_server.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/details/http_server_api.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/details/nosal.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/details/resource.h",
+				"dependency/cpprestsdk/Release/src/../include/cpprest/details/web_utilities.h"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 5,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"dependency/cpprestsdk/Release/Binaries/libcpprest.2.10.dylib"
+			],
+			"targetId" : "cpprest::@3c9d9c47b43dde2cd6ed",
+			"targetIndex" : 34,
+			"targetInstallNamelink" : "skip",
+			"type" : "target"
+		},
+		{
+			"backtrace" : 5,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"dependency/cpprestsdk/Release/Binaries/libcpprest.dylib"
+			],
+			"targetId" : "cpprest::@3c9d9c47b43dde2cd6ed",
+			"targetIndex" : 34,
+			"targetInstallNamelink" : "only",
+			"type" : "target"
+		},
+		{
+			"backtrace" : 6,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/cpprestsdk",
+			"paths" : 
+			[
+				"build/dependency/cpprestsdk/Release/src/cpprestsdk-config.cmake",
+				"build/dependency/cpprestsdk/Release/src/cpprestsdk-config-version.cmake"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 7,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/cpprestsdk",
+			"exportName" : "cpprestsdk-targets",
+			"exportTargets" : 
+			[
+				{
+					"id" : "cpprest::@3c9d9c47b43dde2cd6ed",
+					"index" : 34
+				},
+				{
+					"id" : "cpprestsdk_boost_internal::@3c9d9c47b43dde2cd6ed",
+					"index" : 0
+				},
+				{
+					"id" : "cpprestsdk_zlib_internal::@3c9d9c47b43dde2cd6ed",
+					"index" : 0
+				},
+				{
+					"id" : "cpprestsdk_openssl_internal::@3c9d9c47b43dde2cd6ed",
+					"index" : 0
+				},
+				{
+					"id" : "cpprestsdk_websocketpp_internal::@3c9d9c47b43dde2cd6ed",
+					"index" : 0
+				}
+			],
+			"paths" : 
+			[
+				"dependency/cpprestsdk/Release/src/CMakeFiles/Export/0f425fe7e2467babc1de94b92f87002d/cpprestsdk-targets.cmake"
+			],
+			"type" : "export"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "dependency/cpprestsdk/Release/src",
+		"source" : "dependency/cpprestsdk/Release/src"
+	}
+}
