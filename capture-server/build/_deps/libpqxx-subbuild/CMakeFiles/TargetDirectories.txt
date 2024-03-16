@@ -1,3 +1,0 @@
-/Users/manishverma/git/half-stack/capture-server/build/_deps/libpqxx-subbuild/CMakeFiles/libpqxx-populate.dir
-/Users/manishverma/git/half-stack/capture-server/build/_deps/libpqxx-subbuild/CMakeFiles/edit_cache.dir
-/Users/manishverma/git/half-stack/capture-server/build/_deps/libpqxx-subbuild/CMakeFiles/rebuild_cache.dir
