@@ -13,36 +13,17 @@ import { ArrayBuilder } from 'app/sport-pip-capture/blocks/array.builder';
   encapsulation: ViewEncapsulation.None
 })
 export class EventPresenter implements OnInit {
-
-  activeTab: string = 'ongoing'; 
   ds!: EventRange
   constructor(private router: Router, private dataFactory: DataFactoryService) {
     this.ds = new EventRange()
   }
 
   ngOnInit(): void {
-   
+    Transformer.ComposeCollectionAsync(this.dataFactory.ongoingEventJson(), this.ds.ongoingEvent, EventRangeBuilder);
+    Transformer.ComposeCollectionAsync(this.dataFactory.UpCommingEventJson(), this.ds.upcomingEvent, UpcomingEventBuilder);
+    Transformer.ComposeCollectionAsync(this.dataFactory.PastEventJson(), this.ds.pastEvent, PastEventBuilder);
   }
 
-  filterDataByActiveTab(): void {
-    switch (this.activeTab) {
-      case 'ongoing':
-        Transformer.ComposeCollectionAsync(this.dataFactory.ongoingEventJson(), this.ds.ongoingEvent,EventRangeBuilder);
-        break;
-      case 'upcoming':
-        Transformer.ComposeCollectionAsync(this.dataFactory.UpCommingEventJson(), this.ds.upcomingEvent,UpcomingEventBuilder);
-        break;
-      case 'past':
-        Transformer.ComposeCollectionAsync(this.dataFactory.PastEventJson(), this.ds.pastEvent,PastEventBuilder);
-        break;
-      default:
-        break;
-    }
-  }
 
- 
-  onTabChange(tabName: string): void {
-    this.activeTab = tabName;
-    this.filterDataByActiveTab();
-  }
+
 }

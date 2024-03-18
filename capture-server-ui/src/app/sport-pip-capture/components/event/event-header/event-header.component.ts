@@ -1,8 +1,4 @@
 import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
-import { Transformer } from "app/blocks/transformer";
-import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
-import { headerView } from "./views/header";
-import { MetaTypeBuilder } from "app/sport-pip-capture/blocks/meta-type.builder";
 
 
 @Component({
@@ -21,6 +17,7 @@ export class EventHeaderComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    console.log(this.datasource)
   }
 
 }

@@ -1,4 +1,4 @@
-<div class="row ml-1 mr-1 mt-1 mb-0">
+<div class="row ml-1 mr-1 mt-1 mb-0" *ngIf="datasource">
   <div class="col-md-4 col-12">
     <label>&nbsp;</label>
     <div class="input-group input-group-merge">
@@ -17,7 +17,7 @@
   <div class="col-md-2 col-6">
     <label>Sport</label>
     <div class="form-group">
-      <ng-select >
+      <ng-select  [(ngModel)]="datasource.sports.SelectedItem">
         <ng-option *ngFor="let item of datasource.sports">
           {{ item }}
         </ng-option>
@@ -28,7 +28,7 @@
     <label>Level</label>
     <div class="form-group">
       <ng-select
-     
+      [(ngModel)]="datasource.levels.SelectedItem"
       >
       <ng-option *ngFor="let item of datasource.levels">
         {{item}}
@@ -40,7 +40,7 @@
     <label>Program</label>
     <div class="form-group">
       <ng-select
-     
+      [(ngModel)]="datasource.programs.SelectedItem"
       >
       <ng-option *ngFor="let item of datasource.programs">
         {{item}}
@@ -52,7 +52,7 @@
     <label>Year</label>
     <div class="form-group">
       <ng-select
-    
+      [(ngModel)]="datasource.years.SelectedItem"
       >
       <ng-option *ngFor="let item of datasource.years">
         {{item}}
