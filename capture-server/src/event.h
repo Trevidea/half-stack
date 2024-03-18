@@ -1,39 +1,41 @@
 #ifndef EVENT_H
 #define EVENT_H
 
-#include "entity-base.h" // Assuming EntityBase is the base class for entities
-#include "gateway.h"
+#include "entity-base.h" // Assuming this includes definitions for Request and Response
+#include "gateway.h"     // Assuming this includes definitions for Gateway
 #include <string>
 #include <vector>
-#include <ctime> // For time_t
-#include <map>   // For std::map
+#include <ctime>
+#include <map>
 
 // Enum for event status
-enum class EventStatus {
+enum class EventStatus
+{
     OnGoing,
     Upcoming,
     Past
 };
 
 // Structure to represent venue details
-struct Venue {
+struct Venue
+{
     std::string type;
     std::string streetAddress;
     std::string cityAddress;
 };
 
 // Structure to represent event detail
-struct EventDetail {
-    std::string streetAddress;
-    std::string cityAddress;
+struct EventDetail
+{
     std::string type;
+    std::string description;
 };
 
 // Class to represent Event entity
-class Event : public EntityBase {
+class Event : public EntityBase
+{
 public:
     Event();
-    ~Event();
 
     // Route handling methods
     void report();
@@ -46,7 +48,7 @@ public:
     void remove(const Request &req, Response &rsp);
 
     // Method to retrieve events for a specific period
-    static std::vector<Event> forPeriod(int year, const std::string &cat);
+    static std::vector<Event> forPeriodAndStatus(const std::string &startDateTime, const std::string &endDateTime, const std::string &status);
 
 private:
     int id;
@@ -55,13 +57,11 @@ private:
     std::string program;
     int year;
     time_t dttEvent;
-    std::map<std::string, Venue> venue;
+    Venue venue;         // Changed to a single instance of Venue
     bool onPremise;
-    std::vector<EventDetail> detail;
+    EventDetail detail;  // Changed to a single instance of EventDetail
     std::string title;
     EventStatus status;
-    std::string time; // Assuming time is represented as a string
-    bool active;
 };
 
 #endif // EVENT_H
