@@ -13,7 +13,6 @@ RUN apt-get update && \
         && rm -rf /var/lib/apt/lists/*
 
 # Set environment variables
-ENV HR_CAPS /path/to/capture/files
 ENV PG_SRV your_postgres_server
 ENV PG_DBS your_postgres_database
 ENV PG_USR your_postgres_user
