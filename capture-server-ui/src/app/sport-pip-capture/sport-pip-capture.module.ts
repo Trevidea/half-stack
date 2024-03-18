@@ -68,6 +68,7 @@ import { FormHostDirective } from './blocks/inline-modal/form-host.directive';
 import { FormHostComponent } from './blocks/inline-modal/form-host/form-host.component';
 import { InlineModalComponent } from './blocks/inline-modal/inline-modal.component';
 import { MetaTypePresenter } from './components/meta-type/meta-type.presenter';
+import { EventHeaderPresenter } from './components/event/event-header/event-header.presenter';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -123,7 +124,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         FormHostDirective,
         FormHostComponent,
         InlineModalComponent,
-        MetaTypePresenter
+        MetaTypePresenter,
+        EventHeaderPresenter
     ],
     providers: [
         {

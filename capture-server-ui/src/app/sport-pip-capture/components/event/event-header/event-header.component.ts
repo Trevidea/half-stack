@@ -1,4 +1,9 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { Transformer } from "app/blocks/transformer";
+import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
+import { headerView } from "./views/header";
+import { MetaTypeBuilder } from "app/sport-pip-capture/blocks/meta-type.builder";
+
 
 @Component({
   selector: 'app-event-header',
@@ -8,9 +13,12 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class EventHeaderComponent implements OnInit {
   @Input () datasource:any
+  
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
-  constructor() { }
+  constructor() {
+   
+   }
 
   ngOnInit(): void {
   }
