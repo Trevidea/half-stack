@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
+
 
 @Component({
   selector: 'app-event-header',
@@ -8,11 +9,15 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class EventHeaderComponent implements OnInit {
   @Input () datasource:any
+  
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
-  constructor() { }
+  constructor() {
+   
+   }
 
   ngOnInit(): void {
+    console.log(this.datasource)
   }
 
 }

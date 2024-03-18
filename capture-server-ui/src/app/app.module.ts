@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -8,7 +7,6 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FakeDbService } from '@fake-db/fake-db.service';
 
 import 'hammerjs';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateModule } from '@ngx-translate/core';
 import { ContextMenuModule } from '@ctrl/ngx-rightclick';
@@ -34,6 +32,8 @@ import { SportPipCaptureModule } from './sport-pip-capture/sport-pip-capture.mod
 
 import { ExampleModule } from './sport-pip/example/example.module';
 import { SettingModule } from './sport-pip-capture/components/setting/setting.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule, Routes } from '@angular/router';
 
 
 const appRoutes: Routes = [

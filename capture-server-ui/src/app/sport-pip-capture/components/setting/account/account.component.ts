@@ -1,10 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { DataFactoryService } from 'app/sport-pip-capture/models/data-factory.service';
-import { UserProfileData } from 'app/sport-pip-capture/models/user-profile';
-import { AccountBuilder } from './builder/account';
-import { Transformer } from 'app/blocks/transformer';
-import { AccountView } from './views/account-view';
-
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',

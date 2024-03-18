@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { SettingComponent } from './setting.component';
 import { AccountComponent } from './account/account.component';
 import { FilesComponent } from './files/files.component';
@@ -9,6 +8,7 @@ import { LiceneseComponent } from './licenese/licenese.component';
 import { AccountPresenter } from './account/account.presenter';
 import { SharingPresenter } from './sharing/sharing.presenter';
 import { FilePresenter } from './files/files.presenter';
+import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
