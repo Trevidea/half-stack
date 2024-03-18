@@ -1,0 +1,89 @@
+.grid-view {
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 1rem;
+
+    .custom-card {
+        position: relative;
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid var(--card-border) !important;
+        margin-bottom: 0;
+
+        .card-text-style {
+            h4 {
+                font-size: 14px;
+            }
+
+            .card-text {
+                font-family: 'Outfit';
+                font-size: 12px;
+                font-weight: 400;
+                margin-bottom: 5px;
+            }
+
+            .ellipsis {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 90%;
+            }
+        }
+
+        .card-img {
+            overflow: hidden;
+
+            .right {
+                position: absolute;
+                -webkit-clip-path: polygon(3% 0, 100% 0%, 100% 100%, 0% 100%);
+                clip-path: polygon(3% 0, 100% 0%, 100% 100%, 0% 100%);
+                shape-outside: polygon(3% 0, 100% 0%, 100% 100%, 0% 100%);
+                width: 50%;
+                height: 130px;
+                border-top-right-radius: 10px;
+            }
+
+            .left {
+                -webkit-clip-path: polygon(0% 0%, 100% 0%, 97% 100%, 0 100%);
+                clip-path: polygon(0% 0%, 100% 0%, 97% 100%, 0 100%);
+                shape-outside: polygon(0% 0%, 100% 0%, 97% 100%, 0 100%);
+                width: 50%;
+                height: 130px;
+                border-top-left-radius: 10px;
+            }
+        }
+
+        .custom-card-body {
+            padding-right: 10px;
+            padding-left: 10px;
+
+            .btn-warning {
+                border-color: #F5A30A !important;
+                background-color: #F5A30A !important;
+                color: #fff !important;
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .grid-view {
+            grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+        }
+    }
+
+    @media screen and (max-width:320px) {
+        .grid-view {
+            grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+        }
+
+        .custom-card {
+            position: relative;
+            width: 267px;
+            border-radius: 10px;
+            border: 1px solid var(--card-border) !important;
+            margin-bottom: 0;
+
+        }
+    }
+}

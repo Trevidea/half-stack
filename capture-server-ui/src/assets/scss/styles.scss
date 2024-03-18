@@ -16,3 +16,28 @@ h5,
 h6 {
 	color: var(--text, #000);
 }
+
+.card{
+  border: 1px solid #C3C3C3;
+}
+
+.dark-layout {
+	
+.card{
+	border: none;
+  }
+}
+
+.dark-layout {
+	--main-border-color: none;
+	--secondary-border-color: #3b4253;
+	--light-secondary-border-color: #3b4253;
+	--card-border: #444444;
+}
+
+:root {
+	--main-border-color: #C3C3C3;
+	--secondary-border-color: #C3C3C3;
+	--light-secondary-border-color: #ebe9f1;
+	--card-border: #C3C3C3;
+}
