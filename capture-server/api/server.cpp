@@ -168,7 +168,7 @@ int main()
    Gateway::instance().init();
    try
    {
-      web::uri uri{"http://0.0.0.0:8283"};
+      web::uri uri{"http://0.0.0.0:1437"};
 
       spdlog::trace("URI created for the url");
 
@@ -180,7 +180,7 @@ int main()
       listener.support(methods::DEL, handle_del);
       listener.support(methods::OPTIONS, handle_opt);
 
-      spdlog::trace("Created listener at 0.0.0.0:8283");
+      spdlog::trace("Created listener at 0.0.0.0:1437");
 
       listener
           .open()
