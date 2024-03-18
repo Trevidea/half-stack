@@ -45,10 +45,10 @@ void Event::report()
                               });
 }
 
-std::vector<Event> Event::forPeriod(int year, const std::string &cat)
+std::vector<Event> Event::forPeriod(int year, const std::string &status)
 {
     char eventQry[128] = {0};
-    snprintf(eventQry, 128, "year=%d&category='%s'", year, cat.c_str());
+    snprintf(eventQry, 128, "year=%d AND status='%s'", year, status.c_str());
     return EntityBase::find<Event>(eventQry);
 }
 

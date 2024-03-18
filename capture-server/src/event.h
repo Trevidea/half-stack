@@ -2,9 +2,34 @@
 #define EVENT_H
 
 #include "entity-base.h" // Assuming EntityBase is the base class for entities
-#include "request.h"
-#include "response.h"
+#include "gateway.h"
+#include <string>
+#include <vector>
+#include <ctime> // For time_t
+#include <map>   // For std::map
 
+// Enum for event status
+enum class EventStatus {
+    OnGoing,
+    Upcoming,
+    Past
+};
+
+// Structure to represent venue details
+struct Venue {
+    std::string type;
+    std::string streetAddress;
+    std::string cityAddress;
+};
+
+// Structure to represent event detail
+struct EventDetail {
+    std::string streetAddress;
+    std::string cityAddress;
+    std::string type;
+};
+
+// Class to represent Event entity
 class Event : public EntityBase {
 public:
     Event();
@@ -24,20 +49,19 @@ public:
     static std::vector<Event> forPeriod(int year, const std::string &cat);
 
 private:
-    // Event attributes
-    int id; // Auto-generated primary key
+    int id;
     std::string sport;
     std::string level;
     std::string program;
     int year;
-    std::string dttEvent; // Assuming datetime is represented as string for simplicity
-    std::string venue; // JSON representation of venue
+    time_t dttEvent;
+    std::map<std::string, Venue> venue;
     bool onPremise;
-    std::string detail; // JSON representation of event details
+    std::vector<EventDetail> detail;
     std::string title;
-    enum Status { Upcoming, Ongoing, Past }; // Enum for event status
-
-    // Add any private members as needed
+    EventStatus status;
+    std::string time; // Assuming time is represented as a string
+    bool active;
 };
 
 #endif // EVENT_H
