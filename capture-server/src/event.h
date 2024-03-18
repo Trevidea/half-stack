@@ -9,7 +9,7 @@
 #include <map>
 
 // Enum for event status
-enum class EventStatus
+enum EventStatus
 {
     OnGoing,
     Upcoming,
