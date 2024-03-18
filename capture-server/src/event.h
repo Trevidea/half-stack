@@ -37,31 +37,64 @@ class Event : public EntityBase
 public:
     Event();
 
-    // Route handling methods
-    void report();
-    void listUpcoming(const Request &req, Response &rsp);
-    void listOngoing(const Request &req, Response &rsp);
-    void listPast(const Request &req, Response &rsp);
-    void find(const Request &req, Response &rsp);
-    void create(const Request &req, Response &rsp);
-    void update(const Request &req, Response &rsp);
-    void remove(const Request &req, Response &rsp);
+    // Getter and setter functions for EventDetail
+    const EventDetail &eventDetail() const
+    {
+        return this->detail;
+    }
+
+    EventDetail &eventDetail()
+    {
+        return this->detail;
+    }
+
+    // Setter functions for EventDetail properties
+    void setEventType(const std::string &type)
+    {
+        this->detail.type = type;
+    }
+
+    void setEventDescription(const std::string &description)
+    {
+        this->detail.description = description;
+    }
+
+    // Other getter functions remain the same
+    std::string sport() const
+    {
+        return this->m_model.get<std::string>("sport");
+    }
+
+    std::string level() const
+    {
+        return this->m_model.get<std::string>("level");
+    }
+
+    std::string program() const
+    {
+        return this->m_model.get<std::string>("program");
+    }
+
+    int year() const
+    {
+        return this->m_model.get<int>("year");
+    }
+
+    std::string title() const
+    {
+        return this->m_model.get<std::string>("title");
+    }
 
     // Method to retrieve events for a specific period
     static std::vector<Event> forPeriodAndStatus(const std::string &startDateTime, const std::string &endDateTime, const std::string &status);
 
 private:
     int id;
-    std::string sport;
-    std::string level;
-    std::string program;
-    int year;
     time_t dttEvent;
-    Venue venue;         // Changed to a single instance of Venue
+    Venue venue; // Changed to a single instance of Venue
     bool onPremise;
-    EventDetail detail;  // Changed to a single instance of EventDetail
-    std::string title;
     EventStatus status;
+    EventDetail detail; // Changed to a single instance of EventDetail
 };
 
 #endif // EVENT_H
