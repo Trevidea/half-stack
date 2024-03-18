@@ -1,4 +1,5 @@
 set(HALF_STACK_SRC
+    half-stack-exceptions.cpp
     filesysutils.cpp
     handler.cpp
     holiday.cpp

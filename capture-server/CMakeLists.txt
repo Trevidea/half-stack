@@ -9,6 +9,7 @@ set(CMAKE_BUILD_TYPE Debug)
 set(Boost_DEBUG ON)
 
 find_package(PostgreSQL REQUIRED)
+find_package(OpenSSL REQUIRED)
 
 # if (WIN32)
 #     set(PostgreSQL_LIBRARIES "C:/Program Files/PostgreSQL/15/lib")
@@ -21,6 +22,7 @@ include(AddSubmodule)
 include(FetchContent)
 
 set(PostgreSQL_ADDITIONAL_VERSIONS "14")
+set(OPENSSL_ROOT_DIR "/opt/homebrew/bin/openssl")
 
 #ENV-VARS------------------
 #HR_CAPS = to set the path of the folder where are capture files are stored 
@@ -37,9 +39,7 @@ FetchContent_Declare(
     GIT_SHALLOW TRUE
 )
 FetchContent_MakeAvailable(libpqxx)
-#ifndef _WIN32
-set(OPENSSL_ROOT_DIR "/opt/homebrew/opt/openssl@3")
-#endif
+
 add_git_submodule(dependency/jsoncpp)
 add_git_submodule(dependency/cpprestsdk)
 add_git_submodule(dependency/spdlog)

@@ -8,4 +8,4 @@ target_link_libraries(capture-server PUBLIC
     cpprest
     jsoncpp_lib
     pg-dal
-    hr-manager)
+    half-stack)
