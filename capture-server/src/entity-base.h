@@ -10,6 +10,7 @@
 #include "handler.h"
 #include "pgresult.h"
 #include "half-stack-exceptions.h"
+#include "event.h"
 
 class EntityBase : public Handler
 {

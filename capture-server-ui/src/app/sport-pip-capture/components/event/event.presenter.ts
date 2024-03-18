@@ -13,22 +13,17 @@ import { ArrayBuilder } from 'app/sport-pip-capture/blocks/array.builder';
   encapsulation: ViewEncapsulation.None
 })
 export class EventPresenter implements OnInit {
-
   ds!: EventRange
   constructor(private router: Router, private dataFactory: DataFactoryService) {
     this.ds = new EventRange()
   }
 
   ngOnInit(): void {
-    Transformer.ComposeObject(this.dataFactory.EventSports(), this.ds.sports, ArrayBuilder)
-    Transformer.ComposeObject(this.dataFactory.EventLevel(), this.ds.levels, ArrayBuilder)
-    Transformer.ComposeObject(this.dataFactory.EventProgram(), this.ds.programs, ArrayBuilder)
-    Transformer.ComposeObject(this.dataFactory.EventYear(), this.ds.years, ArrayBuilder)
-
-    Transformer.ComposeCollectionAsync(this.dataFactory.PastEventJson(), this.ds.pastEvent,PastEventBuilder);
-    Transformer.ComposeCollectionAsync(this.dataFactory.UpCommingEventJson(), this.ds.upcomingEvent,UpcomingEventBuilder);
-    Transformer.ComposeCollectionAsync(this.dataFactory.ongoingEventJson(), this.ds.ongoingEvent,EventRangeBuilder);
-    
+    Transformer.ComposeCollectionAsync(this.dataFactory.ongoingEventJson(), this.ds.ongoingEvent, EventRangeBuilder);
+    Transformer.ComposeCollectionAsync(this.dataFactory.UpCommingEventJson(), this.ds.upcomingEvent, UpcomingEventBuilder);
+    Transformer.ComposeCollectionAsync(this.dataFactory.PastEventJson(), this.ds.pastEvent, PastEventBuilder);
   }
+
+
 
 }

@@ -6,7 +6,6 @@ import { SportPipCaptureComponent } from './sport-pip-capture.component';
 import { CaptureDashboardComponent } from './components/dashboard/dashboard.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { CoreCommonModule } from '@core/common.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InvoiceModule } from 'app/main/apps/invoice/invoice.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { ChartsModule } from 'ng2-charts';
@@ -16,7 +15,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { OnGoingEventComponent } from './components/event/on-going-event/on-going-event.component';
 import { UpComingEventComponent } from './components/event/up-coming-event/up-coming-event.component';
 import { PastEventComponent } from './components/event/past-event/past-event.component';
-import { FormsModule } from '@angular/forms';
+
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TruncateWordsPipe } from './pipes/truncate-words.pipe';
 import { ScheduledEventSidebarComponent } from './components/event/up-coming-event/scheduled-event-sidebar/scheduled-event-sidebar.component';
@@ -68,6 +67,9 @@ import { FormHostDirective } from './blocks/inline-modal/form-host.directive';
 import { FormHostComponent } from './blocks/inline-modal/form-host/form-host.component';
 import { InlineModalComponent } from './blocks/inline-modal/inline-modal.component';
 import { MetaTypePresenter } from './components/meta-type/meta-type.presenter';
+import { EventHeaderPresenter } from './components/event/event-header/event-header.presenter';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -123,7 +125,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         FormHostDirective,
         FormHostComponent,
         InlineModalComponent,
-        MetaTypePresenter
+        MetaTypePresenter,
+        EventHeaderPresenter
     ],
     providers: [
         {

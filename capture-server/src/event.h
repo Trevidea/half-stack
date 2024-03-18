@@ -1,14 +1,41 @@
 #ifndef EVENT_H
 #define EVENT_H
 
-#include "entity-base.h" // Assuming EntityBase is the base class for entities
-#include "request.h"
-#include "response.h"
+#include "entity-base.h" // Assuming this includes definitions for Request and Response
+#include "gateway.h"     // Assuming this includes definitions for Gateway
+#include <string>
+#include <vector>
+#include <ctime>
+#include <map>
 
-class Event : public EntityBase {
+// Enum for event status
+enum class EventStatus
+{
+    OnGoing,
+    Upcoming,
+    Past
+};
+
+// Structure to represent venue details
+struct Venue
+{
+    std::string type;
+    std::string streetAddress;
+    std::string cityAddress;
+};
+
+// Structure to represent event detail
+struct EventDetail
+{
+    std::string type;
+    std::string description;
+};
+
+// Class to represent Event entity
+class Event : public EntityBase
+{
 public:
     Event();
-    ~Event();
 
     // Route handling methods
     void report();
@@ -21,23 +48,20 @@ public:
     void remove(const Request &req, Response &rsp);
 
     // Method to retrieve events for a specific period
-    static std::vector<Event> forPeriod(int year, const std::string &cat);
+    static std::vector<Event> forPeriodAndStatus(const std::string &startDateTime, const std::string &endDateTime, const std::string &status);
 
 private:
-    // Event attributes
-    int id; // Auto-generated primary key
+    int id;
     std::string sport;
     std::string level;
     std::string program;
     int year;
-    std::string dttEvent; // Assuming datetime is represented as string for simplicity
-    std::string venue; // JSON representation of venue
+    time_t dttEvent;
+    Venue venue;         // Changed to a single instance of Venue
     bool onPremise;
-    std::string detail; // JSON representation of event details
+    EventDetail detail;  // Changed to a single instance of EventDetail
     std::string title;
-    enum Status { Upcoming, Ongoing, Past }; // Enum for event status
-
-    // Add any private members as needed
+    EventStatus status;
 };
 
 #endif // EVENT_H

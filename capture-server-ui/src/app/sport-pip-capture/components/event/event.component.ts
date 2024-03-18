@@ -19,4 +19,6 @@ export class EventComponent implements OnInit {
   CreateOnDemandEvent() {
     this.router.navigate(['on-demand-event'])
   }
+
+ 
 }
