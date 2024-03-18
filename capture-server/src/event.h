@@ -1,67 +1,100 @@
 #ifndef EVENT_H
 #define EVENT_H
 
-#include "entity-base.h" // Assuming EntityBase is the base class for entities
-#include "gateway.h"
+#include "entity-base.h" // Assuming this includes definitions for Request and Response
+#include "gateway.h"     // Assuming this includes definitions for Gateway
 #include <string>
 #include <vector>
-#include <ctime> // For time_t
-#include <map>   // For std::map
+#include <ctime>
+#include <map>
 
 // Enum for event status
-enum class EventStatus {
+enum EventStatus
+{
     OnGoing,
     Upcoming,
     Past
 };
 
 // Structure to represent venue details
-struct Venue {
+struct Venue
+{
     std::string type;
     std::string streetAddress;
     std::string cityAddress;
 };
 
 // Structure to represent event detail
-struct EventDetail {
-    std::string streetAddress;
-    std::string cityAddress;
+struct EventDetail
+{
     std::string type;
+    std::string description;
 };
 
 // Class to represent Event entity
-class Event : public EntityBase {
+class Event : public EntityBase
+{
 public:
     Event();
-    ~Event();
 
-    // Route handling methods
-    void report();
-    void listUpcoming(const Request &req, Response &rsp);
-    void listOngoing(const Request &req, Response &rsp);
-    void listPast(const Request &req, Response &rsp);
-    void find(const Request &req, Response &rsp);
-    void create(const Request &req, Response &rsp);
-    void update(const Request &req, Response &rsp);
-    void remove(const Request &req, Response &rsp);
+    // Getter and setter functions for EventDetail
+    const EventDetail &eventDetail() const
+    {
+        return this->detail;
+    }
+
+    EventDetail &eventDetail()
+    {
+        return this->detail;
+    }
+
+    // Setter functions for EventDetail properties
+    void setEventType(const std::string &type)
+    {
+        this->detail.type = type;
+    }
+
+    void setEventDescription(const std::string &description)
+    {
+        this->detail.description = description;
+    }
+
+    // Other getter functions remain the same
+    std::string sport() const
+    {
+        return this->m_model.get<std::string>("sport");
+    }
+
+    std::string level() const
+    {
+        return this->m_model.get<std::string>("level");
+    }
+
+    std::string program() const
+    {
+        return this->m_model.get<std::string>("program");
+    }
+
+    int year() const
+    {
+        return this->m_model.get<int>("year");
+    }
+
+    std::string title() const
+    {
+        return this->m_model.get<std::string>("title");
+    }
 
     // Method to retrieve events for a specific period
-    static std::vector<Event> forPeriod(int year, const std::string &cat);
+    static std::vector<Event> forPeriodAndStatus(const std::string &startDateTime, const std::string &endDateTime, const std::string &status);
 
 private:
     int id;
-    std::string sport;
-    std::string level;
-    std::string program;
-    int year;
     time_t dttEvent;
-    std::map<std::string, Venue> venue;
+    Venue venue; // Changed to a single instance of Venue
     bool onPremise;
-    std::vector<EventDetail> detail;
-    std::string title;
     EventStatus status;
-    std::string time; // Assuming time is represented as a string
-    bool active;
+    EventDetail detail; // Changed to a single instance of EventDetail
 };
 
 #endif // EVENT_H
