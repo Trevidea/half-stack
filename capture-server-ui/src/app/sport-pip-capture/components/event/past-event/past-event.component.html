@@ -1,6 +1,5 @@
 <div class="grid-view p-1">
   <div class="card custom-card" *ngFor=" let item of datasource">
-
     <div class="card-img">
       <img class="left img-fluid" src="assets/images/pip-image/400-300/130-130/fairport.png" />
       <img class="right img-fluid" src="assets/images/pip-image/400-300/130-130/mcquaid.png" />
@@ -74,10 +73,8 @@
     </div>
   </div>
 </div>
-
 <ng-template #eventShareModal let-modal>
   <div class="modal-header">
-
     <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -87,5 +84,4 @@
     <h4 class="modal-title" id="myModalLabel160">McQuaid vs Fairport, Football</h4>
     <app-share-event></app-share-event>
   </div>
-
 </ng-template>

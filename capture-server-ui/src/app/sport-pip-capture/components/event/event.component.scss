@@ -4,63 +4,69 @@ app-scheduled-event-sidebar {
   display: flex;
 }
 
-// @media (max-width:768px) {
-//   .card{
-//     .card-body{
-//       ul{
-//         li{
-//           a{
-//             font-size: 0.8rem;
-//           }
-//         }
-//         .btn-ondemand{
-//           margin-top: 5px;
-//           margin-right: auto;
-//           .cus-btn-sm{
-//             padding: 0.486rem 1rem;
-//             font-size: 0.9rem;
-//             line-height: 1;
-//             border-radius: 0.358rem;
-//           }
-//           .cus-Create-On-Demand-Event{
-//             padding: 0.486rem 1rem;
-//             font-size: 0.9rem;
-//             line-height: 1;
-//             border-radius: 0.358rem;
-//           }
-//         }
-//       }
-//     }
-//   }
+.event-warepper {
+  .nav-tabs {
+    display: flex;
+    align-items: end !important;
+    border-bottom: 1px solid var(--secondary-border-color);
+    border-top: 1px solid var(--secondary-border-color);
+    padding-right: 14px;
+    padding-left: 14px;
+    padding-bottom: 0;
+    border-radius: 0;
 
-// }
-.but {
+    .custum-button {
+      padding: 10px 9px;
+      border-radius: 5px;
+      border: none;
+      box-shadow: none;
+      margin-bottom: 9px;
+      margin-top: 9px;
+    }
 
-  padding-top: 0.786rem;
-  padding-right: 1rem;
-  padding-bottom: 0.786rem;
-  padding-left: 1rem;
-  border-radius: 5px;
-  border: none;
+    .on-demand-btn {
+      background-color: rgba(143, 171, 7, 1);
+      color: #fff;
+    }
+  }
+
+  .nav-link {
+    padding: 1rem 1.2rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .nav-tabs .nav-link:after {
+    left: 3% !important;
+    margin-bottom: 0 !important;
+
+  }
+
+  .btn-outline-secondary {
+    box-shadow: none !important;
+    padding: 8px 9px;
+    margin-bottom: 9px;
+    margin-top: 9px;
+  }
 }
+
 .button-container {
-  text-align: center; 
+  text-align: center;
 
   button {
-      display: none; 
+    display: none;
   }
 }
 
 /* Media Query for XL to Tablet screens */
 @media (min-width: 768px) and (max-width: 3000px) {
   .button-container button#xl-to-tablet-button {
-      display: inline-block; 
+    display: inline-block;
   }
 }
 
 /* Media Query for Mobile screens */
 @media (max-width: 767px) {
   .button-container button#mobile-button {
-      display: inline-block; 
+    display: inline-block;
   }
 }

@@ -1,71 +1,59 @@
-<div class="row match-height">
-  <div
-    class="col-12 col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
-    *ngFor="let item of datasource"
-  >
-    <div class="card custom-card">
-      <img
-        class="img-fluid"
-        src="../../../../../assets/images/pip-image/card-image.png"
-        alt="Card image cap"
-      />
-      <div class="p-0 d-flex align-items-center Progress">
-        <h6 class="m-0 Progress-text">In Progress in {{ item?.countdown }}</h6>
-      </div>
-      <div class="menu-container">
-        <a ngbDropdown>
-          <button
-            class="btn btn-sm btn-light menuitem-but"
-            id="menuDropdown"
-            ngbDropdownToggle
-          >
-            <i class="bi bi-three-dots-vertical" style="font-size: 1.3rem"></i>
+<div class="grid-view p-1">
+  <div class="card custom-card" *ngFor="let item of datasource">
+    <!-- <img class="img-fluid" src="../../../../../assets/images/pip-image/card-image.png" alt="Card image cap" /> -->
+    <div class="card-img">
+      <img class="left img-fluid" src="assets/images/pip-image/400-300/130-130/fairport.png" />
+      <img class="right img-fluid" src="assets/images/pip-image/400-300/130-130/mcquaid.png" />
+    </div>
+    <div class="p-0 d-flex align-items-center Progress">
+      <h6 class=" m-0 Progress-text">In Progress in {{ item?.countdown }}</h6>
+    </div>
+    <div class="menu-container">
+      <a ngbDropdown>
+        <button class="btn btn-sm btn-light menuitem-but" id="menuDropdown" ngbDropdownToggle>
+          <i class="bi bi-three-dots-vertical" style="font-size: 1.3rem"></i>
+        </button>
+        <div ngbDropdownMenu aria-labelledby="menuDropdown">
+          <button class="dropdown-item">
+            <i [data-feather]="'trash'" [size]="16"></i> Remove Event
           </button>
-          <div ngbDropdownMenu aria-labelledby="menuDropdown">
-            <button class="dropdown-item">
-              <i [data-feather]="'trash'" [size]="16"></i> Remove Event
-            </button>
-          </div>
-        </a>
-      </div>
-    
-      <div class="card-body pt-1 custom-card-body">
-        <div class="row mb-1">
-          <div class="col-4">
-            <div class="badge scheduled-event">
-              {{ item.detail.type }}
-            </div>
-          </div>
-          <div class="col-8">
-            <div class="float-right">
-              <button
-                type="button"
-                class="btn btn-flat-dark btn-sm"
-                rippleEffect
-              >
-                View
-              </button>
-              <button
-                type="button"
-                class="btn btn-gradient-warning ml-auto btn-sm"
-              >
-                Join
-              </button>
-            </div>
+        </div>
+      </a>
+    </div>
+    <div class="card-body pt-1 pb-0 custom-card-body">
+      <div class="row">
+        <div class="col-4">
+          <div class="badge badge-past-event" [ngClass]="{
+            'on-demand-event': item.detail.type === 'On Demand Event',
+            'scheduled-event': item.detail.type === 'Scheduled Event'
+          }">
+            {{ item.detail.type }}
           </div>
         </div>
-
-        <h4>{{ item.title }}</h4>
-        <p class="card-text">
-          <i class="bi bi-clock"></i>
-          {{ item.dttEvent | date }} {{ item.time | timeFormat }}{{ " , "
-          }}{{ item.level }}
-        </p>
-        <p class="card-text">
-          <i class="bi bi-geo-alt-fill"></i>
-          {{ item.venue.location }}
-        </p>
+        <div class="col-8">
+          <div class="float-right">
+            <button type="button" class="btn btn-flat-dark btn-sm" rippleEffect>
+              View
+            </button>
+            <button type="button" class="btn btn-gradient-warning ml-auto btn-sm">
+              Join
+            </button>
+          </div>
+        </div>
+        <div class="col-12 mt-1 card-text-style">
+          <h4 class="ellipsis">{{item.title}}</h4>
+          <p class="card-text">
+            <i class="feather" data-feather="clock"></i>
+            {{ item.dttEvent | date }} {{ item.time | timeFormat }}{{ " , "
+            }}{{ item.level }}
+          </p>
+          <p class="card-text">
+            <i class="feather" data-feather="map-pin"></i>
+            {{ item.venue.location }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
+
 </div>

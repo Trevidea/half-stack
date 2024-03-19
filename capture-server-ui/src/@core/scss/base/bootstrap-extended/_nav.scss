@@ -172,14 +172,14 @@
       left: 7%;
       width: 100%;
       height: 3px;
-      background: linear-gradient(30deg, rgba(rgba(33, 96, 147, 1), 1), rgba(rgba(33, 96, 147, 1), 0.5)) !important;
+      background: rgba($primary, 1)!important;
       transition: transform 0.3s;
       transform: translate3d(0, 150%, 0);
     }
 
     &.active {
       position: relative;
-      color: rgba(33, 96, 147, 1);
+      color: $primary;
 
       &:after {
         transform: translate3d(0, 0, 0);

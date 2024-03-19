@@ -16,11 +16,13 @@
         </div>
       </a>
     </div>
-
-    <div class="card-body pt-1 custom-card-body ">
-      <div class="row mb-1">
+    <div class="card-body pt-1 pb-0 custom-card-body">
+      <div class="row">
         <div class="col-4">
-          <div class="badge scheduled-event">
+          <div class="badge badge-past-event" [ngClass]="{
+            'on-demand-event': item.detail.type === 'On Demand Event',
+            'scheduled-event': item.detail.type === 'Scheduled Event'
+          }">
             {{item.detail.type}}
           </div>
         </div>
@@ -31,223 +33,37 @@
               View
             </button>
             <button type="button" class="btn btn-gradient-warning ml-auto btn-sm">
-              Join
+              Preview
             </button>
           </div>
         </div>
+        <div class="col-12 mt-1 card-text-style">
+          <h4 class="ellipsis">{{item.title}}</h4>
+          <p class="card-text">
+            <i class="feather" data-feather="clock"></i>
+            {{ item.dttEvent | date }} {{ item.time | timeFormat }}{{ " , "
+            }}{{ item.level }}
+          </p>
+          <p class="card-text">
+            <i class="feather" data-feather="map-pin"></i>
+            {{ item.venue.location }}
+          </p>
+        </div>
       </div>
-
-      <h4>{{item.title}}</h4>
+      <!-- <h4>{{item.title}}</h4>
       <p class="card-text">
         <i class="bi bi-clock"></i>
         {{item.dttEvent | date }} {{ item.time | timeFormat }}{{' , '}}{{item.level}}
-        <!-- Saturday, Sept 15th, 2:00 pm, Varsity -->
       </p>
       <p class="card-text">
         <i class="bi bi-geo-alt-fill"></i>
         {{item.venue.location}}
-        <!-- Fairport High School, 33 Union Street, Fairport -->
-      </p>
+      </p> -->
     </div>
   </div>
 </div>
-<!-- src="../../../../../assets/images/pip-image/Team-Logo_1.png"
-src="../../../../../assets/images/pip-image/football_1.png" -->
-<!--<div class="row">
-  <div class="col-lg-6 col-xl-4 col-md-12 col-sm-12" *ngFor="let item of datasource.upcomingEvent">
- <app-scheduled-event-card [upcomingEvent]="item"></app-scheduled-event-card>
-  </div>
- <div class="col-lg-6 col-xl-4 col-md-12 col-sm-12">
-<app-scheduled-event-card></app-scheduled-event-card>
-  </div>
-  <div class="col-lg-6 col-xl-4 col-md-12 col-sm-12">
-<app-on-demand-event-card></app-on-demand-event-card>
-  </div> 
-</div>-->
 
-<!-- <div class="row match-height" (click)="AddEvent('scheduled-event-sidebar')">
-  <div class="col-5">
-    <div class="card">
-      <div class="card-body">
-        <div
-          class="row p-0"
-          style="border: 1px solid rgba(165, 164, 164, 1); border-radius: 6px"
-        >
-          <div class="col-12 p-0">
-            <div
-              class="card-header"
-              style="background-color: rgb(218, 218, 218); height: 21px"
-            >
-              In Progress in 01:20:03
-            </div>
-          </div>
-          <div class="col-5 p-0 m-0">
-            <img
-              class="img-fluid h-100"
-              src="../../../../../assets/images/pip-image/football_1.png"
-              alt="sans"
-            />
-          </div>
-          <div class="col-7 p-0 m-0">
-            <div
-              class="badge mt-1 ml-1"
-              style="
-                background-color: rgba(233, 240, 245, 1);
-                color: rgba(0, 0, 0, 1);
-                font-weight: 400;
-              "
-            >
-              Scheduled Event
-            </div>
-            <h5 class="card-title mt-1 ml-1">{{'McQuaid vs Fairport, Football'| truncateWords: 10}}</h5>
-            <div class="row p-1">
-              <div
-                class="col-2 mt-1 d-flex justify-content-center align-items-center"
-              >
-                <div
-                  style="
-                    padding: 5px 10px 5px 10px;
-                    background-color: rgba(245, 163, 10, 0.1);
-                    border-radius: 2px;
-                  "
-                >
-                  <i class="bi bi-clock icon-50"></i>
-                </div>
-              </div>
-              <div class="col-10 mt-1">
-                <h6 style="color: rgba(0, 0, 0, 1)">Saturday,Sept 15th</h6>
-                <div class="d-flex">
-                  <span style="size: 10px">2:00 pm, Varsity</span>
-                </div>
-              </div>
-              <div
-                class="col-2 mt-1 d-flex justify-content-center align-items-center"
-              >
-                <div
-                  style="
-                    padding: 5px 10px 5px 10px;
-                    background-color: rgba(245, 163, 10, 0.1);
-                    border-radius: 2px;
-                  "
-                >
-                  <i class="bi bi-geo-alt-fill icon-50"></i>
-                </div>
-              </div>
-              <div class="col-10 mt-1">
-                <h6 style="color: rgba(0, 0, 0, 1)">Fairport High School</h6>
-                <div class="d-flex">
-                  <span style="size: 10px">33 Union Street,Fairfort</span>
-                </div>
-              </div>
-              <div class="col-12 mt-1  float-right">
-                <button
-                  type="button"
-                  class="btn btn-gradient-warning float-right ml-auto btn-sm"
-                >
-                  Start
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-flat-dark ml-auto btn-sm ml-1 float-right"
-                  rippleEffect
-                >
-                  View
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-5" (click)="AddEvent('on-demand-event-sidebar')">
-    <div class="card">
-      <div class="card-body">
-        <div
-          class="row p-0"
-          style="border: 1px solid rgba(165, 164, 164, 1); border-radius: 6px">
-          <div class="col-12 p-0">
-            <div
-              class="card-header"
-              style="background-color: rgb(218, 218, 218); height: 21px"
-            >
-              In Progress in 01:20:03
-            </div>
-          </div>
-          <div class="col-5 p-0 m-0">
-            <img
-              class="img-fluid h-100"
-              src="../../../../../assets/images/pip-image/Team-Logo_1.png"
-              alt="sans"
-            />
-          </div>
-          <div class="col-7 p-0 m-0">
-           
-            <div class="badge badge-custom mt-1 ml-1">
-              <span class="badge-text">On demand Event</span>
-              <i class="bi bi-three-dots-vertical "></i>
-            </div>
-            <h5 class="card-title  ml-1">McQuaid vs Fairport, Football
-            </h5>
-            <div class="row p-1">
-              <div
-                class="col-2 mt-1 d-flex justify-content-center align-items-center"
-              >
-                <div
-                  style="
-                    padding: 5px 10px 5px 10px;
-                    background-color: rgba(245, 163, 10, 0.1);
-                    border-radius: 2px;
-                  "
-                >
-                  <i class="bi bi-clock icon-50"></i>
-                </div>
-              </div>
-              <div class="col-10 mt-1">
-                <h6 style="color: rgba(0, 0, 0, 1)">Saturday,Sept 15th</h6>
-                <div class="d-flex">
-                  <span style="size: 10px">2:00 pm, Varsity</span>
-                </div>
-              </div>
-              <div
-                class="col-2 mt-1 d-flex justify-content-center align-items-center"
-              >
-                <div
-                  style="
-                    padding: 5px 10px 5px 10px;
-                    background-color: rgba(245, 163, 10, 0.1);
-                    border-radius: 2px;
-                  "
-                >
-                  <i class="bi bi-geo-alt-fill icon-50"></i>
-                </div>
-              </div>
-              <div class="col-10 mt-1">
-                <h6 style="color: rgba(0, 0, 0, 1)">Fairport High School</h6>
-                <div class="d-flex">
-                  <span style="size: 10px">33 Union Street,Fairfort</span>
-                </div>
-              </div>
-              <div class="col-12 mt-1  float-right">
-                <button
-                  type="button"
-                  class="btn btn-gradient-warning float-right ml-auto btn-sm"
-                  disabled
-                >
-                  Start
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-flat-dark ml-auto btn-sm ml-1 float-right"
-                  rippleEffect
-                >
-                  View
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
+<core-sidebar class="modal modal-slide-in fade event-sidebar" name="on-demand-event-sidebar"
+  overlayClass="modal-backdrop" hideOnEsc="true">
+  <app-on-demand-event-sidebar></app-on-demand-event-sidebar>
+</core-sidebar>
