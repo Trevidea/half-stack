@@ -35,7 +35,10 @@ struct EventDetail
 class Event : public EntityBase
 {
 public:
-    Event();
+    Event(const std::string &jsonData) : EntityBase(jsonData) {
+        // Deserialize the JSON data and update m_model
+        deserializeFromJson(jsonData);
+    }
 
     // Getter and setter functions for EventDetail
     const EventDetail &eventDetail() const
@@ -59,7 +62,7 @@ public:
         this->detail.description = description;
     }
 
-    // Other getter functions remain the same
+    // Other getter functions fetching data from m_model
     std::string sport() const
     {
         return this->m_model.get<std::string>("sport");

@@ -26,7 +26,7 @@ protected:
     void find(const Request &request, Response &response);
     void view(const Request &request, Response &response, const std::string &view);
     void function(const Request &request, Response &response, const std::string &func);
-    Json::Value function(const std::string& funcName, const std::string &params);
+    Json::Value function(const std::string &funcName, const std::string &params);
     Json::Value create(const Request &request, Response &response);
     Json::Value update(const Request &request, Response &response);
     Json::Value remove(const Request &request, Response &response);
@@ -58,7 +58,6 @@ public:
         return this->m_model.get<double>(field);
     }
     void report() override;
-
 
     template <typename T = EntityBase>
     static std::vector<T> list()
@@ -180,6 +179,20 @@ public:
     static LogPrinter logOptions()
     {
         return LogPrinter();
+    }
+
+    // Serialize the current object to a JSON string
+    std::string serializeToJson() const
+    {
+        // Convert the model to JSON and return the string representation
+        return m_model.toString();
+    }
+
+    // Deserialize from a JSON string and update the current object
+    void deserializeFromJson(const std::string &jsonString)
+    {
+        // Parse the JSON string and update the model
+        m_model = Model(jsonString);
     }
 };
 
