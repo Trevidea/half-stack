@@ -29,4 +29,4 @@ RUN cmake . && \
     make
 
 # Specify the command to run when the container starts
-CMD ["./your_executable"]
+CMD ["./capture-server"]
