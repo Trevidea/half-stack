@@ -39,9 +39,9 @@ Connection DBManager::getConnection(bool trx)
         if (!Connection::has(c))
         {
             auto server = this->getEnv("PG_SRV", "localhost");
-            auto db = this->getEnv("PG_DBS", "payroll");
-            auto usr = this->getEnv("PG_USR", "");
-            auto pwd = this->getEnv("PG_PWD", "");
+            auto db = this->getEnv("PG_DBS", "half-stack");
+            auto usr = this->getEnv("PG_USR", "postgres");
+            auto pwd = this->getEnv("PG_PWD", "btc.008");
             return Connection::open(c, server, 5432, db, usr, pwd, trx);
         }
     }
