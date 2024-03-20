@@ -32,7 +32,7 @@ void Event::report()
 void Event::listUpcoming(const Request &req, Response &rsp)
 {
     // Set the response body with the JSON data
-    rsp.setData(R"([{"name":"shreya"}])");
+    rsp.setData(R"("result":[{"name":"shreya"}],"count":1)");
     // Set appropriate headers and status code
     rsp.complete();
 }
