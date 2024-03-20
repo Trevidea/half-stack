@@ -31,10 +31,16 @@ void Event::report()
 
 void Event::listUpcoming(const Request &req, Response &rsp)
 {
-    // Set the response body with the JSON data
-    rsp.setData(R"([{"name":"shreya"}])");
-    // Set appropriate headers and status code
-    rsp.complete();
+    try {
+        // Set the response body with the JSON data
+        rsp.setData(R"([{"name":"shreya"}])");
+        // Set appropriate headers and status code
+        rsp.complete();
+    } catch (const std::exception& e) {
+        std::cerr << "Error in listUpcoming: " << e.what() << std::endl;
+        rsp.setStatus(500);
+        rsp.complete();
+    }
 }
 
 void Event::listOngoing(const Request &req, Response &rsp)
