@@ -4,6 +4,7 @@
 #include "holiday.h"
 #include "spdlog/spdlog.h"
 #include "metatype.h"
+#include "event.h"
 
 Gateway::Gateway()
 {
