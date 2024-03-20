@@ -26,17 +26,6 @@ void EntityBase::deserializeFromJson(const std::string &jsonString) {
     m_model = Model(jsonString);
 }
 
-
-/// @brief 
-/// @param model 
-EntityBase::EntityBase(const Model &model) : m_model{model}
-{
-}
-/// @brief 
-/// @param entity 
-EntityBase::EntityBase(const std::string &entity) : m_entity{entity}
-{
-}
 /// @brief 
 void EntityBase::report()
 {
@@ -67,9 +56,9 @@ Json::Value EntityBase::function(const std::string& funcName, const std::string 
     spdlog::debug("Function..{}", functionQry);
     return this->executeSqlJson(functionQry);
 }
-EntityBase::~EntityBase()
-{
-}
+// EntityBase::~EntityBase()
+// {
+// }
 /// @brief 
 /// @return 
 std::string EntityBase::entity()
