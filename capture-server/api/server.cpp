@@ -37,9 +37,20 @@ void handle_get(http_request request)
    answer["Absolute URI"] = json::value::string(uri.to_string());
    auto reponse = Gateway::instance().request("GET", uri.path(), uri::decode(uri.query()), "");
    spdlog::trace("response received {}", reponse.data());
-   auto val = json::value::parse(reponse.data());
+   try
+   {
+      /* code */
+      auto val = json::value::parse(reponse.data());
 
    answer["Gateway Response"] = val;
+
+   }
+   catch(const std::exception& e)
+   {
+         std::cerr << e.what() << '\n';
+   }
+   
+   
 
    http_response response(status_codes::OK);
    response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
