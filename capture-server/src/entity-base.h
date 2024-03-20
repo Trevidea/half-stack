@@ -182,18 +182,10 @@ public:
     }
 
     // Serialize the current object to a JSON string
-    std::string serializeToJson() const
-    {
-        // Convert the model to JSON and return the string representation
-        return m_model.toString();
-    }
+    std::string serializeToJson() const;
 
     // Deserialize from a JSON string and update the current object
-    void deserializeFromJson(const std::string &jsonString)
-    {
-        // Parse the JSON string and update the model
-        m_model = Model(jsonString);
-    }
+    void deserializeFromJson(const std::string &jsonString);
 };
 
 #endif // ENTITYBASE_H
