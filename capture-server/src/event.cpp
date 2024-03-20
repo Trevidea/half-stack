@@ -42,32 +42,9 @@ void Event::listUpcoming(const Request &req, Response &rsp) {
 
 void Event::listOngoing(const Request &req, Response &rsp) {
     // Call the list method of EntityBase to retrieve ongoing events
-   //std::vector<Event> events = EntityBase::list<Event>();
+   std::vector<Event> events = EntityBase::list<Event>();
     
-    // Create dummy event 1
-    Event event1("{\"sport\": \"Football\", \"level\": \"College\", \"program\": \"Championship\", \"year\": 2024, \"title\": \"College Football Championship\", \"status\": \"Upcoming\"}");
-    event1.setEventType("Match");
-    event1.setEventDescription("Exciting college football championship match.");
-    events.push_back(event1);
-
-    // Create dummy event 2
-    Event event2("{\"sport\": \"Basketball\", \"level\": \"High School\", \"program\": \"Tournament\", \"year\": 2024, \"title\": \"High School Basketball Tournament\", \"status\": \"Upcoming\"}");
-    event2.setEventType("Tournament");
-    event2.setEventDescription("Annual high school basketball tournament.");
-    events.push_back(event2);
-
-    // Create dummy event 3
-    Event event3("{\"sport\": \"Soccer\", \"level\": \"Professional\", \"program\": \"League\", \"year\": 2024, \"title\": \"Professional Soccer League Match\", \"status\": \"Upcoming\"}");
-    event3.setEventType("Match");
-    event3.setEventDescription("Key match in the professional soccer league.");
-    events.push_back(event3);
-
-    // Now you can process these dummy events as if they were real
-    // For testing purposes, you can directly construct dummy events or even read them from a test file
-    // You can also use loops or other methods to generate multiple dummy events with different data
-
-    // Here, you might want to convert these dummy events to JSON format and include them in the response
-    // For simplicity, let's assume rsp is a JSON response
+    
     Json::Value jsonResponse;
     for (const auto &event : events) {
         Json::Value eventJson;
