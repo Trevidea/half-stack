@@ -42,7 +42,7 @@ void Event::listUpcoming(const Request &req, Response &rsp) {
 
 void Event::listOngoing(const Request &req, Response &rsp) {
     // Call the list method of EntityBase to retrieve ongoing events
-    std::vector<Event> events = EntityBase::list<Event>();
+   //std::vector<Event> events = EntityBase::list<Event>();
     
     // Create dummy event 1
     Event event1("{\"sport\": \"Football\", \"level\": \"College\", \"program\": \"Championship\", \"year\": 2024, \"title\": \"College Football Championship\", \"status\": \"Upcoming\"}");
