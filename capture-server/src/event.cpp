@@ -7,7 +7,7 @@ Event::Event() : EntityBase("event") {}
 void Event::report()
 {
     // Route definitions
-    Gateway::instance().route("GET", "/api/events/upcoming", [this](const Request &req, Response &rsp)
+    Gateway::instance().route("GET", "/api/events", [this](const Request &req, Response &rsp)
                               { this->listUpcoming(req, rsp); });
 
     Gateway::instance().route("GET", "/api/events/ongoing", [this](const Request &req, Response &rsp)
@@ -39,44 +39,32 @@ void Event::listUpcoming(const Request &req, Response &rsp)
 
 void Event::listOngoing(const Request &req, Response &rsp)
 {
-    // Call the list method of EntityBase to retrieve ongoing events
-    std::vector<Event> events = EntityBase::list<Event>();
-    // Process events..
+    // Process ongoing events...
 }
 
 void Event::listPast(const Request &req, Response &rsp)
 {
-    // Call the list method of EntityBase to retrieve past events
-    std::vector<Event> events = EntityBase::list<Event>();
-    // Process events...
+    // Process past events...
 }
 
 void Event::find(const Request &req, Response &rsp)
 {
-    // Call the find method of EntityBase to find a specific event
-    std::vector<Event> events = EntityBase::find<Event>(req.getQueryString());
-    // Process events...
+    // Process finding a specific event...
 }
 
 void Event::create(const Request &req, Response &rsp)
 {
-    // Call the create method of EntityBase to create a new event
-    Json::Value result = EntityBase::create(req, rsp);
-    // Process result...
+    // Process creating a new event...
 }
 
 void Event::update(const Request &req, Response &rsp)
 {
-    // Call the update method of EntityBase to update an existing event
-    Json::Value result = EntityBase::update(req, rsp);
-    // Process result...
+    // Process updating an existing event...
 }
 
 void Event::remove(const Request &req, Response &rsp)
 {
-    // Call the remove method of EntityBase to remove an existing event
-    std::vector<Event> events = EntityBase::remove<Event>(req.getQueryString());
-    // Process events...
+    // Process removing an existing event...
 }
 
 std::vector<Event> Event::forPeriodAndStatus(const std::string &startDateTime, const std::string &endDateTime, const std::string &status)

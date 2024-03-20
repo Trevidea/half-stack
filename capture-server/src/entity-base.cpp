@@ -5,27 +5,16 @@
 #include "gateway.h"
 #include "model.h"
 
-// Constructor
-EntityBase::EntityBase(const Model &model) : m_model{model} {}
-
-// Constructor
-EntityBase::EntityBase(const std::string &entity) : m_entity{entity} {}
-
-// Destructor
-EntityBase::~EntityBase() {}
-
-// Implementation of serializeToJson method
-std::string EntityBase::serializeToJson() const {
-    // Convert the model to JSON and return the string representation
-    return m_model.toString();
+/// @brief 
+/// @param model 
+EntityBase::EntityBase(const Model &model) : m_model{model}
+{
 }
-
-// Implementation of deserializeFromJson method
-void EntityBase::deserializeFromJson(const std::string &jsonString) {
-    // Parse the JSON string and update the model
-    m_model = Model(jsonString);
+/// @brief 
+/// @param entity 
+EntityBase::EntityBase(const std::string &entity) : m_entity{entity}
+{
 }
-
 /// @brief 
 void EntityBase::report()
 {
@@ -56,9 +45,9 @@ Json::Value EntityBase::function(const std::string& funcName, const std::string 
     spdlog::debug("Function..{}", functionQry);
     return this->executeSqlJson(functionQry);
 }
-// EntityBase::~EntityBase()
-// {
-// }
+EntityBase::~EntityBase()
+{
+}
 /// @brief 
 /// @return 
 std::string EntityBase::entity()

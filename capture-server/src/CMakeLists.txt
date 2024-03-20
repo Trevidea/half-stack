@@ -9,6 +9,7 @@ set(HALF_STACK_SRC
     request.cpp
     employee.cpp
     gateway.cpp
+    event.cpp
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
 target_include_directories(pg-dal PUBLIC "./")
