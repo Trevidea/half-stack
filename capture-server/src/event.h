@@ -41,12 +41,6 @@ public:
 
     // Method declarations for route handlers
     void listUpcoming(const Request &req, Response &rsp);
-    void listOngoing(const Request &req, Response &rsp);
-    void listPast(const Request &req, Response &rsp);
-    void find(const Request &req, Response &rsp);
-    void create(const Request &req, Response &rsp);
-    void update(const Request &req, Response &rsp);
-    void remove(const Request &req, Response &rsp);
 
     // Getter and setter functions for EventDetail
     const EventDetail &eventDetail() const
