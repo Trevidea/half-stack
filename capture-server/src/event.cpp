@@ -31,18 +31,15 @@ void Event::report()
 
 void Event::listUpcoming(const Request &req, Response &rsp)
 {
-    // Create dummy data for testing purposes
-    Json::Value dummyData;
-    dummyData["name"] = "John Doe";
-    dummyData["age"] = 30;
-    dummyData["email"] = "john.doe@example.com";
+    /// Create dummy data string for testing purposes
+    std::string dummyData = "This is a dummy string response";
 
-    // Set the response body with the dummy data
-    rsp.setData(dummyData.toStyledString());
+    // Set the response body with the dummy data string
+    rsp.setData(dummyData);
 
     // Set appropriate headers and status code
-    rsp.setStatusCode(200);
-    rsp.setHeader("Content-Type", "application/json");
+    // rsp.setStatusCode(200);
+    // rsp.setHeader("Content-Type", "text/plain"); // Set Content-Type as text/plain for a string response
 
     // Complete the response
     rsp.complete();
