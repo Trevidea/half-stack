@@ -31,16 +31,21 @@ void Event::report()
 
 void Event::listUpcoming(const Request &req, Response &rsp)
 {
-    try {
-        // Set the response body with the JSON data
-        rsp.setData(R"([{"name":"shreya"}])");
-        // Set appropriate headers and status code
-        rsp.complete();
-    } catch (const std::exception& e) {
-        std::cerr << "Error in listUpcoming: " << e.what() << std::endl;
-        rsp.setStatus(500);
-        rsp.complete();
-    }
+    // Create dummy data for testing purposes
+    Json::Value dummyData;
+    dummyData["name"] = "John Doe";
+    dummyData["age"] = 30;
+    dummyData["email"] = "john.doe@example.com";
+
+    // Set the response body with the dummy data
+    rsp.setData(dummyData.toStyledString());
+
+    // Set appropriate headers and status code
+    rsp.setStatusCode(200);
+    rsp.setHeader("Content-Type", "application/json");
+
+    // Complete the response
+    rsp.complete();
 }
 
 void Event::listOngoing(const Request &req, Response &rsp)
