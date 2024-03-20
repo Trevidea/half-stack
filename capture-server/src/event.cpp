@@ -1,5 +1,6 @@
 #include "event.h"
 #include "gateway.h"
+#include "json/json.h"
 
 Event::Event() : EntityBase("event") {}
 
@@ -37,32 +38,37 @@ void Event::report() {
 void Event::listUpcoming(const Request &req, Response &rsp) {
     // Call the list method of EntityBase to retrieve upcoming events
     std::vector<Event> events = EntityBase::list<Event>();
-    // Process events...
-}
+    
 
-void Event::listOngoing(const Request &req, Response &rsp) {
-    // Call the list method of EntityBase to retrieve ongoing events
-   std::vector<Event> events = EntityBase::list<Event>();
-    
-    
+    // Create dummy events
+    Event event1("{\"sport\": \"Football\", \"level\": \"College\", \"program\": \"Championship\", \"year\": 2024, \"title\": \"College Football Championship\", \"status\": \"Upcoming\"}");
+    event1.setEventType("Match");
+    event1.setEventDescription("Exciting college football championship match.");
+
+    Event event2("{\"sport\": \"Basketball\", \"level\": \"High School\", \"program\": \"Tournament\", \"year\": 2024, \"title\": \"High School Basketball Tournament\", \"status\": \"Upcoming\"}");
+    event2.setEventType("Tournament");
+    event2.setEventDescription("Annual high school basketball tournament.");
+
+    Event event3("{\"sport\": \"Soccer\", \"level\": \"Professional\", \"program\": \"League\", \"year\": 2024, \"title\": \"Professional Soccer League Match\", \"status\": \"Upcoming\"}");
+    event3.setEventType("Match");
+    event3.setEventDescription("Key match in the professional soccer league.");
+
+    // Construct JSON response
     Json::Value jsonResponse;
-    for (const auto &event : events) {
-        Json::Value eventJson;
-        eventJson["sport"] = event.sport();
-        eventJson["level"] = event.level();
-        eventJson["program"] = event.program();
-        eventJson["year"] = event.year();
-        eventJson["title"] = event.title();
-        eventJson["type"] = event.eventDetail().type;
-        eventJson["description"] = event.eventDetail().description;
-        jsonResponse.append(eventJson);
-    }
+    jsonResponse.append(eventToJson(event1));
+    jsonResponse.append(eventToJson(event2));
+    jsonResponse.append(eventToJson(event3));
 
     // Set the response body with the JSON data
     rsp.setBody(jsonResponse.toStyledString());
     // Set appropriate headers and status code
     rsp.setStatusCode(200);
+}
 
+void Event::listOngoing(const Request &req, Response &rsp) {
+    // Call the list method of EntityBase to retrieve ongoing events
+    std::vector<Event> events = EntityBase::list<Event>();
+    // Process events..
 }
 
 void Event::listPast(const Request &req, Response &rsp) {
