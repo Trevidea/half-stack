@@ -6,6 +6,7 @@ Event::Event() : EntityBase("event") {}
 
 void Event::report()
 {
+    EntityBase::report();
     // Route definitions
     Gateway::instance().route("GET", "/api/events", [this](const Request &req, Response &rsp)
                               { this->listUpcoming(req, rsp); });
