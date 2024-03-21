@@ -8,8 +8,11 @@ void Event::report()
 {
     EntityBase::report();
     // Route definitions
-    Gateway::instance().route("GET", "/api/events", [this](const Request &req, Response &rsp)
+    Gateway::instance().route("GET", "/api/events/upcoming", [this](const Request &req, Response &rsp)
                               { this->listUpcoming(req, rsp); });
+
+    Gateway::instance().route("GET", "/api/events/ongoing", [this](const Request &req, Response &rsp)
+                              { this->listOngoing(req, rsp); });
 }
 
 void Event::listUpcoming(const Request &req, Response &rsp)
@@ -19,27 +22,67 @@ void Event::listUpcoming(const Request &req, Response &rsp)
         "Absolute URI" : "/api/event/template",
                          "Gateway Response" : [
                              {
-    "sport": "Football",
-    "level": "Professional",
-    "program": "Championship",
-    "year": 2024,
-    "dttEvent": "2024-03-19T18:00:00Z",
-    "venue": {
-        "type": "Stadium",
-        "streetAddress": "123 Main St",
-        "cityAddress": "Cityville"
-    },
-    "onPremise": true,
-    "detail": {
-        "type": "Match",
-        "description": "Championship final"
-    },
-    "title": "Championship Final",
-    "status": "OnGoing"
-}
-
+                                 "field" : "id",
+                                 "type" : 1,
+                                 "value" : "Unknown"
+                             },
+                             {
+                                 "field" : "year",
+                                 "type" : 1,
+                                 "value" : "Unknown"
+                             },
+                             {
+                                 "field" : "dttevent",
+                                 "type" : 1,
+                                 "value" : "Unknown"
+                             },
+                             {
+                                 "field" : "venue",
+                                 "type" : 1,
+                                 "value" : "Unknown"
+                             },
+                             {
+                                 "field" : "onpremise",
+                                 "type" : 1,
+                                 "value" : true
+                             },
+                             {
+                                 "field" : "detail",
+                                 "type" : 1,
+                                 "value" : "Unknown"
+                             },
+                             {
+                                 "field" : "sport",
+                                 "type" : 1,
+                                 "value" : "var-char"
+                             },
+                             {
+                                 "field" : "level",
+                                 "type" : 1,
+                                 "value" : "var-char"
+                             },
+                             {
+                                 "field" : "program",
+                                 "type" : 1,
+                                 "value" : "var-char"
+                             },
+                             {
+                                 "field" : "status",
+                                 "type" : 1,
+                                 "value" : "var-char"
+                             },
+                             {
+                                 "field" : "title",
+                                 "type" : 1,
+                                 "value" : "var-char"
+                             }
                          ]
     } ")V0G0N");
     // Set appropriate headers and status code
     rsp.complete();
+}
+
+void Event::listOngoing(const Request &req, Response &rsp)
+{
+
 }
