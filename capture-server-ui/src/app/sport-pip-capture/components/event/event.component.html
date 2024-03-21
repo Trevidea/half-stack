@@ -14,31 +14,31 @@
     </div> -->
     <div class="col-12">
       <ul ngbNav #nav="ngbNav" class="nav-tabs">
-        <li ngbNavItem ngbNavItem="ongoingEvent">
+        <li ngbNavItem ngbNavItem="ongoingEvent" style="margin-top: 5px;">
           <a ngbNavLink>Ongoing Events</a>
           <ng-template ngbNavContent>
             <app-on-going-event [datasource]="datasource.ongoingEvent"></app-on-going-event>
           </ng-template>
         </li>
-        <li ngbNavItem="upcomingEvents">
+        <li ngbNavItem="upcomingEvents" style="margin-top: 5px;">
           <a ngbNavLink>Upcoming Events</a>
           <ng-template ngbNavContent>
             <app-up-coming-event [datasource]="datasource"></app-up-coming-event>
           </ng-template>
         </li>
-        <li ngbNavItem="pastEvents">
+        <li ngbNavItem="pastEvents" style="margin-top: 5px;">
           <a ngbNavLink>Past Events</a>
           <ng-template ngbNavContent>
             <app-past-event [datasource]="datasource.pastEvent"></app-past-event>
           </ng-template>
         </li>
         <li class="ml-lg-auto d-flex align-items-center">
-          <button type="button" class=" btn-flat-secondary btn " rippleEffect>
-            <h4 class="m-0"><i class="bi bi-list"></i></h4>
+          <button type="button" class="btn btn-flat-secondary  list-button " rippleEffec  >
+            <h4 class="m-0"><i class="bi bi-list" style="font-size: 1.5rem;"></i></h4>
           </button>
         </li>
         <li class=" d-flex align-items-center mr-1 ml-0.5">
-          <button type="button" class=" btn-flat-secondary btn " rippleEffect>
+          <button type="button" class="btn btn-flat-secondary  grid-button ">
             <h4 class="m-0"><i class="bi bi-grid"></i></h4>
           </button>
         </li>

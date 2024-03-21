@@ -38,12 +38,20 @@ app-scheduled-event-sidebar {
     margin-bottom: 0 !important;
   }
 
-  .btn-flat-secondary {
+  .grid-button {
     padding: 0.4rem 0.6rem;
   }
+
+  .list-button {
+    padding: 0.3rem 0.5rem;
+    margin-right: 5px;
+  }
+
 
   .btn-outline-secondary {
     box-shadow: none !important;
     padding: 0.7rem 1rem;
   }
 }
+
+

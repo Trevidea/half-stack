@@ -22,7 +22,7 @@
     </div>
     <div class="card-body pt-1 pb-0 custom-card-body">
       <div class="row">
-        <div class="col-4">
+        <div class="col-4 d-flex align-items-center " style="padding: 14 0;">
           <div class="badge badge-past-event" [ngClass]="{
             'on-demand-event': item.detail.type === 'On Demand Event',
             'scheduled-event': item.detail.type === 'Scheduled Event'
@@ -30,8 +30,8 @@
             {{ item.detail.type }}
           </div>
         </div>
-        <div class="col-8">
-          <div class="float-right">
+        <div class="col-8 card-btn-conatiner">
+          <div class="float-right card-buttons">
             <button type="button" class="btn btn-flat-dark btn-sm" rippleEffect>
               View
             </button>
