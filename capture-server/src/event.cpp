@@ -16,7 +16,7 @@ void Event::listUpcoming(const Request &req, Response &rsp)
 {
     // Set the response body with the JSON data
     rsp.setData(R"V0G0N(" {
-        "Absolute URI" : "/api/event/template",
+        "Absolute URI" : "/api/event/",
                          "Gateway Response" : [
                              {
                                  "field" : "id",
