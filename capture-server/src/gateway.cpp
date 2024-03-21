@@ -4,6 +4,7 @@
 #include "holiday.h"
 #include "spdlog/spdlog.h"
 #include "metatype.h"
+#include "event.h"
 
 Gateway::Gateway()
 {
@@ -16,6 +17,7 @@ void Gateway::init()
     this->m_entities.push_back(new Config());
     this->m_entities.push_back(new Holiday());
     this->m_entities.push_back(new MetaType());
+    this->m_entities.push_back(new Event());
     for (auto &&e : this->m_entities)
     {
         e->report();

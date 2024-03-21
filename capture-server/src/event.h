@@ -35,10 +35,12 @@ struct EventDetail
 class Event : public EntityBase
 {
 public:
-    Event(const std::string &jsonData) : EntityBase(jsonData) {
-        // Deserialize the JSON data and update m_model
-        deserializeFromJson(jsonData);
-    }
+    Event();
+
+    void report();
+
+    // Method declarations for route handlers
+    void listUpcoming(const Request &req, Response &rsp);
 
     // Getter and setter functions for EventDetail
     const EventDetail &eventDetail() const
@@ -55,11 +57,13 @@ public:
     void setEventType(const std::string &type)
     {
         this->detail.type = type;
+        this->m_model.set("type", type);
     }
 
     void setEventDescription(const std::string &description)
     {
         this->detail.description = description;
+        this->m_model.set("description", description);
     }
 
     // Other getter functions fetching data from m_model
@@ -92,12 +96,13 @@ public:
     static std::vector<Event> forPeriodAndStatus(const std::string &startDateTime, const std::string &endDateTime, const std::string &status);
 
 private:
+    // Member variables
     int id;
     time_t dttEvent;
-    Venue venue; // Changed to a single instance of Venue
+    Venue venue;
     bool onPremise;
     EventStatus status;
-    EventDetail detail; // Changed to a single instance of EventDetail
+    EventDetail detail;
 };
 
 #endif // EVENT_H

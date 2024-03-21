@@ -1,82 +1,80 @@
 #include "event.h"
 #include "gateway.h"
+#include "json/json.h"
 
 Event::Event() : EntityBase("event") {}
 
-void Event::report() {
+void Event::report()
+{
+    EntityBase::report();
     // Route definitions
-    Gateway::instance().route("GET", "/api/events/upcoming", [this](const Request &req, Response &rsp) { 
-        this->listUpcoming(req, rsp); 
-    });
-
-    Gateway::instance().route("GET", "/api/events/ongoing", [this](const Request &req, Response &rsp) { 
-        this->listOngoing(req, rsp); 
-    });
-
-    Gateway::instance().route("GET", "/api/events/past", [this](const Request &req, Response &rsp) { 
-        this->listPast(req, rsp); 
-    });
-
-    Gateway::instance().route("GET", "/api/event", [this](const Request &req, Response &rsp) { 
-        this->find(req, rsp); 
-    });
-
-    Gateway::instance().route("POST", "/api/event", [this](const Request &req, Response &rsp) { 
-        this->create(req, rsp); 
-    });
-
-    Gateway::instance().route("PUT", "/api/event", [this](const Request &req, Response &rsp) { 
-        this->update(req, rsp); 
-    });
-
-    Gateway::instance().route("DELETE", "/api/event", [this](const Request &req, Response &rsp) { 
-        this->remove(req, rsp); 
-    });
+    Gateway::instance().route("GET", "/api/events/upcoming", [this](const Request &req, Response &rsp)
+                              { this->listUpcoming(req, rsp); });
 }
 
-void Event::listUpcoming(const Request &req, Response &rsp) {
-    // Call the list method of EntityBase to retrieve upcoming events
-    std::vector<Event> events = EntityBase::list<Event>();
-    // Process events...
-}
-
-void Event::listOngoing(const Request &req, Response &rsp) {
-    // Call the list method of EntityBase to retrieve ongoing events
-    std::vector<Event> events = EntityBase::list<Event>();
-    // Process events...
-}
-
-void Event::listPast(const Request &req, Response &rsp) {
-    // Call the list method of EntityBase to retrieve past events
-    std::vector<Event> events = EntityBase::list<Event>();
-    // Process events...
-}
-
-void Event::find(const Request &req, Response &rsp) {
-    // Call the find method of EntityBase to find a specific event
-    std::vector<Event> events = EntityBase::find<Event>(req.getQueryString());
-    // Process events...
-}
-
-void Event::create(const Request &req, Response &rsp) {
-    // Call the create method of EntityBase to create a new event
-    Json::Value result = EntityBase::create(req, rsp);
-    // Process result...
-}
-
-void Event::update(const Request &req, Response &rsp) {
-    // Call the update method of EntityBase to update an existing event
-    Json::Value result = EntityBase::update(req, rsp);
-    // Process result...
-}
-
-void Event::remove(const Request &req, Response &rsp) {
-    // Call the remove method of EntityBase to remove an existing event
-    std::vector<Event> events = EntityBase::remove<Event>(req.getQueryString());
-    // Process events...
-}
-
-std::vector<Event> Event::forPeriodAndStatus(const std::string &startDateTime, const std::string &endDateTime, const std::string &status) {
-    // Call the corresponding method of EntityBase to find events for a specific period and status
-    return EntityBase::find<Event>("startDateTime=" + startDateTime + "&endDateTime=" + endDateTime + "&status=" + status);
+void Event::listUpcoming(const Request &req, Response &rsp)
+{
+    // Set the response body with the JSON data
+    rsp.setData(R"V0G0N(" {
+        "Absolute URI" : "/api/event/template",
+                         "Gateway Response" : [
+                             {
+                                 "field" : "id",
+                                 "type" : 1,
+                                 "value" : "Unknown"
+                             },
+                             {
+                                 "field" : "year",
+                                 "type" : 1,
+                                 "value" : "Unknown"
+                             },
+                             {
+                                 "field" : "dttevent",
+                                 "type" : 1,
+                                 "value" : "Unknown"
+                             },
+                             {
+                                 "field" : "venue",
+                                 "type" : 1,
+                                 "value" : "Unknown"
+                             },
+                             {
+                                 "field" : "onpremise",
+                                 "type" : 1,
+                                 "value" : true
+                             },
+                             {
+                                 "field" : "detail",
+                                 "type" : 1,
+                                 "value" : "Unknown"
+                             },
+                             {
+                                 "field" : "sport",
+                                 "type" : 1,
+                                 "value" : "var-char"
+                             },
+                             {
+                                 "field" : "level",
+                                 "type" : 1,
+                                 "value" : "var-char"
+                             },
+                             {
+                                 "field" : "program",
+                                 "type" : 1,
+                                 "value" : "var-char"
+                             },
+                             {
+                                 "field" : "status",
+                                 "type" : 1,
+                                 "value" : "var-char"
+                             },
+                             {
+                                 "field" : "title",
+                                 "type" : 1,
+                                 "value" : "var-char"
+                             }
+                         ]
+    } ")V0G0N");
+    // Set appropriate headers and status code
+    rsp.complete();
 }

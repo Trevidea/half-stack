@@ -36,10 +36,21 @@ void handle_get(http_request request)
    
    answer["Absolute URI"] = json::value::string(uri.to_string());
    auto reponse = Gateway::instance().request("GET", uri.path(), uri::decode(uri.query()), "");
-   
-   auto val = json::value::parse(reponse.data());
+   spdlog::trace("response received {}", reponse.data());
+   try
+   {
+      /* code */
+      auto val = json::value::parse(reponse.data());
 
    answer["Gateway Response"] = val;
+
+   }
+   catch(const std::exception& e)
+   {
+         std::cerr << e.what() << '\n';
+   }
+   
+   
 
    http_response response(status_codes::OK);
    response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
@@ -163,7 +174,7 @@ void handle_del(http_request request)
 
 int main()
 {
-   spdlog::set_level(spdlog::level::debug); // Set global log level to debug
+   spdlog::set_level(spdlog::level::trace); // Set global log level to debug
    spdlog::trace("Welcome to spdlog version {}.{}.{}  !", SPDLOG_VER_MAJOR, SPDLOG_VER_MINOR, SPDLOG_VER_PATCH);
    Gateway::instance().init();
    try
