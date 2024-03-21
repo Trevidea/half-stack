@@ -31,7 +31,7 @@ void Event::listUpcoming(const Request &req, Response &rsp)
                     "detail": {
                         "streetAddress": "123 Main St",
                         "cityAddress": "Cityville",
-                        "type": "Scheduled Event",
+                        "type": "Scheduled Event"
                     },
                     "title": "Championship Final",
                     "status": "Upcoming"
