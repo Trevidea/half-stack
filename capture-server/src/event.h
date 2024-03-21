@@ -19,16 +19,15 @@ enum EventStatus
 // Structure to represent venue details
 struct Venue
 {
-    std::string type;
-    std::string streetAddress;
-    std::string cityAddress;
+    std::string location;
 };
 
 // Structure to represent event detail
 struct EventDetail
 {
     std::string type;
-    std::string description;
+    std::string streetAddress;
+    std::string cityAddress;
 };
 
 // Class to represent Event entity
@@ -60,10 +59,28 @@ public:
         this->m_model.set("type", type);
     }
 
-    void setEventDescription(const std::string &description)
+    void setStreetAddress(const std::string &streetAddress)
     {
-        this->detail.description = description;
-        this->m_model.set("description", description);
+        this->detail.streetAddress = streetAddress;
+        this->m_model.set("streetAddress", streetAddress);
+    }
+
+    void setCityAddress(const std::string &cityAddress)
+    {
+        this->detail.cityAddress = cityAddress;
+        this->m_model.set("cityAddress", cityAddress);
+    }
+
+    // Getter function for id (assuming id is auto-generated)
+    int getId() const
+    {
+        return this->id;
+    }
+
+    // Setter function for id (assuming id is auto-generated)
+    void setId(int id)
+    {
+        this->id = id;
     }
 
     // Other getter functions fetching data from m_model
@@ -98,7 +115,7 @@ public:
 private:
     // Member variables
     int id;
-    time_t dttEvent;
+    std::time_t dttEvent;
     Venue venue;
     bool onPremise;
     EventStatus status;

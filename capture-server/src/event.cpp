@@ -19,26 +19,25 @@ void Event::listUpcoming(const Request &req, Response &rsp)
         "Absolute URI" : "/api/event/template",
              "Gateway Response" : [
                {
-  "sport": "Football",
-  "level": "Professional",
-  "program": "Championship",
-  "year": 2024,
-  "dttEvent": "2024-03-19T18:00:00Z",
-  "venue": {
-    "type": "Stadium",
-    "streetAddress": "123 Main St",
-    "cityAddress": "Cityville"
-  },
-  "onPremise": true,
-  "detail": {
-    "type": "Match",
-    "description": "Championship final"
-  },
-  "title": "Championship Final",
-  "status": "OnGoing"
-}
-             ]
-  } ")V0G0N");
+                    "sport": "Football",
+                    "level": "Professional",
+                    "program": "Championship",
+                    "year": 2024,
+                    "dttEvent": "2024-03-19T18:00:00Z",
+                    "venue": {
+                        "location": "Cityville Stadium"
+                    },
+                    "onPremise": true,
+                    "detail": {
+                        "streetAddress": "123 Main St",
+                        "cityAddress": "Cityville",
+                        "type": "Scheduled Event",
+                    },
+                    "title": "Championship Final",
+                    "status": "Upcoming"
+                }
+            ]
+        } ")V0G0N");
     // Set appropriate headers and status code
     rsp.complete();
 }
