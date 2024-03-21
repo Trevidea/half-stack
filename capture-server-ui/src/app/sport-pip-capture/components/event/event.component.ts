@@ -10,15 +10,16 @@ import { setTimeout } from 'timers';
   encapsulation: ViewEncapsulation.None
 })
 export class EventComponent implements OnInit {
-@Input() datasource: any
+  @Input() datasource: any
+  gridView: boolean = true
   constructor(private router: Router) { }
 
   ngOnInit(): void {
- 
+
   }
   CreateOnDemandEvent() {
     this.router.navigate(['on-demand-event'])
   }
 
- 
+
 }

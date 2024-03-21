@@ -7,14 +7,14 @@
       </h6>
     </div>
     <div class="menu-container">
-      <a ngbDropdown>
+      <div ngbDropdown>
         <button class="btn btn-sm btn-light menuitem-but" id="menuDropdown" ngbDropdownToggle>
           <i class="bi bi-three-dots-vertical" style="font-size: 1.3rem;"></i>
         </button>
         <div ngbDropdownMenu aria-labelledby="menuDropdown">
           <button class="dropdown-item"><i [data-feather]="'trash'" [size]="16"></i> Remove Event</button>
         </div>
-      </a>
+      </div>
     </div>
     <div class="card-body pt-1 pb-0 custom-card-body">
       <div class="row">
@@ -38,27 +38,18 @@
           </div>
         </div>
         <div class="col-12 mt-1 card-text-style">
-          <h4 class="ellipsis">{{item.title}}</h4>
-          <p class="card-text">
+          <h4 class="ellipsis">{{item.title}}  </h4>
+          <p class="card-text ellipsis">
             <i class="feather" data-feather="clock"></i>
             {{ item.dttEvent | date }} {{ item.time | timeFormat }}{{ " , "
             }}{{ item.level }}
           </p>
-          <p class="card-text">
+          <p class="card-text ellipsis">
             <i class="feather" data-feather="map-pin"></i>
             {{ item.venue.location }}
           </p>
         </div>
       </div>
-      <!-- <h4>{{item.title}}</h4>
-      <p class="card-text">
-        <i class="bi bi-clock"></i>
-        {{item.dttEvent | date }} {{ item.time | timeFormat }}{{' , '}}{{item.level}}
-      </p>
-      <p class="card-text">
-        <i class="bi bi-geo-alt-fill"></i>
-        {{item.venue.location}}
-      </p> -->
     </div>
   </div>
 </div>

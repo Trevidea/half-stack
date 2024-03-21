@@ -1,2 +1,24 @@
 @import "@core/scss/angular/libs/select.component.scss";
 @import '@core/scss/capture-ui-scss/cards-grid-view.scss';
+
+.past-menu-container {
+    position: absolute;
+    bottom: 90%;
+    right: 10px;
+
+    .btn-sm,
+    .btn-group-sm>.btn {
+        padding: 0.486rem 12px !important;
+    }
+
+    .menuitem-but {
+        width: 18px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 7px;
+        background: rgba(248, 248, 248, 1);
+    }
+
+}
