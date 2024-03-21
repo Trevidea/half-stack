@@ -10,9 +10,6 @@ void Event::report()
     // Route definitions
     Gateway::instance().route("GET", "/api/events/upcoming", [this](const Request &req, Response &rsp)
                               { this->listUpcoming(req, rsp); });
-
-    Gateway::instance().route("GET", "/api/events/ongoing", [this](const Request &req, Response &rsp)
-                              { this->listOngoing(req, rsp); });
 }
 
 void Event::listUpcoming(const Request &req, Response &rsp)
@@ -80,9 +77,4 @@ void Event::listUpcoming(const Request &req, Response &rsp)
     } ")V0G0N");
     // Set appropriate headers and status code
     rsp.complete();
-}
-
-void Event::listOngoing(const Request &req, Response &rsp)
-{
-
 }
