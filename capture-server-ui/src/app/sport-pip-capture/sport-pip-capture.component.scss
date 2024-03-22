@@ -1,0 +1,10 @@
+/// dark skin card border
+.dark-layout {
+  .card {
+    border: 1px solid transparent;
+  }
+}
+/// custome card border css for light skin
+.card {
+  border: 1px solid rgba(195, 195, 195, 1);
+}
