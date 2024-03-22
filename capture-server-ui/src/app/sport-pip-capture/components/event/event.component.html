@@ -3,41 +3,43 @@
     <div class="col-12">
       <app-header-presenter></app-header-presenter>
     </div>
-    <div class="button-container col-12 d-flex justify-content-end">
-      <button type="button" class="btn " id="mobile-button" style="
-          background-color: rgba(143, 171, 7, 1);
-          color: #fff;
-          margin-right: 27px;
-        " rippleEffect (click)="CreateOnDemandEvent()">
-        <i class="bi bi-plus-circle-fill"></i> Create On-Demand Event
-      </button>
-    </div>
     <div class="col-12">
-      <ul ngbNav #nav="ngbNav" class="nav-tabs ">
-        <li ngbNavItem ngbNavItem="ongoingEvent">
+      <ul ngbNav #nav="ngbNav" class="nav-tabs"[activeId]="activeTabId" (navChange)="onNavChange($event)" >
+        <li  ngbNavItem="ongoingEvent" style="margin-top: 5px;">
           <a ngbNavLink>Ongoing Events</a>
           <ng-template ngbNavContent>
             <app-on-going-event [datasource]="datasource.ongoingEvent"></app-on-going-event>
           </ng-template>
         </li>
-        <li ngbNavItem="upcomingEvents">
+        <li ngbNavItem="upcomingEvents" style="margin-top: 5px;">
           <a ngbNavLink>Upcoming Events</a>
           <ng-template ngbNavContent>
             <app-up-coming-event [datasource]="datasource"></app-up-coming-event>
           </ng-template>
         </li>
-        <li ngbNavItem="pastEvents">
+        <li ngbNavItem="pastEvents" style="margin-top: 5px;">
           <a ngbNavLink>Past Events</a>
           <ng-template ngbNavContent>
             <app-past-event [datasource]="datasource.pastEvent"></app-past-event>
           </ng-template>
         </li>
-        <li class="ml-lg-auto">
-          <button type="button" class="btn  btn-outline-secondary" rippleEffect>Generate Events</button>
+        <li class="ml-lg-auto d-flex align-items-center">
+          <button type="button" class="btn btn-flat-secondary  list-button " rippleEffec  >
+            <h4 class="m-0"><i class="bi bi-list" style="font-size: 1.5rem;"></i></h4>
+          </button>
         </li>
-        <li ngbNavItem class="ml-1">
-          <button type="button" class="btn custum-button  on-demand-btn " rippleEffect (click)="CreateOnDemandEvent()">
-            <i class="bi bi-plus-circle-fill"></i> Create On-Demand Event
+        <li class=" d-flex align-items-center mr-1 ml-0.5">
+          <button type="button" class="btn btn-flat-secondary  grid-button ">
+            <h4 class="m-0"><i class="bi bi-grid"></i></h4>
+          </button>
+        </li>
+        <li class="d-flex align-items-center" [class.active]="gridView">
+          <button type="button" class="btn  btn-outline-secondary" rippleEffect>Sync Events</button>
+        </li>
+
+        <li class="ml-1 d-flex align-items-center">
+          <button type="button" class="btn btn-primary  on-demand-btn " rippleEffect (click)="CreateOnDemandEvent()">
+            <i class="bi bi-plus-circle-fill "></i> Create On-Demand Event
           </button>
         </li>
       </ul>

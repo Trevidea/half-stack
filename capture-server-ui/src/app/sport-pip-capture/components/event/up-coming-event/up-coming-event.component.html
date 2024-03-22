@@ -7,18 +7,18 @@
       </h6>
     </div>
     <div class="menu-container">
-      <a ngbDropdown>
+      <div ngbDropdown>
         <button class="btn btn-sm btn-light menuitem-but" id="menuDropdown" ngbDropdownToggle>
           <i class="bi bi-three-dots-vertical" style="font-size: 1.3rem;"></i>
         </button>
         <div ngbDropdownMenu aria-labelledby="menuDropdown">
           <button class="dropdown-item"><i [data-feather]="'trash'" [size]="16"></i> Remove Event</button>
         </div>
-      </a>
+      </div>
     </div>
     <div class="card-body pt-1 pb-0 custom-card-body">
       <div class="row">
-        <div class="col-4">
+        <div class="col-5 d-flex align-items-center " style="padding: 17 0;">
           <div class="badge badge-past-event" [ngClass]="{
             'on-demand-event': item.detail.type === 'On Demand Event',
             'scheduled-event': item.detail.type === 'Scheduled Event'
@@ -26,44 +26,33 @@
             {{item.detail.type}}
           </div>
         </div>
-        <div class="col-8">
-          <div class="float-right">
-            <button type="button" class="btn btn-flat-dark btn-sm" (click)="AddEvent('on-demand-event-sidebar',item)"
-              rippleEffect>
-              View
-            </button>
-            <button type="button" class="btn btn-gradient-warning ml-auto btn-sm">
-              Preview
-            </button>
-          </div>
+        <div class="col-7  card-btn-conatiner ">
+          <button type="button" class="btn btn-flat-dark btn-sm ml-auto card-buttons"
+            (click)="AddEvent('on-demand-event-sidebar',item)" rippleEffect>
+            View
+          </button>
+          <button type="button" class="btn btn-warning  btn-sm card-buttons " style="box-shadow: none;">
+            Preview
+          </button>
         </div>
         <div class="col-12 mt-1 card-text-style">
-          <h4 class="ellipsis">{{item.title}}</h4>
-          <p class="card-text">
+          <h4 class="ellipsis">{{item.title}} </h4>
+          <p class="card-text ellipsis">
             <i class="feather" data-feather="clock"></i>
             {{ item.dttEvent | date }} {{ item.time | timeFormat }}{{ " , "
             }}{{ item.level }}
           </p>
-          <p class="card-text">
+          <p class="card-text ellipsis">
             <i class="feather" data-feather="map-pin"></i>
             {{ item.venue.location }}
           </p>
         </div>
       </div>
-      <!-- <h4>{{item.title}}</h4>
-      <p class="card-text">
-        <i class="bi bi-clock"></i>
-        {{item.dttEvent | date }} {{ item.time | timeFormat }}{{' , '}}{{item.level}}
-      </p>
-      <p class="card-text">
-        <i class="bi bi-geo-alt-fill"></i>
-        {{item.venue.location}}
-      </p> -->
     </div>
   </div>
 </div>
 
 <core-sidebar class="modal modal-slide-in fade event-sidebar" name="on-demand-event-sidebar"
   overlayClass="modal-backdrop" hideOnEsc="true">
-  <app-on-demand-event-sidebar></app-on-demand-event-sidebar>
+  <app-up-coming-event-detil></app-up-coming-event-detil>
 </core-sidebar>

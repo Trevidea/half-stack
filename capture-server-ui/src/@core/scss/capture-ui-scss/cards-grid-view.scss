@@ -10,13 +10,21 @@
         border-radius: 10px;
         border: 1px solid var(--card-border) !important;
         margin-bottom: 0;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s ease-in-out ;
+        // transition: all .3s ease-in-out, background 0s, color 0s, border-color 0s;
 
         .card-text-style {
+            width: 100%;
+
             h4 {
                 font-size: 14px;
             }
 
             .card-text {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 font-family: 'Outfit';
                 font-size: 12px;
                 font-weight: 400;
@@ -27,9 +35,9 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                width: 90%;
             }
         }
+
 
         .card-img {
             overflow: hidden;
@@ -66,24 +74,88 @@
         }
     }
 
-    @media screen and (max-width: 768px) {
-        .grid-view {
-            grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-        }
+    //card effect   on  hovor 
+
+    .card-btn-conatiner {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        min-height: 28px;
+
     }
 
-    @media screen and (max-width:320px) {
-        .grid-view {
-            grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-        }
-
-        .custom-card {
-            position: relative;
-            width: 267px;
-            border-radius: 10px;
-            border: 1px solid var(--card-border) !important;
-            margin-bottom: 0;
-
-        }
+    .custom-card .card-buttons {
+        display: none;
+        transition: opacity 0.5s ease;
     }
+
+    .custom-card:hover {
+        box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .custom-card:hover .card-buttons {
+        display: inline-block;
+        opacity: 1;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .grid-view {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .grid-view {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@include media-breakpoint-down(xs) {
+    .grid-view {
+        grid-template-columns: 1fr;
+    }
+}
+
+.Progress {
+    background: rgba(254, 246, 231, 1);
+    border-radius: 10px 10px 0px 0px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 25px;
+
+    .Progress-text {
+        padding: 9px;
+        color: var(--text, #000);
+        font-family: 'Outfit';
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+}
+
+
+.menu-container {
+    position: absolute;
+    bottom: 77%;
+    right: 10px;
+
+    .btn-sm,
+    .btn-group-sm>.btn {
+        padding: 0.486rem 12px !important;
+    }
+
+    .menuitem-but {
+        width: 18px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 7px;
+        background: rgba(248, 248, 248, 1);
+    }
+
 }

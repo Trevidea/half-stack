@@ -120,6 +120,8 @@
     "unordered_map": "cpp",
     "unordered_set": "cpp",
     "variant": "cpp",
-    "algorithm": "cpp"
-  }
+    "algorithm": "cpp",
+    "functional": "cpp"
+  },
+  "cmake.sourceDirectory": "/Users/shreyapathak/git/half-stack/capture-server/build/_deps/libpqxx-src/src"
 }

@@ -12,7 +12,8 @@ set(HALF_STACK_SRC
     event.cpp
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
-target_include_directories(pg-dal PUBLIC "./")
+target_include_directories(half-stack PUBLIC "./" api-client)
 target_link_libraries(half-stack PUBLIC
     spdlog::spdlog
+    api-client
     pg-dal)
