@@ -3,10 +3,9 @@
     <div class="col-12">
       <app-header-presenter></app-header-presenter>
     </div>
-
     <div class="col-12">
-      <ul ngbNav #nav="ngbNav" class="nav-tabs" [activeId]="activeId" (navChange)="onNavChange($event)">
-        <li ngbNavItem ngbNavItem="ongoingEvent" style="margin-top: 5px;">
+      <ul ngbNav #nav="ngbNav" class="nav-tabs"[activeId]="activeTabId" (navChange)="onNavChange($event)" >
+        <li  ngbNavItem="ongoingEvent" style="margin-top: 5px;">
           <a ngbNavLink>Ongoing Events</a>
           <ng-template ngbNavContent>
             <app-on-going-event [datasource]="datasource.ongoingEvent"></app-on-going-event>
@@ -25,7 +24,7 @@
           </ng-template>
         </li>
         <li class="ml-lg-auto d-flex align-items-center">
-          <button type="button" class="btn btn-flat-secondary  list-button " rippleEffec>
+          <button type="button" class="btn btn-flat-secondary  list-button " rippleEffec  >
             <h4 class="m-0"><i class="bi bi-list" style="font-size: 1.5rem;"></i></h4>
           </button>
         </li>

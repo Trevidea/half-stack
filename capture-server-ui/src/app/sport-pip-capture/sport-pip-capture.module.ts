@@ -19,8 +19,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { TruncateWordsPipe } from './pipes/truncate-words.pipe';
 import { CoreSidebarModule } from '@core/components';
 import { EventHeaderComponent } from './components/event/event-header/event-header.component';
-import { ScheduledEventCardComponent } from './components/event/up-coming-event/card/scheduled-event-card/scheduled-event-card.component';
-import { OnDemandEventCardComponent } from './components/event/up-coming-event/card/on-demand-event-card/on-demand-event-card.component';
 import { ConnectionComponent } from './components/connection/connection.component';
 import { ConnectionPresenter } from './components/connection/connection.presenter';
 import { PreviousEventsConnectionComponent } from './components/connection/previous-events-connection/previous-events-connection.component';
@@ -84,8 +82,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PastEventComponent,
         TruncateWordsPipe,
         EventHeaderComponent,
-        ScheduledEventCardComponent,
-        OnDemandEventCardComponent,
         ConnectionComponent,
         ConnectionPresenter,
         PreviousEventsConnectionComponent,

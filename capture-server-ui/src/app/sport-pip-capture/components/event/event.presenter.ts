@@ -11,6 +11,7 @@ import { ArrayBuilder } from 'app/sport-pip-capture/blocks/array.builder';
   template: `<app-event [datasource]="ds"></app-event>`,
   styleUrls: ['./event.component.scss'],
   encapsulation: ViewEncapsulation.None
+  
 })
 export class EventPresenter implements OnInit {
   ds!: EventRange
