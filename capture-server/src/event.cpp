@@ -1,6 +1,7 @@
 #include "event.h"
 #include "gateway.h"
 #include "json/json.h"
+#include "client-factory.h"
 
 Event::Event() : EntityBase("event") {}
 
@@ -18,7 +19,7 @@ void Event::report()
     //                           { this->listPast(req, rsp); });
 
     // Route definition for the sync function
-    Gateway::instance().route("POST", "/api/event/sync", [this](const Request &req, Response &rsp)
+    Gateway::instance().route("GET", "/api/event/sync", [this](const Request &req, Response &rsp)
                               { this->sync(req, rsp); });
 }
 
@@ -64,8 +65,19 @@ void Event::listUpcoming(const Request &req, Response &rsp)
 
 void Event::sync(const Request &req, Response &rsp)
 {
-    // Your synchronization logic here
-    // For demonstration purposes, let's just set a response indicating success
+    ClientFactory &factory = ClientFactory::getInstance();
+
+    Client client = factory.create("http://drake.in:1337/api/events");
+    client.get([](const std::string &s)
+               { 
+                spdlog::trace("success..{}", s); 
+                /*write the code to first delete all scheduled-events in existing db and then save this data to the local db*/
+                },
+               [](const std::string &s)
+               {
+                   spdlog::trace("failure..{}", s);
+               });
+
     rsp.setData("Sync operation completed successfully.");
     rsp.complete();
 }
