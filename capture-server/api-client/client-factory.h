@@ -6,7 +6,7 @@ private:
 
 public:
     static ClientFactory& getInstance();
-    Client getClient(const std::string& url);
+    Client create(const std::string& url);
     ~ClientFactory();
 
 private:

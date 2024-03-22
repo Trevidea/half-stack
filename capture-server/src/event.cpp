@@ -67,9 +67,12 @@ void Event::sync(const Request &req, Response &rsp)
 {
     ClientFactory &factory = ClientFactory::getInstance();
 
-    Client client = factory.getClient("https://jsonplaceholder.typicode.com/todos/1");
+    Client client = factory.create("http://drake.in:1337/api/events");
     client.get([](const std::string &s)
-               { spdlog::trace("success..{}", s); },
+               { 
+                spdlog::trace("success..{}", s); 
+                /*write the code to first delete all scheduled-events in existing db and then save this data to the local db*/
+                },
                [](const std::string &s)
                {
                    spdlog::trace("failure..{}", s);

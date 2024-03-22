@@ -9,7 +9,7 @@ ClientFactory& ClientFactory::getInstance() {
     return *instance;
 }
 
-Client ClientFactory::getClient(const std::string& url) {
+Client ClientFactory::create(const std::string& url) {
     return Client(url);
 }
 
