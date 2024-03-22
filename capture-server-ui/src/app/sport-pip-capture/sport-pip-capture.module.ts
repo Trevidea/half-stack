@@ -15,12 +15,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { OnGoingEventComponent } from './components/event/on-going-event/on-going-event.component';
 import { UpComingEventComponent } from './components/event/up-coming-event/up-coming-event.component';
 import { PastEventComponent } from './components/event/past-event/past-event.component';
-
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TruncateWordsPipe } from './pipes/truncate-words.pipe';
-import { ScheduledEventSidebarComponent } from './components/event/up-coming-event/scheduled-event-sidebar/scheduled-event-sidebar.component';
-import { OnDemandEventSidebarComponent } from './components/event/up-coming-event/on-demand-event-sidebar/on-demand-event-sidebar.component';
-
 import { CoreSidebarModule } from '@core/components';
 import { EventHeaderComponent } from './components/event/event-header/event-header.component';
 import { ScheduledEventCardComponent } from './components/event/up-coming-event/card/scheduled-event-card/scheduled-event-card.component';
@@ -70,6 +66,8 @@ import { MetaTypePresenter } from './components/meta-type/meta-type.presenter';
 import { EventHeaderPresenter } from './components/event/event-header/event-header.presenter';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { OnGoingEventDetailComponent } from './components/event/on-going-event/components/on-going-event-detail/on-going-event-detail.component';
+import { UpComingEventDetilComponent } from './components/event/up-coming-event/up-coming-event-detil/up-coming-event-detil.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -85,8 +83,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         UpComingEventComponent,
         PastEventComponent,
         TruncateWordsPipe,
-        ScheduledEventSidebarComponent,
-        OnDemandEventSidebarComponent,
         EventHeaderComponent,
         ScheduledEventCardComponent,
         OnDemandEventCardComponent,
@@ -126,7 +122,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         FormHostComponent,
         InlineModalComponent,
         MetaTypePresenter,
-        EventHeaderPresenter
+        EventHeaderPresenter,
+        OnGoingEventDetailComponent,
+        UpComingEventDetilComponent
     ],
     providers: [
         {

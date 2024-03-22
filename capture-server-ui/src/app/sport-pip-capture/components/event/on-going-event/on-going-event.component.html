@@ -32,7 +32,8 @@
         </div>
         <div class="col-8 card-btn-conatiner">
           <div class="float-right card-buttons">
-            <button type="button" class="btn btn-flat-dark btn-sm" rippleEffect>
+            <button type="button" class="btn btn-flat-dark btn-sm" rippleEffect
+              (click)="eventDetail('ongoing-event-detail')">
               View
             </button>
             <button type="button" class="btn btn-gradient-warning ml-auto btn-sm">
@@ -57,3 +58,8 @@
   </div>
 
 </div>
+
+<core-sidebar class="modal modal-slide-in fade event-sidebar" name="ongoing-event-detail" overlayClass="modal-backdrop"
+  hideOnEsc="true" preventBackgroundScroll="true">
+  <app-on-going-event-detail></app-on-going-event-detail>
+</core-sidebar>
