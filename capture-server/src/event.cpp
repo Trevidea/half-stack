@@ -104,7 +104,7 @@ void Event::sync(const Request &req, Response &rsp)
                 {
                     columns.append(Json::objectValue);
                     Json::Value &column = columns[columns.size() - 1];
-                    const auto &field = col[0]["field"].asString();
+                    const auto &field = col["field"].asString();
                     spdlog::trace("Field name..{}", field);
                     column["field"] = field;
                     Json::Value &attributes = dataJson["attributes"];
