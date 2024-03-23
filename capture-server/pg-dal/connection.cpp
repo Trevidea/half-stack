@@ -37,6 +37,7 @@ Connection Connection::open(
                      port,
                      pwd.c_str(),
                      dbName.c_str());
+            spdlog::trace("Connection string: {}", connStr);
             m_connPool[name] = std::make_tuple(false, new pqxx::connection(connStr));
             spdlog::trace("Connection opened..{}", name);
         }

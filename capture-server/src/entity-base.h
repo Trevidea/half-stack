@@ -19,7 +19,6 @@ private:
     PGResult executeSqlModel(const std::string &sql);
     std::string m_entity;
     EntityBase(const Model &model);
-    Json::Value schemaJson();
 
 protected:
     void list(const Request &request, Response &response);
@@ -30,6 +29,7 @@ protected:
     Json::Value create(const Request &request, Response &response);
     Json::Value update(const Request &request, Response &response);
     Json::Value remove(const Request &request, Response &response);
+    Json::Value schemaJson();
     void schema(const Request &request, Response &response);
     void postTemplate(const Request &request, Response &response);
     virtual std::string entity();

@@ -212,6 +212,7 @@ void EntityBase::schema(const Request &request, Response &response)
 Json::Value EntityBase::schemaJson()
 {
     const auto sql = SqlHelper::SchemaSql(this->entity());
+    spdlog::trace("EntityBase::schemaJson() executing..{}", sql);
     Json::Value jsResult = this->executeSqlJson(sql);
     Json::Value result = jsResult["result"];
     Json::Value columns = Json::arrayValue;
