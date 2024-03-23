@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { SportPipCaptureRoutingModule } from './sport-pip-capture-routing.module';
 import { SportPipCaptureComponent } from './sport-pip-capture.component';
 import { CaptureDashboardComponent } from './components/dashboard/dashboard.component';
@@ -65,7 +64,8 @@ import { EventHeaderPresenter } from './components/event/event-header/event-head
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { OnGoingEventDetailComponent } from './components/event/on-going-event/components/on-going-event-detail/on-going-event-detail.component';
-import { UpComingEventDetilComponent } from './components/event/up-coming-event/up-coming-event-detil/up-coming-event-detil.component';
+import { EventPreviewComponent } from './components/event/up-coming-event/components/event-preview/event-preview.component';
+import { UpComingEventDetilComponent } from './components/event/up-coming-event/components/up-coming-event-detil/up-coming-event-detil.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -120,7 +120,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MetaTypePresenter,
         EventHeaderPresenter,
         OnGoingEventDetailComponent,
-        UpComingEventDetilComponent
+        UpComingEventDetilComponent,
+        EventPreviewComponent
     ],
     providers: [
         {

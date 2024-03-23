@@ -18,6 +18,7 @@ import { EventPresenter } from './components/event/event.presenter';
 import { CreateOnDemandEventPresenter } from './components/event/create-on-demand-event-form/create-on-demand-event.presenter';
 import { MetaTypeComponent } from './components/meta-type/meta-type.component';
 import { MetaTypePresenter } from './components/meta-type/meta-type.presenter';
+import { EventPreviewComponent } from './components/event/up-coming-event/components/event-preview/event-preview.component';
 
 
 const routes: Routes = [
@@ -39,7 +40,9 @@ const routes: Routes = [
    
  
   { path: 'event', component: EventPresenter },
-  {path:'past-event-view',component:PastEventViewPresenter}
+  {path:'past-event-view',component:PastEventViewPresenter},
+  {path:'event/event-preview',component:EventPreviewComponent}
+  
 ];
 
 @NgModule({
