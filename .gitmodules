@@ -7,3 +7,18 @@
 [submodule "capture-server/dependency/spdlog"]
 	path = capture-server/dependency/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "capture-server/dependency/cpprestsdk/cpprestsdk"]
+	path = capture-server/dependency/cpprestsdk/cpprestsdk
+	url = https://github.com/microsoft/cpprestsdk.git
+[submodule "capture-server/cpprestsdk"]
+	path = capture-server/cpprestsdk
+	url = https://github.com/microsoft/cpprestsdk.git
+[submodule "capture-server/jsoncpp"]
+	path = capture-server/jsoncpp
+	url = https://github.com/open-source-parsers/jsoncpp.git
+[submodule "capture-server/spdlog"]
+	path = capture-server/spdlog
+	url = https://github.com/gabime/spdlog.git
+[submodule "capture-server/capture-server/dependency/cpprestsdk"]
+	path = capture-server/capture-server/dependency/cpprestsdk
+	url = https://github.com/microsoft/cpprestsdk.git

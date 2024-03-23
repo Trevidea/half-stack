@@ -1,5 +1,19 @@
 @import "@core/scss/core.scss";
 @import "./assets/scss/styles";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-
-
+/// menu right border and navbar bootom border custome css as per FIGMA design for dark and light skin
+.dark-layout {
+  .main-menu.menu-dark {
+    border-right: 1px solid rgba(79, 79, 79, 1);
+  }
+  .header-navbar .navbar-container {
+    border-bottom: 1px solid rgba(79, 79, 79, 1);
+  }
+}
+.main-menu {
+  border-right: 1px solid rgba(195, 195, 195, 1);
+}
+.header-navbar .navbar-container {
+  border-bottom: 1px solid rgba(195, 195, 195, 1);
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////

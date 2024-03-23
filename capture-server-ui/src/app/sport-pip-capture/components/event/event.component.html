@@ -3,18 +3,9 @@
     <div class="col-12">
       <app-header-presenter></app-header-presenter>
     </div>
-    <!-- <div class="button-container col-12 d-flex justify-content-end">
-      <button type="button" class="btn " id="mobile-button" style="
-          background-color: rgba(143, 171, 7, 1);
-          color: #fff;
-          margin-right: 27px;
-        " rippleEffect (click)="CreateOnDemandEvent()">
-        <i class="bi bi-plus-circle-fill"></i> Create On-Demand Event
-      </button>
-    </div> -->
     <div class="col-12">
-      <ul ngbNav #nav="ngbNav" class="nav-tabs">
-        <li ngbNavItem ngbNavItem="ongoingEvent" style="margin-top: 5px;">
+      <ul ngbNav #nav="ngbNav" class="nav-tabs"[activeId]="activeTabId" (navChange)="onNavChange($event)" >
+        <li  ngbNavItem="ongoingEvent" style="margin-top: 5px;">
           <a ngbNavLink>Ongoing Events</a>
           <ng-template ngbNavContent>
             <app-on-going-event [datasource]="datasource.ongoingEvent"></app-on-going-event>

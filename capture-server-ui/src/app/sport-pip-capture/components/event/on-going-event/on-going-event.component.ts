@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 @Component({
   selector: 'app-on-going-event',
   templateUrl: './on-going-event.component.html',
@@ -10,7 +11,7 @@ export class OnGoingEventComponent implements OnInit {
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
 
-  constructor() { }
+  constructor(private _coreSidebarService: CoreSidebarService) { }
 
   ngOnInit(): void {
     setInterval(() => {
@@ -21,7 +22,9 @@ export class OnGoingEventComponent implements OnInit {
   getCurrentDateTime(): Date {
     return new Date();
   }
-
+  eventDetail(event: string) {
+    this._coreSidebarService.getSidebarRegistry(event).toggleOpen();
+  }
   updateCountdownTimers() {
     const currentDateTime = this.getCurrentDateTime();
     this.datasource.forEach((event, index) => {
