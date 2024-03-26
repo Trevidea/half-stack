@@ -345,6 +345,10 @@ void EntityBase::sync(const Request &req, Response &rsp)
                    Run a loop on B, get values for the fields in B from data in A, create a Json::Value and add to C.
                    */
                    Json::Value &columns = jsSQLInput["columns"];
+
+                   const Json::Value &jsId = dataJson[0].get("id", Json::intValue);
+                   const Json::Value &attributes = dataJson[0].get("attributes", Json::objectValue);
+
                    for (auto &&col : jsEntityTemplate)
                    {
                        columns.append(Json::objectValue);
@@ -356,17 +360,22 @@ void EntityBase::sync(const Request &req, Response &rsp)
                        column["field"] = field;
                        column["type"] = type;
 
-                       const Json::Value &attributes = dataJson[0].get("attributes", Json::objectValue);
-                       const auto &val = attributes.get(field, Json::objectValue);
-                       if (val.isObject())
-                       {
-                           Json::FastWriter objectToStringConverter;
-                           const auto &converted = objectToStringConverter.write(val);
-                           column["value"] = converted;
-                       }
+                       if (field == "id")
+                           column["value"] = jsId;
                        else
                        {
-                           column["value"] = val;
+                           const auto &val = attributes.get(field, Json::objectValue);
+                           if (val.isObject())
+                           {
+                               Json::FastWriter objectToStringConverter;
+                               const auto &converted = objectToStringConverter.write(val);
+                               
+                               column["value"] = converted;
+                           }
+                           else
+                           {
+                               column["value"] = val;
+                           }
                        }
                    }
                    Json::FastWriter f1;
