@@ -43,8 +43,6 @@ public:
     // void listOngoing(const Request &req, Response &rsp);
     // void listPast(const Request &req, Response &rsp);
 
-    // Declaration of the sync function
-    void sync(const Request &req, Response &rsp);
 
     // Getter and setter functions for EventDetail
     const EventDetail &eventDetail() const

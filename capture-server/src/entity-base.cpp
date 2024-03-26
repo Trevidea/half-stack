@@ -4,18 +4,19 @@
 #include "spdlog/spdlog.h"
 #include "gateway.h"
 #include "model.h"
+#include "client-factory.h"
 
-/// @brief 
-/// @param model 
+/// @brief
+/// @param model
 EntityBase::EntityBase(const Model &model) : m_model{model}
 {
 }
-/// @brief 
-/// @param entity 
+/// @brief
+/// @param entity
 EntityBase::EntityBase(const std::string &entity) : m_entity{entity}
 {
 }
-/// @brief 
+/// @brief
 void EntityBase::report()
 {
     char schemaUrl[128] = {0};
@@ -34,11 +35,11 @@ void EntityBase::report()
                                   this->postTemplate(req, rsp);
                               });
 }
-/// @brief 
-/// @param funcName 
-/// @param params 
-/// @return 
-Json::Value EntityBase::function(const std::string& funcName, const std::string &params)
+/// @brief
+/// @param funcName
+/// @param params
+/// @return
+Json::Value EntityBase::function(const std::string &funcName, const std::string &params)
 {
     char functionQry[128] = {0};
     snprintf(functionQry, 128, "SELECT * FROM %s(%s)", funcName.c_str(), params.c_str());
@@ -48,15 +49,15 @@ Json::Value EntityBase::function(const std::string& funcName, const std::string 
 EntityBase::~EntityBase()
 {
 }
-/// @brief 
-/// @return 
+/// @brief
+/// @return
 std::string EntityBase::entity()
 {
     return m_entity;
 }
-/// @brief 
-/// @param sql 
-/// @return 
+/// @brief
+/// @param sql
+/// @return
 std::string EntityBase::executeSqlStr(const std::string &sql)
 {
     auto &&connection = DBManager::instance().getConnection();
@@ -65,9 +66,9 @@ std::string EntityBase::executeSqlStr(const std::string &sql)
     auto &&js = connection.result().root();
     return fastWriter.write(js);
 }
-/// @brief 
-/// @param sql 
-/// @return 
+/// @brief
+/// @param sql
+/// @return
 Json::Value EntityBase::executeSqlJson(const std::string &sql)
 {
     auto &&connection = DBManager::instance().getConnection();
@@ -75,18 +76,18 @@ Json::Value EntityBase::executeSqlJson(const std::string &sql)
     return connection.result().root();
 }
 
-/// @brief 
-/// @param sql 
-/// @return 
+/// @brief
+/// @param sql
+/// @return
 PGResult EntityBase::executeSqlModel(const std::string &sql)
 {
     auto &&connection = DBManager::instance().getConnection();
     connection.execute(sql);
     return connection.data();
 }
-/// @brief 
-/// @param request 
-/// @param response 
+/// @brief
+/// @param request
+/// @param response
 void EntityBase::list(const Request &request, Response &response)
 {
     const std::string jsonString = SqlHelper::JsonStub(this->entity());
@@ -98,9 +99,9 @@ void EntityBase::list(const Request &request, Response &response)
     response.setData(result);
     response.complete();
 }
-/// @brief 
-/// @param request 
-/// @param response 
+/// @brief
+/// @param request
+/// @param response
 void EntityBase::find(const Request &request, Response &response)
 {
     const std::string jsonString = SqlHelper::JsonStub(this->entity());
@@ -123,10 +124,10 @@ void EntityBase::find(const Request &request, Response &response)
     response.complete();
 }
 
-/// @brief 
-/// @param request 
-/// @param response 
-/// @param func 
+/// @brief
+/// @param request
+/// @param response
+/// @param func
 void EntityBase::function(const Request &request, Response &response, const std::string &func)
 {
     const std::string jsonString = SqlHelper::JsonStub(func);
@@ -141,7 +142,7 @@ void EntityBase::function(const Request &request, Response &response, const std:
         crt["value"] = qry.m_operand2;
         crt["op"] = qry.m_operator;
         js.append(crt);
-    } 
+    }
 
     const auto sql = SqlHelper::ScriptFunction(parsedJson);
     std::string result = this->executeSqlStr(sql);
@@ -220,32 +221,33 @@ Json::Value EntityBase::schemaJson()
     {
         columns.append(Json::objectValue);
         Json::Value &column = columns[columns.size() - 1];
-        column["field"] = row[0]["value"];
-        if (row[1]["value"] == "bigint")
-        {
-            column["type"] = 0;
-            column["value"] = 0;
-        }
-        else if (row[1]["value"] == "date")
-        {
-            column["type"] = 4;
-            column["value"] = "2000-11-01";
-        }
-        else if (row[1]["value"] == "character varying")
-        {
-            column["type"] = 1;
-            column["value"] = "var-char";
-        }
-        else if (row[1]["value"] == "boolean")
-        {
-            column["type"] = 1;
-            column["value"] = true;
-        }
-        else
-        {
-            column["type"] = 1;
-            column["value"] = "Unknown";
-        }
+        this->setColumn(column, row[0]["value"], row[1]["value"].as<std::string>());
+        // column["field"] = row[0]["value"];
+        // if (row[1]["value"] == "bigint")
+        // {
+        //     column["type"] = 0;
+        //     column["value"] = 0;
+        // }
+        // else if (row[1]["value"] == "date")
+        // {
+        //     column["type"] = 4;
+        //     column["value"] = "2000-11-01";
+        // }
+        // else if (row[1]["value"] == "character varying")
+        // {
+        //     column["type"] = 1;
+        //     column["value"] = "var-char";
+        // }
+        // else if (row[1]["value"] == "boolean")
+        // {
+        //     column["type"] = 1;
+        //     column["value"] = true;
+        // }
+        // else
+        // {
+        //     column["type"] = 1;
+        //     column["value"] = "Unknown";
+        // }
     }
     return columns;
 }
@@ -305,4 +307,84 @@ void EntityBase::LogPrinter::setPrintSqlOn()
 EntityBase::LogPrinter::~LogPrinter()
 {
     DBManager::instance().s_printResults = false;
+}
+
+void EntityBase::sync(const Request &req, Response &rsp)
+{
+    ClientFactory &factory = ClientFactory::getInstance();
+
+    // Client client = factory.create("https://jsonplaceholder.typicode.com/todos/1");
+    Client client = factory.create("http://drake.in:1337/api/events");
+    client.get([this, &rsp](const std::string &response)
+               {
+                   /*A.***Event data from the Full Stack - STRAPI****/
+                   spdlog::trace("success..{}", response);
+                   Json::Reader reader;
+                   Json::Value responseJson;
+                   reader.parse(response, responseJson);
+                   Json::Value dataJson = responseJson.get("data", Json::arrayValue);
+                   /***********************************************/
+
+                   /*B.********This is the template that has all the fields we need to save for a record*********/
+                   Json::Value jsEntityTemplate = this->schemaJson();
+                   Json::FastWriter fw;
+                   auto x = fw.write(jsEntityTemplate);
+                   spdlog::trace("Insert Json..{}", x);
+                   /*******************************************************************************************/
+
+                   /*C.****This is the JSON stub to be used for creating the SQL*****/
+                   Json::Value jsSQLInput;
+                   const auto &sqlInput = SqlHelper::JsonStub("event");
+                   spdlog::trace("sqlInput: {}", sqlInput);
+                   auto stub = reader.parse(sqlInput, jsSQLInput);
+
+                   /*
+                   We need to populate C.
+                   B has all the fields that will go into the Columns array in C.
+                   And A has all the data that we will set for the columns in B.
+                   Run a loop on B, get values for the fields in B from data in A, create a Json::Value and add to C.
+                   */
+                   Json::Value &columns = jsSQLInput["columns"];
+                   for (auto &&col : jsEntityTemplate)
+                   {
+                       columns.append(Json::objectValue);
+                       Json::Value &column = columns[columns.size() - 1];
+                       const auto &field = col["field"].asString();
+                       const auto &type = col["type"].asString();
+
+                       spdlog::trace("Field name..{}, type..{}", field, type);
+                       column["field"] = field;
+                       column["type"] = type;
+
+                       const Json::Value &attributes = dataJson[0].get("attributes", Json::objectValue);
+                       const auto &val = attributes.get(field, Json::objectValue);
+                       if (val.isObject())
+                       {
+                           Json::FastWriter objectToStringConverter;
+                           const auto &converted = objectToStringConverter.write(val);
+                           column["value"] = converted;
+                       }
+                       else
+                       {
+                           column["value"] = val;
+                       }
+                   }
+                   Json::FastWriter f1;
+                   const std::string djs = f1.write(columns);
+                   std::cout << djs << std::endl;
+                   /***************************************************************/
+
+                   const auto sql = SqlHelper::ScriptInsert(jsSQLInput);
+                   spdlog::trace("Insert script..{}", sql);
+
+                   //    auto jsResult = this->executeSqlJson(sql);
+                   //    rsp.setData(jsResult);
+               },
+               [](const std::string &s)
+               {
+                   spdlog::trace("failure..{}", s);
+               });
+
+    rsp.setData("Sync operation completed successfully.");
+    rsp.complete();
 }
