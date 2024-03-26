@@ -8,25 +8,6 @@ NOTE:
 ------
 PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	color: var(--text, #000);
-}
-
-.card{
-  border: 1px solid #C3C3C3;
-}
-
-.dark-layout {
-	
-.card{
-	border: none;
-  }
-}
 
 .dark-layout {
 	--main-border-color: none;
@@ -41,6 +22,29 @@ h6 {
 	--light-secondary-border-color: #ebe9f1;
 	--card-border: #C3C3C3;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--text, #000);
+}
+
+.card {
+	border: 1px solid #C3C3C3;
+	box-shadow: none;
+}
+
+.dark-layout {
+
+	.card {
+		border: none;
+
+	}
+}
+
 .on-demand-event {
 	background-color: rgba(143, 171, 7, 1);
 	color: rgba(255, 255, 255, 1);
@@ -51,4 +55,12 @@ h6 {
 	background-color: #E9F0F5;
 	color: #0D0D0D;
 	font-weight: 400;
+}
+
+.table:not(.table-dark):not(.table-light) {
+
+	thead:not(.thead-dark) th,
+	tfoot:not(.thead-dark) th {
+		background-color: transparent;
+	}
 }

@@ -66,6 +66,7 @@ import { FormsModule } from '@angular/forms';
 import { OnGoingEventDetailComponent } from './components/event/on-going-event/components/on-going-event-detail/on-going-event-detail.component';
 import { EventPreviewComponent } from './components/event/up-coming-event/components/event-preview/event-preview.component';
 import { UpComingEventDetilComponent } from './components/event/up-coming-event/components/up-coming-event-detil/up-coming-event-detil.component';
+import { ActiveDevicesComponent } from './components/event/up-coming-event/components/event-preview/active-devices/active-devices.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -121,7 +122,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         EventHeaderPresenter,
         OnGoingEventDetailComponent,
         UpComingEventDetilComponent,
-        EventPreviewComponent
+        EventPreviewComponent,
+        ActiveDevicesComponent
     ],
     providers: [
         {
