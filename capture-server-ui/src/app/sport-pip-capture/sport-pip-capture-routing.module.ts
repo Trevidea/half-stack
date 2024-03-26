@@ -5,15 +5,14 @@ import { ConnectionPresenter } from './components/connection/connection.presente
 import { LogPresentert } from './components/log/log.presenter';
 import { SharedPresenter } from './components/shared/shared.presenter';
 import { AuthGuard } from 'app/auth/helpers/auth.guards';
-import { PastEventViewComponent } from './components/event/past-event/past-event-view/past-event-view.component';
-import { PastEventViewPresenter } from './components/event/past-event/past-event-view/past-event-view.presenter';
 import { ConnectionDeviceDetailComponent } from './components/connection/connection-device-detail/connection-device-detail.component';
 import { ConnectionCardComponent } from './components/connection/card/connection-card/connection-card.component';
 import { ConnectionStartComponent } from './components/connection/connection-start/connection-start.component';
 import { EventPresenter } from './components/event/event.presenter';
 import { CreateOnDemandEventPresenter } from './components/event/create-on-demand-event-form/create-on-demand-event.presenter';
 import { MetaTypePresenter } from './components/meta-type/meta-type.presenter';
-import { EventPreviewComponent } from './components/event/up-coming-event/components/event-preview/event-preview.component';
+import { PastEventViewPresenter } from './components/event/grid-view-ui/past-event/past-event-view/past-event-view.presenter';
+import { EventPreviewComponent } from './components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.component';
 
 
 const routes: Routes = [
