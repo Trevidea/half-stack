@@ -1,8 +1,10 @@
-.menu-container {
+.menu-box {
+
     .btn-sm,
     .btn-group-sm>.btn {
         padding: 0.486rem 12px !important;
     }
+
     .menuitem-but {
         border: none;
         width: 18px;
@@ -13,7 +15,6 @@
         border-radius: 7px;
         background: rgba(248, 248, 248, 1);
     }
-
 }
 
 .dropdown-menu .dropdown-item {
