@@ -13,7 +13,7 @@
         justify-content: center;
         align-items: center;
         border-radius: 7px;
-        background: rgba(248, 248, 248, 1);
+
     }
 }
 
@@ -22,4 +22,11 @@
     align-items: center;
     width: 100%;
     cursor: pointer;
+}
+
+.dark-layout {
+    .menuitem-but {
+        background: #2E2E2E;
+    }
+
 }
