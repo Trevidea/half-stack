@@ -2,7 +2,12 @@
   <div class="d-flex p-1 justify-content-between">
     <h4>Previous Events Connection</h4>
     <div>
-      <button class="btn btn-sm btn-outline-info">Check On Going Event</button>
+      <button
+        class="btn btn-sm btn-outline-info"
+        (click)="startEvent.emit(true)"
+      >
+        Check On Going Event
+      </button>
     </div>
   </div>
   <div class="table-responsive">
@@ -11,7 +16,11 @@
         <tr class="no-wrap-cell headerTopBoarder">
           <th scope="col">Name of event</th>
           <th scope="col">
-            <div style="cursor: pointer" class="d-flex" (click)="sortDate()">
+            <div
+              style="cursor: pointer"
+              class="d-flex justify-items-center"
+              (click)="sortDate()"
+            >
               <div>Date</div>
               <div style="display: grid; margin: auto">
                 <i

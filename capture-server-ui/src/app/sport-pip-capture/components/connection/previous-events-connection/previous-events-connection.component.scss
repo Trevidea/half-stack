@@ -28,4 +28,9 @@
 }
 .icon-rotate {
   transform: rotate(180deg);
+  transition: all ease-in 0.5s;
+}
+.sort-back {
+  transform: rotate(180deg);
+  transition: all ease-in 0.5s;
 }

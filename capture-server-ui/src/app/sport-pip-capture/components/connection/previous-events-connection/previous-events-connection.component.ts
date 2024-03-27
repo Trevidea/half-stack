@@ -1,8 +1,10 @@
 import {
   Component,
   ElementRef,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
   Renderer2,
   ViewChild,
   ViewEncapsulation,
@@ -18,6 +20,7 @@ import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.se
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviousEventsConnectionComponent implements OnInit {
+  @Output() startEvent = new EventEmitter<boolean>();
   @Input() datasource: any;
   @Input() previousEventsConnection: any;
   public ColumnMode = ColumnMode;

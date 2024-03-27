@@ -9,6 +9,7 @@
   <app-previous-events-connection
     [datasource]="datasource.Connection"
     [previousEventsConnection]="previousEventsConnection"
+    (startEvent)="isEventStarted($event)"
   ></app-previous-events-connection>
 </div>
 <div *ngIf="eventStarted">

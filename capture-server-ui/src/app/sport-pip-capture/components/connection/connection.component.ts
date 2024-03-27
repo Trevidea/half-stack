@@ -37,4 +37,8 @@ export class ConnectionComponent implements OnInit {
       return;
     }
   }
+  isEventStarted(e: boolean) {
+    console.log(e);
+    this.eventStarted = e;
+  }
 }
