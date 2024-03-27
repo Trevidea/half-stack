@@ -17,7 +17,7 @@ private:
     {
         if (!json["value"])
             return "NULL";
-
+        spdlog::trace("sqlhelper.formatvalue.json..{}", Json::FastWriter().write(json));
         std::string value = "";
         if (json["type"])
         {
@@ -31,6 +31,9 @@ private:
                 value = json["value"].asString();
                 break;
             case 4: // date
+                value = "'" + json["value"].asString() + "'";
+                break;
+            case 5: // jsonb
                 value = "'" + json["value"].asString() + "'";
                 break;
             case 0: // int
@@ -221,6 +224,28 @@ public:
         }
 
         std::string criteria = criteriaBuilder(json);
+
+        idx = sql_delete.find("#criteria#", 0);
+        sql_delete.replace(idx, 10, criteria);
+        return sql_delete;
+    }
+    static std::string ScriptRemove(const std::string &tableName, const std::string &criteria)
+    {
+
+        std::string sql_delete = "DELETE FROM #tablename# WHERE #criteria#";
+
+        size_t idx = 0;
+
+        idx = sql_delete.find("#tablename#", 0);
+        if (idx == std::string::npos)
+        {
+            std::cout << "Error" << std::endl;
+        }
+        else
+        {
+            sql_delete.replace(idx, 11, tableName);
+        }
+
 
         idx = sql_delete.find("#criteria#", 0);
         sql_delete.replace(idx, 10, criteria);

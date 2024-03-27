@@ -215,12 +215,16 @@ Json::Value EntityBase::schemaJson()
     const auto sql = SqlHelper::SchemaSql(this->entity());
     spdlog::trace("EntityBase::schemaJson() executing..{}", sql);
     Json::Value jsResult = this->executeSqlJson(sql);
+    Json::FastWriter f2;
+    std::string strResult = f2.write(jsResult);
+    std::cout << strResult << std::endl;
     Json::Value result = jsResult["result"];
     Json::Value columns = Json::arrayValue;
     for (auto &&row : result)
     {
         columns.append(Json::objectValue);
         Json::Value &column = columns[columns.size() - 1];
+        spdlog::trace("Row data..{}", Json::FastWriter().write(row));
         this->setColumn(column, row[0]["value"], row[1]["value"].as<std::string>());
         // column["field"] = row[0]["value"];
         // if (row[1]["value"] == "bigint")
@@ -312,17 +316,25 @@ EntityBase::LogPrinter::~LogPrinter()
 void EntityBase::sync(const Request &req, Response &rsp)
 {
     ClientFactory &factory = ClientFactory::getInstance();
+    const auto &reqData = req.data();
+    spdlog::trace("Request data..{}", reqData);
 
-    // Client client = factory.create("https://jsonplaceholder.typicode.com/todos/1");
-    Client client = factory.create("http://drake.in:1337/api/events");
-    client.get([this, &rsp](const std::string &response)
+    Json::Reader reader;
+    Json::Value requestJson;
+    reader.parse(reqData, requestJson);
+    const auto &jsUrl = requestJson.get("source", "http://drake.in:1337/api");
+    const auto &jsDeleteCriteria = requestJson.get("delete-criteria", "false");
+    const auto &deleteSql = SqlHelper::ScriptRemove(this->entity(), jsDeleteCriteria.asString());
+
+    Client client = factory.create(jsUrl.asString());
+    client.get([this, &rsp, &reader, &deleteSql](const std::string &response)
                {
+                    
                    /*A.***Event data from the Full Stack - STRAPI****/
-                   spdlog::trace("success..{}", response);
-                   Json::Reader reader;
                    Json::Value responseJson;
                    reader.parse(response, responseJson);
                    Json::Value dataJson = responseJson.get("data", Json::arrayValue);
+                   spdlog::trace("sync().dataJson..{}", Json::FastWriter().write(dataJson));
                    /***********************************************/
 
                    /*B.********This is the template that has all the fields we need to save for a record*********/
@@ -354,9 +366,9 @@ void EntityBase::sync(const Request &req, Response &rsp)
                        columns.append(Json::objectValue);
                        Json::Value &column = columns[columns.size() - 1];
                        const auto &field = col["field"].asString();
-                       const auto &type = col["type"].asString();
+                       const auto &type = col["type"];
 
-                       spdlog::trace("Field name..{}, type..{}", field, type);
+                       spdlog::trace("Field name..{}, type..{}", field, Json::FastWriter().write(type));
                        column["field"] = field;
                        column["type"] = type;
 
@@ -380,18 +392,20 @@ void EntityBase::sync(const Request &req, Response &rsp)
                    }
                    Json::FastWriter f1;
                    const std::string djs = f1.write(columns);
-                   std::cout << djs << std::endl;
+                   std::cout << "Final column for sql: " << djs << std::endl;
                    /***************************************************************/
 
                    const auto sql = SqlHelper::ScriptInsert(jsSQLInput);
                    spdlog::trace("Insert script..{}", sql);
-
-                   //    auto jsResult = this->executeSqlJson(sql);
-                   //    rsp.setData(jsResult);
-               },
+                   auto && trs = DBManager::instance().createTransaction();
+                    this->executeSqlJson(deleteSql);
+                   
+                    auto jsResult = this->executeSqlJson(sql);
+                   trs.commit();
+                   rsp.setData(Json::FastWriter().write(jsResult)); },
                [](const std::string &s)
                {
-                   spdlog::trace("failure..{}", s);
+                   spdlog::error("failure..{}", s);
                });
 
     rsp.setData("Sync operation completed successfully.");
