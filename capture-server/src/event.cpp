@@ -1,8 +1,6 @@
 #include "event.h"
 #include "gateway.h"
 #include "json/json.h"
-#include "client-factory.h"
-#include "sqlhelper.h"
 
 Event::Event() : EntityBase("event") {}
 
@@ -20,7 +18,7 @@ void Event::report()
     //                           { this->listPast(req, rsp); });
 
     // Route definition for the sync function
-    Gateway::instance().route("GET", "/api/event/sync", [this](const Request &req, Response &rsp)
+    Gateway::instance().route("POST", "/api/event/sync", [this](const Request &req, Response &rsp)
                               { this->sync(req, rsp); });
 }
 
@@ -63,69 +61,3 @@ void Event::listUpcoming(const Request &req, Response &rsp)
 // {
 //     rsp.complete();
 // }
-
-void Event::sync(const Request &req, Response &rsp)
-{
-    ClientFactory &factory = ClientFactory::getInstance();
-
-    // Client client = factory.create("https://jsonplaceholder.typicode.com/todos/1");
-    Client client = factory.create("http://drake.in:1337/api/events");
-    client.get([this, &rsp](const std::string &data)
-               {
-                /*A.***Event data from the Full Stack - STRAPI****/
-                   spdlog::trace("success..{}", data);
-                   Json::Reader reader;
-                   Json::Value dataJson;
-                   reader.parse(data, dataJson);
-                /***********************************************/
-
-                /*B.********This is the template that has all the fields we need to save for a record*********/
-                   Json::Value jsEntityTemplate = this->schemaJson();
-                   Json::FastWriter fw;
-                   auto x = fw.write(jsEntityTemplate);
-                   spdlog::trace("Insert Json..{}", x);
-                /*******************************************************************************************/
-
-
-                /*C.****This is the JSON stub to be used for creating the SQL*****/
-                   Json::Value jsSQLInput;
-                   const auto &sqlInput = SqlHelper::JsonStub("event");
-                   spdlog::trace("sqlInput: {}", sqlInput);
-                   auto stub = reader.parse(sqlInput, jsSQLInput);
-
-                /*
-                We need to populate C. 
-                B has all the fields that will go into the Columns array in C. 
-                And A has all the data that we will set for the columns in B.
-                Run a loop on B, get values for the fields in B from data in A, create a Json::Value and add to C.
-                */
-                Json::Value &columns = jsSQLInput["columns"];
-                for (auto &&col : jsEntityTemplate)
-                {
-                    columns.append(Json::objectValue);
-                    Json::Value &column = columns[columns.size() - 1];
-                    const auto &field = col["field"].asString();
-                    spdlog::trace("Field name..{}", field);
-                    column["field"] = field;
-                    Json::Value &attributes = dataJson["attributes"];
-                    spdlog::trace("Field value..{}", attributes[field].asString());
-                    column["value"] = attributes[field];
-                }
-
-                /***************************************************************/
-
-                   
-                   const auto sql = SqlHelper::ScriptInsert(jsSQLInput);
-                   spdlog::trace("Insert script..{}", sql);
-
-                //    auto jsResult = this->executeSqlJson(sql);
-                //    rsp.setData(jsResult);
-                   },
-               [](const std::string &s)
-               {
-                   spdlog::trace("failure..{}", s);
-               });
-
-    rsp.setData("Sync operation completed successfully.");
-    rsp.complete();
-}

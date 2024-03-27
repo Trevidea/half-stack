@@ -9,6 +9,7 @@
 #include "sqlhelper.h"
 #include "handler.h"
 #include "pgresult.h"
+#include <tuple>
 #include "half-stack-exceptions.h"
 
 class EntityBase : public Handler
@@ -19,6 +20,53 @@ private:
     PGResult executeSqlModel(const std::string &sql);
     std::string m_entity;
     EntityBase(const Model &model);
+    Json::Value schemaJson();
+
+    template<typename T = std::string>
+    void setColumn(Json::Value &column, Json::Value &field, const std::string &tp, const T* value = nullptr)
+    {
+        column["field"] = field;
+        if (tp == "bigint")
+        {
+            column["type"] = 0;
+            if(value)
+                column["value"] = value;
+            else
+                column["value"] = 0;
+        }
+        else if (tp == "date")
+        {
+            column["type"] = 4;
+            if(value)
+                column["value"] = value;
+            else
+                column["value"] = "2000-11-01";
+        }
+        else if (tp == "character varying")
+        {
+            column["type"] = 1;
+            if(value)
+                column["value"] = value;
+            else
+                column["value"] = "var-char";
+        }
+        else if (tp == "boolean")
+        {
+            column["type"] = 1;
+            if(value)
+                column["value"] = value;
+            else
+                column["value"] = true;
+        }
+        else
+        {
+            column["type"] = 1;
+            if(value)
+                column["value"] = value;
+            else
+                column["value"] = "Unknown";
+        }
+    }
 
 protected:
     void list(const Request &request, Response &response);
@@ -29,9 +77,9 @@ protected:
     Json::Value create(const Request &request, Response &response);
     Json::Value update(const Request &request, Response &response);
     Json::Value remove(const Request &request, Response &response);
-    Json::Value schemaJson();
     void schema(const Request &request, Response &response);
     void postTemplate(const Request &request, Response &response);
+    void sync(const Request &req, Response &rsp);
     virtual std::string entity();
     Model m_model;
     Model m_setModel;
