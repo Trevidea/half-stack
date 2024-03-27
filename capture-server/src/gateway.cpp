@@ -5,6 +5,7 @@
 #include "spdlog/spdlog.h"
 #include "metatype.h"
 #include "event.h"
+#include "team.h"
 
 Gateway::Gateway()
 {
