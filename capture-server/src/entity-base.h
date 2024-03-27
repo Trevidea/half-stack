@@ -26,7 +26,7 @@ private:
     void setColumn(Json::Value &column, Json::Value &field, const std::string &tp, const T* value = nullptr)
     {
         column["field"] = field;
-        if (tp == "bigint")
+        if ((tp == "bigint") || (tp == "integer"))
         {
             column["type"] = 0;
             if(value)
@@ -34,7 +34,7 @@ private:
             else
                 column["value"] = 0;
         }
-        else if (tp == "date")
+        else if ((tp == "date") || (tp == "timestamp without time zone"))
         {
             column["type"] = 4;
             if(value)
@@ -52,7 +52,15 @@ private:
         }
         else if (tp == "boolean")
         {
-            column["type"] = 1;
+            column["type"] = 3;
+            if(value)
+                column["value"] = value;
+            else
+                column["value"] = true;
+        }
+        else if (tp == "jsonb")
+        {
+            column["type"] = 5;
             if(value)
                 column["value"] = value;
             else
@@ -66,6 +74,7 @@ private:
             else
                 column["value"] = "Unknown";
         }
+        spdlog::trace("setColumn().column..{}", Json::FastWriter().write(column));
     }
 
 protected:

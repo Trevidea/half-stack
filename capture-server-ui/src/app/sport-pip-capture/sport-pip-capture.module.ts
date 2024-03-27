@@ -67,6 +67,9 @@ import { ShareEventComponent } from './components/event/grid-view-ui/past-event/
 import { OnGoingEventComponent } from './components/event/grid-view-ui/on-going-event/on-going-event.component';
 import { UpComingEventComponent } from './components/event/grid-view-ui/up-coming-event/up-coming-event.component';
 import { PastEventComponent } from './components/event/grid-view-ui/past-event/past-event.component';
+import { OngoingEventListComponent } from './components/event/list-view-ui/ongoing-event-list/ongoing-event-list.component';
+import { UpcomingEventsListComponent } from './components/event/list-view-ui/upcoming-events-list/upcoming-events-list.component';
+import { PastEventsListComponent } from './components/event/list-view-ui/past-events-list/past-events-list.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -124,7 +127,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         OnGoingEventDetailComponent,
         UpComingEventDetilComponent,
         EventPreviewComponent,
-        ActiveDevicesComponent
+        ActiveDevicesComponent,
+        OngoingEventListComponent,
+        UpcomingEventsListComponent,
+        PastEventsListComponent
     ],
     providers: [
         {

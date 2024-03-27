@@ -57,6 +57,7 @@ void JsonResult::setValue(Json::Value &json, const pqxx::field &field)
         break;
     }
 
+    spdlog::trace("Field name: {}, Field type: {}, Json Value: {}", field.name(), field.type(), Json::FastWriter().write(obj));
     json.append(std::move(obj));
 }
 void JsonResult::setRoot(const pqxx::result &sqlResult, Json::Value &jsonRoot)
