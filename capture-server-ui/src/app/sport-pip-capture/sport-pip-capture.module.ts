@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { SportPipCaptureRoutingModule } from './sport-pip-capture-routing.module';
 import { SportPipCaptureComponent } from './sport-pip-capture.component';
 import { CaptureDashboardComponent } from './components/dashboard/dashboard.component';
@@ -12,9 +11,6 @@ import { ChartsModule } from 'ng2-charts';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { CaptureDashboardPresenter } from './components/dashboard/dashboard.presenter';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { OnGoingEventComponent } from './components/event/on-going-event/on-going-event.component';
-import { UpComingEventComponent } from './components/event/up-coming-event/up-coming-event.component';
-import { PastEventComponent } from './components/event/past-event/past-event.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TruncateWordsPipe } from './pipes/truncate-words.pipe';
 import { CoreSidebarModule } from '@core/components';
@@ -40,13 +36,8 @@ import { PastComponent } from './components/dashboard/event-card/past/past.compo
 import { LineChartComponent } from './components/dashboard/chart-components/line-chart/line-chart.component';
 import { DonutComponent } from './components/dashboard/chart-components/donut/donut.component';
 import { BarChartComponent } from './components/dashboard/chart-components/bar-chart/bar-chart.component';
-import { PastEventViewComponent } from './components/event/past-event/past-event-view/past-event-view.component';
-import { PastEventViewPresenter } from './components/event/past-event/past-event-view/past-event-view.presenter';
 import { PlyrModule } from 'ngx-plyr';
 import { CardSnippetModule } from "../../@core/components/card-snippet/card-snippet.module";
-import { ShareEventComponent } from './components/event/past-event/share-event/share-event.component';
-import { ShareToPeopleComponent } from './components/event/past-event/share-event/component/share-to-people/share-to-people.component';
-import { ShareToSocialComponent } from './components/event/past-event/share-event/component/share-to-social/share-to-social.component';
 import { ConnectionHeaderComponent } from './components/connection/connection-header/connection-header.component';
 import { EventPresenter } from 'app/sport-pip-capture/components/event/event.presenter';
 import { EventComponent } from './components/event/event.component';
@@ -64,8 +55,22 @@ import { MetaTypePresenter } from './components/meta-type/meta-type.presenter';
 import { EventHeaderPresenter } from './components/event/event-header/event-header.presenter';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { OnGoingEventDetailComponent } from './components/event/on-going-event/components/on-going-event-detail/on-going-event-detail.component';
-import { UpComingEventDetilComponent } from './components/event/up-coming-event/up-coming-event-detil/up-coming-event-detil.component';
+import { ShareToPeopleComponent } from './components/event/grid-view-ui/past-event/share-event/component/share-to-people/share-to-people.component';
+import { ShareToSocialComponent } from './components/event/grid-view-ui/past-event/share-event/component/share-to-social/share-to-social.component';
+import { OnGoingEventDetailComponent } from './components/event/grid-view-ui/on-going-event/components/on-going-event-detail/on-going-event-detail.component';
+import { UpComingEventDetilComponent } from './components/event/grid-view-ui/up-coming-event/components/up-coming-event-detil/up-coming-event-detil.component';
+import { EventPreviewComponent } from './components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.component';
+import { ActiveDevicesComponent } from './components/event/grid-view-ui/up-coming-event/components/event-preview/active-devices/active-devices.component';
+import { PastEventViewComponent } from './components/event/grid-view-ui/past-event/past-event-view/past-event-view.component';
+import { PastEventViewPresenter } from './components/event/grid-view-ui/past-event/past-event-view/past-event-view.presenter';
+import { ShareEventComponent } from './components/event/grid-view-ui/past-event/share-event/share-event.component';
+import { OnGoingEventComponent } from './components/event/grid-view-ui/on-going-event/on-going-event.component';
+import { UpComingEventComponent } from './components/event/grid-view-ui/up-coming-event/up-coming-event.component';
+import { PastEventComponent } from './components/event/grid-view-ui/past-event/past-event.component';
+import { OngoingEventListComponent } from './components/event/list-view-ui/ongoing-event-list/ongoing-event-list.component';
+import { UpcomingEventsListComponent } from './components/event/list-view-ui/upcoming-events-list/upcoming-events-list.component';
+import { PastEventsListComponent } from './components/event/list-view-ui/past-events-list/past-events-list.component';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -120,7 +125,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MetaTypePresenter,
         EventHeaderPresenter,
         OnGoingEventDetailComponent,
-        UpComingEventDetilComponent
+        UpComingEventDetilComponent,
+        EventPreviewComponent,
+        ActiveDevicesComponent,
+        OngoingEventListComponent,
+        UpcomingEventsListComponent,
+        PastEventsListComponent
     ],
     providers: [
         {

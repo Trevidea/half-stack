@@ -4,7 +4,7 @@
       <app-header-presenter></app-header-presenter>
     </div>
     <div class="col-12">
-      <ul ngbNav #nav="ngbNav" class="nav-tabs"[activeId]="activeTabId" (navChange)="onNavChange($event)" >
+      <ul ngbNav #nav="ngbNav" class="nav-tabs"[(activeId)]="activeTabId" (navChange)="onNavChange($event)" >
         <li  ngbNavItem="ongoingEvent" style="margin-top: 5px;">
           <a ngbNavLink>Ongoing Events</a>
           <ng-template ngbNavContent>
@@ -24,16 +24,16 @@
           </ng-template>
         </li>
         <li class="ml-lg-auto d-flex align-items-center">
-          <button type="button" class="btn btn-flat-secondary  list-button " rippleEffec  >
+          <button type="button" class="btn btn-flat-secondary  list-button " rippleEffec [class.active]="!gridView" >
             <h4 class="m-0"><i class="bi bi-list" style="font-size: 1.5rem;"></i></h4>
           </button>
         </li>
         <li class=" d-flex align-items-center mr-1 ml-0.5">
-          <button type="button" class="btn btn-flat-secondary  grid-button ">
+          <button type="button" class="btn btn-flat-secondary  grid-button "  [class.active]="gridView">
             <h4 class="m-0"><i class="bi bi-grid"></i></h4>
           </button>
         </li>
-        <li class="d-flex align-items-center" [class.active]="gridView">
+        <li class="d-flex align-items-center" *ngIf="activeTabId=='upcomingEvents'">
           <button type="button" class="btn  btn-outline-secondary" rippleEffect>Sync Events</button>
         </li>
 

@@ -1,0 +1,101 @@
+.preview-container {
+
+    .back-button {
+
+        .btn-warning {
+            border-color: #fff !important;
+            background-color: #fff !important;
+            color: #0D0D0D !important;
+
+            &:hover {
+                box-shadow: 0 0.5rem 1rem #EDEDED !important;
+            }
+        }
+
+    }
+
+    .time-countdown-box {
+        font-size: 16px;
+        width: 100%;
+        padding-right:10px ;
+        .time-box {
+            border-radius: 12px;
+            background-color: #21609333;
+            padding: 14px;
+        }
+
+        .large {
+            font-family: 'Outfit';
+            font-size: 24px;
+            font-weight: 400;
+            text-align: left;
+            margin-bottom: 0;
+        }
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        box-shadow: none !important;
+        overflow: hidden;
+    }
+
+    .card-text {
+        font-family: 'Outfit';
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    .card-title-box {
+        padding: 14px 14px 0px 28px;
+    }
+
+    .row {
+        flex: 1;
+    }
+
+    .col-lg-8 {
+        height: 100%;
+    }
+
+    .highlight-box {
+        background-color: #F2F5F8;
+    }
+
+    .list-group-item {
+        position: relative;
+        display: block;
+        padding: 0.75rem 2rem;
+        background-color: transparent;
+        border-top: 0.5px solid var(#E7E7E7);
+
+    }
+}
+
+
+.dark-layout {
+    .highlight-box {
+        background-color: #272727 !important;
+    }
+
+    .back-button {
+
+        .btn-warning {
+            border-color: #232323 !important;
+            background-color: #232323 !important;
+            color: #fff !important;
+
+            &:hover {
+                box-shadow: 0 0.5rem 1rem #232323 !important;
+            }
+        }
+
+    }
+
+    .list-group-item {
+        background-color: #272727 !important;
+        border-top: 0.5px solid var(#E7E7E7);
+    }
+
+}
