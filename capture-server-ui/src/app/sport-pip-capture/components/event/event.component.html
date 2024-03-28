@@ -1,66 +1,61 @@
 <div class="card event-warepper ">
-  <div class="row">
-    <div class="col-12">
-      <app-header-presenter></app-header-presenter>
-    </div>
-    <div class="col-12">
-      <ul ngbNav #nav="ngbNav" class="nav-tabs"[(activeId)]="activeTabId" (navChange)="onNavChange($event)" >
-        <li  ngbNavItem="ongoingEvent" style="margin-top: 5px;">
-          <a ngbNavLink>Ongoing Events</a>
-          <ng-template ngbNavContent>
-            <app-on-going-event [datasource]="datasource.ongoingEvent"></app-on-going-event>
-          </ng-template>
-        </li>
-        <li ngbNavItem="upcomingEvents" style="margin-top: 5px;">
-          <a ngbNavLink>Upcoming Events</a>
-          <ng-template ngbNavContent>
-            <app-up-coming-event [datasource]="datasource"></app-up-coming-event>
-          </ng-template>
-        </li>
-        <li ngbNavItem="pastEvents" style="margin-top: 5px;">
-          <a ngbNavLink>Past Events</a>
-          <ng-template ngbNavContent>
-            <app-past-event [datasource]="datasource.pastEvent"></app-past-event>
-          </ng-template>
-        </li>
-        <li class="ml-lg-auto d-flex align-items-center">
-          <button type="button" class="btn btn-flat-secondary  list-button " rippleEffec [class.active]="!gridView" >
-            <h4 class="m-0"><i class="bi bi-list" style="font-size: 1.5rem;"></i></h4>
-          </button>
-        </li>
-        <li class=" d-flex align-items-center mr-1 ml-0.5">
-          <button type="button" class="btn btn-flat-secondary  grid-button "  [class.active]="gridView">
-            <h4 class="m-0"><i class="bi bi-grid"></i></h4>
-          </button>
-        </li>
-        <li class="d-flex align-items-center" *ngIf="activeTabId=='upcomingEvents'">
-          <button type="button" class="btn  btn-outline-secondary" rippleEffect>Sync Events</button>
-        </li>
+  <div class="card-header bg-transparent p-0">
+    <app-header-presenter style="width: 100%;"></app-header-presenter>
+  </div>
+  <div class="card-body bg-transparent p-0">
+    <ul ngbNav #nav="ngbNav" class="nav-tabs" [(activeId)]="activeTabId" (navChange)="onNavChange($event)">
+      <li ngbNavItem="ongoingEvent" style="margin-top: 5px;">
+        <a ngbNavLink>Ongoing Events</a>
+        <ng-template ngbNavContent>
+          <app-on-going-event [datasource]="datasource.ongoingEvent" *ngIf="gridView"></app-on-going-event>
+          <app-ongoing-event-list *ngIf="!gridView"></app-ongoing-event-list>
+        </ng-template>
+      </li>
 
-        <li class="ml-1 d-flex align-items-center">
-          <button type="button" class="btn btn-primary  on-demand-btn " rippleEffect (click)="CreateOnDemandEvent()">
-            <i class="bi bi-plus-circle-fill "></i> Create On-Demand Event
-          </button>
-        </li>
-      </ul>
-      <div [ngbNavOutlet]="nav"></div>
+      <li ngbNavItem="upcomingEvents" style="margin-top: 5px;">
+        <a ngbNavLink>Upcoming Events</a>
+        <ng-template ngbNavContent>
+          <app-up-coming-event [datasource]="datasource" *ngIf="gridView"></app-up-coming-event>
+          <app-upcoming-events-list *ngIf="!gridView"></app-upcoming-events-list>
+        </ng-template>
+      </li>
 
-    </div>
-    <div class="col-12">
-      <div class="btn-group m-2">
-        <div ngbDropdown>
-          <button ngbDropdownToggle class="btn btn-outline-dark cus-btn-sm" type="button" id="dropdownMenuButton700"
-            rippleEffect>
-            10
-          </button>
-          <div ngbDropdownMenu aria-labelledby="dropdownMenuButton700">
-            <a ngbDropdownItem href="javascript:void(0)">10</a>
-            <a ngbDropdownItem href="javascript:void(0)">20</a>
-            <a ngbDropdownItem href="javascript:void(0)">30</a>
-          </div>
-        </div>
-      </div>
-    </div>
+      <li ngbNavItem="pastEvents" style="margin-top: 5px;">
+        <a ngbNavLink>Past Events</a>
+        <ng-template ngbNavContent>
+          <app-past-event [datasource]="datasource.pastEvent" *ngIf="gridView"></app-past-event>
+          <app-past-events-list *ngIf="!gridView"></app-past-events-list>
+        </ng-template>
+      </li>
+
+      <li class="ml-lg-auto d-flex align-items-center">
+        <button type="button" class="btn btn-flat-secondary  list-button " rippleEffec [class.active]="!gridView"
+          (click)="changeViewMode()">
+          <h4 class=" m-0"><i class="bi bi-list" style="font-size: 1.5rem;"></i></h4>
+        </button>
+      </li>
+
+      <li class=" d-flex align-items-center mr-1 ml-0.5">
+        <button type="button" class="btn btn-flat-secondary  grid-button " [class.active]="gridView"
+          (click)="changeViewMode()">
+          <h4 class="m-0"><i class="bi bi-grid"></i></h4>
+        </button>
+      </li>
+
+      <li class="d-flex align-items-center" *ngIf="activeTabId=='upcomingEvents'">
+        <button type="button" class="btn  btn-outline-secondary" rippleEffect>Sync Events</button>
+      </li>
+
+      <li class="ml-1 d-flex align-items-center">
+        <button type="button" class="btn btn-primary  on-demand-btn " rippleEffect (click)="CreateOnDemandEvent()">
+          <i class="bi bi-plus-circle-fill "></i> Create On-Demand Event
+        </button>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
+  </div>
+  <div class="card-footer bg-transparent p-1">
+    <app-event-pagination></app-event-pagination>
   </div>
 
 </div>

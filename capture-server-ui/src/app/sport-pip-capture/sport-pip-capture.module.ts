@@ -70,6 +70,8 @@ import { PastEventComponent } from './components/event/grid-view-ui/past-event/p
 import { OngoingEventListComponent } from './components/event/list-view-ui/ongoing-event-list/ongoing-event-list.component';
 import { UpcomingEventsListComponent } from './components/event/list-view-ui/upcoming-events-list/upcoming-events-list.component';
 import { PastEventsListComponent } from './components/event/list-view-ui/past-events-list/past-events-list.component';
+import { MenuButtonComponent } from './components/event/event-utility/menu-button/menu-button.component';
+import { EventPaginationComponent } from './components/event-pagination/event-pagination.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -130,7 +132,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ActiveDevicesComponent,
         OngoingEventListComponent,
         UpcomingEventsListComponent,
-        PastEventsListComponent
+        PastEventsListComponent,
+        MenuButtonComponent,
+        EventPaginationComponent
     ],
     providers: [
         {

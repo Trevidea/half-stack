@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   hmr: false,
-  spModelUrl:'http://localhost:3000/api'
+  spModelUrl:'http://localhost:3000/api',
+  pgUrl:'http://drake.in:1437/api'
 };
 
 /*

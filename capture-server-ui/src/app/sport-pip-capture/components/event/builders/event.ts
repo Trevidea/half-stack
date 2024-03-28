@@ -4,30 +4,31 @@ import { EventRange, OngoingEventView, PastEventView, UpcomingEventView } from "
 import { Transformer } from "app/blocks/transformer";
 
 
-export class EventRangeBuilder extends AbstractBuilder<Data.Event,OngoingEventView>{
+export class EventRangeBuilder extends AbstractBuilder<Data.Event, OngoingEventView>{
     compose(m: Data.Event, v: OngoingEventView) {
-       
-        v.id = m.id,
-        v.dttEvent = m.dttEvent;
+        console.log("Model (m):", m.dtevent);
+        v.id = m.id;
+        v.dttEvent = m.dtevent;
         v.level = m.level;
         v.onPremise = m.onPremise;
         v.program.SelectedItem = m.program;
         v.sport = m.sport;
         v.status = m.status;
         v.title = m.title;
-        v.detail.cityAddress = m.detail[0].streetAdress;
-        v.detail.streetAdress = m.detail[0].cityAddress;
-        v.detail.type = m.detail[0].type;
+        v.detail.cityAddress = m.detail.cityAddress;
+        v.detail.streetAdress = m.detail.streetAdress;
+        v.detail.type = m.detail.type;
         v.year = m.year;
-        v.venue.location = m.venue[0].location;
-        v.time = m.time
-        
+        v.venue.location = m.venue.location;
+        v.time = m.time;
+
+        console.log("View (v):", v);
     }
     decompose(v: OngoingEventView): Data.Event {
         throw new Error("Method not implemented.");
     }
     view(): OngoingEventView {
-       return new OngoingEventView()
+        return new OngoingEventView()
     }
 
 }
@@ -36,8 +37,8 @@ export class EventRangeBuilder extends AbstractBuilder<Data.Event,OngoingEventVi
 export class UpcomingEventBuilder extends AbstractBuilder<Data.Event, UpcomingEventView>{
     compose(m: Data.Event, v: UpcomingEventView) {
         console.log(v.year)
-        v.id = m.id,
-        v.dttEvent = m.dttEvent;
+        v.id = m.id;
+        v.dttEvent = m.dtevent;
         v.level = m.level;
         v.onPremise = m.onPremise;
         v.program.SelectedItem = m.program;
@@ -50,10 +51,10 @@ export class UpcomingEventBuilder extends AbstractBuilder<Data.Event, UpcomingEv
         v.year = m.year;
         v.venue.location = m.venue[0].location
         v.time = m.time
-       
+
     }
     decompose(v: UpcomingEventView): Data.Event {
-       return
+        return
     }
     view(): UpcomingEventView {
         return new UpcomingEventView()
@@ -62,24 +63,24 @@ export class UpcomingEventBuilder extends AbstractBuilder<Data.Event, UpcomingEv
 // UpcomingEventBuilder
 export class PastEventBuilder extends AbstractBuilder<Data.Event, PastEventView>{
     compose(m: Data.Event, v: PastEventView) {
-     
-     v.id = m.id,
-     v.dttEvent = m.dttEvent;
-     v.level = m.level;
-     v.onPremise = m.onPremise;
-     v.program.SelectedItem = m.program;
-     v.sport = m.sport;
-     v.status = m.status;
-     v.title = m.title;
-     v.detail.cityAddress = m.detail[0].streetAdress;
-     v.detail.streetAdress = m.detail[0].cityAddress;
-     v.venue.location = m.venue[0].location;
-     v.detail.type = m.detail[0].type;
-     v.year = m.year;
-     v.time = m.time
+
+        v.id = m.id;
+        v.dttEvent = m.dtevent;
+        v.level = m.level;
+        v.onPremise = m.onPremise;
+        v.program.SelectedItem = m.program;
+        v.sport = m.sport;
+        v.status = m.status;
+        v.title = m.title;
+        v.detail.cityAddress = m.detail[0].streetAdress;
+        v.detail.streetAdress = m.detail[0].cityAddress;
+        v.venue.location = m.venue[0].location;
+        v.detail.type = m.detail[0].type;
+        v.year = m.year;
+        v.time = m.time
     }
     decompose(v: PastEventView): Data.Event {
-       return
+        return
     }
     view(): PastEventView {
         return new PastEventView()

@@ -32,17 +32,17 @@ export class EventData extends DataBase<Data.Event>{
         this._model.year = v;
     }
 
-    public get dttEvent(): string {
-        return this._model.dttEvent;
+    public get dtevent(): string {
+        return this._model.dtevent;
     }
-    public set dttEvent(v: string) {
-        this._model.dttEvent = v;
+    public set dtevent(v: string) {
+        this._model.dtevent = v;
     }
     
-    public get venue() : Data.Venue[] {
+    public get venue() : Data.Venue {
         return this._model.venue;
     }
-    public set venue(v : Data.Venue[]) {
+    public set venue(v : Data.Venue) {
         this._model.venue = v;
     }
     
@@ -53,10 +53,10 @@ export class EventData extends DataBase<Data.Event>{
     this._model.onPremise = v;
    }
    
-   public get detail() : Data.EventDetail[] {
+   public get detail() : Data.EventDetail {
     return this._model.detail;
    }
-   public set detail(v : Data.EventDetail[]) {
+   public set detail(v : Data.EventDetail) {
     this._model.detail = v;
    }
      
@@ -74,13 +74,6 @@ export class EventData extends DataBase<Data.Event>{
     this._model.status = v;
    }
   
-//    public get status() : Data.Status {
-//     return this._model.status;
-//    }
-//    public set status(v : Data.Status) {
-//     this._model.status = v;
-//    }
-   
    
    private _event : Data.Event[];
    public get event() : Data.Event[] {
@@ -90,11 +83,7 @@ export class EventData extends DataBase<Data.Event>{
    public set event(v : Data.Event[]) {
     this._model.event = v;
    }
-   /*
-   meridiem, time
-   */
-  
-  private _dayHalve : string;
+ 
   public get dayHalve() : string {
     return this._model.dayHalve;
   }
@@ -102,8 +91,6 @@ export class EventData extends DataBase<Data.Event>{
     this._model.dayHalve = v;
   }
   
-  
-  private _time : string;
   public get time() : string {
     return this._model.time;
   }

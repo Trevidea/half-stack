@@ -1,5 +1,5 @@
 .grid-view {
-    padding: 0;
+    padding:12px 24px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     gap: 1rem;
@@ -16,6 +16,7 @@
 
         .card-text-style {
             width: 100%;
+
             h4 {
                 font-size: 14px;
             }
@@ -119,42 +120,18 @@
 .Progress {
     background: rgba(254, 246, 231, 1);
     border-radius: 10px 10px 0px 0px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 25px;
-
-    .Progress-text {
-        padding: 9px;
-        color: var(--text, #000);
-        font-family: 'Outfit';
-        font-size: 13px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-    }
+    width: 100%;
+    padding: 6px;
+    color: var(--text, #000);
+    font-size: 13px;
+    font-weight: 400;
 }
-
-
+ 
 .menu-container {
-    position: absolute;
-    bottom: 77%;
-    right: 10px;
-
-    .btn-sm,
-    .btn-group-sm>.btn {
-        padding: 0.486rem 12px !important;
-    }
-
-    .menuitem-but {
-        width: 18px;
-        height: 25px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 7px;
-        background: rgba(248, 248, 248, 1);
-    }
-
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-top: 3px;
+    padding-right: 5px;
+    width: 100%;
 }

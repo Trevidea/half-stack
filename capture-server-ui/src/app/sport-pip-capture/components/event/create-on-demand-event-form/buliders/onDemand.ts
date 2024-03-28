@@ -11,7 +11,7 @@ export class OnDemandFormBuilder extends AbstractBuilder<Data.Event, OnDemandEve
         v.title = m.title;
         v.detail.cityAddress = m.detail[0].streetAdress;
         v.detail.streetAdress = m.detail[0].cityAddress;
-        v.dttEvent = m.dttEvent;
+        v.dttEvent = m.dtevent;
         v.levels.SelectedItem = m.level;
         v.dayHalve.SelectedItem = m.dayHalve;
         v.onPromise = false;
@@ -37,15 +37,15 @@ export class OnDemandFormBuilder extends AbstractBuilder<Data.Event, OnDemandEve
         return {
             id: v.id,
             title: v.title,
-            detail: newDetal,
-            dttEvent: v.dttEvent,
+            // detail: newDetal,
+            dtevent: v.dttEvent,
             level: v.levels.SelectedItem,
             dayHalve: v.dayHalve.SelectedItem,
             onPremise: false,
             program: v.programs.SelectedItem,
             sport: v.sports.SelectedItem,
             time: v.time,
-            venue: newVenu,
+            // venue: newVenu,
             status:"upcoming-events",
             
         }
@@ -69,7 +69,7 @@ export class VenueBuilder extends AbstractBuilder<Data.Event, OnDemandEventFormV
         ve.push(v.venue[0].location)
         return {
             id: v.id,
-            venue: ve as []
+            // venue: ve as []
         }
     }
     view(): OnDemandEventFormView {

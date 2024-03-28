@@ -28,8 +28,8 @@ export class OnGoingEventComponent implements OnInit {
   updateCountdownTimers() {
     const currentDateTime = this.getCurrentDateTime();
     this.datasource.forEach((event, index) => {
-      const eventDateTime = new Date(event.dttEvent + 'T' + event.time);
-      const timeDifference = currentDateTime.getTime() - eventDateTime.getTime();
+      const eventDateTime = new Date(event.dttEvent +'T'+'10:00:00');
+      const timeDifference = eventDateTime.getTime() - currentDateTime.getTime();
       if (timeDifference > 0) {
         const hours = Math.floor(timeDifference / (1000 * 60 * 60));
         const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));

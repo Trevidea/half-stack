@@ -18,15 +18,14 @@ export namespace Data {
         email: string,
     }
     export interface Event extends Base {
-
         sport?: string,
         level?: string,
         program?: string,
         year?: number,
-        dttEvent?: string,
-        venue?: Venue[],
+        dtevent?: string,
+        venue?: Venue,
         onPremise?: boolean,
-        detail?: EventDetail[],
+        detail?: EventDetail,
         title?: string,
         status?: string,
         dayHalve?: string,
@@ -41,13 +40,10 @@ export namespace Data {
     // }
 
     export interface EventDetail extends Base {
-
         streetAdress: string;
         cityAddress: string;
         type: string;
-
-
-
+    
     }
 
     export interface Venue extends Base {
