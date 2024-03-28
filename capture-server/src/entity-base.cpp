@@ -381,7 +381,6 @@ void EntityBase::sync(const Request &req, Response &rsp)
                            {
                                Json::FastWriter objectToStringConverter;
                                const auto &converted = objectToStringConverter.write(val);
-                               
                                column["value"] = converted;
                            }
                            else
