@@ -1,11 +1,36 @@
-@import '@core/scss/angular/libs/datatables.component.scss';
+@import "@core/scss/angular/libs/datatables.component.scss";
 
 .datatable-scroll {
   width: auto !important;
 }
-.ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    background-color: #fff !important;
+.ngx-datatable.fixed-header
+  .datatable-header
+  .datatable-header-inner
+  .datatable-header-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: #fff !important;
+}
+.no-wrap-cell th,
+.no-wrap-cell td {
+  white-space: nowrap;
+  // max-width: 200px;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+}
+// .headerTopBoarder th {
+//   // border-top: 1px solid transparent;
+// }
+.sort-chevron-up {
+  position: absolute;
+  margin-top: 6px;
+}
+.icon-rotate {
+  transform: rotate(180deg);
+  transition: all ease-in 0.5s;
+}
+.sort-back {
+  transform: rotate(180deg);
+  transition: all ease-in 0.5s;
 }
