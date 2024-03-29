@@ -11,6 +11,7 @@ class Team : public EntityBase
 {
 public:
     Team();
+    void report();
 
     // Getter and setter functions for Team properties
     int getId() const
@@ -45,35 +46,11 @@ public:
         this->m_model.set("logo", logo);
     }
 
-    const std::string &getCreatedAt() const
-    {
-        return this->createdAt;
-    }
-
-    void setCreatedAt(const std::string &createdAt)
-    {
-        this->createdAt = createdAt;
-        this->m_model.set("createdAt", createdAt);
-    }
-
-    const std::string &getState() const
-    {
-        return this->state;
-    }
-
-    void setState(const std::string &state)
-    {
-        this->state = state;
-        this->m_model.set("state", state);
-    }
-
 private:
     // Member variables
     int id;
     std::string name;
     std::string logo;
-    std::string createdAt;
-    std::string state;
 };
 
 #endif // TEAM_H
