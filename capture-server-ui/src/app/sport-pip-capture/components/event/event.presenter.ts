@@ -21,10 +21,10 @@ export class EventPresenter implements OnInit {
   }
 
   ngOnInit(): void {
-    Transformer.ComposeCollectionAsync(this.service.eventJson(), this.ds.ongoingEvent, EventRangeBuilder);
+    // Transformer.ComposeCollectionAsync(this.service.eventJson(), this.ds.ongoingEvent, EventRangeBuilder);
     // let data= this.service.eventJson();
     console.log(this.ds.ongoingEvent)
-    // Transformer.ComposeCollectionAsync(this.dataFactory.ongoingEventJson(), this.ds.ongoingEvent, EventRangeBuilder);
+    Transformer.ComposeCollectionAsync(this.dataFactory.ongoingEventJson(), this.ds.ongoingEvent, EventRangeBuilder);
     Transformer.ComposeCollectionAsync(this.dataFactory.UpCommingEventJson(), this.ds.upcomingEvent, UpcomingEventBuilder);
     Transformer.ComposeCollectionAsync(this.dataFactory.PastEventJson(), this.ds.pastEvent, PastEventBuilder);
   }

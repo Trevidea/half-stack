@@ -16,22 +16,22 @@ export class UpComingEventComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.datasource.upcomingEvent.forEach((event, index) => {
-      const [year,month,day] = event.dttEvent.split('-').map(Number);
-      const [hours, minutes] = event.time.split(':').map(Number);
-      const targetDate = new Date(year, month - 1, day, hours, minutes);
+    // this.datasource.upcomingEvent.forEach((event, index) => {
+    //   const [year,month,day] = event.dttEvent.split('-').map(Number);
+    //   const [hours, minutes] = event.time.split(':').map(Number);
+    //   const targetDate = new Date(year, month - 1, day, hours, minutes);
 
-      this.startCountdown(targetDate, index);
-    });
-    setInterval(() => {
-      this.datasource.upcomingEvent.forEach((event, index) => {
-        const [year,month,day] = event.dttEvent.split('-').map(Number);
-        const [hours, minutes] = event.time.split(':').map(Number);
-        const targetDate = new Date(year, month - 1, day, hours, minutes);
+    //   this.startCountdown(targetDate, index);
+    // });
+    // setInterval(() => {
+    //   this.datasource.upcomingEvent.forEach((event, index) => {
+    //     const [year,month,day] = event.dttEvent.split('-').map(Number);
+    //     const [hours, minutes] = event.time.split(':').map(Number);
+    //     const targetDate = new Date(year, month - 1, day, hours, minutes);
 
-        this.updateCountdown(targetDate, index);
-      });
-    }, 1000);
+    //     this.updateCountdown(targetDate, index);
+    //   });
+    // }, 1000);
   }
   countdowns: string[] = [];
   startCountdown(targetDate: Date, index: number) {
