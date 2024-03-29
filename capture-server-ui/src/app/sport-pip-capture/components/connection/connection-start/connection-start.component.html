@@ -277,8 +277,109 @@
       </div>
     </div>
   </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr class="text-nowrap">
+          <th scope="col">Action</th>
+          <th scope="col">User</th>
+          <th scope="col">Location</th>
+          <th scope="col">Device ID</th>
+
+          <th scope="col">Device Type</th>
+          <th scope="col">Network</th>
+          <th scope="col">Quality</th>
+          <th scope="col">IP Address</th>
+
+          <th scope="col">Transmit Status</th>
+          <th scope="col">Received</th>
+          <th scope="col">Retries</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="text-nowrap" *ngFor="let item of eventConnection">
+          <th>
+            <div class="d-flex align-items-center">
+              <div ngbDropdown container="body">
+                <a
+                  ngbDropdownToggle
+                  href="javascript:void(0);"
+                  class="hide-arrow"
+                  id="dropdownBrowserState"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i
+                    data-feather="more-vertical"
+                    class="text-secondary cursor-pointer mr-50"
+                  ></i>
+                </a>
+                <div
+                  ngbDropdownMenu
+                  class="dropdown-menu-right"
+                  aria-labelledby="dropdownBrowserState"
+                >
+                  <a
+                    href="javascript:void(0)"
+                    ngbDropdownItem
+                    class="d-flex align-items-center"
+                    ><i data-feather="file-text" class="mr-50"></i> View
+                    Stream</a
+                  >
+                  <a
+                    href="javascript:void(0)"
+                    ngbDropdownItem
+                    class="d-flex align-items-center"
+                    ><i data-feather="archive" class="mr-50"></i> Pause</a
+                  >
+                  <a
+                    href="javascript:void(0)"
+                    ngbDropdownItem
+                    class="d-flex align-items-center"
+                    ><i data-feather="archive" class="mr-50"></i> Block</a
+                  >
+                  <a
+                    href="javascript:void(0)"
+                    ngbDropdownItem
+                    class="d-flex align-items-center"
+                    ><i data-feather="archive" class="mr-50"></i> Stream<i
+                      data-feather="archive"
+                      class="ml-50"
+                    ></i
+                  ></a>
+
+                  <a
+                    href="javascript:void(0)"
+                    ngbDropdownItem
+                    class="d-flex align-items-center"
+                    ><i data-feather="trash-2" class="mr-50"></i> Delete</a
+                  >
+                </div>
+              </div>
+            </div>
+          </th>
+          <td>{{ item.user }}</td>
+          <td>{{ item.location }}</td>
+          <td>{{ item.deviceId }}</td>
+
+          <th>{{ item.deviceType }}</th>
+          <td>{{ item.network }}</td>
+          <td>{{ item.quality }}</td>
+          <td>{{ item.ipAdderss }}</td>
+
+          <th>{{ item.transmitStatus }}</th>
+          <td>{{ item.received }}</td>
+          <td>{{ item.retries }}</td>
+          <td><i class="bi bi-grid-3x2-gap-fill"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-<!-- <div class="card">
+<!-- EventConnection <div class="card">
   <div class="mb-2 mt-2">
     <app-connection-header></app-connection-header>
 
