@@ -118,7 +118,10 @@
     "unordered_set": "cpp",
     "variant": "cpp",
     "algorithm": "cpp",
-    "functional": "cpp"
+    "functional": "cpp",
+    "ranges": "cpp",
+    "version": "cpp",
+    "*.inc": "cpp"
   },
   "cmake.sourceDirectory": "C:/git/half-stack/capture-server/api"
 }
