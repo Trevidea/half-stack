@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { combineAll, combineLatest, concat, map, mergeMap, Observable, of, switchMap } from "rxjs";
-import { environment } from "src/environments/environment";
+import { Injectable } from "@angular/core";
+import { environment } from "environments/environment";
+import { Observable, combineLatest, of } from "rxjs";
+import { map } from "rxjs/operators";
 
 export interface Template {
   field: string,
@@ -11,7 +12,7 @@ export interface Template {
   providedIn: 'root'
 })
 export class AdapterService {
-  private modelsServerUrl: string = environment.modelsUrl;
+  private modelsServerUrl: string = environment.spModelUrl;
   templateMap: { [resource: string]: { [field: string]: number } } = {};
 
   read(type: string): Observable<any> {

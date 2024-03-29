@@ -1,0 +1,9 @@
+.table {
+    thead,
+    tfoot {
+        th {
+            // color: var(--text, #000);
+            border-top: none !important;
+        }
+    }
+}

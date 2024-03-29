@@ -1,24 +1,17 @@
-<div class="grid-view p-1">
+<div class="grid-view">
   <div class="card custom-card" *ngFor="let item of datasource">
     <!-- <img class="img-fluid" src="../../../../../assets/images/pip-image/card-image.png" alt="Card image cap" /> -->
     <div class="card-img">
       <img class="left img-fluid" src="assets/images/pip-image/400-300/130-130/fairport.png" />
       <img class="right img-fluid" src="assets/images/pip-image/400-300/130-130/mcquaid.png" />
     </div>
-    <div class="p-0 d-flex align-items-center Progress">
-      <h6 class=" m-0 Progress-text">In Progress in {{ item?.countdown }}</h6>
-    </div>
-    <div class="menu-container">
-      <a ngbDropdown>
-        <button class="btn btn-sm btn-light menuitem-but" id="menuDropdown" ngbDropdownToggle>
-          <i class="bi bi-three-dots-vertical" style="font-size: 1.3rem"></i>
-        </button>
-        <div ngbDropdownMenu aria-labelledby="menuDropdown">
-          <button class="dropdown-item">
-            <i [data-feather]="'trash'" [size]="16"></i> Remove Event
-          </button>
-        </div>
-      </a>
+    <div class="card-img-overlay p-0 d-flex flex-column" style="height: 100px;">
+      <div class="d-flex align-items-center Progress" *ngIf="item.countdown">
+        Starts in {{item?.countdown}}
+      </div>
+      <div class="menu-container">
+        <app-menu-button></app-menu-button>
+      </div>
     </div>
     <div class="card-body pt-1 pb-0 custom-card-body">
       <div class="row">
@@ -45,8 +38,10 @@
           <h4 class="ellipsis">{{item.title}}</h4>
           <p class="card-text">
             <i class="feather" data-feather="clock"></i>
-            {{ item.dttEvent | date }} {{ item.time | timeFormat }}{{ " , "
-            }}{{ item.level }}
+            <!-- {{ item.dtEvent | date }} {{ item.time | timeFormat }}{{ " , "
+            }}{{ item.level }} -->
+            {{ item.dttEvent | date }}{{ " , "
+          }}{{ item.level }}
           </p>
           <p class="card-text">
             <i class="feather" data-feather="map-pin"></i>

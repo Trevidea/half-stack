@@ -5,7 +5,6 @@
 
 JsonResult::JsonResult(const pqxx::result &result) : m_result{result}
 {
-    
 }
 
 JsonResult::~JsonResult()
@@ -27,28 +26,42 @@ void JsonResult::setValue(Json::Value &json, const pqxx::field &field)
     case 19:
     case 25:
     case 114:
-    case 1043:  // var char
-        if(field.is_null())
-            obj["value"] =  Json::nullValue;
-        else 
-            obj["value"] =  field.as<std::string>();
-        
+    case 1043: // var char
+        if (field.is_null())
+            obj["value"] = Json::nullValue;
+        else
+            obj["value"] = field.as<std::string>();
+
         obj["type"] = 1;
         break;
-    case 700:   //real
-    case 1700:  // double
+    case 700:  // real
+    case 1700: // double
         obj["value"] = field.is_null() ? Json::nullValue : field.as<float>();
         obj["type"] = 2;
         break;
-    case 16:    // bool
+    case 16: // bool
         obj["value"] = field.is_null() ? Json::nullValue : field.as<bool>();
         obj["type"] = 3;
         break;
-    case 1082:  // date
-        if(field.is_null())
-            obj["value"] =  Json::nullValue;
-        else 
-            obj["value"] =  field.as<std::string>();
+    case 1114:
+    case 1082: // date
+        if (field.is_null())
+            obj["value"] = Json::nullValue;
+        else
+            obj["value"] = field.as<std::string>();
+        obj["type"] = 4;
+        break;
+    case 3802: // json
+        if (field.is_null())
+            obj["value"] = Json::nullValue;
+        else
+        {
+            const auto &strVal = field.as<std::string>();
+            Json::Value jsVal;
+            Json::Reader reader;
+            reader.parse(strVal, jsVal);
+            obj["value"] = jsVal;
+        }
         obj["type"] = 4;
         break;
 

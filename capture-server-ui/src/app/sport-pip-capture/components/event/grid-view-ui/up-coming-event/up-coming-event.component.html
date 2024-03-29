@@ -1,19 +1,12 @@
-<div class="grid-view p-1">
+<div class="grid-view">
   <div class="card custom-card" *ngFor="let item of datasource.upcomingEvent">
     <img class="img-fluid" src="../../../../../assets/images/pip-image/card-image.png" alt="Card image cap" />
-    <div class="p-0 d-flex align-items-center Progress">
-      <h6 class=" m-0 Progress-text">
+    <div class="card-img-overlay p-0 d-flex flex-column" style="height: 100px;">
+      <div class="d-flex align-items-center Progress">
         Starts in {{item.countdown}}
-      </h6>
-    </div>
-    <div class="menu-container">
-      <div ngbDropdown>
-        <button class="btn btn-sm btn-light menuitem-but" id="menuDropdown" ngbDropdownToggle>
-          <i class="bi bi-three-dots-vertical" style="font-size: 1.3rem;"></i>
-        </button>
-        <div ngbDropdownMenu aria-labelledby="menuDropdown">
-          <button class="dropdown-item"><i [data-feather]="'trash'" [size]="16"></i> Remove Event</button>
-        </div>
+      </div>
+      <div class="menu-container">
+        <app-menu-button></app-menu-button>
       </div>
     </div>
     <div class="card-body pt-1 pb-0 custom-card-body">
@@ -31,7 +24,8 @@
             (click)="AddEvent('on-demand-event-sidebar',item)" rippleEffect>
             View
           </button>
-          <button type="button" class="btn btn-warning  btn-sm card-buttons " style="box-shadow: none;" routerLink="/event/event-preview">
+          <button type="button" class="btn btn-warning  btn-sm card-buttons " style="box-shadow: none;"
+            routerLink="/event/event-preview">
             Preview
           </button>
         </div>
@@ -39,8 +33,8 @@
           <h4 class="ellipsis">{{item.title}} </h4>
           <p class="card-text ellipsis">
             <i class="feather" data-feather="clock"></i>
-            {{ item.dttEvent | date }} {{ item.time | timeFormat }}{{ " , "
-            }}{{ item.level }}
+            <!-- {{ item.dttEvent | date }} {{ item.time | timeFormat }}{{ " , "
+            }}{{ item.level }} -->
           </p>
           <p class="card-text ellipsis">
             <i class="feather" data-feather="map-pin"></i>

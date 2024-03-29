@@ -92,6 +92,7 @@ export class EventRange implements Views.Datasource {
 }
 export class OngoingEventView implements Views.Datasource {
     private _id: number;
+    v: {};
     public get id(): number {
         return this._id;
     }
