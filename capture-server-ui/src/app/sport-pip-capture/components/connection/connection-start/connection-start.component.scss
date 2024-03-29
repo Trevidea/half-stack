@@ -1,52 +1,76 @@
-
-.cust-button{
-  display: flex;
-  align-items: center;
-}
-.badge {
-  padding: 5px 10px;
-}
-.cus-columns-gap {
-  font-size: 19px;
-  cursor: pointer;
-}
-.cus-columns-gap:hover {
-  background-color: rgba(240, 240, 240, 1);
-}
-.cus-bi-list {
-  font-size: 25px;
-  cursor: pointer;
-}
-.cus-bi-list:hover {
-  background-color: rgba(240, 240, 240, 1);
-}
-.table:not(.table-dark):not(.table-light) thead:not(.thead-dark) th, .table:not(.table-dark):not(.table-light) tfoot:not(.thead-dark) th {
-    background-color: #fff;
-}
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-
+.custom-bi-pause-circle {
+  color: rgba(33, 96, 147, 1);
+  font-size: 20px;
+  margin-right: 0.3em;
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-
+.custom-bi-stop-circle {
+  font-size: 20px;
+  color: rgba(222, 46, 33, 1);
+}
+.custom-earmark {
+  font-size: 28px;
+}
+.custom-tablet {
+  font-size: 40px;
+  color: rgba(33, 96, 147, 1);
+}
+.custom-arrow-down-left {
+  color: rgba(33, 96, 147, 1);
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-
+.custom-camera-video {
+  font-size: 40px;
+  color: rgba(245, 163, 10, 1);
 }
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-
+.custom-arrow-up-right {
+  color: rgba(245, 163, 10, 1);
 }
+/////// old css //////////////////////
+// .cust-button {
+//   display: flex;
+//   align-items: center;
+// }
+// .badge {
+//   padding: 5px 10px;
+// }
+// .cus-columns-gap {
+//   font-size: 19px;
+//   cursor: pointer;
+// }
+// .cus-columns-gap:hover {
+//   background-color: rgba(240, 240, 240, 1);
+// }
+// .cus-bi-list {
+//   font-size: 25px;
+//   cursor: pointer;
+// }
+// .cus-bi-list:hover {
+//   background-color: rgba(240, 240, 240, 1);
+// }
+// .table:not(.table-dark):not(.table-light) thead:not(.thead-dark) th,
+// .table:not(.table-dark):not(.table-light) tfoot:not(.thead-dark) th {
+//   background-color: #fff;
+// }
+// /* Extra small devices (phones, 600px and down) */
+// @media only screen and (max-width: 600px) {
+// }
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
+// /* Small devices (portrait tablets and large phones, 600px and up) */
+// @media only screen and (min-width: 600px) {
+// }
 
-}
-.custom-btn{
-  padding: 5px;
-}
+// /* Medium devices (landscape tablets, 768px and up) */
+// @media only screen and (min-width: 768px) {
+// }
+
+// /* Large devices (laptops/desktops, 992px and up) */
+// @media only screen and (min-width: 992px) {
+// }
+
+// /* Extra large devices (large laptops and desktops, 1200px and up) */
+// @media only screen and (min-width: 1200px) {
+// }
+// .custom-btn {
+//   padding: 5px;
+// }
