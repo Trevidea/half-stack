@@ -376,10 +376,50 @@
 
           <th>{{ item.deviceType }}</th>
           <td>{{ item.network }}</td>
-          <td>{{ item.quality }}</td>
+          <td>
+            <div
+              class="badge badge-pill"
+              [ngClass]="{
+                'badge-light-danger': item.quality === 'Poor',
+                'badge-light-warning': item.quality === 'Fair',
+                'badge-light-info': item.quality === 'Good',
+                'badge-light-success': item.quality === 'Excellent'
+              }"
+            >
+              {{ item.quality }}
+            </div>
+          </td>
           <td>{{ item.ipAdderss }}</td>
 
-          <th>{{ item.transmitStatus }}</th>
+          <th>
+            <div class="d-flex">
+              <span>
+                <i
+                  *ngIf="item.transmitStatus == 'Streaming'"
+                  data-feather="arrow-up-right"
+                  class="text-warning"
+                ></i>
+                <i
+                  *ngIf="item.transmitStatus == 'Receiving'"
+                  data-feather="arrow-down-left"
+                  class="text-primary"
+                ></i>
+                <i
+                  *ngIf="item.transmitStatus == 'Paused'"
+                  data-feather="pause"
+                  class="text-info"
+                ></i>
+                <i
+                  *ngIf="item.transmitStatus == 'Blocked'"
+                  data-feather="slash"
+                  class="text-danger"
+                ></i>
+              </span>
+              <span style="margin-left: 0.5em">
+                {{ item.transmitStatus }}
+              </span>
+            </div>
+          </th>
           <td>{{ item.received }}</td>
           <td>{{ item.retries }}</td>
           <td><i class="bi bi-grid-3x2-gap-fill"></i></td>
@@ -388,30 +428,26 @@
     </table>
   </div>
 </div>
-<!-- <button class="btn btn-primary" [mcDropdownTriggerFor]="appDropdownWithNested">
-  <i data-feather="file"></i>
-</button> -->
-<span [mcDropdownTriggerFor]="appDropdownWithNested">
-  <i
-    data-feather="more-vertical"
-    class="text-secondary cursor-pointer mr-50"
-  ></i>
-</span>
+
 <mc-dropdown #appDropdownWithNested="mcDropdown">
-  <button mc-dropdown-item>
+  <button mc-dropdown-item (click)="viewStream()">
     <i data-feather="eye" class="mr-50 mb-25"></i> View Stream
   </button>
-  <button mc-dropdown-item>
+  <button mc-dropdown-item (click)="pause()">
     <i data-feather="pause" class="mr-50 mb-25"></i> Pause
   </button>
-  <button mc-dropdown-item>
+  <button mc-dropdown-item (click)="block()">
     <i data-feather="slash" class="mr-50 mb-25"></i> Block
   </button>
 
-  <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">
+  <button
+    mc-dropdown-item
+    [mcDropdownTriggerFor]="appDropdownNested"
+    (click)="streaming()"
+  >
     <i data-feather="loader" class="mr-50 mb-25"></i> Streaming
   </button>
-  <button mc-dropdown-item>
+  <button mc-dropdown-item (click)="delete()">
     <i data-feather="trash-2" class="mr-50 mb-25"></i> Delete
   </button>
 </mc-dropdown>

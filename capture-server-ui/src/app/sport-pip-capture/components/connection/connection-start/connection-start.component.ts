@@ -23,4 +23,9 @@ export class ConnectionStartComponent implements OnInit {
   closeDetail() {
     this.connectiondetail = false;
   }
+  viewStream() {}
+  pause() {}
+  block() {}
+  streaming() {}
+  delete() {}
 }
