@@ -326,30 +326,29 @@
                     href="javascript:void(0)"
                     ngbDropdownItem
                     class="d-flex align-items-center"
-                    ><i data-feather="file-text" class="mr-50"></i> View
-                    Stream</a
+                    ><i data-feather="eye" class="mr-50"></i> View Stream</a
                   >
                   <a
                     href="javascript:void(0)"
                     ngbDropdownItem
                     class="d-flex align-items-center"
-                    ><i data-feather="archive" class="mr-50"></i> Pause</a
+                    ><i data-feather="pause" class="mr-50"></i> Pause</a
                   >
                   <a
                     href="javascript:void(0)"
                     ngbDropdownItem
                     class="d-flex align-items-center"
-                    ><i data-feather="archive" class="mr-50"></i> Block</a
+                    ><i data-feather="slash" class="mr-50"></i> Block</a
                   >
                   <a
                     href="javascript:void(0)"
                     ngbDropdownItem
                     class="d-flex align-items-center"
-                    ><i data-feather="archive" class="mr-50"></i> Stream<i
-                      data-feather="archive"
+                    ><i data-feather="loader" class="mr-50"></i> Stream<i
+                      data-feather="chevron-right"
                       class="ml-50"
-                    ></i
-                  ></a>
+                    ></i>
+                  </a>
 
                   <a
                     href="javascript:void(0)"
@@ -379,6 +378,41 @@
     </table>
   </div>
 </div>
+<button class="btn btn-primary" [mcDropdownTriggerFor]="appDropdownWithNested">
+  <i data-feather="file"></i>
+</button>
+
+<mc-dropdown #appDropdownWithNested="mcDropdown">
+  <button mc-dropdown-item>Search settings</button>
+
+  <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">
+    Text
+  </button>
+  <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">
+    Paragraph styles
+  </button>
+</mc-dropdown>
+
+<mc-dropdown #appDropdownNested="mcDropdown">
+  <button mc-dropdown-item>Border and shading</button>
+
+  <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">
+    Normal text
+  </button>
+
+  <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">
+    Options
+  </button>
+</mc-dropdown>
+
+<mc-dropdown #appDropdownNestedNested="mcDropdown">
+  <button mc-dropdown-item>Apply 'Title'</button>
+  <button mc-dropdown-item>Update 'Title' to match style</button>
+</mc-dropdown>
+
+<!-- Copyright 2022 Positive Technologies. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license. -->
+
 <!-- EventConnection <div class="card">
   <div class="mb-2 mt-2">
     <app-connection-header></app-connection-header>
