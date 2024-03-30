@@ -53,12 +53,12 @@
                 <h6>-</h6>
                 <div class="d-flex m-0 p-0">
                   <div>
-                    <p>Sent:</p>
-                    <p>-</p>
+                    <p style="margin-bottom: 0">Sent:</p>
+                    <p style="margin-bottom: 0; font: caption">990mb</p>
                   </div>
                   <div style="margin-left: 3em">
-                    <p>Received:</p>
-                    <p>-</p>
+                    <p style="margin-bottom: 0">Received:</p>
+                    <p style="margin-bottom: 0; font: caption">990mb</p>
                   </div>
                 </div>
               </div>
@@ -77,14 +77,21 @@
             <div>
               <div style="display: flex">
                 <i class="bi bi-tablet custom-tablet"></i>
-                <div style="padding: 2px">
+                <div style="padding: 8px">
                   <h6>None</h6>
                   <div class="d-flex">
                     <i class="bi bi-arrow-down-left custom-arrow-down-left"></i>
                     <p>Receiving</p>
                   </div>
-                  <div style="white-space: nowrap">
-                    <p>Connection Duration:-</p>
+                  <div
+                    style="
+                      white-space: nowrap;
+                      position: absolute;
+                      bottom: 0;
+                      left: 5px;
+                    "
+                  >
+                    <p>Connection Duration:- 01:00:45</p>
                   </div>
                 </div>
                 <br />
@@ -104,14 +111,21 @@
             <div>
               <div style="display: flex">
                 <i class="bi bi-camera-video custom-camera-video"></i>
-                <div style="padding: 2px; margin-left: 0.5em">
+                <div style="padding: 8px; margin-left: 0.5em">
                   <h6>None</h6>
                   <div class="d-flex">
                     <i class="bi bi-arrow-up-right custom-arrow-up-right"></i>
                     <p>Sending</p>
                   </div>
-                  <div style="white-space: nowrap">
-                    <p>Connection Duration:-</p>
+                  <div
+                    style="
+                      white-space: nowrap;
+                      position: absolute;
+                      bottom: 0;
+                      left: 8px;
+                    "
+                  >
+                    <p>Connection Duration:- 01:00:45</p>
                   </div>
                 </div>
                 <br />
@@ -140,14 +154,14 @@
         >
           <div style="display: flex">
             <i class="bi bi-tablet custom-tablet"></i>
-            <div style="padding: 2px">
+            <div style="padding: 8px">
               <h6>None</h6>
               <div class="d-flex">
                 <i class="bi bi-arrow-down-left custom-arrow-down-left"></i>
                 <p>Receiving</p>
               </div>
               <div style="white-space: nowrap">
-                <p>Connection Duration:-</p>
+                <p>Connection Duration:- 01:00:45</p>
               </div>
             </div>
             <br />
@@ -174,14 +188,14 @@
         >
           <div style="display: flex">
             <i class="bi bi-camera-video custom-camera-video"></i>
-            <div style="padding: 2px; margin-left: 0.5em">
+            <div style="padding: 8px; margin-left: 0.5em">
               <h6>None</h6>
               <div class="d-flex">
                 <i class="bi bi-arrow-up-right custom-arrow-up-right"></i>
                 <p>Sending</p>
               </div>
               <div style="white-space: nowrap">
-                <p>Connection Duration:-</p>
+                <p>Connection Duration:- 01:00:45</p>
               </div>
             </div>
             <br />
@@ -206,16 +220,6 @@
       </div>
 
       <div class="d-none d-md-block d-lg-none ml-auto float-right">
-        <!-- <button
-          type="button"
-          class="btn btn-outline-secondary mr-1"
-          rippleEffect
-        >
-          Add Device
-        </button>
-        <button type="button" class="btn btn-warning" rippleEffect>
-          Check for Configuration
-        </button> -->
         <div class="d-flex">
           <div class="mr-1">
             <button
@@ -386,23 +390,31 @@
   <button mc-dropdown-item>Search settings</button>
 
   <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">
-    Text
+    <i data-feather="loader" class="mr-50 mb-25"></i> Streaming
   </button>
-  <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">
+  <!-- <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">
     Paragraph styles
-  </button>
+  </button> -->
 </mc-dropdown>
 
 <mc-dropdown #appDropdownNested="mcDropdown">
-  <button mc-dropdown-item>Border and shading</button>
+  <button mc-dropdown-item>
+    <i data-feather="youtube" class="mr-50 mb-25"></i>YouTube
+  </button>
+  <button mc-dropdown-item>
+    <i data-feather="facebook" class="mr-50 mb-25"></i>Facebook
+  </button>
+  <button mc-dropdown-item>
+    <i data-feather="twitch" class="mr-50 mb-25"></i> Twitch
+  </button>
 
-  <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">
+  <!-- <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">
     Normal text
   </button>
 
   <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">
     Options
-  </button>
+  </button> -->
 </mc-dropdown>
 
 <mc-dropdown #appDropdownNestedNested="mcDropdown">
