@@ -1,10 +1,10 @@
 <div class="card event-warepper ">
   <div class="card-header bg-transparent p-0">
-    <app-header-presenter style="width: 100%;"></app-header-presenter>
+    <app-header-presenter style="width: 100%;" (filter)="onFilter($event )"></app-header-presenter>
   </div>
   <div class="card-body bg-transparent p-0">
     <ul ngbNav #nav="ngbNav" class="nav-tabs" [(activeId)]="activeTabId" (navChange)="onNavChange($event)">
-      <li ngbNavItem="ongoingEvent" style="margin-top: 5px;">
+      <li ngbNavItem="ongoing" style="margin-top: 5px;">
         <a ngbNavLink>Ongoing Events</a>
         <ng-template ngbNavContent>
           <app-on-going-event [datasource]="datasource.ongoingEvent" *ngIf="gridView"></app-on-going-event>
@@ -12,18 +12,18 @@
         </ng-template>
       </li>
 
-      <li ngbNavItem="upcomingEvents" style="margin-top: 5px;">
+      <li ngbNavItem="upcoming" style="margin-top: 5px;">
         <a ngbNavLink>Upcoming Events</a>
         <ng-template ngbNavContent>
-          <app-up-coming-event [datasource]="datasource" *ngIf="gridView"></app-up-coming-event>
+          <app-up-coming-event [datasource]="datasource.ongoingEvent" *ngIf="gridView"></app-up-coming-event>
           <app-upcoming-events-list *ngIf="!gridView"></app-upcoming-events-list>
         </ng-template>
       </li>
 
-      <li ngbNavItem="pastEvents" style="margin-top: 5px;">
+      <li ngbNavItem="past" style="margin-top: 5px;">
         <a ngbNavLink>Past Events</a>
         <ng-template ngbNavContent>
-          <app-past-event [datasource]="datasource.pastEvent" *ngIf="gridView"></app-past-event>
+          <app-past-event [datasource]="datasource.ongoingEvent" *ngIf="gridView"></app-past-event>
           <app-past-events-list *ngIf="!gridView"></app-past-events-list>
         </ng-template>
       </li>
@@ -43,7 +43,7 @@
       </li>
 
       <li class="d-flex align-items-center" *ngIf="activeTabId=='upcomingEvents'">
-        <button type="button" class="btn  btn-outline-secondary" rippleEffect>Sync Events</button>
+        <button type="button" class="btn  btn-outline-secondary" (click)="SyncEvents.emit()" rippleEffect>Sync Events</button>
       </li>
 
       <li class="ml-1 d-flex align-items-center">

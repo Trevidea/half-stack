@@ -3,7 +3,7 @@ import { AccountView } from "./views/account-view";
 import { Transformer } from "app/blocks/transformer";
 import { AccountBuilder } from "./builder/account";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
-import { Views } from "app/sport-pip-capture/models/sport-pip-capture-interface";
+import { Views } from "app/sport-pip-capture/models/capture-interface";
 import { PresenterAction } from "app/blocks/actions";
 import { Router } from "@angular/router";
 

@@ -2,7 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewEnca
 import { Router } from "@angular/router";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 
-import { Views } from "app/sport-pip-capture/models/sport-pip-capture-interface";
+import { Views } from "app/sport-pip-capture/models/capture-interface";
 import { ModalActions, PresenterAction } from "app/blocks/actions";
 import { DistributionListBuilder } from "./builder/distribution-list";
 import { DistributionListView } from "./view/distribution-list";

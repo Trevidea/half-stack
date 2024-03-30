@@ -1,5 +1,5 @@
 import { DataBase } from "./model";
-import { Data } from "./sport-pip-capture-interface";
+import { Data } from "./capture-interface";
 
 export class EventData extends DataBase<Data.Event>{
    
@@ -32,11 +32,12 @@ export class EventData extends DataBase<Data.Event>{
         this._model.year = v;
     }
 
-    public get dtevent(): string {
-        return this._model.dtevent;
+    public get dt_event(): Date {
+        return this._model.dt_event;
     }
-    public set dtevent(v: string) {
-        this._model.dtevent = v;
+    
+    public set dt_event(v: Date) {
+        this._model.dt_event = v;
     }
     
     public get venue() : Data.Venue {
@@ -46,17 +47,11 @@ export class EventData extends DataBase<Data.Event>{
         this._model.venue = v;
     }
     
-   public get onPremise() : boolean {
-    return this._model.onPremise;
-   }
-   public set onPremise(v : boolean) {
-    this._model.onPremise = v;
-   }
-   
-   public get detail() : Data.EventDetail {
+
+   public get detail() : Data.Detail {
     return this._model.detail;
    }
-   public set detail(v : Data.EventDetail) {
+   public set detail(v : Data.Detail) {
     this._model.detail = v;
    }
      
@@ -75,14 +70,14 @@ export class EventData extends DataBase<Data.Event>{
    }
   
    
-   private _event : Data.Event[];
-   public get event() : Data.Event[] {
+//    private _event : Data.Event[];
+//    public get event() : Data.Event[] {
 
-    return this._model.event;
-   }
-   public set event(v : Data.Event[]) {
-    this._model.event = v;
-   }
+//     return this._model.event;
+//    }
+//    public set event(v : Data.Event[]) {
+//     this._model.event = v;
+//    }
  
   public get dayHalve() : string {
     return this._model.dayHalve;
@@ -91,11 +86,11 @@ export class EventData extends DataBase<Data.Event>{
     this._model.dayHalve = v;
   }
   
-  public get time() : string {
-    return this._model.time;
+  public get tm_event() : number {
+    return this._model.tm_event;
   }
-  public set time(v : string) {
-    this._model.time = v;
+  public set time(v : number) {
+    this._model.tm_event = v;
   }
   
 }

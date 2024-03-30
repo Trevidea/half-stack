@@ -3,7 +3,7 @@ import { DataFactoryService } from 'app/sport-pip-capture/models/data-factory.se
 import { Transformer } from 'app/blocks/transformer';
 import { OnDemandEventFormView } from './views/onDemand';
 import { ArrayBuilder } from 'app/sport-pip-capture/blocks/array.builder';
-import { Views } from 'app/sport-pip-capture/models/sport-pip-capture-interface';
+import { Views } from 'app/sport-pip-capture/models/capture-interface';
 import { PresenterAction } from 'app/blocks/actions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OnDemandFormBuilder } from './buliders/onDemand';
@@ -38,7 +38,7 @@ export class CreateOnDemandEventPresenter implements OnInit {
     Transformer.ComposeObject(this.dataFactory.EventYear(), this.ds.years, ArrayBuilder)
     if (this.ds.id) {
 
-      Transformer.ComposeObjectAsync(this.dataFactory.EventJson(123), this.ds, OnDemandFormBuilder)
+      // Transformer.ComposeObjectAsync(this.dataFactory.EventJson(123), this.ds, OnDemandFormBuilder)
     }
     this.ds.sports.onAddingNewItem(async (e: { modal: Views.ModalHost }) => {
       e.modal.component = TypesPresenter;

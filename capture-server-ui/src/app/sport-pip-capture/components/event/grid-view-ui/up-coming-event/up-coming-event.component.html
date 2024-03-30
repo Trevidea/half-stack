@@ -1,5 +1,5 @@
 <div class="grid-view">
-  <div class="card custom-card" *ngFor="let item of datasource.upcomingEvent">
+  <div class="card custom-card" *ngFor="let item of datasource">
     <img class="img-fluid" src="../../../../../assets/images/pip-image/card-image.png" alt="Card image cap" />
     <div class="card-img-overlay p-0 d-flex flex-column" style="height: 100px;">
       <div class="d-flex align-items-center Progress">
@@ -33,8 +33,7 @@
           <h4 class="ellipsis">{{item.title}} </h4>
           <p class="card-text ellipsis">
             <i class="feather" data-feather="clock"></i>
-            <!-- {{ item.dttEvent | date }} {{ item.time | timeFormat }}{{ " , "
-            }}{{ item.level }} -->
+            {{ formatDateTime(item.dtEvent, item.time) }}
           </p>
           <p class="card-text ellipsis">
             <i class="feather" data-feather="map-pin"></i>

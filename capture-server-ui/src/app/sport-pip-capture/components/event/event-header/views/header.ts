@@ -1,5 +1,5 @@
 import { Collection } from "app/blocks/collection";
-import { Views } from "app/sport-pip-capture/models/sport-pip-capture-interface";
+import { Views } from "app/sport-pip-capture/models/capture-interface";
 
 export class headerView implements Views.Datasource {
 
@@ -55,5 +55,7 @@ export class headerView implements Views.Datasource {
     public set years(v: Collection<string>) {
         this._years = v;
     }
+
+
 
 }

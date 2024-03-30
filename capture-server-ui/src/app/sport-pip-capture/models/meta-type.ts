@@ -1,5 +1,5 @@
 import { DataBase } from "./model";
-import { Data } from "./sport-pip-capture-interface";
+import { Data } from "./capture-interface";
 
 
 export class MetaTypeData extends DataBase<Data.MetaType> {

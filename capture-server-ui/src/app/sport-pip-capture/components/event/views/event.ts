@@ -1,5 +1,5 @@
 import { Collection, Range } from "app/blocks/collection";
-import { Views } from "app/sport-pip-capture/models/sport-pip-capture-interface";
+import { Views } from "app/sport-pip-capture/models/capture-interface";
 
 
 export class EventRange implements Views.Datasource {
@@ -102,17 +102,17 @@ export class OngoingEventView implements Views.Datasource {
 
     private _countdown: string;
     public get countdown(): string {
-        return this._countdown; 
+        return this._countdown;
     }
     public set countdown(v: string) {
         this._countdown = v;
     }
 
-    private _time: string;
-    public get time(): string {
+    private _time: number;
+    public get time(): number {
         return this._time;
     }
-    public set time(v: string) {
+    public set time(v: number) {
         this._time = v;
     }
 
@@ -126,24 +126,21 @@ export class OngoingEventView implements Views.Datasource {
     }
 
 
-    private _level: String;
-    public get level(): String {
+    private _level: string;
+    public get level(): string {
 
         return this._level;
     }
-    public set level(v: String) {
+    public set level(v: string) {
         this._level = v;
     }
 
 
-    private _program: Collection<String>;
-    public get program(): Collection<String> {
-        if (!this._program) {
-            this._program = new Collection<string>();
-        }
+    private _program: string;
+    public get program(): string {
         return this._program;
     }
-    public set program(v: Collection<String>) {
+    public set program(v: string) {
         this._program = v;
     }
 
@@ -156,24 +153,13 @@ export class OngoingEventView implements Views.Datasource {
         this._year = v;
     }
 
-    private _dttEvent: string;
-    public get dttEvent(): string {
-        return this._dttEvent;
+    private _dtEvent: Date;
+    public get dtEvent(): Date {
+        return this._dtEvent;
     }
-    public set dttEvent(v: string) {
-        this._dttEvent = v;
+    public set dtEvent(v: Date) {
+        this._dtEvent = v;
     }
-
-
-
-    private _onPremise: boolean;
-    public get onPremise(): boolean {
-        return this._onPremise;
-    }
-    public set onPremise(v: boolean) {
-        this._onPremise = v;
-    }
-
 
 
 
@@ -495,27 +481,3 @@ export class EventDetailView {
     }
 
 }
-/*
-    export interface Event extends Base {
-      
-        venue: Venue,
-        detail: EventDetail,
-        status: Status,
-    }
-
-    export enum Status {
-
-        Pending = 'Pending',
-        Active = 'Active',
-    }
-
-    export interface EventDetail extends Base {
-        description: string;
-
-
-    }
-
-    export interface Venue extends Base {
-        location: string;
-    }
-    */

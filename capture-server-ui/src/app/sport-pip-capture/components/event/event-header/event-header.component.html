@@ -12,7 +12,7 @@
     <label>Sport</label>
     <div class="form-group">
       <ng-select [(ngModel)]="datasource.sports.SelectedItem">
-        <ng-option *ngFor="let item of datasource.sports">
+        <ng-option *ngFor="let item of datasource.sports" [value]="item">
           {{ item }}
         </ng-option>
       </ng-select>
@@ -22,7 +22,7 @@
     <label>Level</label>
     <div class="form-group">
       <ng-select [(ngModel)]="datasource.levels.SelectedItem">
-        <ng-option *ngFor="let item of datasource.levels">
+        <ng-option *ngFor="let item of datasource.levels" [value]="item">
           {{item}}
         </ng-option>
       </ng-select>
@@ -32,7 +32,7 @@
     <label>Program</label>
     <div class="form-group">
       <ng-select [(ngModel)]="datasource.programs.SelectedItem">
-        <ng-option *ngFor="let item of datasource.programs">
+        <ng-option *ngFor="let item of datasource.programs" [value]="item">
           {{item}}
         </ng-option>
       </ng-select>
@@ -42,7 +42,7 @@
     <label>Year</label>
     <div class="form-group">
       <ng-select [(ngModel)]="datasource.years.SelectedItem">
-        <ng-option *ngFor="let item of datasource.years">
+        <ng-option *ngFor="let item of datasource.years" [value]="item">
           {{item}}
         </ng-option>
 

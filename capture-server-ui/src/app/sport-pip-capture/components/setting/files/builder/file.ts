@@ -1,7 +1,7 @@
 
 
 import { AbstractBuilder } from "app/blocks/strategies";
-import { Data } from "app/sport-pip-capture/models/sport-pip-capture-interface";
+import { Data } from "app/sport-pip-capture/models/capture-interface";
 import { FileView } from "../view/file";
 
 

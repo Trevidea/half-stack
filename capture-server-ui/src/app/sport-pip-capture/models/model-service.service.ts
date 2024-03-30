@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { first, map, mergeMap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
-import { Data } from "./sport-pip-capture-interface";
+import { Data } from "./capture-interface";
 import { EventData } from "./event";
 
 
@@ -12,7 +12,7 @@ import { EventData } from "./event";
   providedIn: 'root'
 })
 export class ModelServiceService {
-  private modelsServerUrl: string =  environment.pgUrl;
+  private modelsServerUrl: string = environment.pgUrl;
 
   constructor(private _httpClient: HttpClient, private _adapter: AdapterService) {
 
@@ -104,7 +104,7 @@ export class ModelServiceService {
 
   private _data<M, I extends Data.Base>(resource: string, type: new (I: Data.Base) => M): Observable<M[]> {
     return this._getList<I>(resource)
-      .pipe(map((data: I[]) => { console.log(":::::",data); return data.map((datum: I) => new type(datum)) }));
+      .pipe(map((data: I[]) => { console.log(":::::", data); return data.map((datum: I) => new type(datum)) }));
   }
   private _datum<M, I extends Data.Base>(resource: string, id: number, type: new (I: Data.Base) => M): Observable<M> {
 
@@ -138,5 +138,14 @@ export class ModelServiceService {
 
   eventJson(): Observable<Data.Event[]> {
     return this._data('events', EventData)
+  }
+
+  syncEvents(): Observable<any> {
+    const url = `${this.modelsServerUrl}/event/sync`
+    const data = {
+      'source': "http://localhost:1337/api/events",
+      'delete-criteria': "dt_event >= now()"
+    }
+    return this._httpClient.post<any>(url, data)
   }
 }

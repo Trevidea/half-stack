@@ -1,13 +1,12 @@
 <div class="grid-view">
   <div class="card custom-card" *ngFor="let item of datasource">
-    <!-- <img class="img-fluid" src="../../../../../assets/images/pip-image/card-image.png" alt="Card image cap" /> -->
     <div class="card-img">
       <img class="left img-fluid" src="assets/images/pip-image/400-300/130-130/fairport.png" />
       <img class="right img-fluid" src="assets/images/pip-image/400-300/130-130/mcquaid.png" />
     </div>
     <div class="card-img-overlay p-0 d-flex flex-column" style="height: 100px;">
-      <div class="d-flex align-items-center Progress" *ngIf="item.countdown">
-        Starts in {{item?.countdown}}
+      <div class="d-flex align-items-center Progress">
+        In Progress {{item.countdown}}
       </div>
       <div class="menu-container">
         <app-menu-button></app-menu-button>
@@ -38,10 +37,7 @@
           <h4 class="ellipsis">{{item.title}}</h4>
           <p class="card-text">
             <i class="feather" data-feather="clock"></i>
-            <!-- {{ item.dtEvent | date }} {{ item.time | timeFormat }}{{ " , "
-            }}{{ item.level }} -->
-            {{ item.dttEvent | date }}{{ " , "
-          }}{{ item.level }}
+            {{ formatDateTime(item.dtEvent, item.time) }}
           </p>
           <p class="card-text">
             <i class="feather" data-feather="map-pin"></i>

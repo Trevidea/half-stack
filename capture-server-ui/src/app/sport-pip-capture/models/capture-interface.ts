@@ -18,36 +18,41 @@ export namespace Data {
         email: string,
     }
     export interface Event extends Base {
-        sport?: string,
-        level?: string,
-        program?: string,
-        year?: number,
-        dtevent?: string,
-        venue?: Venue,
-        onPremise?: boolean,
-        detail?: EventDetail,
-        title?: string,
-        status?: string,
-        dayHalve?: string,
-        event?: Event[],
-        time?: string,
+        sport: string;
+        level: string;
+        program: string;
+        year: number;
+        dt_event: Date;
+        tm_event: number;
+        venue: Venue;
+        detail: Detail;
+        title: string;
+        status: string;
+        dayHalve: string;
+        owner_id?: number;  //this is user ID
     }
 
-    // export enum Status {
-
-    //     Pending = 'Pending',
-    //     Active = 'Active',
-    // }
-
-    export interface EventDetail extends Base {
-        streetAdress: string;
-        cityAddress: string;
-        type: string;
-    
+    export interface OnDemandEvent extends Base {
+        event_id: number;
+        owner_id: number;
     }
 
-    export interface Venue extends Base {
+    export interface ScheduledEvent extends Base {
+        event_id: number;
+        on_premise: boolean;
+        pin: string;
+
+    }
+
+
+    export interface Venue {
         location: string;
+    }
+
+    export interface Detail {
+        cityAddress: string;
+        streetAdress: string;
+        type: string;
     }
 
     export interface EventNetWork extends Base {
@@ -124,13 +129,13 @@ export namespace Data {
         Type1 = 'type1',
         Type2 = 'type2',
         Type3 = 'type3',
-      }
-      
-    export  enum DataStatus {
+    }
+
+    export enum DataStatus {
         Status1 = 'status1',
         Status2 = 'status2',
         Status3 = 'status3',
-      }
+    }
     export interface FileIndex extends Base {
         id: number;
         dtCreated: string;
@@ -259,6 +264,13 @@ export namespace Data {
         // "Status": string
     }
 
+    export interface FilterParams {
+        program: string
+        level: string
+        sport: string
+    }
+
+
 }
 
 export namespace Views {
@@ -272,7 +284,7 @@ export namespace Views {
     export interface FormActions {
         onSave(): void;
         onCancel(): void
-        onComplete : EventEmitter<boolean>;
+        onComplete: EventEmitter<boolean>;
         data?: EventEmitter<any>;
     }
     export interface FormModal {

@@ -1,5 +1,5 @@
 import { AbstractBuilder } from "app/blocks/strategies";
-import { Data } from "app/sport-pip-capture/models/sport-pip-capture-interface";
+import { Data } from "app/sport-pip-capture/models/capture-interface";
 import { AccountView } from "../views/account-view";
 
 export class AccountBuilder extends AbstractBuilder<Data.UserProfile, AccountView>{

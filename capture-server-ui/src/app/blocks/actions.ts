@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 // import { Views } from "../models/ro-interface";
 import { AbstractBuilder } from "./strategies";
 import { Transformer } from "./transformer";
-import { Views } from "app/sport-pip-capture/models/sport-pip-capture-interface";
+import { Views } from "app/sport-pip-capture/models/capture-interface";
 
 export class PresenterAction<M, V> implements Views.FormActions {
 
