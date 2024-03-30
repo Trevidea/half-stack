@@ -305,7 +305,13 @@
       <tbody>
         <tr class="text-nowrap" *ngFor="let item of eventConnection">
           <th>
-            <div class="d-flex align-items-center">
+            <span [mcDropdownTriggerFor]="appDropdownWithNested">
+              <i
+                data-feather="more-vertical"
+                class="text-secondary cursor-pointer mr-50"
+              ></i>
+            </span>
+            <!-- <div class="d-flex align-items-center">
               <div ngbDropdown container="body">
                 <a
                   ngbDropdownToggle
@@ -362,7 +368,7 @@
                   >
                 </div>
               </div>
-            </div>
+            </div> -->
           </th>
           <td>{{ item.user }}</td>
           <td>{{ item.location }}</td>
@@ -382,19 +388,32 @@
     </table>
   </div>
 </div>
-<button class="btn btn-primary" [mcDropdownTriggerFor]="appDropdownWithNested">
+<!-- <button class="btn btn-primary" [mcDropdownTriggerFor]="appDropdownWithNested">
   <i data-feather="file"></i>
-</button>
-
+</button> -->
+<span [mcDropdownTriggerFor]="appDropdownWithNested">
+  <i
+    data-feather="more-vertical"
+    class="text-secondary cursor-pointer mr-50"
+  ></i>
+</span>
 <mc-dropdown #appDropdownWithNested="mcDropdown">
-  <button mc-dropdown-item>Search settings</button>
+  <button mc-dropdown-item>
+    <i data-feather="eye" class="mr-50 mb-25"></i> View Stream
+  </button>
+  <button mc-dropdown-item>
+    <i data-feather="pause" class="mr-50 mb-25"></i> Pause
+  </button>
+  <button mc-dropdown-item>
+    <i data-feather="slash" class="mr-50 mb-25"></i> Block
+  </button>
 
   <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">
     <i data-feather="loader" class="mr-50 mb-25"></i> Streaming
   </button>
-  <!-- <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">
-    Paragraph styles
-  </button> -->
+  <button mc-dropdown-item>
+    <i data-feather="trash-2" class="mr-50 mb-25"></i> Delete
+  </button>
 </mc-dropdown>
 
 <mc-dropdown #appDropdownNested="mcDropdown">
@@ -407,19 +426,6 @@
   <button mc-dropdown-item>
     <i data-feather="twitch" class="mr-50 mb-25"></i> Twitch
   </button>
-
-  <!-- <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">
-    Normal text
-  </button>
-
-  <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">
-    Options
-  </button> -->
-</mc-dropdown>
-
-<mc-dropdown #appDropdownNestedNested="mcDropdown">
-  <button mc-dropdown-item>Apply 'Title'</button>
-  <button mc-dropdown-item>Update 'Title' to match style</button>
 </mc-dropdown>
 
 <!-- Copyright 2022 Positive Technologies. All Rights Reserved.
