@@ -1,0 +1,29 @@
+name: Deploy to Self-Hosted Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: cd capture-server-ui && npm install --force
+
+      - name: Build Angular App
+        run: cd capture-server-ui && npm run build
+      
+      - name: Create SSH Key File
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key && chmod 600 ssh_key
+        
+      - name: Try SCP
+        run: rsync -avz -e "ssh -i ssh_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" --exclude='.git,node_modules' capture-server-ui/dist/vuexy/* ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/capture-server-ui
+        
+      - name: Cleanup
+        run: rm -f ssh_key

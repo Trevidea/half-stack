@@ -19,6 +19,7 @@ void Gateway::init()
     this->m_entities.push_back(new Holiday());
     this->m_entities.push_back(new MetaType());
     this->m_entities.push_back(new Event());
+    this->m_entities.push_back(new Team());
     for (auto &&e : this->m_entities)
     {
         e->report();
