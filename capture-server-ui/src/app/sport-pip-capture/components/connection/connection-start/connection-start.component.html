@@ -375,9 +375,7 @@
               class="badge badge-pill"
               [ngClass]="{
                 'badge-light-danger': item.quality === 'Poor',
-                'badge-light-warning': item.quality === 'Fair',
-                'badge-light-info': item.quality === 'Good',
-                'badge-light-success': item.quality === 'Excellent'
+                'badge-light-success': item.quality === 'Good'
               }"
             >
               {{ item.quality }}
@@ -435,6 +433,30 @@
                 alt=""
                 style="height: 100%; width: 100%; border-radius: 0.428rem"
               />
+              <div style="position: absolute; bottom: 1px; left: 1px">
+                <div
+                  *ngIf="item.quality == 'Good'"
+                  class="badge badge-pill badge-light-success"
+                  style="
+                    background-color: rgba(40, 199, 111, 1);
+                    color: rgba(73, 69, 79, 1) !important;
+                  "
+                >
+                  <span style="color: rgb(0, 102, 46)"> &#x2022; </span>
+                  Good
+                </div>
+                <div
+                  *ngIf="item.quality == 'Poor'"
+                  class="badge badge-pill"
+                  style="
+                    background-color: rgba(255, 222, 222, 1);
+                    color: rgba(73, 69, 79, 1);
+                  "
+                >
+                  <span style="color: rgb(181, 0, 0)"> &#x2022; </span>
+                  Poor
+                </div>
+              </div>
             </div>
             <div
               class="card p-1"
