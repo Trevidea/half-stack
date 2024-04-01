@@ -17,4 +17,5 @@ target_include_directories(half-stack PUBLIC "./" api-client)
 target_link_libraries(half-stack PUBLIC
     spdlog::spdlog
     api-client
+    omal
     pg-dal)

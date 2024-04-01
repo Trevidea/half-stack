@@ -46,6 +46,7 @@ add_git_submodule(dependency/spdlog)
 
 add_subdirectory(dependency)
 add_subdirectory(pg-dal)
+add_subdirectory(omal)
 add_subdirectory(src)
 add_subdirectory(api-client)
 add_subdirectory(api)
