@@ -90,7 +90,7 @@ export const EventConnection$: Observable<any[]> = of([
     user: "Coach J.",
     location: "Dugout",
     deviceId: "samsung10-3434",
-    deviceType: "Samsung Tablet",
+    deviceType: "Camcorder",
     network: "Penfield-7",
     quality: "Excellent",
     ipAddress: "192.168.1.12",
