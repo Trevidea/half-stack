@@ -1,6 +1,12 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from "@angular/core";
 import { header } from "./data";
-import { EventConnection } from "../connection-data";
+import { EventConnection$ } from "../connection-data";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 @Component({
   selector: "app-connection-start",
   templateUrl: "./connection-start.component.html",
@@ -9,13 +15,21 @@ import { EventConnection } from "../connection-data";
 })
 export class ConnectionStartComponent implements OnInit {
   header: string[];
-  eventConnection: any;
-  constructor() {
-    this.eventConnection = EventConnection;
-  }
+  eventConnection: any[] = [];
+  deviceName: string;
+  streamingKey: string;
+  constructor(private modalService: NgbModal, private cdr: ChangeDetectorRef) {}
   connectiondetail: boolean = false;
   ngOnInit(): void {
     this.header = header;
+    EventConnection$.subscribe(
+      (data) => {
+        this.eventConnection = data;
+      },
+      (error) => {
+        console.log("error:::", error);
+      }
+    );
   }
   ConnectionDetails(yes: boolean) {
     this.connectiondetail = yes;
@@ -24,8 +38,27 @@ export class ConnectionStartComponent implements OnInit {
     this.connectiondetail = false;
   }
   viewStream() {}
-  pause() {}
-  block() {}
+  pause(item) {
+    const index = this.eventConnection.findIndex((obj) => obj.id === item.id);
+    if (
+      index !== -1 &&
+      this.eventConnection[index].transmitStatus !== "Paused"
+    ) {
+      this.eventConnection[index].transmitStatus = "Paused";
+      // this.cdr.detectChanges();
+    }
+  }
+  block(item) {}
   streaming() {}
   delete() {}
+  modalOpenForm(modalForm) {
+    this.modalService.open(modalForm, {
+      centered: true,
+    });
+  }
+  addNewDevice() {}
+  listOrGrid: string = "list";
+  listGrid(e: string) {
+    this.listOrGrid = e;
+  }
 }
