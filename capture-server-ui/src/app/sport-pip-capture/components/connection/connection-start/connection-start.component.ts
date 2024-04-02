@@ -1,6 +1,13 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from "@angular/core";
 import { header } from "./data";
-import { EventConnection } from "../connection-data";
+import { EventConnection$ } from "../connection-data";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { filter } from "rxjs/operators";
 @Component({
   selector: "app-connection-start",
   templateUrl: "./connection-start.component.html",
@@ -9,18 +16,67 @@ import { EventConnection } from "../connection-data";
 })
 export class ConnectionStartComponent implements OnInit {
   header: string[];
-  eventConnection: any;
-  constructor() {
-    this.eventConnection = EventConnection;
-  }
+  eventConnection: any[] = [];
+  deviceName: string;
+  streamingKey: string;
+  allOrSubOrPub: string = "all";
+  constructor(private modalService: NgbModal, private cdr: ChangeDetectorRef) {}
   connectiondetail: boolean = false;
   ngOnInit(): void {
     this.header = header;
+    EventConnection$.subscribe(
+      (data) => {
+        this.eventConnection = data;
+      },
+      (error) => {
+        console.log("error:::", error);
+      }
+    );
+    console.log(this.eventConnection);
   }
   ConnectionDetails(yes: boolean) {
     this.connectiondetail = yes;
   }
   closeDetail() {
     this.connectiondetail = false;
+  }
+  viewStream() {}
+  pause(item) {
+    const index = this.eventConnection.findIndex((obj) => obj.id === item.id);
+    if (
+      index !== -1 &&
+      this.eventConnection[index].transmitStatus !== "Paused"
+    ) {
+      this.eventConnection[index].transmitStatus = "Paused";
+      // this.cdr.detectChanges();
+    }
+  }
+  getAllPubOrSub(e) {
+    this.allOrSubOrPub = e;
+    EventConnection$.pipe(
+      // Filter the data based on the type
+      filter((data: any[]) => data.filter((item) => item.type === e).length > 0)
+    ).subscribe(
+      (filteredData) => {
+        // Assign the filtered data to this.eventConnection
+        this.eventConnection = filteredData;
+      },
+      (error) => {
+        console.log("error:::", error);
+      }
+    );
+  }
+  block(item) {}
+  streaming() {}
+  delete() {}
+  modalOpenForm(modalForm) {
+    this.modalService.open(modalForm, {
+      centered: true,
+    });
+  }
+  addNewDevice() {}
+  listOrGrid: string = "list";
+  listGrid(e: string) {
+    this.listOrGrid = e;
   }
 }

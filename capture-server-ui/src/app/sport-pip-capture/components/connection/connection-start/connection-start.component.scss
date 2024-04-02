@@ -1,15 +1,16 @@
 .custom-bi-pause-circle {
   color: rgba(33, 96, 147, 1);
-  font-size: 20px;
+  font-size: 30px;
   margin-right: 0.3em;
 }
 
 .custom-bi-stop-circle {
-  font-size: 20px;
+  font-size: 30px;
   color: rgba(222, 46, 33, 1);
 }
 .custom-earmark {
   font-size: 28px;
+  color: black;
 }
 .custom-tablet {
   font-size: 40px;
@@ -31,6 +32,9 @@
 }
 .card .card {
   margin: 0;
+}
+.dropdown-toggle::after {
+  display: none;
 }
 // .mc-dropdown__panel {
 //   border-style: none !important;

@@ -1,4 +1,5 @@
 // Define array of objects
+import { of, Observable } from "rxjs";
 export const PreviousEventsConnection = [
   {
     id: 1,
@@ -57,7 +58,7 @@ export const PreviousEventsConnection = [
   },
 ];
 
-export const EventConnection = [
+export const EventConnection$: Observable<any[]> = of([
   {
     id: 1,
     user: "Coach S.",
@@ -66,10 +67,11 @@ export const EventConnection = [
     deviceType: "iPad",
     network: "Penfield-5..",
     quality: "Poor",
-    ipAdderss: "192.168.1.10",
+    ipAddress: "192.168.1.10",
     transmitStatus: "Receiving",
     received: "22 files",
     retries: "2",
+    type: "sub",
   },
   {
     id: 2,
@@ -79,23 +81,25 @@ export const EventConnection = [
     deviceType: "iPhone",
     network: "Penfield-6",
     quality: "Good",
-    ipAdderss: "192.168.1.11",
-    transmitStatus: "Transmitting",
+    ipAddress: "192.168.1.11",
+    transmitStatus: "Paused",
     received: "18 files",
     retries: "0",
+    type: "sub",
   },
   {
     id: 3,
     user: "Coach J.",
     location: "Dugout",
     deviceId: "samsung10-3434",
-    deviceType: "Samsung Tablet",
+    deviceType: "Camcorder",
     network: "Penfield-7",
-    quality: "Excellent",
-    ipAdderss: "192.168.1.12",
-    transmitStatus: "Transmitting",
+    quality: "Good",
+    ipAddress: "192.168.1.12",
+    transmitStatus: "Streaming",
     received: "25 files",
     retries: "1",
+    type: "pub",
   },
   {
     id: 4,
@@ -104,11 +108,12 @@ export const EventConnection = [
     deviceId: "ipadpro11-4545",
     deviceType: "iPad Pro",
     network: "Penfield-8",
-    quality: "Fair",
-    ipAdderss: "192.168.1.13",
-    transmitStatus: "Idle",
+    quality: "Poor",
+    ipAddress: "192.168.1.13",
+    transmitStatus: "Blocked",
     received: "0 files",
     retries: "0",
+    type: "sub",
   },
   {
     id: 5,
@@ -118,9 +123,10 @@ export const EventConnection = [
     deviceType: "MacBook Air",
     network: "Penfield-9",
     quality: "Poor",
-    ipAdderss: "192.168.1.14",
+    ipAddress: "192.168.1.14",
     transmitStatus: "Receiving",
     received: "15 files",
     retries: "3",
+    type: "sub",
   },
-];
+]);
