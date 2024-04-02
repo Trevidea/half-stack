@@ -266,10 +266,10 @@ export namespace Data {
     }
 
     export interface FilterParams {
-        year: number
-        program: string;
-        level: string;
-        sport: string;
+        year?: number
+        program?: string;
+        level?: string;
+        sport?: string;
         status?: string;
     }
 
