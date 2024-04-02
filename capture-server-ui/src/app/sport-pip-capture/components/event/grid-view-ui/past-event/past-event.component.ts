@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UI } from '../../event-utility/event-ui-interface';
 
 @Component({
   selector: 'app-past-event',
@@ -11,6 +12,12 @@ export class PastEventComponent implements OnInit {
   @Input() datasource: any
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
+
+  dropdownItems: UI.DropDownMenuItem[] = [
+    { label: 'Share Event', icon: 'share', type: 'feather', action: () => {} },
+    { label: 'Upload to server', icon: 'upload-cloud', type: 'feather', action: () => {} },
+    { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => {} },
+  ]
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {

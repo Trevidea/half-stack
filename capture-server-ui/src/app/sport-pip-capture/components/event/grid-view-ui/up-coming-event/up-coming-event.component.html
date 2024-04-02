@@ -6,7 +6,7 @@
         Starts in {{item.countdown}}
       </div>
       <div class="menu-container">
-        <app-menu-button></app-menu-button>
+        <app-menu-button [dropdownItems]="dropdownItems" ></app-menu-button>
       </div>
     </div>
     <div class="card-body pt-1 pb-0 custom-card-body">
@@ -20,8 +20,8 @@
           </div>
         </div>
         <div class="col-7  card-btn-conatiner ">
-          <button type="button" class="btn btn-flat-dark btn-sm ml-auto card-buttons"
-            (click)="AddEvent('on-demand-event-sidebar',item)" rippleEffect>
+          <button type="button" class="btn btn-flat-dark btn-sm ml-auto card-buttons" (click)="viewDetail(item.type)"
+            rippleEffect>
             View
           </button>
           <button type="button" class="btn btn-warning  btn-sm card-buttons " style="box-shadow: none;"
@@ -45,7 +45,11 @@
   </div>
 </div>
 
-<core-sidebar class="modal modal-slide-in fade event-sidebar" name="on-demand-event-sidebar"
-  overlayClass="modal-backdrop" hideOnEsc="true">
-  <app-up-coming-event-detil></app-up-coming-event-detil>
+<core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-scheduled" overlayClass="modal-backdrop"
+  hideOnEsc="true">
+  <app-up-coming-event-detil-presenter></app-up-coming-event-detil-presenter>
+</core-sidebar>
+<core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-on-demand" overlayClass="modal-backdrop"
+  hideOnEsc="true">
+  <app-upcoming-ondemand-presenter></app-upcoming-ondemand-presenter>
 </core-sidebar>

@@ -3,8 +3,8 @@ import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.s
 
 @Component({
   selector: 'app-up-coming-event-detil',
-  templateUrl: './up-coming-event-detil.component.html',
-  styleUrls: ['./up-coming-event-detil.component.scss'],
+  templateUrl: './up-coming-event-detail.component.html',
+  styleUrls: ['./up-coming-event-detail.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class UpComingEventDetilComponent implements OnInit {

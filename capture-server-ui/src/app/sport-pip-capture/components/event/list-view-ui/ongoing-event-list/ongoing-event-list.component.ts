@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DateTimeService } from '../../event-utility/date-time.service';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
+import { UI } from '../../event-utility/event-ui-interface';
 
 @Component({
   selector: 'app-ongoing-event-list',
@@ -10,7 +11,9 @@ import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.s
 export class OngoingEventListComponent implements OnInit, OnDestroy {
   @Input() datasource: any;
   private countdownInterval: any;
-
+  dropdownItems: UI.DropDownMenuItem[] = [
+    { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => {} },
+  ]
   constructor(private _coreSidebarService: CoreSidebarService, private dateTimeService: DateTimeService) { }
 
   ngOnInit(): void {
