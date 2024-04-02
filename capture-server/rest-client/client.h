@@ -1,3 +1,6 @@
+#ifndef CLIENT_H
+#define CLIENT_H
+
 #include <cpprest/http_client.h>
 #include <iostream>
 #include <mutex> // For std::mutex
@@ -15,3 +18,7 @@ public:
     Client(const std::string& url);
     void get(std::function<void(const std::string&)> &&success, std::function<void(const std::string&)> &&failure, int timeout = 10);
 };
+
+
+
+#endif //CLIENT_H

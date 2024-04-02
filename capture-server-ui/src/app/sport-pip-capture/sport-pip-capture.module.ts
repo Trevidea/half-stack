@@ -75,6 +75,7 @@ import { EventPaginationComponent } from "./components/event-pagination/event-pa
 // import { McDropdownModule } from "@ptsecurity/mosaic/dropdown";
 // import { McIconModule } from "@ptsecurity/mosaic/icon";
 import { DemoMosaicModule } from "./mosaic.module";
+import { EventPreviewPresenter } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.presenter";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -136,6 +137,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PastEventsListComponent,
     MenuButtonComponent,
     EventPaginationComponent,
+    EventPreviewPresenter,
   ],
   providers: [
     {

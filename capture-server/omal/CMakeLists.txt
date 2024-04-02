@@ -1,5 +1,7 @@
 set(OMAL_SRC
-    api-client.cpp)
+    output-profile.cpp
+    omal-factory.cpp
+    virtual-host.cpp)
 add_library(omal STATIC ${OMAL_SRC})
 target_include_directories(omal PUBLIC "./" rest-client)
 target_link_libraries(omal PUBLIC
