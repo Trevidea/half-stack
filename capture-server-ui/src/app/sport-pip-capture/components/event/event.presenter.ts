@@ -21,7 +21,7 @@ export class EventPresenter implements OnInit {
   query: Data.FilterParams
   activeTab: string;
   ds!: EventRange
-  filteredData:any;
+  filteredData: any;
   constructor(private router: Router,
     private dataFactory: DataFactoryService,
     private service: ModelServiceService,
@@ -32,9 +32,7 @@ export class EventPresenter implements OnInit {
   ngOnInit(): void {
     const status = this.tabStateService.getActiveTab()
     Transformer.ComposeCollectionAsync(this.service.eventJson(status), this.ds.event, EventRangeBuilder);
-    this.filteredData=this.ds.event;
-    // const filteredEvents = EventFilter.filterEvents(this.ds.event, this.query);
-    // console.log(filteredEvents);
+    this.filteredData = this.ds.event;
   }
 
   SyncEvents() {
@@ -50,28 +48,31 @@ export class EventPresenter implements OnInit {
   }
 
   onFilter(filter: Data.FilterParams) {
-    this.query = filter;
-    console.log(this.query)
-    console.log(this.ds.event)
-    this.filteredData = this.filterEvents(this.ds.event, this.query);
-    console.log(this.filteredData)
-    // this.ds.event = this.filteredData;
+    if (filter != null) {
+      if (isNaN(filter.year)) {
+        filter.year = null;
+      }
+      this.query = filter;
+      this.filteredData = this.filterEvents(this.ds.event, this.query);
+    }
   }
+
 
   onTabChange(): void {
     // console.log(this.query)
   }
 
-  filterEvents(events: any[], query: Data.FilterParams) {
-    return events.filter(event => {
-      if (query.sport !== null && query.sport !== undefined && event._sport !== query.sport) {
-        return false;
+
+  filterEvents(data, query) {
+    return data.filter(item => {
+      for (const key in query) {
+        if (query[key] !== null && item[key] !== query[key]) {
+          return false;
+        }
       }
       return true;
     });
   }
-
-
 
 
 }

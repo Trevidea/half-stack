@@ -122,6 +122,61 @@ export namespace Data {
     Type3 = "type3",
   }
 
+  export interface FileIndex extends Base {
+    id: number;
+    dtCreated: string;
+    size: number;
+    hash: number;
+    name: string;
+    type: DataType;
+    eventId: number;
+    userId: number;
+    status: DataStatus;
+    dttReceived: string;
+    deviceId: number;
+  }
+
+  export interface FileSharing extends Base {
+    id: number;
+    fileId: number;
+    distributionId: number[];
+    dtShared: string;
+    sharingLink: string;
+  }
+
+  export interface License extends Base {
+    id: number;
+    code: string;
+    dtStart: string;
+    dtExpiry: string;
+    cost: number;
+  }
+
+  export interface UserProfile extends Base {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    role: Role;
+    address: string;
+  }
+  export interface Role {}
+  export interface Preference extends Base {
+    id: number;
+    display: DisplaySettings;
+    customization: CustomizationSettings;
+    notification: NotificationSettings;
+    videoResolution: VideoResolutionSettings;
+  }
+
+  export interface DisplaySettings {}
+
+  export interface CustomizationSettings {}
+
+  export interface NotificationSettings {}
+
+  export interface VideoResolutionSettings {}
   export enum DataStatus {
     Status1 = "status1",
     Status2 = "status2",
@@ -182,6 +237,64 @@ export namespace Data {
   export interface NotificationSettings {}
 
   export interface VideoResolutionSettings {}
+
+  export interface Team extends Base {
+    id: number;
+    name: string;
+    logo: string;
+  }
+  export interface PastConnection extends Base {
+    connection: PreviousEventsConnection[];
+  }
+  export interface MetaType extends Base {
+    name: string;
+    key: string;
+    values: string[];
+  }
+  export interface MetaTypeEgress extends Base {
+    newItem: string;
+    values: string[];
+  }
+  export interface PreviousEventsConnection extends Base {
+    userId: number;
+    "Network Quality": string;
+    "IP Address": string;
+    // "Is Disabled": boolean,
+    // "Type": string,
+    "Connection Date": string;
+    // "Priority": string,
+    // "Location": string,
+    // "First Name": string,
+    // "Last Name": string,
+    // "Email": string,
+    // "Phone": string,
+    // "Role": string,
+    // "Address": string,
+    // "eventId": number,
+    // "Shared Date": string,
+    // "Team Name": string,
+    // "detail": [
+    //     {
+    //         "cityAddress": string,
+    //         "streetAdress": string,
+    //         "type": string
+    //     }
+    // ],
+    // "Event Date": string,
+    // "Level": string,
+    // "Day Halve": string,
+    // "onPremise": boolean,
+    // "Program": string,
+    // "Sport": string,
+    Time: string;
+    // "Year": number,
+    // "venue": [
+    //     {
+    //         "location": string
+    //     }
+    // ],
+    // "Status": string
+  }
 
   export interface Team extends Base {
     id: number;
