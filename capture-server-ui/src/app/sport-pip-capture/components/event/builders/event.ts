@@ -1,11 +1,9 @@
 import { AbstractBuilder } from "app/blocks/strategies";
 import { Data } from "app/sport-pip-capture/models/capture-interface";
-import { EventRange, OngoingEventView, PastEventView, UpcomingEventView } from "../views/event";
-import { Transformer } from "app/blocks/transformer";
+import { EventView,} from "../views/event";
 
-
-export class EventRangeBuilder extends AbstractBuilder<Data.Event, OngoingEventView>{
-    compose(m: Data.Event, v: OngoingEventView) {
+export class EventRangeBuilder extends AbstractBuilder<Data.Event, EventView>{
+    compose(m: Data.Event, v: EventView) {
         console.log("Model (m):", m.dt_event);
         v.id = m.id;
         v.dtEvent = m.dt_event;
@@ -14,73 +12,21 @@ export class EventRangeBuilder extends AbstractBuilder<Data.Event, OngoingEventV
         v.sport = m.sport;
         v.status = m.status;
         v.title = m.title;
-        v.detail.cityAddress = m.detail.cityAddress;
-        v.detail.streetAdress = m.detail.streetAdress;
-        v.detail.type = m.detail.type;
+        v.detail.cityAddress = m?.detail?.cityAddress;
+        v.detail.streetAdress = m?.detail?.streetAdress;
+        v.detail.type = m?.detail?.type;
         v.year = m.year;
-        v.venue.location = m.venue.location;
+        v.venue.location = m?.venue?.location;
         v.time = m.tm_event;
-
+        v.type= m.type;
         console.log("View (v):", v);
     }
-    decompose(v: OngoingEventView): Data.Event {
+    decompose(v: EventView): Data.Event {
         throw new Error("Method not implemented.");
     }
-    view(): OngoingEventView {
-        return new OngoingEventView()
+    view(): EventView {
+        return new EventView()
     }
 
 }
 
-
-export class UpcomingEventBuilder extends AbstractBuilder<Data.Event, UpcomingEventView>{
-    compose(m: Data.Event, v: UpcomingEventView) {
-        console.log(v.year)
-        // v.id = m.id;
-        // v.dttEvent = m.dtevent;
-        // v.level = m.level;
-        // v.onPremise = m.onPremise;
-        // v.program.SelectedItem = m.program;
-        // v.sport = m.sport;
-        // v.status = m.status;
-        // v.title = m.title;
-        // v.detail.cityAddress = m.detail[0].streetAdress;
-        // v.detail.streetAdress = m.detail[0].cityAddress;
-        // v.detail.type = m.detail[0].type;
-        // v.year = m.year;
-        // v.venue.location = m.venue[0].location
-        // v.time = m.time
-
-    }
-    decompose(v: UpcomingEventView): Data.Event {
-        return
-    }
-    view(): UpcomingEventView {
-        return new UpcomingEventView()
-    }
-}
-// UpcomingEventBuilder
-export class PastEventBuilder extends AbstractBuilder<Data.Event, PastEventView>{
-    compose(m: Data.Event, v: PastEventView) {
-        // v.id = m.id;
-        // v.dttEvent = m.dtevent;
-        // v.level = m.level;
-        // v.onPremise = m.onPremise;
-        // v.program.SelectedItem = m.program;
-        // v.sport = m.sport;
-        // v.status = m.status;
-        // v.title = m.title;
-        // v.detail.cityAddress = m.detail[0].streetAdress;
-        // v.detail.streetAdress = m.detail[0].cityAddress;
-        // v.venue.location = m.venue[0].location;
-        // v.detail.type = m.detail[0].type;
-        // v.year = m.year;
-        // v.time = m.time
-    }
-    decompose(v: PastEventView): Data.Event {
-        return
-    }
-    view(): PastEventView {
-        return new PastEventView()
-    }
-}

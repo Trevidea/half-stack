@@ -16,10 +16,10 @@
       <div class="row">
         <div class="col-4 d-flex align-items-center " style="padding: 14 0;">
           <div class="badge badge-past-event" [ngClass]="{
-            'on-demand-event': item.detail.type === 'On Demand Event',
-            'scheduled-event': item.detail.type === 'Scheduled Event'
+            'on-demand-event': item.type === 'on-demand',
+            'scheduled-event': item.type === 'scheduled'
           }">
-            {{ item.detail.type }}
+            {{item.type}}
           </div>
         </div>
         <div class="col-8 card-btn-conatiner">
@@ -37,11 +37,11 @@
           <h4 class="ellipsis">{{item.title}}</h4>
           <p class="card-text">
             <i class="feather" data-feather="clock"></i>
-            {{ formatDateTime(item.dtEvent, item.time) }}
+            {{dateTimeservice.formatDateTime(item.dtEvent, item.time)}}
           </p>
           <p class="card-text">
             <i class="feather" data-feather="map-pin"></i>
-            {{ item.venue.location }}
+            {{item.venue.location}}
           </p>
         </div>
       </div>

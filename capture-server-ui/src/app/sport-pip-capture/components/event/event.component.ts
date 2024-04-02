@@ -12,25 +12,30 @@ import { Data } from 'app/sport-pip-capture/models/capture-interface';
   templateUrl: './event.component.html',
   styleUrls: ['./event.component.scss'],
   encapsulation: ViewEncapsulation.None,
- 
+
 })
 export class EventComponent implements OnInit {
   @Input() datasource: any
 
   @Output() filter = new EventEmitter<Data.FilterParams>();
   @Output() SyncEvents = new EventEmitter();
-  @Output() onTabChange=new EventEmitter()
+  @Output() onTabChange = new EventEmitter()
   gridView: boolean = true
   activeTabId: string;
   constructor(private router: Router, private tabStateService: TabStateService,) { }
 
   ngOnInit(): void {
     this.activeTabId = this.tabStateService.getActiveTab();
-
+    console.log(this.datasource)
   }
 
   CreateOnDemandEvent() {
     this.router.navigate(['on-demand-event'])
+  }
+
+
+  changeViewMode() {
+    this.gridView = !this.gridView
   }
 
   onNavChange(event: any) {
@@ -38,12 +43,8 @@ export class EventComponent implements OnInit {
     this.onTabChange.emit();
   }
 
-  changeViewMode(){
-    this.gridView =!this.gridView
-  }
-
   onFilter(filter: Data.FilterParams) {
-    console.log(filter);
     this.filter.emit(filter)
   }
+
 }

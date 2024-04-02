@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DateTimeService } from '../../event-utility/date-time.service';
 
 @Component({
   selector: 'app-upcoming-events-list',
@@ -6,9 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./upcoming-events-list.component.scss']
 })
 export class UpcomingEventsListComponent implements OnInit {
-
-  constructor() { }
-
+  @Input() datasource: any;
+  constructor(private dateTimeService: DateTimeService) { }
   ngOnInit(): void {
   }
 

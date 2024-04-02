@@ -1,20 +1,23 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
+import { DateTimeService } from '../../event-utility/date-time.service';
 @Component({
   selector: 'app-up-coming-event',
   templateUrl: './up-coming-event.component.html',
   styleUrls: ['./up-coming-event.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class UpComingEventComponent implements OnInit {
+export class UpComingEventComponent implements OnInit,OnDestroy {
   @Input() datasource: any
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
 
-  constructor(private _coreSidebarService: CoreSidebarService) { }
-
+  constructor(private _coreSidebarService: CoreSidebarService,private dateTimeservice: DateTimeService) { }
   ngOnInit(): void {
-    console.log(this.datasource)
+    this.dateTimeservice.calculateCountdown(this.datasource);
+    this.countdownInterval = setInterval(() => {
+      this.dateTimeservice.calculateCountdown(this.datasource);
+    }, 50);
   }
 
 
@@ -38,4 +41,12 @@ export class UpComingEventComponent implements OnInit {
     const formattedDate = date.toLocaleDateString('en-US', dateOptions);
     return `${formattedDate}, ${formattedHours}:${formattedMinutes} ${amPm}`;
   }
+
+  private countdownInterval: any;
+
+  ngOnDestroy(): void {
+     if (this.countdownInterval) {
+       clearInterval(this.countdownInterval);
+     }
+   }
 }

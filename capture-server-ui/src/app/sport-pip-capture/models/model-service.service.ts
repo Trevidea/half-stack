@@ -86,7 +86,6 @@ export class ModelServiceService {
       })));
   }
   private _getList<I extends Data.Base>(resource: string): Observable<I[]> {
-
     return this._adapter.demodulate(resource, this.read(resource))
       .pipe(map(models => models.map((model: any) => {
         return model as I
@@ -136,9 +135,16 @@ export class ModelServiceService {
   //   return this._data("employees", EmployeeModel);
   // }
 
-  eventJson(): Observable<Data.Event[]> {
-    return this._data('events', EventData)
+  // eventJson(query: Data.FilterParams): Observable<Data.Event[]> {
+  //   console.log("eventJson query",query)
+  //   return this._data(`events?status=${query.status}&sport=${query.sport}&level=${query.level}&program=${query.program}`, EventData)
+  // }
+
+  eventJson(status:string): Observable<Data.Event[]> {
+    console.log("eventJson query",status)
+    return this._data(`events?status=${status}`, EventData)
   }
+
 
   syncEvents(): Observable<any> {
     const url = `${this.modelsServerUrl}/event/sync`

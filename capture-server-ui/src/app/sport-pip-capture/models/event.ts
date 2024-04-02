@@ -92,5 +92,13 @@ export class EventData extends DataBase<Data.Event>{
   public set time(v : number) {
     this._model.tm_event = v;
   }
+ 
+  
+  public get type() : string {
+    return this._model.type;
+  }
+  public set type(v : string) {
+    this._model.type = v;
+  }
   
 }

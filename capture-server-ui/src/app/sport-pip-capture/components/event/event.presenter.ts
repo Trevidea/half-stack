@@ -3,23 +3,25 @@ import { Router } from '@angular/router';
 import { DataFactoryService } from 'app/sport-pip-capture/models/data-factory.service';
 import { EventRange } from './views/event';
 import { Transformer } from 'app/blocks/transformer';
-import { EventRangeBuilder, PastEventBuilder, UpcomingEventBuilder } from './builders/event';
+import { EventRangeBuilder } from './builders/event';
 import { ArrayBuilder } from 'app/sport-pip-capture/blocks/array.builder';
 import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 import { Data } from 'app/sport-pip-capture/models/capture-interface';
 import { TabStateService } from './event-utility/nav';
+import { EventFilter } from './event-utility/event-filter';
 
 @Component({
   selector: 'app-event-presenter',
-  template: `<app-event [datasource]="ds" (SyncEvents)="SyncEvents()" (filter)="onFilter($event)" (onTabChange)="onTabChange()" ></app-event>`,
+  template: `<app-event [datasource]="filteredData" (SyncEvents)="SyncEvents()" (filter)="onFilter($event)" (onTabChange)="onTabChange()" ></app-event>`,
   styleUrls: ['./event.component.scss'],
   encapsulation: ViewEncapsulation.None
-
 })
+
 export class EventPresenter implements OnInit {
   query: Data.FilterParams
-  activeTab:string;
+  activeTab: string;
   ds!: EventRange
+  filteredData:any;
   constructor(private router: Router,
     private dataFactory: DataFactoryService,
     private service: ModelServiceService,
@@ -28,14 +30,12 @@ export class EventPresenter implements OnInit {
   }
 
   ngOnInit(): void {
-    Transformer.ComposeCollectionAsync(this.service.eventJson(), this.ds.ongoingEvent, EventRangeBuilder);
-    // let data= this.service.eventJson();
-    console.log(this.ds.ongoingEvent)
-    // Transformer.ComposeCollectionAsync(this.dataFactory.ongoingEventJson(), this.ds.ongoingEvent, EventRangeBuilder);
-    // Transformer.ComposeCollectionAsync(this.dataFactory.UpCommingEventJson(), this.ds.upcomingEvent, UpcomingEventBuilder);
-    // Transformer.ComposeCollectionAsync(this.dataFactory.PastEventJson(), this.ds.pastEvent, PastEventBuilder);
+    const status = this.tabStateService.getActiveTab()
+    Transformer.ComposeCollectionAsync(this.service.eventJson(status), this.ds.event, EventRangeBuilder);
+    this.filteredData=this.ds.event;
+    // const filteredEvents = EventFilter.filterEvents(this.ds.event, this.query);
+    // console.log(filteredEvents);
   }
-
 
   SyncEvents() {
     console.log('clicked syncEvents');
@@ -49,34 +49,29 @@ export class EventPresenter implements OnInit {
     );
   }
 
-
   onFilter(filter: Data.FilterParams) {
-    console.log(filter)
-  }
-
-  filterDataByActiveTab(): void {
-    switch (this.activeTab) {
-      case 'ongoing': {
-        
-       
-        break;
-      }
-
-      case 'upcoming':
-
-        break;
-      case 'past':
-
-        break;
-      default:
-        break;
-    }
+    this.query = filter;
+    console.log(this.query)
+    console.log(this.ds.event)
+    this.filteredData = this.filterEvents(this.ds.event, this.query);
+    console.log(this.filteredData)
+    // this.ds.event = this.filteredData;
   }
 
   onTabChange(): void {
-    this.activeTab = this.tabStateService.getActiveTab()
-   
+    // console.log(this.query)
   }
+
+  filterEvents(events: any[], query: Data.FilterParams) {
+    return events.filter(event => {
+      if (query.sport !== null && query.sport !== undefined && event._sport !== query.sport) {
+        return false;
+      }
+      return true;
+    });
+  }
+
+
 
 
 }

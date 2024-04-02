@@ -29,6 +29,7 @@ export namespace Data {
         title: string;
         status: string;
         dayHalve: string;
+        type:string;
         owner_id?: number;  //this is user ID
     }
 
@@ -265,9 +266,11 @@ export namespace Data {
     }
 
     export interface FilterParams {
-        program: string
-        level: string
-        sport: string
+        year: number
+        program: string;
+        level: string;
+        sport: string;
+        status?: string;
     }
 
 
