@@ -14,6 +14,7 @@ import { MetaTypePresenter } from "./components/meta-type/meta-type.presenter";
 import { PastEventViewPresenter } from "./components/event/grid-view-ui/past-event/past-event-view/past-event-view.presenter";
 import { EventPreviewComponent } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.component";
 import { EventPreviewPresenter } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.presenter";
+import { DatatablesService } from "app/main/tables/datatables/datatables.service";
 
 const routes: Routes = [
   {
@@ -31,8 +32,15 @@ const routes: Routes = [
         path: "connection-device-detail",
         component: ConnectionDeviceDetailComponent,
       },
-      { path: "event-preview", component: EventPreviewPresenter },
     ],
+  },
+  {
+    path: "connection/event-preview",
+    component: EventPreviewPresenter,
+    resolve: {
+      datatables: DatatablesService,
+    },
+    data: { animation: "datatables" },
   },
   { path: "meta-types", component: MetaTypePresenter },
   { path: "logs", component: LogPresentert },
@@ -47,5 +55,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers: [DatatablesService],
 })
 export class SportPipCaptureRoutingModule {}
