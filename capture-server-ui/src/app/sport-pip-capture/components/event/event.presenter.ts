@@ -8,7 +8,6 @@ import { ArrayBuilder } from 'app/sport-pip-capture/blocks/array.builder';
 import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 import { Data } from 'app/sport-pip-capture/models/capture-interface';
 import { TabStateService } from './event-utility/nav';
-import { EventFilter } from './event-utility/event-filter';
 
 @Component({
   selector: 'app-event-presenter',

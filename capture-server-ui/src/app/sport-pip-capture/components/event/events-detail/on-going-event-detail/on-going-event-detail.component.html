@@ -4,7 +4,7 @@
             <img src="../../../../../../../../assets/images/pip-image/Event-card.png"
                 style="width: 100%; height:150px;">
             <div class="card-img-overlay cursor-pointer">
-                <svg (click)="toggleSidebar('ongoing-event-detail')" xmlns="http://www.w3.org/2000/svg" width="25"
+                <svg (click)="toggleSidebar('ongoing-scheduled')" xmlns="http://www.w3.org/2000/svg" width="25"
                     height="24" viewBox="0 0 25 24" fill="none">
                     <rect x="0.346191" width="24" height="24" rx="5" fill="#F2F2F2" />
                     <path d="M16.3462 8L8.34619 16" stroke="black" stroke-width="1.5" stroke-linecap="round"
@@ -198,7 +198,8 @@
             </div>
         </div>
         <div class="modal-footer fixed-footer">
-            <div class="d-flex justify-content-end align-items-center pagination-btn" style="margin-top: 7px;">
+            <button type="button" class="btn btn-warning" rippleEffect>join</button>
+            <div class="d-flex justify-content-end align-items-center pagination-btn ml-auto" style="margin-top: 7px;">
                 <button type="button" class="mr-1 btn btn-icon btn-secondary">
                     <i class="bi bi-chevron-left"></i></button>
                 <button type="button" class="btn btn-icon btn-secondary">

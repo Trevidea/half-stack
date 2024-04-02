@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewEncapsulation }
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { Subscription, interval } from 'rxjs';
 import { DateTimeService } from '../../event-utility/date-time.service';
+import { UI } from '../../event-utility/event-ui-interface';
 @Component({
   selector: 'app-on-going-event',
   templateUrl: './on-going-event.component.html',
@@ -11,7 +12,9 @@ import { DateTimeService } from '../../event-utility/date-time.service';
 export class OnGoingEventComponent implements OnInit, OnDestroy {
   @Input() datasource: any
   private countdownInterval: any;
-
+  dropdownItems: UI.DropDownMenuItem[] = [
+    { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => {} },
+  ]
   constructor(private _coreSidebarService: CoreSidebarService, private dateTimeservice: DateTimeService) { }
 
 
@@ -23,7 +26,7 @@ export class OnGoingEventComponent implements OnInit, OnDestroy {
   }
 
   eventDetail(event: string) {
-    this._coreSidebarService.getSidebarRegistry(event).toggleOpen();
+    this._coreSidebarService.getSidebarRegistry('ongoing-' + event).toggleOpen();
   }
 
 

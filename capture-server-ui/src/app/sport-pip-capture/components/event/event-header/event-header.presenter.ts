@@ -19,9 +19,20 @@ export class EventHeaderPresenter implements OnInit, AfterViewInit {
     constructor(private dataFactory: DataFactoryService, private tabStateService: TabStateService) {
         this.ds = new headerView();
     }
-    ngAfterViewInit(): void {
-        // this.onfilter()
+
+
+
+    ngOnInit(): void {
+        Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("SPORTS"), this.ds.sports, MetaTypeBuilder);
+        Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("PROGRAM"), this.ds.programs, MetaTypeBuilder);
+        Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("LEVELS"), this.ds.levels, MetaTypeBuilder);
+        Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("YEARS"), this.ds.years, MetaTypeBuilder);
+        this.ds.programs.onItemSelected(handler => this.onfilter());
+        this.ds.levels.onItemSelected(handler => this.onfilter());
+        this.ds.sports.onItemSelected(handler => this.onfilter());
+        this.ds.years.onItemSelected(handler => this.onfilter());
     }
+
     onfilter() {
         const level = this.ds.levels.SelectedItem ? this.ds.levels.SelectedItem : null;
         const program = this.ds.programs.SelectedItem ? this.ds.programs.SelectedItem : null;
@@ -33,17 +44,6 @@ export class EventHeaderPresenter implements OnInit, AfterViewInit {
             sport: sport,
             year: year,
         });
-    }
-
-    ngOnInit(): void {
-        Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("SPORTS"), this.ds.sports, MetaTypeBuilder);
-        Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("PROGRAM"), this.ds.programs, MetaTypeBuilder);
-        Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("LEVELS"), this.ds.levels, MetaTypeBuilder);
-        Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("YEARS"), this.ds.years, MetaTypeBuilder);
-        this.ds.programs.onItemSelected(handler => this.onfilter());
-        this.ds.levels.onItemSelected(handler => this.onfilter());
-        this.ds.sports.onItemSelected(handler => this.onfilter());
-        this.ds.years.onItemSelected(handler => this.onfilter());
     }
 
     clearAll() {
@@ -58,6 +58,8 @@ export class EventHeaderPresenter implements OnInit, AfterViewInit {
             year: null,
         });
     }
-
+    ngAfterViewInit(): void {
+        // this.onfilter()
+    }
 
 }

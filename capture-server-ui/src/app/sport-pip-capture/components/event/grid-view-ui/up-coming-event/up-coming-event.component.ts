@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { DateTimeService } from '../../event-utility/date-time.service';
+import { UI } from '../../event-utility/event-ui-interface';
 @Component({
   selector: 'app-up-coming-event',
   templateUrl: './up-coming-event.component.html',
@@ -11,7 +12,9 @@ export class UpComingEventComponent implements OnInit,OnDestroy {
   @Input() datasource: any
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
-
+  dropdownItems: UI.DropDownMenuItem[] = [
+    { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => {} },
+  ]
   constructor(private _coreSidebarService: CoreSidebarService,private dateTimeservice: DateTimeService) { }
   ngOnInit(): void {
     this.dateTimeservice.calculateCountdown(this.datasource);
@@ -21,9 +24,8 @@ export class UpComingEventComponent implements OnInit,OnDestroy {
   }
 
 
-  AddEvent(event: string, item: any) {
-    console.log(item)
-    this._coreSidebarService.getSidebarRegistry(`${event}`).toggleOpen();
+  viewDetail(event: string) {
+    this._coreSidebarService.getSidebarRegistry('upcoming-'+event).toggleOpen();
   }
 
   formatDateTime(dateTimeString: string, time: number): string {

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { UI } from '../event-ui-interface';
 
 @Component({
   selector: 'app-menu-button',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu-button.component.scss']
 })
 export class MenuButtonComponent implements OnInit {
-  horizontalPositon 
+  @Input() dropdownItems: UI.DropDownMenuItem[] = [];
+  // horizontalPositon 
   constructor() { }
 
   ngOnInit(): void {
