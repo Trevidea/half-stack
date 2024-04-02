@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { Data } from './sport-pip-capture-interface';
+import { Data } from './capture-interface';
 import { ConnectionData } from './connection';
 import { DeviceData } from './device';
 import { UserProfileData } from './user-profile';
@@ -131,22 +131,22 @@ export class DataFactoryService {
   FilesIndexJson(): Observable<Data.FileIndex[]> {
     return this._data('file-indexes', FileIndexData)
   }
-  EventJson(id: number): Observable<Data.Event> {
+  // EventJson(id: number): Observable<Data.Event> {
 
-    return this._datum('event', id, EventData)
-  }
-  PastEventJson(): Observable<Data.Event[]> {
+  //   return this._datum('event', id, EventData)
+  // }
+  // PastEventJson(): Observable<Data.Event[]> {
 
-    return this._data(`events/past-events`, EventData)
-  }
-  UpCommingEventJson(): Observable<Data.Event[]> {
+  //   return this._data(`events/past-events`, EventData)
+  // }
+  // UpCommingEventJson(): Observable<Data.Event[]> {
 
-    return this._data(`events/upcoming-events`, EventData)
-  }
-  ongoingEventJson(): Observable<Data.Event[]> {
+  //   return this._data(`events/upcoming-events`, EventData)
+  // }
+  // ongoingEventJson(): Observable<Data.Event[]> {
 
-    return this._data(`events/ongoing-events`, EventData)
-  }
+  //   return this._data(`events/ongoing-events`, EventData)
+  // }
 
   EventStatus() {
     return ["Pending", "Active"]

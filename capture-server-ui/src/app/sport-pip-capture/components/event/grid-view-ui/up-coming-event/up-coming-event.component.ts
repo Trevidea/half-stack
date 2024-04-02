@@ -1,61 +1,52 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
+import { DateTimeService } from '../../event-utility/date-time.service';
 @Component({
   selector: 'app-up-coming-event',
   templateUrl: './up-coming-event.component.html',
   styleUrls: ['./up-coming-event.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class UpComingEventComponent implements OnInit {
-  @Input ()datasource:any
+export class UpComingEventComponent implements OnInit,OnDestroy {
+  @Input() datasource: any
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
-  targetDate: Date;
-  countdown: string;
-  constructor( private _coreSidebarService: CoreSidebarService) { }
 
+  constructor(private _coreSidebarService: CoreSidebarService,private dateTimeservice: DateTimeService) { }
   ngOnInit(): void {
-
-    // this.datasource.upcomingEvent.forEach((event, index) => {
-    //   const [year,month,day] = event.dttEvent.split('-').map(Number);
-    //   const [hours, minutes] = event.time.split(':').map(Number);
-    //   const targetDate = new Date(year, month - 1, day, hours, minutes);
-
-    //   this.startCountdown(targetDate, index);
-    // });
-    // setInterval(() => {
-    //   this.datasource.upcomingEvent.forEach((event, index) => {
-    //     const [year,month,day] = event.dttEvent.split('-').map(Number);
-    //     const [hours, minutes] = event.time.split(':').map(Number);
-    //     const targetDate = new Date(year, month - 1, day, hours, minutes);
-
-    //     this.updateCountdown(targetDate, index);
-    //   });
-    // }, 1000);
-  }
-  countdowns: string[] = [];
-  startCountdown(targetDate: Date, index: number) {
-    this.updateCountdown(targetDate, index);
+    this.dateTimeservice.calculateCountdown(this.datasource);
+    this.countdownInterval = setInterval(() => {
+      this.dateTimeservice.calculateCountdown(this.datasource);
+    }, 50);
   }
 
-  updateCountdown(targetDate: Date, index: number) {
-    const now = new Date();
-    const timeDifference = targetDate.getTime() - now.getTime();
-  
 
-    if (timeDifference <= 0) {
-      this.datasource.upcomingEvent[index].countdown = "Countdown expired";
-    } else {
-      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-      this.datasource.upcomingEvent[index].countdown = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
-  }
-  AddEvent(event:string,item:any) {
+  AddEvent(event: string, item: any) {
     console.log(item)
     this._coreSidebarService.getSidebarRegistry(`${event}`).toggleOpen();
   }
+
+  formatDateTime(dateTimeString: string, time: number): string {
+    const dateOptions: Intl.DateTimeFormatOptions = {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+    };
+    const timeHours = Math.floor(time / 100);
+    const timeMinutes = time % 100;
+    const amPm = timeHours >= 12 ? 'pm' : 'am';
+    const formattedHours = timeHours % 12 || 12;
+    const formattedMinutes = timeMinutes < 10 ? '0' + timeMinutes : timeMinutes;
+    const date = new Date(dateTimeString);
+    const formattedDate = date.toLocaleDateString('en-US', dateOptions);
+    return `${formattedDate}, ${formattedHours}:${formattedMinutes} ${amPm}`;
+  }
+
+  private countdownInterval: any;
+
+  ngOnDestroy(): void {
+     if (this.countdownInterval) {
+       clearInterval(this.countdownInterval);
+     }
+   }
 }

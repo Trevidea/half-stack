@@ -1,5 +1,5 @@
 import { Collection } from "app/blocks/collection";
-import { Views } from "app/sport-pip-capture/models/sport-pip-capture-interface";
+import { Views } from "app/sport-pip-capture/models/capture-interface";
 
 export class OnDemandEventFormView implements Views.Datasource {
 
@@ -73,26 +73,13 @@ export class OnDemandEventFormView implements Views.Datasource {
     }
 
 
-    private _dttEvent: string;
-    public get dttEvent(): string {
-        // if (!this._dttEvent) {
-        //     this._dttEvent = "12-12-2023"
-        // }
-        return this._dttEvent;
+    private _dtEvent: Date;
+    public get dttEvent(): Date {
+        return this._dtEvent;
     }
-    public set dttEvent(v: string) {
-        this._dttEvent = v;
+    public set dtEvent(v: Date) {
+        this._dtEvent = v;
     }
-
-
-    private _onPromise: boolean;
-    public get onPromise(): boolean {
-        return this._onPromise;
-    }
-    public set onPromise(v: boolean) {
-        this._onPromise = v;
-    }
-
 
 
     private _status: string;
@@ -126,19 +113,12 @@ export class OnDemandEventFormView implements Views.Datasource {
         this._venue = v;
     }
 
-    private _time: string;
-    public get time(): string {
-        // if (!this._time) {
-        //     const now = new Date();
-        //     const minutes = now.getMinutes().toString().padStart(2, '0');
-        //     const seconds = now.getSeconds().toString().padStart(2, '0');
-        //     this._time = `${minutes}:${seconds}`
-         //   return this._time;
-
-        // }
+    private _time: number;
+    public get time(): number {
+      
         return this._time;
     }
-    public set time(v: string) {
+    public set time(v: number) {
         this._time = v;
     }
 

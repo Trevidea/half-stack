@@ -1,5 +1,5 @@
 // import { Views } from '../models/ro-interface';
-import { Views } from 'app/sport-pip-capture/models/sport-pip-capture-interface';
+import { Views } from 'app/sport-pip-capture/models/capture-interface';
 import { EventDispatcher, Handler } from './event-dispatcher'
 
 export interface ItemSelectedEvent<T> {

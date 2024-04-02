@@ -1,5 +1,5 @@
 
-import { Data } from "app/sport-pip-capture/models/sport-pip-capture-interface";
+import { Data } from "app/sport-pip-capture/models/capture-interface";
 import { TypesView } from "../views/types";
 import { AbstractBuilder } from "app/blocks/strategies";
 

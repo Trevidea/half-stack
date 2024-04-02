@@ -1,5 +1,5 @@
 import { Collection , Range} from "app/blocks/collection";
-import { Views } from "app/sport-pip-capture/models/sport-pip-capture-interface";
+import { Views } from "app/sport-pip-capture/models/capture-interface";
 import { DistributionListView } from "../../distribution-list/view/distribution-list";
 export class SharingRangeView implements Views.Datasource {
 

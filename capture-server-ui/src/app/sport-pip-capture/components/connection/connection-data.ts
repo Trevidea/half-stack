@@ -71,6 +71,7 @@ export const EventConnection$: Observable<any[]> = of([
     transmitStatus: "Receiving",
     received: "22 files",
     retries: "2",
+    type: "sub",
   },
   {
     id: 2,
@@ -84,6 +85,7 @@ export const EventConnection$: Observable<any[]> = of([
     transmitStatus: "Paused",
     received: "18 files",
     retries: "0",
+    type: "sub",
   },
   {
     id: 3,
@@ -97,6 +99,7 @@ export const EventConnection$: Observable<any[]> = of([
     transmitStatus: "Streaming",
     received: "25 files",
     retries: "1",
+    type: "pub",
   },
   {
     id: 4,
@@ -110,6 +113,7 @@ export const EventConnection$: Observable<any[]> = of([
     transmitStatus: "Blocked",
     received: "0 files",
     retries: "0",
+    type: "sub",
   },
   {
     id: 5,
@@ -123,5 +127,6 @@ export const EventConnection$: Observable<any[]> = of([
     transmitStatus: "Receiving",
     received: "15 files",
     retries: "3",
+    type: "sub",
   },
 ]);

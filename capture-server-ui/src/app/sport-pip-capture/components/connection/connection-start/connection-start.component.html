@@ -209,13 +209,32 @@
 <div class="card">
   <div class="row p-2">
     <div class="col-md-12 col-lg-6 col-6 d-flex align-items-center">
-      <div class="badge badge-pill badge-primary">
+      <div
+        style="cursor: pointer"
+        class="badge badge-pill badge-primary cursor-pointer"
+        [ngClass]="
+          allOrSubOrPub == 'all' ? 'badge-primary' : 'badge-light-secondary'
+        "
+        (click)="getAllPubOrSub('all')"
+      >
         <span style="font-size: 1.4em"> All </span>
       </div>
-      <div class="badge badge-pill badge-light-secondary ml-1">
+      <div
+        class="badge badge-pill ml-1 cursor-pointer"
+        [ngClass]="
+          allOrSubOrPub == 'sub' ? 'badge-primary' : 'badge-light-secondary'
+        "
+        (click)="getAllPubOrSub('sub')"
+      >
         <span style="font-size: 1.4em"> Subscriber</span>
       </div>
-      <div class="badge badge-pill badge-light-secondary ml-1">
+      <div
+        class="badge badge-pill ml-1 cursor-pointer"
+        [ngClass]="
+          allOrSubOrPub == 'pub' ? 'badge-primary' : 'badge-light-secondary'
+        "
+        (click)="getAllPubOrSub('pub')"
+      >
         <span style="font-size: 1.4em"> Publisher</span>
       </div>
 
@@ -420,7 +439,7 @@
       <div class="row">
         <div
           *ngFor="let item of eventConnection"
-          class="col-xl-3 col-lg-4 col-md-6 col-sm-12"
+          class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12"
         >
           <div class="d-flex p-1">
             <div
@@ -529,11 +548,13 @@
                     <i
                       *ngIf="item.transmitStatus !== 'Streaming'"
                       class="bi bi bi-tablet text-primary"
-                      style="margin-right: 0.2rem"
+                      style="margin-right: 0.2rem; margin-bottom: 0.2em"
                     ></i>
                   </span>
                   <!-- <i class="bi bi-tablet" style="margin-right: 0.2rem"></i> -->
-                  <h6>{{ item.deviceType }}</h6>
+                  <h6 style="text-wrap: nowrap; overflow: hidden">
+                    {{ item.deviceType }}
+                  </h6>
                 </div>
 
                 <span ngbDropdown style="cursor: pointer">

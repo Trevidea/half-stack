@@ -12,17 +12,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1:40:00</td>
+            <tr *ngFor="let item of datasource">
+                <td style="width: 180px;">{{item.countdown}}</td>
                 <td>
                     <img src="assets/images/pip-image/Event-card.png" class="img-fluid" alt="..."
                         style="max-width: 60px; max-height: 36px; border-radius: 4px; margin-right: 5px;">
-                    Mendon vs Sutherland
+                    {{item.title}}
                 </td>
-                <td>Scheduled Event</td>
-                <td>Sept 15th, Saturday</td>
-                <td class="cursor-pointer">2:00 pm</td>
-                <td>Fairport High School, 33 Union Street, Fairport</td>
+                <td>{{item.type}}</td>
+                <td>{{dateTimeService.formatEventDate(item.dtEvent)}}</td>
+                <!-- Sept 15th, Saturda -->
+                <td class="cursor-pointer">{{dateTimeService.formatTime(item.time)}}</td>
+                <td>{{item.venue.location}}</td>
                 <td class="">
                     <app-menu-button></app-menu-button>
                 </td>
