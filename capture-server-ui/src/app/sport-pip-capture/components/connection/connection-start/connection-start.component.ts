@@ -7,6 +7,7 @@ import {
 import { header } from "./data";
 import { EventConnection$ } from "../connection-data";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { filter } from "rxjs/operators";
 @Component({
   selector: "app-connection-start",
   templateUrl: "./connection-start.component.html",
@@ -18,6 +19,7 @@ export class ConnectionStartComponent implements OnInit {
   eventConnection: any[] = [];
   deviceName: string;
   streamingKey: string;
+  allOrSubOrPub: string = "all";
   constructor(private modalService: NgbModal, private cdr: ChangeDetectorRef) {}
   connectiondetail: boolean = false;
   ngOnInit(): void {
@@ -30,6 +32,7 @@ export class ConnectionStartComponent implements OnInit {
         console.log("error:::", error);
       }
     );
+    console.log(this.eventConnection);
   }
   ConnectionDetails(yes: boolean) {
     this.connectiondetail = yes;
@@ -47,6 +50,21 @@ export class ConnectionStartComponent implements OnInit {
       this.eventConnection[index].transmitStatus = "Paused";
       // this.cdr.detectChanges();
     }
+  }
+  getAllPubOrSub(e) {
+    this.allOrSubOrPub = e;
+    EventConnection$.pipe(
+      // Filter the data based on the type
+      filter((data: any[]) => data.filter((item) => item.type === e).length > 0)
+    ).subscribe(
+      (filteredData) => {
+        // Assign the filtered data to this.eventConnection
+        this.eventConnection = filteredData;
+      },
+      (error) => {
+        console.log("error:::", error);
+      }
+    );
   }
   block(item) {}
   streaming() {}
