@@ -1,20 +1,21 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { environment } from 'environments/environment';
-import { Observable } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
-import { Data } from './capture-interface';
-import { ConnectionData } from './connection';
-import { DeviceData } from './device';
-import { UserProfileData } from './user-profile';
-import { EventData } from './event';
-import { DistributionData } from './distribution';
-import { PreviousEventsConnectionData } from './previous-events-connection';
-import { MetaTypeData } from './meta-type';
-import { FileIndexData } from './file-index';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { environment } from "environments/environment";
+import { Observable } from "rxjs";
+import { map, mergeMap } from "rxjs/operators";
+import { Data } from "./capture-interface";
+import { ConnectionData } from "./connection";
+import { DeviceData } from "./device";
+import { UserProfileData } from "./user-profile";
+import { EventData } from "./event";
+import { DistributionData } from "./distribution";
+import { PreviousEventsConnectionData } from "./previous-events-connection";
+import { MetaTypeData } from "./meta-type";
+import { FileIndexData } from "./file-index";
+import { ConnectionPreviewData } from "./connection-preview";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class DataFactoryService {
   private _spModelUrl: string = environment.spModelUrl;
@@ -26,95 +27,117 @@ export class DataFactoryService {
   }
 
   create(type: string, entity: any): Observable<any> {
-    const url = `${this._spModelUrl}/${type}`
+    const url = `${this._spModelUrl}/${type}`;
 
     return this._httpClient.post<any>(url, entity);
-
   }
 
   read(type: string): Observable<any> {
-    const url = `${this._spModelUrl}/${type}`
-
-    return this._httpClient.get<any>(url);
+    if (type == "api/event-preview") {
+      const url = type;
+      return this._httpClient.get<any>(url);
+    } else {
+      const url = `${this._spModelUrl}/${type}`;
+      return this._httpClient.get<any>(url);
+    }
   }
 
-
-
   readOne(type: string, id: number): Observable<any> {
-    const url = `${this._spModelUrl}/${type}/${id}`
+    const url = `${this._spModelUrl}/${type}/${id}`;
 
     return this._httpClient.get<any>(url);
   }
 
   update(type: string, entity: any, id: number) {
-    const url = `${this._spModelUrl}/${type}/${id}`
+    const url = `${this._spModelUrl}/${type}/${id}`;
     // console.log(url)
     return this._httpClient.put<any>(url, entity);
   }
 
   delete(type: string, id: number) {
-    const url = `${this._spModelUrl}/${type}/${id}`
+    const url = `${this._spModelUrl}/${type}/${id}`;
     // console.log(url)
     return this._httpClient.delete<any>(url);
   }
   private _getList<I extends Data.Base>(resource: string): Observable<I[]> {
-    return this.read(resource).pipe(map((blob: any) => blob))
-      .pipe(map(models => {
-        return models.map((model: any) => {
-          model.id = model.id;
-          return model as I
+    return this.read(resource)
+      .pipe(map((blob: any) => blob))
+      .pipe(
+        map((models) => {
+          return models.map((model: any) => {
+            model.id = model.id;
+            return model as I;
+          });
         })
-      }));
+      );
   }
-  MetaTypeByKey(key: string)
-    : Observable<Data.MetaType> {
-    const url = `${this._spModelUrl}/meta-type/key/${key}`
+  MetaTypeByKey(key: string): Observable<Data.MetaType> {
+    const url = `${this._spModelUrl}/meta-type/key/${key}`;
     return this._httpClient.get<MetaTypeData>(url);
   }
-  MetaTypeJson():Observable<Data.MetaType[]>{
-    
-    return this._data(`meta-types`, MetaTypeData)
+  MetaTypeJson(): Observable<Data.MetaType[]> {
+    return this._data(`meta-types`, MetaTypeData);
   }
-  private _get<I extends Data.Base>(resource: string, id: number): Observable<I> {
-
-    return this.readOne(resource, id)
-      .pipe(map((blob: any) => {
-        if (blob)
-          blob["id"] = blob["id"]
+  private _get<I extends Data.Base>(
+    resource: string,
+    id: number
+  ): Observable<I> {
+    return this.readOne(resource, id).pipe(
+      map((blob: any) => {
+        if (blob) blob["id"] = blob["id"];
         return blob as I;
-      }))
+      })
+    );
   }
 
-  private _data<M, I extends Data.Base>(resource: string, type: new (I: Data.Base) => M): Observable<M[]> {
-    return this._getList<I>(resource)
-      .pipe(map((data: I[]) => {
-        return data.map((datum: I) => { return new type(datum) });
-      }));
+  private _data<M, I extends Data.Base>(
+    resource: string,
+    type: new (I: Data.Base) => M
+  ): Observable<M[]> {
+    return this._getList<I>(resource).pipe(
+      map((data: I[]) => {
+        return data.map((datum: I) => {
+          return new type(datum);
+        });
+      })
+    );
   }
 
-  private _datum<M, I extends Data.Base>(resource: string, id: number, type: new (I: Data.Base) => M): Observable<M> {
-    return this._get<I>(resource, id)
-      .pipe(map((datum: I) => {  return new type(datum) }));
+  private _datum<M, I extends Data.Base>(
+    resource: string,
+    id: number,
+    type: new (I: Data.Base) => M
+  ): Observable<M> {
+    return this._get<I>(resource, id).pipe(
+      map((datum: I) => {
+        return new type(datum);
+      })
+    );
   }
 
-
-  // //////Get all data 
+  // //////Get all data
   // ConnectionsJson(): Observable<ConnectionData[]> {
   //   return this._data('connections', ConnectionData)
   // }
 
-  // //////////Get data  
+  // //////////Get data
   // ConnectionJson(id: number): Observable<Data.Connection> {
   //   return this._datum('connections', id, ConnectionData);
   // }
   PreviousConnection(): Observable<Data.PreviousEventsConnection[]> {
-    return this._data('connection-with-past-details', PreviousEventsConnectionData);
+    return this._data(
+      "connection-with-past-details",
+      PreviousEventsConnectionData
+    );
   }
   DistributionsListJson(): Observable<Data.Distribution[]> {
-    return this._data('distributions', DistributionData);
+    return this._data("distributions", DistributionData);
+  }
+  getEventPreview(): Observable<Data.ConnectionPreview[]> {
+    return this._data("api/event-preview", ConnectionPreviewData);
   }
   DistributionJson(id: number): Observable<Data.Distribution> {
-    return this._datum('distribution', id, DistributionData);
+    return this._datum("distribution", id, DistributionData);
   }
   // DevicesJson(): Observable<DeviceData[]> {
   //   return this._data('devices', DeviceData);
@@ -125,11 +148,11 @@ export class DataFactoryService {
   // }
 
   UserProfileJson(id: number): Observable<Data.UserProfile> {
-    return this._datum('user', id, UserProfileData);
+    return this._datum("user", id, UserProfileData);
   }
 
   FilesIndexJson(): Observable<Data.FileIndex[]> {
-    return this._data('file-indexes', FileIndexData)
+    return this._data("file-indexes", FileIndexData);
   }
   // EventJson(id: number): Observable<Data.Event> {
 
@@ -149,19 +172,20 @@ export class DataFactoryService {
   // }
 
   EventStatus() {
-    return ["Pending", "Active"]
+    return ["Pending", "Active"];
   }
   EventLevel() {
-    return ["Varsity", "Junior Varsity", "Sophomore"]
+    return ["Varsity", "Junior Varsity", "Sophomore"];
   }
   EventProgram() {
-    return ["Man", "Women"]
+    return ["Man", "Women"];
   }
   EventYear() {
-    return ["2023", "2022", "2021", "2020"]
+    return ["2023", "2022", "2021", "2020"];
   }
   EventSports() {
-    return ["Archery",
+    return [
+      "Archery",
       "Badminton",
       "Baseball",
       "Basketball",
@@ -181,49 +205,45 @@ export class DataFactoryService {
       "Gymnastics",
       "Hang Gliding",
       "High Jumping",
-      "Hockey"]
+      "Hockey",
+    ];
   }
   dayHalves() {
-    return ["AM", "PM"]
+    return ["AM", "PM"];
   }
   SaveUserProfileJson(data: Data.UserProfile): Observable<Data.UserProfile> {
     if (data.id) {
-      return this.update('user', data, data.id);
+      return this.update("user", data, data.id);
     }
-
-
   }
 
   SaveOnDemandFormJson(data: Data.Event): Observable<Data.Event> {
     // console.log(data)
 
     if (data.id) {
-      return this.update('event', data, data.id);
+      return this.update("event", data, data.id);
     } else {
-      return this.create('event', data)
+      return this.create("event", data);
     }
-
-
   }
   SaveDistributionList(data: Data.Distribution): Observable<Data.Distribution> {
     // console.log(data)
     if (data.id) {
-      return this.update('distribution', data, data.id);
+      return this.update("distribution", data, data.id);
     } else {
-      return this.create("distribution", data)
+      return this.create("distribution", data);
     }
   }
   DeleteDistributionJson(id: number) {
-    return this.delete('distribution', id).subscribe((res: any) => {
+    return this.delete("distribution", id).subscribe((res: any) => {
       // console.log(res)
-    })
+    });
   }
   SaveMetaType(data: Data.MetaTypeEgress): Observable<Data.MetaTypeEgress> {
     if (data.id) {
       // console.log('::::::', data, data.id)
-      return this.update("meta-type/value", data, data.id)
-    }
-    else {
+      return this.update("meta-type/value", data, data.id);
+    } else {
       throw new Error("Method not implemented.");
     }
   }
