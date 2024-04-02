@@ -8,7 +8,7 @@ import { TabStateService } from "../event-utility/nav";
 
 @Component({
     selector: 'app-header-presenter',
-    template: `<app-event-header [datasource]="ds"><app-event-header>`,
+    template: `<app-event-header [datasource]="ds" (onClear)="onfilter()"  (allClear)="clearAll()" ><app-event-header>`,
     styleUrls: ['./event-header.component.scss'],
 })
 
@@ -23,14 +23,18 @@ export class EventHeaderPresenter implements OnInit, AfterViewInit {
         // this.onfilter()
     }
     onfilter() {
-        console.log("emitting filter event")
+        const level = this.ds.levels.SelectedItem ? this.ds.levels.SelectedItem : null;
+        const program = this.ds.programs.SelectedItem ? this.ds.programs.SelectedItem : null;
+        const sport = this.ds.sports.SelectedItem ? this.ds.sports.SelectedItem : null;
+        const year = this.ds.years.SelectedItem ? parseInt(this.ds.years.SelectedItem) : null;
         this.filter.emit({
-            level: this.ds.levels.SelectedItem,
-            program: this.ds.programs.SelectedItem,
-            sport: this.ds.sports.SelectedItem,
-            year: parseInt(this.ds.years.SelectedItem),
+            level: level,
+            program: program,
+            sport: sport,
+            year: year,
         });
     }
+
     ngOnInit(): void {
         Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("SPORTS"), this.ds.sports, MetaTypeBuilder);
         Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("PROGRAM"), this.ds.programs, MetaTypeBuilder);
@@ -40,10 +44,20 @@ export class EventHeaderPresenter implements OnInit, AfterViewInit {
         this.ds.levels.onItemSelected(handler => this.onfilter());
         this.ds.sports.onItemSelected(handler => this.onfilter());
         this.ds.years.onItemSelected(handler => this.onfilter());
-
-        // this.onfilter()
     }
 
+    clearAll() {
+        this.ds.levels.SelectedItem = null;
+        this.ds.programs.SelectedItem = null;
+        this.ds.sports.SelectedItem = null;
+        this.ds.years.SelectedItem = null;
+        this.filter.emit({
+            level: null,
+            program: null,
+            sport: null,
+            year: null,
+        });
+    }
 
 
 }

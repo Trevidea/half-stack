@@ -49,9 +49,7 @@ export class EventPresenter implements OnInit {
 
   onFilter(filter: Data.FilterParams) {
     if (filter != null) {
-      if (isNaN(filter.year)) {
-        filter.year = null;
-      }
+      console.log(filter)
       this.query = filter;
       this.filteredData = this.filterEvents(this.ds.event, this.query);
     }
