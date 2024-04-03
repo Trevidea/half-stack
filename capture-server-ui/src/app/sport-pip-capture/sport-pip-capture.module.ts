@@ -74,10 +74,18 @@ import { EventPaginationComponent } from "./components/event-pagination/event-pa
 // import { McIconModule } from "@ptsecurity/mosaic/icon";
 import { DemoMosaicModule } from "./mosaic.module";
 import { EventPreviewPresenter } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.presenter";
+// import { OngoingOndemandEventComponent } from "./components/event/events-detail/ongoing-ondemand-event/ongoing-ondemand-event.component";
+// import { UpcomingOndemandEventComponent } from "./components/event/events-detail/upcoming-ondemand-event/upcoming-ondemand-event.component";
+// import { OngoingOndemandEventPresenter } from "./components/event/events-detail/ongoing-ondemand-event/ongoing-ondemand.event.presenter";
+// import { UpcomingOndemandEventPresenter } from "./components/event/events-detail/upcoming-ondemand-event/upcoming-ondemand-event.presenter";
+// import { OnGoingEventDetailPresenter } from "./components/event/events-detail/on-going-event-detail/on-going-event-detail.presenter";
+// import { UpComingEventDetilPresenter } from "./components/event/events-detail/up-coming-event-detail/up-coming-event-detail.presenter";
+import { VideoStreamingComponent } from "./blocks/video-streaming/video-streaming.component";
 import { SchedualEventDetailPresenter } from "./components/event/events-detail/schedual-event-detail/schedual-event-detail.presenter";
 import { SchedualEventDetailComponent } from "./components/event/events-detail/schedual-event-detail/schedual-event-detail.component";
 import { OndemandEventDetailComponent } from "./components/event/events-detail/ondemand-event-detail/ondemand-event-detail.component";
 import { OndemandEventDetailPresenter } from "./components/event/events-detail/ondemand-event-detail/ondemand-event-detail.presenter";
+import { NouisliderModule } from "ng2-nouislider";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -138,11 +146,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MenuButtonComponent,
     EventPaginationComponent,
     EventPreviewPresenter,
+    // OngoingOndemandEventComponent,
+    // UpcomingOndemandEventComponent,
+    // OngoingOndemandEventPresenter,
+    // UpcomingOndemandEventPresenter,
+    // OnGoingEventDetailPresenter,
+    // UpComingEventDetilPresenter,
+    VideoStreamingComponent,
     SchedualEventDetailComponent,
     SchedualEventDetailPresenter,
     OndemandEventDetailComponent,
-    OndemandEventDetailPresenter
-
+    OndemandEventDetailPresenter,
   ],
   providers: [
     {
@@ -151,6 +165,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     },
   ],
   imports: [
+    NouisliderModule,
     CommonModule,
     SportPipCaptureRoutingModule,
     TranslateModule,
@@ -170,4 +185,4 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DemoMosaicModule,
   ],
 })
-export class SportPipCaptureModule { }
+export class SportPipCaptureModule {}

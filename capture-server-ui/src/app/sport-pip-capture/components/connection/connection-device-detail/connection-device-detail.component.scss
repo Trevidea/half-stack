@@ -1,7 +1,11 @@
-.table:not(.table-dark):not(.table-light) thead:not(.thead-dark) th, .table:not(.table-dark):not(.table-light) tfoot:not(.thead-dark) th {
-    background-color: #fff;
+.table:not(.table-dark):not(.table-light) thead:not(.thead-dark) th,
+.table:not(.table-dark):not(.table-light) tfoot:not(.thead-dark) th {
+  background-color: #fff;
 }
 
-.back-button{
-    background:  rgba(255, 255, 255, 1);
+.back-button {
+  background: rgba(255, 255, 255, 1);
+}
+.btn.btn-icon {
+  padding: 0.515rem 0.536rem;
 }

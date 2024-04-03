@@ -383,13 +383,23 @@
               </button>
             </mc-dropdown>
           </th>
-          <td>{{ item.user }}</td>
-          <td>{{ item.location }}</td>
-          <td>{{ item.deviceId }}</td>
+          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+            {{ item.user }}
+          </td>
+          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+            {{ item.location }}
+          </td>
+          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+            {{ item.deviceId }}
+          </td>
 
-          <td>{{ item.deviceType }}</td>
-          <td>{{ item.network }}</td>
-          <td>
+          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+            {{ item.deviceType }}
+          </td>
+          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+            {{ item.network }}
+          </td>
+          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
             <div
               class="badge badge-pill"
               [ngClass]="{
@@ -400,9 +410,11 @@
               {{ item.quality }}
             </div>
           </td>
-          <td>{{ item.ipAddress }}</td>
+          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+            {{ item.ipAddress }}
+          </td>
 
-          <th>
+          <th [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
             <div class="d-flex">
               <span>
                 <i
@@ -427,8 +439,12 @@
               </span>
             </div>
           </th>
-          <td>{{ item.received }}</td>
-          <td>{{ item.retries }}</td>
+          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+            {{ item.received }}
+          </td>
+          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+            {{ item.retries }}
+          </td>
           <td><i class="bi bi-grid-3x2-gap-fill"></i></td>
         </tr>
       </tbody>
@@ -445,7 +461,7 @@
             <div
               class="card cursor-pointer"
               style="height: 14rem; width: 24rem"
-              [routerLink]="'/connection/connection-device-detail'"
+              [routerLink]="'/connection/connection-device-detail/{{item.id}}'"
             >
               <img
                 src="assets/images/pip-image/football_1.png"
