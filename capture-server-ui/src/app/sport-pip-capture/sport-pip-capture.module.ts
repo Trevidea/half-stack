@@ -85,6 +85,7 @@ import { SchedualEventDetailPresenter } from "./components/event/events-detail/s
 import { SchedualEventDetailComponent } from "./components/event/events-detail/schedual-event-detail/schedual-event-detail.component";
 import { OndemandEventDetailComponent } from "./components/event/events-detail/ondemand-event-detail/ondemand-event-detail.component";
 import { OndemandEventDetailPresenter } from "./components/event/events-detail/ondemand-event-detail/ondemand-event-detail.presenter";
+import { NouisliderModule } from "ng2-nouislider";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -164,6 +165,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     },
   ],
   imports: [
+    NouisliderModule,
     CommonModule,
     SportPipCaptureRoutingModule,
     TranslateModule,
