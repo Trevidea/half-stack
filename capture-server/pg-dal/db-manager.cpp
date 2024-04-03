@@ -6,6 +6,18 @@ DBManager::DBManager()
 {
 }
 
+// Method to retrieve user ID by username
+int DBManager::getUserIdByUsername(const std::string &username)
+{
+    // Implementation to retrieve user ID from database or other source
+    int userId = 0; // Dummy implementation
+
+    // Log the retrieval of user ID
+    spdlog::info("Retrieved user ID {} for username {}", userId, username);
+
+    return userId;
+}
+
 Connection DBManager::getConnection(bool trx)
 {
     // If a transaction is in progress, proivide the transaction connection
