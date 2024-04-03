@@ -1,5 +1,6 @@
 #include "omal-factory.h"
 #include "virtual-host.h" 
+#include "virtual-host-conf.h"
 
 OMALFactory& OMALFactory::getInstance() {
     static OMALFactory instance;
@@ -11,7 +12,7 @@ VirtualHost& OMALFactory::create(const std::string& name) {
     if (it != virtualHostMap.end()) {
         return *it->second;
     } else {
-        omal::vhost vhost; //Initialize it as required
+        vhost vhost; //Initialize it as required
         VirtualHost* newVirtualHost = new VirtualHost(name, vhost);
         virtualHostMap[name] = newVirtualHost;
         return *newVirtualHost;
@@ -20,6 +21,7 @@ VirtualHost& OMALFactory::create(const std::string& name) {
 
 std::string OMALFactory::baseUrl()
 {
+    return this->m_endpointUrl;
 }
 
 OMALFactory::OMALFactory() {
