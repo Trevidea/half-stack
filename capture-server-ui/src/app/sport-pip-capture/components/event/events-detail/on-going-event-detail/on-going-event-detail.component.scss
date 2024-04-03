@@ -88,6 +88,7 @@
         .btn.btn-icon {
             padding: 0.3rem 0.3rem !important;
         }
+
         .btn.disabled,
         .btn:disabled {
             background: #EDEDED !important;
@@ -115,4 +116,7 @@
         }
     }
 
+    .btn-warning {
+        padding: 4px 3rem !important;
+    }
 }

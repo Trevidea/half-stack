@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UpComingEventDetilComponent } from './up-coming-event-detil.component';
+import { UpComingEventDetilComponent } from './up-coming-event-detail.component';
 
 describe('UpComingEventDetilComponent', () => {
   let component: UpComingEventDetilComponent;

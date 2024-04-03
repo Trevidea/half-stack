@@ -9,7 +9,7 @@
         In Progress {{item.countdown}}
       </div>
       <div class="menu-container">
-        <app-menu-button></app-menu-button>
+        <app-menu-button [dropdownItems]="dropdownItems" ></app-menu-button>
       </div>
     </div>
     <div class="card-body pt-1 pb-0 custom-card-body">
@@ -25,10 +25,10 @@
         <div class="col-8 card-btn-conatiner">
           <div class="float-right card-buttons">
             <button type="button" class="btn btn-flat-dark btn-sm" rippleEffect
-              (click)="eventDetail('ongoing-event-detail')">
+              (click)="eventDetail(item.type)">
               View
             </button>
-            <button type="button" class="btn btn-gradient-warning ml-auto btn-sm">
+            <button type="button" class="btn btn-warning ml-auto btn-sm">
               Join
             </button>
           </div>
@@ -50,7 +50,12 @@
 
 </div>
 
-<core-sidebar class="modal modal-slide-in fade event-sidebar" name="ongoing-event-detail" overlayClass="modal-backdrop"
+<core-sidebar class="modal modal-slide-in fade event-sidebar" name="ongoing-scheduled" overlayClass="modal-backdrop"
   hideOnEsc="true" preventBackgroundScroll="true">
-  <app-on-going-event-detail></app-on-going-event-detail>
+  <app-on-going-event-detail-presenter></app-on-going-event-detail-presenter>
+</core-sidebar>
+
+<core-sidebar class="modal modal-slide-in fade event-sidebar" name="ongoing-on-demand" overlayClass="modal-backdrop"
+  hideOnEsc="true" preventBackgroundScroll="true">
+  <app-ongoing-ondemand-event-presenter></app-ongoing-ondemand-event-presenter>
 </core-sidebar>

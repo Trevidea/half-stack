@@ -21,11 +21,10 @@
                 </td>
                 <td>{{item.type}}</td>
                 <td>{{dateTimeService.formatEventDate(item.dtEvent)}}</td>
-                <!-- Sept 15th, Saturda -->
                 <td class="cursor-pointer">{{dateTimeService.formatTime(item.time)}}</td>
                 <td>{{item.venue.location}}</td>
                 <td class="">
-                    <app-menu-button></app-menu-button>
+                    <app-menu-button [dropdownItems]="dropdownItems" ></app-menu-button>
                 </td>
             </tr>
         </tbody>

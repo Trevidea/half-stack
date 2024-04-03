@@ -8,7 +8,6 @@ import { ArrayBuilder } from 'app/sport-pip-capture/blocks/array.builder';
 import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 import { Data } from 'app/sport-pip-capture/models/capture-interface';
 import { TabStateService } from './event-utility/nav';
-import { EventFilter } from './event-utility/event-filter';
 
 @Component({
   selector: 'app-event-presenter',
@@ -49,9 +48,7 @@ export class EventPresenter implements OnInit {
 
   onFilter(filter: Data.FilterParams) {
     if (filter != null) {
-      if (isNaN(filter.year)) {
-        filter.year = null;
-      }
+      console.log(filter)
       this.query = filter;
       this.filteredData = this.filterEvents(this.ds.event, this.query);
     }
