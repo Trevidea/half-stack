@@ -11,31 +11,17 @@ export class EventRange implements Views.Datasource {
     public set id(v: number) {
         this._id = v;
     }
-   
-    
-    private _event : Range<EventView>;
-    public get event() : Range<EventView> {
-        if(!this._event){
-            this._event=new Range<EventView>();
+
+    private _event: Range<EventView>;
+    public get event(): Range<EventView> {
+        if (!this._event) {
+            this._event = new Range<EventView>();
         }
         return this._event;
     }
-    public set event(v : Range<EventView>) {
+    public set event(v: Range<EventView>) {
         this._event = v;
     }
-    
-
-
-    // private _ongoingEvent: Range<EventView>;
-    // public get ongoingEvent(): Range<EventView> {
-    //     if (!this._ongoingEvent) {
-    //         this._ongoingEvent = new Range<EventView>()
-    //     }
-    //     return this._ongoingEvent;
-    // }
-    // public set ongoingEvent(v: Range<EventView>) {
-    //     this._ongoingEvent = v;
-    // }
 
 }
 export class EventView implements Views.Datasource {
@@ -147,23 +133,23 @@ export class EventView implements Views.Datasource {
         this._venue = v;
     }
 
-    
-    private _formatedDateTime : string;
-    public get formatedDateTime() : string {
+
+    private _formatedDateTime: string;
+    public get formatedDateTime(): string {
         return this._formatedDateTime;
     }
-    public set formatedDateTime(v : string) {
+    public set formatedDateTime(v: string) {
         this._formatedDateTime = v;
     }
-    
-    private _type : string;
-    public get type() : string {
+
+    private _type: string;
+    public get type(): string {
         return this._type;
     }
-    public set type(v : string) {
+    public set type(v: string) {
         this._type = v;
     }
-       
+
 }
 
 export class VenueView {
