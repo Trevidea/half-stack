@@ -1,4 +1,4 @@
-import { Data } from "./sport-pip-capture-interface";
+import { Data } from "./capture-interface";
 
 export class DataBase<T extends Data.Base> {
     protected _model: T;

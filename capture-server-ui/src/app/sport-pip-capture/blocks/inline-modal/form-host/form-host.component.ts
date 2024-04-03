@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, Output, Type, ViewChild } from '@angular/core';
 
 import { FormHostDirective } from '../form-host.directive';
-import { Views } from 'app/sport-pip-capture/models/sport-pip-capture-interface';
+import { Views } from 'app/sport-pip-capture/models/capture-interface';
 
 
 @Component({

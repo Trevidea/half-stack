@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { SharingRangeView} from "./view/sharing";
-import { Views } from "app/sport-pip-capture/models/sport-pip-capture-interface";
+import { Views } from "app/sport-pip-capture/models/capture-interface";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 import { Router } from "@angular/router";
 import { ShareBuilder } from "./builder/sharing";

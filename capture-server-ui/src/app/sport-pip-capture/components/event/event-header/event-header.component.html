@@ -11,8 +11,8 @@
   <div class="col-md-2 col-6">
     <label>Sport</label>
     <div class="form-group">
-      <ng-select [(ngModel)]="datasource.sports.SelectedItem">
-        <ng-option *ngFor="let item of datasource.sports">
+      <ng-select [(ngModel)]="datasource.sports.SelectedItem" (clear)="onClear.emit()">
+        <ng-option *ngFor="let item of datasource.sports" [value]="item">
           {{ item }}
         </ng-option>
       </ng-select>
@@ -21,8 +21,8 @@
   <div class="col-md-2 col-6">
     <label>Level</label>
     <div class="form-group">
-      <ng-select [(ngModel)]="datasource.levels.SelectedItem">
-        <ng-option *ngFor="let item of datasource.levels">
+      <ng-select [(ngModel)]="datasource.levels.SelectedItem" (clear)="onClear.emit()">
+        <ng-option *ngFor="let item of datasource.levels" [value]="item">
           {{item}}
         </ng-option>
       </ng-select>
@@ -31,8 +31,8 @@
   <div class="col-md-2 col-6">
     <label>Program</label>
     <div class="form-group">
-      <ng-select [(ngModel)]="datasource.programs.SelectedItem">
-        <ng-option *ngFor="let item of datasource.programs">
+      <ng-select [(ngModel)]="datasource.programs.SelectedItem" (clear)="onClear.emit()">
+        <ng-option *ngFor="let item of datasource.programs" [value]="item">
           {{item}}
         </ng-option>
       </ng-select>
@@ -41,12 +41,16 @@
   <div class="col-md-2 col-6">
     <label>Year</label>
     <div class="form-group">
-      <ng-select [(ngModel)]="datasource.years.SelectedItem">
-        <ng-option *ngFor="let item of datasource.years">
+      <ng-select [(ngModel)]="datasource.years.SelectedItem" (clear)="onClear.emit()">
+        <ng-option *ngFor="let item of datasource.years" [value]="item">
           {{item}}
         </ng-option>
 
       </ng-select>
     </div>
+  </div>
+  <div class="col-12 d-flex align-items-center justify-content-end">
+    <a *ngIf="isAnyItemSelected()" (click)="allClear.emit()" style="text-decoration: underline; color: #216093;">Clear
+      Filter</a>
   </div>
 </div>

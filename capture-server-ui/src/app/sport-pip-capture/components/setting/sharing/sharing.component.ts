@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Views } from 'app/sport-pip-capture/models/sport-pip-capture-interface';
+import { Views } from 'app/sport-pip-capture/models/capture-interface';
 import { DistributionListPresenter } from '../distribution-list/distribution-list.presenter';
 import { DataFactoryService } from 'app/sport-pip-capture/models/data-factory.service';
 import { Transformer } from 'app/blocks/transformer';

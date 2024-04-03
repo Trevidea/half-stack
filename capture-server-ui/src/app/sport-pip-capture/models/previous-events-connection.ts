@@ -1,11 +1,7 @@
 import { DataBase } from "./model";
-import { Data } from "./sport-pip-capture-interface";
+import { Data } from "./capture-interface";
 
 export class PreviousEventsConnectionData extends DataBase<Data.PreviousEventsConnection>{
-
-
-
-
 
     public get userId(): number {
         return this._model.userId;

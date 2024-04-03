@@ -315,7 +315,7 @@ EntityBase::LogPrinter::~LogPrinter()
 
 void EntityBase::sync(const Request &req, Response &rsp)
 {
-    ClientFactory &factory = ClientFactory::getInstance();
+    auto &factory = Rest::ClientFactory::getInstance();
     const auto &reqData = req.data();
     spdlog::trace("Request data..{}", reqData);
 

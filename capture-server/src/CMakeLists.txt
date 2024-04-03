@@ -15,8 +15,9 @@ set(HALF_STACK_SRC
     user.cpp
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
-target_include_directories(half-stack PUBLIC "./" api-client)
+target_include_directories(half-stack PUBLIC "./" rest-client)
 target_link_libraries(half-stack PUBLIC
     spdlog::spdlog
-    api-client
+    rest-client
+    omal
     pg-dal)

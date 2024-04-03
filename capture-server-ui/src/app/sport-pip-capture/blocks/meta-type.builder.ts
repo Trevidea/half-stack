@@ -1,6 +1,6 @@
 import { Collection } from "app/blocks/collection";
 import { AbstractBuilder } from "app/blocks/strategies";
-import { Data } from "../models/sport-pip-capture-interface";
+import { Data } from "../models/capture-interface";
 
 
 export class MetaTypeBuilder extends AbstractBuilder<Data.MetaType, Collection<string>>

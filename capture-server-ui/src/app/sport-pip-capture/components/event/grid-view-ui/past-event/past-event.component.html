@@ -6,7 +6,7 @@
     </div>
     <div class="card-img-overlay p-0 d-flex flex-column" style="height: 100px;">
       <div class="menu-container" style="padding: 7px;">
-        <app-menu-button></app-menu-button>
+        <app-menu-button  [dropdownItems]="dropdownItems"></app-menu-button>
       </div>
     </div>
     <div class="card-body pt-1  pb-0 custom-card-body">
@@ -25,7 +25,7 @@
           <h4 class="ellipsis">{{item.title}}</h4>
           <p class="card-text ">
             <i class="bi bi-clock"></i>
-            {{item.dttEvent | date }} {{ item.time | timeFormat }}{{' , '}}{{item.level}}
+            {{ formatDateTime(item.dtEvent, item.time) }}
           </p>
         </div>
         <div class=" col-12 d-flex justify-content-between tar-file">

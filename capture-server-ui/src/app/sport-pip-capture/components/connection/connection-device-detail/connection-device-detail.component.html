@@ -1,90 +1,238 @@
-<button type="button" class="btn btn-icon  back-button mb-1" [routerLink]="'/connection/connection-card-view'"
-  rippleEffect>
-  <i class="feather " data-feather="arrow-left" [size]="24"></i></button>
+<button
+  type="button"
+  class="btn btn-icon back-button mb-1"
+  [routerLink]="'/connection/connection-card-view'"
+  rippleEffect
+>
+  <i class="feather" data-feather="arrow-left" [size]="24"></i>
+</button>
+<div class="row match-height">
+  <div class="col-xl-9" style="padding-right: 0rem">
+    <app-video-streaming
+      [liveStreamVideoPath]="url"
+      style="margin-bottom: 0.7rem"
+    ></app-video-streaming>
+    <div class="card">
+      <div
+        class="row p-1 m-0 d-xl-none"
+        style="
+          background-color: rgba(255, 252, 243, 1);
+          border-radius: 0.428rem;
+        "
+      >
+        <div class="col-2 col-md-3">
+          <div>
+            <div class="d-flex align-items-center">
+              <i
+                class="bi bi-arrow-up-right"
+                style="font-size: 20px; color: rgba(245, 163, 10, 1)"
+              ></i>
+              <h4 class="align-items-center" style="margin-left: 0.2em">
+                Streaming
+              </h4>
+            </div>
+            <p style="font-size: 0.95rem">Transmit Status</p>
+          </div>
+        </div>
+        <div class="col-2 col-md-3">
+          <div>
+            <div class="d-flex align-items-center">
+              <i
+                class="bi bi-camera-video"
+                style="font-size: 20px; color: rgba(245, 163, 10, 1)"
+              ></i>
+              <h4 style="margin-left: 0.2em">Camcorder</h4>
+            </div>
+            <p style="font-size: 0.95rem">Device Type</p>
+          </div>
+        </div>
+        <div class="col-2 col-md-3">
+          <div>
+            <div class="d-flex">
+              <h4>Harry</h4>
+            </div>
+            <p style="font-size: 0.95rem">User Name</p>
+          </div>
+        </div>
+        <div class="col-2 col-md-3">
+          <div>
+            <div class="d-flex">
+              <h4>cc18</h4>
+            </div>
+            <p style="font-size: 0.95rem">Device ID</p>
+          </div>
+        </div>
+        <div class="col-2 col-md-3">
+          <div>
+            <div class="d-flex">
+              <h4>192.168.1.10</h4>
+            </div>
+            <p style="font-size: 0.95rem">IP Address</p>
+          </div>
+        </div>
+        <div class="col-2 col-md-3">
+          <div>
+            <div class="d-flex">
+              <h4>2 retries</h4>
+            </div>
+            <p style="font-size: 0.95rem">Retries</p>
+          </div>
+        </div>
+        <div class="col-3 col-md-3">
+          <div>
+            <div class="d-flex">
+              <h4>Poor</h4>
+            </div>
+            <p style="font-size: 0.95rem">Internet Connection</p>
+          </div>
+        </div>
 
-<div class="card ml-1 p-0">
-  <div class="card-body m-0 p-0">
-    <div class="row">
-      <div class="col-xl-3 p-1" style="background-color: rgba(255, 252, 243, 1)">
-        <div class="row">
-          <div class="col-md-6 col-xl-12 col-sm-6 col-xxl-12 col-6">
-            <div class="d-flex mt-3">
-              <i class="bi bi-arrow-up-right mr-1" style="color: rgba(245, 163, 10, 1)"></i>
-              <h6>Sending</h6>
+        <div class="col-3 col-md-3">
+          <div>
+            <div class="d-flex">
+              <h4>00:05</h4>
             </div>
-            <p>Transmit Status</p>
+            <p style="font-size: 0.95rem">Part Hold Back</p>
           </div>
-          <div class="col-md-6 col-xl-12 col-sm-6 col-xxl-12 col-6">
-            <div class="d-flex mt-3">
-              <i class="bi bi-camera-video-fill mr-1" style="color: rgba(245, 163, 10, 1)"></i>
-              <h6>Camcorder</h6>
+        </div>
+        <div class="col-3 col-md-3">
+          <div>
+            <div class="d-flex">
+              <h4>9 sec</h4>
             </div>
-            <p>Device Type</p>
+            <p style="font-size: 0.95rem">Segment Duration</p>
           </div>
-          <div class="col-md-6 col-xl-12 col-sm-6 col-xxl-12 col-6">
-            <div class="mt-3">
-              <h6>Harry</h6>
-              <p>User Name</p>
+        </div>
+        <div class="col-3 col-md-3">
+          <div>
+            <div class="d-flex">
+              <h4>12</h4>
             </div>
-          </div>
-          <div class="col-md-6 col-xl-12 col-sm-6 col-xxl-12 col-6">
-            <div class="mt-3">
-              <h6>cc18</h6>
-              <p>Device ID</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-xl-12 col-sm-6 col-xxl-12 col-6">
-            <div class="mt-3">
-              <h6>192.168.1.10</h6>
-              <p>IP Address</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-xl-12 col-sm-6 col-xxl-12 col-6">
-            <div class="mt-3">
-              <h6>2 retries</h6>
-              <p>Retries</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-xl-12 col-sm-6 col-xxl-12 col-6">
-            <div class="mt-3">
-              <h6>Poor</h6>
-              <p>Internet Connection</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-xl-12 col-sm-6 col-xxl-12 col-6">
-            <div class="mt-3">
-              <h6>120</h6>
-              <p>Total Clips</p>
-            </div>
+            <p style="font-size: 0.95rem">Segment Count</p>
           </div>
         </div>
       </div>
-
-      <div class="col-xl-9 table-responsive">
-        <table class="table ">
-          <thead>
-            <tr>
-              <th>Video Time</th>
-              <th>Video Resolution/Quality</th>
-              <th>Duration</th>
-              <th>Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1:49:00</td>
-              <td>
-                <div class="badge badge-pill badge-light-danger" style="color: black">
-                  Poor
-                </div>
-              </td>
-              <td>30 sec</td>
-              <td>4:16 pm</td>
-            </tr>
-          </tbody>
+      <div class="table-responsive h-100">
+        <table class="table table-default">
+          <tr>
+            <th>Video Time</th>
+            <th>Video Resolution/Quality</th>
+            <th>Duration</th>
+            <th>Time</th>
+          </tr>
+          <tr>
+            <td>1:49:00</td>
+            <td><div class="badge badge-pill badge-light-danger">Poor</div></td>
+            <!-- badge-light-success -->
+            <td>30 sec</td>
+            <td>4:16 pm</td>
+          </tr>
+          <tr>
+            <td>1:49:00</td>
+            <td><div class="badge badge-pill badge-light-danger">Poor</div></td>
+            <!-- badge-light-success -->
+            <td>30 sec</td>
+            <td>4:16 pm</td>
+          </tr>
+          <tr>
+            <td>1:49:00</td>
+            <td><div class="badge badge-pill badge-light-danger">Poor</div></td>
+            <!-- badge-light-success -->
+            <td>30 sec</td>
+            <td>4:16 pm</td>
+          </tr>
         </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3">
+    <div
+      class="card p-1 d-xs-none d-sm-none d-md-none d-lg-none d-xl-block"
+      style="background-color: rgba(255, 252, 243, 1)"
+    >
+      <div>
+        <div class="d-flex align-content-center">
+          <i
+            class="bi bi-arrow-up-right align-items-center"
+            style="font-size: 20px; color: rgba(245, 163, 10, 1)"
+          ></i>
+          <h4 class="align-items-center" style="margin-left: 0.2em">
+            Streaming
+          </h4>
+        </div>
+        <p>Transmit Status</p>
+      </div>
+      <div>
+        <div class="d-flex align-items-center">
+          <i
+            class="bi bi-camera-video"
+            style="font-size: 20px; color: rgba(245, 163, 10, 1)"
+          ></i>
+          <h4 style="margin-left: 0.2em">Camcorder</h4>
+        </div>
+        <p>Device Type</p>
+      </div>
+      <div>
+        <div class="d-flex">
+          <h4>Harry</h4>
+        </div>
+        <p>User Name</p>
+      </div>
+
+      <div>
+        <div class="d-flex">
+          <h4>cc18</h4>
+        </div>
+        <p>Device ID</p>
+      </div>
+
+      <div>
+        <div class="d-flex">
+          <h4>192.168.1.10</h4>
+        </div>
+        <p>IP Address</p>
+      </div>
+
+      <div>
+        <div class="d-flex">
+          <h4>2 retries</h4>
+        </div>
+        <p>Retries</p>
+      </div>
+
+      <div>
+        <div class="d-flex">
+          <h4>Poor</h4>
+        </div>
+        <p>Internet Connection</p>
+      </div>
+
+      <div>
+        <div class="d-flex">
+          <h4>00:05</h4>
+        </div>
+        <p>Chunk Duration</p>
+      </div>
+
+      <div>
+        <div class="d-flex">
+          <h4>00:05</h4>
+        </div>
+        <p>Part Hold Back</p>
+      </div>
+
+      <div>
+        <div class="d-flex">
+          <h4>9 sec</h4>
+        </div>
+        <p>Segment Duration</p>
+      </div>
+
+      <div>
+        <div class="d-flex">
+          <h4>12</h4>
+        </div>
+        <p>Segment Count</p>
       </div>
     </div>
   </div>

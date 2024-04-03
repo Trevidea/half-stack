@@ -9,7 +9,7 @@ import { TypesEgressBuilder } from './builders/types-egress';
 import { TypesView } from './views/types';
 import { Transformer } from 'app/blocks/transformer';
 import { DataFactoryService } from 'app/sport-pip-capture/models/data-factory.service';
-import { Views } from 'app/sport-pip-capture/models/sport-pip-capture-interface';
+import { Views } from 'app/sport-pip-capture/models/capture-interface';
 import { ModalActions } from 'app/blocks/actions';
 
 @Component({

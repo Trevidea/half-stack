@@ -1,6 +1,9 @@
 @import "@core/scss/core.scss";
 @import "./assets/scss/styles";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "~@ptsecurity/mosaic/prebuilt-themes/default-theme.css";
+@import "~@ptsecurity/mosaic/prebuilt-visual/default-visual.css";
+@import "~@ptsecurity/mosaic-icons/dist/styles/mc-icons-embed.css";
 /// menu right border and navbar bootom border custome css as per FIGMA design for dark and light skin
 .dark-layout {
   .main-menu.menu-dark {
@@ -17,3 +20,6 @@
   border-bottom: 1px solid rgba(195, 195, 195, 1);
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
+html .navbar-sticky .app-content {
+  padding: calc(2rem + 4.45rem) 0.5rem 0 0.5rem;
+}
