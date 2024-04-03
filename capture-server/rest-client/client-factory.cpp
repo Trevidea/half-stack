@@ -1,20 +1,20 @@
 #include "client-factory.h"
 
-ClientFactory* ClientFactory::instance = nullptr;
+Rest::ClientFactory* Rest::ClientFactory::instance = nullptr;
 
-ClientFactory& ClientFactory::getInstance() {
+Rest::ClientFactory& Rest::ClientFactory::getInstance() {
     if (!instance) {
         instance = new ClientFactory();
     }
     return *instance;
 }
 
-Client ClientFactory::create(const std::string& url) {
+Client Rest::ClientFactory::create(const std::string& url) {
     return Client(url);
 }
 
-ClientFactory::~ClientFactory() {
+Rest::ClientFactory::~ClientFactory() {
     delete instance;
 }
 
-ClientFactory::ClientFactory() {}
+Rest::ClientFactory::ClientFactory() {}
