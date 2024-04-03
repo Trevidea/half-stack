@@ -3,7 +3,6 @@
 
 #include <string>
 #include <map>
-#include "virtual-host-data.h"
 
 class VirtualHost;
 

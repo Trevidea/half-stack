@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 
 @Component({
-  selector: 'app-ongoing-ondemand-event',
-  templateUrl: './ongoing-ondemand-event.component.html',
-  styleUrls: ['./ongoing-ondemand-event.component.scss']
+  selector: 'app-ondemand-event-detail',
+  templateUrl: './ondemand-event-detail.component.html',
+  styleUrls: ['./ondemand-event-detail.component.scss']
 })
-export class OngoingOndemandEventComponent implements OnInit {
+export class OndemandEventDetailComponent implements OnInit {
 
   constructor(private _coreSidebarService: CoreSidebarService) { }
 

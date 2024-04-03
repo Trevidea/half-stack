@@ -57,8 +57,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule } from "@angular/forms";
 import { ShareToPeopleComponent } from "./components/event/grid-view-ui/past-event/share-event/component/share-to-people/share-to-people.component";
 import { ShareToSocialComponent } from "./components/event/grid-view-ui/past-event/share-event/component/share-to-social/share-to-social.component";
-import { OnGoingEventDetailComponent } from "./components/event/events-detail/on-going-event-detail/on-going-event-detail.component";
-import { UpComingEventDetilComponent } from "./components/event/events-detail/up-coming-event-detail/up-coming-event-detail.component";
 import { EventPreviewComponent } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.component";
 import { ActiveDevicesComponent } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/active-devices/active-devices.component";
 import { PastEventViewComponent } from "./components/event/grid-view-ui/past-event/past-event-view/past-event-view.component";
@@ -76,13 +74,17 @@ import { EventPaginationComponent } from "./components/event-pagination/event-pa
 // import { McIconModule } from "@ptsecurity/mosaic/icon";
 import { DemoMosaicModule } from "./mosaic.module";
 import { EventPreviewPresenter } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.presenter";
-import { OngoingOndemandEventComponent } from "./components/event/events-detail/ongoing-ondemand-event/ongoing-ondemand-event.component";
-import { UpcomingOndemandEventComponent } from "./components/event/events-detail/upcoming-ondemand-event/upcoming-ondemand-event.component";
-import { OngoingOndemandEventPresenter } from "./components/event/events-detail/ongoing-ondemand-event/ongoing-ondemand.event.presenter";
-import { UpcomingOndemandEventPresenter } from "./components/event/events-detail/upcoming-ondemand-event/upcoming-ondemand-event.presenter";
-import { OnGoingEventDetailPresenter } from "./components/event/events-detail/on-going-event-detail/on-going-event-detail.presenter";
-import { UpComingEventDetilPresenter } from "./components/event/events-detail/up-coming-event-detail/up-coming-event-detail.presenter";
+// import { OngoingOndemandEventComponent } from "./components/event/events-detail/ongoing-ondemand-event/ongoing-ondemand-event.component";
+// import { UpcomingOndemandEventComponent } from "./components/event/events-detail/upcoming-ondemand-event/upcoming-ondemand-event.component";
+// import { OngoingOndemandEventPresenter } from "./components/event/events-detail/ongoing-ondemand-event/ongoing-ondemand.event.presenter";
+// import { UpcomingOndemandEventPresenter } from "./components/event/events-detail/upcoming-ondemand-event/upcoming-ondemand-event.presenter";
+// import { OnGoingEventDetailPresenter } from "./components/event/events-detail/on-going-event-detail/on-going-event-detail.presenter";
+// import { UpComingEventDetilPresenter } from "./components/event/events-detail/up-coming-event-detail/up-coming-event-detail.presenter";
 import { VideoStreamingComponent } from "./blocks/video-streaming/video-streaming.component";
+import { SchedualEventDetailPresenter } from "./components/event/events-detail/schedual-event-detail/schedual-event-detail.presenter";
+import { SchedualEventDetailComponent } from "./components/event/events-detail/schedual-event-detail/schedual-event-detail.component";
+import { OndemandEventDetailComponent } from "./components/event/events-detail/ondemand-event-detail/ondemand-event-detail.component";
+import { OndemandEventDetailPresenter } from "./components/event/events-detail/ondemand-event-detail/ondemand-event-detail.presenter";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -135,8 +137,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     InlineModalComponent,
     MetaTypePresenter,
     EventHeaderPresenter,
-    OnGoingEventDetailComponent,
-    UpComingEventDetilComponent,
     EventPreviewComponent,
     ActiveDevicesComponent,
     OngoingEventListComponent,
@@ -145,13 +145,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MenuButtonComponent,
     EventPaginationComponent,
     EventPreviewPresenter,
-    OngoingOndemandEventComponent,
-    UpcomingOndemandEventComponent,
-    OngoingOndemandEventPresenter,
-    UpcomingOndemandEventPresenter,
-    OnGoingEventDetailPresenter,
-    UpComingEventDetilPresenter,
+    // OngoingOndemandEventComponent,
+    // UpcomingOndemandEventComponent,
+    // OngoingOndemandEventPresenter,
+    // UpcomingOndemandEventPresenter,
+    // OnGoingEventDetailPresenter,
+    // UpComingEventDetilPresenter,
     VideoStreamingComponent,
+    SchedualEventDetailComponent,
+    SchedualEventDetailPresenter,
+    OndemandEventDetailComponent,
+    OndemandEventDetailPresenter,
   ],
   providers: [
     {
