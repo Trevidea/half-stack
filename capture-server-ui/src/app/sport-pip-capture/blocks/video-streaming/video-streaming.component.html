@@ -23,6 +23,7 @@
       <i class="fa fa-volume-up"></i>
     </button>
     <nouislider
+      *ngIf="showVolumeSlider"
       [min]="0"
       [connect]="'upper'"
       [behaviour]="'tap'"
