@@ -1,5 +1,4 @@
 <div class="video-container">
-  <h2>Live Stream Player</h2>
   <video
     id="liveStreamPlayer"
     class="video-js"
@@ -7,6 +6,8 @@
     preload="auto"
     width="100%"
     height="100%"
+    muted
+    style="border-radius: 0.6rem"
   >
     <source [src]="liveStreamVideoPath" type="application/x-mpegURL" />
     Your browser does not support the video tag.

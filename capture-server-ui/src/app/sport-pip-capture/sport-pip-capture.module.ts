@@ -82,6 +82,7 @@ import { OngoingOndemandEventPresenter } from "./components/event/events-detail/
 import { UpcomingOndemandEventPresenter } from "./components/event/events-detail/upcoming-ondemand-event/upcoming-ondemand-event.presenter";
 import { OnGoingEventDetailPresenter } from "./components/event/events-detail/on-going-event-detail/on-going-event-detail.presenter";
 import { UpComingEventDetilPresenter } from "./components/event/events-detail/up-coming-event-detail/up-coming-event-detail.presenter";
+import { VideoStreamingComponent } from "./blocks/video-streaming/video-streaming.component";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -149,7 +150,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     OngoingOndemandEventPresenter,
     UpcomingOndemandEventPresenter,
     OnGoingEventDetailPresenter,
-    UpComingEventDetilPresenter
+    UpComingEventDetilPresenter,
+    VideoStreamingComponent,
   ],
   providers: [
     {
@@ -177,4 +179,4 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DemoMosaicModule,
   ],
 })
-export class SportPipCaptureModule { }
+export class SportPipCaptureModule {}
