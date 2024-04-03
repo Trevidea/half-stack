@@ -11,6 +11,8 @@ set(HALF_STACK_SRC
     gateway.cpp
     event.cpp
     team.cpp
+    on-demand-event.cpp
+    user.cpp
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
 target_include_directories(half-stack PUBLIC "./" api-client)

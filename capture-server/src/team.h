@@ -13,6 +13,9 @@ public:
     Team();
     void report();
 
+    Json::Value create(const Request &request, Response &response);
+    Json::Value remove(const Request &request, Response &response);
+
     // Getter and setter functions for Team properties
     int getId() const
     {

@@ -38,3 +38,56 @@ void Event::report()
                               { this->sync(req, rsp); });
 }
 
+// Implementation of the setTitle method
+void Event::setTitle(const std::string &title)
+{
+    this->title = title; // Assuming 'title' is a member variable of the Event class
+}
+
+bool Event::executeSql(const std::string &sql)
+{
+    // Code to execute the SQL query using your database connection
+    // Replace this with your actual database interaction code
+    // Return true if the query is executed successfully, false otherwise
+}
+
+Json::Value Event::create(const Request &request, Response &response)
+{
+    Json::Value jsonData = request.json();
+
+    // Extract data from the JSON request
+    std::string title = jsonData["title"].asString();
+    // Extract other relevant data from the JSON request
+
+    try
+    {
+        // Construct the SQL query to insert data into the event table
+        std::string sql = "INSERT INTO event (title, ...) VALUES ('" + title + "', ...)";
+
+        // Execute the SQL query using your database connection
+        // Replace `executeSql` with your actual method for executing SQL queries
+        bool success = executeSql(sql);
+
+        if (success)
+        {
+            // Return success response
+            response.setData("Event created successfully.");
+            response.complete();
+        }
+        else
+        {
+            // Handle database errors
+            response.setData("Error: Failed to create event in the database.");
+            response.complete();
+        }
+    }
+    catch (const std::exception &ex)
+    {
+        // Handle any other errors that occur during execution
+        response.setData("Error: " + std::string(ex.what()));
+        response.complete();
+    }
+
+    // Return a placeholder Json::Value since the method signature requires it
+    return Json::Value();
+}

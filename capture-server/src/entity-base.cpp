@@ -410,3 +410,4 @@ void EntityBase::sync(const Request &req, Response &rsp)
     rsp.setData("Sync operation completed successfully.");
     rsp.complete();
 }
+
