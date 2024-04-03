@@ -14,6 +14,9 @@
     <button (click)="play()">
       <i class="fa fa-play"></i><i class="fa fa-pause"></i>
     </button>
+    <div style="align-self: center">
+      <h6 style="margin-bottom: 0">{{ currentTime }}</h6>
+    </div>
     <div class="timeline">
       <div class="bar">
         <div class="inner"></div>
@@ -34,8 +37,12 @@
       [ngClass]="'circle-filled slider-secondary'"
       (ngModelChange)="setVolume($event)"
     ></nouislider>
-    <button (click)="fullScreen()"><i class="fa fa-expand"></i></button>
-
-    <div></div>
+    <button (click)="fullScreen()">
+      <span
+        data-feather="maximize"
+        size="20"
+        style="margin-bottom: 0.15em"
+      ></span>
+    </button>
   </div>
 </div>

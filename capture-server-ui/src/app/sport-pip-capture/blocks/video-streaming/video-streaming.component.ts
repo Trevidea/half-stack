@@ -19,7 +19,7 @@ export class VideoStreamingComponent implements OnInit {
   videoPlayer!: ElementRef<HTMLVideoElement>;
   public setVolumelenght: number = 15;
   private hls!: Hls;
-
+  currentTime: string = "00:00";
   ngOnInit(): void {
     // Initialize hls.js
     this.hls = new Hls();
@@ -39,9 +39,23 @@ export class VideoStreamingComponent implements OnInit {
           });
           (document.querySelector(".fa-pause") as HTMLElement).style.display =
             "none";
+          const video = this.videoPlayer.nativeElement;
+
+          video.addEventListener("timeupdate", () => {
+            this.currentTime = this.formatTime(video.currentTime);
+          });
         }
       });
     }
+  }
+  formatTime(totalSeconds: number): string {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+    return `${this.padZero(minutes)}:${this.padZero(seconds)}`;
+  }
+
+  padZero(num: number): string {
+    return num < 10 ? `0${num}` : `${num}`;
   }
   play() {
     if (this.videoPlayer.nativeElement.paused) {
