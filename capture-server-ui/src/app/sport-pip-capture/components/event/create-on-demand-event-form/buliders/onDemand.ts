@@ -14,7 +14,6 @@ export class OnDemandFormBuilder extends AbstractBuilder<Data.Event, OnDemandEve
         v.dtEvent = m.dt_event;
         v.levels.SelectedItem = m.level;
         v.dayHalve.SelectedItem = m.dayHalve;
-        // v.onPromise = false;
         v.programs.SelectedItem = m.program;
         v.sports.SelectedItem = m.sport;
         v.time = m.tm_event;
@@ -23,32 +22,19 @@ export class OnDemandFormBuilder extends AbstractBuilder<Data.Event, OnDemandEve
 
     }
     decompose(v: OnDemandEventFormView): Data.Event {
-
-        const newDetal = []
-        const newVenu = []
-        newDetal.push({
-            "cityAddress": v.detail.cityAddress,
-            "streetAdress": v.detail.streetAdress,
-            "type": "On Demand Event"
-        })
-        newVenu.push({
-            "location": v.venue.location,
-        })
-        return;
-        //  {
-            // id: v.id,
+        return; {
             // title: v.title,
-            // // detail: newDetal,
-            // dt_event: v.dtEvent,
+            // detail: v.detail,
+            // dt_event: v.dttEvent,
             // level: v.levels.SelectedItem,
             // dayHalve: v.dayHalve.SelectedItem,
             // program: v.programs.SelectedItem,
             // sport: v.sports.SelectedItem,
             // tm_event: v.time,
-            // // venue: newVenu,
-            // status: "upcoming-events",
-
-        // }
+            // venue: v.venue,
+            // status:"upcoming-events",
+            // owner_id:v.owner_id
+        };
 
     }
     view(): OnDemandEventFormView {

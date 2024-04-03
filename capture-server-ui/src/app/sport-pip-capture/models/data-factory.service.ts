@@ -181,7 +181,7 @@ export class DataFactoryService {
     return ["Man", "Women"];
   }
   EventYear() {
-    return ["2023", "2022", "2021", "2020"];
+    return ['2024',"2023", "2022", "2021", "2020",];
   }
   EventSports() {
     return [
