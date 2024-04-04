@@ -18,7 +18,7 @@ class OnDemandEvent;
 class EntityBase : public Handler
 {
 private:
-    std::string executeSqlStr(const std::string &sql);
+    // std::string executeSqlStr(const std::string &sql);
     Json::Value executeSqlJson(const std::string &sql);
     PGResult executeSqlModel(const std::string &sql);
     std::string m_entity;
@@ -98,16 +98,23 @@ protected:
     virtual std::string entity();
     Model m_model;
     Model m_setModel;
-    int executeSqlAndGetId(const std::string &sql);
+    // New protected method to save event data to the database
+    int saveEventToDatabase(const std::string &title, const std::string &dttEvent, const std::string &level,
+                            const std::string &program, const std::string &sport, const std::string &time,
+                            bool active, const std::string &location);
+
+    // Declare executeSql as a virtual function
+    virtual void executeSql(const std::string &sql)
+    {
+        // Default implementation in EntityBase
+        executeSqlStr(sql);
+    }
+    std::string executeSqlStr(const std::string &sql);
+    // Declare Event class as a friend
+    friend class Event;
 
 public:
     EntityBase(const std::string &entity);
-
-    // New public method to execute SQL query
-    void executeSql(const std::string &sql)
-    {
-        executeSqlStr(sql);
-    }
 
     int id() const
     {

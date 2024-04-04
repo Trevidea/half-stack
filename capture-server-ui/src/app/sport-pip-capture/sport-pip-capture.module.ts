@@ -38,7 +38,7 @@ import { DonutComponent } from "./components/dashboard/chart-components/donut/do
 import { BarChartComponent } from "./components/dashboard/chart-components/bar-chart/bar-chart.component";
 import { PlyrModule } from "ngx-plyr";
 import { CardSnippetModule } from "../../@core/components/card-snippet/card-snippet.module";
-import { ConnectionHeaderComponent } from "./components/connection/connection-header/connection-header.component";
+import { ConnectionHeaderComponent } from "./components/connection/connection-start/connection-header/connection-header.component";
 import { EventPresenter } from "app/sport-pip-capture/components/event/event.presenter";
 import { EventComponent } from "./components/event/event.component";
 import { CreateOnDemandEventPresenter } from "./components/event/create-on-demand-event-form/create-on-demand-event.presenter";
@@ -78,8 +78,12 @@ import { SchedualEventDetailComponent } from "./components/event/events-detail/s
 import { OndemandEventDetailComponent } from "./components/event/events-detail/ondemand-event-detail/ondemand-event-detail.component";
 import { OndemandEventDetailPresenter } from "./components/event/events-detail/ondemand-event-detail/ondemand-event-detail.presenter";
 import { NouisliderModule } from "ng2-nouislider";
+import { ConnectioGridListHeaderComponent } from "./components/connection/connection-start/connection-grid-list-header/connectio-grid-list-header.component";
+import { ConnectionGridComponent } from "./components/connection/connection-start/connection-grid/connection-grid.component";
+import { ConnectionListComponent } from "./components/connection/connection-start/connection-list/connection-list.component";
 import { NgCircleProgressModule } from "ng-circle-progress";
 import { EventsSyncComponent } from "./components/event/events-sync/events-sync.component";
+import { DragulaModule } from "ng2-dragula";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -140,12 +144,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MenuButtonComponent,
     EventPaginationComponent,
     EventPreviewPresenter,
-     VideoStreamingComponent,
+    VideoStreamingComponent,
     SchedualEventDetailComponent,
     SchedualEventDetailPresenter,
     OndemandEventDetailComponent,
     OndemandEventDetailPresenter,
-    EventsSyncComponent
+    EventsSyncComponent,
+    ConnectioGridListHeaderComponent,
+    ConnectionListComponent,
+    ConnectionGridComponent,
   ],
   providers: [
     {
@@ -177,9 +184,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       imageWidth: 95,
       showImage: true,
     }),
-    
-
-
+    NgCircleProgressModule.forRoot(),
+    DragulaModule.forRoot(),
   ],
 })
-export class SportPipCaptureModule {}
+export class SportPipCaptureModule { }
