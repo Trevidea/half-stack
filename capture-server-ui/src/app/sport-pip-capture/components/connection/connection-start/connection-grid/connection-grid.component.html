@@ -1,0 +1,135 @@
+<p>connection-grid works!</p>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr class="text-nowrap">
+        <th scope="col">Action</th>
+        <th scope="col">User</th>
+        <th scope="col">Location</th>
+        <th scope="col">Device ID</th>
+
+        <th scope="col">Device Type</th>
+        <th scope="col">Network</th>
+        <th scope="col">Quality</th>
+        <th scope="col">IP Address</th>
+
+        <th scope="col">Transmit Status</th>
+        <th scope="col">Received</th>
+        <th scope="col">Retries</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-nowrap" *ngFor="let item of eventConnection">
+        <th>
+          <span [mcDropdownTriggerFor]="appDropdownWithNested">
+            <i
+              data-feather="more-vertical"
+              class="text-secondary cursor-pointer mr-50"
+            ></i>
+          </span>
+          <mc-dropdown #appDropdownWithNested="mcDropdown">
+            <button mc-dropdown-item (click)="viewStream()">
+              <i data-feather="eye" class="mr-50 mb-25"></i> View Stream
+            </button>
+            <button mc-dropdown-item (click)="pause(item)">
+              <i data-feather="pause" class="mr-50 mb-25"></i>
+              {{
+                item.transmitStatus == "Paused" ? "Resume Connection" : "Pause"
+              }}
+            </button>
+            <button mc-dropdown-item (click)="block(item)">
+              <i data-feather="slash" class="mr-50 mb-25"></i> Block
+            </button>
+
+            <button
+              mc-dropdown-item
+              [mcDropdownTriggerFor]="appDropdownNested"
+              (click)="streaming()"
+            >
+              <i data-feather="loader" class="mr-50 mb-25"></i> Streaming
+            </button>
+            <button mc-dropdown-item (click)="delete()">
+              <i data-feather="trash-2" class="mr-50 mb-25"></i> Delete
+            </button>
+          </mc-dropdown>
+
+          <mc-dropdown #appDropdownNested="mcDropdown">
+            <button mc-dropdown-item>
+              <i data-feather="youtube" class="mr-50 mb-25"></i>YouTube
+            </button>
+            <button mc-dropdown-item>
+              <i data-feather="facebook" class="mr-50 mb-25"></i>Facebook
+            </button>
+            <button mc-dropdown-item>
+              <i data-feather="twitch" class="mr-50 mb-25"></i> Twitch
+            </button>
+          </mc-dropdown>
+        </th>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.user }}
+        </td>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.location }}
+        </td>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.deviceId }}
+        </td>
+
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.deviceType }}
+        </td>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.network }}
+        </td>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <div
+            class="badge badge-pill"
+            [ngClass]="{
+              'badge-light-danger': item.quality === 'Poor',
+              'badge-light-success': item.quality === 'Good'
+            }"
+          >
+            {{ item.quality }}
+          </div>
+        </td>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.ipAddress }}
+        </td>
+
+        <th [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <div class="d-flex">
+            <span>
+              <i
+                *ngIf="item.transmitStatus === 'Streaming'"
+                class="bi bi-arrow-up-right text-warning"
+              ></i>
+              <i
+                *ngIf="item.transmitStatus === 'Receiving'"
+                class="bi bi-arrow-down-left text-primary"
+              ></i>
+              <i
+                *ngIf="item.transmitStatus === 'Paused'"
+                class="bi bi-pause text-info"
+              ></i>
+              <i
+                *ngIf="item.transmitStatus === 'Blocked'"
+                class="bi bi-slash-circle text-danger"
+              ></i>
+            </span>
+            <span style="margin-left: 0.5em">
+              {{ item.transmitStatus }}
+            </span>
+          </div>
+        </th>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.received }}
+        </td>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.retries }}
+        </td>
+        <td><i class="bi bi-grid-3x2-gap-fill"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

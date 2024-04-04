@@ -1,0 +1,152 @@
+<div class="row p-2">
+  <div class="col-md-12 col-lg-6 col-6 d-flex align-items-center">
+    <div
+      style="cursor: pointer"
+      class="badge badge-pill badge-primary cursor-pointer"
+      [ngClass]="
+        allOrSubOrPub == 'all' ? 'badge-primary' : 'badge-light-secondary'
+      "
+      (click)="getAllPubOrSub('all')"
+    >
+      <span style="font-size: 1.4em"> All </span>
+    </div>
+    <div
+      class="badge badge-pill ml-1 cursor-pointer"
+      [ngClass]="
+        allOrSubOrPub == 'sub' ? 'badge-primary' : 'badge-light-secondary'
+      "
+      (click)="getAllPubOrSub('sub')"
+    >
+      <span style="font-size: 1.4em"> Subscriber</span>
+    </div>
+    <div
+      class="badge badge-pill ml-1 cursor-pointer"
+      [ngClass]="
+        allOrSubOrPub == 'pub' ? 'badge-primary' : 'badge-light-secondary'
+      "
+      (click)="getAllPubOrSub('pub')"
+    >
+      <span style="font-size: 1.4em"> Publisher</span>
+    </div>
+
+    <div class="d-none d-md-block d-lg-none ml-auto float-right">
+      <div class="d-flex">
+        <div class="mr-1">
+          <button
+            [style.background-color]="
+              listOrGrid == 'grid' ? 'rgba(240, 240, 240, 1)' : ''
+            "
+            type="button"
+            class="btn btn-icon"
+            rippleEffect
+            (click)="listGrid('grid')"
+          >
+            <span [data-feather]="'grid'" [size]="25"></span>
+          </button>
+        </div>
+        <button
+          [style.background-color]="
+            listOrGrid == 'list' ? 'rgba(240, 240, 240, 1)' : ''
+          "
+          type="button"
+          class="btn btn-icon"
+          rippleEffect
+          (click)="listGrid('list')"
+        >
+          <span [data-feather]="'align-justify'" [size]="25"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 col-lg-6 col-6">
+    <div class="d-flex align-items-center float-right mt-lg-0 mt-md-1">
+      <div class="d-md-none d-lg-block">
+        <div class="d-flex mr-1">
+          <div class="mr-1">
+            <button
+              [style.background-color]="
+                listOrGrid == 'grid' ? 'rgba(240, 240, 240, 1)' : ''
+              "
+              type="button"
+              class="btn btn-icon"
+              (click)="listGrid('grid')"
+              rippleEffect
+            >
+              <span [data-feather]="'grid'" [size]="25"></span>
+            </button>
+          </div>
+          <button
+            [style.background-color]="
+              listOrGrid == 'list' ? 'rgba(240, 240, 240, 1)' : ''
+            "
+            type="button"
+            class="btn btn-icon"
+            (click)="listGrid('list')"
+            rippleEffect
+          >
+            <span [data-feather]="'align-justify'" [size]="25"></span>
+          </button>
+        </div>
+      </div>
+      <div class="">
+        <button
+          type="button"
+          class="btn btn-outline-secondary mr-1"
+          rippleEffect
+          (click)="modalOpenForm(modalForm)"
+        >
+          Add Device
+        </button>
+        <button type="button" class="btn btn-warning" rippleEffect>
+          Check for Configuration
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalForm let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="myModalLabel1">Add Device</h4>
+    <button
+      type="button"
+      class="close"
+      (click)="modal.dismiss('Cross click')"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" tabindex="0" ngbAutofocus>
+    <form action="#">
+      <label>Device Name </label>
+      <div class="form-group">
+        <input
+          type="text"
+          placeholder="Device Name"
+          class="form-control"
+          [(ngModal)]="deviceName"
+        />
+      </div>
+      <label>Streaming Key </label>
+      <div class="form-group">
+        <input
+          type="text"
+          placeholder="Streaming Key"
+          class="form-control"
+          [(ngModal)]="streamingKey"
+        />
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-warning"
+      (click)="modal.close('Accept click'); addNewDevice()"
+      rippleEffect
+    >
+      Add
+    </button>
+  </div>
+</ng-template>
