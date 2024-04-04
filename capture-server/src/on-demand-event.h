@@ -2,28 +2,28 @@
 #define ON_DEMAND_EVENT_H
 
 #include "entity-base.h"
-#include "gateway.h"
+#include "request.h"
+#include "response.h"
 #include "json/json.h"
-#include "event.h"
+#include "event.h" // Include Event header for using Event class
+#include "gateway.h" // Include Gateway header for using Gateway class
 
-class OnDemandEvent : public EntityBase {
+class OnDemandEvent : public EntityBase
+{
 public:
-    OnDemandEvent();
+    OnDemandEvent(); // Constructor
 
+    // Report function
     void report();
 
-    // Setter methods for event_id and owner_id
-    void setEventId(int eventId) { this->event_id = eventId; }
-    void setOwnerId(int ownerId) { this->owner_id = ownerId; }
+    // Function to handle listing on-demand events
+    void list(const Request &request, Response &rsp);
 
-private:
-    void list(const Request &request, Response &response);
-    Json::Value create(const Request &request, Response &response); // Update return type
-    void remove(const Request &request, Response &response);
+    // Function to handle creating on-demand events
+    void create(const Request &request, Response &response);
 
-    // Properties
-    int event_id;
-    int owner_id;
+    // Function to handle removing on-demand events
+    void remove(const Request &request, Response &rsp);
 };
 
 #endif // ON_DEMAND_EVENT_H

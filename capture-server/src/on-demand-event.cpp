@@ -1,7 +1,7 @@
 #include "on-demand-event.h"
 #include "event.h"
 #include "gateway.h"
-#include "user.h" // Assuming you have a class to handle user-related operations
+#include "json/json.h"
 
 // Define a global vector to store on-demand events
 std::vector<Event> onDemandEvents;
@@ -34,54 +34,65 @@ void OnDemandEvent::report()
 
 void OnDemandEvent::list(const Request &request, Response &rsp)
 {
-    // Construct and execute a SELECT query to fetch on-demand events from the database
-    std::string sqlQuery = "SELECT * FROM public.ondemandevent"; // Modify this query according to your table structure
-    std::string result = executeSqlStr(sqlQuery); // Implement a method to execute SQL queries and return the result as a string
+    // Convert the vector of on-demand events to JSON and set it as response data
+    Json::Value responseData(Json::arrayValue);
+    for (const auto &event : onDemandEvents)
+    {
+        // Convert each event to JSON and add it to the responseData array
+        Json::Value eventJson;
+        eventJson["id"] = event.getId();
+        responseData.append(eventJson);
+    }
 
-    // Set response data with the fetched results and complete the response
-    rsp.setData(result);
+    // Set response data and complete the response
+    rsp.setData(responseData.toStyledString());
     rsp.complete();
 }
 
-Json::Value OnDemandEvent::create(const Request &request, Response &response) {
-    Json::Value parsedJson = request.json();
+void OnDemandEvent::create(const Request &request, Response &response)
+{
+    // Parse the JSON data from the request
+    Json::Value requestData = request.json();
 
-    // Extract necessary data from the request JSON
-    std::string title = parsedJson["title"].asString();
-    // Extract other required fields...
+    // Extract relevant data from the JSON
+    std::string title = requestData["title"].asString();
+    std::string dt_event_str = requestData["dt_event"].asString();
+    std::string level = requestData["level"].asString();
+    std::string program = requestData["program"].asString();
+    std::string sport = requestData["sport"].asString();
+    int tm_event = requestData["tm_event"].asInt();
+    std::string location = requestData["venue"][0]["location"].asString();
 
-    // Create a new Event instance
-    Event newEvent;
+    // Parse dt_event string to std::tm
+    std::tm dt_event_tm = {};
+    std::stringstream dt_ss(dt_event_str);
+    dt_ss >> std::get_time(&dt_event_tm, "%Y-%m-%d"); // Assuming date format is "YYYY-MM-DD"
 
-    // Set event details from parsed JSON
-    newEvent.setTitle(title);
-    // Set other event details...
+    // Extract year from std::tm
+    int year = dt_event_tm.tm_year + 1900; // tm_year is years since 1900
 
-    // Add the new event to the global vector
-    onDemandEvents.push_back(newEvent);
+    // Save the data into the Event table
+    Event event;
+    event.setTitle(title);
+    event.setDtEvent(dt_event_tm); // Set date and time
+    event.setYear(year);           // Set year
+    event.setLevel(level);
+    event.setProgram(program);
+    event.setSport(sport);
+    event.setTmEvent(tm_event);
+    event.setLocation(location);
 
-    // Assuming newEvent.getId() returns the auto-generated ID of the new event
-    int eventId = newEvent.getId();
+    // Add error handling if save fails
+    // Assuming save returns an event ID
+    int eventId = event.save();
 
-    // Construct and execute the SQL query to insert data into the database
-    std::string sqlQuery = "INSERT INTO ondemandevent (event_id, owner_id) VALUES (" + std::to_string(eventId) + ", " + std::to_string(owner_id) + ")";
-    try {
-        // Execute the SQL query using executeSql function (implement this)
-        executeSql(sqlQuery);
+    // Now, construct a JSON response with the generated event_id
+    Json::Value responseData;
+    responseData["event_id"] = eventId;
 
-        // Set response data and complete the response
-        response.setData("New event created successfully");
-        response.complete();
-
-        return parsedJson;
-    } catch (const std::exception &ex) {
-        // Handle any errors that occur during execution
-        response.setData("Error: " + std::string(ex.what()));
-        response.complete();
-        
-        // Return a placeholder Json::Value since the method signature requires it
-        return Json::Value();
-    }
+    // Set response data and complete the response
+    response.setData(responseData.toStyledString());
+    response.complete();
 }
 
 void OnDemandEvent::remove(const Request &request, Response &rsp)
@@ -109,9 +120,11 @@ void OnDemandEvent::remove(const Request &request, Response &rsp)
     {
         // Delete the on-demand event with the specified ID from the vector
         onDemandEvents.erase(std::remove_if(onDemandEvents.begin(), onDemandEvents.end(),
-                                            [onDemandEventId](const Event& event) {
+                                            [onDemandEventId](const Event &event)
+                                            {
                                                 return event.getId() == onDemandEventId;
-                                            }), onDemandEvents.end());
+                                            }),
+                             onDemandEvents.end());
 
         // Set response data and complete the response
         rsp.setData("On-demand event deleted successfully");
