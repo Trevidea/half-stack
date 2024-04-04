@@ -2,7 +2,7 @@
   <div class="col-md-12 col-lg-6 col-6 d-flex align-items-center">
     <div
       style="cursor: pointer"
-      class="badge badge-pill badge-primary cursor-pointer"
+      class="badge badge-pill badge-primary cursor-pointer custom-pill"
       [ngClass]="
         allOrSubOrPub == 'all' ? 'badge-primary' : 'badge-light-secondary'
       "
@@ -11,7 +11,7 @@
       <span style="font-size: 1.4em"> All </span>
     </div>
     <div
-      class="badge badge-pill ml-1 cursor-pointer"
+      class="badge badge-pill ml-1 cursor-pointer custom-pill"
       [ngClass]="
         allOrSubOrPub == 'sub' ? 'badge-primary' : 'badge-light-secondary'
       "
@@ -20,7 +20,7 @@
       <span style="font-size: 1.4em"> Subscriber</span>
     </div>
     <div
-      class="badge badge-pill ml-1 cursor-pointer"
+      class="badge badge-pill ml-1 cursor-pointer custom-pill"
       [ngClass]="
         allOrSubOrPub == 'pub' ? 'badge-primary' : 'badge-light-secondary'
       "
