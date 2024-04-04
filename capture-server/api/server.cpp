@@ -1,5 +1,6 @@
 #include <cpprest/http_listener.h>
 #include "gateway.h"
+#include "on-demand-event.h"
 #pragma comment(lib, "cpprest143_2_10")
 using namespace web;
 using namespace web::http;
@@ -190,6 +191,11 @@ int main()
       listener.support(methods::PUT, handle_put);
       listener.support(methods::DEL, handle_del);
       listener.support(methods::OPTIONS, handle_opt);
+
+      // Initialize an instance of OnDemandEvent
+        OnDemandEvent onDemandEvent;
+        // Setup routes for handling on-demand event-related requests
+        onDemandEvent.report();
 
       spdlog::trace("Created listener at 0.0.0.0:1437");
 

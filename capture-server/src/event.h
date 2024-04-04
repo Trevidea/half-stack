@@ -1,12 +1,16 @@
+// In Event.h
 #ifndef EVENT_H
 #define EVENT_H
 
-#include "entity-base.h" // Assuming this includes definitions for Request and Response
-#include "gateway.h"     // Assuming this includes definitions for Gateway
+#include "entity-base.h"
+#include "gateway.h"
+#include "request.h"  // Include the appropriate header for Request
+#include "response.h" // Include the appropriate header for Response
 #include <string>
 #include <vector>
 #include <ctime>
 #include <map>
+#include <json/json.h> // Include the appropriate header for JSON handling
 
 // Enum for event status
 enum EventStatus
@@ -40,9 +44,6 @@ public:
 
     // Method declarations for route handlers
     void listUpcoming(const Request &req, Response &rsp);
-    // void listOngoing(const Request &req, Response &rsp);
-    // void listPast(const Request &req, Response &rsp);
-
 
     // Getter and setter functions for EventDetail
     const EventDetail &eventDetail() const
@@ -56,34 +57,49 @@ public:
     }
 
     // Setter functions for EventDetail properties
-    void setEventType(const std::string &type)
-    {
-        this->detail.type = type;
-        this->m_model.set("type", type);
-    }
+    void setEventType(const std::string &type);
+    void setStreetAddress(const std::string &streetAddress);
+    void setCityAddress(const std::string &cityAddress);
 
-    void setStreetAddress(const std::string &streetAddress)
-    {
-        this->detail.streetAddress = streetAddress;
-        this->m_model.set("streetAddress", streetAddress);
-    }
+    void setDetail(const std::string &detail);
+    void setTitle(const std::string &title); // Declaration of setTitle method
+    void setStatus(EventStatus status);
+    void setType(const std::string &type);
 
-    void setCityAddress(const std::string &cityAddress)
-    {
-        this->detail.cityAddress = cityAddress;
-        this->m_model.set("cityAddress", cityAddress);
-    }
-
-    // Getter function for id (assuming id is auto-generated)
+    // Getter and setter functions for other properties
     int getId() const
     {
         return this->id;
     }
 
-    // Setter function for id (assuming id is auto-generated)
     void setId(int id)
     {
         this->id = id;
+    }
+
+    std::time_t eventDateTime() const
+    {
+        return this->dttEvent;
+    }
+
+    void setEventDateTime(std::time_t dateTime)
+    {
+        this->dttEvent = dateTime;
+    }
+
+    Venue getVenue() const
+    {
+        return this->venue;
+    }
+
+    void setVenue(const Venue &venue)
+    {
+        this->venue = venue;
+    }
+
+    EventStatus getStatus() const
+    {
+        return this->status;
     }
 
     // Other getter functions fetching data from m_model
@@ -107,22 +123,35 @@ public:
         return this->m_model.get<int>("year");
     }
 
-    std::string title() const
-    {
-        return this->m_model.get<std::string>("title");
-    }
+    // std::string title() const
+    // {
+    //     return this->m_model.get<std::string>("title");
+    // }
 
-    // Method to retrieve events for a specific period
-    static std::vector<Event> forPeriodAndStatus(const std::string &startDateTime, const std::string &endDateTime, const std::string &status);
+    // Method to load event data from the database
+    bool load(int eventId);
+
+    // Method to convert event data to JSON
+    Json::Value toJson() const;
+
+    // Method to create a new event
+    Json::Value create(const Request &request, Response &response);
 
 private:
     // Member variables
     int id;
     std::time_t dttEvent;
     Venue venue;
-    bool onPremise;
     EventStatus status;
     EventDetail detail;
+    std::string title; // Declaration of 'title' member variable
+    bool executeSql(const std::string &sql);
+
+    // Private helper methods
+    void setEventDetail(const EventDetail &detail);
+
+    // Function to retrieve user ID by username
+    int getUserIdByUsername(const std::string &username);
 };
 
 #endif // EVENT_H

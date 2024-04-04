@@ -12,6 +12,9 @@
 #include <tuple>
 #include "half-stack-exceptions.h"
 
+// Forward declaration of OnDemandEvent
+class OnDemandEvent;
+
 class EntityBase : public Handler
 {
 private:
@@ -22,14 +25,17 @@ private:
     EntityBase(const Model &model);
     Json::Value schemaJson();
 
-    template<typename T = std::string>
-    void setColumn(Json::Value &column, Json::Value &field, const std::string &tp, const T* value = nullptr)
+    // Declare OnDemandEvent as a friend class
+    friend class OnDemandEvent;
+
+    template <typename T = std::string>
+    void setColumn(Json::Value &column, Json::Value &field, const std::string &tp, const T *value = nullptr)
     {
         column["field"] = field;
         if ((tp == "bigint") || (tp == "integer"))
         {
             column["type"] = 0;
-            if(value)
+            if (value)
                 column["value"] = value;
             else
                 column["value"] = 0;
@@ -37,7 +43,7 @@ private:
         else if ((tp == "date") || (tp == "timestamp without time zone"))
         {
             column["type"] = 4;
-            if(value)
+            if (value)
                 column["value"] = value;
             else
                 column["value"] = "2000-11-01";
@@ -45,7 +51,7 @@ private:
         else if (tp == "character varying")
         {
             column["type"] = 1;
-            if(value)
+            if (value)
                 column["value"] = value;
             else
                 column["value"] = "var-char";
@@ -53,7 +59,7 @@ private:
         else if (tp == "boolean")
         {
             column["type"] = 3;
-            if(value)
+            if (value)
                 column["value"] = value;
             else
                 column["value"] = true;
@@ -61,7 +67,7 @@ private:
         else if (tp == "jsonb")
         {
             column["type"] = 5;
-            if(value)
+            if (value)
                 column["value"] = value;
             else
                 column["value"] = true;
@@ -69,7 +75,7 @@ private:
         else
         {
             column["type"] = 1;
-            if(value)
+            if (value)
                 column["value"] = value;
             else
                 column["value"] = "Unknown";
@@ -92,9 +98,16 @@ protected:
     virtual std::string entity();
     Model m_model;
     Model m_setModel;
+    int executeSqlAndGetId(const std::string &sql);
 
 public:
     EntityBase(const std::string &entity);
+
+    // New public method to execute SQL query
+    void executeSql(const std::string &sql)
+    {
+        executeSqlStr(sql);
+    }
 
     int id() const
     {
