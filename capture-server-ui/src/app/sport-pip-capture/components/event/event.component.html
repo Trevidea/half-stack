@@ -5,7 +5,7 @@
   <div class="card-body bg-transparent p-0">
     <div class="row d-lg-none " style="padding-right: 24px;">
       <div class="col-12 d-flex align-items-center justify-content-end" style="margin-top: 10px ;">
-        <button type="button" class="btn  btn-outline-secondary mr-1 " (click)="SyncEvents.emit()" rippleEffect>Sync
+        <button type="button" class="btn  btn-outline-secondary mr-1 " (click)="modalOpenSM()" rippleEffect>Sync
           Events</button>
         <button type="button" class="btn btn-primary  on-demand-btn " rippleEffect (click)="CreateOnDemandEvent()">
           <i class="bi bi-plus-circle-fill "></i> Create On-Demand Event
@@ -53,7 +53,7 @@
       </li>
 
       <li class=" ml-1 d-flex align-items-center" *ngIf="activeTabId=='upcoming'">
-        <button type="button" class="btn  btn-outline-secondary d-none d-lg-block " (click)="SyncEvents.emit()"
+        <button type="button" class="btn  btn-outline-secondary d-none d-lg-block " (click)="modalOpenSM()"
           rippleEffect>Sync Events</button>
       </li>
 
@@ -69,5 +69,4 @@
   <div class="card-footer bg-transparent p-1">
     <app-event-pagination></app-event-pagination>
   </div>
-
 </div>

@@ -6,6 +6,7 @@
 #include "model.h"
 #include "client-factory.h"
 
+
 /// @brief
 /// @param model
 EntityBase::EntityBase(const Model &model) : m_model{model}
@@ -410,4 +411,3 @@ void EntityBase::sync(const Request &req, Response &rsp)
     rsp.setData("Sync operation completed successfully.");
     rsp.complete();
 }
-
