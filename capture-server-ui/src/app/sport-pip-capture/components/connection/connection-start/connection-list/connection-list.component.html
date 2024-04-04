@@ -1,389 +1,134 @@
-<div>
-  <div class="card-body">
-    <div class="row">
-      <div
-        *ngFor="let item of eventConnection"
-        class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-3"
-      >
-        <!-- <div class="card card-blog">
-            <div class="card-image">
-              <a>
-                <img class="img" src="assets/images/pip-image/1.jpg" />
-                <div class="card-caption">
-                  <span>
-                    <i
-                      *ngIf="item.transmitStatus === 'Streaming'"
-                      class="bi bi-camera-video text-warning"
-                      style="
-                        font-size: medium;
-                        margin-right: 0.2rem;
-                        margin-bottom: 0.2em;
-                      "
-                    ></i>
-                    <i
-                      *ngIf="item.transmitStatus !== 'Streaming'"
-                      class="bi bi bi-tablet text-primary"
-                      style="margin-right: 0.2rem; margin-bottom: 0.2em"
-                    ></i>
-                  </span>
-                  {{ item.deviceType }}
-                </div>
-                <span
-                  style="position: absolute; top: 2px; right: 2px"
-                  [mcDropdownTriggerFor]="appDropdownWithNested"
-                >
-                  <i
-                    data-feather="more-vertical"
-                    class="text-secondary cursor-pointer mr-50"
-                  ></i>
-                </span>
-                <mc-dropdown #appDropdownWithNested="mcDropdown">
-                  <button mc-dropdown-item (click)="viewStream()">
-                    <i data-feather="eye" class="mr-50 mb-25"></i> View Stream
-                  </button>
-                  <button mc-dropdown-item (click)="pause(item)">
-                    <i data-feather="pause" class="mr-50 mb-25"></i>
-                    {{
-                      item.transmitStatus == "Paused"
-                        ? "Resume Connection"
-                        : "Pause"
-                    }}
-                  </button>
-                  <button mc-dropdown-item (click)="block(item)">
-                    <i data-feather="slash" class="mr-50 mb-25"></i> Block
-                  </button>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr class="text-nowrap">
+        <th scope="col">Action</th>
+        <th scope="col">User</th>
+        <th scope="col">Location</th>
+        <th scope="col">Device ID</th>
 
-                  <button
-                    mc-dropdown-item
-                    [mcDropdownTriggerFor]="appDropdownNested"
-                    (click)="streaming()"
-                  >
-                    <i data-feather="loader" class="mr-50 mb-25"></i> Streaming
-                  </button>
-                  <button mc-dropdown-item (click)="delete()">
-                    <i data-feather="trash-2" class="mr-50 mb-25"></i> Delete
-                  </button>
-                </mc-dropdown>
+        <th scope="col">Device Type</th>
+        <th scope="col">Network</th>
+        <th scope="col">Quality</th>
+        <th scope="col">IP Address</th>
 
-                <mc-dropdown #appDropdownNested="mcDropdown">
-                  <button mc-dropdown-item>
-                    <i data-feather="youtube" class="mr-50 mb-25"></i>YouTube
-                  </button>
-                  <button mc-dropdown-item>
-                    <i data-feather="facebook" class="mr-50 mb-25"></i>Facebook
-                  </button>
-                  <button mc-dropdown-item>
-                    <i data-feather="twitch" class="mr-50 mb-25"></i> Twitch
-                  </button>
-                </mc-dropdown>
-              </a>
-            </div>
-            <div class="card-body" style="padding: 0.5rem">
-              <h6 class="category text-info">Connected Device Details</h6>
-              <div class="d-flex justify-content-between mb-1">
-                <div class="d-flex align-items-center">
-                  <div
-                    style="
-                      display: flex;
-                      justify-content: center;
-                      background-color: rgb(165, 217, 247);
-                      height: 25px;
-                      align-items: center;
-                      border-radius: 6px;
-                      padding: 1em;
-                    "
-                  >
-                    <i
-                      style="font-size: large"
-                      class="fa fa-user-circle"
-                      aria-hidden="true"
-                    ></i>
-                  </div>
-                  <div style="margin-left: 0.5em">
-                    {{ item.user }}
-                  </div>
-                </div>
+        <th scope="col">Transmit Status</th>
+        <th scope="col">Received</th>
+        <th scope="col">Retries</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-nowrap" *ngFor="let item of eventConnection">
+        <th>
+          <span [mcDropdownTriggerFor]="appDropdownWithNested">
+            <i
+              data-feather="more-vertical"
+              class="text-secondary cursor-pointer mr-50"
+            ></i>
+          </span>
+          <mc-dropdown #appDropdownWithNested="mcDropdown">
+            <button mc-dropdown-item (click)="viewStream()">
+              <i data-feather="eye" class="mr-50 mb-25"></i> View Stream
+            </button>
+            <button mc-dropdown-item (click)="pause(item)">
+              <i data-feather="pause" class="mr-50 mb-25"></i>
+              {{
+                item.transmitStatus == "Paused" ? "Resume Connection" : "Pause"
+              }}
+            </button>
+            <button mc-dropdown-item (click)="block(item)">
+              <i data-feather="slash" class="mr-50 mb-25"></i> Block
+            </button>
 
-                <div class="d-flex align-items-center">
-                  <div
-                    style="
-                      display: flex;
-                      justify-content: center;
-                      background-color: rgb(165, 217, 247);
-                      height: 25px;
-                      align-items: center;
-                      border-radius: 6px;
-                      padding: 1em;
-                    "
-                  >
-                    <i
-                      style="font-size: large; color: rgb(165, 5, 5)"
-                      class="fa fa-signal"
-                      aria-hidden="true"
-                    ></i>
-                  </div>
-
-                  <div style="margin-left: 0.5em">{{ item.ipAddress }}</div>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between mb-3">
-                <div class="d-flex align-items-center">
-                  <div
-                    style="
-                      display: flex;
-                      justify-content: center;
-                      background-color: rgb(165, 217, 247);
-                      height: 25px;
-                      align-items: center;
-                      border-radius: 6px;
-                      padding: 1em;
-                    "
-                  >
-                    <i
-                      style="font-size: large"
-                      class="fa fa-wpexplorer"
-                      aria-hidden="true"
-                    ></i>
-                  </div>
-
-                  <div style="margin-left: 0.5em">{{ item.deviceId }}</div>
-                </div>
-
-                <div class="d-flex align-items-center">
-                  <div
-                    style="
-                      display: flex;
-                      justify-content: center;
-                      background-color: rgb(165, 217, 247);
-                      height: 25px;
-                      align-items: center;
-                      border-radius: 6px;
-                      padding: 1em;
-                    "
-                  >
-                    <i
-                      style="font-size: large"
-                      class="fa fa-retweet"
-                      aria-hidden="true"
-                    ></i>
-                  </div>
-
-                  <div style="margin-left: 0.5em">
-                    {{ item.retries }} Retries
-                  </div>
-                </div>
-              </div>
-              <div
-                class="d-flex"
-                style="position: absolute; bottom: 1px; right: 1px"
-              >
-                <span>
-                  <div
-                    *ngIf="item.transmitStatus === 'Streaming'"
-                    class="badge badge-pill"
-                    style="background-color: rgba(255, 252, 243, 1)"
-                  >
-                    <i class="bi bi-arrow-up-right text-warning"></i>
-                    <span style="margin-left: 0.5em; color: black">
-                      {{ item.transmitStatus }}
-                    </span>
-                  </div>
-
-                  <i></i>
-                  <div
-                    *ngIf="item.transmitStatus === 'Receiving'"
-                    class="badge badge-pill"
-                    style="background-color: rgba(233, 240, 245, 1)"
-                  >
-                    <i class="bi bi-arrow-down-left text-primary"></i>
-                    <span style="margin-left: 0.5em; color: black">
-                      {{ item.transmitStatus }}
-                    </span>
-                  </div>
-                  <div
-                    *ngIf="item.transmitStatus === 'Paused'"
-                    class="badge badge-pill"
-                    style="background-color: rgb(238 220 213)"
-                  >
-                    <i class="bi bi-pause text-info"></i>
-                    <span style="margin-left: 0.5em; color: black">
-                      {{ item.transmitStatus }}
-                    </span>
-                  </div>
-                  <div
-                    *ngIf="item.transmitStatus === 'Blocked'"
-                    class="badge badge-pill"
-                    style="background-color: rgb(213 169 153)"
-                  >
-                    <i class="bi bi-slash-circle text-danger"></i>
-                    <span style="margin-left: 0.5em; color: black">
-                      {{ item.transmitStatus }}
-                    </span>
-                  </div>
-                </span>
-              </div>
-              <div style="position: absolute; bottom: 1px; left: 1px">
-                <div
-                  *ngIf="item.quality == 'Good'"
-                  class="badge badge-pill badge-light-success"
-                  style="
-                    background-color: rgba(40, 199, 111, 1);
-                    color: rgba(73, 69, 79, 1) !important;
-                  "
-                >
-                  <span style="color: rgb(0, 102, 46)"> &#x25CF; </span>
-                  Good
-                </div>
-                <div
-                  *ngIf="item.quality == 'Poor'"
-                  class="badge badge-pill"
-                  style="
-                    background-color: rgba(255, 222, 222, 1);
-                    color: rgba(73, 69, 79, 1);
-                  "
-                >
-                  <span style="color: rgb(181, 0, 0)"> &#x25CF; </span>
-                  Poor
-                </div>
-              </div>
-             
-            </div>
-          </div> -->
-        <div class="d-flex p-1">
-          <div
-            class="card cursor-pointer"
-            style="height: 14rem; width: 24rem"
-            [routerLink]="'/connection/connection-device-detail/{{item.id}}'"
-          >
-            <img
-              src="assets/images/pip-image/football_1.png"
-              alt=""
-              style="height: 100%; width: 100%; border-radius: 0.428rem"
-            />
-            <div style="position: absolute; bottom: 1px; left: 1px">
-              <div
-                *ngIf="item.quality == 'Good'"
-                class="badge badge-pill badge-light-success"
-                style="
-                  background-color: rgba(40, 199, 111, 1);
-                  color: rgba(73, 69, 79, 1) !important;
-                "
-              >
-                <span style="color: rgb(0, 102, 46)"> &#x25CF; </span>
-                Good
-              </div>
-              <div
-                *ngIf="item.quality == 'Poor'"
-                class="badge badge-pill"
-                style="
-                  background-color: rgba(255, 222, 222, 1);
-                  color: rgba(73, 69, 79, 1);
-                "
-              >
-                <span style="color: rgb(181, 0, 0)"> &#x25CF; </span>
-                Poor
-              </div>
-            </div>
-            <div
-              class="d-flex"
-              style="position: absolute; bottom: 1px; right: 1px"
+            <button
+              mc-dropdown-item
+              [mcDropdownTriggerFor]="appDropdownNested"
+              (click)="streaming()"
             >
-              <span>
-                <div
-                  *ngIf="item.transmitStatus === 'Streaming'"
-                  class="badge badge-pill"
-                  style="background-color: rgba(255, 252, 243, 1)"
-                >
-                  <i class="bi bi-arrow-up-right text-warning"></i>
-                  <span style="margin-left: 0.5em; color: black">
-                    {{ item.transmitStatus }}
-                  </span>
-                </div>
+              <i data-feather="loader" class="mr-50 mb-25"></i> Streaming
+            </button>
+            <button mc-dropdown-item (click)="delete()">
+              <i data-feather="trash-2" class="mr-50 mb-25"></i> Delete
+            </button>
+          </mc-dropdown>
 
-                <i></i>
-                <div
-                  *ngIf="item.transmitStatus === 'Receiving'"
-                  class="badge badge-pill"
-                  style="background-color: rgba(233, 240, 245, 1)"
-                >
-                  <i class="bi bi-arrow-down-left text-primary"></i>
-                  <span style="margin-left: 0.5em; color: black">
-                    {{ item.transmitStatus }}
-                  </span>
-                </div>
-                <div
-                  *ngIf="item.transmitStatus === 'Paused'"
-                  class="badge badge-pill"
-                  style="background-color: rgb(238 220 213)"
-                >
-                  <i class="bi bi-pause text-info"></i>
-                  <span style="margin-left: 0.5em; color: black">
-                    {{ item.transmitStatus }}
-                  </span>
-                </div>
-                <div
-                  *ngIf="item.transmitStatus === 'Blocked'"
-                  class="badge badge-pill"
-                  style="background-color: rgb(213 169 153)"
-                >
-                  <i class="bi bi-slash-circle text-danger"></i>
-                  <span style="margin-left: 0.5em; color: black">
-                    {{ item.transmitStatus }}
-                  </span>
-                </div>
-              </span>
-            </div>
-          </div>
+          <mc-dropdown #appDropdownNested="mcDropdown">
+            <button mc-dropdown-item>
+              <i data-feather="youtube" class="mr-50 mb-25"></i>YouTube
+            </button>
+            <button mc-dropdown-item>
+              <i data-feather="facebook" class="mr-50 mb-25"></i>Facebook
+            </button>
+            <button mc-dropdown-item>
+              <i data-feather="twitch" class="mr-50 mb-25"></i> Twitch
+            </button>
+          </mc-dropdown>
+        </th>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.user }}
+        </td>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.location }}
+        </td>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.deviceId }}
+        </td>
+
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.deviceType }}
+        </td>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.network }}
+        </td>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
           <div
-            class="card p-1"
-            style="
-              height: 10rem;
-              width: 14rem;
-              background-color: rgba(233, 241, 244, 1);
-              margin-top: 2rem;
-              margin-left: -2rem !important;
-            "
+            class="badge badge-pill"
+            [ngClass]="{
+              'badge-light-danger': item.quality === 'Poor',
+              'badge-light-success': item.quality === 'Good'
+            }"
           >
-            <div class="d-flex">
-              <div class="d-flex mr-auto">
-                <span>
-                  <i
-                    *ngIf="item.transmitStatus === 'Streaming'"
-                    class="bi bi-camera-video text-warning"
-                    style="margin-right: 0.2rem"
-                  ></i>
-                  <i
-                    *ngIf="item.transmitStatus !== 'Streaming'"
-                    class="bi bi bi-tablet text-primary"
-                    style="margin-right: 0.2rem; margin-bottom: 0.2em"
-                  ></i>
-                </span>
-                <h6 style="text-wrap: nowrap; overflow: hidden">
-                  {{ item.deviceType }}
-                </h6>
-              </div>
-
-              <span ngbDropdown style="cursor: pointer">
-                <i
-                  class="bi bi-three-dots-vertical"
-                  ngbDropdownToggle
-                  id="dropdownMenuButton"
-                ></i>
-                <div ngbDropdownMenu>
-                  <a ngbDropdownItem>Pause</a>
-                  <a ngbDropdownItem>Pause</a>
-                  <a ngbDropdownItem>Disable</a>
-                  <a ngbDropdownItem>Remove</a>
-                </div>
-              </span>
-            </div>
-            <h6>{{ item.user }}</h6>
-            <h6>{{ item.deviceType }}</h6>
-            <h6>{{ item.ipAddress }}</h6>
-            <h6>{{ item.retries }} retries</h6>
+            {{ item.quality }}
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        </td>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.ipAddress }}
+        </td>
+
+        <th [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <div class="d-flex">
+            <span>
+              <i
+                *ngIf="item.transmitStatus === 'Streaming'"
+                class="bi bi-arrow-up-right text-warning"
+              ></i>
+              <i
+                *ngIf="item.transmitStatus === 'Receiving'"
+                class="bi bi-arrow-down-left text-primary"
+              ></i>
+              <i
+                *ngIf="item.transmitStatus === 'Paused'"
+                class="bi bi-pause text-info"
+              ></i>
+              <i
+                *ngIf="item.transmitStatus === 'Blocked'"
+                class="bi bi-slash-circle text-danger"
+              ></i>
+            </span>
+            <span style="margin-left: 0.5em">
+              {{ item.transmitStatus }}
+            </span>
+          </div>
+        </th>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.received }}
+        </td>
+        <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          {{ item.retries }}
+        </td>
+        <td><i class="bi bi-grid-3x2-gap-fill"></i></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

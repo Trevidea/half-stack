@@ -6,12 +6,12 @@
   ></app-connectio-grid-list-header>
 
   <app-connection-grid
-    *ngIf="listOrGrid == 'list'"
+    *ngIf="listOrGrid == 'grid'"
     [eventConnection]="eventConnection"
   ></app-connection-grid>
 
   <app-connection-list
-    *ngIf="listOrGrid == 'grid'"
+    *ngIf="listOrGrid == 'list'"
     [eventConnection]="eventConnection"
   ></app-connection-list>
 </div>
