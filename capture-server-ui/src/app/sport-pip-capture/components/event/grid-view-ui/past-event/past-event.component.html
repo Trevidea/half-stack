@@ -6,16 +6,21 @@
     </div>
     <div class="card-img-overlay p-0 d-flex flex-column" style="height: 100px;">
       <div class="menu-container" style="padding: 7px;">
-        <app-menu-button  [dropdownItems]="dropdownItems"></app-menu-button>
+        <app-menu-button [dropdownItems]="dropdownItems"></app-menu-button>
       </div>
     </div>
     <div class="card-body pt-1  pb-0 custom-card-body">
       <div class="row ">
-        <div class="col-4 d-flex align-items-center " style="padding: 14 0;">
-          <div class="badge badge-past-event">{{item.detail.type ? '': item.detail.type }}</div>
+        <div class="col-4 d-flex align-items-center">
+          <div class="badge badge-past-event" [ngClass]="{
+            'on-demand-event': item.type === 'on-demand',
+            'scheduled-event': item.type === 'scheduled'
+          }">
+            {{item.type}}
+          </div>
         </div>
         <div class="col-8 d-flex align-items-center card-btn-conatiner  justify-content-end">
-          <div class="float-right card-buttons">
+          <div class="card-buttons">
             <button type="button" class="btn btn-gradient-warning ml-auto btn-sm" routerLink="/past-event-view">
               View
             </button>

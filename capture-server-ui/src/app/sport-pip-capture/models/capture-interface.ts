@@ -12,10 +12,12 @@ export namespace Data {
     name: string;
     emails: Emails[];
   }
+
   export interface Emails {
     name: string;
     email: string;
   }
+
   export interface Event extends Base {
     sport: string;
     level: string;
@@ -32,8 +34,6 @@ export namespace Data {
     owner_id?: number; //this is user ID
   }
 
-
-
   export interface OnDemandEvent extends Base {
     event_id: number;
     owner_id: number;
@@ -44,8 +44,6 @@ export namespace Data {
     on_premise: boolean;
     pin: string;
   }
-
-
   export interface Venue {
     location: string;
   }
