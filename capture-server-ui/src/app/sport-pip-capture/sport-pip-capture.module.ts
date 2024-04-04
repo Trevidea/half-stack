@@ -70,16 +70,8 @@ import { UpcomingEventsListComponent } from "./components/event/list-view-ui/upc
 import { PastEventsListComponent } from "./components/event/list-view-ui/past-events-list/past-events-list.component";
 import { MenuButtonComponent } from "./components/event/event-utility/menu-button/menu-button.component";
 import { EventPaginationComponent } from "./components/event-pagination/event-pagination.component";
-// import { McDropdownModule } from "@ptsecurity/mosaic/dropdown";
-// import { McIconModule } from "@ptsecurity/mosaic/icon";
 import { DemoMosaicModule } from "./mosaic.module";
 import { EventPreviewPresenter } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.presenter";
-// import { OngoingOndemandEventComponent } from "./components/event/events-detail/ongoing-ondemand-event/ongoing-ondemand-event.component";
-// import { UpcomingOndemandEventComponent } from "./components/event/events-detail/upcoming-ondemand-event/upcoming-ondemand-event.component";
-// import { OngoingOndemandEventPresenter } from "./components/event/events-detail/ongoing-ondemand-event/ongoing-ondemand.event.presenter";
-// import { UpcomingOndemandEventPresenter } from "./components/event/events-detail/upcoming-ondemand-event/upcoming-ondemand-event.presenter";
-// import { OnGoingEventDetailPresenter } from "./components/event/events-detail/on-going-event-detail/on-going-event-detail.presenter";
-// import { UpComingEventDetilPresenter } from "./components/event/events-detail/up-coming-event-detail/up-coming-event-detail.presenter";
 import { VideoStreamingComponent } from "./blocks/video-streaming/video-streaming.component";
 import { SchedualEventDetailPresenter } from "./components/event/events-detail/schedual-event-detail/schedual-event-detail.presenter";
 import { SchedualEventDetailComponent } from "./components/event/events-detail/schedual-event-detail/schedual-event-detail.component";
@@ -89,6 +81,7 @@ import { NouisliderModule } from "ng2-nouislider";
 import { ConnectioGridListHeaderComponent } from "./components/connection/connection-start/connection-grid-list-header/connectio-grid-list-header.component";
 import { ConnectionGridComponent } from "./components/connection/connection-start/connection-grid/connection-grid.component";
 import { ConnectionListComponent } from "./components/connection/connection-start/connection-list/connection-list.component";
+import { NgCircleProgressModule } from "ng-circle-progress";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -149,12 +142,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MenuButtonComponent,
     EventPaginationComponent,
     EventPreviewPresenter,
-    // OngoingOndemandEventComponent,
-    // UpcomingOndemandEventComponent,
-    // OngoingOndemandEventPresenter,
-    // UpcomingOndemandEventPresenter,
-    // OnGoingEventDetailPresenter,
-    // UpComingEventDetilPresenter,
     VideoStreamingComponent,
     SchedualEventDetailComponent,
     SchedualEventDetailPresenter,
@@ -189,6 +176,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CardSnippetModule,
     SweetAlert2Module.forRoot(),
     DemoMosaicModule,
+    NgCircleProgressModule.forRoot(),
   ],
 })
 export class SportPipCaptureModule {}
