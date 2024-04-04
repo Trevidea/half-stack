@@ -82,6 +82,7 @@ import { ConnectioGridListHeaderComponent } from "./components/connection/connec
 import { ConnectionGridComponent } from "./components/connection/connection-start/connection-grid/connection-grid.component";
 import { ConnectionListComponent } from "./components/connection/connection-start/connection-list/connection-list.component";
 import { NgCircleProgressModule } from "ng-circle-progress";
+import { DragulaModule } from "ng2-dragula";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -177,6 +178,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SweetAlert2Module.forRoot(),
     DemoMosaicModule,
     NgCircleProgressModule.forRoot(),
+    DragulaModule.forRoot(),
   ],
 })
 export class SportPipCaptureModule {}
