@@ -14,6 +14,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	--secondary-border-color: #3b4253;
 	--light-secondary-border-color: #3b4253;
 	--card-border: #444444;
+	--syncbackground:rgba(33, 96, 147, 0.2)
 }
 
 :root {
@@ -21,6 +22,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	--secondary-border-color: #C3C3C3;
 	--light-secondary-border-color: #ebe9f1;
 	--card-border: #C3C3C3;
+	--syncbackground:#E9F0F5;
 }
 
 h1,
@@ -43,6 +45,16 @@ h6 {
 		border: none;
 
 	}
+
+	.modal-backdrop.show {
+		background: rgba(0, 0, 0, 0.50);
+	}
+	.modal .modal-header{
+		background:#232323;
+		border-bottom: 1px solid var(--light-secondary-border-color);
+	}
+
+	
 }
 
 .on-demand-event {
@@ -64,4 +76,5 @@ h6 {
 		background-color: transparent;
 	}
 }
+
 

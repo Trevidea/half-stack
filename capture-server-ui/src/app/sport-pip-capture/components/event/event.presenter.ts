@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataFactoryService } from 'app/sport-pip-capture/models/data-factory.service';
 import { EventRange } from './views/event';
@@ -8,10 +8,12 @@ import { ArrayBuilder } from 'app/sport-pip-capture/blocks/array.builder';
 import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 import { Data } from 'app/sport-pip-capture/models/capture-interface';
 import { TabStateService } from './event-utility/nav';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EventComponent } from './event.component';
 
 @Component({
   selector: 'app-event-presenter',
-  template: `<app-event [datasource]="filteredData" (SyncEvents)="SyncEvents()" (filter)="onFilter($event)" (onTabChange)="onTabChange()" ></app-event>`,
+  template: `<app-event  [datasource]="filteredData" (filter)="onFilter($event)" (onTabChange)="onTabChange()" ></app-event>`,
   styleUrls: ['./event.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
@@ -21,7 +23,10 @@ export class EventPresenter implements OnInit {
   activeTab: string;
   ds!: EventRange
   filteredData: any;
+  progress: number = 0;
+  isSyncing: boolean = false;
   constructor(private router: Router,
+    private modalService: NgbModal,
     private dataFactory: DataFactoryService,
     private service: ModelServiceService,
     private tabStateService: TabStateService) {
@@ -34,17 +39,7 @@ export class EventPresenter implements OnInit {
     this.filteredData = this.ds.event;
   }
 
-  SyncEvents() {
-    console.log('clicked syncEvents');
-    this.service.syncEvents().subscribe(
-      (response) => {
-        console.log('Response from syncEvents:', response);
-      },
-      (error) => {
-        console.error('Error occurred while syncing events:', error);
-      }
-    );
-  }
+
 
   onFilter(filter: Data.FilterParams) {
     if (filter != null) {

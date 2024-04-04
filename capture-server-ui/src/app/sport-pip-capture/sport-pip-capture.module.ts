@@ -79,6 +79,7 @@ import { OndemandEventDetailComponent } from "./components/event/events-detail/o
 import { OndemandEventDetailPresenter } from "./components/event/events-detail/ondemand-event-detail/ondemand-event-detail.presenter";
 import { NouisliderModule } from "ng2-nouislider";
 import { NgCircleProgressModule } from "ng-circle-progress";
+import { EventsSyncComponent } from "./components/event/events-sync/events-sync.component";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -144,6 +145,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SchedualEventDetailPresenter,
     OndemandEventDetailComponent,
     OndemandEventDetailPresenter,
+    EventsSyncComponent
   ],
   providers: [
     {
@@ -170,7 +172,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CardSnippetModule,
     SweetAlert2Module.forRoot(),
     DemoMosaicModule,
-    NgCircleProgressModule.forRoot()
+    NgCircleProgressModule.forRoot({
+      imageHeight: 95,
+      imageWidth: 95,
+      showImage: true,
+    }),
+    
+
 
   ],
 })
