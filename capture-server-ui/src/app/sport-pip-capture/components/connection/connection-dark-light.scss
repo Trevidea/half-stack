@@ -8,59 +8,80 @@
   $icon-wr-color: rgba(245, 163, 10, 1);
   $icon-da-color: rgba(222, 46, 33, 1);
   .connection-header {
-    .conection-status {
+    .connection-header-top {
       background-color: $primary-color;
-      border-radius: 0.428rem;
-      small {
-        color: $text-li-color;
-      }
-      h5 {
-        color: $text-li-color;
-        margin-bottom: 0;
-        margin-right: 6px;
-      }
     }
-    .connection-header-body {
-      // align-self: center;
-      .event-details {
-        .team-name {
-          color: $text-li-color;
-        }
-        .match-date {
-          color: $text-dr-color;
-        }
-        .location-name {
-          color: $text-dr-color;
-        }
-      }
+    .light-text {
+      color: $text-li-color;
     }
-    .event-data-serving-cards {
-      .data-display-board {
-        background-color: $card-cu-bg-color !important;
-        border-radius: 10px;
-        border: 1px solid transparent;
-        .custom-earmark {
-          color: $icon-li-color;
-        }
-        .text-label {
-          color: $text-li-color;
-        }
-      }
+    .dark-white-text {
+      color: $text-dr-color;
+    }
+    .custome-bg {
+      background-color: $card-cu-bg-color;
+    }
+    .custom-earmark {
+      color: $text-li-color;
     }
   }
 }
 .connection-header {
-  .conection-status {
+  .connection-header-top {
     background-color: rgba(233, 240, 245, 1);
-    border-radius: 0.428rem;
   }
-  .connection-header-body {
+  .custome-bg {
+    background-color: rgba(248, 248, 248, 1);
   }
-  .event-data-serving-cards {
-    .data-display-board {
-      background-color: rgba(248, 248, 248, 1);
-      border-radius: 10px;
-      border: 1px solid transparent;
+  // .light-text {
+  //   color: $text-li-color;
+  // }
+  // .dark-light-text {
+  //   color: $text-dr-color;
+  // }
+}
+.dark-layout {
+  $card-cu-bg-color: rgba(49, 49, 49, 1);
+  $primary-color: rgba(33, 96, 147, 0.3);
+  $text-li-color: rgba(253, 253, 253, 1);
+  $text-dr-color: rgba(195, 195, 195, 1);
+  $icon-li-color: rgba(253, 253, 253, 1);
+  $icon-pr-color: rgba(33, 96, 147, 1);
+  $icon-wr-color: rgba(245, 163, 10, 1);
+  $icon-da-color: rgba(222, 46, 33, 1);
+  .connection-list-grid-header {
+    .grid-list-box {
+      background-color: $card-cu-bg-color;
+    }
+    .custome-btn-outline-secondary {
+      color: $text-li-color !important;
+    }
+    .badge-primary {
+      color: $text-li-color;
+      background-color: $icon-pr-color;
+    }
+    .badge-light-secondary {
+      color: $text-li-color;
+      background-color: $card-cu-bg-color;
     }
   }
 }
+.connection-list-grid-header {
+  .grid-list-box {
+    background-color: rgba(240, 240, 240, 1);
+  }
+}
+
+// .darke-layout {
+//   .connection-grid {
+
+//   }
+// }
+// .connection-grid{
+
+// }
+// .mc-dropdown__panel.mc-dropdown__panel_nested {
+//   background-color: black;
+// }
+// .mc-dropdown-item:not([disabled]) {
+//   color: white;
+// }

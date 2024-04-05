@@ -1,8 +1,8 @@
-<div class="row p-2" style="margin: 0">
+<div class="row p-2 connection-list-grid-header" style="margin: 0">
   <div class="col-md-12 col-lg-6 col-6 d-flex align-items-center">
     <div
       style="cursor: pointer"
-      class="badge badge-pill badge-primary cursor-pointer custom-pill"
+      class="badge badge-pill badge-primary cursor-pointer"
       [ngClass]="
         allOrSubOrPub == 'all' ? 'badge-primary' : 'badge-light-secondary'
       "
@@ -11,7 +11,7 @@
       <span style="font-size: 1.4em"> All </span>
     </div>
     <div
-      class="badge badge-pill ml-1 cursor-pointer custom-pill"
+      class="badge badge-pill ml-1 cursor-pointer"
       [ngClass]="
         allOrSubOrPub == 'sub' ? 'badge-primary' : 'badge-light-secondary'
       "
@@ -20,7 +20,7 @@
       <span style="font-size: 1.4em"> Subscriber</span>
     </div>
     <div
-      class="badge badge-pill ml-1 cursor-pointer custom-pill"
+      class="badge badge-pill ml-1 cursor-pointer"
       [ngClass]="
         allOrSubOrPub == 'pub' ? 'badge-primary' : 'badge-light-secondary'
       "
@@ -29,13 +29,11 @@
       <span style="font-size: 1.4em"> Publisher</span>
     </div>
 
-    <div class="d-none d-md-block d-lg-none ml-auto float-right">
+    <div class="d-none d-md-block d-lg-none ml-auto float-right grid-list-box">
       <div class="d-flex">
         <div class="mr-1">
           <button
-            [style.background-color]="
-              listOrGrid == 'grid' ? 'rgba(240, 240, 240, 1)' : ''
-            "
+            [ngClass]="listOrGrid == 'grid' ? 'grid-list-box' : ''"
             type="button"
             class="btn btn-icon"
             rippleEffect
@@ -45,9 +43,7 @@
           </button>
         </div>
         <button
-          [style.background-color]="
-            listOrGrid == 'list' ? 'rgba(240, 240, 240, 1)' : ''
-          "
+          [ngClass]="listOrGrid == 'list' ? 'grid-list-box' : ''"
           type="button"
           class="btn btn-icon"
           rippleEffect
@@ -90,12 +86,12 @@
       </div>
       <div class="">
         <button
-          type="button"
+          type="button custome-btn-color"
           class="btn btn-outline-secondary mr-1"
           rippleEffect
           (click)="modalOpenForm(modalForm)"
         >
-          Add Device
+          <span class="custome-btn-outline-secondary"> Add Device </span>
         </button>
         <button type="button" class="btn btn-warning" rippleEffect>
           Check for Configuration
