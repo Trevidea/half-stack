@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "environments/environment";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { map, mergeMap } from "rxjs/operators";
 import { Data } from "./capture-interface";
 import { ConnectionData } from "./connection";
@@ -181,7 +181,7 @@ export class DataFactoryService {
     return ["Man", "Women"];
   }
   EventYear() {
-    return ['2024',"2023", "2022", "2021", "2020",];
+    return ['2024', "2023", "2022", "2021", "2020",];
   }
   EventSports() {
     return [
@@ -247,4 +247,25 @@ export class DataFactoryService {
       throw new Error("Method not implemented.");
     }
   }
+
+  liveEventJson(): Observable<Data.LiveEventDetail[]> {
+    const dummyData: Data.LiveEventDetail[] = [{
+      id: 1,
+      name: 'Jon',
+      role: 'Coach S.',
+      location: 'Press Box',
+      userId: 123,
+      deviceId: 'iPad15',
+      deviceType: 'iPad',
+      network: 'Penfield-5',
+      quality: 'Poor',
+      ipAddress: '127.0.0.1',
+      trasnsmitStatus: 'Receiving',
+      received: '22 files',
+      retries: '2'
+    }];
+    return of(dummyData);
+  }
+
+
 }
