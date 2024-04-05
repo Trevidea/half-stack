@@ -19,10 +19,8 @@ import { ConnectionComponent } from "./components/connection/connection.componen
 import { ConnectionPresenter } from "./components/connection/connection.presenter";
 import { PreviousEventsConnectionComponent } from "./components/connection/previous-events-connection/previous-events-connection.component";
 import { ConnectionStartComponent } from "./components/connection/connection-start/connection-start.component";
-import { DevicesConnectingComponent } from "./components/connection/devices-connecting/devices-connecting.component";
 import { CreateOnDemandEventComponent } from "./components/event/create-on-demand-event-form/create-on-demand-event.component";
 import { EventConnectionDetailComponent } from "./components/connection/event-connection-detail/event-connection-detail.component";
-import { ConnectionCardComponent } from "./components/connection/card/connection-card/connection-card.component";
 import { ConnectionDeviceDetailComponent } from "./components/connection/connection-device-detail/connection-device-detail.component";
 import { LogComponent } from "./components/log/log.component";
 import { LogPresentert } from "./components/log/log.presenter";
@@ -106,10 +104,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ConnectionPresenter,
     PreviousEventsConnectionComponent,
     ConnectionStartComponent,
-    DevicesConnectingComponent,
     CreateOnDemandEventComponent,
     EventConnectionDetailComponent,
-    ConnectionCardComponent,
+
     ConnectionDeviceDetailComponent,
     LogComponent,
     LogPresentert,
@@ -157,7 +154,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ConnectionListComponent,
     ConnectionGridComponent,
     EventStartNotificationsComponent,
-    EventEndNotifictionsComponent
+    EventEndNotifictionsComponent,
   ],
   providers: [
     {
@@ -192,4 +189,4 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DragulaModule.forRoot(),
   ],
 })
-export class SportPipCaptureModule { }
+export class SportPipCaptureModule {}

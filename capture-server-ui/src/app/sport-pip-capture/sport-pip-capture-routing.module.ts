@@ -6,7 +6,6 @@ import { LogPresentert } from "./components/log/log.presenter";
 import { SharedPresenter } from "./components/shared/shared.presenter";
 import { AuthGuard } from "app/auth/helpers/auth.guards";
 import { ConnectionDeviceDetailComponent } from "./components/connection/connection-device-detail/connection-device-detail.component";
-import { ConnectionCardComponent } from "./components/connection/card/connection-card/connection-card.component";
 import { ConnectionStartComponent } from "./components/connection/connection-start/connection-start.component";
 import { EventPresenter } from "./components/event/event.presenter";
 import { CreateOnDemandEventPresenter } from "./components/event/create-on-demand-event-form/create-on-demand-event.presenter";
@@ -27,7 +26,6 @@ const routes: Routes = [
     component: ConnectionPresenter,
     children: [
       { path: "", component: ConnectionStartComponent },
-      { path: "connection-card-view", component: ConnectionCardComponent },
       {
         path: "connection-device-detail/:id",
         component: ConnectionDeviceDetailComponent,
