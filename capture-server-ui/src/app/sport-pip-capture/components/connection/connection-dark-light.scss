@@ -20,11 +20,47 @@
         margin-right: 6px;
       }
     }
+    .connection-header-body {
+      // align-self: center;
+      .event-details {
+        .team-name {
+          color: $text-li-color;
+        }
+        .match-date {
+          color: $text-dr-color;
+        }
+        .location-name {
+          color: $text-dr-color;
+        }
+      }
+    }
+    .event-data-serving-cards {
+      .data-display-board {
+        background-color: $card-cu-bg-color !important;
+        border-radius: 10px;
+        border: 1px solid transparent;
+        .custom-earmark {
+          color: $icon-li-color;
+        }
+        .text-label {
+          color: $text-li-color;
+        }
+      }
+    }
   }
 }
 .connection-header {
   .conection-status {
     background-color: rgba(233, 240, 245, 1);
     border-radius: 0.428rem;
+  }
+  .connection-header-body {
+  }
+  .event-data-serving-cards {
+    .data-display-board {
+      background-color: rgba(248, 248, 248, 1);
+      border-radius: 10px;
+      border: 1px solid transparent;
+    }
   }
 }
