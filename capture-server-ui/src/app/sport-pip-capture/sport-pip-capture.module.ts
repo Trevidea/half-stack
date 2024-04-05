@@ -19,10 +19,8 @@ import { ConnectionComponent } from "./components/connection/connection.componen
 import { ConnectionPresenter } from "./components/connection/connection.presenter";
 import { PreviousEventsConnectionComponent } from "./components/connection/previous-events-connection/previous-events-connection.component";
 import { ConnectionStartComponent } from "./components/connection/connection-start/connection-start.component";
-import { DevicesConnectingComponent } from "./components/connection/devices-connecting/devices-connecting.component";
 import { CreateOnDemandEventComponent } from "./components/event/create-on-demand-event-form/create-on-demand-event.component";
 import { EventConnectionDetailComponent } from "./components/connection/event-connection-detail/event-connection-detail.component";
-import { ConnectionCardComponent } from "./components/connection/card/connection-card/connection-card.component";
 import { ConnectionDeviceDetailComponent } from "./components/connection/connection-device-detail/connection-device-detail.component";
 import { LogComponent } from "./components/log/log.component";
 import { LogPresentert } from "./components/log/log.presenter";
@@ -84,7 +82,10 @@ import { ConnectionListComponent } from "./components/connection/connection-star
 import { NgCircleProgressModule } from "ng-circle-progress";
 import { EventsSyncComponent } from "./components/event/events-sync/events-sync.component";
 import { DragulaModule } from "ng2-dragula";
-import { EventNotificationsComponent } from "./components/event-notifications/event-notifications.component";
+import { EventStartNotificationsComponent } from "./components/event-notifications/event-start-notifications/event-start-notifications.component";
+import { EventEndNotifictionsComponent } from "./components/event-notifications/event-end-notifictions/event-end-notifictions.component";
+import { ConnectionStartPresenter } from "./components/connection/connection-start/connection-start.presenter";
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -104,10 +105,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ConnectionPresenter,
     PreviousEventsConnectionComponent,
     ConnectionStartComponent,
-    DevicesConnectingComponent,
     CreateOnDemandEventComponent,
     EventConnectionDetailComponent,
-    ConnectionCardComponent,
+
     ConnectionDeviceDetailComponent,
     LogComponent,
     LogPresentert,
@@ -154,7 +154,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ConnectioGridListHeaderComponent,
     ConnectionListComponent,
     ConnectionGridComponent,
-    EventNotificationsComponent
+    EventStartNotificationsComponent,
+    EventEndNotifictionsComponent,
+    ConnectionStartPresenter
   ],
   providers: [
     {
@@ -182,12 +184,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SweetAlert2Module.forRoot(),
     DemoMosaicModule,
     NgCircleProgressModule.forRoot({
-      imageHeight: 95,
-      imageWidth: 95,
+      imageHeight: 90,
+      imageWidth: 90,
       showImage: true,
     }),
-    NgCircleProgressModule.forRoot(),
     DragulaModule.forRoot(),
   ],
 })
-export class SportPipCaptureModule { }
+export class SportPipCaptureModule {}

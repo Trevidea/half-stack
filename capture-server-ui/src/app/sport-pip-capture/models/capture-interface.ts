@@ -112,6 +112,22 @@ export namespace Data {
     location: string;
   }
 
+  export interface LiveEventDetail extends Base {
+    id: number;
+    name: string;
+    role: string;
+    location: string;
+    userId: number;
+    deviceId: string;
+    deviceType: string;
+    network: string;
+    quality: string;
+    ipAddress: string
+    trasnsmitStatus: string;
+    received: string;
+    retries:string; 
+  }
+
   export enum NetWorkQuality { }
   export enum Type { }
 
