@@ -49,19 +49,19 @@ export class EventComponent implements OnInit {
 
 
   // modal  Open 
-  _modalOpenSM() {
+  modalOpenSM() {
     this.modalService.open(EventsSyncComponent, {
       centered: true,
       size: 'sm'
     });
   }
 
-  modalOpenSM() {
-    this.modalService.open(EventEndNotifictionsComponent, {
-      centered: true,
-      size: 'md'
-    });
-  }
+  // modalOpenSM() {
+  //   this.modalService.open(EventEndNotifictionsComponent, {
+  //     centered: true,
+  //     size: 'md'
+  //   });
+  // }
 
 }
 
