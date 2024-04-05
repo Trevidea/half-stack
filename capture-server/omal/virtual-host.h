@@ -8,10 +8,11 @@
 
 class OMALFactory;
 
-const char *DUMPS_BASE_LOCATION = "/usr/share/ovenmediaengine/conf/html";
 
 class VirtualHost {
 public:
+    const char *DUMPS_BASE_LOCATION = "/Users/manishverma/git";
+    // const char *DUMPS_BASE_LOCATION = "/usr/share/ovenmediaengine/conf/html";
     friend class OMALFactory;
 
     /// @brief Creates a stream in the specified application with the key provided by the function user

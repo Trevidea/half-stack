@@ -8,4 +8,5 @@ target_link_libraries(capture-server PUBLIC
     cpprest
     jsoncpp_lib
     pg-dal
+    omal
     half-stack)

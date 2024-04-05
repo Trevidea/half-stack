@@ -1,5 +1,7 @@
 #include "holiday.h"
 #include "gateway.h"
+#include "omal-factory.h"
+#include "virtual-host.h"
 
 Holiday::Holiday() : EntityBase("holiday")
 {
@@ -11,7 +13,15 @@ void Holiday::report()
     Gateway::instance().route("GET", "/api/holidays", // To request LIST
                               [this](const Request &req, Response &rsp)
                               {
-                                  this->list(req, rsp);
+                                  auto &om = OMALFactory::getInstance().create("host");
+                                  auto dumps = om.getVODDumps();
+                                  std::string strDumps;
+                                  for (const auto &d : dumps)
+                                  {
+                                    strDumps.append(d);
+                                    strDumps.append("\n");
+                                  }
+                                  rsp.setData(strDumps);
                               });
     Gateway::instance().route("GET", "/api/holiday", // To request SINGLE
                               [this](const Request &req, Response &rsp)
