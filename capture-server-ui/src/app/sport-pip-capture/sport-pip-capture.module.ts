@@ -84,6 +84,7 @@ import { ConnectionListComponent } from "./components/connection/connection-star
 import { NgCircleProgressModule } from "ng-circle-progress";
 import { EventsSyncComponent } from "./components/event/events-sync/events-sync.component";
 import { DragulaModule } from "ng2-dragula";
+import { EventNotificationsComponent } from "./components/event-notifications/event-notifications.component";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -153,6 +154,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ConnectioGridListHeaderComponent,
     ConnectionListComponent,
     ConnectionGridComponent,
+    EventNotificationsComponent
   ],
   providers: [
     {
