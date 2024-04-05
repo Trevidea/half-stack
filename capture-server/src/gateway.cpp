@@ -78,7 +78,7 @@ Response &Gateway::request(std::string method, const std::string &path, const st
 }
 std::string Gateway::formatResponse(const std::vector<std::map<std::string, std::string>> &data)
 {
-    Json::Value m_root; // = Json::objectValue;
+    Json::Value root; // = Json::objectValue;
     std::vector<Json::Value> results;
     for (auto &&c = data.begin(); c != data.end(); ++c) // ROWS
     {
@@ -91,10 +91,10 @@ std::string Gateway::formatResponse(const std::vector<std::map<std::string, std:
             row.append(obj);
         }
     }
-    m_root["count"] = static_cast<int>(results.size());
-    m_root["result"] = Json::Value{Json::arrayValue};
-    std::for_each(results.begin(), results.end(), [&m_root](Json::Value &val)
-                  { m_root["result"].append(val); });
-    return Json::FastWriter().write(m_root);
+    root["count"] = static_cast<int>(results.size());
+    root["result"] = Json::Value{Json::arrayValue};
+    std::for_each(results.begin(), results.end(), [&root](Json::Value &val)
+                  { root["result"].append(val); });
+    return Json::FastWriter().write(root);
 }
 Gateway::~Gateway(){};

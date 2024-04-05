@@ -32,7 +32,8 @@ public:
     Response &request(std::string method, const std::string &path, const std::string &query, const std::string &data);
     void route(const std::string &method, const std::string &path, const std::function<void(const Request &, Response &)> &handler);
     std::string formatResponse(const std::vector<std::map<std::string, std::string>> &data);
-    // std::string response();
+   
+    std::string response();
 };
 
 #endif // GATEWAY_H
