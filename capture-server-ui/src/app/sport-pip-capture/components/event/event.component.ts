@@ -7,6 +7,7 @@ import { TabStateService } from './event-utility/nav';
 import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 import { Data } from 'app/sport-pip-capture/models/capture-interface';
 import { EventsSyncComponent } from './events-sync/events-sync.component';
+import { EventEndNotifictionsComponent } from '../event-end-notifictions/event-end-notifictions.component';
 
 @Component({
   selector: 'app-event',
@@ -47,11 +48,18 @@ export class EventComponent implements OnInit {
   }
 
 
-  // modal Open Small
-  modalOpenSM() {
+  // modal  Open 
+  _modalOpenSM() {
     this.modalService.open(EventsSyncComponent, {
       centered: true,
       size: 'sm'
+    });
+  }
+
+  modalOpenSM() {
+    this.modalService.open(EventEndNotifictionsComponent, {
+      centered: true,
+      size: 'md'
     });
   }
 
