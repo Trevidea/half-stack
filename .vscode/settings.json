@@ -121,7 +121,11 @@
     "functional": "cpp",
     "ranges": "cpp",
     "version": "cpp",
-    "*.inc": "cpp"
+    "*.inc": "cpp",
+    "type_traits": "cpp",
+    "__availability": "cpp",
+    "*.dat": "cpp",
+    "filesystem": "cpp"
   },
   "cmake.sourceDirectory": "C:/git/half-stack/capture-server/api"
 }

@@ -29,7 +29,7 @@ const routes: Routes = [
       { path: "", component: ConnectionStartComponent },
       { path: "connection-card-view", component: ConnectionCardComponent },
       {
-        path: "connection-device-detail",
+        path: "connection-device-detail/:id",
         component: ConnectionDeviceDetailComponent,
       },
     ],

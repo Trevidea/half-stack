@@ -12,10 +12,12 @@ export namespace Data {
     name: string;
     emails: Emails[];
   }
+
   export interface Emails {
     name: string;
     email: string;
   }
+
   export interface Event extends Base {
     sport: string;
     level: string;
@@ -42,7 +44,6 @@ export namespace Data {
     on_premise: boolean;
     pin: string;
   }
-
   export interface Venue {
     location: string;
   }
@@ -111,10 +112,10 @@ export namespace Data {
     location: string;
   }
 
-  export enum NetWorkQuality {}
-  export enum Type {}
+  export enum NetWorkQuality { }
+  export enum Type { }
 
-  export enum Priority {}
+  export enum Priority { }
 
   export enum DataType {
     Type1 = "type1",
@@ -161,7 +162,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role {}
+  export interface Role { }
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -170,13 +171,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings {}
+  export interface DisplaySettings { }
 
-  export interface CustomizationSettings {}
+  export interface CustomizationSettings { }
 
-  export interface NotificationSettings {}
+  export interface NotificationSettings { }
 
-  export interface VideoResolutionSettings {}
+  export interface VideoResolutionSettings { }
   export enum DataStatus {
     Status1 = "status1",
     Status2 = "status2",
@@ -221,7 +222,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role {}
+  export interface Role { }
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -230,13 +231,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings {}
+  export interface DisplaySettings { }
 
-  export interface CustomizationSettings {}
+  export interface CustomizationSettings { }
 
-  export interface NotificationSettings {}
+  export interface NotificationSettings { }
 
-  export interface VideoResolutionSettings {}
+  export interface VideoResolutionSettings { }
 
   export interface Team extends Base {
     id: number;

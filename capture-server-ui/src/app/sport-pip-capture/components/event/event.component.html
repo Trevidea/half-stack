@@ -3,6 +3,16 @@
     <app-header-presenter style="width: 100%;" (filter)="onFilter($event )"></app-header-presenter>
   </div>
   <div class="card-body bg-transparent p-0">
+    <div class="row d-lg-none " style="padding-right: 24px;">
+      <div class="col-12 d-flex align-items-center justify-content-end" style="margin-top: 10px ;">
+        <button type="button" class="btn  btn-outline-secondary mr-1 " (click)="modalOpenSM()" rippleEffect>Sync
+          Events</button>
+        <button type="button" class="btn btn-primary  on-demand-btn " rippleEffect (click)="CreateOnDemandEvent()">
+          <i class="bi bi-plus-circle-fill "></i> Create On-Demand Event
+        </button>
+      </div>
+    </div>
+
     <ul ngbNav #nav="ngbNav" class="nav-tabs" [(activeId)]="activeTabId" (navChange)="onNavChange($event)">
       <li ngbNavItem="ongoing" style="margin-top: 5px;">
         <a ngbNavLink>Ongoing Events</a>
@@ -28,27 +38,29 @@
         </ng-template>
       </li>
 
-      <li class="ml-lg-auto d-flex align-items-center">
+      <li class="ml-auto d-flex align-items-center">
         <button type="button" class="btn btn-flat-secondary  list-button " rippleEffec [class.active]="!gridView"
           (click)="changeViewMode()">
           <h4 class=" m-0"><i class="bi bi-list" style="font-size: 1.5rem;"></i></h4>
         </button>
       </li>
 
-      <li class=" d-flex align-items-center mr-1 ml-0.5">
+      <li class=" d-flex align-items-center">
         <button type="button" class="btn btn-flat-secondary  grid-button " [class.active]="gridView"
           (click)="changeViewMode()">
           <h4 class="m-0"><i class="bi bi-grid"></i></h4>
         </button>
       </li>
 
-      <li class="d-flex align-items-center" *ngIf="activeTabId=='upcomingEvents'">
-        <button type="button" class="btn  btn-outline-secondary" (click)="SyncEvents.emit()" rippleEffect>Sync Events</button>
+      <li class=" ml-1 d-flex align-items-center" *ngIf="activeTabId=='upcoming'">
+        <button type="button" class="btn  btn-outline-secondary d-none d-lg-block " (click)="modalOpenSM()"
+          rippleEffect>Sync Events</button>
       </li>
 
-      <li class="ml-1 d-flex align-items-center">
-        <button type="button" class="btn btn-primary  on-demand-btn " rippleEffect (click)="CreateOnDemandEvent()">
-          <i class="bi bi-plus-circle-fill "></i> Create On-Demand Event
+      <li class="ml-1 mr-2 d-flex align-items-center">
+        <button type="button" class="btn btn-primary  on-demand-btn  d-none d-lg-block " rippleEffect
+          (click)="CreateOnDemandEvent()">
+          <i class="bi bi-plus-circle-fill"></i> Create On-Demand Event
         </button>
       </li>
     </ul>
@@ -57,5 +69,4 @@
   <div class="card-footer bg-transparent p-1">
     <app-event-pagination></app-event-pagination>
   </div>
-
 </div>

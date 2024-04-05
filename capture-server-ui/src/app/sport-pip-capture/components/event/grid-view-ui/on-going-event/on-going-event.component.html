@@ -23,15 +23,15 @@
           </div>
         </div>
         <div class="col-8 card-btn-conatiner">
-          <div class="float-right card-buttons">
-            <button type="button" class="btn btn-flat-dark btn-sm" rippleEffect
+          <div class="card-buttons ml-auto">
+            <button type="button" class="btn btn-flat-dark btn-sm mr-md-1" rippleEffect
               (click)="eventDetail(item.type)">
               View
             </button>
-            <button type="button" class="btn btn-warning ml-auto btn-sm">
+            <button type="button" class="btn btn-warning btn-sm">
               Join
             </button>
-          </div>
+          </div> 
         </div>
         <div class="col-12 mt-1 card-text-style">
           <h4 class="ellipsis">{{item.title}}</h4>
@@ -52,10 +52,10 @@
 
 <core-sidebar class="modal modal-slide-in fade event-sidebar" name="ongoing-scheduled" overlayClass="modal-backdrop"
   hideOnEsc="true" preventBackgroundScroll="true">
-  <app-on-going-event-detail-presenter></app-on-going-event-detail-presenter>
+  <app-schedual-event-detail-presenter></app-schedual-event-detail-presenter>
 </core-sidebar>
 
 <core-sidebar class="modal modal-slide-in fade event-sidebar" name="ongoing-on-demand" overlayClass="modal-backdrop"
   hideOnEsc="true" preventBackgroundScroll="true">
-  <app-ongoing-ondemand-event-presenter></app-ongoing-ondemand-event-presenter>
+  <app-ondemand-event-detail-presenter></app-ondemand-event-detail-presenter>
 </core-sidebar>

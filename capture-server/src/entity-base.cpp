@@ -6,6 +6,7 @@
 #include "model.h"
 #include "client-factory.h"
 
+
 /// @brief
 /// @param model
 EntityBase::EntityBase(const Model &model) : m_model{model}

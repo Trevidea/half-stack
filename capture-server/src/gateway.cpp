@@ -6,6 +6,8 @@
 #include "metatype.h"
 #include "event.h"
 #include "team.h"
+#include "on-demand-event.h"
+#include "user.h"
 
 Gateway::Gateway()
 {

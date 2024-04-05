@@ -38,7 +38,7 @@ import { DonutComponent } from "./components/dashboard/chart-components/donut/do
 import { BarChartComponent } from "./components/dashboard/chart-components/bar-chart/bar-chart.component";
 import { PlyrModule } from "ngx-plyr";
 import { CardSnippetModule } from "../../@core/components/card-snippet/card-snippet.module";
-import { ConnectionHeaderComponent } from "./components/connection/connection-header/connection-header.component";
+import { ConnectionHeaderComponent } from "./components/connection/connection-start/connection-header/connection-header.component";
 import { EventPresenter } from "app/sport-pip-capture/components/event/event.presenter";
 import { EventComponent } from "./components/event/event.component";
 import { CreateOnDemandEventPresenter } from "./components/event/create-on-demand-event-form/create-on-demand-event.presenter";
@@ -57,8 +57,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule } from "@angular/forms";
 import { ShareToPeopleComponent } from "./components/event/grid-view-ui/past-event/share-event/component/share-to-people/share-to-people.component";
 import { ShareToSocialComponent } from "./components/event/grid-view-ui/past-event/share-event/component/share-to-social/share-to-social.component";
-import { OnGoingEventDetailComponent } from "./components/event/events-detail/on-going-event-detail/on-going-event-detail.component";
-import { UpComingEventDetilComponent } from "./components/event/events-detail/up-coming-event-detail/up-coming-event-detail.component";
 import { EventPreviewComponent } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.component";
 import { ActiveDevicesComponent } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/active-devices/active-devices.component";
 import { PastEventViewComponent } from "./components/event/grid-view-ui/past-event/past-event-view/past-event-view.component";
@@ -72,16 +70,21 @@ import { UpcomingEventsListComponent } from "./components/event/list-view-ui/upc
 import { PastEventsListComponent } from "./components/event/list-view-ui/past-events-list/past-events-list.component";
 import { MenuButtonComponent } from "./components/event/event-utility/menu-button/menu-button.component";
 import { EventPaginationComponent } from "./components/event-pagination/event-pagination.component";
-// import { McDropdownModule } from "@ptsecurity/mosaic/dropdown";
-// import { McIconModule } from "@ptsecurity/mosaic/icon";
 import { DemoMosaicModule } from "./mosaic.module";
 import { EventPreviewPresenter } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.presenter";
-import { OngoingOndemandEventComponent } from "./components/event/events-detail/ongoing-ondemand-event/ongoing-ondemand-event.component";
-import { UpcomingOndemandEventComponent } from "./components/event/events-detail/upcoming-ondemand-event/upcoming-ondemand-event.component";
-import { OngoingOndemandEventPresenter } from "./components/event/events-detail/ongoing-ondemand-event/ongoing-ondemand.event.presenter";
-import { UpcomingOndemandEventPresenter } from "./components/event/events-detail/upcoming-ondemand-event/upcoming-ondemand-event.presenter";
-import { OnGoingEventDetailPresenter } from "./components/event/events-detail/on-going-event-detail/on-going-event-detail.presenter";
-import { UpComingEventDetilPresenter } from "./components/event/events-detail/up-coming-event-detail/up-coming-event-detail.presenter";
+import { VideoStreamingComponent } from "./blocks/video-streaming/video-streaming.component";
+import { SchedualEventDetailPresenter } from "./components/event/events-detail/schedual-event-detail/schedual-event-detail.presenter";
+import { SchedualEventDetailComponent } from "./components/event/events-detail/schedual-event-detail/schedual-event-detail.component";
+import { OndemandEventDetailComponent } from "./components/event/events-detail/ondemand-event-detail/ondemand-event-detail.component";
+import { OndemandEventDetailPresenter } from "./components/event/events-detail/ondemand-event-detail/ondemand-event-detail.presenter";
+import { NouisliderModule } from "ng2-nouislider";
+import { ConnectioGridListHeaderComponent } from "./components/connection/connection-start/connection-grid-list-header/connectio-grid-list-header.component";
+import { ConnectionGridComponent } from "./components/connection/connection-start/connection-grid/connection-grid.component";
+import { ConnectionListComponent } from "./components/connection/connection-start/connection-list/connection-list.component";
+import { NgCircleProgressModule } from "ng-circle-progress";
+import { EventsSyncComponent } from "./components/event/events-sync/events-sync.component";
+import { DragulaModule } from "ng2-dragula";
+import { EventNotificationsComponent } from "./components/event-notifications/event-notifications.component";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -134,8 +137,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     InlineModalComponent,
     MetaTypePresenter,
     EventHeaderPresenter,
-    OnGoingEventDetailComponent,
-    UpComingEventDetilComponent,
     EventPreviewComponent,
     ActiveDevicesComponent,
     OngoingEventListComponent,
@@ -144,12 +145,16 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MenuButtonComponent,
     EventPaginationComponent,
     EventPreviewPresenter,
-    OngoingOndemandEventComponent,
-    UpcomingOndemandEventComponent,
-    OngoingOndemandEventPresenter,
-    UpcomingOndemandEventPresenter,
-    OnGoingEventDetailPresenter,
-    UpComingEventDetilPresenter
+    VideoStreamingComponent,
+    SchedualEventDetailComponent,
+    SchedualEventDetailPresenter,
+    OndemandEventDetailComponent,
+    OndemandEventDetailPresenter,
+    EventsSyncComponent,
+    ConnectioGridListHeaderComponent,
+    ConnectionListComponent,
+    ConnectionGridComponent,
+    EventNotificationsComponent
   ],
   providers: [
     {
@@ -158,6 +163,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     },
   ],
   imports: [
+    NouisliderModule,
     CommonModule,
     SportPipCaptureRoutingModule,
     TranslateModule,
@@ -175,6 +181,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CardSnippetModule,
     SweetAlert2Module.forRoot(),
     DemoMosaicModule,
+    NgCircleProgressModule.forRoot({
+      imageHeight: 95,
+      imageWidth: 95,
+      showImage: true,
+    }),
+    NgCircleProgressModule.forRoot(),
+    DragulaModule.forRoot(),
   ],
 })
 export class SportPipCaptureModule { }

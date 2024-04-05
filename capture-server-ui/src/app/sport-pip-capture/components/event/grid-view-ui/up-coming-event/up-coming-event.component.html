@@ -6,12 +6,12 @@
         Starts in {{item.countdown}}
       </div>
       <div class="menu-container">
-        <app-menu-button [dropdownItems]="dropdownItems" ></app-menu-button>
+        <app-menu-button [dropdownItems]="dropdownItems"></app-menu-button>
       </div>
     </div>
     <div class="card-body pt-1 pb-0 custom-card-body">
       <div class="row">
-        <div class="col-5 d-flex align-items-center " style="padding: 17 0;">
+        <div class="col-4 d-flex align-items-center " style="padding: 17 0;">
           <div class="badge badge-past-event" [ngClass]="{
             'on-demand-event': item.type === 'on-demand',
             'scheduled-event': item.type === 'scheduled'
@@ -19,15 +19,17 @@
             {{item.type}}
           </div>
         </div>
-        <div class="col-7  card-btn-conatiner ">
-          <button type="button" class="btn btn-flat-dark btn-sm ml-auto card-buttons" (click)="viewDetail(item.type)"
-            rippleEffect>
-            View
-          </button>
-          <button type="button" class="btn btn-warning  btn-sm card-buttons " style="box-shadow: none;"
-            routerLink="/event/event-preview">
-            Preview
-          </button>
+        <div class="col-8  card-btn-conatiner  ">
+          <div class="card-buttons ml-auto">
+            <button type="button" class="btn btn-flat-dark btn-sm  mr-md-1 " (click)="viewDetail(item.type)"
+              rippleEffect>
+              View
+            </button>
+            <button type="button" class="btn btn-warning  btn-sm" style="box-shadow: none;"
+              routerLink="/event/event-preview">
+              Preview
+            </button>
+          </div>
         </div>
         <div class="col-12 mt-1 card-text-style">
           <h4 class="ellipsis">{{item.title}} </h4>
@@ -47,9 +49,9 @@
 
 <core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-scheduled" overlayClass="modal-backdrop"
   hideOnEsc="true">
-  <app-up-coming-event-detil-presenter></app-up-coming-event-detil-presenter>
+  <app-schedual-event-detail-presenter></app-schedual-event-detail-presenter>
 </core-sidebar>
 <core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-on-demand" overlayClass="modal-backdrop"
   hideOnEsc="true">
-  <app-upcoming-ondemand-presenter></app-upcoming-ondemand-presenter>
+  <app-ondemand-event-detail-presenter upcommingEvent=true></app-ondemand-event-detail-presenter>
 </core-sidebar>

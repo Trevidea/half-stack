@@ -1,128 +1,156 @@
 #ifndef EVENT_H
 #define EVENT_H
 
-#include "entity-base.h" // Assuming this includes definitions for Request and Response
-#include "gateway.h"     // Assuming this includes definitions for Gateway
+#include "entity-base.h"
+#include "gateway.h"
+#include "request.h"
+#include "response.h"
 #include <string>
-#include <vector>
-#include <ctime>
-#include <map>
+#include <ctime> // Include for std::tm
+#include <json/json.h>
 
-// Enum for event status
-enum EventStatus
-{
-    OnGoing,
+enum class EventStatus {
     Upcoming,
+    OnGoing,
     Past
 };
 
-// Structure to represent venue details
-struct Venue
-{
+enum class EventType {
+    OnDemand,
+    Scheduled
+};
+
+struct Venue {
     std::string location;
 };
 
-// Structure to represent event detail
-struct EventDetail
-{
+struct EventDetail {
     std::string type;
     std::string streetAddress;
     std::string cityAddress;
 };
 
-// Class to represent Event entity
-class Event : public EntityBase
-{
+class Event : public EntityBase {
 public:
-    Event();
+    // Constructor with member initializer list to initialize id to -1
+    Event() : EntityBase("event"), id(-1) {} 
 
     void report();
 
     // Method declarations for route handlers
-    void listUpcoming(const Request &req, Response &rsp);
-    // void listOngoing(const Request &req, Response &rsp);
-    // void listPast(const Request &req, Response &rsp);
+    int save();
+    int saveEventToDatabase(const std::string &title, const std::string &level,
+                            const std::string &program, int year, const std::tm &dt_event_tm,
+                            int tmEvent, const Venue &venue, const EventDetail &detail,
+                            EventStatus status, EventType type);
+    Json::Value create(const Request &request, Response &response);
+    Json::Value remove(const Request &request, Response &response);
 
-
-    // Getter and setter functions for EventDetail
-    const EventDetail &eventDetail() const
-    {
-        return this->detail;
+    // Declare the function as static
+    static EventStatus convertStringToEventStatus(const std::string& statusStr) {
+        if (statusStr == "Upcoming") {
+            return EventStatus::Upcoming;
+        } else if (statusStr == "OnGoing") {
+            return EventStatus::OnGoing;
+        } else if (statusStr == "Past") {
+            return EventStatus::Past;
+        } else {
+            // Handle invalid status string
+            // For simplicity, return EventStatus::Upcoming as default
+            return EventStatus::Upcoming;
+        }
     }
 
-    EventDetail &eventDetail()
-    {
-        return this->detail;
+    // Getter and setter functions for other properties
+    int getId() const {
+        return id;
     }
 
-    // Setter functions for EventDetail properties
-    void setEventType(const std::string &type)
-    {
-        this->detail.type = type;
-        this->m_model.set("type", type);
-    }
-
-    void setStreetAddress(const std::string &streetAddress)
-    {
-        this->detail.streetAddress = streetAddress;
-        this->m_model.set("streetAddress", streetAddress);
-    }
-
-    void setCityAddress(const std::string &cityAddress)
-    {
-        this->detail.cityAddress = cityAddress;
-        this->m_model.set("cityAddress", cityAddress);
-    }
-
-    // Getter function for id (assuming id is auto-generated)
-    int getId() const
-    {
-        return this->id;
-    }
-
-    // Setter function for id (assuming id is auto-generated)
-    void setId(int id)
-    {
+    void setId(int id) {
         this->id = id;
     }
 
-    // Other getter functions fetching data from m_model
-    std::string sport() const
-    {
-        return this->m_model.get<std::string>("sport");
+    const std::string &getTitle() const {
+        return title;
     }
 
-    std::string level() const
-    {
-        return this->m_model.get<std::string>("level");
+    void setTitle(const std::string &title) {
+        this->title = title;
     }
 
-    std::string program() const
-    {
-        return this->m_model.get<std::string>("program");
+    const EventStatus &getStatus() const {
+        return status;
     }
 
-    int year() const
-    {
-        return this->m_model.get<int>("year");
+    void setStatus(const EventStatus &status) {
+        this->status = status;
     }
 
-    std::string title() const
-    {
-        return this->m_model.get<std::string>("title");
+    const EventType &getType() const {
+        return type;
     }
 
-    // Method to retrieve events for a specific period
-    static std::vector<Event> forPeriodAndStatus(const std::string &startDateTime, const std::string &endDateTime, const std::string &status);
+    void setType(const EventType &type) {
+        this->type = type;
+    }
+
+    // Setter functions for member variables
+    void setVenue(const Venue &venue);
+    void setDetail(const EventDetail &detail);
+
+    // Setter function for date and time
+    void setDtEvent(const std::tm &dtEvent) {
+        this->dt_event = dtEvent;
+    }
+
+    // Setter functions for level, program, sport, tm_event, and location
+    void setLevel(const std::string &level) {
+        this->level = level;
+    }
+
+    void setProgram(const std::string &program) {
+        this->program = program;
+    }
+
+    void setSport(const std::string &sport) {
+        this->sport = sport;
+    }
+
+    void setTmEvent(int tmEvent) {
+        this->tm_event = tmEvent;
+    }
+
+    void setLocation(const std::string &location) {
+        this->venue.location = location;
+    }
+
+    // Getter and setter for year
+    int getYear() const {
+        return year;
+    }
+
+    void setYear(int year) {
+        this->year = year;
+    }
 
 private:
     // Member variables
     int id;
-    std::time_t dttEvent;
+    std::string title;
+    std::string level;
+    std::string program;
+    std::string sport;
+    std::tm dt_event;
+    int tm_event;
+    int year;
     Venue venue;
-    bool onPremise;
-    EventStatus status;
     EventDetail detail;
+    EventStatus status;
+    EventType type;
+
+    // Private helper methods
+    void executeSql(const std::string &sql);
+    
 };
 
 #endif // EVENT_H

@@ -1,5 +1,5 @@
 .grid-view {
-    padding:12px 24px;
+    padding: 12px 24px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     gap: 1rem;
@@ -75,27 +75,32 @@
     }
 
     //card effect  on  hovor 
-
+    // For desktop screens with pointer capabilities 
     .card-btn-conatiner {
         display: flex;
         align-items: center;
-        justify-content: end;
-        min-height: 28px;
-
     }
 
-    .custom-card .card-buttons {
-        display: none;
-        transition: opacity 0.5s ease;
-    }
+    @media (hover: hover) and (pointer: fine) {
+        .card-btn-conatiner {
+            display: flex;
+            align-items: center;
+            min-height: 28px;
+        }
 
-    .custom-card:hover {
-        box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.12) !important;
-    }
+        .custom-card .card-buttons {
+            display: none;
+            transition: opacity 0.5s ease;
+        }
 
-    .custom-card:hover .card-buttons {
-        display: inline-block;
-        opacity: 1;
+        .custom-card:hover {
+            box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        .custom-card:hover .card-buttons {
+            display: inline-block;
+            opacity: 1;
+        }
     }
 }
 
@@ -126,11 +131,11 @@
     font-size: 13px;
     font-weight: 400;
 }
- 
+
 .menu-container {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     padding-top: 3px;
     padding-right: 5px;
     width: 100%;

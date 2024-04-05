@@ -94,66 +94,24 @@ private:
 
 public:
     static std::string ScriptInsert(const Json::Value &json)
+{
+    std::string tablename = json["table"].asString();
+
+    // Extract columns and values from JSON
+    std::vector<std::string> columns;
+    std::vector<std::string> values;
+    for (const auto &column : json["columns"])
     {
-        //"INSERT INTO salaryslipfield (key, field) VALUES('Basic', 'basic_pay')"
-        // get table name from jsonString and store in tablename variable
-        std::string tablename = json["table"].asString(); //"salaryslipfield";
-        // creating vector for fields
-        std::vector<std::string> fields;
-        for (const auto v : json["columns"])
-        {
-            fields.push_back(v["field"].asString());
-        }
-        std::string fiel = su_join(fields, ", ");
-        // std::cout <<fiel <<std::endl;
-
-        // creating vector for values
-        std::vector<std::string> values;
-        for (const auto v : json["columns"])
-        {
-            std::string fmtdValue = formatValue(v);
-            values.push_back(fmtdValue);
-        }
-
-        std::string val = su_join(values, ", ");
-        // std::cout<<val<<endl;
-
-        // get field names csv from jsonString and store in fieldnames_csv variable
-        std::string fieldnames_csv = fiel;
-        // get field values from jsonString and store in values_csv variable
-        std::string values_csv = val;
-
-        std::string sql_insert = "INSERT INTO #tablename# (#fieldnames_csv#) VALUES(#values_csv#)";
-        size_t idx = 0;
-
-        // use string manipulation (find & replace) to replace placeholders with the values in actual variables
-        idx = sql_insert.find("#tablename#", 0);
-        if (idx == std::string::npos)
-            std::cout << "completely unexpected" << std::endl;
-        else
-        {
-            sql_insert.replace(idx, 11, tablename);
-        }
-
-        //---------------------------------------------------
-        idx = sql_insert.find("#fieldnames_csv#", 0);
-        if (idx == std::string::npos)
-            std::cout << "completely unexpected" << std::endl;
-        else
-        {
-            sql_insert.replace(idx, 16, fieldnames_csv);
-        }
-        //---------------------------------------------------
-        idx = sql_insert.find("#values_csv#", 0);
-        if (idx == std::string::npos)
-            std::cout << "completely unexpected" << std::endl;
-        else
-        {
-            sql_insert.replace(idx, 12, values_csv);
-        }
-
-        return sql_insert; // SAMPLE::::"INSERT INTO salaryslipfield (key, field) VALUES('Basic', 'basic_pay')";
+        columns.push_back(column["field"].asString());
+        values.push_back(formatValue(column));
     }
+
+    // Construct the INSERT SQL statement with RETURNING clause to get the inserted ID
+    std::string sql_insert = "INSERT INTO " + tablename + " (" + su_join(columns, ", ") + ") VALUES (" + su_join(values, ", ") + ") RETURNING id";
+
+    return sql_insert;
+}
+
 
     //-----------------------------------------------------------------------------------
 
@@ -330,4 +288,20 @@ public:
         return sql_select;
     }
 };
+
+// // Define the executeAndReturnId function
+// int executeAndReturnId(const std::string &sql) {
+//     // Implement the logic to execute the SQL query and return the inserted ID
+//     // For demonstration purposes, let's just print the SQL query
+//     std::cout << "Executing SQL query: " << sql << std::endl;
+    
+//     // Placeholder value for the inserted ID
+//     int insertedId = 12345; // Replace with your actual implementation to retrieve the inserted ID
+    
+//     return insertedId;
+// }
+
+// Declaration of ownerId function (assuming it returns an integer)
+int ownerId();
+
 #endif // SQLHELPER_H

@@ -11,7 +11,16 @@ export class OnDemandEventFormView implements Views.Datasource {
     public set id(v: number) {
         this._id = v;
     }
-
+    
+    
+    private _owner_id : number;
+    public get owner_id() : number {
+        return this._owner_id;
+    }
+    public set owner_id(v : number) {
+        this._owner_id = v;
+    }
+    
     private _title: string;
     public get title(): string {
         return this._title;
