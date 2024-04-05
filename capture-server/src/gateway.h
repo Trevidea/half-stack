@@ -16,8 +16,9 @@ private:
     ~Gateway();
     std::string flatten(std::string method, const std::string path);
     std::map<int, Response> m_reg;
-    std::map<std::string, std::function<void(const Request&, Response&)>> m_handlers;
-    std::vector<Handler*> m_entities;
+    std::map<std::string, std::function<void(const Request &, Response &)>> m_handlers;
+    std::vector<Handler *> m_entities;
+
 public:
     static Gateway &
     instance()
@@ -29,9 +30,9 @@ public:
     Gateway &operator=(const Gateway &) = delete;
     void init();
     Response &request(std::string method, const std::string &path, const std::string &query, const std::string &data);
-    void route(const std::string &method, const std::string &path, const std::function<void(const Request&, Response&)>& handler);
-
-    std::string response();
+    void route(const std::string &method, const std::string &path, const std::function<void(const Request &, Response &)> &handler);
+    std::string formatResponse(const std::vector<std::map<std::string, std::string>> &data);
+    // std::string response();
 };
 
 #endif // GATEWAY_H

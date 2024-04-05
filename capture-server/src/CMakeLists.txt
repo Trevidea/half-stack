@@ -12,6 +12,7 @@ set(HALF_STACK_SRC
     event.cpp
     team.cpp
     on-demand-event.cpp
+    omal.cpp
     user.cpp
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})

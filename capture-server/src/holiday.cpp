@@ -16,11 +16,6 @@ void Holiday::report()
                                   auto &om = OMALFactory::getInstance().create("host");
                                   auto dumps = om.getVODDumps();
                                   std::string strDumps;
-                                  for (const auto &d : dumps)
-                                  {
-                                    strDumps.append(d);
-                                    strDumps.append("\n");
-                                  }
                                   rsp.setData(strDumps);
                               });
     Gateway::instance().route("GET", "/api/holiday", // To request SINGLE
