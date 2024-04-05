@@ -18,8 +18,8 @@ export class ConnectionStartPresenter implements OnInit {
   }
 
   ngOnInit(): void {
-    Transformer.ComposeCollectionAsync(this.dataFactory.liveEventJson(), this.ds.liveView, LiveEventBuilder)
-    console.log(this.ds.liveView)
+    // Transformer.ComposeCollectionAsync(this.dataFactory.liveEventJson(), this.ds.liveView, LiveEventBuilder)
+    // console.log(this.ds.liveView)
   }
 
 
