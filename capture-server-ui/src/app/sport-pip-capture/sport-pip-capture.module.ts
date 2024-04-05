@@ -84,8 +84,8 @@ import { ConnectionListComponent } from "./components/connection/connection-star
 import { NgCircleProgressModule } from "ng-circle-progress";
 import { EventsSyncComponent } from "./components/event/events-sync/events-sync.component";
 import { DragulaModule } from "ng2-dragula";
-import { EventStartNotificationsComponent } from "./components/event-start-notifications/event-start-notifications.component";
-import { EventEndNotifictionsComponent } from "./components/event-end-notifictions/event-end-notifictions.component";
+import { EventStartNotificationsComponent } from "./components/event-notifications/event-start-notifications/event-start-notifications.component";
+import { EventEndNotifictionsComponent } from "./components/event-notifications/event-end-notifictions/event-end-notifictions.component";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,

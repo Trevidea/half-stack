@@ -7,7 +7,7 @@ import { TabStateService } from './event-utility/nav';
 import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 import { Data } from 'app/sport-pip-capture/models/capture-interface';
 import { EventsSyncComponent } from './events-sync/events-sync.component';
-import { EventEndNotifictionsComponent } from '../event-end-notifictions/event-end-notifictions.component';
+import { EventEndNotifictionsComponent } from '../event-notifications/event-end-notifictions/event-end-notifictions.component';
 
 @Component({
   selector: 'app-event',
