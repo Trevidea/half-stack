@@ -14,6 +14,7 @@ import { PastEventViewPresenter } from "./components/event/grid-view-ui/past-eve
 import { EventPreviewComponent } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.component";
 import { EventPreviewPresenter } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.presenter";
 import { DatatablesService } from "app/main/tables/datatables/datatables.service";
+import { ConnectionStartPresenter } from "./components/connection/connection-start/connection-start.presenter";
 
 const routes: Routes = [
   {
@@ -25,7 +26,7 @@ const routes: Routes = [
     path: "connection",
     component: ConnectionPresenter,
     children: [
-      { path: "", component: ConnectionStartComponent },
+      { path: "", component: ConnectionStartPresenter },
       {
         path: "connection-device-detail/:id",
         component: ConnectionDeviceDetailComponent,

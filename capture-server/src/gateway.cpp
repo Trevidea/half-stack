@@ -5,9 +5,13 @@
 #include "spdlog/spdlog.h"
 #include "metatype.h"
 #include "event.h"
+#include "omal.h"
 #include "team.h"
 #include "on-demand-event.h"
 #include "user.h"
+#include <vector>
+#include <map>
+#include <json/json.h>
 
 Gateway::Gateway()
 {
@@ -19,6 +23,7 @@ void Gateway::init()
     this->m_entities.push_back(new Employee());
     this->m_entities.push_back(new Config());
     this->m_entities.push_back(new Holiday());
+    this->m_entities.push_back(new Omal());
     this->m_entities.push_back(new MetaType());
     this->m_entities.push_back(new Event());
     this->m_entities.push_back(new Team());
@@ -63,7 +68,7 @@ Response &Gateway::request(std::string method, const std::string &path, const st
         {
             spdlog::error("Error handlingf request, {}", e.what());
             Json::Value errJs = Json::objectValue;
-            errJs["error"] = e.what(); 
+            errJs["error"] = e.what();
             this->m_reg[x].setData(Json::FastWriter().write(errJs));
         }
         return this->m_reg[x];
@@ -71,7 +76,25 @@ Response &Gateway::request(std::string method, const std::string &path, const st
     else
         throw ExHandlerNotFound();
 }
-
-Gateway::~Gateway()
+std::string Gateway::formatResponse(const std::vector<std::map<std::string, std::string>> &data)
 {
-};
+    Json::Value root; // = Json::objectValue;
+    std::vector<Json::Value> results;
+    for (auto &&c = data.begin(); c != data.end(); ++c) // ROWS
+    {
+        results.push_back(Json::arrayValue);
+        Json::Value &row = results.back();
+        for (auto &&r : *c) // COLUMNS
+        {
+            Json::Value obj = Json::objectValue;
+            obj[r.first] = r.second;
+            row.append(obj);
+        }
+    }
+    root["count"] = static_cast<int>(results.size());
+    root["result"] = Json::Value{Json::arrayValue};
+    std::for_each(results.begin(), results.end(), [&root](Json::Value &val)
+                  { root["result"].append(val); });
+    return Json::FastWriter().write(root);
+}
+Gateway::~Gateway(){};
