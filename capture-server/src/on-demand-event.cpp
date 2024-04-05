@@ -61,7 +61,43 @@ void OnDemandEvent::create(const Request &request, Response &response)
     std::string program = requestData["program"].asString();
     std::string sport = requestData["sport"].asString();
     int tm_event = requestData["tm_event"].asInt();
-    std::string location = requestData["venue"][0]["location"].asString();
+    std::string location = requestData["venue"]["location"].asString();
+
+    // Validate and set the status field
+    std::string statusStr = requestData["status"].asString();
+    EventStatus status;
+    if (statusStr == "Upcoming") {
+        status = EventStatus::Upcoming;
+    } else if (statusStr == "OnGoing") {
+        status = EventStatus::OnGoing;
+    } else if (statusStr == "Past") {
+        status = EventStatus::Past;
+    } else {
+        // Handle invalid status value
+        // Set appropriate error response data
+        Json::Value responseData;
+        responseData["error"] = "Invalid value for status field";
+        response.setData(responseData.toStyledString());
+        response.complete();
+        return;
+    }
+
+    // Validate and set the type field
+    std::string typeStr = requestData["type"].asString();
+    EventType type;
+    if (typeStr == "Ondemand") {
+        type = EventType::OnDemand;
+    } else if (typeStr == "Scheduled") {
+        type = EventType::Scheduled;
+    } else {
+        // Handle invalid type value
+        // Set appropriate error response data
+        Json::Value responseData;
+        responseData["error"] = "Invalid value for type field";
+        response.setData(responseData.toStyledString());
+        response.complete();
+        return;
+    }
 
     // Parse dt_event string to std::tm
     std::tm dt_event_tm = {};
@@ -81,6 +117,8 @@ void OnDemandEvent::create(const Request &request, Response &response)
     event.setSport(sport);
     event.setTmEvent(tm_event);
     event.setLocation(location);
+    event.setStatus(status); // Set status
+    event.setType(type); // Set type
 
     // Add error handling if save fails
     // Assuming save returns an event ID
