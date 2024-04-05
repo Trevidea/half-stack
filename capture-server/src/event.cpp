@@ -6,7 +6,7 @@
 #include <iomanip> // Include for std::put_time
 #include <sstream> // Include for std::stringstream
 
-Event::Event() : EntityBase("event") {}
+// Event::Event() : EntityBase("event") {}
 
 void Event::report() {
     EntityBase::report();
@@ -78,29 +78,53 @@ Json::Value Event::create(const Request &request, Response &response) {
     std::string title = jsonData["title"].asString();
     std::string level = jsonData["level"].asString();
     std::string program = jsonData["program"].asString();
-    std::string dt_event_str = jsonData["dt_event"].asString(); // Changed from dttEvent to dt_event
+    std::string dt_event_str = jsonData["dt_event"].asString();
     int tm_event = jsonData["tm_event"].asInt();
+    int year = jsonData["year"].asInt(); // Extract year from JSON
     Venue venue;
-    venue.location = jsonData["venue"].asString(); // Assuming venue is a string
+    venue.location = jsonData["venue"]["location"].asString();
     EventDetail detail;
     detail.type = jsonData["detail"]["type"].asString();
     detail.streetAddress = jsonData["detail"]["streetAddress"].asString();
     detail.cityAddress = jsonData["detail"]["cityAddress"].asString();
-    EventStatus status = static_cast<EventStatus>(jsonData["status"].asInt());
-    EventType type = static_cast<EventType>(jsonData["type"].asInt());
+    EventStatus status;
+    std::string status_str = jsonData["status"].asString();
+    if (status_str == "Upcoming") {
+        status = EventStatus::Upcoming;
+    } else if (status_str == "OnGoing") {
+        status = EventStatus::OnGoing;
+    } else if (status_str == "Past") {
+        status = EventStatus::Past;
+    } else {
+        // Handle invalid status value
+        // Return an error response
+        response.setData("Invalid status value.");
+        response.complete();
+        return Json::Value();
+    }
+    EventType type;
+    std::string type_str = jsonData["type"].asString();
+    if (type_str == "OnDemand") {
+        type = EventType::OnDemand;
+    } else if (type_str == "Scheduled") {
+        type = EventType::Scheduled;
+    } else {
+        // Handle invalid type value
+        // Return an error response
+        response.setData("Invalid type value.");
+        response.complete();
+        return Json::Value();
+    }
 
     // Parse dt_event string to std::tm
     std::tm dt_event_tm = {};
     std::stringstream dt_ss(dt_event_str);
-    dt_ss >> std::get_time(&dt_event_tm, "%Y-%m-%d"); // Assuming date format is "YYYY-MM-DD"
+    dt_ss >> std::get_time(&dt_event_tm, "%Y-%m-%d");
 
-    // Extract year from std::tm
-int year = dt_event_tm.tm_year + 1900; // tm_year is years since 1900
+    // Save the data into the Event table and get the event ID
+    int eventId = saveEventToDatabase(title, level, program, year, dt_event_tm, tm_event, venue, detail, status, type);
 
-// Save the data into the Event table and get the event ID
-int eventId = saveEventToDatabase(title, level, program, year, dt_event_tm, tm_event, venue, detail, status, type);
-
-    // Now, construct a JSON response with the generated event_id
+    // Construct a JSON response with the generated event_id
     Json::Value responseData;
     responseData["event_id"] = eventId;
 
@@ -111,6 +135,7 @@ int eventId = saveEventToDatabase(title, level, program, year, dt_event_tm, tm_e
     // Return a placeholder Json::Value since the method signature requires it
     return Json::Value();
 }
+
 
 Json::Value Event::remove(const Request &request, Response &response) {
     // Parse JSON data from the request body

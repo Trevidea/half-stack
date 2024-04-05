@@ -6,9 +6,7 @@
 #include "request.h"
 #include "response.h"
 #include <string>
-#include <vector>
 #include <ctime> // Include for std::tm
-#include <map>
 #include <json/json.h>
 
 enum class EventStatus {
@@ -34,19 +32,34 @@ struct EventDetail {
 
 class Event : public EntityBase {
 public:
-    Event();
+    // Constructor with member initializer list to initialize id to -1
+    Event() : EntityBase("event"), id(-1) {} 
 
     void report();
 
     // Method declarations for route handlers
-    void listUpcoming(const Request &req, Response &rsp);
     int save();
     int saveEventToDatabase(const std::string &title, const std::string &level,
-                        const std::string &program, int year, const std::tm &dt_event_tm,
-                        int tmEvent, const Venue &venue, const EventDetail &detail,
-                        EventStatus status, EventType type);
+                            const std::string &program, int year, const std::tm &dt_event_tm,
+                            int tmEvent, const Venue &venue, const EventDetail &detail,
+                            EventStatus status, EventType type);
     Json::Value create(const Request &request, Response &response);
     Json::Value remove(const Request &request, Response &response);
+
+    // Declare the function as static
+    static EventStatus convertStringToEventStatus(const std::string& statusStr) {
+        if (statusStr == "Upcoming") {
+            return EventStatus::Upcoming;
+        } else if (statusStr == "OnGoing") {
+            return EventStatus::OnGoing;
+        } else if (statusStr == "Past") {
+            return EventStatus::Past;
+        } else {
+            // Handle invalid status string
+            // For simplicity, return EventStatus::Upcoming as default
+            return EventStatus::Upcoming;
+        }
+    }
 
     // Getter and setter functions for other properties
     int getId() const {
@@ -127,17 +140,17 @@ private:
     std::string level;
     std::string program;
     std::string sport;
-    std::tm dt_event; // Changed type to std::tm
+    std::tm dt_event;
     int tm_event;
-    int year; // Added member variable for year
+    int year;
     Venue venue;
     EventDetail detail;
     EventStatus status;
     EventType type;
 
     // Private helper methods
-    int saveEventToDatabase(); // Updated save function declaration
     void executeSql(const std::string &sql);
+    
 };
 
 #endif // EVENT_H
