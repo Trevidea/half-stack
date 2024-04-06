@@ -1,4 +1,16 @@
-.table:not(.table-dark):not(.table-light) thead:not(.thead-dark) th, .table:not(.table-dark):not(.table-light) tfoot:not(.thead-dark) th {
+.table:not(.table-dark):not(.table-light) thead:not(.thead-dark) th,
+.table:not(.table-dark):not(.table-light) tfoot:not(.thead-dark) th {
     background-color: #fff;
 }
+.log-warraper {
+.card-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: initial !important;
+    padding: 0;
+    background-color: transparent ;
+}
 
+}

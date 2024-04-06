@@ -18,9 +18,9 @@ export class LiveEventBuilder extends AbstractBuilder<Data.LiveEventDetail,LiveV
         // v.retries=m.retries;    
     }
     decompose(v: LiveView): Data.LiveEventDetail {
-        throw new Error("Method not implemented.");
+        return;
     }
     view(): LiveView {
-        throw new Error("Method not implemented.");
+        return new LiveView();
     }
 }

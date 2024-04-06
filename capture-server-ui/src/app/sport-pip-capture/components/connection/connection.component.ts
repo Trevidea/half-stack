@@ -12,6 +12,7 @@ import { PreviousEventsConnection } from "./connection-data";
 })
 export class ConnectionComponent implements OnInit {
   @Input() datasource: any;
+  @Input() _isEventStarted
   eventStarted: boolean;
   previousEventsConnection: any;
   header: string[];
@@ -21,6 +22,10 @@ export class ConnectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this._isEventStarted) {
+      this.isEventStarted(this._isEventStarted)
+    }
+
     if (this.eventStarted === true) {
       setTimeout(() => {
         this.event.setEventStarted(false);
