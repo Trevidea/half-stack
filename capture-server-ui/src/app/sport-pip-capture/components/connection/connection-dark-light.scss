@@ -152,6 +152,35 @@
     background-color: rgba(255, 252, 243, 1);
   }
 }
+
+.dark-layout {
+  $card-info-bg-primary: rgba(34, 53, 69, 1);
+  $card-info-bg-warning: rgba(66, 51, 22, 1);
+  $card-cu-bg-color: rgba(49, 49, 49, 1);
+  $primary-color: rgba(33, 96, 147, 0.3);
+  $text-li-color: rgba(253, 253, 253, 1);
+  $text-dr-color: rgba(195, 195, 195, 1);
+  $icon-li-color: rgba(253, 253, 253, 1);
+  $icon-pr-color: rgba(33, 96, 147, 1);
+  $icon-wr-color: rgba(245, 163, 10, 1);
+  $icon-da-color: rgba(222, 46, 33, 1);
+  .connection-list {
+    .table th,
+    .table td {
+      color: $text-li-color !important;
+    }
+    .text-secondary {
+      color: $text-li-color !important;
+    }
+    // th {
+    //   span {
+    //     background-color: $card-cu-bg-color;
+    //     padding: 0.5em;
+    //     border-radius: 8px;
+    //   }
+    // }
+  }
+}
 // .mc-dropdown__panel.mc-dropdown__panel_nested {
 //   background-color: black;
 // }

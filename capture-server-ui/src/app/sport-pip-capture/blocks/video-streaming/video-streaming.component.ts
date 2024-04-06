@@ -14,7 +14,8 @@ import Hls from "hls.js";
   encapsulation: ViewEncapsulation.None,
 })
 export class VideoStreamingComponent implements OnInit {
-  @Input() liveStreamVideoPath: string = "";
+  @Input() liveStreamVideoPath: string =
+    "http://drake.in:59919/spip_school_stream/ind_vs_pak/llhls.m3u8";
   @ViewChild("liveStreamPlayer", { static: true })
   videoPlayer!: ElementRef<HTMLVideoElement>;
   public setVolumelenght: number = 15;

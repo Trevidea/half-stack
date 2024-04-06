@@ -1,6 +1,6 @@
-<div>
+<div class="previous-event-connection">
   <div class="d-flex p-1 justify-content-between">
-    <h4>Previous Events Connection</h4>
+    <h4 class="light-text">Previous Events Connection</h4>
     <div>
       <button
         class="btn btn-sm btn-outline-info"
@@ -24,6 +24,7 @@
               <div>Date</div>
               <div style="display: grid; margin: auto">
                 <i
+                  style="margin-top: -5px"
                   class="bi bi-chevron-down"
                   [ngClass]="{ 'icon-rotate': !sortAscending }"
                 ></i>
@@ -57,11 +58,10 @@
                 "
               >
                 <div
-                  [style.background-color]="
-                    items.device === 'pub'
-                      ? 'rgba(254, 246, 231, 1)'
-                      : 'rgba(233, 240, 245, 1)'
-                  "
+                  [ngClass]="{
+                    pub: items.device === 'pub',
+                    sub: items.device === 'sub'
+                  }"
                   [style.margin-left]="items.device === 'pub' ? '0.1em' : ''"
                   style="width: 130px; padding: 0.2em; border-radius: 4px"
                 >
@@ -84,7 +84,11 @@
     </table>
   </div>
 </div>
-
+<!-- [style.background-color]="
+items.device === 'pub'
+  ? 'rgba(254, 246, 231, 1)'
+  : 'rgba(233, 240, 245, 1)'
+" -->
 <!-- ngx-datatables responsive -->
 <!-- <div class="card">
     <div class="card-body">
