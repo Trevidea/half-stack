@@ -12,8 +12,11 @@ VirtualHost& OMALFactory::create(const std::string& name) {
     if (it != virtualHostMap.end()) {
         return *it->second;
     } else {
-        vhost vhost; //Initialize it as required
-        VirtualHost* newVirtualHost = new VirtualHost(name, vhost);
+        //Find out if OME has a vhost by this name. 
+        //If it has, then just add the vhost here 
+        //else create one in ome first and then add here 
+        //and finally return the reference
+        VirtualHost* newVirtualHost = new VirtualHost(name, vhost());
         virtualHostMap[name] = newVirtualHost;
         return *newVirtualHost;
     }

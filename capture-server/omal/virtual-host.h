@@ -4,14 +4,15 @@
 #include <string>
 #include "virtual-host-conf.h" 
 #include "output-profile.h"
-#include <vector>
+#include <map>
 
 class OMALFactory;
 
-const char *DUMPS_BASE_LOCATION = "/usr/share/ovenmediaengine/conf/html";
 
 class VirtualHost {
 public:
+    const char *DUMPS_BASE_LOCATION = "/tmp/ovenmediaengine/vod_dumps";
+    // const char *DUMPS_BASE_LOCATION = "/usr/share/ovenmediaengine/conf/html";
     friend class OMALFactory;
 
     /// @brief Creates a stream in the specified application with the key provided by the function user
@@ -23,7 +24,7 @@ public:
 
     /// @brief Gets the locations of all the VOD dumps know to the OMAL
     /// @return a collection
-    std::vector<std::string> getVODDumps();
+    std::map<std::string, std::string> getVODDumps();
 
     /// @brief https://airensoft.gitbook.io/ovenmediaengine/streaming/low-latency-hls#dump
     /// @param streamName 
