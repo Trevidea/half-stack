@@ -9,19 +9,19 @@
   $icon-da-color: rgba(222, 46, 33, 1);
   .connection-header {
     .connection-header-top {
-      background-color: $primary-color;
+      background-color: $primary-color !important;
     }
     .light-text {
-      color: $text-li-color;
+      color: $text-li-color !important;
     }
     .dark-white-text {
-      color: $text-dr-color;
+      color: $text-dr-color !important;
     }
     .custome-bg {
-      background-color: $card-cu-bg-color;
+      background-color: $card-cu-bg-color !important;
     }
     .custom-earmark {
-      color: $text-li-color;
+      color: $text-li-color !important;
     }
   }
 }
@@ -50,7 +50,7 @@
   $icon-da-color: rgba(222, 46, 33, 1);
   .connection-list-grid-header {
     .grid-list-box {
-      background-color: $card-cu-bg-color;
+      background-color: $card-cu-bg-color !important;
     }
     .custome-btn-outline-secondary {
       color: $text-li-color !important;
@@ -63,10 +63,22 @@
       color: $text-li-color;
       background-color: $card-cu-bg-color;
     }
+    .list-box {
+      background-color: $card-cu-bg-color !important;
+    }
+    .grid-box {
+      background-color: $card-cu-bg-color !important;
+    }
   }
 }
 .connection-list-grid-header {
   .grid-list-box {
+    background-color: rgba(240, 240, 240, 1);
+  }
+  .list-box {
+    background-color: rgba(240, 240, 240, 1);
+  }
+  .grid-box {
     background-color: rgba(240, 240, 240, 1);
   }
 }
