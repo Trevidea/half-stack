@@ -43,11 +43,25 @@ void PGResult::setValue(Json::Value &obj, const pqxx::field &field)
         obj[field.name()] = field.is_null() ? Json::nullValue : field.as<bool>();
         // obj["type"] = 3;
         break;
+    case 1114:
     case 1082: // date
         if(field.is_null())
             obj[field.name()] =  Json::nullValue;
         else 
             obj[field.name()] =  field.as<std::string>();
+        // obj["type"] = 4;
+        break;
+    case 3802: // jsonb
+        if (field.is_null())
+            obj[field.name()] =  Json::nullValue;
+        else
+        {
+            const auto &strVal = field.as<std::string>();
+            Json::Value jsVal;
+            Json::Reader reader;
+            reader.parse(strVal, jsVal);
+            obj[field.name()] = jsVal;
+        }
         // obj["type"] = 4;
         break;
 
