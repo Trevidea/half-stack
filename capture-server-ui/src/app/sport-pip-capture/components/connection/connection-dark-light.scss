@@ -12,16 +12,16 @@
       background-color: $primary-color;
     }
     .light-text {
-      color: $text-li-color;
+      color: $text-li-color !important;
     }
     .dark-white-text {
-      color: $text-dr-color;
+      color: $text-dr-color !important;
     }
     .custome-bg {
-      background-color: $card-cu-bg-color;
+      background-color: $card-cu-bg-color !important;
     }
     .custom-earmark {
-      color: $text-li-color;
+      color: $text-li-color !important;
     }
   }
 }
