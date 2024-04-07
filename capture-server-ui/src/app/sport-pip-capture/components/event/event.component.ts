@@ -22,6 +22,10 @@ export class EventComponent implements OnInit {
   @Output() onTabChange = new EventEmitter()
   gridView: boolean = true
   activeTabId: string;
+  pageSize: number = 10
+  startIndex: number = 0;
+  endIndex: number = this.pageSize;
+
   constructor(private router: Router, private tabStateService: TabStateService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -55,7 +59,17 @@ export class EventComponent implements OnInit {
       size: 'sm'
     });
   }
+  onPageChange(event: { startIndex: number, endIndex: number }) {
+    this.startIndex = event.startIndex;
+    this.endIndex = event.endIndex;
+  }
 
+
+  updatePageSize(newPageSize: number) {
+    this.pageSize = newPageSize;
+    this.startIndex = 0;
+    this.endIndex = this.pageSize;
+  }
   // modalOpenSM() {
   //   this.modalService.open(EventEndNotifictionsComponent, {
   //     centered: true,

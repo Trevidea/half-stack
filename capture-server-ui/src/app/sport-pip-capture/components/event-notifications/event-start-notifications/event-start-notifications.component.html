@@ -13,7 +13,9 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between pt-1">
                         <h6 class="card-title m-0">McQuaid vs Fairport, Football</h6>
-                        <button type="button" class="btn btn-warning btn-sm m-0" rippleEffect>View</button>
+                        <button type="button" class="btn btn-warning btn-sm m-0" rippleEffect
+                            [routerLink]="'connection'" [queryParams]="{ eventStarted:true }"
+                            (click)="activeModal.dismiss('Cross click')">View</button>
                     </div>
                 </div>
             </div>

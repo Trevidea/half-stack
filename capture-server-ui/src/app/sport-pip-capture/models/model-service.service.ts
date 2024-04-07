@@ -6,6 +6,7 @@ import { first, map, mergeMap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { Data } from "./capture-interface";
 import { EventData } from "./event";
+import { LiveEventDetailData } from "./live-event-detail";
 
 
 @Injectable({
@@ -131,18 +132,16 @@ export class ModelServiceService {
   //   return this._httpClient.get<MetaTypeModel>(url);
   // }
 
-  // EmployeesJson(): Observable<EmployeeModel[]> {
-  //   return this._data("employees", EmployeeModel);
-  // }
+ 
 
   // eventJson(query: Data.FilterParams): Observable<Data.Event[]> {
   //   console.log("eventJson query",query)
   //   return this._data(`events?status=${query.status}&sport=${query.sport}&level=${query.level}&program=${query.program}`, EventData)
   // }
 
-  eventJson(status:string): Observable<Data.Event[]> {
-    console.log("eventJson query",status)
-    return this._data(`events?status=${status}`, EventData)
+  eventJson(): Observable<Data.Event[]> {
+    console.log("eventJson query", status)
+    return this._data(`events`, EventData)
   }
 
 
@@ -153,5 +152,10 @@ export class ModelServiceService {
       'delete-criteria': "dt_event >= now()"
     }
     return this._httpClient.post<any>(url, data)
+  }
+
+
+  liveEventJson(): Observable<Data.LiveEventDetail[]>{
+     return this._data('liveEvent', LiveEventDetailData)
   }
 }

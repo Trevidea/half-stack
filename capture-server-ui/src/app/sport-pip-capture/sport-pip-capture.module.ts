@@ -85,6 +85,7 @@ import { DragulaModule } from "ng2-dragula";
 import { EventStartNotificationsComponent } from "./components/event-notifications/event-start-notifications/event-start-notifications.component";
 import { EventEndNotifictionsComponent } from "./components/event-notifications/event-end-notifictions/event-end-notifictions.component";
 import { ConnectionStartPresenter } from "./components/connection/connection-start/connection-start.presenter";
+import { LogFilterComponent } from "./components/log/log-filter/log-filter.component";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -156,7 +157,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ConnectionGridComponent,
     EventStartNotificationsComponent,
     EventEndNotifictionsComponent,
-    ConnectionStartPresenter
+    ConnectionStartPresenter,
+    LogFilterComponent
   ],
   providers: [
     {

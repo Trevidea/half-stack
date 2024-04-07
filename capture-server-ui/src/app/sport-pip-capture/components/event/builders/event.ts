@@ -4,7 +4,6 @@ import { EventView,} from "../views/event";
 
 export class EventRangeBuilder extends AbstractBuilder<Data.Event, EventView>{
     compose(m: Data.Event, v: EventView) {
-        console.log("Model (m):", m.dt_event);
         v.id = m.id;
         v.dtEvent = m.dt_event;
         v.level = m.level;
@@ -19,7 +18,6 @@ export class EventRangeBuilder extends AbstractBuilder<Data.Event, EventView>{
         v.venue.location = m?.venue?.location;
         v.time = m.tm_event;
         v.type= m.type;
-        console.log("View (v):", v);
     }
     decompose(v: EventView): Data.Event {
         throw new Error("Method not implemented.");

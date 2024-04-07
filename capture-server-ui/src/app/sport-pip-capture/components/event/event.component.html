@@ -17,24 +17,29 @@
       <li ngbNavItem="ongoing" style="margin-top: 5px;">
         <a ngbNavLink>Ongoing Events</a>
         <ng-template ngbNavContent>
-          <app-on-going-event [datasource]="datasource" *ngIf="gridView"></app-on-going-event>
-          <app-ongoing-event-list *ngIf="!gridView" [datasource]="datasource"></app-ongoing-event-list>
+          <app-on-going-event [datasource]="datasource | slice : startIndex : endIndex "
+            *ngIf="gridView"></app-on-going-event>
+          <app-ongoing-event-list *ngIf="!gridView"
+            [datasource]="datasource | slice : startIndex : endIndex"></app-ongoing-event-list>
         </ng-template>
       </li>
 
       <li ngbNavItem="upcoming" style="margin-top: 5px;">
         <a ngbNavLink>Upcoming Events</a>
         <ng-template ngbNavContent>
-          <app-up-coming-event [datasource]="datasource" *ngIf="gridView"></app-up-coming-event>
-          <app-upcoming-events-list *ngIf="!gridView" [datasource]="datasource"></app-upcoming-events-list>
+          <app-up-coming-event [datasource]="datasource | slice : startIndex : endIndex"
+            *ngIf="gridView"></app-up-coming-event>
+          <app-upcoming-events-list *ngIf="!gridView"
+            [datasource]="datasource | slice : startIndex : endIndex"></app-upcoming-events-list>
         </ng-template>
       </li>
 
       <li ngbNavItem="past" style="margin-top: 5px;">
         <a ngbNavLink>Past Events</a>
         <ng-template ngbNavContent>
-          <app-past-event [datasource]="datasource" *ngIf="gridView"></app-past-event>
-          <app-past-events-list *ngIf="!gridView" [datasource]="datasource"></app-past-events-list>
+          <app-past-event [datasource]="datasource | slice : startIndex : endIndex" *ngIf="gridView"></app-past-event>
+          <app-past-events-list *ngIf="!gridView"
+            [datasource]="datasource | slice : startIndex : endIndex"></app-past-events-list>
         </ng-template>
       </li>
 
@@ -67,6 +72,8 @@
     <div [ngbNavOutlet]="nav"></div>
   </div>
   <div class="card-footer bg-transparent p-1">
-    <app-event-pagination></app-event-pagination>
+    <app-event-pagination [totalItems]="datasource" [pageSize]="pageSize" [startIndex]="startIndex"
+      class="d-md-none d-lg-block d-none" [endIndex]="endIndex" (pageSizeChange)="updatePageSize($event)"
+      (pageChange)="onPageChange($event)"></app-event-pagination>
   </div>
 </div>
