@@ -23,7 +23,7 @@ export namespace Data {
     level?: string;
     program?: string;
     year?: number;
-    dt_event?: Date;
+    dt_event?: string;
     tm_event?: number;
     venue?: Venue;
     detail?: Detail;
@@ -375,7 +375,7 @@ export namespace Data {
     program: string;
     level: string;
     sport: string;
-    status?: string;
+    status: string;
   }
   export interface ConnectionPreview extends Base {
     dtEvent: string;

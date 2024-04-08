@@ -85,11 +85,11 @@ export class OnDemandEventFormView implements Views.Datasource {
 
 
      
-     private _dtEvent : Date;
-     public get dtEvent() : Date {
+     private _dtEvent : string;
+     public get dtEvent() : string {
         return this._dtEvent;
      }
-     public set dtEvent(v : Date) {
+     public set dtEvent(v : string) {
         this._dtEvent = v;
      }
      

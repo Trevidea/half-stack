@@ -10,6 +10,7 @@ import { UI } from '../../event-utility/event-ui-interface';
   encapsulation: ViewEncapsulation.None,
 })
 export class OnGoingEventComponent implements OnInit, OnDestroy {
+  eventData:any
   @Input() datasource: any
   private countdownInterval: any;
   dropdownItems: UI.DropDownMenuItem[] = [
@@ -25,8 +26,10 @@ export class OnGoingEventComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  eventDetail(event: string) {
+  eventDetail(event: string,data:any) {
+    this.eventData
     this._coreSidebarService.getSidebarRegistry('ongoing-' + event).toggleOpen();
+
   }
 
 
