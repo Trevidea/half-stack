@@ -15,12 +15,14 @@
       </div>
 
       <div class="col-md-6 col-sm-12 mb-2">
-        <div class="form-group">
-          <label>Event Date<span class="validationIcon">*</span></label>
-          <input type="date" id="Event-Date" class="form-control" name="Event-Date" placeholder="Event Date"
-            [(ngModel)]="datasource.dtEvent" required #ngmEventDate="ngModel" />
-          <app-validation-alert controlName="Event Date" [control]="ngmEventDate">
-          </app-validation-alert>
+        <label>Event Date<span class="validationIcon">*</span></label>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="yyyy-mm-dd" name="Event Date"
+            [(ngModel)]="datasource.dtEvent" ngbDatepicker #basicDP="ngbDatepicker" />
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary feather icon-calendar" (click)="basicDP.toggle()" type="button"
+              rippleEffect></button>
+          </div>
         </div>
       </div>
       <div class="col-md-6 col-sm-12 mb-2">

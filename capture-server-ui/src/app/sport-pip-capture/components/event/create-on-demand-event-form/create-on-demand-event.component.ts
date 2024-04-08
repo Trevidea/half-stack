@@ -29,13 +29,21 @@ export class CreateOnDemandEventComponent implements OnInit {
   }
 
 
-  onSaveCancelClick() { 
+  onSaveCancelClick() {
     console.log('clicked cancle')
 
   }
   onSaveYesClick() {
     console.log('clicked save')
     this.save.emit()
-   }
+  }
+
+
+  formatTime(time: string): number {
+    if (!time) return 0;
+    const [hours, minutes] = time.split(':');
+    let formattedTime = hours + minutes;
+    return parseInt(formattedTime);
+  }
 
 }
