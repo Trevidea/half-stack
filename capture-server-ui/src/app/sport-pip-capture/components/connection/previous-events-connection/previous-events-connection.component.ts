@@ -83,8 +83,6 @@ export class PreviousEventsConnectionComponent implements OnInit {
         break;
       default:
     }
-    // this.count = 0;
-    // }
   }
   dateSort(data: any[], index: number) {
     data.sort((a, b) => {
@@ -118,7 +116,6 @@ export class PreviousEventsConnectionComponent implements OnInit {
       const valueB = Number(b[property]);
 
       if (isNaN(valueA) || isNaN(valueB)) {
-        // Handle cases where the value is not a valid number
         return 0;
       }
 
