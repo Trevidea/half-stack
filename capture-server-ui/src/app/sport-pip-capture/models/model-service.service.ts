@@ -132,16 +132,22 @@ export class ModelServiceService {
   //   return this._httpClient.get<MetaTypeModel>(url);
   // }
 
- 
 
-  // eventJson(query: Data.FilterParams): Observable<Data.Event[]> {
-  //   console.log("eventJson query",query)
-  //   return this._data(`events?status=${query.status}&sport=${query.sport}&level=${query.level}&program=${query.program}`, EventData)
-  // }
+
+  SaveOnDemandFormJson(data: Data.Event): Observable<Data.Event> {
+   console.log(data)
+
+    if (data.id) {
+      return this.update("event", data, data.id);
+    } else {
+      return this.create("event", data);
+    }
+  }
+
+
 
   eventJson(): Observable<Data.Event[]> {
-    console.log("eventJson query", status)
-    return this._data(`events`, EventData)
+    return this._data('events', EventData)
   }
 
 
@@ -155,7 +161,7 @@ export class ModelServiceService {
   }
 
 
-  liveEventJson(): Observable<Data.LiveEventDetail[]>{
-     return this._data('liveEvent', LiveEventDetailData)
+  liveEventJson(): Observable<Data.LiveEventDetail[]> {
+    return this._data('liveEvent', LiveEventDetailData)
   }
 }
