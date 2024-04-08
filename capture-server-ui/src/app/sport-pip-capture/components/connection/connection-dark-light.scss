@@ -112,6 +112,12 @@
     .bi-three-dots-vertical {
       color: $text-li-color;
     }
+    .mc-dropdown-item:not([disabled]) {
+      color: white !important;
+    }
+    .mc-dropdown__panel {
+      background-color: black !important;
+    }
   }
 }
 .connection-grid {
@@ -191,18 +197,26 @@
     .text-secondary {
       color: $text-li-color !important;
     }
-    // th {
-    //   span {
-    //     background-color: $card-cu-bg-color;
-    //     padding: 0.5em;
-    //     border-radius: 8px;
-    //   }
-    // }
+  }
+  .mc-dropdown-item:not([disabled]) {
+    color: rgba(243, 243, 245, 1) !important;
+  }
+  .mc-dropdown__panel {
+    background-color: rgba(21, 23, 25, 1) !important;
+  }
+  .mc-dropdown-item:hover {
+    background-color: rgba(33, 96, 147, 0.2) !important;
+    color: #216093 !important;
   }
 }
-// .mc-dropdown__panel.mc-dropdown__panel_nested {
-//   background-color: black;
-// }
-// .mc-dropdown-item:not([disabled]) {
-//   color: white;
-// }
+
+.connection-list {
+  .mc-dropdown-item:hover {
+    background-color: rgba(233, 240, 245, 1) !important;
+    color: rgba(33, 96, 147, 1) !important;
+  }
+}
+.mc-dropdown-item:hover {
+  background-color: rgba(233, 240, 245, 1) !important;
+  color: rgba(33, 96, 147, 1) !important;
+}

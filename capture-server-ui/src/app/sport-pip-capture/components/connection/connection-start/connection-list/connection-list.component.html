@@ -45,6 +45,7 @@
               </button>
 
               <button
+                *ngIf="item.transmitStatus == 'Receiving'"
                 mc-dropdown-item
                 [mcDropdownTriggerFor]="appDropdownNested"
                 (click)="streaming()"
