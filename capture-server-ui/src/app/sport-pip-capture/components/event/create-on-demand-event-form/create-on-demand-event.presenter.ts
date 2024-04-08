@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OnDemandFormBuilder } from './buliders/onDemand';
 import { MetaTypeBuilder } from 'app/sport-pip-capture/blocks/meta-type.builder';
 import { TypesPresenter } from 'app/sport-pip/components/types/types.presenter';
+import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 @Component({
   selector: 'app-create-on-demand-event-presenter',
   template: `<app-create-on-demand-event [datasource]="ds" (save)="actions.onSave()" (cancel)="actions.onCancel()"></app-create-on-demand-event>`,
@@ -20,18 +21,16 @@ export class CreateOnDemandEventPresenter implements OnInit {
   actions!: Views.FormActions;
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
-  constructor(private dataFactory: DataFactoryService, router: Router, route: ActivatedRoute) {
+  constructor(private dataFactory: DataFactoryService, router: Router, route: ActivatedRoute , private modelServiceService:ModelServiceService) {
     this.ds = new OnDemandEventFormView();
     if (Object.is(route.snapshot.component, this.constructor))
       this.ds.id = route.snapshot.params['id']
-    this.actions = new PresenterAction("event", this.ds, dataFactory.SaveOnDemandFormJson, OnDemandFormBuilder, router);
+    this.actions = new PresenterAction("event", this.ds, modelServiceService.SaveOnDemandFormJson, OnDemandFormBuilder, router);
 
   }
 
   ngOnInit(): void {
-
-    Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("SPORTS"), this.ds.sports, MetaTypeBuilder);
-
+    Transformer.ComposeObject(this.dataFactory.EventSports(), this.ds.sports, ArrayBuilder)
     Transformer.ComposeObject(this.dataFactory.dayHalves(), this.ds.dayHalve, ArrayBuilder)
     Transformer.ComposeObject(this.dataFactory.EventLevel(), this.ds.levels, ArrayBuilder)
     Transformer.ComposeObject(this.dataFactory.EventProgram(), this.ds.programs, ArrayBuilder)
