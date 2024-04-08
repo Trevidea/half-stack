@@ -51,7 +51,7 @@ void JsonResult::setValue(Json::Value &json, const pqxx::field &field)
             obj["value"] = field.as<std::string>();
         obj["type"] = 4;
         break;
-    case 3802: // json
+    case 3802: // jsonb
         if (field.is_null())
             obj["value"] = Json::nullValue;
         else
@@ -62,7 +62,7 @@ void JsonResult::setValue(Json::Value &json, const pqxx::field &field)
             reader.parse(strVal, jsVal);
             obj["value"] = jsVal;
         }
-        obj["type"] = 4;
+        obj["type"] = 5;
         break;
 
     default:

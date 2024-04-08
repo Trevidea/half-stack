@@ -6,9 +6,8 @@
 #include "metatype.h"
 #include "event.h"
 #include "omal.h"
-#include "team.h"
 #include "on-demand-event.h"
-#include "user.h"
+#include "user-profile.h"
 #include <vector>
 #include <map>
 #include <json/json.h>
@@ -26,7 +25,7 @@ void Gateway::init()
     this->m_entities.push_back(new Omal());
     this->m_entities.push_back(new MetaType());
     this->m_entities.push_back(new Event());
-    this->m_entities.push_back(new Team());
+    this->m_entities.push_back(new UserProfile());
     for (auto &&e : this->m_entities)
     {
         e->report();
@@ -75,6 +74,26 @@ Response &Gateway::request(std::string method, const std::string &path, const st
     }
     else
         throw ExHandlerNotFound();
+}
+
+std::string Gateway::formatResponse(const std::vector<std::vector<Json::Value>> &data)
+{
+    Json::Value root; // = Json::objectValue;
+    std::vector<Json::Value> results;
+    for (auto &&c = data.begin(); c != data.end(); ++c) // ROWS
+    {
+        results.push_back(Json::arrayValue);
+        Json::Value &row = results.back();
+        for (auto &&r : *c) // COLUMNS
+        {
+            row.append(r);
+        }
+    }
+    root["count"] = static_cast<int>(results.size());
+    root["result"] = Json::Value{Json::arrayValue};
+    std::for_each(results.begin(), results.end(), [&root](Json::Value &val)
+                  { root["result"].append(val); });
+    return Json::FastWriter().write(root);
 }
 std::string Gateway::formatResponse(const std::vector<std::map<std::string, std::string>> &data)
 {

@@ -2,7 +2,7 @@
   <div class="col-md-12 col-lg-6 col-6 d-flex align-items-center">
     <div
       style="cursor: pointer"
-      class="badge badge-pill badge-primary cursor-pointer"
+      class="badge badge-pill badge-primary cursor-pointer custom-pill"
       [ngClass]="
         allOrSubOrPub == 'all' ? 'badge-primary' : 'badge-light-secondary'
       "
@@ -11,7 +11,7 @@
       <span style="font-size: 1.4em"> All </span>
     </div>
     <div
-      class="badge badge-pill ml-1 cursor-pointer"
+      class="badge badge-pill ml-1 cursor-pointer custom-pill"
       [ngClass]="
         allOrSubOrPub == 'sub' ? 'badge-primary' : 'badge-light-secondary'
       "
@@ -20,7 +20,7 @@
       <span style="font-size: 1.4em"> Subscriber</span>
     </div>
     <div
-      class="badge badge-pill ml-1 cursor-pointer"
+      class="badge badge-pill ml-1 cursor-pointer custom-pill"
       [ngClass]="
         allOrSubOrPub == 'pub' ? 'badge-primary' : 'badge-light-secondary'
       "
@@ -29,11 +29,11 @@
       <span style="font-size: 1.4em"> Publisher</span>
     </div>
 
-    <div class="d-none d-md-block d-lg-none ml-auto float-right grid-list-box">
+    <div class="d-none d-md-block d-lg-none ml-auto float-right">
       <div class="d-flex">
         <div class="mr-1">
           <button
-            [ngClass]="listOrGrid == 'grid' ? 'grid-list-box' : ''"
+            [ngClass]="{ 'grid-box': listOrGrid == 'grid' }"
             type="button"
             class="btn btn-icon"
             rippleEffect
@@ -43,7 +43,7 @@
           </button>
         </div>
         <button
-          [ngClass]="listOrGrid == 'list' ? 'grid-list-box' : ''"
+          [ngClass]="{ 'list-box': listOrGrid == 'list' }"
           type="button"
           class="btn btn-icon"
           rippleEffect
@@ -60,9 +60,7 @@
         <div class="d-flex mr-1">
           <div class="mr-1">
             <button
-              [style.background-color]="
-                listOrGrid == 'grid' ? 'rgba(240, 240, 240, 1)' : ''
-              "
+              [ngClass]="{ 'grid-box': listOrGrid == 'grid' }"
               type="button"
               class="btn btn-icon"
               (click)="listGrid('grid')"
@@ -72,9 +70,7 @@
             </button>
           </div>
           <button
-            [style.background-color]="
-              listOrGrid == 'list' ? 'rgba(240, 240, 240, 1)' : ''
-            "
+            [ngClass]="{ 'list-box': listOrGrid == 'list' }"
             type="button"
             class="btn btn-icon"
             (click)="listGrid('list')"

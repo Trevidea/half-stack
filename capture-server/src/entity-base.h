@@ -12,21 +12,16 @@
 #include <tuple>
 #include "half-stack-exceptions.h"
 
-// Forward declaration of OnDemandEvent
-class OnDemandEvent;
-
 class EntityBase : public Handler
 {
 private:
-    // std::string executeSqlStr(const std::string &sql);
+    std::string executeSqlStr(const std::string &sql);
     Json::Value executeSqlJson(const std::string &sql);
     PGResult executeSqlModel(const std::string &sql);
     std::string m_entity;
     EntityBase(const Model &model);
     Json::Value schemaJson();
 
-    // Declare OnDemandEvent as a friend class
-    friend class OnDemandEvent;
 
     template <typename T = std::string>
     void setColumn(Json::Value &column, Json::Value &field, const std::string &tp, const T *value = nullptr)
@@ -95,23 +90,24 @@ protected:
     void schema(const Request &request, Response &response);
     void postTemplate(const Request &request, Response &response);
     void sync(const Request &req, Response &rsp);
+    
+    template<class T>
+    static T byId(const int id)
+    {
+        char crit[128] = {'\0'};
+        snprintf(crit, 128, "id = %d", id);
+        
+        const auto result = EntityBase::find<T>(crit);
+
+        if(result.size() <= 0)
+            throw ExModelNotFoundException(T().entity(), id);
+
+        return result[0];
+    }
+
     virtual std::string entity();
     Model m_model;
     Model m_setModel;
-    // New protected method to save event data to the database
-    int saveEventToDatabase(const std::string &title, const std::string &dttEvent, const std::string &level,
-                            const std::string &program, const std::string &sport, const std::string &time,
-                            bool active, const std::string &location);
-
-    // Declare executeSql as a virtual function
-    virtual void executeSql(const std::string &sql)
-    {
-        // Default implementation in EntityBase
-        executeSqlStr(sql);
-    }
-    std::string executeSqlStr(const std::string &sql);
-    // Declare Event class as a friend
-    friend class Event;
 
 public:
     EntityBase(const std::string &entity);
@@ -120,6 +116,8 @@ public:
     {
         return this->m_model.get<int>("id");
     }
+    bool notSet() const;
+
     std::string getAsString(const std::string &field) const
     {
         return this->m_model.get<std::string>(field);
@@ -258,11 +256,6 @@ public:
         return LogPrinter();
     }
 
-    // Serialize the current object to a JSON string
-    std::string serializeToJson() const;
-
-    // Deserialize from a JSON string and update the current object
-    void deserializeFromJson(const std::string &jsonString);
 };
 
 #endif // ENTITYBASE_H

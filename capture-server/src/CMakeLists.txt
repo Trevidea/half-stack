@@ -10,10 +10,12 @@ set(HALF_STACK_SRC
     employee.cpp
     gateway.cpp
     event.cpp
-    team.cpp
     on-demand-event.cpp
     omal.cpp
-    user.cpp
+    user-profile.cpp
+    base.cpp
+    event-preview.cpp
+    device.cpp
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
 target_include_directories(half-stack PUBLIC "./" rest-client)
