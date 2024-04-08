@@ -55,6 +55,7 @@ export class PreviousEventsConnectionComponent implements OnInit {
   sortedStarted: boolean[] = [];
   sortData(column: any, index: number) {
     console.log("clicked");
+
     this.sortAscending[index] = !this.sortAscending[index];
     this.sortedStarted[index] = true;
     this.header.forEach((data, i) => {
