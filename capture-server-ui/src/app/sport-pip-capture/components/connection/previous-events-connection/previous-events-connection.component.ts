@@ -25,7 +25,7 @@ export class PreviousEventsConnectionComponent implements OnInit {
   @Input() previousEventsConnection: any;
   public ColumnMode = ColumnMode;
   public SelectionType = SelectionType;
-  sortAscending: boolean = true;
+  sortAscending: boolean[] = [];
   private tempData = [];
   public selected = [];
   public rows: any;
@@ -45,9 +45,27 @@ export class PreviousEventsConnectionComponent implements OnInit {
       }
     );
   }
-  sortDate() {
+  header = [
+    { name: "Name Of Event", sort: true },
+    { name: "Date", sort: true },
+    { name: "Total Connection", sort: true },
+    { name: "Duration", sort: true },
+    { name: "Most Connected Device", sort: false },
+  ];
+  sortedStarted: boolean[] = [];
+  currentSort: string = "";
+  sortData(column: any, index: number) {
     console.log("clicked");
-    this.sortAscending = !this.sortAscending;
+    this.sortAscending[index] = !this.sortAscending[index];
+    this.sortedStarted[index] = true;
+    this.header.forEach((data, i) => {
+      if (i == index) {
+        this.sortedStarted[index] = true;
+      } else {
+        this.sortedStarted[i] = false;
+      }
+    });
+    this.currentSort = column;
     this.previousEventsConnection.sort((a, b) => {
       if (this.sortAscending) {
         return new Date(a.date).getTime() - new Date(b.date).getTime();
