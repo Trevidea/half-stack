@@ -124,7 +124,6 @@ void EntityBase::find(const Request &request, Response &response)
     response.setData(result);
     response.complete();
 }
-
 /// @brief
 /// @param request
 /// @param response
@@ -410,4 +409,9 @@ void EntityBase::sync(const Request &req, Response &rsp)
 
     rsp.setData("Sync operation completed successfully.");
     rsp.complete();
+}
+
+bool EntityBase::notSet() const
+{
+    return this->id() <= 0;
 }

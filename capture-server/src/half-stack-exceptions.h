@@ -44,6 +44,21 @@ public:
     }
     ~ExFieldMissingInRequest();
 };
+class ExModelNotFoundException: public std::exception
+{
+private:
+    std::string m_entity;
+    int m_id;
+public:
+    ExModelNotFoundException(const std::string &entity, const int id);
+    const char *what() const noexcept
+    {
+        char msg[128] = {'\0'};
+        snprintf(msg, 128, "There is no record in table %s with id %d", this->m_entity.c_str(), this->m_id);
+        return msg;
+    }
+    ~ExModelNotFoundException();
+};
 
 class ExMonthMissingInRequest: public std::exception
 {

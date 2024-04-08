@@ -34,8 +34,11 @@ private:
                 value = "'" + json["value"].asString() + "'";
                 break;
             case 5: // jsonb
-                value = "'" + json["value"].asString() + "'";
+            {
+                const auto strValue = Json::FastWriter().write(json["value"]);
+                value = "'" + strValue + "'";
                 break;
+            }
             case 0: // int
             case 2: // float
             default:
@@ -94,24 +97,23 @@ private:
 
 public:
     static std::string ScriptInsert(const Json::Value &json)
-{
-    std::string tablename = json["table"].asString();
-
-    // Extract columns and values from JSON
-    std::vector<std::string> columns;
-    std::vector<std::string> values;
-    for (const auto &column : json["columns"])
     {
-        columns.push_back(column["field"].asString());
-        values.push_back(formatValue(column));
+        std::string tablename = json["table"].asString();
+
+        // Extract columns and values from JSON
+        std::vector<std::string> columns;
+        std::vector<std::string> values;
+        for (const auto &column : json["columns"])
+        {
+            columns.push_back(column["field"].asString());
+            values.push_back(formatValue(column));
+        }
+
+        // Construct the INSERT SQL statement with RETURNING clause to get the inserted ID
+        std::string sql_insert = "INSERT INTO " + tablename + " (" + su_join(columns, ", ") + ") VALUES (" + su_join(values, ", ") + ") RETURNING id";
+
+        return sql_insert;
     }
-
-    // Construct the INSERT SQL statement with RETURNING clause to get the inserted ID
-    std::string sql_insert = "INSERT INTO " + tablename + " (" + su_join(columns, ", ") + ") VALUES (" + su_join(values, ", ") + ") RETURNING id";
-
-    return sql_insert;
-}
-
 
     //-----------------------------------------------------------------------------------
 
@@ -204,7 +206,6 @@ public:
             sql_delete.replace(idx, 11, tableName);
         }
 
-
         idx = sql_delete.find("#criteria#", 0);
         sql_delete.replace(idx, 10, criteria);
         return sql_delete;
@@ -261,7 +262,6 @@ public:
         sql_select.replace(idx, 10, criteria);
         return sql_select;
     }
-
     //-----------------------------------------------------------------------------------
 
     static std::string ScriptFunction(const Json::Value &json)
@@ -294,10 +294,10 @@ public:
 //     // Implement the logic to execute the SQL query and return the inserted ID
 //     // For demonstration purposes, let's just print the SQL query
 //     std::cout << "Executing SQL query: " << sql << std::endl;
-    
+
 //     // Placeholder value for the inserted ID
 //     int insertedId = 12345; // Replace with your actual implementation to retrieve the inserted ID
-    
+
 //     return insertedId;
 // }
 

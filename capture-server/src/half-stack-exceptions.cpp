@@ -1,11 +1,8 @@
 #include "half-stack-exceptions.h"
 
-
 ExEntityNotSet::ExEntityNotSet()
 {
-    
 }
-
 
 ExEntityNotSet::~ExEntityNotSet()
 {
@@ -35,5 +32,13 @@ ExMonthMissingInRequest::ExMonthMissingInRequest()
 }
 
 ExMonthMissingInRequest::~ExMonthMissingInRequest()
+{
+}
+
+ExModelNotFoundException::ExModelNotFoundException(const std::string &entity, const int id) : m_entity{entity},
+                                                                                              m_id{id}
+{
+}
+ExModelNotFoundException::~ExModelNotFoundException()
 {
 }

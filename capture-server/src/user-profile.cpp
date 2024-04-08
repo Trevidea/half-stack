@@ -1,43 +1,42 @@
-#include "on-demand-event.h"
-#include "event.h"
+#include "user-profile.h"
 #include "gateway.h"
-#include "json/json.h"
+#include "db-manager.h"
+#include "entity-base.h"
 
-// Define a global vector to store on-demand events
-std::vector<Event> onDemandEvents;
+// Default constructor
+UserProfile::UserProfile():  EntityBase("userprofile"){
+    
+}
 
-OnDemandEvent::OnDemandEvent() : EntityBase("ondemandevent") {}
-
-void OnDemandEvent::report()
+void UserProfile::report()
 {
     EntityBase::report();
-
-    // Route definitions
-    Gateway::instance().route("GET", "/api/on-demand-events", // To request LIST
+    Gateway::instance().route("GET", "/api/user-profiles", // To request LIST
                               [this](const Request &req, Response &rsp)
                               {
                                   this->list(req, rsp);
                               });
-    Gateway::instance().route("GET", "/api/on-demand-event", // To request SINGLE
+    Gateway::instance().route("GET", "/api/user-profile", // To request SINGLE
                               [this](const Request &req, Response &rsp)
                               {
                                   this->find(req, rsp);
                               });
-
-    Gateway::instance().route("POST", "/api/on-demand-event",
+    Gateway::instance().route("POST", "/api/user-profile", // To request INSERT
                               [this](const Request &req, Response &rsp)
                               {
                                   this->create(req, rsp);
                               });
-    Gateway::instance().route("PUT", "/api/on-demand-event", // To request UPDATE
+    Gateway::instance().route("PUT", "/api/user-profile", // To request UPDATE
                               [this](const Request &req, Response &rsp)
                               {
                                   this->update(req, rsp);
                               });
-
-    Gateway::instance().route("DELETE", "/api/on-demand-event/:id",
+    Gateway::instance().route("DELETE", "/api/user-profile", // To request DELETE
                               [this](const Request &req, Response &rsp)
                               {
                                   this->remove(req, rsp);
                               });
+}
+UserProfile::~UserProfile() {
+    // Destructor implementation, if needed
 }
