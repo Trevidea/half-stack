@@ -63,7 +63,13 @@
                     sub: items.device === 'sub'
                   }"
                   [style.margin-left]="items.device === 'pub' ? '0.1em' : ''"
-                  style="width: 130px; padding: 0.2em; border-radius: 4px"
+                  style="
+                    width: 150px;
+                    padding: 0.2em;
+                    border-radius: 4px;
+                    text-transform: capitalize;
+                    display: flex;
+                  "
                 >
                   <img
                     src="../../../../../assets/images/avatars/{{
@@ -74,7 +80,14 @@
                     height="25px"
                     class="rounded-circle"
                   />
-                  {{ items.device }} {{ items.time }}
+                  <div class="d-flex pl-1 pr-1">
+                    <div>
+                      {{ items.device }}
+                    </div>
+                    <div class="ml-1">
+                      {{ items.time }}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
