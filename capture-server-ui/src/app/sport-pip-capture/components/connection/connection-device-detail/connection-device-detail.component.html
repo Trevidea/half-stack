@@ -8,7 +8,7 @@
     <i class="feather" data-feather="arrow-left" [size]="24"></i>
   </button>
   <div class="row match-height">
-    <div class="col-xl-9" style="padding-right: 0rem">
+    <div class="col-xl-9" style="padding-right: 0">
       <app-video-streaming
         [liveStreamVideoPath]="url"
         style="margin-bottom: 0.7rem"
@@ -110,7 +110,7 @@
               </p>
             </div>
           </div>
-          <div class="col-3 col-md-3">
+          <div class="col-3 col-md-3" style="margin-left: 0">
             <div>
               <div class="d-flex">
                 <h4 class="light-text">9 sec</h4>
@@ -133,7 +133,7 @@
         </div>
         <div class="table-responsive h-100">
           <table class="table table-default">
-            <tr>
+            <tr style="text-transform: uppercase">
               <th>Video Time</th>
               <th>Video Resolution/Quality</th>
               <th>Duration</th>
@@ -170,7 +170,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-3">
+    <div class="col-xl-3" style="padding-right: 0">
       <div
         class="card p-1 d-xs-none d-sm-none d-md-none d-lg-none d-xl-block streaming-card-bg-color"
       >
