@@ -14,29 +14,62 @@
     <table class="table table-hover">
       <thead>
         <tr class="no-wrap-cell headerTopBoarder">
-          <th scope="col">Name of event</th>
           <th scope="col">
-            <div
-              style="cursor: pointer"
-              class="d-flex justify-items-center"
-              (click)="sortDate()"
-            >
-              <div>Date</div>
-              <div style="display: grid; margin: auto">
-                <i
-                  style="margin-top: -5px"
-                  class="bi bi-chevron-down"
-                  [ngClass]="{ 'icon-rotate': !sortAscending }"
-                ></i>
-                <i
-                  class="bi bi-chevron-up sort-chevron-up"
-                  [ngClass]="{ 'icon-rotate': !sortAscending }"
-                ></i>
-              </div>
+            <div class="d-flex">
+              <div>Name of event</div>
+
+              <i
+                class="bi bi-arrow-down ml-1"
+                [ngClass]="{ 'icon-rotate': !sortAscending }"
+              ></i
+              ><i
+                class="bi bi-arrow-up"
+                [ngClass]="{ 'icon-rotate': !sortAscending }"
+              ></i>
             </div>
           </th>
-          <th scope="col">Total connection</th>
-          <th scope="col">Duration</th>
+          <th scope="col">
+            <div class="d-flex" (click)="sortDate()">
+              <div>Date</div>
+
+              <i
+                class="bi bi-arrow-down ml-1"
+                [ngClass]="{ 'icon-rotate': !sortAscending }"
+              ></i
+              ><i
+                class="bi bi-arrow-up"
+                [ngClass]="{ 'icon-rotate': !sortAscending }"
+              ></i>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="d-flex">
+              <div>Total connection</div>
+
+              <i
+                class="bi bi-arrow-down ml-1"
+                [ngClass]="{ 'icon-rotate': !sortAscending }"
+              ></i
+              ><i
+                class="bi bi-arrow-up"
+                [ngClass]="{ 'icon-rotate': !sortAscending }"
+              ></i>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="d-flex">
+              <div>Duration</div>
+
+              <i
+                class="bi bi-arrow-down ml-1"
+                [ngClass]="{ 'icon-rotate': !sortAscending }"
+              ></i
+              ><i
+                class="bi bi-arrow-up"
+                [ngClass]="{ 'icon-rotate': !sortAscending }"
+              ></i>
+            </div>
+          </th>
           <th>Most connected device</th>
         </tr>
       </thead>
