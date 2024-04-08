@@ -16,7 +16,7 @@
             'on-demand-event': item.type === 'on-demand',
             'scheduled-event': item.type === 'scheduled'
           }">
-            {{item.type}}
+            {{item.type| eventTypeTransform}}
           </div>
         </div>
         <div class="col-8  card-btn-conatiner  ">

@@ -19,13 +19,13 @@
             'on-demand-event': item.type === 'on-demand',
             'scheduled-event': item.type === 'scheduled'
           }">
-            {{item.type}}
+            {{item.type| eventTypeTransform }}
           </div>
         </div>
         <div class="col-8 card-btn-conatiner">
           <div class="card-buttons ml-auto">
             <button type="button" class="btn btn-flat-dark btn-sm mr-md-1" rippleEffect
-              (click)="eventDetail(item.type)">
+              (click)="eventDetail(item.type,item)">
               View
             </button>
             <button type="button" class="btn btn-warning btn-sm">
