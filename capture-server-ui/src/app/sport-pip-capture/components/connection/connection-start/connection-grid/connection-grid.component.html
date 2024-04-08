@@ -21,7 +21,7 @@
                 *ngIf="item.quality == 'Good'"
                 class="badge badge-pill badge-light-success"
                 style="
-                  background-color: rgba(40, 199, 111, 1);
+                  background-color: #eaf7ee;
                   color: rgba(73, 69, 79, 1) !important;
                 "
               >
@@ -31,10 +31,7 @@
               <div
                 *ngIf="item.quality == 'Poor'"
                 class="badge badge-pill"
-                style="
-                  background-color: rgba(255, 222, 222, 1);
-                  color: rgba(73, 69, 79, 1);
-                "
+                style="background-color: #ffdede; color: rgba(73, 69, 79, 1)"
               >
                 <span style="color: rgb(181, 0, 0)"> &#x25CF; </span>
                 Poor
@@ -72,7 +69,7 @@
                   class="badge badge-pill"
                   style="background-color: rgb(238 220 213)"
                 >
-                  <i class="bi bi-pause text-info"></i>
+                  <i class="bi bi-pause" style="color: #0d0d0d"></i>
                   <span style="margin-left: 0.1em; color: black">
                     {{ item.transmitStatus }}
                   </span>

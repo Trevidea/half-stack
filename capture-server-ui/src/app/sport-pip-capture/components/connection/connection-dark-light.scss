@@ -96,7 +96,12 @@
   $icon-pr-color: rgba(33, 96, 147, 1);
   $icon-wr-color: rgba(245, 163, 10, 1);
   $icon-da-color: rgba(222, 46, 33, 1);
-
+  $receiving-bg: #e9f0f5;
+  $poor-bg: #ffdede;
+  $good-bg: #eaf7ee;
+  $paused-icon-color: #0d0d0d;
+  $paused-bg: #f3f3f5;
+  $stream-bg: #fffcf3;
   .connection-grid {
     .info-card-primary {
       background-color: $card-info-bg-primary !important;
