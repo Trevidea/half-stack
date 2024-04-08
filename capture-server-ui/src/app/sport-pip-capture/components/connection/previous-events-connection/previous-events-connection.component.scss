@@ -48,20 +48,15 @@
   .no-wrap-cell th,
   .no-wrap-cell td {
     white-space: nowrap;
-    // max-width: 200px;
-    // overflow: hidden;
-    // text-overflow: ellipsis;
   }
-  // .headerTopBoarder th {
-  //   // border-top: 1px solid transparent;
-  // }
+
   .sort-chevron-up {
     position: absolute;
     margin-top: 4px;
   }
   .icon-rotate {
     transform: rotate(180deg);
-    transition: all ease-in 0.5s;
+    transition: all ease-in 0.2s;
   }
   .sort-back {
     transform: rotate(180deg);
