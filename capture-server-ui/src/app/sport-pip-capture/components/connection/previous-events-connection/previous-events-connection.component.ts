@@ -54,8 +54,6 @@ export class PreviousEventsConnectionComponent implements OnInit {
   ];
   sortedStarted: boolean[] = [];
   sortData(column: any, index: number) {
-    console.log("clicked");
-
     this.sortAscending[index] = !this.sortAscending[index];
     this.sortedStarted[index] = true;
     this.header.forEach((data, i) => {
@@ -63,12 +61,10 @@ export class PreviousEventsConnectionComponent implements OnInit {
         this.sortedStarted[index] = true;
       } else {
         this.sortedStarted[i] = false;
+        this.sortAscending[i] = false;
       }
     });
     switch (column.name) {
-      case "Date":
-        this.dateSort(this.previousEventsConnection, index);
-        break;
       case "Name Of Event":
         this.stringSort(this.previousEventsConnection, index, "Name of event");
         break;
@@ -87,6 +83,8 @@ export class PreviousEventsConnectionComponent implements OnInit {
         break;
       default:
     }
+    // this.count = 0;
+    // }
   }
   dateSort(data: any[], index: number) {
     data.sort((a, b) => {
