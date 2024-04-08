@@ -87,7 +87,7 @@ export class PreviousEventsConnectionComponent implements OnInit {
       default:
     }
   }
-  dateSort(data, index) {
+  dateSort(data: any[], index: number) {
     data.sort((a, b) => {
       if (this.sortAscending[index]) {
         const data = new Date(a.date).getTime() - new Date(b.date).getTime();
