@@ -16,14 +16,16 @@ export class ModelServiceService {
   private modelsServerUrl: string = environment.pgUrl;
 
   constructor(private _httpClient: HttpClient, private _adapter: AdapterService) {
+    this.saveEvent = this.saveEvent.bind(this);
 
   }
 
   create(type: string, entity: any): Observable<any> {
-    console.log(type)
+
     const url = `${this.modelsServerUrl}/${type}`
-    console.log(entity)
+    console.log(url)
     return this._adapter.modulateOne(type, entity).pipe(mergeMap(modata => {
+      console.log("modulateOne",modata)
       return this._httpClient.post<any>(url, modata);
     }));
   }
@@ -133,9 +135,8 @@ export class ModelServiceService {
   // }
 
 
-
-  SaveOnDemandFormJson(data: Data.Event): Observable<Data.Event> {
-   console.log(data)
+  saveEvent(data: Data.Event): Observable<Data.Event> {
+    console.log(data)
 
     if (data.id) {
       return this.update("event", data, data.id);
@@ -147,7 +148,7 @@ export class ModelServiceService {
 
 
   eventJson(): Observable<Data.Event[]> {
-    return this._data('events', EventData)
+    return this._data('event', EventData)
   }
 
 
