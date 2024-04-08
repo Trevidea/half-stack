@@ -53,7 +53,6 @@ export class PreviousEventsConnectionComponent implements OnInit {
     { name: "Most Connected Device", sort: false },
   ];
   sortedStarted: boolean[] = [];
-  currentSort: string = "";
   sortData(column: any, index: number) {
     console.log("clicked");
     this.sortAscending[index] = !this.sortAscending[index];
@@ -65,13 +64,40 @@ export class PreviousEventsConnectionComponent implements OnInit {
         this.sortedStarted[i] = false;
       }
     });
-    this.currentSort = column;
-    this.previousEventsConnection.sort((a, b) => {
-      if (this.sortAscending) {
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
+    switch (column.name) {
+      case "Date":
+        this.dateSort(this.previousEventsConnection, index);
+        break;
+      case "Name Of Event":
+        this.stringSort(this.previousEventsConnection, index, true);
+        break;
+      default:
+    }
+  }
+  dateSort(data, index) {
+    data.sort((a, b) => {
+      if (this.sortAscending[index]) {
+        const data = new Date(a.date).getTime() - new Date(b.date).getTime();
+        return data;
       } else {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
       }
+    });
+  }
+  stringSort(data, index, ascending: boolean) {
+    data.sort((a, b) => {
+      const nameA = (a["Name of event"] || "").toUpperCase();
+      const nameB = (b["Name of event"] || "").toUpperCase();
+
+      const sortOrder = ascending ? 1 : -1;
+
+      if (nameA < nameB) {
+        return -1 * sortOrder;
+      }
+      if (nameA > nameB) {
+        return 1 * sortOrder;
+      }
+      return 0;
     });
   }
 }
