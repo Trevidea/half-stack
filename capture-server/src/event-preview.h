@@ -7,6 +7,7 @@
 class EventPreview : public Base {
 public:
     void report() override;
+    EventPreview() = default;
     EventPreview(Json::Value& model);
 
     // Getter and Setter properties
