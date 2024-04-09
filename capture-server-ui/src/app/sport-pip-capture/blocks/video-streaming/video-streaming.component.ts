@@ -38,7 +38,7 @@ export class VideoStreamingComponent implements OnInit {
           this.videoPlayer.nativeElement.play().catch((error) => {
             console.error("Error while trying to play the video:", error);
           });
-          (document.querySelector(".fa-pause") as HTMLElement).style.display =
+          (document.querySelector(".pause") as HTMLElement).style.display =
             "none";
           const video = this.videoPlayer.nativeElement;
 
@@ -63,16 +63,12 @@ export class VideoStreamingComponent implements OnInit {
       this.videoPlayer.nativeElement.play().catch((error) => {
         console.error("Error while trying to play the video:", error);
       });
-      (document.querySelector(".fa-pause") as HTMLElement).style.display =
-        "none";
-      (document.querySelector(".fa-play") as HTMLElement).style.display =
-        "block";
+      (document.querySelector(".pause") as HTMLElement).style.display = "none";
+      (document.querySelector(".play") as HTMLElement).style.display = "block";
     } else {
       this.videoPlayer.nativeElement.pause();
-      (document.querySelector(".fa-play") as HTMLElement).style.display =
-        "none";
-      (document.querySelector(".fa-pause") as HTMLElement).style.display =
-        "block";
+      (document.querySelector(".play") as HTMLElement).style.display = "none";
+      (document.querySelector(".pause") as HTMLElement).style.display = "block";
     }
   }
   fullScreen() {
@@ -89,11 +85,11 @@ export class VideoStreamingComponent implements OnInit {
     video.addEventListener("timeupdate", () => {
       let curr = (video.currentTime / video.duration) * 100;
       if (video.ended) {
-        const playIcon = document.querySelector(".fa-play") as HTMLElement;
+        const playIcon = document.querySelector(".play") as HTMLElement;
         if (playIcon) {
           playIcon.style.display = "block";
         }
-        const pauseIcon = document.querySelector(".fa-pause") as HTMLElement;
+        const pauseIcon = document.querySelector(".pause") as HTMLElement;
         if (pauseIcon) {
           pauseIcon.style.display = "none";
         }

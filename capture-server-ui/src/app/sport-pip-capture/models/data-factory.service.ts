@@ -13,27 +13,19 @@ import { PreviousEventsConnectionData } from "./previous-events-connection";
 import { MetaTypeData } from "./meta-type";
 import { FileIndexData } from "./file-index";
 import { ConnectionPreviewData } from "./connection-preview";
-import { webSocket, WebSocketSubject } from "rxjs/webSocket";
 @Injectable({
   providedIn: "root",
 })
 export class DataFactoryService {
-  private socket$: WebSocketSubject<any>;
   private _spModelUrl: string = environment.spModelUrl;
+
   constructor(private _httpClient: HttpClient) {
     this.SaveUserProfileJson = this.SaveUserProfileJson.bind(this);
     this.SaveDistributionList = this.SaveDistributionList.bind(this);
     this.SaveOnDemandFormJson = this.SaveOnDemandFormJson.bind(this);
     this.SaveMetaType = this.SaveMetaType.bind(this);
-    this.socket$ = webSocket("tcp://localhost:7890");
-  }
-  sendMessage(message: string) {
-    this.socket$.next(message);
   }
 
-  getMessage() {
-    return this.socket$;
-  }
   create(type: string, entity: any): Observable<any> {
     const url = `${this._spModelUrl}/${type}`;
 

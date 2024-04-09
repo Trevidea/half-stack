@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { EventService } from "@core/services/event -start.service";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 
+import { Subject } from "rxjs";
 @Component({
   selector: "app-connection-header",
   templateUrl: "./connection-header.component.html",
@@ -12,33 +13,18 @@ import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.se
 export class ConnectionHeaderComponent implements OnInit {
   _gridView: boolean = false;
   _ListView: boolean = true;
-  message: string;
   connectiondetail: boolean = false;
+  private socket: any;
+  private subject: Subject<string> = new Subject<string>();
   constructor(
     private router: Router,
     private event: EventService,
     private route: ActivatedRoute,
     private webSocketService: DataFactoryService
   ) {}
+  messages: string[] = [];
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    this.webSocketService.getMessage().subscribe(
-      (message) => {
-        console.log("Received message:", message);
-        // Handle the received message as needed
-      },
-      (error) => {
-        console.error("Error:", error);
-        // Handle errors if any
-      }
-    );
-  }
-  sendMessage() {
-    this.webSocketService.sendMessage("Hello from Angular!");
-  }
-  ConnectionDetails(yes: boolean) {
-    this.connectiondetail = yes;
-  }
   closeDetail() {
     this.connectiondetail = false;
   }
