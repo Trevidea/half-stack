@@ -16,14 +16,16 @@ export class ModelServiceService {
   private modelsServerUrl: string = environment.pgUrl;
 
   constructor(private _httpClient: HttpClient, private _adapter: AdapterService) {
+    this.saveEvent = this.saveEvent.bind(this);
 
   }
 
   create(type: string, entity: any): Observable<any> {
-    console.log(type)
+
     const url = `${this.modelsServerUrl}/${type}`
-    console.log(entity)
+    console.log(url)
     return this._adapter.modulateOne(type, entity).pipe(mergeMap(modata => {
+      console.log("modulateOne",modata)
       return this._httpClient.post<any>(url, modata);
     }));
   }
@@ -132,16 +134,21 @@ export class ModelServiceService {
   //   return this._httpClient.get<MetaTypeModel>(url);
   // }
 
- 
 
-  // eventJson(query: Data.FilterParams): Observable<Data.Event[]> {
-  //   console.log("eventJson query",query)
-  //   return this._data(`events?status=${query.status}&sport=${query.sport}&level=${query.level}&program=${query.program}`, EventData)
-  // }
+  saveEvent(data: Data.Event): Observable<Data.Event> {
+    console.log(data)
+
+    if (data.id) {
+      return this.update("event", data, data.id);
+    } else {
+      return this.create("event", data);
+    }
+  }
+
+
 
   eventJson(): Observable<Data.Event[]> {
-    console.log("eventJson query", status)
-    return this._data(`events`, EventData)
+    return this._data('event', EventData)
   }
 
 
@@ -155,7 +162,7 @@ export class ModelServiceService {
   }
 
 
-  liveEventJson(): Observable<Data.LiveEventDetail[]>{
-     return this._data('liveEvent', LiveEventDetailData)
+  liveEventJson(): Observable<Data.LiveEventDetail[]> {
+    return this._data('liveEvent', LiveEventDetailData)
   }
 }

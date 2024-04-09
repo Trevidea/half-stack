@@ -1,5 +1,5 @@
 <div class="grid-view">
-  <div class="card custom-card" *ngFor="let item of datasource">
+  <div class="card custom-card" *ngFor="let item of datasource; let i = index">
     <img class="img-fluid" src="../../../../../assets/images/pip-image/card-image.png" alt="Card image cap" />
     <div class="card-img-overlay p-0 d-flex flex-column" style="height: 100px;">
       <div class="d-flex align-items-center Progress">
@@ -16,12 +16,12 @@
             'on-demand-event': item.type === 'on-demand',
             'scheduled-event': item.type === 'scheduled'
           }">
-            {{item.type}}
+            {{item.type| eventTypeTransform}}
           </div>
         </div>
         <div class="col-8  card-btn-conatiner  ">
           <div class="card-buttons ml-auto">
-            <button type="button" class="btn btn-flat-dark btn-sm  mr-md-1 " (click)="viewDetail(item.type)"
+            <button type="button" class="btn btn-flat-dark btn-sm  mr-md-1 " (click)="viewDetail(item.type,i)"
               rippleEffect>
               View
             </button>
@@ -53,5 +53,5 @@
 </core-sidebar>
 <core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-on-demand" overlayClass="modal-backdrop"
   hideOnEsc="true">
-  <app-ondemand-event-detail-presenter upcommingEvent=true></app-ondemand-event-detail-presenter>
+  <app-ondemand-event-detail-presenter  [eventData]="datasource" [startIndex]="startIndex"></app-ondemand-event-detail-presenter>
 </core-sidebar>

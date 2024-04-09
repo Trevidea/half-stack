@@ -34,24 +34,21 @@ export class EventPresenter implements OnInit {
   }
 
   ngOnInit(): void {
-    const status = this.tabStateService.getActiveTab()
     Transformer.ComposeCollectionAsync(this.service.eventJson(), this.ds.event, EventRangeBuilder);
-    console.log(this.ds.event)
-    this.filteredData = this.ds.event;
+    this.filteredData = this.filterEvents(this.ds.event, this.query);
   }
 
 
-
   onFilter(filter: Data.FilterParams) {
-    console.log(filter)
+    filter.status = this.tabStateService.getActiveTab()
     this.query = filter;
-    this.filteredData = this.filterEvents(this.ds.event, this.query);
-
+    this.filteredData = this.filterEvents(this.ds.event, filter);
   }
 
 
   onTabChange(): void {
- Transformer.ComposeCollectionAsync(this.service.eventJson(), this.ds.event, EventRangeBuilder);
+    Transformer.ComposeCollectionAsync(this.service.eventJson(), this.ds.event, EventRangeBuilder);
+    this.onFilter(this.query)
 
   }
 

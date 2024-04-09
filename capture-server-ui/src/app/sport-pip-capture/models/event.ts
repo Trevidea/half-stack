@@ -32,11 +32,11 @@ export class EventData extends DataBase<Data.Event>{
         this._model.year = v;
     }
 
-    public get dt_event(): Date {
+    public get dt_event(): string {
         return this._model.dt_event;
     }
     
-    public set dt_event(v: Date) {
+    public set dt_event(v: string) {
         this._model.dt_event = v;
     }
     
@@ -79,12 +79,12 @@ export class EventData extends DataBase<Data.Event>{
 //     this._model.event = v;
 //    }
  
-  public get dayHalve() : string {
-    return this._model.dayHalve;
-  }
-  public set dayHalve(v : string) {
-    this._model.dayHalve = v;
-  }
+//   public get dayHalve() : string {
+//     return this._model.dayHalve;
+//   }
+//   public set dayHalve(v : string) {
+//     this._model.dayHalve = v;
+//   }
   
   public get tm_event() : number {
     return this._model.tm_event;

@@ -4,7 +4,9 @@
       <thead>
         <tr class="text-nowrap">
           <th scope="col">Action</th>
-          <th scope="col">User</th>
+          <th scope="col">Name</th>
+          <th scope="col">Role</th>
+
           <th scope="col">Location</th>
           <th scope="col">Device ID</th>
 
@@ -45,6 +47,7 @@
               </button>
 
               <button
+                *ngIf="item.role == 'Publisher'"
                 mc-dropdown-item
                 [mcDropdownTriggerFor]="appDropdownNested"
                 (click)="streaming()"
@@ -70,6 +73,9 @@
           </th>
           <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
             {{ item.user }}
+          </td>
+          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+            {{ item.role }}
           </td>
           <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
             {{ item.location }}

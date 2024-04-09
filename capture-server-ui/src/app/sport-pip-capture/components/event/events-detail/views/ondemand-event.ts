@@ -1,4 +1,28 @@
 import { Views } from "app/sport-pip-capture/models/capture-interface";
+import { Collection, Range } from "app/blocks/collection";
+
+export class OnDemandEventRange implements Views.Datasource {
+
+    private _id: number;
+    public get id(): number {
+        return this._id;
+    }
+    public set id(v: number) {
+        this._id = v;
+    }
+
+    private _event: Range<OnDemandEventView>;
+    public get event(): Range<OnDemandEventView> {
+        if (!this._event) {
+            this._event = new Range<OnDemandEventView>();
+        }
+        return this._event;
+    }
+    public set event(v: Range<OnDemandEventView>) {
+        this._event = v;
+    }
+
+}
 
 export class OnDemandEventView implements Views.Datasource {
 

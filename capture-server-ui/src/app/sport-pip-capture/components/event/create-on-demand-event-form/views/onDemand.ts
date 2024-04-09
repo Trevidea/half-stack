@@ -1,4 +1,6 @@
+import { DatePipe } from "@angular/common";
 import { Collection } from "app/blocks/collection";
+import { UI } from "app/blocks/ui-utils";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
 
 export class OnDemandEventFormView implements Views.Datasource {
@@ -11,16 +13,16 @@ export class OnDemandEventFormView implements Views.Datasource {
     public set id(v: number) {
         this._id = v;
     }
-    
-    
-    private _owner_id : number;
-    public get owner_id() : number {
+
+
+    private _owner_id: number;
+    public get owner_id(): number {
         return this._owner_id;
     }
-    public set owner_id(v : number) {
+    public set owner_id(v: number) {
         this._owner_id = v;
     }
-    
+
     private _title: string;
     public get title(): string {
         return this._title;
@@ -82,13 +84,18 @@ export class OnDemandEventFormView implements Views.Datasource {
     }
 
 
-    private _dtEvent: Date;
-    public get dttEvent(): Date {
+     
+     private _dtEvent : string;
+     public get dtEvent() : string {
+        if (!this._dtEvent) {
+            this._dtEvent = UI.DateHelper.apiDateToday()
+        }
         return this._dtEvent;
-    }
-    public set dtEvent(v: Date) {
+     }
+     public set dtEvent(v : string) {
         this._dtEvent = v;
-    }
+     }
+     
 
 
     private _status: string;
@@ -124,23 +131,14 @@ export class OnDemandEventFormView implements Views.Datasource {
 
     private _time: number;
     public get time(): number {
-      
+
         return this._time;
     }
     public set time(v: number) {
         this._time = v;
     }
 
-    private _dayHalve: Collection<string>;
-    public get dayHalve(): Collection<string> {
-        if (!this._dayHalve) {
-            this._dayHalve = new Collection<string>();
-        }
-        return this._dayHalve;
-    }
-    public set dayHalve(v: Collection<string>) {
-        this._dayHalve = v;
-    }
+
 
 
 }

@@ -175,10 +175,10 @@ export class DataFactoryService {
     return ["Pending", "Active"];
   }
   EventLevel() {
-    return ["Varsity", "Junior Varsity", "Sophomore"];
+    return ["Varsity", "Junior Varsity", 'Senior',"Sophomore"];
   }
   EventProgram() {
-    return ["Man", "Women"];
+    return ["Man", "Woman"];
   }
   EventYear() {
     return ['2024', "2023", "2022", "2021", "2020",];

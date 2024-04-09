@@ -14,7 +14,8 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	--secondary-border-color: #3b4253;
 	--light-secondary-border-color: #3b4253;
 	--card-border: #444444;
-	--syncbackground:rgba(33, 96, 147, 0.2)
+	--syncbackground:rgba(33, 96, 147, 0.2);
+  
 }
 
 :root {
@@ -24,6 +25,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 	--card-border: #C3C3C3;
 	--syncbackground:#E9F0F5;
 }
+
 
 h1,
 h2,
@@ -51,15 +53,15 @@ h6 {
 	}
 	.modal .modal-header{
 		background:#232323;
-		border-bottom: 1px solid var(--light-secondary-border-color);
+		border-bottom: 1px solid #000;
 	}
 
 	
 }
 
 .on-demand-event {
-	background-color: rgba(143, 171, 7, 1);
-	color: rgba(255, 255, 255, 1);
+	background-color: #8FAB0766;
+	color: #0F0F0F;
 	font-weight: 400;
 }
 

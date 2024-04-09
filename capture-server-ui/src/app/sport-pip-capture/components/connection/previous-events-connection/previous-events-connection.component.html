@@ -14,30 +14,19 @@
     <table class="table table-hover">
       <thead>
         <tr class="no-wrap-cell headerTopBoarder">
-          <th scope="col">Name of event</th>
-          <th scope="col">
-            <div
-              style="cursor: pointer"
-              class="d-flex justify-items-center"
-              (click)="sortDate()"
-            >
-              <div>Date</div>
-              <div style="display: grid; margin: auto">
-                <i
-                  style="margin-top: -5px"
-                  class="bi bi-chevron-down"
-                  [ngClass]="{ 'icon-rotate': !sortAscending }"
-                ></i>
-                <i
-                  class="bi bi-chevron-up sort-chevron-up"
-                  [ngClass]="{ 'icon-rotate': !sortAscending }"
-                ></i>
+          <th scope="col" *ngFor="let item of header; let i = index">
+            <div class="d-flex" (click)="sortData(item, i)">
+              <div class="w-100">{{ item.name }}</div>
+              <div class="flex-grow-1" *ngIf="item.sort">
+                <i *ngIf="!sortedStarted[i]" class="bi bi-arrow-down ml-1"></i>
               </div>
+              <i
+                *ngIf="item.sort"
+                class="bi bi-arrow-up"
+                [ngClass]="{ 'icon-rotate': sortAscending[i] }"
+              ></i>
             </div>
           </th>
-          <th scope="col">Total connection</th>
-          <th scope="col">Duration</th>
-          <th>Most connected device</th>
         </tr>
       </thead>
       <tbody>
@@ -63,7 +52,13 @@
                     sub: items.device === 'sub'
                   }"
                   [style.margin-left]="items.device === 'pub' ? '0.1em' : ''"
-                  style="width: 130px; padding: 0.2em; border-radius: 4px"
+                  style="
+                    width: 150px;
+                    padding: 0.2em;
+                    border-radius: 4px;
+                    text-transform: capitalize;
+                    display: flex;
+                  "
                 >
                   <img
                     src="../../../../../assets/images/avatars/{{
@@ -74,7 +69,14 @@
                     height="25px"
                     class="rounded-circle"
                   />
-                  {{ items.device }} {{ items.time }}
+                  <div class="d-flex pl-1 pr-1">
+                    <div>
+                      {{ items.device }}
+                    </div>
+                    <div class="ml-1">
+                      {{ items.time }}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
