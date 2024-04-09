@@ -8,6 +8,7 @@
 #include "omal.h"
 #include "on-demand-event.h"
 #include "user-profile.h"
+#include "event-preview.h"
 #include <vector>
 #include <map>
 #include <json/json.h>
@@ -26,6 +27,7 @@ void Gateway::init()
     this->m_entities.push_back(new MetaType());
     this->m_entities.push_back(new Event());
     this->m_entities.push_back(new UserProfile());
+    this->m_entities.push_back(new EventPreview());
     for (auto &&e : this->m_entities)
     {
         e->report();

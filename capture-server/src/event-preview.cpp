@@ -1,7 +1,9 @@
 #include "event-preview.h"
 #include "gateway.h"
 
-EventPreview::EventPreview(Json::Value& model) : Base(model) {}
+EventPreview::EventPreview(Json::Value& model) : Base(model) {
+
+}
 
 void EventPreview::report()
 {
@@ -9,7 +11,10 @@ void EventPreview::report()
     Gateway::instance().route("GET", "/api/event-preview", 
                               [this](const Request &req, Response &rsp)
                               {
-                                Gateway::instance().formatResponse({{this->m_model}});
+                                this->setCityAddress("Address1");
+                                this->setDtEvent("2024-05-01");
+                                const std::string response = Gateway::instance().formatResponse({{this->m_model}});
+                                rsp.setData(response);
                               });
 }
 
