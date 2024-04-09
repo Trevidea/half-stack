@@ -47,11 +47,16 @@
   </div>
 </div>
 
-<core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-scheduled" overlayClass="modal-backdrop"
-  hideOnEsc="true">
-  <app-schedual-event-detail-presenter></app-schedual-event-detail-presenter>
-</core-sidebar>
-<core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-on-demand" overlayClass="modal-backdrop"
-  hideOnEsc="true">
-  <app-ondemand-event-detail-presenter  [eventData]="datasource" [startIndex]="startIndex"></app-ondemand-event-detail-presenter>
-</core-sidebar>
+<ng-container *ngIf="openDetailmodel">
+
+  <core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-scheduled" overlayClass="modal-backdrop"
+    hideOnEsc="true">
+    <app-schedual-event-detail-presenter></app-schedual-event-detail-presenter>
+  </core-sidebar>
+
+  <core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-on-demand" overlayClass="modal-backdrop"
+    hideOnEsc="true">
+    <app-ondemand-event-detail-presenter [eventData]="datasource"
+      [startIndex]="startIndex"></app-ondemand-event-detail-presenter>
+  </core-sidebar>
+</ng-container>

@@ -9,11 +9,12 @@ class Base: public Handler
 private:
     
 public:
+    Base() = default;
     Base(Json::Value& model);
     void report();
     ~Base();
 protected:
-    Json::Value& m_model;
+    Json::Value m_model;
 };
 
 

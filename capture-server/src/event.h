@@ -2,6 +2,7 @@
 #define EVENT_H
 
 #include <iostream>
+#include "publisher.h"
 #include "entity-base.h"
 
 class Event : public EntityBase
@@ -21,6 +22,23 @@ public:
     std::string title() const { return m_model.get<std::string>("title"); }
     std::string status() const { return m_model.get<std::string>("status"); }
     std::string type() const { return m_model.get<std::string>("type"); }
+
+public:
+    void startEvent(const Request &req, Response rsp);
+    void stopEvent(const Request &req, Response rsp);
+
+public:
+    class EventRunner
+    {
+    private:
+        Publisher m_pub;
+
+    public:
+        EventRunner() : m_pub{"inproc://somename"} {}
+    };
+
+private:
+    EventRunner *mp_runner;
 };
 
 #endif // EVENT_H
