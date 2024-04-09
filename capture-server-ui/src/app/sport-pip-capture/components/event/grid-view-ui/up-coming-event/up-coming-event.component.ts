@@ -11,7 +11,7 @@ import { UI } from '../../event-utility/event-ui-interface';
 export class UpComingEventComponent implements OnInit,OnDestroy {
   @Input() datasource;
   startIndex:number;
-
+  openDetailmodel:boolean;
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
   dropdownItems: UI.DropDownMenuItem[] = [

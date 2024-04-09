@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-log-filter',
@@ -7,10 +8,14 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class LogFilterComponent implements OnInit {
+  category: string[] = ['Dashboard', 'Event', 'Connection', 'Shared'];
+  user:string[]=['Abigail','Alex']
+  constructor() {
 
-  constructor() { }
-
+  }
   ngOnInit(): void {
   }
+
+
 
 }
