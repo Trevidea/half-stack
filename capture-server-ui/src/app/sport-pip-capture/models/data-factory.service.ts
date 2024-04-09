@@ -13,19 +13,27 @@ import { PreviousEventsConnectionData } from "./previous-events-connection";
 import { MetaTypeData } from "./meta-type";
 import { FileIndexData } from "./file-index";
 import { ConnectionPreviewData } from "./connection-preview";
-
+import { webSocket, WebSocketSubject } from "rxjs/webSocket";
 @Injectable({
   providedIn: "root",
 })
 export class DataFactoryService {
+  private socket$: WebSocketSubject<any>;
   private _spModelUrl: string = environment.spModelUrl;
   constructor(private _httpClient: HttpClient) {
     this.SaveUserProfileJson = this.SaveUserProfileJson.bind(this);
     this.SaveDistributionList = this.SaveDistributionList.bind(this);
     this.SaveOnDemandFormJson = this.SaveOnDemandFormJson.bind(this);
     this.SaveMetaType = this.SaveMetaType.bind(this);
+    this.socket$ = webSocket("tcp://localhost:7890");
+  }
+  sendMessage(message: string) {
+    this.socket$.next(message);
   }
 
+  getMessage() {
+    return this.socket$;
+  }
   create(type: string, entity: any): Observable<any> {
     const url = `${this._spModelUrl}/${type}`;
 
@@ -175,13 +183,13 @@ export class DataFactoryService {
     return ["Pending", "Active"];
   }
   EventLevel() {
-    return ["Varsity", "Junior Varsity", 'Senior',"Sophomore"];
+    return ["Varsity", "Junior Varsity", "Senior", "Sophomore"];
   }
   EventProgram() {
     return ["Man", "Woman"];
   }
   EventYear() {
-    return ['2024', "2023", "2022", "2021", "2020",];
+    return ["2024", "2023", "2022", "2021", "2020"];
   }
   EventSports() {
     return [
@@ -249,23 +257,23 @@ export class DataFactoryService {
   }
 
   liveEventJson(): Observable<Data.LiveEventDetail[]> {
-    const dummyData: Data.LiveEventDetail[] = [{
-      id: 1,
-      name: 'Jon',
-      role: 'Coach S.',
-      location: 'Press Box',
-      userId: 123,
-      deviceId: 'iPad15',
-      deviceType: 'iPad',
-      network: 'Penfield-5',
-      quality: 'Poor',
-      ipAddress: '127.0.0.1',
-      trasnsmitStatus: 'Receiving',
-      received: '22 files',
-      retries: '2'
-    }];
+    const dummyData: Data.LiveEventDetail[] = [
+      {
+        id: 1,
+        name: "Jon",
+        role: "Coach S.",
+        location: "Press Box",
+        userId: 123,
+        deviceId: "iPad15",
+        deviceType: "iPad",
+        network: "Penfield-5",
+        quality: "Poor",
+        ipAddress: "127.0.0.1",
+        trasnsmitStatus: "Receiving",
+        received: "22 files",
+        retries: "2",
+      },
+    ];
     return of(dummyData);
   }
-
-
 }

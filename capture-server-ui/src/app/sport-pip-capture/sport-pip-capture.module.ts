@@ -160,7 +160,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EventEndNotifictionsComponent,
     ConnectionStartPresenter,
     LogFilterComponent,
-    EventTypeTransformPipe 
+    EventTypeTransformPipe,
   ],
   providers: [
     {

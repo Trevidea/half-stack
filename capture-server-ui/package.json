@@ -76,6 +76,7 @@
     "ngx-perfect-scrollbar": "10.1.1",
     "ngx-plyr": "4.0.0",
     "ngx-quill": "14.0.0",
+    "ngx-socket-io": "^4.6.1",
     "ngx-swiper-wrapper": "10.0.0",
     "ngx-toastr": "14.0.0",
     "node-waves": "0.7.6",
