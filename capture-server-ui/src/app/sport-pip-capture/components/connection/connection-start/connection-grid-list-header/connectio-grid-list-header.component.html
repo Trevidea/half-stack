@@ -81,7 +81,7 @@
         </div>
       </div>
       <div class="">
-        <button
+        <!-- <button
           type="button custome-btn-color"
           class="btn btn-outline-secondary mr-1"
           rippleEffect
@@ -91,6 +91,14 @@
         </button>
         <button type="button" class="btn btn-warning" rippleEffect>
           Check for Configuration
+        </button> -->
+        <button
+          type="button"
+          class="btn btn-warning"
+          (click)="modalOpenForm(modalForm)"
+          rippleEffect
+        >
+          Add Device
         </button>
       </div>
     </div>
