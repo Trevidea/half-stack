@@ -202,6 +202,7 @@
     color: rgba(243, 243, 245, 1) !important;
   }
   .mc-dropdown__panel {
+    border-width: 0px !important;
     background-color: rgba(21, 23, 25, 1) !important;
   }
   .mc-dropdown-item:hover {
@@ -219,4 +220,7 @@
 .mc-dropdown-item:hover {
   background-color: rgba(233, 240, 245, 1) !important;
   color: rgba(33, 96, 147, 1) !important;
+}
+.mc-dropdown__panel {
+  border-width: 0px !important;
 }
