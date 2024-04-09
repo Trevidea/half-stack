@@ -17,11 +17,11 @@
       <div class="col-md-6 col-sm-12 mb-2">
         <label>Event Date<span class="validationIcon">*</span></label>
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="yyyy-mm-dd" name="Event Date"
-            [(ngModel)]="datasource.dtEvent" ngbDatepicker #basicDP="ngbDatepicker" />
+          <input class="form-control" maxlength="10" type="text" ngbDatepicker placeholder="mm-dd-yyyy" name="dtEvent"
+            #dtEvent="ngbDatepicker" [(ngModel)]="datasource.dtEvent" />
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary feather icon-calendar" (click)="basicDP.toggle()" type="button"
-              rippleEffect></button>
+            <button class="btn btn-outline-secondary feather icon-calendar" (click)="dtEvent.toggle()" type="button">
+            </button>
           </div>
         </div>
       </div>

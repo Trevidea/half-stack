@@ -22,21 +22,23 @@ export class OnDemandFormBuilder extends AbstractBuilder<Data.Event, OnDemandEve
 
     }
     decompose(v: OnDemandEventFormView): Data.Event {
-        console.log("View data", v)
+        // console.log("View data", v)
+         let formatedTime:number = this.formatTime(v.time)
         return {
             id: v.id,
             title: v.title,
             detail: v.detail,
-            dt_event: '2024-04-03',
+            dt_event: v.dtEvent,
             level: v.levels.SelectedItem,
             program: v.programs.SelectedItem,
             sport: v.sports.SelectedItem,
             year: 2024,
-            tm_event: 1800,
+            tm_event: formatedTime,
             venue: v.venue,
             status: "upcoming",
             type: 'on-demand',
             owner_id: 123
+
         };
 
     }
@@ -44,6 +46,12 @@ export class OnDemandFormBuilder extends AbstractBuilder<Data.Event, OnDemandEve
         return new OnDemandEventFormView();
     }
 
+    formatTime(time: any): number {
+        if (!time) return 0;
+        const [hours, minutes] = time.split(':');
+        let formattedTime = hours + minutes;
+        return parseInt(formattedTime);
+    }
 }
 
 

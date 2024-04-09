@@ -26,7 +26,9 @@ export class CreateOnDemandEventPresenter implements OnInit {
     this.ds = new OnDemandEventFormView();
     if (Object.is(route.snapshot.component, this.constructor))
       this.ds.id = route.snapshot.params['id']
-       
+    if (this.ds.time) {
+      this.ds.time = this.formatTime(this.ds.time)
+    }
     this.actions = new PresenterAction("event", this.ds, this.modelServiceService.saveEvent, OnDemandFormBuilder, router);
 
   }

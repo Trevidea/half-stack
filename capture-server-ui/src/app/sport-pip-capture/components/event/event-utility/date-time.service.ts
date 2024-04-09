@@ -15,7 +15,7 @@ export class DateTimeService {
   calculateCountdown(data: any[]): void {
     const now = new Date();
     data.forEach(item => {
-      const eventDateTime = new Date(item._dtEvent);
+      const eventDateTime = new Date(item?._dtEvent);
       eventDateTime.setHours(Math.floor(item._time / 100));
       eventDateTime.setMinutes(item._time % 100);
       const diff = eventDateTime.getTime() - now.getTime();

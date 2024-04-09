@@ -87,6 +87,9 @@ export class OnDemandEventFormView implements Views.Datasource {
      
      private _dtEvent : string;
      public get dtEvent() : string {
+        if (!this._dtEvent) {
+            this._dtEvent = UI.DateHelper.apiDateToday()
+        }
         return this._dtEvent;
      }
      public set dtEvent(v : string) {
