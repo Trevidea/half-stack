@@ -43,7 +43,6 @@ export class EventComponent implements OnInit {
   }
 
   onNavChange(event: any) {
-    console.log(event)
     this.tabStateService.setActiveTab(event.nextId);
     this.onTabChange.emit();
   }

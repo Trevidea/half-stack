@@ -38,7 +38,7 @@ export class EventHeaderPresenter implements OnInit, AfterViewInit {
         this.ds.levels.onItemSelected(handler => this.onfilter());
         this.ds.sports.onItemSelected(handler => this.onfilter());
         this.ds.years.onItemSelected(handler => this.onfilter());
-       this.onfilter()
+        this.onfilter()
     }
 
     onfilter() {
@@ -46,7 +46,7 @@ export class EventHeaderPresenter implements OnInit, AfterViewInit {
         const program = this.ds.programs.SelectedItem ? this.ds.programs.SelectedItem : null;
         const sport = this.ds.sports.SelectedItem ? this.ds.sports.SelectedItem : null;
         const year = this.ds.years.SelectedItem ? parseInt(this.ds.years.SelectedItem) : null;
-        const status = this.tabStateService.getActiveTab()
+        const status = this.tabStateService.getActiveTab() 
         this.filter.emit({
             level: level,
             program: program,

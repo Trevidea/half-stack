@@ -16,21 +16,11 @@
               <form class="form-inline">
                 <div class="form-group">
                   <div class="input-group">
-                    <input
-                      class="form-control"
-                      placeholder="yyyy-mm-dd"
-                      name="Basic Date Picker"
-                      [(ngModel)]="basicDPdata"
-                      ngbDatepicker
-                      #basicDP="ngbDatepicker"
-                    />
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="Basic Date Picker"
+                      [(ngModel)]="basicDPdata" ngbDatepicker #basicDP="ngbDatepicker" />
                     <div class="input-group-append">
-                      <button
-                        class="btn btn-outline-secondary feather icon-calendar"
-                        (click)="basicDP.toggle()"
-                        type="button"
-                        rippleEffect
-                      ></button>
+                      <button class="btn btn-outline-secondary feather icon-calendar" (click)="basicDP.toggle()"
+                        type="button" rippleEffect></button>
                     </div>
                   </div>
                 </div>
@@ -52,30 +42,17 @@
               <form class="form-inline">
                 <div class="form-group">
                   <div class="input-group">
-                    <input
-                      class="form-control"
-                      placeholder="yyyy-mm-dd"
-                      name="Disabled Date Picker"
-                      ngbDatepicker
-                      #disabledDP="ngbDatepicker"
-                      [disabled]="disabled"
-                    />
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="Disabled Date Picker" ngbDatepicker
+                      #disabledDP="ngbDatepicker" [disabled]="disabled" />
                     <div class="input-group-append">
-                      <button
-                        class="btn btn-outline-secondary feather icon-calendar"
-                        (click)="disabledDP.toggle()"
-                        type="button"
-                        rippleEffect
-                      ></button>
+                      <button class="btn btn-outline-secondary feather icon-calendar" (click)="disabledDP.toggle()"
+                        type="button" rippleEffect></button>
                     </div>
                   </div>
                 </div>
               </form>
-              <button
-                class="btn btn-sm btn-outline-{{ disabled ? 'danger' : 'success' }} my-1"
-                (click)="disabled = !disabled"
-                rippleEffect
-              >
+              <button class="btn btn-sm btn-outline-{{ disabled ? 'danger' : 'success' }} my-1"
+                (click)="disabled = !disabled" rippleEffect>
                 {{ disabled ? 'D I S A B L E D' : 'E N A B L E D' }}
               </button>
               <!--/ Disabled Date Picker -->
@@ -99,23 +76,12 @@
               <form class="form-inline">
                 <div class="form-group">
                   <div class="input-group">
-                    <input
-                      class="form-control"
-                      placeholder="yyyy-mm-dd"
-                      name="Min-Max Date Picker"
-                      [(ngModel)]="MinMaxDPdata"
-                      ngbDatepicker
-                      #MinMaxDP="ngbDatepicker"
-                      [minDate]="{ year: 2019, month: 1, day: 1 }"
-                      [maxDate]="{ year: 2020, month: 2, day: 15 }"
-                    />
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="Min-Max Date Picker"
+                      [(ngModel)]="MinMaxDPdata" ngbDatepicker #MinMaxDP="ngbDatepicker"
+                      [minDate]="{ year: 2019, month: 1, day: 1 }" [maxDate]="{ year: 2020, month: 2, day: 15 }" />
                     <div class="input-group-append">
-                      <button
-                        class="btn btn-outline-secondary feather icon-calendar"
-                        (click)="MinMaxDP.toggle()"
-                        type="button"
-                        rippleEffect
-                      ></button>
+                      <button class="btn btn-outline-secondary feather icon-calendar" (click)="MinMaxDP.toggle()"
+                        type="button" rippleEffect></button>
                     </div>
                   </div>
                 </div>
@@ -136,33 +102,20 @@
               <form class="form-inline">
                 <div class="form-group">
                   <div class="input-group">
-                    <input
-                      class="form-control"
-                      placeholder="yyyy-mm-dd"
-                      name="Custom Footer Date Picker"
-                      [(ngModel)]="customFooterDPdata"
-                      ngbDatepicker
-                      #customFooterDP="ngbDatepicker"
-                      [footerTemplate]="footerTemplate"
-                    />
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="Custom Footer Date Picker"
+                      [(ngModel)]="customFooterDPdata" ngbDatepicker #customFooterDP="ngbDatepicker"
+                      [footerTemplate]="footerTemplate" />
                     <div class="input-group-append">
-                      <button
-                        class="btn btn-outline-secondary feather icon-calendar"
-                        (click)="customFooterDP.toggle()"
-                        type="button"
-                        rippleEffect
-                      ></button>
+                      <button class="btn btn-outline-secondary feather icon-calendar" (click)="customFooterDP.toggle()"
+                        type="button" rippleEffect></button>
                     </div>
                   </div>
                 </div>
               </form>
               <ng-template #footerTemplate>
                 <hr class="my-0" />
-                <button
-                  class="btn btn-primary btn-sm m-2 float-left"
-                  (click)="customFooterDPdata = today; customFooterDP.close()"
-                  rippleEffect
-                >
+                <button class="btn btn-primary btn-sm m-2 float-left"
+                  (click)="customFooterDPdata = today; customFooterDP.close()" rippleEffect>
                   Today
                 </button>
                 <button class="btn btn-secondary btn-sm m-2 float-right" (click)="customFooterDP.close()" rippleEffect>
@@ -203,43 +156,21 @@
               <form class="form-inline">
                 <div class="form-group">
                   <div class="input-group">
-                    <input
-                      class="form-control"
-                      placeholder="yyyy-mm-dd"
-                      name="Custom Day Date Picker"
-                      [(ngModel)]="CustomDayDPdata"
-                      ngbDatepicker
-                      [dayTemplate]="customDay"
-                      [markDisabled]="isDisabled"
-                      #CustomDayDP="ngbDatepicker"
-                    />
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="Custom Day Date Picker"
+                      [(ngModel)]="CustomDayDPdata" ngbDatepicker [dayTemplate]="customDay" [markDisabled]="isDisabled"
+                      #CustomDayDP="ngbDatepicker" />
                     <div class="input-group-append">
-                      <button
-                        class="btn btn-outline-secondary feather icon-calendar"
-                        (click)="CustomDayDP.toggle()"
-                        type="button"
-                        rippleEffect
-                      ></button>
+                      <button class="btn btn-outline-secondary feather icon-calendar" (click)="CustomDayDP.toggle()"
+                        type="button" rippleEffect></button>
                     </div>
                   </div>
                 </div>
               </form>
-              <ng-template
-                #customDay
-                let-date
-                let-currentMonth="currentMonth"
-                let-selected="selected"
-                let-disabled="disabled"
-                let-focused="focused"
-              >
-                <span
-                  class="custom-day"
-                  [class.weekend]="isWeekend(date)"
-                  [class.focused]="focused"
-                  [class.bg-primary]="selected"
-                  [class.hidden]="date.month !== currentMonth"
-                  [class.text-muted]="disabled"
-                >
+              <ng-template #customDay let-date let-currentMonth="currentMonth" let-selected="selected"
+                let-disabled="disabled" let-focused="focused">
+                <span class="custom-day" [class.weekend]="isWeekend(date)" [class.focused]="focused"
+                  [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth"
+                  [class.text-muted]="disabled">
                   {{ date.day }}
                 </span>
               </ng-template>
@@ -265,27 +196,13 @@
               <form class="form-inline">
                 <div class="form-group">
                   <div class="input-group w-0">
-                    <input
-                      name="datepicker"
-                      class="form-control"
-                      ngbDatepicker
-                      #datepicker="ngbDatepicker"
-                      [autoClose]="'outside'"
-                      (dateSelect)="onDateSelection($event)"
-                      [displayMonths]="2"
-                      [dayTemplate]="rangeSelectionDP"
-                      outsideDays="hidden"
-                      [startDate]="fromDate!"
-                    />
+                    <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
+                      [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
+                      [dayTemplate]="rangeSelectionDP" outsideDays="hidden" [startDate]="fromDate!" />
                     <ng-template #rangeSelectionDP let-date let-focused="focused">
-                      <span
-                        class="custom-day"
-                        [class.focused]="focused"
-                        [class.range]="isRange(date)"
-                        [class.faded]="isHovered(date) || isInside(date)"
-                        (mouseenter)="hoveredDate = date"
-                        (mouseleave)="hoveredDate = null"
-                      >
+                      <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                        [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null">
                         {{ date.day }}
                       </span>
                     </ng-template>
@@ -293,39 +210,21 @@
                 </div>
                 <div class="form-group">
                   <div class="input-group">
-                    <input
-                      #dpFromDate
-                      class="form-control"
-                      placeholder="yyyy-mm-dd"
-                      name="dpFromDate"
-                      [value]="formatter.format(fromDate)"
-                    />
+                    <input #dpFromDate class="form-control" placeholder="yyyy-mm-dd" name="dpFromDate"
+                      [value]="formatter.format(fromDate)" />
                     <div class="input-group-append">
-                      <button
-                        class="btn btn-outline-secondary feather icon-calendar"
-                        (click)="datepicker.toggle()"
-                        type="button"
-                        rippleEffect
-                      ></button>
+                      <button class="btn btn-outline-secondary feather icon-calendar" (click)="datepicker.toggle()"
+                        type="button" rippleEffect></button>
                     </div>
                   </div>
                 </div>
                 <div class="form-group ml-sm-2">
                   <div class="input-group">
-                    <input
-                      #dpToDate
-                      class="form-control"
-                      placeholder="yyyy-mm-dd"
-                      name="dpToDate"
-                      [value]="formatter.format(toDate)"
-                    />
+                    <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate"
+                      [value]="formatter.format(toDate)" />
                     <div class="input-group-append">
-                      <button
-                        class="btn btn-outline-secondary feather icon-calendar"
-                        (click)="datepicker.toggle()"
-                        type="button"
-                        rippleEffect
-                      ></button>
+                      <button class="btn btn-outline-secondary feather icon-calendar" (click)="datepicker.toggle()"
+                        type="button" rippleEffect></button>
                     </div>
                   </div>
                 </div>
@@ -365,11 +264,8 @@
               </p>
               <!-- Meridian Time Picker -->
               <ngb-timepicker [(ngModel)]="meridianTPdata" [meridian]="meridianTP"></ngb-timepicker>
-              <button
-                class="btn btn-sm btn-outline-{{ meridianTP ? 'success' : 'danger' }}"
-                (click)="meridianTPtoggle()"
-                rippleEffect
-              >
+              <button class="btn btn-sm btn-outline-{{ meridianTP ? 'success' : 'danger' }}"
+                (click)="meridianTPtoggle()" rippleEffect>
                 Meridian - {{ meridianTP ? 'ON' : 'OFF' }}
               </button>
               <hr />
@@ -391,11 +287,8 @@
               </p>
               <!-- Custom Time Picker -->
               <ngb-timepicker [(ngModel)]="customTPtime" [seconds]="customTPseconds"></ngb-timepicker>
-              <button
-                class="btn btn-sm btn-outline-{{ customTPseconds ? 'success' : 'danger' }}"
-                (click)="customTPtoggleSeconds()"
-                rippleEffect
-              >
+              <button class="btn btn-sm btn-outline-{{ customTPseconds ? 'success' : 'danger' }}"
+                (click)="customTPtoggleSeconds()" rippleEffect>
                 Seconds - {{ customTPseconds ? 'ON' : 'OFF' }}
               </button>
               <hr />
@@ -416,11 +309,8 @@
 
               <hr />
 
-              <button
-                class="m-t-1 btn btn-sm btn-outline-{{ spinnerTP ? 'success' : 'danger' }}"
-                (click)="spinnerTPtoggle()"
-                rippleEffect
-              >
+              <button class="m-t-1 btn btn-sm btn-outline-{{ spinnerTP ? 'success' : 'danger' }}"
+                (click)="spinnerTPtoggle()" rippleEffect>
                 Spinners - {{ spinnerTP ? 'ON' : 'OFF' }}
               </button>
               <!--/ Spinner Time Picker -->
