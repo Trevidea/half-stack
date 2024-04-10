@@ -1,4 +1,4 @@
-#include "Publisher.h"
+#include "publisher.h"
 
 Publisher::Publisher(const std::string& address) : m_context(1), m_socket(m_context, ZMQ_PUB) {
     m_socket.bind(address);
