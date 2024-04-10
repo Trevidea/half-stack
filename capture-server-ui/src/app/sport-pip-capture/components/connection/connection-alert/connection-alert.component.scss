@@ -1,1 +1,7 @@
 @import "@core/scss/angular/libs/sweet-alerts.component.scss";
+.connection-alert {
+  .btn-danger {
+    border-color: rgba(222, 46, 33, 1) !important;
+    background-color: rgba(222, 46, 33, 1) !important;
+  }
+}
