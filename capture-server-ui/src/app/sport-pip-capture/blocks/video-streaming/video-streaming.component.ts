@@ -38,7 +38,7 @@ export class VideoStreamingComponent implements OnInit {
           this.videoPlayer.nativeElement.play().catch((error) => {
             console.error("Error while trying to play the video:", error);
           });
-          (document.querySelector(".pause") as HTMLElement).style.display =
+          (document.querySelector(".play") as HTMLElement).style.display =
             "none";
           const video = this.videoPlayer.nativeElement;
 
@@ -63,12 +63,12 @@ export class VideoStreamingComponent implements OnInit {
       this.videoPlayer.nativeElement.play().catch((error) => {
         console.error("Error while trying to play the video:", error);
       });
-      (document.querySelector(".pause") as HTMLElement).style.display = "none";
-      (document.querySelector(".play") as HTMLElement).style.display = "block";
-    } else {
-      this.videoPlayer.nativeElement.pause();
       (document.querySelector(".play") as HTMLElement).style.display = "none";
       (document.querySelector(".pause") as HTMLElement).style.display = "block";
+    } else {
+      this.videoPlayer.nativeElement.pause();
+      (document.querySelector(".pause") as HTMLElement).style.display = "none";
+      (document.querySelector(".play") as HTMLElement).style.display = "block";
     }
   }
   fullScreen() {
