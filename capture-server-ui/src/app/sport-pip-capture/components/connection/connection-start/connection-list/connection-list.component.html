@@ -30,16 +30,25 @@
               ></i>
             </span>
             <mc-dropdown #appDropdownWithNested="mcDropdown">
-              <button mc-dropdown-item (click)="viewStream()">
+              <button
+                mc-dropdown-item
+                (click)="viewStream()"
+                *ngIf="item.role == 'Publisher'"
+              >
                 <i data-feather="eye" class="mr-50 mb-25"></i> View Stream
               </button>
               <button mc-dropdown-item (click)="pause(item)">
-                <i data-feather="pause" class="mr-50 mb-25"></i>
-                {{
-                  item.transmitStatus == "Paused"
-                    ? "Resume Connection"
-                    : "Pause"
-                }}
+                <i
+                  *ngIf="item.transmitStatus !== 'Paused'"
+                  data-feather="pause"
+                  class="mr-50 mb-25"
+                ></i>
+                <i
+                  *ngIf="item.transmitStatus == 'Paused'"
+                  data-feather="play"
+                  class="mr-50 mb-25"
+                ></i>
+                {{ item.transmitStatus == "Paused" ? "Resume" : "Pause" }}
               </button>
               <button mc-dropdown-item (click)="modalOpenSM(modalblock)">
                 <i data-feather="slash" class="mr-50 mb-25"></i> Block
