@@ -1,4 +1,4 @@
-#include "Subscriber.h"
+#include "subscriber.h"
 
 Subscriber::Subscriber(const std::string& address) : m_context(1), m_socket(m_context, ZMQ_SUB) {
     m_socket.connect(address);
