@@ -206,11 +206,7 @@
                     data-feather="play"
                     class="mr-50 mb-25"
                   ></i>
-                  {{
-                    item.transmitStatus == "Paused"
-                      ? "Resume Connection"
-                      : "Pause"
-                  }}
+                  {{ item.transmitStatus == "Paused" ? "Resume " : "Pause" }}
                 </button>
                 <button mc-dropdown-item (click)="modalOpenSM(modalblock)">
                   <i data-feather="slash" class="mr-50 mb-25"></i> Block
