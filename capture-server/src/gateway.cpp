@@ -8,6 +8,7 @@
 #include "team.h"
 #include "on-demand-event.h"
 #include "user.h"
+#include "preview_service.h"
 
 Gateway::Gateway()
 {

@@ -13,6 +13,7 @@ set(HALF_STACK_SRC
     team.cpp
     on-demand-event.cpp
     user.cpp
+    preview_service.cpp
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
 target_include_directories(half-stack PUBLIC "./" rest-client)

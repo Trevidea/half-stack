@@ -32,22 +32,22 @@ void OnDemandEvent::report()
                               });
 }
 
-void OnDemandEvent::list(const Request &request, Response &rsp)
-{
-    // Convert the vector of on-demand events to JSON and set it as response data
-    Json::Value responseData(Json::arrayValue);
-    for (const auto &event : onDemandEvents)
-    {
-        // Convert each event to JSON and add it to the responseData array
-        Json::Value eventJson;
-        eventJson["id"] = event.getId();
-        responseData.append(eventJson);
-    }
+// void OnDemandEvent::list(const Request &request, Response &rsp)
+// {
+//     // Convert the vector of on-demand events to JSON and set it as response data
+//     Json::Value responseData(Json::arrayValue);
+//     for (const auto &event : onDemandEvents)
+//     {
+//         // Convert each event to JSON and add it to the responseData array
+//         Json::Value eventJson;
+//         eventJson["id"] = event.getId();
+//         responseData.append(eventJson);
+//     }
 
-    // Set response data and complete the response
-    rsp.setData(responseData.toStyledString());
-    rsp.complete();
-}
+//     // Set response data and complete the response
+//     rsp.setData(responseData.toStyledString());
+//     rsp.complete();
+// }
 
 void OnDemandEvent::create(const Request &request, Response &response)
 {

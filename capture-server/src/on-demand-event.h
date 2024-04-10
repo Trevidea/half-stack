@@ -17,7 +17,7 @@ public:
     void report();
 
     // Function to handle listing on-demand events
-    void list(const Request &request, Response &rsp);
+    // void list(const Request &request, Response &rsp);
 
     // Function to handle creating on-demand events
     void create(const Request &request, Response &response);
