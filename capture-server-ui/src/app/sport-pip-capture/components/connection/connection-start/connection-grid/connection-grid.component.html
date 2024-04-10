@@ -157,9 +157,9 @@
             style="
               height: 10rem;
               width: 14rem;
-
               margin-top: 2rem;
               margin-left: -2rem !important;
+              border: 1px solid transparent;
             "
             [ngClass]="{
               'info-card-warning': item.transmitStatus === 'Streaming',
@@ -213,7 +213,7 @@
                     <app-connection-alert
                       [title]="'Block User'"
                       [description]="
-                        'Are you sure you want to block user  Are you sure you want to block user' +
+                        'Are you sure you want to block user  <br>' +
                         item.user +
                         '?'
                       "
