@@ -13,8 +13,11 @@
         </h5>
       </div>
       <div>
-        <i class="bi bi-pause-circle custom-bi-pause-circle"></i>
-        <i class="bi bi-stop-circle custom-bi-stop-circle"></i>
+        <i class="bi bi-pause-circle custom-bi-pause-circle cursor-pointer"></i>
+        <i
+          class="bi bi-stop-circle custom-bi-stop-circle cursor-pointer"
+          (click)="modalOpenSM(modalblock)"
+        ></i>
       </div>
     </div>
   </div>
@@ -195,3 +198,9 @@
     </div>
   </div>
 </div>
+<ng-template #modalblock let-modal style="width: 100px; height: 100px">
+  <app-connection-alert
+    [title]="'End Event'"
+    [description]="'Are you sure you want to end the event ?'"
+  ></app-connection-alert>
+</ng-template>

@@ -52,7 +52,11 @@
               </button>
               <button mc-dropdown-item (click)="modalOpenSM(modalblock)">
                 <i data-feather="slash" class="mr-50 mb-25"></i> Block
-                <ng-template #modalblock let-modal>
+                <ng-template
+                  #modalblock
+                  let-modal
+                  style="width: 100px; height: 100px"
+                >
                   <app-connection-alert
                     [title]="'Block User'"
                     [description]="

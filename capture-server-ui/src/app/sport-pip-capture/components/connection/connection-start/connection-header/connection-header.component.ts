@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { EventService } from "@core/services/event -start.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 
 import { Subject } from "rxjs";
@@ -20,7 +21,8 @@ export class ConnectionHeaderComponent implements OnInit {
     private router: Router,
     private event: EventService,
     private route: ActivatedRoute,
-    private webSocketService: DataFactoryService
+    private webSocketService: DataFactoryService,
+    private modelService: NgbModal
   ) {}
   messages: string[] = [];
   ngOnInit(): void {}
@@ -38,5 +40,12 @@ export class ConnectionHeaderComponent implements OnInit {
     this._gridView = false;
     this._ListView = true;
     this.router.navigate(["connection"]);
+  }
+
+  modalOpenSM(modalblock) {
+    this.modelService.open(modalblock, {
+      centered: true,
+      size: "sm",
+    });
   }
 }
