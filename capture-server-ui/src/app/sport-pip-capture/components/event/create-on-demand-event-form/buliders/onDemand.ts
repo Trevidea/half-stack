@@ -1,10 +1,11 @@
 import { AbstractBuilder } from "app/blocks/strategies";
 import { Data } from "app/sport-pip-capture/models/capture-interface";
 import { OnDemandEventFormView } from "../views/onDemand";
+import moment from "moment";
 
 
 
-export class OnDemandFormBuilder extends AbstractBuilder<Data.Event, OnDemandEventFormView>{
+export class OnDemandFormBuilder extends AbstractBuilder<Data.Event, OnDemandEventFormView> {
     compose(m: Data.Event, v: OnDemandEventFormView) {
 
         v.id = m.id;
@@ -13,7 +14,6 @@ export class OnDemandFormBuilder extends AbstractBuilder<Data.Event, OnDemandEve
         v.detail.streetAdress = m.detail[0].cityAddress;
         v.dtEvent = m.dt_event;
         v.levels.SelectedItem = m.level;
-        v.dayHalve.SelectedItem = m.dayHalve;
         v.programs.SelectedItem = m.program;
         v.sports.SelectedItem = m.sport;
         v.time = m.tm_event;
@@ -22,18 +22,23 @@ export class OnDemandFormBuilder extends AbstractBuilder<Data.Event, OnDemandEve
 
     }
     decompose(v: OnDemandEventFormView): Data.Event {
-        return; {
-            // title: v.title,
-            // detail: v.detail,
-            // dt_event: v.dttEvent,
-            // level: v.levels.SelectedItem,
-            // dayHalve: v.dayHalve.SelectedItem,
-            // program: v.programs.SelectedItem,
-            // sport: v.sports.SelectedItem,
-            // tm_event: v.time,
-            // venue: v.venue,
-            // status:"upcoming-events",
-            // owner_id:v.owner_id
+        // console.log("View data", v)
+         let formatedTime:number = this.formatTime(v.time)
+        return {
+            id: v.id,
+            title: v.title,
+            detail: v.detail,
+            dt_event: v.dtEvent,
+            level: v.levels.SelectedItem,
+            program: v.programs.SelectedItem,
+            sport: v.sports.SelectedItem,
+            year: 2024,
+            tm_event: formatedTime,
+            venue: v.venue,
+            status: "upcoming",
+            type: 'on-demand',
+            owner_id: 123
+
         };
 
     }
@@ -41,11 +46,17 @@ export class OnDemandFormBuilder extends AbstractBuilder<Data.Event, OnDemandEve
         return new OnDemandEventFormView();
     }
 
+    formatTime(time: any): number {
+        if (!time) return 0;
+        const [hours, minutes] = time.split(':');
+        let formattedTime = hours + minutes;
+        return parseInt(formattedTime);
+    }
 }
 
 
 
-export class VenueBuilder extends AbstractBuilder<Data.Event, OnDemandEventFormView>{
+export class VenueBuilder extends AbstractBuilder<Data.Event, OnDemandEventFormView> {
     compose(m: Data.Event, v: OnDemandEventFormView) {
 
         v.venue[0].location = m.venue[0].location

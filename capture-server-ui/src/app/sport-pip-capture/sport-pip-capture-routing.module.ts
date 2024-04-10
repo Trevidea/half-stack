@@ -6,7 +6,6 @@ import { LogPresentert } from "./components/log/log.presenter";
 import { SharedPresenter } from "./components/shared/shared.presenter";
 import { AuthGuard } from "app/auth/helpers/auth.guards";
 import { ConnectionDeviceDetailComponent } from "./components/connection/connection-device-detail/connection-device-detail.component";
-import { ConnectionCardComponent } from "./components/connection/card/connection-card/connection-card.component";
 import { ConnectionStartComponent } from "./components/connection/connection-start/connection-start.component";
 import { EventPresenter } from "./components/event/event.presenter";
 import { CreateOnDemandEventPresenter } from "./components/event/create-on-demand-event-form/create-on-demand-event.presenter";
@@ -15,6 +14,7 @@ import { PastEventViewPresenter } from "./components/event/grid-view-ui/past-eve
 import { EventPreviewComponent } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.component";
 import { EventPreviewPresenter } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.presenter";
 import { DatatablesService } from "app/main/tables/datatables/datatables.service";
+import { ConnectionStartPresenter } from "./components/connection/connection-start/connection-start.presenter";
 
 const routes: Routes = [
   {
@@ -26,8 +26,7 @@ const routes: Routes = [
     path: "connection",
     component: ConnectionPresenter,
     children: [
-      { path: "", component: ConnectionStartComponent },
-      { path: "connection-card-view", component: ConnectionCardComponent },
+      { path: "", component: ConnectionStartPresenter },
       {
         path: "connection-device-detail/:id",
         component: ConnectionDeviceDetailComponent,

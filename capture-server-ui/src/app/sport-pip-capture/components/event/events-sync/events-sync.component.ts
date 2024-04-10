@@ -10,6 +10,7 @@ import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.
 })
 export class EventsSyncComponent implements OnInit {
   uploadicon: string = 'assets/images/spip-icons/upload.svg'
+  backgroundColor: string;
   constructor( private service: ModelServiceService,public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
@@ -18,12 +19,14 @@ export class EventsSyncComponent implements OnInit {
 
 
   SyncEvents() {
+    this.backgroundColor='var(--syncbackground)'
     console.log('clicked syncEvents');
     this.service.syncEvents().subscribe(
       (response) => {
         console.log('Response from syncEvents:', response);
       },
       (error) => {
+        // this.backgroundColor='rgba(222, 46, 33, 0.10)'   
         console.error('Error occurred while syncing events:', error);
       }
     );

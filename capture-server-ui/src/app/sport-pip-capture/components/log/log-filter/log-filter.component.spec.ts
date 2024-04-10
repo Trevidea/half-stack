@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConnectionCardComponent } from './connection-card.component';
+import { LogFilterComponent } from './log-filter.component';
 
-describe('ConnectionCardComponent', () => {
-  let component: ConnectionCardComponent;
-  let fixture: ComponentFixture<ConnectionCardComponent>;
+describe('LogFilterComponent', () => {
+  let component: LogFilterComponent;
+  let fixture: ComponentFixture<LogFilterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConnectionCardComponent ]
+      declarations: [ LogFilterComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ConnectionCardComponent);
+    fixture = TestBed.createComponent(LogFilterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

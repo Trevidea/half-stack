@@ -7,6 +7,7 @@ import { TabStateService } from './event-utility/nav';
 import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 import { Data } from 'app/sport-pip-capture/models/capture-interface';
 import { EventsSyncComponent } from './events-sync/events-sync.component';
+import { EventEndNotifictionsComponent } from '../event-notifications/event-end-notifictions/event-end-notifictions.component';
 
 @Component({
   selector: 'app-event',
@@ -21,6 +22,10 @@ export class EventComponent implements OnInit {
   @Output() onTabChange = new EventEmitter()
   gridView: boolean = true
   activeTabId: string;
+  pageSize: number = 10
+  startIndex: number = 0;
+  endIndex: number = this.pageSize;
+
   constructor(private router: Router, private tabStateService: TabStateService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -47,13 +52,30 @@ export class EventComponent implements OnInit {
   }
 
 
-  // modal Open Small
+  // modal  Open 
   modalOpenSM() {
     this.modalService.open(EventsSyncComponent, {
       centered: true,
       size: 'sm'
     });
   }
+  onPageChange(event: { startIndex: number, endIndex: number }) {
+    this.startIndex = event.startIndex;
+    this.endIndex = event.endIndex;
+  }
+
+
+  updatePageSize(newPageSize: number) {
+    this.pageSize = newPageSize;
+    this.startIndex = 0;
+    this.endIndex = this.pageSize;
+  }
+  // modalOpenSM() {
+  //   this.modalService.open(EventEndNotifictionsComponent, {
+  //     centered: true,
+  //     size: 'md'
+  //   });
+  // }
 
 }
 

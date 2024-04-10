@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@
   styleUrls: ['./event-pagination.component.scss']
 })
 export class EventPaginationComponent implements OnInit {
-  @Input() totalItems: number = 0
+  @Input() totalItems:any
   @Input() startIndex: number = 0
   @Input() endIndex: number
   @Output() pageChange = new EventEmitter<{ startIndex: number, endIndex: number }>();

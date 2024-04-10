@@ -6,6 +6,7 @@ import { Component, OnInit } from "@angular/core";
 })
 export class ConnectionDeviceDetailComponent implements OnInit {
   url = "assets/videos/2/output.m3u8";
+  // url = "http://drake.in:59919/spip_school_stream/ind_vs_pak/llhls.m3u8";
   constructor() {}
 
   ngOnInit(): void {}

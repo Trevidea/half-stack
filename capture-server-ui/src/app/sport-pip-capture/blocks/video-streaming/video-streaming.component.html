@@ -1,4 +1,4 @@
-<div class="video-container">
+<div class="video-container" style="padding-left: 0">
   <video
     #liveStreamPlayer
     class="video-js"
@@ -12,7 +12,8 @@
   </video>
   <div class="controls">
     <button (click)="play()">
-      <i class="fa fa-play"></i><i class="fa fa-pause"></i>
+      <i data-feather="play" class="play"></i
+      ><i class="pause" data-feather="pause"></i>
     </button>
     <div style="align-self: center">
       <h6 style="margin-bottom: 0">{{ currentTime }}</h6>

@@ -1,36 +1,71 @@
 @import "@core/scss/angular/libs/datatables.component.scss";
+.dark-layout {
+  $card-info-bg-primary: rgba(34, 53, 69, 1);
+  $card-info-bg-warning: rgba(66, 51, 22, 1);
+  $card-cu-bg-color: rgba(49, 49, 49, 1);
+  $primary-color: rgba(33, 96, 147, 0.3);
+  $text-li-color: rgba(253, 253, 253, 1);
+  $text-dr-color: rgba(195, 195, 195, 1);
+  $icon-li-color: rgba(253, 253, 253, 1);
+  $icon-pr-color: rgba(33, 96, 147, 1);
+  $icon-wr-color: rgba(245, 163, 10, 1);
+  $icon-da-color: rgba(222, 46, 33, 1);
+  .previous-event-connection {
+    .light-text {
+      color: $text-li-color;
+    }
+    .bi-chevron-up {
+      color: $text-li-color !important;
+    }
+    .bi-chevron-down {
+      color: $text-li-color !important;
+    }
+    .table th,
+    .table td {
+      color: $text-li-color !important;
+    }
+    .pub {
+      background-color: rgba(245, 163, 10, 0.5);
+    }
+    .sub {
+      background-color: rgba(33, 96, 147, 0.5);
+    }
+  }
+}
+.previous-event-connection {
+  .datatable-scroll {
+    width: auto !important;
+  }
+  .ngx-datatable.fixed-header
+    .datatable-header
+    .datatable-header-inner
+    .datatable-header-cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: #fff !important;
+  }
+  .no-wrap-cell th,
+  .no-wrap-cell td {
+    white-space: nowrap;
+  }
 
-.datatable-scroll {
-  width: auto !important;
-}
-.ngx-datatable.fixed-header
-  .datatable-header
-  .datatable-header-inner
-  .datatable-header-cell {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  background-color: #fff !important;
-}
-.no-wrap-cell th,
-.no-wrap-cell td {
-  white-space: nowrap;
-  // max-width: 200px;
-  // overflow: hidden;
-  // text-overflow: ellipsis;
-}
-// .headerTopBoarder th {
-//   // border-top: 1px solid transparent;
-// }
-.sort-chevron-up {
-  position: absolute;
-  margin-top: 6px;
-}
-.icon-rotate {
-  transform: rotate(180deg);
-  transition: all ease-in 0.5s;
-}
-.sort-back {
-  transform: rotate(180deg);
-  transition: all ease-in 0.5s;
+  .sort-chevron-up {
+    position: absolute;
+    margin-top: 4px;
+  }
+  .icon-rotate {
+    transform: rotate(180deg);
+    transition: all ease-in 0.2s;
+  }
+  .sort-back {
+    transform: rotate(180deg);
+    transition: all ease-in 0.5s;
+  }
+  .pub {
+    background-color: rgba(254, 246, 231, 1);
+  }
+  .sub {
+    background-color: rgba(233, 240, 245, 1);
+  }
 }

@@ -9,7 +9,9 @@ import { UI } from '../../event-utility/event-ui-interface';
   encapsulation: ViewEncapsulation.None
 })
 export class UpComingEventComponent implements OnInit,OnDestroy {
-  @Input() datasource: any
+  @Input() datasource;
+  startIndex:number;
+  openDetailmodel:boolean;
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
   dropdownItems: UI.DropDownMenuItem[] = [
@@ -24,7 +26,8 @@ export class UpComingEventComponent implements OnInit,OnDestroy {
   }
 
 
-  viewDetail(event: string) {
+  viewDetail(event: string,index:number) {
+    this.startIndex=index
     this._coreSidebarService.getSidebarRegistry('upcoming-'+event).toggleOpen();
   }
 

@@ -6,7 +6,7 @@
 // Define a global vector to store on-demand events
 std::vector<Event> onDemandEvents;
 
-OnDemandEvent::OnDemandEvent() : EntityBase("on_demand_event") {}
+OnDemandEvent::OnDemandEvent() : EntityBase("ondemandevent") {}
 
 void OnDemandEvent::report()
 {
@@ -18,19 +18,30 @@ void OnDemandEvent::report()
                               {
                                   this->list(req, rsp);
                               });
+    Gateway::instance().route("GET", "/api/on-demand-event", // To request SINGLE
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  this->find(req, rsp);
+                              });
 
-    Gateway::instance().route("POST", "/api/on-demand-events",
+    Gateway::instance().route("POST", "/api/on-demand-event",
                               [this](const Request &req, Response &rsp)
                               {
                                   this->create(req, rsp);
                               });
+    Gateway::instance().route("PUT", "/api/on-demand-event", // To request UPDATE
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  this->update(req, rsp);
+                              });
 
-    Gateway::instance().route("DELETE", "/api/on-demand-events/:id",
+    Gateway::instance().route("DELETE", "/api/on-demand-event/:id",
                               [this](const Request &req, Response &rsp)
                               {
                                   this->remove(req, rsp);
                               });
 }
+<<<<<<< HEAD
 
 // void OnDemandEvent::list(const Request &request, Response &rsp)
 // {
@@ -175,3 +186,5 @@ void OnDemandEvent::remove(const Request &request, Response &rsp)
     }
     rsp.complete();
 }
+=======
+>>>>>>> 585a3248b13605c35abad749958410026e70b241

@@ -10,6 +10,7 @@ export class SportPipCaptureComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("helloe bhai logoo")
   }
 
 }

@@ -19,17 +19,16 @@ export namespace Data {
   }
 
   export interface Event extends Base {
-    sport: string;
-    level: string;
-    program: string;
-    year: number;
-    dt_event: Date;
-    tm_event: number;
-    venue: Venue;
-    detail: Detail;
-    title: string;
-    status: string;
-    dayHalve: string;
+    sport?: string;
+    level?: string;
+    program?: string;
+    year?: number;
+    dt_event?: string;
+    tm_event?: number;
+    venue?: Venue;
+    detail?: Detail;
+    title?: string;
+    status?: string;
     type: string;
     owner_id?: number; //this is user ID
   }
@@ -110,6 +109,22 @@ export namespace Data {
     dttConnected: string;
     priority: Priority;
     location: string;
+  }
+
+  export interface LiveEventDetail extends Base {
+    id: number;
+    name: string;
+    role: string;
+    location: string;
+    userId: number;
+    deviceId: string;
+    deviceType: string;
+    network: string;
+    quality: string;
+    ipAddress: string
+    trasnsmitStatus: string;
+    received: string;
+    retries:string; 
   }
 
   export enum NetWorkQuality { }
@@ -360,7 +375,7 @@ export namespace Data {
     program: string;
     level: string;
     sport: string;
-    status?: string;
+    status: string;
   }
   export interface ConnectionPreview extends Base {
     dtEvent: string;

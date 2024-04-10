@@ -10,15 +10,23 @@ set(HALF_STACK_SRC
     employee.cpp
     gateway.cpp
     event.cpp
-    team.cpp
     on-demand-event.cpp
+<<<<<<< HEAD
     user.cpp
     preview_service.cpp
+=======
+    omal.cpp
+    user-profile.cpp
+    base.cpp
+    event-preview.cpp
+    device.cpp
+>>>>>>> 585a3248b13605c35abad749958410026e70b241
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
-target_include_directories(half-stack PUBLIC "./" rest-client)
+target_include_directories(half-stack PUBLIC "./" rest-client zmq)
 target_link_libraries(half-stack PUBLIC
     spdlog::spdlog
     rest-client
     omal
-    pg-dal)
+    pg-dal
+    zmq)

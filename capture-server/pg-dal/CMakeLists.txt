@@ -7,7 +7,6 @@ set(PG_DAL_SRC
   jsonresult.cpp
   db-exceptions.cpp
   db-manager.cpp
-  # pg-task.cpp
   transaction.cpp
 )
 

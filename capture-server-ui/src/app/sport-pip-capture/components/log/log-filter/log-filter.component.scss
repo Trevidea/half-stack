@@ -1,0 +1,10 @@
+@import '@core/scss/angular/libs/select.component.scss';
+
+@import '@core/scss/angular/libs/date-time-picker.component.scss';
+
+.ng-dropdown-panel.ng-select-bottom {
+    top: 100%;
+    border-radius: 4px;
+    border: 1px solid #e6e6e6;
+    margin-top: 1rem;
+}

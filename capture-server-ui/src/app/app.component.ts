@@ -88,6 +88,8 @@ export class AppComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
+     
+
     // Init wave effect (Ripple effect)
     Waves.init();
 

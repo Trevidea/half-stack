@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "environments/environment";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { map, mergeMap } from "rxjs/operators";
 import { Data } from "./capture-interface";
 import { ConnectionData } from "./connection";
@@ -13,12 +13,12 @@ import { PreviousEventsConnectionData } from "./previous-events-connection";
 import { MetaTypeData } from "./meta-type";
 import { FileIndexData } from "./file-index";
 import { ConnectionPreviewData } from "./connection-preview";
-
 @Injectable({
   providedIn: "root",
 })
 export class DataFactoryService {
   private _spModelUrl: string = environment.spModelUrl;
+
   constructor(private _httpClient: HttpClient) {
     this.SaveUserProfileJson = this.SaveUserProfileJson.bind(this);
     this.SaveDistributionList = this.SaveDistributionList.bind(this);
@@ -175,13 +175,13 @@ export class DataFactoryService {
     return ["Pending", "Active"];
   }
   EventLevel() {
-    return ["Varsity", "Junior Varsity", "Sophomore"];
+    return ["Varsity", "Junior Varsity", "Senior", "Sophomore"];
   }
   EventProgram() {
-    return ["Man", "Women"];
+    return ["Man", "Woman"];
   }
   EventYear() {
-    return ['2024',"2023", "2022", "2021", "2020",];
+    return ["2024", "2023", "2022", "2021", "2020"];
   }
   EventSports() {
     return [
@@ -246,5 +246,26 @@ export class DataFactoryService {
     } else {
       throw new Error("Method not implemented.");
     }
+  }
+
+  liveEventJson(): Observable<Data.LiveEventDetail[]> {
+    const dummyData: Data.LiveEventDetail[] = [
+      {
+        id: 1,
+        name: "Jon",
+        role: "Coach S.",
+        location: "Press Box",
+        userId: 123,
+        deviceId: "iPad15",
+        deviceType: "iPad",
+        network: "Penfield-5",
+        quality: "Poor",
+        ipAddress: "127.0.0.1",
+        trasnsmitStatus: "Receiving",
+        received: "22 files",
+        retries: "2",
+      },
+    ];
+    return of(dummyData);
   }
 }

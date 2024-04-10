@@ -6,6 +6,7 @@ import { first, map, mergeMap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { Data } from "./capture-interface";
 import { EventData } from "./event";
+import { LiveEventDetailData } from "./live-event-detail";
 
 
 @Injectable({
@@ -15,14 +16,16 @@ export class ModelServiceService {
   private modelsServerUrl: string = environment.pgUrl;
 
   constructor(private _httpClient: HttpClient, private _adapter: AdapterService) {
+    this.saveEvent = this.saveEvent.bind(this);
 
   }
 
   create(type: string, entity: any): Observable<any> {
-    console.log(type)
+
     const url = `${this.modelsServerUrl}/${type}`
-    console.log(entity)
+    console.log(url)
     return this._adapter.modulateOne(type, entity).pipe(mergeMap(modata => {
+      console.log("modulateOne",modata)
       return this._httpClient.post<any>(url, modata);
     }));
   }
@@ -131,18 +134,21 @@ export class ModelServiceService {
   //   return this._httpClient.get<MetaTypeModel>(url);
   // }
 
-  // EmployeesJson(): Observable<EmployeeModel[]> {
-  //   return this._data("employees", EmployeeModel);
-  // }
 
-  // eventJson(query: Data.FilterParams): Observable<Data.Event[]> {
-  //   console.log("eventJson query",query)
-  //   return this._data(`events?status=${query.status}&sport=${query.sport}&level=${query.level}&program=${query.program}`, EventData)
-  // }
+  saveEvent(data: Data.Event): Observable<Data.Event> {
+    console.log(data)
 
-  eventJson(status:string): Observable<Data.Event[]> {
-    console.log("eventJson query",status)
-    return this._data(`events?status=${status}`, EventData)
+    if (data.id) {
+      return this.update("event", data, data.id);
+    } else {
+      return this.create("event", data);
+    }
+  }
+
+
+
+  eventJson(): Observable<Data.Event[]> {
+    return this._data('event', EventData)
   }
 
 
@@ -153,5 +159,10 @@ export class ModelServiceService {
       'delete-criteria': "dt_event >= now()"
     }
     return this._httpClient.post<any>(url, data)
+  }
+
+
+  liveEventJson(): Observable<Data.LiveEventDetail[]> {
+    return this._data('liveEvent', LiveEventDetailData)
   }
 }

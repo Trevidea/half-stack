@@ -1,4 +1,4 @@
-<div>
+<div class="connection-grid">
   <div class="card-body" style="padding: 0.5rem">
     <div class="row">
       <div
@@ -21,7 +21,7 @@
                 *ngIf="item.quality == 'Good'"
                 class="badge badge-pill badge-light-success"
                 style="
-                  background-color: rgba(40, 199, 111, 1);
+                  background-color: #eaf7ee;
                   color: rgba(73, 69, 79, 1) !important;
                 "
               >
@@ -31,10 +31,7 @@
               <div
                 *ngIf="item.quality == 'Poor'"
                 class="badge badge-pill"
-                style="
-                  background-color: rgba(255, 222, 222, 1);
-                  color: rgba(73, 69, 79, 1);
-                "
+                style="background-color: #ffdede; color: rgba(73, 69, 79, 1)"
               >
                 <span style="color: rgb(181, 0, 0)"> &#x25CF; </span>
                 Poor
@@ -72,7 +69,7 @@
                   class="badge badge-pill"
                   style="background-color: rgb(238 220 213)"
                 >
-                  <i class="bi bi-pause text-info"></i>
+                  <i class="bi bi-pause" style="color: #0d0d0d"></i>
                   <span style="margin-left: 0.1em; color: black">
                     {{ item.transmitStatus }}
                   </span>
@@ -95,10 +92,14 @@
             style="
               height: 10rem;
               width: 14rem;
-              background-color: rgba(233, 241, 244, 1);
+
               margin-top: 2rem;
               margin-left: -2rem !important;
             "
+            [ngClass]="{
+              'info-card-warning': item.transmitStatus === 'Streaming',
+              'info-card-primary': item.transmitStatus !== 'Streaming'
+            }"
           >
             <div class="d-flex">
               <div class="d-flex mr-auto">
@@ -118,8 +119,52 @@
                   {{ item.deviceType }}
                 </h6>
               </div>
-
               <span
+                [mcDropdownTriggerFor]="appDropdownWithNested"
+                style="position: absolute; top: 0.5em; right: 0.3em"
+              >
+                <i class="bi bi-three-dots-vertical cursor-pointer"></i>
+              </span>
+              <mc-dropdown #appDropdownWithNested="mcDropdown">
+                <button mc-dropdown-item>
+                  <i data-feather="eye" class="mr-50 mb-25"></i> View Stream
+                </button>
+                <button mc-dropdown-item>
+                  <i data-feather="pause" class="mr-50 mb-25"></i>
+                  {{
+                    item.transmitStatus == "Paused"
+                      ? "Resume Connection"
+                      : "Pause"
+                  }}
+                </button>
+                <button mc-dropdown-item>
+                  <i data-feather="slash" class="mr-50 mb-25"></i> Block
+                </button>
+
+                <button
+                  *ngIf="item.role == 'Publisher'"
+                  mc-dropdown-item
+                  [mcDropdownTriggerFor]="appDropdownNested"
+                >
+                  <i data-feather="loader" class="mr-50 mb-25"></i> Streaming
+                </button>
+                <button mc-dropdown-item (click)="delete()">
+                  <i data-feather="trash-2" class="mr-50 mb-25"></i> Delete
+                </button>
+              </mc-dropdown>
+
+              <mc-dropdown #appDropdownNested="mcDropdown">
+                <button mc-dropdown-item>
+                  <i data-feather="youtube" class="mr-50 mb-25"></i>YouTube
+                </button>
+                <button mc-dropdown-item>
+                  <i data-feather="facebook" class="mr-50 mb-25"></i>Facebook
+                </button>
+                <button mc-dropdown-item>
+                  <i data-feather="twitch" class="mr-50 mb-25"></i> Twitch
+                </button>
+              </mc-dropdown>
+              <!-- <span
                 ngbDropdown
                 style="cursor: pointer"
                 style="position: absolute; top: 0.5em; right: 0.3em"
@@ -135,7 +180,7 @@
                   <a ngbDropdownItem>Disable</a>
                   <a ngbDropdownItem>Remove</a>
                 </div>
-              </span>
+              </span> -->
             </div>
             <h6>{{ item.user }}</h6>
             <h6>{{ item.deviceType }}</h6>

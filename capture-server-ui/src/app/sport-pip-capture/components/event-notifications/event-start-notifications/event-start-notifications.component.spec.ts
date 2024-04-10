@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EventNotificationsComponent } from './event-notifications.component';
+import { EventStartNotificationsComponent } from './event-start-notifications.component';
 
 describe('EventNotificationsComponent', () => {
-  let component: EventNotificationsComponent;
-  let fixture: ComponentFixture<EventNotificationsComponent>;
+  let component: EventStartNotificationsComponent;
+  let fixture: ComponentFixture<EventStartNotificationsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EventNotificationsComponent ]
+      declarations: [ EventStartNotificationsComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EventNotificationsComponent);
+    fixture = TestBed.createComponent(EventStartNotificationsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
