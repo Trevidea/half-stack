@@ -114,7 +114,7 @@
             {{ item.ipAddress }}
           </td>
 
-          <th [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
             <div class="d-flex">
               <span>
                 <i
@@ -138,7 +138,7 @@
                 {{ item.transmitStatus }}
               </span>
             </div>
-          </th>
+          </td>
           <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
             {{ item.received }}
           </td>
