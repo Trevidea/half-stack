@@ -1,0 +1,74 @@
+<!-- <button
+  class="btn btn-outline-danger mr-1 mb-1"
+  [swal]="SweetAlertError"
+  rippleEffect
+>
+  Error
+</button>
+<swal
+  #SweetAlertError
+  title="Good job!"
+  text="You clicked the button!"
+  [swalOptions]="{
+    cancelButtonClass: 'btn btn-outline-secondary ml-1',
+    confirmButtonClass: 'btn btn-danger'
+  }"
+  [cancelButtonText]="'No'"
+  [confirmButtonText]="'Yes Sure'"
+  [showCancelButton]="true"
+  icon="info"
+> -->
+
+<!-- </swal> -->
+<div class="modal-body" tabindex="0" ngbAutofocus>
+  <div style="display: flex; align-items: center; justify-content: center">
+    <div
+      class="d-flex"
+      style="
+        justify-content: center;
+        align-items: center;
+        border: 3px solid red;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+      "
+    >
+      <strong style="font-size: 40px" class="text-danger">!</strong>
+    </div>
+  </div>
+
+  <div>
+    <div style="margin-top: 15px; display: flex; justify-content: center">
+      <span style="font-weight: 700">{{ title }}</span>
+    </div>
+    <div
+      style="
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      "
+    >
+      <span>{{ description }}</span>
+    </div>
+  </div>
+  <div style="margin-top: 30px; display: flex; justify-content: center">
+    <button
+      type="button"
+      class="btn btn-sm btn-outline-dark"
+      style="padding-left: 1.7em; padding-right: 1.7em"
+      rippleEffect
+      (click)="close()"
+    >
+      No
+    </button>
+    <button
+      type="button"
+      class="btn btn-sm btn-danger ml-1"
+      rippleEffect
+      (click)="close()"
+    >
+      Yes, Sure
+    </button>
+  </div>
+</div>

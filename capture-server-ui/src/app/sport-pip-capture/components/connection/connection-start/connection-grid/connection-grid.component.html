@@ -1,3 +1,4 @@
+<app-connection-alert></app-connection-alert>
 <div class="connection-grid">
   <div class="card-body" style="padding: 0.5rem">
     <div class="row">
@@ -137,8 +138,18 @@
                       : "Pause"
                   }}
                 </button>
-                <button mc-dropdown-item>
+                <button mc-dropdown-item (click)="modalOpenSM(modalblock)">
                   <i data-feather="slash" class="mr-50 mb-25"></i> Block
+                  <ng-template #modalblock let-modal>
+                    <app-connection-alert
+                      [title]="'Block User'"
+                      [description]="
+                        'Are you sure you want to block user  Are you sure you want to block user' +
+                        item.user +
+                        '?'
+                      "
+                    ></app-connection-alert>
+                  </ng-template>
                 </button>
 
                 <button
