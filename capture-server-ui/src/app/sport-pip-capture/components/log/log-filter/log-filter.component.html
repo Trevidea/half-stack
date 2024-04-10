@@ -8,7 +8,7 @@
             <input type="text" class="form-control" id="searchbar" name="searchbar" placeholder="Search..." />
         </div>
     </div>
-    <div class="col-md-6 col-lg-2 col-6">
+    <div class="col-md-6 col-lg-2 col-12 ">
         <label>Category</label>
         <div class="form-group">
             <ng-select>
@@ -16,7 +16,7 @@
             </ng-select>
         </div>
     </div>
-    <div class="col-md-6 col-lg-2 col-6">
+    <div class="col-md-6 col-lg-2 col-12">
         <label>User</label>
         <div class="form-group">
             <ng-select>
@@ -25,12 +25,12 @@
                         <span class="avatar-content">
                             <img src="assets/images/portrait/small/avatar-s-20.jpg" alt="avatar" />
                         </span>
-                    </div> {{ item }}
+                    </div> {{ item}}
                 </ng-option>
             </ng-select>
         </div>
     </div>
-    <div class="col-md-6 col-lg-3 col-6">
+    <div class="col-md-6 col-lg-3 col-12">
         <label>Date Range - From</label>
         <div class="input-group">
             <input class="form-control" maxlength="10" type="text" ngbDatepicker placeholder="yyyy-mm-dd"
@@ -43,7 +43,7 @@
         </div>
 
     </div>
-    <div class="col-lg-3">
+    <div class="col-md-6 col-lg-3 col-12 ">
         <label for="">Date Range - To</label>
         <div class="input-group">
             <input class="form-control" maxlength="10" type="text" ngbDatepicker placeholder="yyyy-mm-dd" name="toDate"

@@ -17,43 +17,52 @@ import { EventComponent } from './event.component';
   styleUrls: ['./event.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-
+// 
 export class EventPresenter implements OnInit {
-  query: Data.FilterParams
+  query: Data.FilterParams = {
+    sport: null
+  }
   activeTab: string;
   ds!: EventRange
-  filteredData: any;
+  filteredData!: any;
   progress: number = 0;
-  isSyncing: boolean = false;
-  constructor(private router: Router,
-    private modalService: NgbModal,
-    private dataFactory: DataFactoryService,
+
+  constructor(
     private service: ModelServiceService,
     private tabStateService: TabStateService) {
     this.ds = new EventRange()
   }
 
   ngOnInit(): void {
-    Transformer.ComposeCollectionAsync(this.service.eventJson(), this.ds.event, EventRangeBuilder);
+
+    Transformer.ComposeCollectionAsync(this.service.eventJson(), this.ds.event, EventRangeBuilder)
+      .then(() => {
+        this.query.status = this.tabStateService.getActiveTab();
+        this.filteredData = this.filterEvents(this.ds.event, this.query);
+      })
+
+    // setInterval(() => {
+    //   Transformer.ComposeCollectionAsync(this.service.eventJson(), this.ds.event, EventRangeBuilder)
+    //     .then(() => {
+    //       this.query.status = this.tabStateService.getActiveTab();
+    //       this.filteredData = this.filterEvents(this.ds.event, this.query);
+    //     })
+    // }, 2000);
+
+  }
+
+  onFilter(filter: Data.FilterParams) {
+    this.query = filter;
     this.filteredData = this.filterEvents(this.ds.event, this.query);
   }
 
-
-  onFilter(filter: Data.FilterParams) {
-    filter.status = this.tabStateService.getActiveTab()
-    this.query = filter;
-    this.filteredData = this.filterEvents(this.ds.event, filter);
-  }
-
-
   onTabChange(): void {
-    Transformer.ComposeCollectionAsync(this.service.eventJson(), this.ds.event, EventRangeBuilder);
+    this.query.status = this.tabStateService.getActiveTab();
     this.onFilter(this.query)
-
   }
-
 
   filterEvents(data, query) {
+    console.log(query)
     return data.filter(item => {
       for (const key in query) {
         if (query[key] !== null && item[key] !== query[key]) {

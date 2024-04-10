@@ -17,10 +17,10 @@ export class OngoingEventListComponent implements OnInit, OnDestroy {
   constructor(private _coreSidebarService: CoreSidebarService, private dateTimeService: DateTimeService) { }
 
   ngOnInit(): void {
-    this.dateTimeService.calculateCountdown(this.datasource);
-    this.countdownInterval = setInterval(() => {
-      this.dateTimeService.calculateCountdown(this.datasource);
-    }, 50);
+    // this.dateTimeService.calculateCountdown(this.datasource);
+    // this.countdownInterval = setInterval(() => {
+    //   this.dateTimeService.calculateCountdown(this.datasource);
+    // }, 50);
   }
 
   eventDetail(event: string) {

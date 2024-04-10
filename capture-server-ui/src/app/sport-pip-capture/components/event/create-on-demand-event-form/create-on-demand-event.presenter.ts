@@ -3,14 +3,14 @@ import { DataFactoryService } from 'app/sport-pip-capture/models/data-factory.se
 import { Transformer } from 'app/blocks/transformer';
 import { OnDemandEventFormView } from './views/onDemand';
 import { ArrayBuilder } from 'app/sport-pip-capture/blocks/array.builder';
-import { Views } from 'app/sport-pip-capture/models/capture-interface';
+import { Data, Views } from 'app/sport-pip-capture/models/capture-interface';
 import { PresenterAction } from 'app/blocks/actions';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OnDemandFormBuilder } from './buliders/onDemand';
-import { MetaTypeBuilder } from 'app/sport-pip-capture/blocks/meta-type.builder';
 import { TypesPresenter } from 'app/sport-pip/components/types/types.presenter';
 import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 import { stringify } from 'querystring';
+import { EventBuilder } from './buliders/event';
+import { OnDemandEventBuilder } from './buliders/on-demand-event';
 @Component({
   selector: 'app-create-on-demand-event-presenter',
   template: `<app-create-on-demand-event [datasource]="ds" (save)="actions.onSave()" (cancel)="actions.onCancel()"></app-create-on-demand-event>`,
@@ -18,21 +18,46 @@ import { stringify } from 'querystring';
   encapsulation: ViewEncapsulation.None
 })
 export class CreateOnDemandEventPresenter implements OnInit {
-  ds!: OnDemandEventFormView
+  ds!: OnDemandEventFormView;
+
+  ondemandEvent: Data.OnDemandEvent = {
+    event_id: 0,
+    owner_id: 0,
+    id: 0
+  };
+
   actions!: Views.FormActions;
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
-  constructor(private dataFactory: DataFactoryService, router: Router, route: ActivatedRoute, private modelServiceService: ModelServiceService) {
+
+  constructor(private dataFactory: DataFactoryService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private modelServiceService: ModelServiceService) {
+
     this.ds = new OnDemandEventFormView();
     if (Object.is(route.snapshot.component, this.constructor))
       this.ds.id = route.snapshot.params['id']
-    if (this.ds.time) {
-      this.ds.time = this.formatTime(this.ds.time)
-    }
-    this.actions = new PresenterAction("event", this.ds, this.modelServiceService.saveEvent, OnDemandFormBuilder, router);
+
+    this.actions = new PresenterAction("event", this.ds, this.modelServiceService.saveEvent, EventBuilder, router);
+
+    this.actions.data.subscribe((data: any) => {
+      if (data) {
+        console.log("If succeeds, then", data.id)
+        this.ondemandEvent.event_id = data.id;
+        this.ondemandEvent.owner_id = 1
+        this.modelServiceService.saveOnDemandEvent(this.ondemandEvent)
+      }
+    })
 
   }
 
+
+  // saveDemand() {
+  //   this.ondemandEvent.event_id = 43;
+  //   this.ondemandEvent.owner_id = 1
+  //   this.modelServiceService.saveOnDemandEvent(this.ondemandEvent)
+  // }
   ngOnInit(): void {
     Transformer.ComposeObject(this.dataFactory.EventSports(), this.ds.sports, ArrayBuilder)
     Transformer.ComposeObject(this.dataFactory.EventLevel(), this.ds.levels, ArrayBuilder)

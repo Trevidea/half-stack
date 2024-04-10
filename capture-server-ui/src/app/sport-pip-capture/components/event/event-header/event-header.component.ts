@@ -11,13 +11,10 @@ export class EventHeaderComponent implements OnInit {
   @Input() datasource: any
   @Output() onClear = new EventEmitter();
   @Output() allClear = new EventEmitter();
-  public selectBasic: any[] = [];
-  public selectBasicLoading = false;
   constructor() {
   }
 
   ngOnInit(): void {
-    console.log(this.datasource)
   }
 
   isAnyItemSelected(): boolean {

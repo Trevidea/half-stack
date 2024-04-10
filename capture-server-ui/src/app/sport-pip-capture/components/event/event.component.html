@@ -27,7 +27,7 @@
       <li ngbNavItem="upcoming" style="margin-top: 5px;">
         <a ngbNavLink>Upcoming Events</a>
         <ng-template ngbNavContent>
-          <app-up-coming-event [datasource]="datasource | slice : startIndex : endIndex"
+          <app-up-coming-event [datasource]="datasource | slice : startIndex : endIndex" 
             *ngIf="gridView"></app-up-coming-event>
           <app-upcoming-events-list *ngIf="!gridView"
             [datasource]="datasource | slice : startIndex : endIndex"></app-upcoming-events-list>

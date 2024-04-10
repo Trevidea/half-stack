@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbNavChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
@@ -16,7 +16,7 @@ import { EventEndNotifictionsComponent } from '../event-notifications/event-end-
   encapsulation: ViewEncapsulation.None,
 
 })
-export class EventComponent implements OnInit {
+export class EventComponent implements OnInit{
   @Input() datasource: any
   @Output() filter = new EventEmitter<Data.FilterParams>();
   @Output() onTabChange = new EventEmitter()
@@ -26,12 +26,17 @@ export class EventComponent implements OnInit {
   startIndex: number = 0;
   endIndex: number = this.pageSize;
 
-  constructor(private router: Router, private tabStateService: TabStateService, private modalService: NgbModal) { }
+  constructor(private router: Router, private tabStateService: TabStateService, private modalService: NgbModal) {
+
+   }
 
   ngOnInit(): void {
-    this.activeTabId = this.tabStateService.getActiveTab();
-    console.log(this.datasource)
+    this.tabStateService.activeTab$.subscribe(activeTab => {
+      this.activeTabId = activeTab;
+    });
+    this.onTabChange.emit();
   }
+
 
   CreateOnDemandEvent() {
     this.router.navigate(['on-demand-event'])
@@ -47,6 +52,7 @@ export class EventComponent implements OnInit {
     this.onTabChange.emit();
   }
 
+
   onFilter(filter: Data.FilterParams) {
     this.filter.emit(filter)
   }
@@ -59,6 +65,7 @@ export class EventComponent implements OnInit {
       size: 'sm'
     });
   }
+
   onPageChange(event: { startIndex: number, endIndex: number }) {
     this.startIndex = event.startIndex;
     this.endIndex = event.endIndex;
@@ -76,6 +83,9 @@ export class EventComponent implements OnInit {
   //     size: 'md'
   //   });
   // }
+
+
+
 
 }
 

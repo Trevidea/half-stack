@@ -17,15 +17,17 @@ export class ModelServiceService {
 
   constructor(private _httpClient: HttpClient, private _adapter: AdapterService) {
     this.saveEvent = this.saveEvent.bind(this);
-
+    this.saveOnDemandEvent=  this.saveOnDemandEvent.bind(this)
   }
+
+
 
   create(type: string, entity: any): Observable<any> {
 
     const url = `${this.modelsServerUrl}/${type}`
     console.log(url)
     return this._adapter.modulateOne(type, entity).pipe(mergeMap(modata => {
-      console.log("modulateOne",modata)
+      console.log("modulateOne", modata)
       return this._httpClient.post<any>(url, modata);
     }));
   }
@@ -145,8 +147,16 @@ export class ModelServiceService {
     }
   }
 
+  // http://drake.in:1437/api/on-demand-event
 
-
+  saveOnDemandEvent(data: Data.OnDemandEvent): Observable<Data.OnDemandEvent> {
+    console.log('saveOnDemandEvent',data)
+    if (data.id) {
+      return this.update("on-demand-event", data, data.id);
+    } else {
+      return this.create("on-demand-event", data);
+    }
+  }
   eventJson(): Observable<Data.Event[]> {
     return this._data('event', EventData)
   }

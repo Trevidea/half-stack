@@ -11,6 +11,7 @@ import { UI } from '../../event-utility/event-ui-interface';
 })
 export class OnGoingEventComponent implements OnInit, OnDestroy {
   startIndex:number;
+  openDetailmodel: boolean;
   @Input() datasource: any
   private countdownInterval: any;
   dropdownItems: UI.DropDownMenuItem[] = [
@@ -20,10 +21,13 @@ export class OnGoingEventComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.dateTimeservice.calculateCountdown(this.datasource);
-    this.countdownInterval = setInterval(() => {
-      this.dateTimeservice.calculateCountdown(this.datasource);
-    }, 1000);
+    // if (this.datasource) {
+    //   this.dateTimeservice.calculateCountdown(this.datasource);
+    //   this.countdownInterval = setInterval(() => {
+    //     this.dateTimeservice.calculateCountdown(this.datasource);
+    //   }, 1000);
+    // }
+   
   }
 
   eventDetail(event: string,index:number) {
