@@ -7,16 +7,11 @@
 #include "event.h"
 #include "omal.h"
 #include "on-demand-event.h"
-<<<<<<< HEAD
-#include "user.h"
-#include "preview_service.h"
-=======
 #include "user-profile.h"
 #include "event-preview.h"
 #include <vector>
 #include <map>
 #include <json/json.h>
->>>>>>> 585a3248b13605c35abad749958410026e70b241
 
 Gateway::Gateway()
 {

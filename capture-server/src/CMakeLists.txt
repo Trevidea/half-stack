@@ -11,16 +11,11 @@ set(HALF_STACK_SRC
     gateway.cpp
     event.cpp
     on-demand-event.cpp
-<<<<<<< HEAD
-    user.cpp
-    preview_service.cpp
-=======
     omal.cpp
     user-profile.cpp
     base.cpp
     event-preview.cpp
     device.cpp
->>>>>>> 585a3248b13605c35abad749958410026e70b241
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
 target_include_directories(half-stack PUBLIC "./" rest-client zmq)
