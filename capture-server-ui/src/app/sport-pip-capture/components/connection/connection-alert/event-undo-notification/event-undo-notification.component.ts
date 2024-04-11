@@ -1,5 +1,12 @@
-import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from "@angular/core";
+import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-event-undo-notification",
@@ -10,11 +17,20 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 export class EventUndoNotificationComponent implements OnInit {
   @Input() title: string;
   @Input() description: string;
-  constructor(private modalService: NgbModal) {}
+  @Input() undoEvent: boolean;
+  @Output() selectedItems = new EventEmitter<any>();
+  constructor(
+    private modalService: NgbModal,
+    public activeModal: NgbActiveModal
+  ) {}
 
   ngOnInit(): void {}
 
   close() {
     this.modalService.dismissAll();
+  }
+  undo() {
+    this.undoEvent = true;
+    this.activeModal.close(this.undoEvent);
   }
 }
