@@ -113,7 +113,7 @@ export const EventConnection$: Observable<any[]> = of([
     network: "Penfield-8",
     quality: "Poor",
     ipAddress: "192.168.1.13",
-    transmitStatus: "Blocked",
+    transmitStatus: "Paused",
     role: "Subscriber",
     received: "0 files",
     retries: "0",
