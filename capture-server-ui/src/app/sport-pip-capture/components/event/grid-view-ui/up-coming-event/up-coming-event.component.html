@@ -58,7 +58,7 @@
 </core-sidebar>
 
 <core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-on-demand" overlayClass="modal-backdrop"
-  hideOnEsc="true">
-  <app-ondemand-event-detail-presenter [eventData]="datasource" *ngIf="openDetailmodel"
+  (OnClosed)="OnClosedDetail($event)" hideOnEsc="true">
+  <app-ondemand-event-detail-presenter [eventData]="datasource" *ngIf="openDetailmodel" detailType='upcoming'
     [startIndex]="startIndex"></app-ondemand-event-detail-presenter>
 </core-sidebar>

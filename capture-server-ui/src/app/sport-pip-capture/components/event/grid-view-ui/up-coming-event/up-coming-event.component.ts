@@ -19,7 +19,7 @@ export class UpComingEventComponent implements OnInit, OnDestroy {
   ]
   constructor(private _coreSidebarService: CoreSidebarService, private dateTimeservice: DateTimeService) { }
   ngOnInit(): void {
-    if(this.datasource) {
+    if (this.datasource) {
       this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
       this.countdownInterval = setInterval(() => {
         this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
@@ -32,6 +32,11 @@ export class UpComingEventComponent implements OnInit, OnDestroy {
     this.startIndex = index
     this.openDetailmodel = true
     this._coreSidebarService.getSidebarRegistry('upcoming-' + event).toggleOpen();
+  }
+
+  OnClosedDetail(data: any) {
+    console.log("core side bar closed")
+    this.openDetailmodel = false
   }
 
   formatDateTime(dateTimeString: string, time: number): string {
