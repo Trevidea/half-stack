@@ -5,10 +5,11 @@
 <div class="modal-body d-flex flex-column" tabindex="0" ngbAutofocus>
     <div class="d-flex align-items-center justify-content-center">
         <circle-progress [percent]="50" [radius]="70" [outerStrokeWidth]="3" [innerStrokeWidth]="0"
-            [outerStrokeColor]="'#216093'" [animation]="true" [animationDuration]="300"
+            [outerStrokeColor]="outerStrokeColor" [animation]="true" [animationDuration]="300"
             [backgroundColor]="backgroundColor" [backgroundPadding]="0" [showImage]="true"
-            [imageSrc]="uploadicon">
+            [imageSrc]="'assets/images/spip-icons/upload.svg'">
         </circle-progress>
+
     </div>
     <div class="d-flex align-items-center justify-content-center mt-1 mb-1">
         <h2>Syncing Events</h2>

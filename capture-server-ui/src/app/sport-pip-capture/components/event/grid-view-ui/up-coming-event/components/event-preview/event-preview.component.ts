@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-event-preview',
@@ -7,10 +7,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class EventPreviewComponent implements OnInit {
-
+  @Input() datasource:any
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.datasource)
   }
 
 }
