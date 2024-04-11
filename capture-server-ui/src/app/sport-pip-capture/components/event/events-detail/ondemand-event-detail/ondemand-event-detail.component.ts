@@ -11,7 +11,7 @@ export class OndemandEventDetailComponent implements OnInit {
   @Input() startIndex:number;
   constructor(private _coreSidebarService: CoreSidebarService) { }
   ngOnInit(): void {
-    console.log(this.datasource);
+    console.log(this.datasource , this.startIndex);
   }
   toggleSidebar(key): void {
     this._coreSidebarService.getSidebarRegistry(key).close()

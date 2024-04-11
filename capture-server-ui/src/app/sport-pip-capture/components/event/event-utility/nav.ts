@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TabStateService {
-  activeTab: string ='ongoing' ;
+  private activeTabSubject = new BehaviorSubject<string>('ongoing'); // Initial value 'ongoing'
+  activeTab$ = this.activeTabSubject.asObservable();
 
   constructor() {}
 
   setActiveTab(activeTab: string) {
-    this.activeTab = activeTab;
+    this.activeTabSubject.next(activeTab);
   }
 
   getActiveTab(): string {
-    return this.activeTab;
+    return this.activeTabSubject.value;
   }
 }

@@ -5,7 +5,7 @@ import moment from "moment";
 
 
 
-export class OnDemandFormBuilder extends AbstractBuilder<Data.Event, OnDemandEventFormView> {
+export class EventBuilder extends AbstractBuilder<Data.Event, OnDemandEventFormView> {
     compose(m: Data.Event, v: OnDemandEventFormView) {
 
         v.id = m.id;
@@ -37,7 +37,7 @@ export class OnDemandFormBuilder extends AbstractBuilder<Data.Event, OnDemandEve
             venue: v.venue,
             status: "upcoming",
             type: 'on-demand',
-            owner_id: 123
+          
 
         };
 

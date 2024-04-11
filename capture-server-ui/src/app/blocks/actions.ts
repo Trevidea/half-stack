@@ -52,7 +52,10 @@ export class PresenterAction<M, V> implements Views.FormActions {
                     this.onComplete.emit(true);
                     this.state = { error: false, data: data };
                     //navigate
-                    console.log(this.state)
+                    console.log(data)
+                    const id = data['Gateway Response']['result'][0][0]['value'];
+                    console.log("event id to save in data base ",id)
+                    this.data.emit({"id":id})
                     this.opensweetalertsave();
                     this.router.navigate([this.resource])
                 }

@@ -14,7 +14,8 @@ import { ArrayBuilder } from "app/sport-pip-capture/blocks/array.builder";
 })
 
 export class EventHeaderPresenter implements OnInit, AfterViewInit {
-    ds!: headerView
+    ds!: headerView;
+    status: string
     @Output() filter = new EventEmitter<Data.FilterParams>();
 
     constructor(private dataFactory: DataFactoryService, private tabStateService: TabStateService) {
@@ -28,7 +29,6 @@ export class EventHeaderPresenter implements OnInit, AfterViewInit {
         // Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("PROGRAM"), this.ds.programs, MetaTypeBuilder);
         // Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("LEVELS"), this.ds.levels, MetaTypeBuilder);
         // Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("YEARS"), this.ds.years, MetaTypeBuilder);
-
         Transformer.ComposeObject(this.dataFactory.EventSports(), this.ds.sports, ArrayBuilder)
         Transformer.ComposeObject(this.dataFactory.EventYear(), this.ds.years, ArrayBuilder);
         Transformer.ComposeObject(this.dataFactory.EventLevel(), this.ds.levels, ArrayBuilder)
@@ -42,17 +42,12 @@ export class EventHeaderPresenter implements OnInit, AfterViewInit {
     }
 
     onfilter() {
-        const level = this.ds.levels.SelectedItem ? this.ds.levels.SelectedItem : null;
-        const program = this.ds.programs.SelectedItem ? this.ds.programs.SelectedItem : null;
-        const sport = this.ds.sports.SelectedItem ? this.ds.sports.SelectedItem : null;
-        const year = this.ds.years.SelectedItem ? parseInt(this.ds.years.SelectedItem) : null;
-        const status = this.tabStateService.getActiveTab() 
         this.filter.emit({
-            level: level,
-            program: program,
-            sport: sport,
-            year: year,
-            status: status
+            level: this.ds.levels.SelectedItem ? this.ds.levels.SelectedItem : null,
+            program: this.ds.programs.SelectedItem ? this.ds.programs.SelectedItem : null,
+            sport: this.ds.sports.SelectedItem ? this.ds.sports.SelectedItem : null,
+            year: this.ds.years.SelectedItem ? parseInt(this.ds.years.SelectedItem) : null,
+            status: this.tabStateService.getActiveTab(),
         });
     }
 

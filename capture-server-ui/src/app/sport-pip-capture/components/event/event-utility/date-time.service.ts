@@ -1,35 +1,51 @@
 import { Injectable } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EventStartNotificationsComponent } from '../../event-notifications/event-start-notifications/event-start-notifications.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DateTimeService {
-
-  constructor() { }
+  popupShown: boolean = false;
+  constructor(private modalService: NgbModal) { }
 
   padZero(num: number): string {
     return num < 10 ? `0${num}` : `${num}`;
   }
 
 
-  calculateCountdown(data: any[]): void {
+  calculateUpcomingCountdown(data: any[]): void {
     const now = new Date();
     data.forEach(item => {
       const eventDateTime = new Date(item?._dtEvent);
       eventDateTime.setHours(Math.floor(item._time / 100));
       eventDateTime.setMinutes(item._time % 100);
       const diff = eventDateTime.getTime() - now.getTime();
-      if (diff > 0) {
+      if (diff >= 0) {
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         item.countdown = `${this.padZero(days)} days, ${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
+        if (!this.popupShown && diff <= 1000) { 
+          this.modalOpenSM();
+          this.popupShown = true;
+        }
       } else {
-        item.countdown = '00:00:00';
+        item.countdown = 'end';
       }
     });
   }
+
+  modalOpenSM() {
+    this.modalService.open(EventStartNotificationsComponent, {
+      centered: true,
+      size: 'md',
+      backdrop: 'static', // Set the backdrop option here
+      keyboard: false
+    });
+  }
+
 
   formatDateTime(dateTimeString: string, time: number): string {
     const dateOptions: Intl.DateTimeFormatOptions = {
@@ -46,6 +62,8 @@ export class DateTimeService {
     const formattedDate = date.toLocaleDateString('en-US', dateOptions);
     return `${formattedDate}, ${formattedHours}:${formattedMinutes} ${amPm}`;
   }
+
+
 
 
 
@@ -89,5 +107,10 @@ export class DateTimeService {
     const formattedTime = `${formattedHours}:${minutes.toString().padStart(2, '0')}${period}`;
     return formattedTime;
   }
+
+
+
+
+
 
 }

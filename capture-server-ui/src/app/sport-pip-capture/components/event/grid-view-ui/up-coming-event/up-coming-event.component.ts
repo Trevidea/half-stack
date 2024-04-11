@@ -8,27 +8,30 @@ import { UI } from '../../event-utility/event-ui-interface';
   styleUrls: ['./up-coming-event.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class UpComingEventComponent implements OnInit,OnDestroy {
+export class UpComingEventComponent implements OnInit, OnDestroy {
   @Input() datasource;
-  startIndex:number;
-  openDetailmodel:boolean;
+  startIndex: number;
+  openDetailmodel: boolean;
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
   dropdownItems: UI.DropDownMenuItem[] = [
-    { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => {} },
+    { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => { } },
   ]
-  constructor(private _coreSidebarService: CoreSidebarService,private dateTimeservice: DateTimeService) { }
+  constructor(private _coreSidebarService: CoreSidebarService, private dateTimeservice: DateTimeService) { }
   ngOnInit(): void {
-    this.dateTimeservice.calculateCountdown(this.datasource);
-    this.countdownInterval = setInterval(() => {
-      this.dateTimeservice.calculateCountdown(this.datasource);
-    }, 50);
+    if(this.datasource) {
+      this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
+      this.countdownInterval = setInterval(() => {
+        this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
+      }, 50);
+    }
+
   }
 
-
-  viewDetail(event: string,index:number) {
-    this.startIndex=index
-    this._coreSidebarService.getSidebarRegistry('upcoming-'+event).toggleOpen();
+  viewDetail(event: string, index: number) {
+    this.startIndex = index
+    this.openDetailmodel = true
+    this._coreSidebarService.getSidebarRegistry('upcoming-' + event).toggleOpen();
   }
 
   formatDateTime(dateTimeString: string, time: number): string {
@@ -50,8 +53,8 @@ export class UpComingEventComponent implements OnInit,OnDestroy {
   private countdownInterval: any;
 
   ngOnDestroy(): void {
-     if (this.countdownInterval) {
-       clearInterval(this.countdownInterval);
-     }
-   }
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+    }
+  }
 }

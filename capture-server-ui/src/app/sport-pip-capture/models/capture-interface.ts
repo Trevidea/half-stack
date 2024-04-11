@@ -30,7 +30,7 @@ export namespace Data {
     title?: string;
     status?: string;
     type: string;
-    owner_id?: number; //this is user ID
+    // owner_id?: number; //this is user ID
   }
 
   export interface OnDemandEvent extends Base {
@@ -124,7 +124,7 @@ export namespace Data {
     ipAddress: string
     trasnsmitStatus: string;
     received: string;
-    retries:string; 
+    retries: string;
   }
 
   export enum NetWorkQuality { }
@@ -371,11 +371,11 @@ export namespace Data {
   }
 
   export interface FilterParams {
-    year: number;
-    program: string;
-    level: string;
-    sport: string;
-    status: string;
+    year?: number;
+    program?: string;
+    level?: string;
+    sport?: string;
+    status?: string;
   }
   export interface ConnectionPreview extends Base {
     dtEvent: string;
