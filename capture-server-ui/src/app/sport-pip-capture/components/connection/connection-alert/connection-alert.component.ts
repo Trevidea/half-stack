@@ -8,6 +8,7 @@ import {
 } from "@angular/core";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EventUndoNotificationComponent } from "./event-undo-notification/event-undo-notification.component";
+import { EventEndNotifictionsComponent } from "../../event-notifications/event-end-notifictions/event-end-notifictions.component";
 
 @Component({
   selector: "app-connection-alert",
@@ -35,15 +36,20 @@ export class ConnectionAlertComponent implements OnInit {
       this.undoEvent = true;
       this.passEntry.emit(this.undoEvent);
       this.modalService.dismissAll();
-
+      //  EventUndoNotificationComponent,
       const undoNotification = this.modalService.open(
-        EventUndoNotificationComponent,
+        EventEndNotifictionsComponent,
         {
-          centered: false,
-          size: "sm",
-          windowClass: "event-notification-undo",
+          centered: true,
+          size: "md",
         }
       );
+      undoNotification.componentInstance.eventDetail = {
+        eventName: "CSK vs MI",
+        eventType: "Cricket",
+        duration: "5hr 32mn",
+        size: "700",
+      };
       undoNotification.componentInstance.undoEvent = this.undoEvent;
 
       undoNotification.result.then(

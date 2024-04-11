@@ -89,6 +89,7 @@ import { LogFilterComponent } from "./components/log/log-filter/log-filter.compo
 import { EventTypeTransformPipe } from "./components/event/event-utility/type-transform";
 import { ConnectionAlertComponent } from "./components/connection/connection-alert/connection-alert.component";
 import { EventUndoNotificationComponent } from "./components/connection/connection-alert/event-undo-notification/event-undo-notification.component";
+import { EventEndedModalComponent } from "./components/connection/connection-alert/event-ended-modal/event-ended-modal.component";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -165,6 +166,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EventTypeTransformPipe,
     ConnectionAlertComponent,
     EventUndoNotificationComponent,
+    EventEndedModalComponent,
   ],
   providers: [
     {
