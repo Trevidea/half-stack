@@ -30,11 +30,11 @@ export class ConnectionAlertComponent implements OnInit {
   ngOnInit(): void {
     console.log("connection alert component ::", this.undoEvent);
   }
-
   close() {
+    this.modalService.dismissAll();
+  }
+  YesSure() {
     if (this.title == "End Event") {
-      this.undoEvent = true;
-      this.passEntry.emit(this.undoEvent);
       this.modalService.dismissAll();
       //  EventUndoNotificationComponent,
       const undoNotification = this.modalService.open(
@@ -56,7 +56,7 @@ export class ConnectionAlertComponent implements OnInit {
         (selectedItems) => {
           this.undoEvent = selectedItems;
           console.log("Parent :::", this.undoEvent, selectedItems);
-          this.passEntry.emit(this.undoEvent);
+          // this.passEntry.emit(this.undoEvent);
         },
         (reason) => {}
       );

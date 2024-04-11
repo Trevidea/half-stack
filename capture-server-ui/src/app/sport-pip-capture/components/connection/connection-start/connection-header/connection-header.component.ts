@@ -55,6 +55,7 @@ export class ConnectionHeaderComponent implements OnInit {
         size: "sm",
         windowClass: "event-notification-undo",
       });
+      modelRef.componentInstance;
       modelRef.componentInstance.undoEvent = true;
       modelRef.componentInstance.updateEventStatus.subscribe(
         (receivedEntry) => {
