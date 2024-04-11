@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { DateTimeService } from '../../event-utility/date-time.service';
 import { UI } from '../../event-utility/event-ui-interface';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-up-coming-event',
   templateUrl: './up-coming-event.component.html',
@@ -17,7 +18,10 @@ export class UpComingEventComponent implements OnInit, OnDestroy {
   dropdownItems: UI.DropDownMenuItem[] = [
     { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => { } },
   ]
-  constructor(private _coreSidebarService: CoreSidebarService, private dateTimeservice: DateTimeService) { }
+  constructor(private _coreSidebarService: CoreSidebarService,
+    private dateTimeservice: DateTimeService,
+    private router: Router
+  ) { }
   ngOnInit(): void {
     if (this.datasource) {
       this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
@@ -56,6 +60,13 @@ export class UpComingEventComponent implements OnInit, OnDestroy {
   }
 
   private countdownInterval: any;
+
+  navigateToEventPreview(item: any) {
+    console.log(item)
+    this.router.navigate(['/event/event-preview']);
+  }
+
+
 
   ngOnDestroy(): void {
     if (this.countdownInterval) {

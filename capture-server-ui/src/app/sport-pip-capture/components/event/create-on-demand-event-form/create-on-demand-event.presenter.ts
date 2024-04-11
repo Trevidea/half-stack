@@ -44,12 +44,10 @@ export class CreateOnDemandEventPresenter implements OnInit {
       if (data) {
         let ondemandEvent = { event_id: data.id, owner_id: 1 }
         this.saveDemand(ondemandEvent)
-        // this.modelServiceService._saveOnDemandEvent(ondemandEvent)
       }
     })
 
   }
-
 
 
   ngOnInit(): void {
@@ -76,7 +74,6 @@ export class CreateOnDemandEventPresenter implements OnInit {
   }
 
 
-
   formatTime(time: any): number {
     if (!time) return 0;
     const [hours, minutes] = time.split(':');
@@ -84,7 +81,7 @@ export class CreateOnDemandEventPresenter implements OnInit {
     return parseInt(formattedTime);
   }
 
-
+////just for testing ///////
   saveDemand(data: { event_id: number, owner_id: number }) {
     const requestData = {
       "table": "ondemandevent",
