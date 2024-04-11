@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { NotificationsService } from 'app/layout/components/navbar/navbar-notification/notifications.service';
+import { NotificationsService } from "app/layout/components/navbar/navbar-notification/notifications.service";
+import { SocketService } from "app/sport-pip-capture/models/socket.service";
 
 // Interface
 interface notification {
@@ -10,8 +11,8 @@ interface notification {
 }
 
 @Component({
-  selector: 'app-navbar-notification',
-  templateUrl: './navbar-notification.component.html'
+  selector: "app-navbar-notification",
+  templateUrl: "./navbar-notification.component.html",
 })
 export class NavbarNotificationComponent implements OnInit {
   // Public
@@ -21,7 +22,10 @@ export class NavbarNotificationComponent implements OnInit {
    *
    * @param {NotificationsService} _notificationsService
    */
-  constructor(private _notificationsService: NotificationsService) {}
+  constructor(
+    private _notificationsService: NotificationsService,
+    private socketService: SocketService
+  ) {}
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
@@ -29,9 +33,15 @@ export class NavbarNotificationComponent implements OnInit {
   /**
    * On init
    */
+  notification = [];
   ngOnInit(): void {
-    this._notificationsService.onApiDataChange.subscribe(res => {
+    this._notificationsService.onApiDataChange.subscribe((res) => {
       this.notifications = res;
     });
+    // this.socketService.listen("hello").subscribe((data) => {
+    //   this.notification.push(data);
+    //   console.log(data);
+    //   // this.socketService.emit("message", "message UI");
+    // });
   }
 }
