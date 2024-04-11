@@ -16,10 +16,12 @@
         <i
           *ngIf="!undoEvent"
           class="bi bi-pause-circle custom-bi-pause-circle cursor-pointer"
+          (click)="playPauseEvent('paues')"
         ></i>
         <i
           *ngIf="undoEvent"
           class="bi bi-play-circle custom-bi-pause-circle cursor-pointer"
+          (click)="playPauseEvent('play')"
         ></i>
         <i
           class="bi bi-stop-circle custom-bi-stop-circle cursor-pointer"

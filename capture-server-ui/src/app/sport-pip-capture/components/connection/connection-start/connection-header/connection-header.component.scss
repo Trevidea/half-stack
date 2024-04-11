@@ -1,1 +1,9 @@
 @import "../../connection-dark-light.scss";
+.event-notification-undo {
+  width: auto !important;
+  right: 0;
+
+  .modal-dialog {
+    float: right;
+  }
+}

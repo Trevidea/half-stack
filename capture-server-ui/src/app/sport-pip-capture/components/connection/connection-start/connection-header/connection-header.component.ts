@@ -6,6 +6,7 @@ import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.se
 
 import { Subject } from "rxjs";
 import { ConnectionAlertComponent } from "../../connection-alert/connection-alert.component";
+import { EventUndoNotificationComponent } from "../../connection-alert/event-undo-notification/event-undo-notification.component";
 @Component({
   selector: "app-connection-header",
   templateUrl: "./connection-header.component.html",
@@ -45,7 +46,24 @@ export class ConnectionHeaderComponent implements OnInit {
     this._ListView = true;
     this.router.navigate(["connection"]);
   }
-
+  playPauseEvent(e: string) {
+    if (e == "play") {
+      this.undoEvent = false;
+    } else {
+      const modelRef = this.modelService.open(EventUndoNotificationComponent, {
+        centered: false,
+        size: "sm",
+        windowClass: "event-notification-undo",
+      });
+      modelRef.componentInstance.undoEvent = true;
+      modelRef.componentInstance.updateEventStatus.subscribe(
+        (receivedEntry) => {
+          console.log("received", receivedEntry);
+          this.undoEvent = receivedEntry;
+        }
+      );
+    }
+  }
   modalOpenSM(modalblock) {
     const modeldata = this.modelService.open(ConnectionAlertComponent, {
       centered: true,

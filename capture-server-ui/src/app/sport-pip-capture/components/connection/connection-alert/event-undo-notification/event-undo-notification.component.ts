@@ -18,7 +18,7 @@ export class EventUndoNotificationComponent implements OnInit {
   @Input() title: string;
   @Input() description: string;
   @Input() undoEvent: boolean;
-  @Output() selectedItems = new EventEmitter<any>();
+  @Output() updateEventStatus = new EventEmitter<any>();
   constructor(
     private modalService: NgbModal,
     public activeModal: NgbActiveModal
@@ -28,10 +28,12 @@ export class EventUndoNotificationComponent implements OnInit {
 
   close() {
     this.undoEvent = true;
+    this.updateEventStatus.emit(this.undoEvent);
     this.activeModal.close(this.undoEvent);
   }
   undo() {
     this.undoEvent = false;
+    this.updateEventStatus.emit(this.undoEvent);
     this.activeModal.close(this.undoEvent);
   }
 }
