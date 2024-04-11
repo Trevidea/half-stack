@@ -25,12 +25,12 @@ export class EventsSyncComponent implements OnInit {
     console.log('clicked syncEvents');
     this.service.syncEvents().subscribe(
       (response) => {
-        this.uploadicon='assets/images/spip-icons/Successfull.svg'
+        this.uploadicon='assets/images/spip-icons/check.svg'
         console.log('Response from syncEvents:', response);
       },
       (error) => {
         console.error('Error occurred while syncing events:', error);
-        this.uploadicon='assets/images/spip-icons/Failed.svg'
+        this.uploadicon='assets/images/spip-icons/x.svg'
         this.backgroundColor = 'rgba(222, 46, 33, 0.10)'
         this.outerStrokeColor='transparent'
       }
