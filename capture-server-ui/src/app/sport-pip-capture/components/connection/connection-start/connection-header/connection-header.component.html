@@ -13,10 +13,17 @@
         </h5>
       </div>
       <div>
-        <i class="bi bi-pause-circle custom-bi-pause-circle cursor-pointer"></i>
+        <i
+          *ngIf="!undoEvent"
+          class="bi bi-pause-circle custom-bi-pause-circle cursor-pointer"
+        ></i>
+        <i
+          *ngIf="undoEvent"
+          class="bi bi-play-circle custom-bi-pause-circle cursor-pointer"
+        ></i>
         <i
           class="bi bi-stop-circle custom-bi-stop-circle cursor-pointer"
-          (click)="modalOpenSM(modalblock)"
+          (click)="modalOpenSM('modalblock')"
         ></i>
       </div>
     </div>
@@ -202,5 +209,6 @@
   <app-connection-alert
     [title]="'End Event'"
     [description]="'Are you sure you want to end the <br> event ?'"
+    [undoEvent]="undoEvent"
   ></app-connection-alert>
 </ng-template>

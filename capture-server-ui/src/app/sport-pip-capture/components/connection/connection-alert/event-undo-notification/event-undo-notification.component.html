@@ -1,0 +1,14 @@
+<div
+  class="d-flex align-items-center justify-content-between"
+  style="padding: 15px 10px"
+>
+  <h6 style="margin-right: 150px; margin-bottom: 0">Event is paused</h6>
+  <div class="d-flex align-items-center">
+    <a style="text-decoration: underline; margin-right: 10px" (click)="undo()"
+      >Undo</a
+    >
+    <div class="cursor-pointer" (click)="close()">
+      <i data-feather="x" [size]="20"></i>
+    </div>
+  </div>
+</div>
