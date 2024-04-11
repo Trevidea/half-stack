@@ -6,20 +6,22 @@ import { OnDemandEventRange } from '../views/ondemand-event';
 
 @Component({
   selector: 'app-ondemand-event-detail-presenter',
-  template: `<app-ondemand-event-detail [datasource]="eventData" [startIndex]='startIndex'></app-ondemand-event-detail>`,
+  template: `<app-ondemand-event-detail [datasource]="eventData" [currentIndex]='startIndex' [detailType]='detailType'></app-ondemand-event-detail>`,
   styleUrls: ['./ondemand-event-detail.component.scss']
 })
 export class OndemandEventDetailPresenter implements OnInit {
-  @Input() eventData:any;
-  ds!:OnDemandEventRange;
-  @Input() startIndex:number
+  @Input() eventData: any;
+  @Input() detailType: string;
+  ds!: OnDemandEventRange;
+  @Input() startIndex: number
   constructor(private service: ModelServiceService,
-    private tabStateService: TabStateService ) { 
-      this.ds = new OnDemandEventRange();
-    }
+    private tabStateService: TabStateService) {
+    this.ds = new OnDemandEventRange();
+  }
 
   ngOnInit(): void {
 
   }
+
 
 }

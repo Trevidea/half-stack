@@ -40,24 +40,18 @@ export class CreateOnDemandEventPresenter implements OnInit {
       this.ds.id = route.snapshot.params['id']
 
     this.actions = new PresenterAction("event", this.ds, this.modelServiceService.saveEvent, EventBuilder, router);
-
     this.actions.data.subscribe((data: any) => {
       if (data) {
-        console.log("If succeeds, then", data.id)
-        this.ondemandEvent.event_id = data.id;
-        this.ondemandEvent.owner_id = 1
-        this.modelServiceService.saveOnDemandEvent(this.ondemandEvent)
+        let ondemandEvent = { event_id: data.id, owner_id: 1 }
+        this.saveDemand(ondemandEvent)
+        // this.modelServiceService._saveOnDemandEvent(ondemandEvent)
       }
     })
 
   }
 
 
-  // saveDemand() {
-  //   this.ondemandEvent.event_id = 43;
-  //   this.ondemandEvent.owner_id = 1
-  //   this.modelServiceService.saveOnDemandEvent(this.ondemandEvent)
-  // }
+
   ngOnInit(): void {
     Transformer.ComposeObject(this.dataFactory.EventSports(), this.ds.sports, ArrayBuilder)
     Transformer.ComposeObject(this.dataFactory.EventLevel(), this.ds.levels, ArrayBuilder)
@@ -88,5 +82,38 @@ export class CreateOnDemandEventPresenter implements OnInit {
     const [hours, minutes] = time.split(':');
     let formattedTime = hours + minutes;
     return parseInt(formattedTime);
+  }
+
+
+  saveDemand(data: { event_id: number, owner_id: number }) {
+    const requestData = {
+      "table": "ondemandevent",
+      "columns": [
+        {
+          "field": "event_id",
+          "type": 0,
+          "value": data.event_id
+        },
+        {
+          "field": "owner_id",
+          "type": 0,
+          "value": data.owner_id
+        }
+      ],
+      "criteria": [
+        {
+          "field": "id"
+        }
+      ]
+    };
+    this.modelServiceService._saveOnDemandEvent(requestData).subscribe(
+      response => {
+        console.log('Data saved successfully:', response);
+      },
+      error => {
+        console.error('Error saving data:', error);
+        // Handle error
+      }
+    );
   }
 }

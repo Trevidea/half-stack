@@ -34,7 +34,8 @@ export class CoreSidebarComponent implements OnInit, OnDestroy {
   // Sidebar name (Component input)
   @Input()
   name: string;
-
+  @Output()
+  OnClosed: EventEmitter<any> = new EventEmitter<any>();
   // Class name for the overlay (Component input)
   @Input()
   overlayClass: string;
@@ -608,6 +609,8 @@ export class CoreSidebarComponent implements OnInit, OnDestroy {
 
     // Change detector
     this._changeDetectorRef.markForCheck();
+
+    this.OnClosed.emit()
   }
 
   /**

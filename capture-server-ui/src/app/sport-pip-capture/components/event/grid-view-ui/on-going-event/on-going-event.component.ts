@@ -10,12 +10,12 @@ import { UI } from '../../event-utility/event-ui-interface';
   encapsulation: ViewEncapsulation.None,
 })
 export class OnGoingEventComponent implements OnInit, OnDestroy {
-  startIndex:number;
-  openDetailmodel: boolean;
+  startIndex: number;
+  opOngoingDetail: boolean = false;
   @Input() datasource: any
   private countdownInterval: any;
   dropdownItems: UI.DropDownMenuItem[] = [
-    { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => {} },
+    { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => { } },
   ]
   constructor(private _coreSidebarService: CoreSidebarService, private dateTimeservice: DateTimeService) { }
 
@@ -27,13 +27,18 @@ export class OnGoingEventComponent implements OnInit, OnDestroy {
     //     this.dateTimeservice.calculateCountdown(this.datasource);
     //   }, 1000);
     // }
-   
+
   }
 
-  eventDetail(event: string,index:number) {
-    this.startIndex=index
+  eventDetail(event: string, index: number) {
+    this.startIndex = index
+    this.opOngoingDetail = true
     this._coreSidebarService.getSidebarRegistry('ongoing-' + event).toggleOpen();
+  }
 
+  OnClosedDetail(data: any) {
+    console.log("core side bar closed")
+    this.opOngoingDetail = false
   }
 
   ngOnDestroy(): void {

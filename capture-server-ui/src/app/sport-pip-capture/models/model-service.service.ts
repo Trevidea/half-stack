@@ -17,7 +17,7 @@ export class ModelServiceService {
 
   constructor(private _httpClient: HttpClient, private _adapter: AdapterService) {
     this.saveEvent = this.saveEvent.bind(this);
-    this.saveOnDemandEvent=  this.saveOnDemandEvent.bind(this)
+    // this.saveOnDemandEvent = this.saveOnDemandEvent.bind(this)
   }
 
 
@@ -149,13 +149,18 @@ export class ModelServiceService {
 
   // http://drake.in:1437/api/on-demand-event
 
-  saveOnDemandEvent(data: Data.OnDemandEvent): Observable<Data.OnDemandEvent> {
-    console.log('saveOnDemandEvent',data)
-    if (data.id) {
-      return this.update("on-demand-event", data, data.id);
-    } else {
-      return this.create("on-demand-event", data);
-    }
+  // saveOnDemandEvent(data: Data.OnDemandEvent): Observable<Data.OnDemandEvent> {
+  //   console.log('saveOnDemandEvent', data)
+  //   if (data.id) {
+  //     return this.update("on-demand-event", data, data.id);
+  //   } else {
+  //     return this.create("on-demand-event", data);
+  //   }
+  // }
+
+  private apiUrl = 'http://drake.in:1437/api/on-demand-event';
+  _saveOnDemandEvent(data: any): Observable<any> {
+    return this._httpClient.post<any>(this.apiUrl, data);
   }
   eventJson(): Observable<Data.Event[]> {
     return this._data('event', EventData)
