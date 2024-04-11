@@ -7,11 +7,8 @@
     <a style="text-decoration: underline; margin-right: 10px" (click)="undo()"
       >Undo</a
     >
-    <i
-      class="cursor-pointer"
-      data-feather="x"
-      [size]="20"
-      (click)="close()"
-    ></i>
+    <div class="cursor-pointer" (click)="close()">
+      <i data-feather="x" [size]="20"></i>
+    </div>
   </div>
 </div>

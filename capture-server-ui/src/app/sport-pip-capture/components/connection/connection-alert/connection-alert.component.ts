@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from "@angular/core";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EventUndoNotificationComponent } from "./event-undo-notification/event-undo-notification.component";
 
@@ -6,19 +13,29 @@ import { EventUndoNotificationComponent } from "./event-undo-notification/event-
   selector: "app-connection-alert",
   templateUrl: "./connection-alert.component.html",
   styleUrls: ["./connection-alert.component.scss"],
+  providers: [NgbActiveModal],
   encapsulation: ViewEncapsulation.None,
 })
 export class ConnectionAlertComponent implements OnInit {
   @Input() title: string;
   @Input() description: string;
-  undoEvent: boolean = true;
-  constructor(private modalService: NgbModal) {}
+  @Input() undoEvent: boolean;
+  @Output() passEntry: EventEmitter<any> = new EventEmitter();
+  constructor(
+    private modalService: NgbModal,
+    public activeModal: NgbActiveModal
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log("connection alert component ::", this.undoEvent);
+  }
 
   close() {
-    this.modalService.dismissAll();
     if (this.title == "End Event") {
+      this.undoEvent = true;
+      this.passEntry.emit(this.undoEvent);
+      this.modalService.dismissAll();
+
       const undoNotification = this.modalService.open(
         EventUndoNotificationComponent,
         {
@@ -27,30 +44,18 @@ export class ConnectionAlertComponent implements OnInit {
           windowClass: "event-notification-undo",
         }
       );
-      undoNotification.componentInstance.undoEvent = false;
+      undoNotification.componentInstance.undoEvent = this.undoEvent;
 
       undoNotification.result.then(
         (selectedItems) => {
           this.undoEvent = selectedItems;
           console.log("Parent :::", this.undoEvent, selectedItems);
+          this.passEntry.emit(this.undoEvent);
         },
         (reason) => {}
       );
+    } else {
+      this.modalService.dismissAll();
     }
   }
 }
-/*
- const modalRef = this.modalService.open(FormListModalComponent, {
-      size: "lg",
-    });
-
-    modalRef.componentInstance.items = this.peoples;
-    modalRef.componentInstance.type = "Peoples";
-
-    modalRef.result.then(
-      (selectedItems) => {
-        this.datasource.peoples = selectedItems;
-      },
-      (reason) => {}
-    );
-*/

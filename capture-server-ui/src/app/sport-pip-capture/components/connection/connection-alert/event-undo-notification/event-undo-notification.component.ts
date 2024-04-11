@@ -27,10 +27,11 @@ export class EventUndoNotificationComponent implements OnInit {
   ngOnInit(): void {}
 
   close() {
-    this.modalService.dismissAll();
+    this.undoEvent = true;
+    this.activeModal.close(this.undoEvent);
   }
   undo() {
-    this.undoEvent = true;
+    this.undoEvent = false;
     this.activeModal.close(this.undoEvent);
   }
 }
