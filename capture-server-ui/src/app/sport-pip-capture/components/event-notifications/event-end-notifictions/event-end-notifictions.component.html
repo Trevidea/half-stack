@@ -11,17 +11,12 @@
     </div>
     <div class="col-12">
       <div class="d-flex align-items-center justify-content-between mt-1">
-        <img
-          src="assets/images/pip-image/Event-card.png"
-          class="img-fluid"
-          alt="..."
-          style="
+        <img src="assets/images/pip-image/Event-card.png" class="img-fluid" alt="..." style="
             max-width: 131px;
             max-height: 58px;
             border-radius: 4px;
             margin-right: 7px;
-          "
-        />
+          " />
         <div class="flex-fill">
           <h6 class="card-titles m-0">
             {{ eventDetail.eventName }},{{ eventDetail.eventType }}
@@ -32,49 +27,12 @@
             <p></p>
           </div>
         </div>
-        <button
-          type="button"
-          class="btn btn-warning btn-warning-custom m-0"
-          (click)="activeModal.dismiss('Cross click')"
-          [routerLink]="'/past-event-view'"
-          rippleEffect
-        >
+        <button type="button" class="btn btn-warning btn-warning-custom m-0"
+          (click)="activeModal.dismiss('Cross click')" [routerLink]="'/past-event-view'" rippleEffect>
           View
         </button>
       </div>
     </div>
-    <!-- <div class="col-12 d-flex align-items-center justify-content-between mt-1">
-      <div class="d-flex align-items-center">
-        <img
-          src="assets/images/pip-image/Event-card.png"
-          class="img-fluid"
-          alt="..."
-          style="
-            max-width: 131px;
-            max-height: 58px;
-            border-radius: 4px;
-            margin-right: 7px;
-          "
-        />
-        <div>
-          <h6 class="card-titles m-0">
-            {{ eventDetail.eventName }},{{ eventDetail.eventType }}
-          </h6>
-          <div class="d-flex align-items-center justify-content-between">
-            <p class="m-0">Duration - {{ eventDetail.duration }}</p>
-            <p class="m-0">Size - {{ eventDetail.size }} files</p>
-          </div>
-        </div>
-      </div>
-      <button
-        type="button"
-        class="btn btn-warning btn-warning-custom m-0"
-        (click)="activeModal.dismiss('Cross click')"
-        [routerLink]="'/past-event-view'"
-        rippleEffect
-      >
-        View
-      </button>
-    </div> -->
+
   </div>
 </div>
