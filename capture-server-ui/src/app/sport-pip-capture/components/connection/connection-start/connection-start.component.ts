@@ -22,6 +22,7 @@ export class ConnectionStartComponent implements OnInit {
   deviceName: string;
   streamingKey: string;
   allOrSubOrPub: string = "all";
+  socketData = [];
   constructor(
     private modalService: NgbModal,
     private cdr: ChangeDetectorRef,
@@ -29,7 +30,7 @@ export class ConnectionStartComponent implements OnInit {
   ) {
     this.socketService.listen("hello").subscribe((data) => {
       console.log(data);
-      this.socketService.emit("message", "message UI");
+      // this.socketService.emit("message", "message UI");
     });
   }
   connectiondetail: boolean = false;
