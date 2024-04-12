@@ -18,7 +18,6 @@
           <th scope="col">Transmit Status</th>
           <th scope="col">Received</th>
           <th scope="col">Retries</th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -31,19 +30,42 @@
               ></i>
             </span>
             <mc-dropdown #appDropdownWithNested="mcDropdown">
-              <button mc-dropdown-item (click)="viewStream()">
+              <button
+                mc-dropdown-item
+                (click)="viewStream()"
+                *ngIf="item.role == 'Publisher'"
+              >
                 <i data-feather="eye" class="mr-50 mb-25"></i> View Stream
               </button>
               <button mc-dropdown-item (click)="pause(item)">
-                <i data-feather="pause" class="mr-50 mb-25"></i>
-                {{
-                  item.transmitStatus == "Paused"
-                    ? "Resume Connection"
-                    : "Pause"
-                }}
+                <i
+                  *ngIf="item.transmitStatus !== 'Paused'"
+                  data-feather="pause"
+                  class="mr-50 mb-25"
+                ></i>
+                <i
+                  *ngIf="item.transmitStatus == 'Paused'"
+                  data-feather="play"
+                  class="mr-50 mb-25"
+                ></i>
+                {{ item.transmitStatus == "Paused" ? "Resume" : "Pause" }}
               </button>
-              <button mc-dropdown-item (click)="block(item)">
+              <button mc-dropdown-item (click)="modalOpenSM(modalblock)">
                 <i data-feather="slash" class="mr-50 mb-25"></i> Block
+                <ng-template
+                  #modalblock
+                  let-modal
+                  style="width: 100px; height: 100px"
+                >
+                  <app-connection-alert
+                    [title]="'Block User'"
+                    [description]="
+                      'Are you sure you want to block user  <br>' +
+                      item.user +
+                      '?'
+                    "
+                  ></app-connection-alert>
+                </ng-template>
               </button>
 
               <button
@@ -105,7 +127,7 @@
             {{ item.ipAddress }}
           </td>
 
-          <th [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
             <div class="d-flex">
               <span>
                 <i
@@ -118,7 +140,7 @@
                 ></i>
                 <i
                   *ngIf="item.transmitStatus === 'Paused'"
-                  class="bi bi-pause text-info"
+                  class="bi bi-pause text-dark"
                 ></i>
                 <i
                   *ngIf="item.transmitStatus === 'Blocked'"
@@ -129,14 +151,13 @@
                 {{ item.transmitStatus }}
               </span>
             </div>
-          </th>
+          </td>
           <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
             {{ item.received }}
           </td>
           <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
             {{ item.retries }}
           </td>
-          <td><i class="bi bi-grid-3x2-gap-fill"></i></td>
         </tr>
       </tbody>
     </table>

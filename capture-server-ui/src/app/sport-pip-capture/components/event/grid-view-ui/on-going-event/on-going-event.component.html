@@ -57,5 +57,7 @@
 
 <core-sidebar class="modal modal-slide-in fade event-sidebar" name="ongoing-on-demand" overlayClass="modal-backdrop"
   hideOnEsc="true" preventBackgroundScroll="true">
-  <app-ondemand-event-detail-presenter [eventData]="datasource" [startIndex]="startIndex"></app-ondemand-event-detail-presenter>
+  <app-ondemand-event-detail-presenter *ngIf="opOngoingDetail" [eventData]="datasource" [startIndex]="startIndex" 
+  (OnClosed)="OnClosedDetail($event)"
+  ></app-ondemand-event-detail-presenter>
 </core-sidebar>

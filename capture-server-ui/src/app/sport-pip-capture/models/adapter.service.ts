@@ -80,7 +80,7 @@ export class AdapterService {
     console.log("Table",type)
     const pos = type.indexOf("-");
     if (pos >= 0) {
-      type = type.split("-").join("_");
+      type = type.split("-").join("");
      
     }
     console.log(data,type)

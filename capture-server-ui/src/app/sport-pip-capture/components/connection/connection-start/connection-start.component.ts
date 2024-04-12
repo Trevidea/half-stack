@@ -8,10 +8,12 @@ import { header } from "./data";
 import { EventConnection$ } from "../connection-data";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { filter } from "rxjs/operators";
+import { SocketService } from "app/sport-pip-capture/models/socket.service";
 @Component({
   selector: "app-connection-start",
   templateUrl: "./connection-start.component.html",
   styleUrls: ["./connection-start.component.scss"],
+  providers: [SocketService],
   encapsulation: ViewEncapsulation.None,
 })
 export class ConnectionStartComponent implements OnInit {
@@ -20,7 +22,17 @@ export class ConnectionStartComponent implements OnInit {
   deviceName: string;
   streamingKey: string;
   allOrSubOrPub: string = "all";
-  constructor(private modalService: NgbModal, private cdr: ChangeDetectorRef) {}
+  socketData = [];
+  constructor(
+    private modalService: NgbModal,
+    private cdr: ChangeDetectorRef,
+    private socketService: SocketService
+  ) {
+    this.socketService.listen("hello").subscribe((data) => {
+      console.log(data);
+      // this.socketService.emit("message", "message UI");
+    });
+  }
   connectiondetail: boolean = false;
   ngOnInit(): void {
     this.header = header;

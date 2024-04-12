@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-3 col-12">
+    <div class="col-md-6 col-lg-2 col-12">
         <label>&nbsp;</label>
         <div class="input-group input-group-merge">
             <div class="input-group-prepend">
@@ -8,36 +8,51 @@
             <input type="text" class="form-control" id="searchbar" name="searchbar" placeholder="Search..." />
         </div>
     </div>
-    <div class="col-md-3 col-6">
+    <div class="col-md-6 col-lg-2 col-12 ">
         <label>Category</label>
         <div class="form-group">
             <ng-select>
-                <ng-option>
-                    item
-                </ng-option>
+                <ng-option *ngFor="let item of category" [value]="item">{{ item }}</ng-option>
             </ng-select>
         </div>
     </div>
-    <div class="col-md-3 col-6">
+    <div class="col-md-6 col-lg-2 col-12">
         <label>User</label>
         <div class="form-group">
             <ng-select>
-                <ng-option>
-                    item
+                <ng-option *ngFor="let item of user" [value]="item" class="d-flex align-items-center">
+                    <div class="avatar avatar-sm">
+                        <span class="avatar-content">
+                            <img src="assets/images/portrait/small/avatar-s-20.jpg" alt="avatar" />
+                        </span>
+                    </div> {{ item}}
                 </ng-option>
             </ng-select>
         </div>
     </div>
-    <div class="col-md-3 col-6">
-        <label>Date Range</label>
-        <div class="form-group">
-            <ng-select>
-                <ng-option>
-                    item
-                </ng-option>
-            </ng-select>
+    <div class="col-md-6 col-lg-3 col-12">
+        <label>Date Range - From</label>
+        <div class="input-group">
+            <input class="form-control" maxlength="10" type="text" ngbDatepicker placeholder="yyyy-mm-dd"
+                name="fromDate" #fromDate="ngbDatepicker" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary feather icon-calendar" (click)="fromDate.toggle()"
+                    type="button">
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6 col-lg-3 col-12 ">
+        <label for="">Date Range - To</label>
+        <div class="input-group">
+            <input class="form-control" maxlength="10" type="text" ngbDatepicker placeholder="yyyy-mm-dd" name="toDate"
+                #toDate="ngbDatepicker" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary feather icon-calendar" (click)="toDate.toggle()" type="button">
+                </button>
+            </div>
         </div>
     </div>
 
-      
 </div>

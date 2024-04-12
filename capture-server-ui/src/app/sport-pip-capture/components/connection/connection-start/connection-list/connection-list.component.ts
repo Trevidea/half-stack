@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DragulaService } from "ng2-dragula";
 
 @Component({
@@ -10,7 +11,10 @@ import { DragulaService } from "ng2-dragula";
 })
 export class ConnectionListComponent implements OnInit {
   @Input() eventConnection: any;
-  constructor(private dragulaService: DragulaService) {
+  constructor(
+    private dragulaService: DragulaService,
+    public modalService: NgbModal
+  ) {
     dragulaService.createGroup("handle-list", {
       moves: function (el, container, handle) {
         return handle.classList.contains("handle");
@@ -19,4 +23,10 @@ export class ConnectionListComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+  modalOpenSM(modalSM) {
+    this.modalService.open(modalSM, {
+      centered: true,
+      size: "sm", // size: 'xs' | 'sm' | 'lg' | 'xl'
+    });
+  }
 }

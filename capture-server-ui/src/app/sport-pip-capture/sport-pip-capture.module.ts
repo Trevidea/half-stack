@@ -87,6 +87,9 @@ import { EventEndNotifictionsComponent } from "./components/event-notifications/
 import { ConnectionStartPresenter } from "./components/connection/connection-start/connection-start.presenter";
 import { LogFilterComponent } from "./components/log/log-filter/log-filter.component";
 import { EventTypeTransformPipe } from "./components/event/event-utility/type-transform";
+import { ConnectionAlertComponent } from "./components/connection/connection-alert/connection-alert.component";
+import { EventUndoNotificationComponent } from "./components/connection/connection-alert/event-undo-notification/event-undo-notification.component";
+import { EventEndedModalComponent } from "./components/connection/connection-alert/event-ended-modal/event-ended-modal.component";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -160,7 +163,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EventEndNotifictionsComponent,
     ConnectionStartPresenter,
     LogFilterComponent,
-    EventTypeTransformPipe 
+    EventTypeTransformPipe,
+    ConnectionAlertComponent,
+    EventUndoNotificationComponent,
+    EventEndedModalComponent,
   ],
   providers: [
     {

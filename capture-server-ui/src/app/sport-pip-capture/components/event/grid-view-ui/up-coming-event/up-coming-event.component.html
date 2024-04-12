@@ -1,57 +1,64 @@
 <div class="grid-view">
-  <div class="card custom-card" *ngFor="let item of datasource; let i = index">
-    <img class="img-fluid" src="../../../../../assets/images/pip-image/card-image.png" alt="Card image cap" />
-    <div class="card-img-overlay p-0 d-flex flex-column" style="height: 100px;">
-      <div class="d-flex align-items-center Progress">
-        Starts in {{item.countdown}}
+  <div *ngFor="let item of datasource; let i = index">
+    <div class="card custom-card" *ngIf="item.countdown!='end'">
+      <img class="img-fluid" src="../../../../../assets/images/pip-image/card-image.png" alt="Card image cap" />
+      <div class="card-img-overlay p-0 d-flex flex-column" style="height: 100px;">
+        <div class="d-flex align-items-center Progress">
+          Starts in {{item.countdown}}
+        </div>
+        <div class="menu-container">
+          <app-menu-button [dropdownItems]="dropdownItems"></app-menu-button>
+        </div>
       </div>
-      <div class="menu-container">
-        <app-menu-button [dropdownItems]="dropdownItems"></app-menu-button>
-      </div>
-    </div>
-    <div class="card-body pt-1 pb-0 custom-card-body">
-      <div class="row">
-        <div class="col-4 d-flex align-items-center " style="padding: 17 0;">
-          <div class="badge badge-past-event" [ngClass]="{
-            'on-demand-event': item.type === 'on-demand',
-            'scheduled-event': item.type === 'scheduled'
-          }">
-            {{item.type| eventTypeTransform}}
+      <div class="card-body pt-1 pb-0 custom-card-body">
+        <div class="row">
+          <div class="col-4 d-flex align-items-center " style="padding: 17 0;">
+            <div class="badge badge-past-event" [ngClass]="{
+              'on-demand-event': item.type === 'on-demand',
+              'scheduled-event': item.type === 'scheduled'
+            }">
+              {{item.type| eventTypeTransform}}
+            </div>
+          </div>
+          <div class="col-8  card-btn-conatiner  ">
+            <div class="card-buttons ml-auto">
+              <button type="button" class="btn btn-flat-dark btn-sm  mr-md-1 " (click)="viewDetail(item.type,i)"
+                rippleEffect>
+                View
+              </button>
+              <button type="button" class="btn btn-warning  btn-sm" style="box-shadow: none;"
+                (click)="navigateToEventPreview(item)">
+                Preview
+              </button>
+            </div>
+          </div>
+          <div class="col-12 mt-1 card-text-style">
+            <h4 class="ellipsis">{{item.title}} </h4>
+            <p class="card-text ellipsis">
+              <i class="feather" data-feather="clock"></i>
+              {{ formatDateTime(item.dtEvent, item.time) }}
+            </p>
+            <p class="card-text ellipsis">
+              <i class="feather" data-feather="map-pin"></i>
+              {{ item.venue.location }}
+            </p>
           </div>
         </div>
-        <div class="col-8  card-btn-conatiner  ">
-          <div class="card-buttons ml-auto">
-            <button type="button" class="btn btn-flat-dark btn-sm  mr-md-1 " (click)="viewDetail(item.type,i)"
-              rippleEffect>
-              View
-            </button>
-            <button type="button" class="btn btn-warning  btn-sm" style="box-shadow: none;"
-              routerLink="/event/event-preview">
-              Preview
-            </button>
-          </div>
-        </div>
-        <div class="col-12 mt-1 card-text-style">
-          <h4 class="ellipsis">{{item.title}} </h4>
-          <p class="card-text ellipsis">
-            <i class="feather" data-feather="clock"></i>
-            {{ formatDateTime(item.dtEvent, item.time) }}
-          </p>
-          <p class="card-text ellipsis">
-            <i class="feather" data-feather="map-pin"></i>
-            {{ item.venue.location }}
-          </p>
-        </div>
       </div>
+
     </div>
   </div>
 </div>
 
+
+
 <core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-scheduled" overlayClass="modal-backdrop"
   hideOnEsc="true">
-  <app-schedual-event-detail-presenter></app-schedual-event-detail-presenter>
+  <app-schedual-event-detail-presenter *ngIf="openDetailmodel"></app-schedual-event-detail-presenter>
 </core-sidebar>
+
 <core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-on-demand" overlayClass="modal-backdrop"
-  hideOnEsc="true">
-  <app-ondemand-event-detail-presenter  [eventData]="datasource" [startIndex]="startIndex"></app-ondemand-event-detail-presenter>
+  (OnClosed)="OnClosedDetail($event)" hideOnEsc="true">
+  <app-ondemand-event-detail-presenter [eventData]="datasource" *ngIf="openDetailmodel" detailType='upcoming'
+    [startIndex]="startIndex"></app-ondemand-event-detail-presenter>
 </core-sidebar>
