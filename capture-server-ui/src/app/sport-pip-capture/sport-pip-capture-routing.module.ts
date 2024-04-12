@@ -48,7 +48,7 @@ const routes: Routes = [
 
   { path: "event", component: EventPresenter },
   { path: "past-event-view", component: PastEventViewPresenter },
-  { path: "event/event-preview", component: EventPreviewComponent },
+  { path: "event/event-preview", component: EventPreviewPresenter },
 ];
 
 @NgModule({

@@ -5,7 +5,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   selector: 'event-start-notifications',
   templateUrl: './event-start-notifications.component.html',
   styleUrls: ['./event-start-notifications.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class EventStartNotificationsComponent implements OnInit {
 
