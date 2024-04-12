@@ -1,15 +1,20 @@
 import * as zmq from 'zeromq';
 import express from 'express';
+import { Server } from './server';
 
-const app = express();
-const server = app.listen(5000, () => {
+const server = new Server();
+
+const app = server.app;
+
+const myServer = app.listen(5000, () => {
   console.log('running 5000');
 });
-const io = require('socket.io')(server, {
+
+const io = require('socket.io')(myServer, {
   cors: { origin: '*' },
 });
-server.setMaxListeners(15);
-// Create a ZeroMQ subscriber socket
+myServer.setMaxListeners(15);
+
 const sock = new zmq.Subscriber();
 const publisher = new zmq.Publisher();
 // Connect to the ZeroMQ socket
