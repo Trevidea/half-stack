@@ -11,10 +11,10 @@ import { EventPresenter } from "./components/event/event.presenter";
 import { CreateOnDemandEventPresenter } from "./components/event/create-on-demand-event-form/create-on-demand-event.presenter";
 import { MetaTypePresenter } from "./components/meta-type/meta-type.presenter";
 import { PastEventViewPresenter } from "./components/event/grid-view-ui/past-event/past-event-view/past-event-view.presenter";
-import { EventPreviewComponent } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.component";
-import { EventPreviewPresenter } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.presenter";
 import { DatatablesService } from "app/main/tables/datatables/datatables.service";
 import { ConnectionStartPresenter } from "./components/connection/connection-start/connection-start.presenter";
+import { EventPreviewPresenter } from "./components/event/event-preview/event-preview.presenter";
+import { EventPreviewComponent } from "./components/event/event-preview/event-preview.component";
 
 const routes: Routes = [
   {
