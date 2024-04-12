@@ -3,22 +3,32 @@
 
 #include <chrono>
 #include <thread>
+#include <functional>
+#include <condition_variable>
+#include <mutex>
 
 class Countdown
 {
 private:
+    std::tm m_time;
+    std::thread *mp_thread;
+    std::mutex mtx;
+    std::condition_variable cv;
+    bool m_abort = false;
+private:
+    std::function<void()> m_end;
+    void worker(std::chrono::time_point<std::chrono::system_clock> tp);
 public:
-    Countdown();
+    Countdown(const int year,
+              const int month,
+              const int day,
+              const int hour,
+              const int min,
+              const int sec,
+              std::function<void()> &&end);
+    Countdown(const Countdown &cd, const int duration, std::function<void()> &&end);
     ~Countdown();
+    void abort();
 };
-
-Countdown::Countdown()
-{
-    std::chrono::steady_clock().now()
-}
-
-Countdown::~Countdown()
-{
-}
 
 #endif // COUNTDOWN_H
