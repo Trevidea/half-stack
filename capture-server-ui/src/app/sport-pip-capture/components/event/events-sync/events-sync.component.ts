@@ -11,10 +11,11 @@ import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.
 export class EventsSyncComponent implements OnInit {
   uploadicon: string = 'assets/images/spip-icons/upload.svg'
   backgroundColor: string;
-  outerStrokeColor:string;
-  syncMessage:string;
-  subSyncMessage:string;
-  failed:boolean=false
+  outerStrokeColor: string;
+  syncMessage: string;
+  subSyncMessage: string;
+  failed: boolean = false
+  percent: number = 0
   constructor(private service: ModelServiceService, public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
@@ -23,24 +24,31 @@ export class EventsSyncComponent implements OnInit {
 
 
   SyncEvents() {
-    this.outerStrokeColor='#216093'
+    this.outerStrokeColor = '#216093'
     this.backgroundColor = 'var(--syncbackground)'
-    this.syncMessage='Syncing Events'
+    this.syncMessage = 'Syncing Events'
+    this.percent = 5
     console.log('clicked syncEvents');
-    this.service.syncEvents().subscribe(
-      (response) => {
-        this.uploadicon='assets/images/spip-icons/check.svg'
-        console.log('Response from syncEvents:', response);
-      },
-      (error) => {
-        console.error('Error occurred while syncing events:', error);
-        this.failed=true
-        this.uploadicon='assets/images/spip-icons/x.svg'
-        this.backgroundColor = 'rgba(222, 46, 33, 0.10)'
-        this.outerStrokeColor='transparent'
-        this.syncMessage='Sync Failed'
-        this.subSyncMessage='Try again  to sync event'
-      }
-    );
+    setTimeout(() => {
+      this.service.syncEvents().subscribe(
+        (response) => {
+          this.percent = 100
+          this.uploadicon = 'assets/images/spip-icons/check.svg'
+          this.backgroundColor = 'rgba(222, 46, 33, 0.10)'
+          console.log('Response from syncEvents:', response);
+        },
+        (error) => {
+          console.error('Error occurred while syncing events:', error);
+          this.failed = true
+          this.uploadicon = 'assets/images/spip-icons/x.svg'
+          this.backgroundColor = 'rgba(222, 46, 33, 0.10)'
+          this.outerStrokeColor = 'transparent'
+          this.syncMessage = 'Sync Failed'
+          this.subSyncMessage = 'Try again  to sync event'
+        }
+      );
+    }, 1000)
   }
+
+  
 }
