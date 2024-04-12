@@ -1,15 +1,22 @@
 import * as zmq from 'zeromq';
 import express from 'express';
+import { Server } from './server';
+import { Socket } from './socket-service';
 
-const app = express();
-const server = app.listen(5000, () => {
+const server = new Server();
+
+const app = server.app;
+
+export const myServer = app.listen(5000, () => {
   console.log('running 5000');
+  server.init();
 });
-const io = require('socket.io')(server, {
-  cors: { origin: '*' },
-});
-server.setMaxListeners(15);
-// Create a ZeroMQ subscriber socket
+
+// const io = require('socket.io')(myServer, {
+//   cors: { origin: '*' },
+// });
+// myServer.setMaxListeners(15);
+
 const sock = new zmq.Subscriber();
 const publisher = new zmq.Publisher();
 // Connect to the ZeroMQ socket
@@ -33,14 +40,14 @@ async function handleMessage() {
         `Received message on topic ${topic.toString()}: ${message.toString()}`,
       );
 
-      io.on('connection', (socket: any) => {
-        console.log('connection with socket');
-        io.emit('hello', `${message.toString()}`);
-        socket.on('message', (data: any) => {
-          console.log(data);
-          publisher.send(['response-topic', data]);
-        });
-      });
+      // io.on('connection', (socket: any) => {
+      //   console.log('connection with socket');
+      //   io.emit('hello', `${message.toString()}`);
+      //   socket.on('message', (data: any) => {
+      //     console.log(data);
+      //     publisher.send(['response-topic', data]);
+      //   });
+      // });
     } catch (err) {
       console.error('Error receiving message:', err);
     }

@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
-import { DatatablesService } from 'app/main/tables/datatables/datatables.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { data, Connection } from './table-data'
+import { Component, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
+import { ColumnMode, SelectionType } from "@swimlane/ngx-datatable";
+import { DatatablesService } from "app/main/tables/datatables/datatables.service";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { data, Connection } from "./table-data";
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -22,9 +22,11 @@ import {
   ApexLegend,
   ApexResponsive,
   ApexStates,
-  ChartComponent
-} from 'ng-apexcharts';
-import { CoreConfigService } from '@core/services/config.service';
+  ChartComponent,
+} from "ng-apexcharts";
+import { CoreConfigService } from "@core/services/config.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { PipConformationModalComponent } from "app/sport-pip-capture/blocks/pip-conformation-modal/pip-conformation-modal.component";
 export interface ChartOptions {
   series?: ApexAxisChartSeries;
   chart?: ApexChart;
@@ -64,17 +66,14 @@ export interface ChartOptions2 {
   states?: ApexStates;
 }
 @Component({
-  selector: 'app-capture-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  selector: "app-capture-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.scss"],
   encapsulation: ViewEncapsulation.None,
-  providers: [
-    DatatablesService
-  ],
+  providers: [DatatablesService],
 })
-
 export class CaptureDashboardComponent implements OnInit {
-  @ViewChild('tableRowDetails') tableRowDetails: any;
+  @ViewChild("tableRowDetails") tableRowDetails: any;
   private _unsubscribeAll: Subject<any>;
   public ColumnMode = ColumnMode;
   public SelectionType = SelectionType;
@@ -83,81 +82,67 @@ export class CaptureDashboardComponent implements OnInit {
   public rows: any;
   public chkBoxSelected = [];
 
-
   public isMenuToggled = false;
   chartColors = {
     column: {
-      series1: '#826af9',
-      series2: '#d2b0ff',
-      bg: '#f8d3ff'
+      series1: "#826af9",
+      series2: "#d2b0ff",
+      bg: "#f8d3ff",
     },
     success: {
-      shade_100: '#7eefc7',
-      shade_200: '#06774f'
+      shade_100: "#7eefc7",
+      shade_200: "#06774f",
     },
     donut: {
-      series1: '#216093',
-      series2: '#F5A30A',
-      series3: '#826bf8',
-      series4: '#2b9bf4',
-      series5: '#FFA1A1'
+      series1: "#216093",
+      series2: "#F5A30A",
+      series3: "#826bf8",
+      series4: "#2b9bf4",
+      series5: "#FFA1A1",
     },
     area: {
-      series3: '#a4f8cd',
-      series2: '#60f2ca',
-      series1: '#2bdac7'
-    }
+      series3: "#a4f8cd",
+      series2: "#60f2ca",
+      series1: "#2bdac7",
+    },
   };
 
+  activeTabId = 2;
 
-  activeTabId = 2
- 
-  constructor(private _datatablesService: DatatablesService, private _coreConfigService: CoreConfigService) {
+  constructor(
+    private _datatablesService: DatatablesService,
+    private _coreConfigService: CoreConfigService,
+    public modal: NgbModal
+  ) {
     this._unsubscribeAll = new Subject();
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  }
+  openalert() {
+    this.modal.open(PipConformationModalComponent, {
+      centered: true,
+      size: "sm",
+    });
   }
 
   ngOnInit(): void {
-    this.rows = Connection
-    
+    this.rows = Connection;
   }
   customChkboxOnSelect({ selected }) {
     this.chkBoxSelected.splice(0, this.chkBoxSelected.length);
     this.chkBoxSelected.push(...selected);
   }
-  onActivate(event) {
-   
-  }
+  onActivate(event) {}
   onSelect({ selected }) {
-   
-
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);
   }
   ngAfterViewInit() {
     // Subscribe to core config changes
-    this._coreConfigService.getConfig().subscribe(config => {
+    this._coreConfigService.getConfig().subscribe((config) => {
       // If Menu Collapsed Changes
-      if (config.layout.menu.collapsed === true || config.layout.menu.collapsed === false) {
+      if (
+        config.layout.menu.collapsed === true ||
+        config.layout.menu.collapsed === false
+      ) {
         setTimeout(() => {
           // Get Dynamic Width for Charts
           this.isMenuToggled = true;
@@ -168,28 +153,27 @@ export class CaptureDashboardComponent implements OnInit {
       }
     });
   }
-
 }
 export const colors = {
   solid: {
-    primary: '#7367F0',
-    secondary: '#82868b',
-    success: '#28C76F',
-    info: '#00cfe8',
-    warning: '#FF9F43',
-    danger: '#EA5455',
-    dark: '#4b4b4b',
-    black: '#000',
-    white: '#fff',
-    body: '#f8f8f8'
+    primary: "#7367F0",
+    secondary: "#82868b",
+    success: "#28C76F",
+    info: "#00cfe8",
+    warning: "#FF9F43",
+    danger: "#EA5455",
+    dark: "#4b4b4b",
+    black: "#000",
+    white: "#fff",
+    body: "#f8f8f8",
   },
   light: {
-    primary: '#7367F01a',
-    secondary: '#82868b1a',
-    success: '#28C76F1a',
-    info: '#00cfe81a',
-    warning: '#FF9F431a',
-    danger: '#EA54551a',
-    dark: '#4b4b4b1a'
-  }
+    primary: "#7367F01a",
+    secondary: "#82868b1a",
+    success: "#28C76F1a",
+    info: "#00cfe81a",
+    warning: "#FF9F431a",
+    danger: "#EA54551a",
+    dark: "#4b4b4b1a",
+  },
 };
