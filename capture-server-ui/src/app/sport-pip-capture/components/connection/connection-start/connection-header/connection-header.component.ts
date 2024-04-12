@@ -4,9 +4,10 @@ import { EventService } from "@core/services/event -start.service";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 
-import { Subject } from "rxjs";
+import { Subject, Subscription } from "rxjs";
 import { ConnectionAlertComponent } from "../../connection-alert/connection-alert.component";
 import { EventUndoNotificationComponent } from "../../connection-alert/event-undo-notification/event-undo-notification.component";
+import { TimerService } from "../../timer.service";
 @Component({
   selector: "app-connection-header",
   templateUrl: "./connection-header.component.html",
@@ -15,37 +16,51 @@ import { EventUndoNotificationComponent } from "../../connection-alert/event-und
   encapsulation: ViewEncapsulation.None,
 })
 export class ConnectionHeaderComponent implements OnInit {
-  _gridView: boolean = false;
-  _ListView: boolean = true;
   connectiondetail: boolean = false;
   undoEvent: boolean = false;
 
-  private socket: any;
-  private subject: Subject<string> = new Subject<string>();
+  currentTime: string;
+  isTimerRunning = false;
+  private timerSubscription: Subscription;
   constructor(
     private router: Router,
     private event: EventService,
     private route: ActivatedRoute,
     private webSocketService: DataFactoryService,
-    private modelService: NgbModal
-  ) {}
-  messages: string[] = [];
-  ngOnInit(): void {}
+    private modelService: NgbModal,
+    private timerService: TimerService
+  ) {
+    this.timerSubscription = this.timerService.getTime().subscribe((time) => {
+      this.currentTime = time;
+    });
+  }
+  startTimer(e?: any) {
+    this.isTimerRunning = true;
+    this.timerService.startTimer(e);
+  }
+  pauseTimer() {
+    this.timerService.pauseTimer();
+  }
+  stopTimer() {
+    this.isTimerRunning = false;
+  }
+
+  resetTimer() {
+    this.timerService.resetTimer();
+    this.isTimerRunning = false;
+  }
+
+  ngOnDestroy() {
+    this.timerSubscription.unsubscribe();
+  }
+  ngOnInit(): void {
+    this.startTimer();
+  }
 
   closeDetail() {
     this.connectiondetail = false;
   }
 
-  gridView() {
-    this._gridView = true;
-    this._ListView = false;
-    this.router.navigate(["connection/connection-card-view"]);
-  }
-  listView() {
-    this._gridView = false;
-    this._ListView = true;
-    this.router.navigate(["connection"]);
-  }
   playPauseEvent(e: string) {
     if (e == "play") {
       this.undoEvent = false;

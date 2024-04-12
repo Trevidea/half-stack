@@ -16,7 +16,7 @@ const publisher = new zmq.Publisher();
 sock.connect('tcp://127.0.0.1:4001');
 
 // Subscribe to a topic
-sock.subscribe('rand');
+sock.subscribe('event');
 
 // Log a message indicating successful connection
 console.log('ZMQ sub connected to port 4000');
