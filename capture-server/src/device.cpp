@@ -1,5 +1,5 @@
 #include "device.h"
-
+Device::Device():Base(){}
 Device::Device(Json::Value& model) : Base(model) {}
 
 std::string Device::user() const {

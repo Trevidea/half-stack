@@ -57,8 +57,8 @@ public:
     void setCountdown(const std::string& value);
 
     // ActiveDevice array
-    std::vector<Device>& activeDevice();
-    const std::vector<Device>& activeDevice() const;
+    std::vector<Device>& activeDevices();
+    const std::vector<Device>& activeDevices() const;
 
 private:
     std::vector<Device> m_activeDevice;

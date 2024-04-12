@@ -5,6 +5,7 @@
 class Device : public Base {
 public:
     // Constructor
+    Device();
     Device(Json::Value& model);
 
     // Getter and Setter properties
