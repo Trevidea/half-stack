@@ -398,7 +398,7 @@ export namespace Data {
     countdown: string;
     activeDevice: ActiveDevice[];
   }
-  export interface ActiveDevice extends Base {
+  export interface ActiveDevice {
     user: string;
     location: string;
     deviceId: string;
