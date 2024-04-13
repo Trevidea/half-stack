@@ -15,6 +15,7 @@ set(HALF_STACK_SRC
     user-profile.cpp
     base.cpp
     event-preview.cpp
+    event-runner.cpp
     device.cpp
     countdown.cpp
     metatype.cpp)

@@ -31,15 +31,15 @@ Countdown::Countdown(const int year,
         std::chrono::system_clock::from_time_t(std::mktime(&this->m_time));
     this->mp_thread = new std::thread(&Countdown::worker, this, tp);
 }
-Countdown::Countdown(const Countdown &cd, const int duration,
-                     std::function<void()> &&end) : m_time{cd.m_time},
+Countdown::Countdown(const Countdown &start, const int forTime,
+                     std::function<void()> &&end) : m_time{start.m_time},
                                                     mp_thread{nullptr},
                                                     m_end{end}
 {
     std::chrono::time_point tp =
         std::chrono::system_clock::from_time_t(std::mktime(&this->m_time));
-    std::chrono::minutes durat{duration};
-    tp += durat;
+    std::chrono::minutes minutes{forTime};
+    tp += minutes;
     this->mp_thread = new std::thread(&Countdown::worker, this, tp);
 }
 void Countdown::abort()

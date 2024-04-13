@@ -26,7 +26,7 @@ public:
               const int min,
               const int sec,
               std::function<void()> &&end);
-    Countdown(const Countdown &cd, const int duration, std::function<void()> &&end);
+    Countdown(const Countdown &start, const int forTime, std::function<void()> &&end);
     ~Countdown();
     void abort();
 };
