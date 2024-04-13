@@ -26,12 +26,12 @@ void Event::report()
                               {
                                   this->create(req, rsp);
                               });
-    Gateway::instance().route("POST", "/api/event/open-preview", // To request INSERT
+    Gateway::instance().route("GET", "/api/event/open-preview", // To request INSERT
                               [this](const Request &req, Response &rsp)
                               {
                                   this->openPreview(req, rsp);
                               });
-    Gateway::instance().route("POST", "/api/event/close-preview", // To request INSERT
+    Gateway::instance().route("GET", "/api/event/close-preview", // To request INSERT
                               [this](const Request &req, Response &rsp)
                               {
                                   this->closePreview(req, rsp);
@@ -50,7 +50,6 @@ void Event::report()
 
 void Event::openPreview(const Request &req, Response rsp)
 {
-    
     const auto event = Event::byId<Event>(27);
     if (!event.notSet())
     {

@@ -4,7 +4,7 @@ const server = new Server();
 
 const app = server.app;
 
-export const myServer: I_http = app.listen(5000, () => {
+export const myServer: I_http = app.listen(5001, () => {
   server.init();
   console.log('running 5000');
 });
