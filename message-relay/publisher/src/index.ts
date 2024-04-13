@@ -49,7 +49,8 @@ function sendEvent() {
   };
   socket.send([topicfilter, JSON.stringify(startEvent)]);
 }
-setInterval(() => {
+
+for (let index = 0; index < 10; index++) {
   setTimeout(() => {
     sendEvent();
     setTimeout(() => {
@@ -61,4 +62,4 @@ setInterval(() => {
       socket.send([topicfilter, JSON.stringify(preview)]);
     }, 2000);
   }, 3000);
-}, 5000);
+}
