@@ -62,7 +62,7 @@ function sendEvent() {
 //     }, 2000);
 //   }, 3000);
 // }, 5000);
-for (let index = 0; (index = 10); index++) {
+for (let index = 0; index < 10; index++) {
   setTimeout(() => {
     sendEvent();
     setTimeout(() => {
