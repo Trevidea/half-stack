@@ -49,14 +49,16 @@ function sendEvent() {
   };
   socket.send([topicfilter, JSON.stringify(startEvent)]);
 }
-setTimeout(() => {
-  sendEvent();
+setInterval(() => {
   setTimeout(() => {
-    const msg = { eventStatus: 'Event Stopped' };
-    socket.send([topicfilter, JSON.stringify(msg)]);
-  }, 1000);
-  setTimeout(() => {
-    const preview = { eventStatus: 'Event Ready for Preview' };
-    socket.send([topicfilter, JSON.stringify(preview)]);
-  }, 2000);
-}, 3000);
+    sendEvent();
+    setTimeout(() => {
+      const msg = { eventStatus: 'Event Stopped' };
+      socket.send([topicfilter, JSON.stringify(msg)]);
+    }, 1000);
+    setTimeout(() => {
+      const preview = { eventStatus: 'Event Ready for Preview' };
+      socket.send([topicfilter, JSON.stringify(preview)]);
+    }, 2000);
+  }, 3000);
+}, 5000);
