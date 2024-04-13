@@ -1,7 +1,30 @@
 import { Collection } from "app/blocks/collection";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
+import { Range } from "app/blocks/collection";
+export class RangeEventPreviewView implements Views.Datasource {
 
-export class EventPreviewView implements Views.Datasource {
+  private _id: number;
+  public get id(): number {
+    return this._id;
+  }
+  public set id(v: number) {
+    this._id = v;
+  }
+
+
+  private _eventPreview: Range<EventPreview>;
+  public get eventPreview(): Range<EventPreview> {
+    if (!this._eventPreview) {
+      this._eventPreview = new Range<EventPreview>();
+    }
+    return this._eventPreview;
+  }
+  public set eventPreview(v: Range<EventPreview>) {
+    this._eventPreview = v;
+  }
+
+}
+export class EventPreview implements Views.Datasource {
   private _id: number;
   private _dtEvent: string;
   private _level: string;
@@ -145,8 +168,7 @@ export class EventPreviewView implements Views.Datasource {
   }
 }
 
-export class ActiveDeviceView implements Views.Datasource {
-  id: number;
+export class ActiveDeviceView {
 
   private _network: string;
   public get network(): string {

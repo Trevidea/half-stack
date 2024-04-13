@@ -55,8 +55,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule } from "@angular/forms";
 import { ShareToPeopleComponent } from "./components/event/grid-view-ui/past-event/share-event/component/share-to-people/share-to-people.component";
 import { ShareToSocialComponent } from "./components/event/grid-view-ui/past-event/share-event/component/share-to-social/share-to-social.component";
-import { EventPreviewComponent } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.component";
-import { ActiveDevicesComponent } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/active-devices/active-devices.component";
 import { PastEventViewComponent } from "./components/event/grid-view-ui/past-event/past-event-view/past-event-view.component";
 import { PastEventViewPresenter } from "./components/event/grid-view-ui/past-event/past-event-view/past-event-view.presenter";
 import { ShareEventComponent } from "./components/event/grid-view-ui/past-event/share-event/share-event.component";
@@ -69,7 +67,6 @@ import { PastEventsListComponent } from "./components/event/list-view-ui/past-ev
 import { MenuButtonComponent } from "./components/event/event-utility/menu-button/menu-button.component";
 import { EventPaginationComponent } from "./components/event-pagination/event-pagination.component";
 import { DemoMosaicModule } from "./mosaic.module";
-import { EventPreviewPresenter } from "./components/event/grid-view-ui/up-coming-event/components/event-preview/event-preview.presenter";
 import { VideoStreamingComponent } from "./blocks/video-streaming/video-streaming.component";
 import { SchedualEventDetailPresenter } from "./components/event/events-detail/schedual-event-detail/schedual-event-detail.presenter";
 import { SchedualEventDetailComponent } from "./components/event/events-detail/schedual-event-detail/schedual-event-detail.component";
@@ -90,6 +87,10 @@ import { EventTypeTransformPipe } from "./components/event/event-utility/type-tr
 import { ConnectionAlertComponent } from "./components/connection/connection-alert/connection-alert.component";
 import { EventUndoNotificationComponent } from "./components/connection/connection-alert/event-undo-notification/event-undo-notification.component";
 import { EventEndedModalComponent } from "./components/connection/connection-alert/event-ended-modal/event-ended-modal.component";
+import { PipConformationModalComponent } from "./blocks/pip-conformation-modal/pip-conformation-modal.component";
+import { EventPreviewComponent } from "./components/event/event-preview/event-preview.component";
+import { ActiveDevicesComponent } from "./components/event/event-preview/active-devices/active-devices.component";
+import { EventPreviewPresenter } from "./components/event/event-preview/event-preview.presenter";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -112,7 +113,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ConnectionStartComponent,
     CreateOnDemandEventComponent,
     EventConnectionDetailComponent,
-
     ConnectionDeviceDetailComponent,
     LogComponent,
     LogPresentert,
@@ -167,6 +167,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ConnectionAlertComponent,
     EventUndoNotificationComponent,
     EventEndedModalComponent,
+    PipConformationModalComponent,
   ],
   providers: [
     {

@@ -54,9 +54,9 @@ setTimeout(() => {
   setTimeout(() => {
     const msg = { eventStatus: 'Event Stopped' };
     socket.send([topicfilter, JSON.stringify(msg)]);
-  }, 10000);
+  }, 1000);
   setTimeout(() => {
     const preview = { eventStatus: 'Event Ready for Preview' };
     socket.send([topicfilter, JSON.stringify(preview)]);
-  }, 20000);
-}, 4000);
+  }, 2000);
+}, 3000);

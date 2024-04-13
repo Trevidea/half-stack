@@ -28,7 +28,7 @@ export class ConnectionStartComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private socketService: SocketService
   ) {
-    this.socketService.listen("hello").subscribe((data) => {
+    this.socketService.listen("event").subscribe((data) => {
       console.log(data);
       // this.socketService.emit("message", "message UI");
     });
