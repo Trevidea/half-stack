@@ -32,6 +32,10 @@ label {
     .btn-danger {
       border-color: rgba(33, 96, 147, 1) !important;
       background-color: rgba(33, 96, 147, 1) !important;
+
+      &:hover {
+        box-shadow: none !important;
+      }
     }
   }
 }
