@@ -19,12 +19,12 @@ import { OnDemandEventBuilder } from './buliders/on-demand-event';
 })
 export class CreateOnDemandEventPresenter implements OnInit {
   ds!: OnDemandEventFormView;
-
-  ondemandEvent: Data.OnDemandEvent = {
-    event_id: 0,
-    owner_id: 0,
-    id: 0
-  };
+  eventId: number;
+  // ondemandEvent: Data.OnDemandEvent = {
+  //   event_id: 0,
+  //   owner_id: 0,
+  //   id: 0
+  // };
 
   actions!: Views.FormActions;
   public selectBasic: any[] = [];
@@ -42,6 +42,7 @@ export class CreateOnDemandEventPresenter implements OnInit {
     this.actions = new PresenterAction("event", this.ds, this.modelServiceService.saveEvent, EventBuilder, router);
     this.actions.data.subscribe((data: any) => {
       if (data) {
+        console.log(data)
         let ondemandEvent = { event_id: data.id, owner_id: 1 }
         this.saveDemand(ondemandEvent)
       }
@@ -51,14 +52,23 @@ export class CreateOnDemandEventPresenter implements OnInit {
 
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.eventId = parseInt(params['id']);
+      console.log(this.eventId)
+    });
+
     Transformer.ComposeObject(this.dataFactory.EventSports(), this.ds.sports, ArrayBuilder)
     Transformer.ComposeObject(this.dataFactory.EventLevel(), this.ds.levels, ArrayBuilder)
     Transformer.ComposeObject(this.dataFactory.EventProgram(), this.ds.programs, ArrayBuilder)
     Transformer.ComposeObject(this.dataFactory.EventYear(), this.ds.years, ArrayBuilder)
-    if (this.ds.id) {
 
-      // Transformer.ComposeObjectAsync(this.dataFactory.EventJson(123), this.ds, OnDemandFormBuilder)
+    if (this.eventId) {
+      Transformer.ComposeObjectAsync(this.modelServiceService.eventJson(this.eventId), this.ds, EventBuilder).then(
+        ()=>{}
+      )
+      console.log(this.ds)
     }
+
     this.ds.sports.onAddingNewItem(async (e: { modal: Views.ModalHost }) => {
       e.modal.component = TypesPresenter;
       e.modal.properties["key"] = "SPORTS";
@@ -74,14 +84,14 @@ export class CreateOnDemandEventPresenter implements OnInit {
   }
 
 
-  formatTime(time: any): number {
-    if (!time) return 0;
-    const [hours, minutes] = time.split(':');
-    let formattedTime = hours + minutes;
-    return parseInt(formattedTime);
-  }
+  // formatTime(time: any): number {
+  //   if (!time) return 0;
+  //   const [hours, minutes] = time.split(':');
+  //   let formattedTime = hours + minutes;
+  //   return parseInt(formattedTime);
+  // }
 
-////just for testing ///////
+  ////just for testing ///////
   saveDemand(data: { event_id: number, owner_id: number }) {
     const requestData = {
       "table": "ondemandevent",
