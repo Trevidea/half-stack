@@ -50,8 +50,8 @@ Connection DBManager::getConnection(bool trx)
     {
         if (!Connection::has(c))
         {
-            auto server = this->getEnv("PG_SRV", "localhost");
-            // auto server = this->getEnv("PG_SRV", "drake.in");
+            // auto server = this->getEnv("PG_SRV", "localhost");
+            auto server = this->getEnv("PG_SRV", "drake.in");
             auto db = this->getEnv("PG_DBS", "half-stack");
             auto usr = this->getEnv("PG_USR", "postgres");
             auto pwd = this->getEnv("PG_PWD", "btc.008");

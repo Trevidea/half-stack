@@ -42,13 +42,13 @@ std::string EventRunner::getLiveEventData()
     le.setStatus("Upcoming");
     return le.toResponse();
 }
-EventRunner::EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration) : m_start{year, month, day, hour, min, sec, std::bind(&EventRunner::started, this)},
+EventRunner::EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration) : mp_eventPreviewPublisher{new WorkerLoop(2, [this]()
+                                                                                                                                                                                     { Publisher::instance().publish("event-preview", this->getEventPreviewData()); })},
+                                                                                                                                             mp_liveEventPublisher{new WorkerLoop(2, [this]()
+                                                                                                                                                                                  { Publisher::instance().publish("live-event", this->getLiveEventData()); })},
+                                                                                                                                             m_start{year, month, day, hour, min, sec, std::bind(&EventRunner::started, this)},
                                                                                                                                              m_end{m_start, duration, std::bind(&EventRunner::ended, this)}
 {
-    this->mp_eventPreviewPublisher = new WorkerLoop(2, [this]()
-                                                    { Publisher::instance().publish("event-preview", getEventPreviewData()); });
-    this->mp_liveEventPublisher = new WorkerLoop(2, [this]()
-                                                 { Publisher::instance().publish("live-event", this->getLiveEventData()); });
     this->mp_eventPreviewPublisher->start();
 }
 
@@ -61,6 +61,7 @@ void EventRunner::stop()
 }
 void EventRunner::started()
 {
+    this->m_eventStarted = true;
     this->mp_eventPreviewPublisher->stop();
     spdlog::trace("Event started..");
     Publisher::instance().publish("event-terminal", "{'terminal':'start'}");
