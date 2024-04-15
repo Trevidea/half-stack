@@ -18,6 +18,7 @@ import {
 } from "app/blocks/ngb-date-converter";
 import Swal from "sweetalert2";
 import { ConnectionAlertComponent } from "../../connection/connection-alert/connection-alert.component";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-create-on-demand-event",
   templateUrl: "./create-on-demand-event.component.html",
@@ -30,12 +31,11 @@ import { ConnectionAlertComponent } from "../../connection/connection-alert/conn
 })
 export class CreateOnDemandEventComponent implements OnInit {
   @Input() datasource: any;
-  // public selectBasic: any[] = [];
-  // public selectBasicLoading = false;
+
   model: NgbDateStruct;
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter();
-  constructor(private modelService: NgbModal) { }
+  constructor(private modelService: NgbModal, private router: Router) {}
 
   ngOnInit(): void {
     console.log(this.datasource.time);
@@ -77,8 +77,9 @@ export class CreateOnDemandEventComponent implements OnInit {
       "Are you sure you <strong> doesn’t want</strong> to <br> create this event?";
 
     modeldata.componentInstance.passEntry.subscribe((receivedEntry) => {
-      console.log("received", receivedEntry);
-      // this.undoEvent = receivedEntry;
+      if (receivedEntry) {
+        this.router.navigate(["event"]);
+      }
     });
   }
 

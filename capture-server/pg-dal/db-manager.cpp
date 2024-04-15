@@ -50,11 +50,13 @@ Connection DBManager::getConnection(bool trx)
     {
         if (!Connection::has(c))
         {
-            auto server = this->getEnv("PG_SRV", "drake.in");
+            auto server = this->getEnv("PG_SRV", "localhost");
+            // auto server = this->getEnv("PG_SRV", "drake.in");
             auto db = this->getEnv("PG_DBS", "half-stack");
             auto usr = this->getEnv("PG_USR", "postgres");
             auto pwd = this->getEnv("PG_PWD", "btc.008");
-            return Connection::open(c, server, 52525, db, usr, pwd, trx);
+            return Connection::open(c, server, 5432, db, usr, pwd, trx);
+            // return Connection::open(c, server, 52525, db, usr, pwd, trx);
         }
     }
     spdlog::error("No more connections available in the connection pool.");

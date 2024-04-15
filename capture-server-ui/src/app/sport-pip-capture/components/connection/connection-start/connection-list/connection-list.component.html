@@ -1,6 +1,6 @@
 <div class="connection-list">
   <div class="table-responsive">
-    <table class="table table-hover">
+    <table class="table custom-table-hover">
       <thead>
         <tr class="text-nowrap">
           <th scope="col">Action</th>
@@ -21,7 +21,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="text-nowrap" *ngFor="let item of eventConnection">
+        <tr
+          [ngClass]="
+            item.role == 'Publisher' ? 'cursor-pointer' : 'cursor-none'
+          "
+          class="text-nowrap"
+          *ngFor="let item of eventConnection"
+        >
           <th>
             <span [mcDropdownTriggerFor]="appDropdownWithNested">
               <i
@@ -93,26 +99,26 @@
               </button>
             </mc-dropdown>
           </th>
-          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <td (click)="detail(item)">
             {{ item.user }}
           </td>
-          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <td (click)="detail(item)">
             {{ item.role }}
           </td>
-          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <td (click)="detail(item)">
             {{ item.location }}
           </td>
-          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <td (click)="detail(item)">
             {{ item.deviceId }}
           </td>
 
-          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <td (click)="detail(item)">
             {{ item.deviceType }}
           </td>
-          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <td (click)="detail(item)">
             {{ item.network }}
           </td>
-          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <td (click)="detail(item)">
             <div
               class="badge badge-pill"
               [ngClass]="{
@@ -123,11 +129,11 @@
               {{ item.quality }}
             </div>
           </td>
-          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <td (click)="detail(item)">
             {{ item.ipAddress }}
           </td>
 
-          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <td (click)="detail(item)">
             <div class="d-flex">
               <span>
                 <i
@@ -152,10 +158,10 @@
               </span>
             </div>
           </td>
-          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <td (click)="detail(item)">
             {{ item.received }}
           </td>
-          <td [routerLink]="'/connection/connection-device-detail/{{item.id}}'">
+          <td (click)="detail(item)">
             {{ item.retries }}
           </td>
         </tr>
