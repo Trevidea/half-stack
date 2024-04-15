@@ -22,6 +22,7 @@ export class ConnectioGridListHeaderComponent implements OnInit {
   }
   getAllPubOrSub(e) {
     this.allOrSubOrPub = e;
+    console.log("clicked");
     this.pubSubAll.emit(e);
   }
   modalOpenForm(modalForm) {
