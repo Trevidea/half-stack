@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
 import { ColumnMode, SelectionType } from "@swimlane/ngx-datatable";
 import { DatatablesService } from "app/main/tables/datatables/datatables.service";
 import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
-import { data, Connection } from "./table-data";
+import { Connection } from "./table-data";
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -22,11 +21,9 @@ import {
   ApexLegend,
   ApexResponsive,
   ApexStates,
-  ChartComponent,
 } from "ng-apexcharts";
 import { CoreConfigService } from "@core/services/config.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { PipConformationModalComponent } from "app/sport-pip-capture/blocks/pip-conformation-modal/pip-conformation-modal.component";
 export interface ChartOptions {
   series?: ApexAxisChartSeries;
   chart?: ApexChart;
@@ -112,16 +109,12 @@ export class CaptureDashboardComponent implements OnInit {
   constructor(
     private _datatablesService: DatatablesService,
     private _coreConfigService: CoreConfigService,
-    public modal: NgbModal
+    public modal: NgbModal,
+    private modalService: NgbModal
   ) {
     this._unsubscribeAll = new Subject();
   }
-  openalert() {
-    this.modal.open(PipConformationModalComponent, {
-      centered: true,
-      size: "sm",
-    });
-  }
+  openalert() {}
 
   ngOnInit(): void {
     this.rows = Connection;

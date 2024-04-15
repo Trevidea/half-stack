@@ -8,6 +8,8 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 })
 export class ConnectioGridListHeaderComponent implements OnInit {
   @Output() messageListOrGrid = new EventEmitter<string>();
+  @Output() pubSubAll = new EventEmitter<string>();
+
   allOrSubOrPub: string = "all";
   listOrGrid: string = "list";
 
@@ -20,6 +22,8 @@ export class ConnectioGridListHeaderComponent implements OnInit {
   }
   getAllPubOrSub(e) {
     this.allOrSubOrPub = e;
+    console.log("clicked");
+    this.pubSubAll.emit(e);
   }
   modalOpenForm(modalForm) {
     this.modalService.open(modalForm, {
