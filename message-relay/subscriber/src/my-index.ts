@@ -8,8 +8,8 @@ const io = new Server(httpServer, {
     origin: 'http://localhost:4200',
   },
 });
-httpServer.listen(3000);
-console.log('Relay service running on port 3000');
+httpServer.listen(3001);
+console.log('Relay service running on port 3001');
 
 async function run() {
   const zmq = require('zeromq');

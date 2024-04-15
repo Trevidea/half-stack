@@ -7,7 +7,7 @@ import { Socket, io } from 'socket.io-client';
 })
 export class SocketService {
   private socket!: Socket;
-  url = 'http://localhost:3000';
+  url = 'http://localhost:3001';
 
   private liveEventSubject = new Subject<string>();
   private eventPreviewSubject = new Subject<string>();
