@@ -148,7 +148,7 @@ export class ModelServiceService {
     }
   }
 
-  // http://drake.in:1437/api/on-demand-event
+  // http://localhost:1437/api/on-demand-event
 
   // saveOnDemandEvent(data: Data.OnDemandEvent): Observable<Data.OnDemandEvent> {
   //   console.log('saveOnDemandEvent', data)
@@ -159,7 +159,7 @@ export class ModelServiceService {
   //   }
   // }
 
-  private apiUrl = 'http://drake.in:1437/api/on-demand-event';
+  private apiUrl = 'http://localhost:1437/api/on-demand-event';
   _saveOnDemandEvent(data: any): Observable<any> {
     return this._httpClient.post<any>(this.apiUrl, data);
   }
@@ -183,10 +183,10 @@ export class ModelServiceService {
   }
 
 
-  // drake.in:1437/api/event/open-preview
+  // localhost:1437/api/event/open-preview
 
   openPreview(): Observable<any> {
-    const url = 'drake.in:1437/api/event/open-preview'
+    const url = 'http://localhost:1437/api/event/open-preview'
     return this._httpClient.get<any>(url)
 
   }
