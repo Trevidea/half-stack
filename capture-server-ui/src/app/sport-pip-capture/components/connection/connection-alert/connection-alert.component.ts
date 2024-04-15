@@ -62,6 +62,7 @@ export class ConnectionAlertComponent implements OnInit {
       );
     } else {
       this.modalService.dismissAll();
+      this.passEntry.emit(true);
     }
   }
 }
