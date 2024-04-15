@@ -21,7 +21,7 @@ export class EventPreviewPresenter implements OnInit {
     private socketService: SocketService,
     private dataFactoryService: DataFactoryService
   ) {
-    this.socketService.listen("event").subscribe((data) => {
+    this.socketService.onEventPreview().subscribe((data) => {
       this.previewData = data;
       console.log(data);
     });

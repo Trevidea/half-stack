@@ -9,7 +9,7 @@ export class Server {
 
   init() {
     // connection with cpp server
-    require('events').EventEmitter.prototype._maxListeners = Infinity;
+    require('events').EventEmitter.prototype._maxListeners = 1;
     ZmqService.connectionZmq();
     this.setConfig();
   }
