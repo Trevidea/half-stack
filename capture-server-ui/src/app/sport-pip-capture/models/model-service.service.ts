@@ -142,6 +142,7 @@ export class ModelServiceService {
     console.log(data)
 
     if (data.id) {
+      
       return this.update("event", data, data.id);
     } else {
       return this.create("event", data);
@@ -186,7 +187,7 @@ export class ModelServiceService {
   // drake.in:1437/api/event/open-preview
 
   openPreview(): Observable<any> {
-    const url = 'drake.in:1437/api/event/open-preview'
+    const url = 'https://drake.in:1437/api/event/open-preview'
     return this._httpClient.get<any>(url)
 
   }
