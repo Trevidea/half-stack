@@ -18,6 +18,9 @@ import { locale as menuEnglish } from 'app/menu/i18n/en';
 import { locale as menuFrench } from 'app/menu/i18n/fr';
 import { locale as menuGerman } from 'app/menu/i18n/de';
 import { locale as menuPortuguese } from 'app/menu/i18n/pt';
+import { SocketService } from './sport-pip-capture/models/socket.service';
+import { EventStartNotificationsComponent } from './sport-pip-capture/components/event-notifications/event-start-notifications/event-start-notifications.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -57,7 +60,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private _coreLoadingScreenService: CoreLoadingScreenService,
     private _coreMenuService: CoreMenuService,
     private _coreTranslationService: CoreTranslationService,
-    private _translateService: TranslateService
+    private _translateService: TranslateService,
+    private socketService: SocketService,
+    private modalService: NgbModal
   ) {
     // Get the application main menu
     this.menu = menu;
@@ -79,6 +84,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Set the private defaults
     this._unsubscribeAll = new Subject();
+
+
   }
 
   // Lifecycle hooks
@@ -88,7 +95,19 @@ export class AppComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
-     
+    this.socketService.onEventTerminal().subscribe((data: string) => {
+      const message: { 'terminal': string } = JSON.parse(data);
+      if (message.terminal == "start") {
+        this.modalOpenMd('EventStartNotificationsComponent')
+      }
+      else if (message.terminal == "stop") {
+        this.socketService.disconnectFromRelayService();
+        this.modalOpenMd('EventEndNotifictionsComponent')
+      }
+      else {
+
+      }
+    })
 
     // Init wave effect (Ripple effect)
     Waves.init();
@@ -261,4 +280,15 @@ export class AppComponent implements OnInit, OnDestroy {
   toggleSidebar(key): void {
     this._coreSidebarService.getSidebarRegistry(key).toggleOpen();
   }
+
+  modalOpenMd(component: string) {
+    this.modalService.open(component, {
+      centered: true,
+      size: 'md',
+      backdrop: 'static', // Set the backdrop option here
+      keyboard: false
+    });
+  }
+
+
 }

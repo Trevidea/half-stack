@@ -7,16 +7,8 @@
       <div class="col-12 mb-2">
         <div class="form-group">
           <label>Event Name <span class="validationIcon">*</span></label>
-          <input
-            type="text"
-            id="Event-Name"
-            class="form-control"
-            name="ename"
-            placeholder="Enter Event Name"
-            [(ngModel)]="datasource.title"
-            required
-            #ngmEventName="ngModel"
-          />
+          <input type="text" id="Event-Name" class="form-control" name="ename" placeholder="Enter Event Name"
+            [(ngModel)]="datasource.title" required #ngmEventName="ngModel" />
         </div>
         <app-validation-alert controlName="Event Name" [control]="ngmEventName">
         </app-validation-alert>
@@ -25,112 +17,62 @@
       <div class="col-md-6 col-sm-12 mb-2">
         <label>Event Date<span class="validationIcon">*</span></label>
         <div class="input-group">
-          <input
-            class="form-control"
-            maxlength="10"
-            type="text"
-            ngbDatepicker
-            placeholder="mm-dd-yyyy"
-            name="dtEvent"
-            #dtEvent="ngbDatepicker"
-            [(ngModel)]="datasource.dtEvent"
-          />
+          <input class="form-control" maxlength="10" type="text" ngbDatepicker placeholder="mm-dd-yyyy" name="dtEvent"
+            #dtEvent="ngbDatepicker" [(ngModel)]="datasource.dtEvent" />
           <div class="input-group-append">
-            <button
-              class="btn btn-outline-secondary feather icon-calendar"
-              (click)="dtEvent.toggle()"
-              type="button"
-            ></button>
+            <button class="btn btn-outline-secondary feather icon-calendar" (click)="dtEvent.toggle()"
+              type="button"></button>
           </div>
         </div>
       </div>
       <div class="col-md-6 col-sm-12 mb-2">
         <div class="form-group">
           <label>Event Time<span class="validationIcon">*</span></label>
-          <input
-            type="time"
-            class="form-control"
-            name="time"
-            [(ngModel)]="datasource.time"
-            required
-            #ngmTime="ngModel"
-          />{{ datasource?.time }}
+          <input type="time" class="form-control" name="time" [value]="_formatTime(datasource.time)"
+            (input)="datasource.time = formatTime($event.target.value)" required
+            />
         </div>
-        <app-validation-alert controlName="Time" [control]="ngmTime">
-        </app-validation-alert>
+        <!-- <app-validation-alert controlName="Time" [control]="ngmTime">
+        </app-validation-alert> -->
       </div>
 
       <div class="col-12 mb-2">
         <div class="form-group">
           <label>Event Location<span class="validationIcon">*</span></label>
-          <input
-            type="text"
-            id="Event-Name"
-            class="form-control"
-            name="location"
-            placeholder="Enter Event Location"
-            [(ngModel)]="datasource.venue.location"
-            required
-            #ngmEventLocation="ngModel"
-          />
+          <input type="text" id="Event-Name" class="form-control" name="location" placeholder="Enter Event Location"
+            [(ngModel)]="datasource.venue.location" required #ngmEventLocation="ngModel" />
         </div>
-        <app-validation-alert
-          controlName="Event Location"
-          [control]="ngmEventLocation"
-        >
+        <app-validation-alert controlName="Event Location" [control]="ngmEventLocation">
         </app-validation-alert>
       </div>
       <div class="col-md-6 mb-2">
         <div class="form-group">
           <label>Street Address</label>
-          <input
-            type="text"
-            id="Event-Name"
-            class="form-control"
-            name="streetAddress"
-            placeholder="Enter Street Address"
-            [(ngModel)]="datasource.detail.cityAddress"
-          />
+          <input type="text" id="Event-Name" class="form-control" name="streetAddress"
+            placeholder="Enter Street Address" [(ngModel)]="datasource.detail.cityAddress" />
         </div>
       </div>
       <div class="col-md-6 mb-2">
         <div class="form-group">
           <label>City Address</label>
-          <input
-            type="text"
-            id="Event-Name"
-            class="form-control"
-            name="loction"
-            placeholder="Enter City Address"
-            [(ngModel)]="datasource.detail.streetAdress"
-          />
+          <input type="text" id="Event-Name" class="form-control" name="loction" placeholder="Enter City Address"
+            [(ngModel)]="datasource.detail.streetAdress" />
         </div>
       </div>
       <div class="col-md-4 mb-2">
         <div class="form-group">
           <label>Sport<span class="validationIcon">*</span></label>
-          <ng-select
-            name="sports"
-            [(ngModel)]="datasource.sports.SelectedItem"
-            required
-            #ngmSport="ngModel"
-          >
+          <ng-select name="sports" [(ngModel)]="datasource.sports.SelectedItem" required #ngmSport="ngModel">
             <ng-template ng-footer-tmp class="p-2">
-              <button
-                (click)="datasource.sports.AddingNewItem(newSports)"
-                class="addTypeBtn btn btn-sm btn-success"
-                rippleEffect
-              >
+              <button (click)="datasource.sports.AddingNewItem(newSports)" class="addTypeBtn btn btn-sm btn-success"
+                rippleEffect>
                 + Add New Sport
               </button>
-              <inline-form-modal
-                #newSports
-                modalTitle="New Sport"
-              ></inline-form-modal>
+              <inline-form-modal #newSports modalTitle="New Sport"></inline-form-modal>
             </ng-template>
             <ng-option *ngFor="let item of datasource.sports" [value]="item">{{
               item
-            }}</ng-option>
+              }}</ng-option>
           </ng-select>
           <app-validation-alert controlName="Sport" [control]="ngmSport">
           </app-validation-alert>
@@ -139,18 +81,8 @@
       <div class="col-md-4 mb-2">
         <div class="form-group">
           <label>Program<span class="validationIcon">*</span></label>
-          <ng-select
-            name="programs"
-            [(ngModel)]="datasource.programs.SelectedItem"
-            required
-            #ngmPrograms="ngModel"
-          >
-            <ng-option
-              *ngFor="let item of datasource.programs"
-              [value]="item"
-              >{{ item }}</ng-option
-            ></ng-select
-          >
+          <ng-select name="programs" [(ngModel)]="datasource.programs.SelectedItem" required #ngmPrograms="ngModel">
+            <ng-option *ngFor="let item of datasource.programs" [value]="item">{{ item }}</ng-option></ng-select>
           <app-validation-alert controlName="Program" [control]="ngmPrograms">
           </app-validation-alert>
         </div>
@@ -158,15 +90,10 @@
       <div class="col-md-4 mb-2">
         <div class="form-group">
           <label>Level<span class="validationIcon">*</span></label>
-          <ng-select
-            name="levels"
-            [(ngModel)]="datasource.levels.SelectedItem"
-            required
-            #ngmLevel="ngModel"
-            ><ng-option *ngFor="let item of datasource.levels" [value]="item">{{
+          <ng-select name="levels" [(ngModel)]="datasource.levels.SelectedItem" required #ngmLevel="ngModel"><ng-option
+              *ngFor="let item of datasource.levels" [value]="item">{{
               item
-            }}</ng-option></ng-select
-          >
+              }}</ng-option></ng-select>
           <app-validation-alert controlName="Level" [control]="ngmLevel">
           </app-validation-alert>
         </div>
@@ -175,21 +102,12 @@
       <div class="col-12 mb-2">
         <div class="form-group">
           <div class="float-right d-flex justify-content-between">
-            <button
-              type="button"
-              class="btn btn-outline-secondary mr-1"
-              rippleEffect
-              (click)="modalOpenSM('modalblock')"
-            >
+            <button type="button" class="btn btn-outline-secondary mr-1" rippleEffect
+              (click)="modalOpenSM('modalblock')">
               Cancel
             </button>
-            <button
-              type="submit"
-              class="btn btn-warning"
-              [disabled]="!OnDemandForm.valid"
-              rippleEffect
-              [swal]="SweetSave"
-            >
+            <button type="submit" class="btn btn-warning" [disabled]="!OnDemandForm.valid" rippleEffect
+              [swal]="SweetSave">
               Save
             </button>
           </div>
@@ -199,43 +117,21 @@
   </div>
 </form>
 
-<swal
-  #SweetCancel
-  title="<strong>Discard<u> Event</u></strong>"
-  text="Something went wrong!"
-  html="Are you sure you doesn’t want to create this event<b> ?</b> "
-  icon="info"
-  [focusCancel]="true"
-  [showCloseButton]="true"
-  [swalOptions]="{
+<swal #SweetCancel title="<strong>Discard<u> Event</u></strong>" text="Something went wrong!"
+  html="Are you sure you doesn’t want to create this event<b> ?</b> " icon="info" [focusCancel]="true"
+  [showCloseButton]="true" [swalOptions]="{
     cancelButtonClass: 'btn btn-danger ml-1',
     confirmButtonClass: 'btn btn-primary'
-  }"
-  [confirmButtonText]="'Yes'"
-  [cancelButtonText]="'No'"
-  [showCancelButton]="true"
-  (cancel)="onCancelClick()"
-  (confirm)="onYesClick()"
->
+  }" [confirmButtonText]="'Yes'" [cancelButtonText]="'No'" [showCancelButton]="true" (cancel)="onCancelClick()"
+  (confirm)="onYesClick()">
 </swal>
-<swal
-  #SweetSave
-  title="<strong>New<u> Event</u></strong>"
-  text="Something went wrong!"
-  html="Are you sure you want to create this event<b> ?</b> "
-  icon="info"
-  [focusCancel]="true"
-  [showCloseButton]="true"
+<swal #SweetSave title="<strong>New<u> Event</u></strong>" text="Something went wrong!"
+  html="Are you sure you want to create this event<b> ?</b> " icon="info" [focusCancel]="true" [showCloseButton]="true"
   [swalOptions]="{
     cancelButtonClass: 'btn btn-danger ml-1',
     confirmButtonClass: 'btn btn-primary'
-  }"
-  [confirmButtonText]="'Yes'"
-  [cancelButtonText]="'Cancel'"
-  [showCancelButton]="true"
-  (cancel)="onSaveCancelClick()"
-  (confirm)="onSaveYesClick()"
->
+  }" [confirmButtonText]="'Yes'" [cancelButtonText]="'Cancel'" [showCancelButton]="true" (cancel)="onSaveCancelClick()"
+  (confirm)="onSaveYesClick()">
 </swal>
 
 <!-- Swal of Sweet Alert HTML -->

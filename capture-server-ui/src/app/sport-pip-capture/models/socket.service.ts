@@ -7,7 +7,7 @@ import { Socket, io } from 'socket.io-client';
 })
 export class SocketService {
   private socket!: Socket;
-  url = 'http://localhost:3001';
+  url = 'http://drake.in:3001';
 
   private liveEventSubject = new Subject<string>();
   private eventPreviewSubject = new Subject<string>();
@@ -15,9 +15,11 @@ export class SocketService {
 
   constructor() {
   }
-  connectToRelayService(): void {
-    this.socket = io(this.url);
 
+  connectToRelayService(): void {
+    console.log("connectToRelayService called")
+    this.socket = io(this.url);
+    
     this.socket.on('live-event', (message: string) => {
       console.log(message)
       this.liveEventSubject.next(message);
@@ -38,6 +40,7 @@ export class SocketService {
       this.socket.disconnect();
     }
   }
+  
   onLiveEvent(): Subject<string> {
     return this.liveEventSubject;
   }

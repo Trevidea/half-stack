@@ -5,6 +5,7 @@ import moment from "moment";
 
 export class EventRangeBuilder extends AbstractBuilder<Data.Event, EventView> {
     compose(m: Data.Event, v: EventView) {
+        
         v.id = m.id;
         v.dtEvent = m.dt_event;
         v.level = m.level;

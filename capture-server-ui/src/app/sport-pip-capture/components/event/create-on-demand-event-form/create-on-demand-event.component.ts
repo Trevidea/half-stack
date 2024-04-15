@@ -35,10 +35,11 @@ export class CreateOnDemandEventComponent implements OnInit {
   model: NgbDateStruct;
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter();
-  constructor(private modelService: NgbModal) {}
+  constructor(private modelService: NgbModal) { }
 
   ngOnInit(): void {
-    console.log(this.datasource.venue.location);
+    console.log(this.datasource.time);
+
   }
   onCancelClick() {
     Swal.close();
@@ -56,12 +57,13 @@ export class CreateOnDemandEventComponent implements OnInit {
     this.save.emit();
   }
 
-  formatTime(time: string): number {
+  formatTime(time: any): number {
     if (!time) return 0;
-    const [hours, minutes] = time.split(":");
+    const [hours, minutes] = time.split(':');
     let formattedTime = hours + minutes;
     return parseInt(formattedTime);
   }
+
   modalOpenSM(modalblock) {
     const modeldata = this.modelService.open(ConnectionAlertComponent, {
       centered: true,
@@ -78,5 +80,13 @@ export class CreateOnDemandEventComponent implements OnInit {
       console.log("received", receivedEntry);
       // this.undoEvent = receivedEntry;
     });
+  }
+
+  _formatTime(time: number): string {
+    const hours = Math.floor(time / 100);
+    const minutes = time % 100;
+    const formattedHours = hours < 10 ? '0' + hours : hours.toString();
+    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
+    return formattedHours + ':' + formattedMinutes;
   }
 }
