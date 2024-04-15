@@ -92,4 +92,7 @@ export class ConnectionStartComponent implements OnInit {
     this.listOrGrid = e;
     console.log(e);
   }
+  ListType(e: any) {
+    console.log("E:::", e);
+  }
 }

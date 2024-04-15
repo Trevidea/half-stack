@@ -2,6 +2,7 @@
 #include "gateway.h"
 #include "datetimeutils.h"
 #include <ctime>
+#include "publisher.h"
 
 Event::Event() : EntityBase("event")
 {
@@ -57,15 +58,18 @@ void Event::openPreview(const Request &req, Response rsp)
         const auto tm = getDTUTimeFromSql(event.tmEvent());
         spdlog::trace("Event {}, date: {}, month: {}, year: {}, hours: {}, mins: {}",
                       event.title(), dt.date, dt.month, dt.year, tm.hours, tm.minutes);
-        if (this->m_runners.find(27) != this->m_runners.end())
+        const auto &kvPair = this->m_runners.find(27);
+        if (kvPair != this->m_runners.end())
         {
-            this->m_runners[27]->stop();
+            kvPair->second->stop();
             this->m_runners.erase(27);
         }
-
-        this->m_runners.emplace(27, new EventRunner(dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1));
         Json::Value response = Json::objectValue;
         response["status"] = "success";
+        Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
+        
+        this->m_runners.emplace(27, new EventRunner(dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1));
+
         rsp.setData(Gateway::instance().formatResponse({{response}}));
     }
 }

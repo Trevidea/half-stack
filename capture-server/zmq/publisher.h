@@ -3,6 +3,7 @@
 
 #include <zmq.hpp>
 #include <string>
+#include <mutex>
 
 class Publisher
 {
@@ -17,6 +18,7 @@ public:
     ~Publisher();
 
 private:
+    static std::mutex instance_creation_mutex;
     zmq::context_t m_context;
     zmq::socket_t m_socket;
     static Publisher *mp_instance;
