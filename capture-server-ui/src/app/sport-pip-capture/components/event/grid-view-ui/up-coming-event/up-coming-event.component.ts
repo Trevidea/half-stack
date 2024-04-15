@@ -3,6 +3,7 @@ import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.s
 import { DateTimeService } from '../../event-utility/date-time.service';
 import { UI } from '../../event-utility/event-ui-interface';
 import { Router } from '@angular/router';
+import { SocketService } from 'app/sport-pip-capture/models/socket.service';
 @Component({
   selector: 'app-up-coming-event',
   templateUrl: './up-coming-event.component.html',
@@ -20,7 +21,8 @@ export class UpComingEventComponent implements OnInit, OnDestroy {
   ]
   constructor(private _coreSidebarService: CoreSidebarService,
     private dateTimeservice: DateTimeService,
-    private router: Router
+    private router: Router,
+    private socketService: SocketService,
   ) { }
   ngOnInit(): void {
     if (this.datasource) {
@@ -61,14 +63,10 @@ export class UpComingEventComponent implements OnInit, OnDestroy {
 
   private countdownInterval: any;
 
-  navigateToEventPreview(item: any) {
-    console.log(item)
-    this.router.navigate(['/event/event-preview'], {
-      queryParams: { item: JSON.stringify(item) },
-    });
-    // this.router.navigate(['/event/event-preview']);
+  navigateToEventPreview() {
+    this.socketService.connectToRelayService()
+    this.router.navigate(['/event/event-preview']);
   }
-
 
 
   ngOnDestroy(): void {
