@@ -23,7 +23,9 @@ async function run() {
 
   for await (const [topic, msg] of sock) {
     console.log('Topic:', topic.toString(), 'message:', msg.toString());
-    io.emit(topic.toString(), msg.toString());
+    io.on('connection', () => {
+      io.emit(topic.toString(), msg.toString());
+    });
   }
 }
 
