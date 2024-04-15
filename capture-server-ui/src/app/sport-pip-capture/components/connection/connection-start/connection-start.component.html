@@ -13,5 +13,6 @@
   <app-connection-list
     *ngIf="listOrGrid == 'list'"
     [eventConnection]="eventConnection"
+    (pubSubAll)="ListType($event)"
   ></app-connection-list>
 </div>
