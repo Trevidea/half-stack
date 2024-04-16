@@ -1,337 +1,369 @@
 <!-- <button class="btn btn-primary" (click)="openalert()">Open</button> -->
-<div class="row mb-1">
-  <div class="col-xxl-6 col-xl-6 col-md-6 col-sm-6 col-8">
-    <h4 class="dashboard-event-header cus-header">
-      Two events are happening right now:
-    </h4>
+<div class="p-1">
+  <div class="row mb-1">
+    <div class="col-xxl-6 col-xl-6 col-md-6 col-sm-6 col-8">
+      <h4 class="dashboard-event-header cus-header">
+        Two events are happening right now:
+      </h4>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-md-6 col-sm-6 col-4">
+      <div class="btn-group float-right">
+        <div ngbDropdown>
+          <button
+            ngbDropdownToggle
+            class="btn btn-outline-dark btn-sm"
+            type="button"
+            id="dropdownMenuButton700"
+            rippleEffect
+          >
+            All
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownMenuButton700">
+            <a ngbDropdownItem href="javascript:void(0)">McQuaid vs Fairfort</a>
+            <a ngbDropdownItem href="javascript:void(0)"
+              >Riverhawks vs Huskers</a
+            >
+            <a ngbDropdownItem href="javascript:void(0)">All</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-xxl-6 col-xl-6 col-md-6 col-sm-6 col-4">
-    <div class="btn-group float-right">
-      <div ngbDropdown>
-        <button
-          ngbDropdownToggle
-          class="btn btn-outline-dark btn-sm"
-          type="button"
-          id="dropdownMenuButton700"
-          rippleEffect
+  <div class="row match-height">
+    <div class="col-xl-3 col-xxl-3 col-lg-3" style="padding-right: 0px">
+      <div class="card">
+        <div class="card-header" style="padding-right: 0rem">
+          <strong> Task Manager </strong>
+        </div>
+        <div class="card-body" style="padding-right: 0rem">
+          <small>Application running in the background</small>
+          <h3 class="pt-1">5</h3>
+          <button class="mt-auto btn btn-warning btn-sm">View Task</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-9 col-xxl-9 col-lg-9">
+      <div class="row">
+        <div
+          class="col-lg-6 col-xl-6 col-xxl-6 col-md-6"
+          style="padding-right: 0rem"
         >
-          All
-        </button>
-        <div ngbDropdownMenu aria-labelledby="dropdownMenuButton700">
-          <a ngbDropdownItem href="javascript:void(0)">McQuaid vs Fairfort</a>
-          <a ngbDropdownItem href="javascript:void(0)">Riverhawks vs Huskers</a>
-          <a ngbDropdownItem href="javascript:void(0)">All</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row match-height">
-  <div class="col-xl-6">
-    <div class="card" style="background-color: #216093">
-      <div class="card-body">
-        <div class="carousel-img-wrapper">
-          <h5 style="color: #e0e0e0; font-weight: 300">Sept. 15</h5>
-          <div
-            class="badge badge-pill badge-light-dark mt-1"
-            style="background-color: #e7e7e7"
-          >
-            <i class="bi bi-clock-history"></i>2.02.00
-          </div>
-          <h1
-            class="mt-1"
-            style="color: #e0e0e0; font-weight: 400; font-size: 24px"
-          >
-            McQuaid vs Fairfort
-          </h1>
-          <div class="combined-elements mt-1">
-            <div
-              class="badge badge-pill badge-light-dark"
-              style="background-color: #ffffff"
-            >
-              <i class="bi bi-geo-alt"></i>
-            </div>
-            <h6
-              style="
-                color: #e0e0e0;
-                font-weight: 400;
-                margin-left: 10px;
-                margin-top: 5px;
-                font-size: 10px;
-              "
-            >
-              Fairport High School, 33 Union Street, Fairport
-            </h6>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-xl-6">
-    <div class="card" style="background-color: #f5a30a">
-      <div class="card-body">
-        <div class="carousel-img-wrapper">
-          <h5 style="color: #e0e0e0; font-weight: 300">Sept. 15</h5>
-          <div
-            class="badge badge-pill badge-light-dark mt-1"
-            style="background-color: #e7e7e7"
-          >
-            <i class="bi bi-clock-history"></i>2.02.00
-          </div>
-          <h1
-            class="mt-1"
-            style="color: #e0e0e0; font-weight: 400; font-size: 24px"
-          >
-            McQuaid vs Fairfort
-          </h1>
-          <div class="combined-elements mt-1">
-            <div
-              class="badge badge-pill badge-light-dark"
-              style="background-color: #ffffff"
-            >
-              <i class="bi bi-geo-alt"></i>
-            </div>
-            <h6
-              style="
-                color: #e0e0e0;
-                font-weight: 400;
-                margin-left: 10px;
-                margin-top: 5px;
-                font-size: 10px;
-              "
-            >
-              Fairport High School, 33 Union Street, Fairport
-            </h6>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row match-height">
-  <div class="col-md-8 col-xl-8 col-xxl-8 col-sm-12 col-12">
-    <div class="card">
-      <div class="card-body">
-        <div class="card-title">
-          <div class="row">
-            <div class="col-6">
-              <h4>Connection</h4>
-            </div>
-            <div class="col-6">
-              <div class="btn-group float-right">
-                <div ngbDropdown>
-                  <button
-                    ngbDropdownToggle
-                    class="btn btn-outline-dark btn-sm"
-                    type="button"
-                    id="dropdownMenuButton700"
-                    rippleEffect
-                  >
-                    4
-                  </button>
-                  <div ngbDropdownMenu aria-labelledby="dropdownMenuButton700">
-                    <a ngbDropdownItem href="javascript:void(0)">1</a>
-                    <a ngbDropdownItem href="javascript:void(0)">12</a>
-                    <a ngbDropdownItem href="javascript:void(0)">15</a>
-                  </div>
+          <div class="card" style="background-color: #216093">
+            <div class="card-body">
+              <div class="carousel-img-wrapper">
+                <h5 style="color: #e0e0e0; font-weight: 300">Sept. 15</h5>
+                <div
+                  class="badge badge-pill badge-light-dark mt-1"
+                  style="background-color: #e7e7e7"
+                >
+                  <i class="bi bi-clock-history"></i>2.02.00
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <ngx-datatable
-          class="bootstrap core-bootstrap"
-          [rows]="rows"
-          [columnMode]="ColumnMode.force"
-          [headerHeight]="40"
-          [footerHeight]="50"
-          [rowHeight]="58"
-          [limit]="5"
-          [selected]="chkBoxSelected"
-          [selectionType]="SelectionType.checkbox"
-          (select)="customChkboxOnSelect($event)"
-          [scrollbarH]="true"
-          (activate)="onActivate($event)"
-          (select)="onSelect($event)"
-        >
-          <ngx-datatable-column
-            [width]="50"
-            [sortable]="false"
-            [canAutoResize]="false"
-            [draggable]="false"
-            [resizeable]="false"
-          >
-            <ng-template
-              ngx-datatable-header-template
-              let-value="value"
-              let-allRowsSelected="allRowsSelected"
-              let-selectFn="selectFn"
-            >
-              <div
-                class="custom-control custom-control-primary custom-checkbox"
-              >
-                <input
-                  type="checkbox"
-                  class="custom-control-input"
-                  [checked]="allRowsSelected"
-                  (change)="selectFn(!allRowsSelected)"
-                  id="headerCustomChkbxRef"
-                />
-                <label
-                  class="custom-control-label"
-                  for="headerCustomChkbxRef"
-                ></label>
-              </div>
-            </ng-template>
-            <ng-template
-              ngx-datatable-cell-template
-              let-rowIndex="rowIndex"
-              let-value="value"
-              let-isSelected="isSelected"
-              let-onCheckboxChangeFn="onCheckboxChangeFn"
-            >
-              <div
-                class="custom-control custom-control-primary custom-checkbox"
-              >
-                <input
-                  type="checkbox"
-                  class="custom-control-input"
-                  [checked]="isSelected"
-                  (change)="onCheckboxChangeFn($event)"
-                  id="rowCustomChkbxRef{{ rowIndex }}"
-                />
-                <label
-                  class="custom-control-label"
-                  for="rowCustomChkbxRef{{ rowIndex }}"
-                ></label>
-              </div>
-            </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Actions" [sortable]="false">
-            <ng-template ngx-datatable-cell-template>
-              <div class="d-flex align-items-center">
-                <div ngbDropdown container="body">
-                  <a
-                    ngbDropdownToggle
-                    href="javascript:void(0);"
-                    class="hide-arrow"
-                    id="dropdownBrowserState"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <i
-                      data-feather="more-vertical"
-                      class="text-primary cursor-pointer mr-50"
-                    ></i>
-                  </a>
+                <h1
+                  class="mt-1"
+                  style="color: #e0e0e0; font-weight: 400; font-size: 24px"
+                >
+                  McQuaid vs Fairfort
+                </h1>
+                <div class="combined-elements mt-1">
                   <div
-                    ngbDropdownMenu
-                    class="dropdown-menu-right"
-                    aria-labelledby="dropdownBrowserState"
+                    class="badge badge-pill badge-light-dark"
+                    style="background-color: #ffffff"
                   >
-                    <a
-                      href="javascript:void(0)"
-                      ngbDropdownItem
-                      class="d-flex align-items-center"
-                      ><i data-feather="file-text" class="mr-50"></i> Pause</a
-                    >
-                    <a
-                      href="javascript:void(0)"
-                      ngbDropdownItem
-                      class="d-flex align-items-center"
-                      ><i data-feather="archive" class="mr-50"></i> Reorder</a
-                    >
-                    <a
-                      href="javascript:void(0)"
-                      ngbDropdownItem
-                      class="d-flex align-items-center"
-                      ><i data-feather="trash-2" class="mr-50"></i> Disable</a
-                    >
-                    <a
-                      href="javascript:void(0)"
-                      ngbDropdownItem
-                      class="d-flex align-items-center"
-                      ><i data-feather="trash-2" class="mr-50"></i> Remove</a
-                    >
+                    <i class="bi bi-geo-alt"></i>
                   </div>
+                  <h6
+                    style="
+                      color: #e0e0e0;
+                      font-weight: 400;
+                      margin-left: 10px;
+                      margin-top: 5px;
+                      font-size: 10px;
+                    "
+                  >
+                    Fairport High School, 33 Union Street, Fairport
+                  </h6>
                 </div>
               </div>
-            </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Event" prop="Event">
-          </ngx-datatable-column>
-          <ngx-datatable-column
-            name="Priority"
-            prop="Priority"
-          ></ngx-datatable-column>
-          <ngx-datatable-column name="User" prop="User"></ngx-datatable-column>
-          <ngx-datatable-column
-            name="Location"
-            prop="Location"
-          ></ngx-datatable-column>
-          <ngx-datatable-column name="Device ID" prop="Device ID">
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Device Type" prop="Device Type">
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Network" prop="Network" [width]="120">
-          </ngx-datatable-column>
-        </ngx-datatable>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-lg-6 col-xl-6 col-xxl-6 col-md-6"
+          style="padding-right: 0rem"
+        >
+          <div class="card" style="background-color: #f5a30a">
+            <div class="card-body">
+              <div class="carousel-img-wrapper">
+                <h5 style="color: #e0e0e0; font-weight: 300">Sept. 15</h5>
+                <div
+                  class="badge badge-pill badge-light-dark mt-1"
+                  style="background-color: #e7e7e7"
+                >
+                  <i class="bi bi-clock-history"></i>2.02.00
+                </div>
+                <h1
+                  class="mt-1"
+                  style="color: #e0e0e0; font-weight: 400; font-size: 24px"
+                >
+                  McQuaid vs Fairfort
+                </h1>
+                <div class="combined-elements mt-1">
+                  <div
+                    class="badge badge-pill badge-light-dark"
+                    style="background-color: #ffffff"
+                  >
+                    <i class="bi bi-geo-alt"></i>
+                  </div>
+                  <h6
+                    style="
+                      color: #e0e0e0;
+                      font-weight: 400;
+                      margin-left: 10px;
+                      margin-top: 5px;
+                      font-size: 10px;
+                    "
+                  >
+                    Fairport High School, 33 Union Street, Fairport
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-4 col-xl-4 col-xxl-4 col-sm-12 col-12">
-    <div class="card">
-      <app-donut></app-donut>
-    </div>
-  </div>
-</div>
-<div class="row match-height">
-  <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-12 col-12">
-    <div class="card">
-      <app-line-chart></app-line-chart>
-    </div>
-  </div>
-  <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-12 col-12">
-    <div class="card">
-      <app-bar-chart></app-bar-chart>
-    </div>
-  </div>
-  <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-12 col-12">
-    <div class="card" [perfectScrollbar] style="height: 450px">
-      <div class="card-body">
-        <div class="card-title">Events</div>
-        <ul
-          ngbNav
-          #navFilled="ngbNav"
-          class="nav-tabs nav-fill"
-          [activeId]="activeTabId"
-        >
-          <li ngbNavItem>
-            <a ngbNavLink>Ongoing</a>
-            <ng-template ngbNavContent>
-              <app-ongoing></app-ongoing>
-            </ng-template>
-          </li>
-          <li [ngbNavItem]="2">
-            <a ngbNavLink>Upcoming</a>
-            <ng-template ngbNavContent>
-              <!-- ----------------------------------------------- -->
-              <app-upcoming></app-upcoming>
 
-              <!-- ----------------------------------------------- -->
-            </ng-template>
-          </li>
+  <div class="row match-height">
+    <div class="col-md-12 col-lg-8 col-xl-8 col-xxl-8 col-sm-12 col-12 pr-0">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title">
+            <div class="row">
+              <div class="col-6">
+                <h4>Connection</h4>
+              </div>
+              <div class="col-6">
+                <div class="btn-group float-right">
+                  <div ngbDropdown>
+                    <button
+                      ngbDropdownToggle
+                      class="btn btn-outline-dark btn-sm"
+                      type="button"
+                      id="dropdownMenuButton700"
+                      rippleEffect
+                    >
+                      4
+                    </button>
+                    <div
+                      ngbDropdownMenu
+                      aria-labelledby="dropdownMenuButton700"
+                    >
+                      <a ngbDropdownItem href="javascript:void(0)">1</a>
+                      <a ngbDropdownItem href="javascript:void(0)">12</a>
+                      <a ngbDropdownItem href="javascript:void(0)">15</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ngx-datatable
+            class="bootstrap core-bootstrap"
+            [rows]="rows"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="40"
+            [footerHeight]="50"
+            [rowHeight]="58"
+            [limit]="5"
+            [selected]="chkBoxSelected"
+            [selectionType]="SelectionType.checkbox"
+            (select)="customChkboxOnSelect($event)"
+            [scrollbarH]="true"
+            (activate)="onActivate($event)"
+            (select)="onSelect($event)"
+          >
+            <ngx-datatable-column
+              [width]="50"
+              [sortable]="false"
+              [canAutoResize]="false"
+              [draggable]="false"
+              [resizeable]="false"
+            >
+              <ng-template
+                ngx-datatable-header-template
+                let-value="value"
+                let-allRowsSelected="allRowsSelected"
+                let-selectFn="selectFn"
+              >
+                <div
+                  class="custom-control custom-control-primary custom-checkbox"
+                >
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    [checked]="allRowsSelected"
+                    (change)="selectFn(!allRowsSelected)"
+                    id="headerCustomChkbxRef"
+                  />
+                  <label
+                    class="custom-control-label"
+                    for="headerCustomChkbxRef"
+                  ></label>
+                </div>
+              </ng-template>
+              <ng-template
+                ngx-datatable-cell-template
+                let-rowIndex="rowIndex"
+                let-value="value"
+                let-isSelected="isSelected"
+                let-onCheckboxChangeFn="onCheckboxChangeFn"
+              >
+                <div
+                  class="custom-control custom-control-primary custom-checkbox"
+                >
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    [checked]="isSelected"
+                    (change)="onCheckboxChangeFn($event)"
+                    id="rowCustomChkbxRef{{ rowIndex }}"
+                  />
+                  <label
+                    class="custom-control-label"
+                    for="rowCustomChkbxRef{{ rowIndex }}"
+                  ></label>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Actions" [sortable]="false">
+              <ng-template ngx-datatable-cell-template>
+                <div class="d-flex align-items-center">
+                  <div ngbDropdown container="body">
+                    <a
+                      ngbDropdownToggle
+                      href="javascript:void(0);"
+                      class="hide-arrow"
+                      id="dropdownBrowserState"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i
+                        data-feather="more-vertical"
+                        class="text-primary cursor-pointer mr-50"
+                      ></i>
+                    </a>
+                    <div
+                      ngbDropdownMenu
+                      class="dropdown-menu-right"
+                      aria-labelledby="dropdownBrowserState"
+                    >
+                      <a
+                        href="javascript:void(0)"
+                        ngbDropdownItem
+                        class="d-flex align-items-center"
+                        ><i data-feather="file-text" class="mr-50"></i> Pause</a
+                      >
+                      <a
+                        href="javascript:void(0)"
+                        ngbDropdownItem
+                        class="d-flex align-items-center"
+                        ><i data-feather="archive" class="mr-50"></i> Reorder</a
+                      >
+                      <a
+                        href="javascript:void(0)"
+                        ngbDropdownItem
+                        class="d-flex align-items-center"
+                        ><i data-feather="trash-2" class="mr-50"></i> Disable</a
+                      >
+                      <a
+                        href="javascript:void(0)"
+                        ngbDropdownItem
+                        class="d-flex align-items-center"
+                        ><i data-feather="trash-2" class="mr-50"></i> Remove</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Event" prop="Event">
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="Priority"
+              prop="Priority"
+            ></ngx-datatable-column>
+            <ngx-datatable-column
+              name="User"
+              prop="User"
+            ></ngx-datatable-column>
+            <ngx-datatable-column
+              name="Location"
+              prop="Location"
+            ></ngx-datatable-column>
+            <ngx-datatable-column name="Device ID" prop="Device ID">
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Device Type" prop="Device Type">
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Network" prop="Network" [width]="120">
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-4 col-xl-4 col-xxl-4 col-sm-12 col-12 pr-0">
+      <div class="card">
+        <app-donut></app-donut>
+      </div>
+    </div>
+  </div>
+  <div class="row match-height">
+    <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-6 col-sm-12 col-12 pr-0">
+      <div class="card">
+        <app-line-chart></app-line-chart>
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-6 col-sm-12 col-12 pr-0">
+      <div class="card">
+        <app-bar-chart></app-bar-chart>
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-6 col-sm-12 col-12 pr-0">
+      <div class="card" [perfectScrollbar] style="height: 450px">
+        <div class="card-body">
+          <div class="card-title">Events</div>
+          <ul
+            ngbNav
+            #navFilled="ngbNav"
+            class="nav-tabs nav-fill"
+            [activeId]="activeTabId"
+          >
+            <li ngbNavItem>
+              <a ngbNavLink>Ongoing</a>
+              <ng-template ngbNavContent>
+                <app-ongoing></app-ongoing>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+              <a ngbNavLink>Upcoming</a>
+              <ng-template ngbNavContent>
+                <!-- ----------------------------------------------- -->
+                <app-upcoming></app-upcoming>
 
-          <li ngbNavItem>
-            <a ngbNavLink>Past</a>
-            <ng-template ngbNavContent>
-              <app-past></app-past>
-            </ng-template>
-          </li>
-        </ul>
-        <div [ngbNavOutlet]="navFilled" class="mt-2"></div>
+                <!-- ----------------------------------------------- -->
+              </ng-template>
+            </li>
+
+            <li ngbNavItem>
+              <a ngbNavLink>Past</a>
+              <ng-template ngbNavContent>
+                <app-past></app-past>
+              </ng-template>
+            </li>
+          </ul>
+          <div [ngbNavOutlet]="navFilled" class="mt-2"></div>
+        </div>
       </div>
     </div>
   </div>

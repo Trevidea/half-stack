@@ -6,7 +6,7 @@
         <div class="d-flex align-items-center Progress">
           Starts in {{item.countdown}}
         </div>
-        <div class="menu-container">
+        <div class="menu-container" (click)="clickedmenu(item.id)">
           <app-menu-button [dropdownItems]="dropdownItems"></app-menu-button>
         </div>
       </div>

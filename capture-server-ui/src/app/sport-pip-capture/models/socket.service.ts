@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 import { Subject } from 'rxjs';
 import { Socket, io } from 'socket.io-client';
 
@@ -6,17 +7,12 @@ import { Socket, io } from 'socket.io-client';
   providedIn: 'root',
 })
 export class SocketService {
-<<<<<<< HEAD
-  socket!: Socket;
-  url = 'ws://localhost:5001';
-=======
   private socket!: Socket;
-  url = 'http://drake.in:3001';
+  url = environment.spRelayUrl;
 
   private liveEventSubject = new Subject<string>();
   private eventPreviewSubject = new Subject<string>();
   private eventTerminalSubject = new Subject<string>();
->>>>>>> bf33f2aac24836ed0185bc5aac07b7b7bacdf180
 
   constructor() {
   }

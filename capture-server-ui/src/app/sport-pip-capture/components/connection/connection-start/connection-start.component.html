@@ -9,10 +9,12 @@
   <app-connection-grid
     *ngIf="listOrGrid == 'grid'"
     [eventConnection]="eventConnection"
+    [listOrGrid]="listOrGrid"
   ></app-connection-grid>
 
   <app-connection-list
     *ngIf="listOrGrid == 'list'"
     [eventConnection]="eventConnection"
+    [listOrGrid]="listOrGrid"
   ></app-connection-list>
 </div>

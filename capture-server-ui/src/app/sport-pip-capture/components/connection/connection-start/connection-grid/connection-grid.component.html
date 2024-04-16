@@ -7,9 +7,12 @@
       >
         <div class="d-flex">
           <div
-            class="card cursor-pointer"
+            class="card"
+            [ngClass]="
+              item.role == 'Publisher' ? 'cursor-pointer' : 'cursor-none'
+            "
             style="height: 14rem; width: 24rem; border: 1px solid transparent"
-            [routerLink]="'/connection/connection-device-detail/{{item.id}}'"
+            (click)="detail(item)"
           >
             <img
               *ngIf="item.transmitStatus === 'Streaming'"

@@ -6,6 +6,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from "@angular/core";
+import { environment } from "environments/environment";
 import Hls from "hls.js";
 @Component({
   selector: "app-video-streaming",
@@ -14,8 +15,8 @@ import Hls from "hls.js";
   encapsulation: ViewEncapsulation.None,
 })
 export class VideoStreamingComponent implements OnInit {
-  @Input() liveStreamVideoPath: string =
-    "http://drake.in:59919/spip_school_stream/ind_vs_pak/llhls.m3u8";
+  @Input()
+  liveStreamVideoPath: string = `${environment.spHLSUrl}/spip_school_stream/ind_vs_pak/llhls.m3u8`;
   @ViewChild("liveStreamPlayer", { static: true })
   videoPlayer!: ElementRef<HTMLVideoElement>;
   public setVolumelenght: number = 15;
@@ -108,5 +109,14 @@ export class VideoStreamingComponent implements OnInit {
 
   toggleVolumeSlider() {
     this.showVolumeSlider = !this.showVolumeSlider;
+  }
+  seekTo(event: MouseEvent) {
+    const video = this.videoPlayer.nativeElement;
+    const bar = document.querySelector(".bar") as HTMLElement;
+    const rect = bar.getBoundingClientRect();
+    const posX = event.clientX - rect.left;
+    const percentage = (posX / bar.offsetWidth) * 100;
+    const seekTime = (percentage / 100) * video.duration;
+    video.currentTime = seekTime;
   }
 }
