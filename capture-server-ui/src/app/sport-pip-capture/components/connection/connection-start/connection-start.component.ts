@@ -1,6 +1,7 @@
 import {
   ChangeDetectorRef,
   Component,
+  Input,
   OnInit,
   ViewEncapsulation,
 } from "@angular/core";
@@ -17,6 +18,7 @@ import { SocketService } from "app/sport-pip-capture/models/socket.service";
   encapsulation: ViewEncapsulation.None,
 })
 export class ConnectionStartComponent implements OnInit {
+  @Input() liveEventData:any 
   header: string[];
   eventConnection: any[] = [];
   deviceName: string;

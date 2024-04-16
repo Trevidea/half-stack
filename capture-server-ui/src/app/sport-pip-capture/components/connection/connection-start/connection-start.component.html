@@ -1,9 +1,12 @@
-<app-connection-header></app-connection-header>
+<app-connection-header
+[liveEventData]="liveEventData"
+></app-connection-header>
 
 <div class="card">
   <app-connectio-grid-list-header
     (messageListOrGrid)="listGrid($event)"
     (pubSubAll)="ListType($event)"
+    
   ></app-connectio-grid-list-header>
 
   <app-connection-grid
