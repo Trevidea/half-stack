@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { DateTimeService } from '../../event-utility/date-time.service';
 import { UI } from '../../event-utility/event-ui-interface';
@@ -10,15 +10,19 @@ import { SocketService } from 'app/sport-pip-capture/models/socket.service';
   styleUrls: ['./up-coming-event.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class UpComingEventComponent implements OnInit, OnDestroy{
+export class UpComingEventComponent implements OnInit, OnDestroy ,OnChanges {
   @Input() datasource;
   startIndex: number;
   openDetailmodel: boolean;
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
   private countdownInterval: any;
+  eventId: number;
   dropdownItems: UI.DropDownMenuItem[] = [
+    { label: 'Edit Event', icon: 'edit', type: 'feather', action: () => this.editOnDemandEvent() },
+    { label: 'Share Event', icon: 'share', type: 'feather', action: () => { } },
     { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => { } },
+
   ]
   constructor(private _coreSidebarService: CoreSidebarService,
     private dateTimeservice: DateTimeService,
@@ -33,15 +37,19 @@ export class UpComingEventComponent implements OnInit, OnDestroy{
       }, 50);
     }
   }
+  
 
-  // ngAfterViewInit(): void {
-  //   if (this.datasource) {
-  //     this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
-  //     this.countdownInterval = setInterval(() => {
-  //       this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
-  //     }, 50);
-  //   }
-  // }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.datasource && changes.datasource.currentValue) {
+      this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
+      if (this.countdownInterval) {
+        clearInterval(this.countdownInterval);
+      }
+      this.countdownInterval = setInterval(() => {
+        this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
+      }, 50);
+    }
+  }
 
 
   viewDetail(event: string, index: number) {
@@ -83,5 +91,18 @@ export class UpComingEventComponent implements OnInit, OnDestroy{
     if (this.countdownInterval) {
       clearInterval(this.countdownInterval);
     }
+  }
+
+  clickedmenu(id: number) {
+    console.log("yes menu clicked ", id)
+    this.eventId = id;
+  }
+
+  editOnDemandEvent() {
+    this.router.navigate(['/on-demand-event'],
+      {
+        queryParams: { id: this.eventId },
+      }
+    )
   }
 }

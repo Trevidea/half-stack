@@ -41,7 +41,8 @@ export class EventPreviewPresenter implements OnInit {
         console.error('openPreview Error occurred:', error);
       }
     )
-    console.log("from preview constructor");
+
+
     this.subscription = this.socketService.onEventPreview().subscribe(
       (data) => {
         this.previewData = data;
@@ -52,6 +53,6 @@ export class EventPreviewPresenter implements OnInit {
         console.error('Error occurred:', error);
       }
     );
-    console.log("from preview  this.previewData", this.previewData);
+    console.log("from preview  this.previewData", this.previewData, this.subscription);
   }
 }
