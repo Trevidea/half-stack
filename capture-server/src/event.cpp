@@ -51,6 +51,8 @@ void Event::report()
 
 void Event::openPreview(const Request &req, Response rsp)
 {
+    Json::Value response = Json::objectValue;
+    response["status"] = "success";
     const auto event = Event::byId<Event>(27);
     if (!event.notSet())
     {
@@ -61,20 +63,23 @@ void Event::openPreview(const Request &req, Response rsp)
         const auto &kvPair = this->m_runners.find(27);
         if (kvPair != this->m_runners.end())
         {
+            spdlog::trace("Runner already exists for event {}. Stopping runner - just in case", 27);
             kvPair->second->stop();
-            this->m_runners.erase(27);
+            this->m_runners.erase(kvPair);
         }
-        Json::Value response = Json::objectValue;
-        response["status"] = "success";
-        Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
-        
-        this->m_runners.emplace(27, new EventRunner(dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1));
 
-        rsp.setData(Gateway::instance().formatResponse({{response}}));
+        Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
+        spdlog::trace("Creating a new runner for event id {}", 27);
+        this->m_runners.emplace(27, new EventRunner(dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1));
     }
+    const std::string strRsp = Gateway::instance().formatResponse({{response}});
+    spdlog::trace("setting response: {}", strRsp);
+    rsp.setData(strRsp);
 }
 void Event::closePreview(const Request &req, Response rsp)
 {
+    Json::Value response = Json::objectValue;
+    response["status"] = "success";
     if (this->m_runners.find(27) != this->m_runners.end())
     {
         auto &runner = this->m_runners[27];
@@ -82,7 +87,5 @@ void Event::closePreview(const Request &req, Response rsp)
         delete runner;
         this->m_runners.erase(1);
     }
-    Json::Value response = Json::objectValue;
-    response["status"] = "success";
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }

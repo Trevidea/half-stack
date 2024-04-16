@@ -5,11 +5,12 @@
 export const environment = {
   production: false,
   hmr: false,
-  spModelUrl:'http://drake.in:1437/api',
-  spRelayUrl:'http://drake.in:3001',
+  spModelUrl:'http://localhost:1437/api',
+  spRelayUrl:'http://localhost:3001',
   spFSUrl:'http://drake.in:1337/api',
   spHLSUrl:'http://drake.in:59919',
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

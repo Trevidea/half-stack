@@ -17,8 +17,8 @@ public:
     
 
 private:
-    void started();
-    void ended();
+    void eventStarted();
+    void eventEnded();
     std::string getEventPreviewData();
     std::string getLiveEventData();
     bool m_eventStarted = false;
