@@ -54,7 +54,7 @@ Connection DBManager::getConnection(bool trx)
             auto db = this->getEnv("PG_DBS", "half-stack");
             auto usr = this->getEnv("PG_USR", "postgres");
             auto pwd = this->getEnv("PG_PWD", "btc.008");
-            auto port = std::stoi(this->getEnv("PG_PORT", "52525"));
+            auto port = std::stoi(this->getEnv("PG_PORT", "5432"));
 
             return Connection::open(c, server, port, db, usr, pwd, trx);
         }
