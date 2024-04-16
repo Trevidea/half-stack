@@ -6,6 +6,7 @@
 #include "output-profile.h"
 #include <map>
 #include "watcher.h"
+#include "network-quality-assessment.h"
 
 class OMALFactory;
 
@@ -32,6 +33,9 @@ public:
     /// @param relativeOutputPath 
     /// @return 
     void setVODDumps(const std::string &streamName, const std::string &relativeOutputPath);
+
+    // Function to assess network quality
+    // NetworkQualityAssessmentResult assessNetworkQuality();
 
     // Destructor declaration
     ~VirtualHost();

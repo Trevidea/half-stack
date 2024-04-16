@@ -10,40 +10,39 @@
     <source [src]="liveStreamVideoPath" type="application/x-mpegURL" />
     Your browser does not support the video tag.
   </video>
-  <div class="controls">
+  <div class="controls" style="height: 20px">
     <button (click)="play()">
-      <i data-feather="play" class="play"></i
-      ><i class="pause" data-feather="pause"></i>
+      <i data-feather="play" class="play" [size]="18"></i
+      ><i class="pause" data-feather="pause" [size]="18"></i>
     </button>
     <div style="align-self: center">
       <h6 style="margin-bottom: 0">{{ currentTime }}</h6>
     </div>
-    <div class="timeline">
+    <div class="timeline" (click)="seekTo($event)">
       <div class="bar">
         <div class="inner"></div>
       </div>
     </div>
     <button (click)="toggleVolumeSlider()">
-      <i class="fa fa-volume-up"></i>
+      <i class="volume" data-feather="volume-1" [size]="18"></i>
     </button>
-    <nouislider
-      *ngIf="showVolumeSlider"
-      [min]="0"
-      [connect]="'upper'"
-      [behaviour]="'tap'"
-      [max]="100"
-      [step]="0.05"
-      [(ngModel)]="setVolumelenght"
-      style="width: 80px"
-      [ngClass]="'circle-filled slider-secondary'"
-      (ngModelChange)="setVolume($event)"
-    ></nouislider>
+    <div style="height: 20px; align-items: center; display: flex; height: 20px">
+      <nouislider
+        *ngIf="showVolumeSlider"
+        [min]="0"
+        [connect]="'upper'"
+        [behaviour]="'tap'"
+        [max]="100"
+        [step]="0.05"
+        [(ngModel)]="setVolumelenght"
+        style="width: 80px"
+        [ngClass]="'circle-filled slider-secondary'"
+        (ngModelChange)="setVolume($event)"
+        @volumeSliderAnimation
+      ></nouislider>
+    </div>
     <button (click)="fullScreen()">
-      <span
-        data-feather="maximize"
-        size="20"
-        style="margin-bottom: 0.15em"
-      ></span>
+      <i class="maximize" data-feather="maximize" [size]="18"></i>
     </button>
   </div>
 </div>

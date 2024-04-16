@@ -12,12 +12,14 @@
   font-weight: bolder;
   border: none;
   cursor: pointer;
+  padding-top: 0;
 }
 .controls .timeline {
   flex: 1;
   display: flex;
   align-items: center;
   border: none;
+  cursor: pointer;
 }
 .controls .timeline .bar {
   background: rgba(15, 15, 15, 1);
@@ -77,4 +79,18 @@
       font-size: 20px !important;
     }
   }
+}
+.volume {
+  // padding-top: 0;
+  // padding-bottom: 0.2em;
+  margin-bottom: 0.16em;
+}
+.pause {
+  margin-bottom: 0.16em;
+}
+.play {
+  margin-bottom: 0.16em;
+}
+.maximize {
+  margin-bottom: 0.16em;
 }
