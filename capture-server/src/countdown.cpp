@@ -8,8 +8,9 @@ void Countdown::worker(std::chrono::time_point<std::chrono::system_clock> tp)
 
     lk.unlock();
     cv.notify_one();
-
-    this->m_end();
+    
+    if(!this->m_abort)
+        this->m_end();
 }
 
 Countdown::Countdown(const int year,
@@ -50,7 +51,8 @@ void Countdown::abort()
 }
 Countdown::~Countdown()
 {
-    this->mp_thread->join();
+    if(this->mp_thread && this->mp_thread->joinable())
+        this->mp_thread->join();
     delete this->mp_thread;
     this->mp_thread = nullptr;
 }
