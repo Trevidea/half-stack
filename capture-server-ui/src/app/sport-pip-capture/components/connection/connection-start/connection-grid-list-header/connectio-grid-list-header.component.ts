@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
@@ -6,6 +12,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
   selector: "app-connectio-grid-list-header",
   templateUrl: "./connectio-grid-list-header.component.html",
   styleUrls: ["./connectio-grid-list-header.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ConnectioGridListHeaderComponent implements OnInit {
   @Output() messageListOrGrid = new EventEmitter<string>();
