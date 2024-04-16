@@ -27,7 +27,7 @@ export class DateTimeService {
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         item.countdown = `${this.padZero(days)} days, ${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
-        if (!this.popupShown && diff <= 1000) { 
+        if (!this.popupShown && diff <= 1000) {
           this.modalOpenSM();
           this.popupShown = true;
         }
@@ -36,6 +36,25 @@ export class DateTimeService {
       }
     });
   }
+
+
+  calculateUpcomingCountdownForSingle(item: any) {
+    const now = new Date();
+    const eventDateTime = new Date(item?.dtEvent);
+    eventDateTime.setHours(Math.floor(item.time / 100));
+    eventDateTime.setMinutes(item.time % 100);
+    const diff = eventDateTime.getTime() - now.getTime();
+    if (diff >= 0) {
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      return `${this.padZero(days)} days, ${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
+    } else {
+      return 'end';
+    }
+  }
+
 
   modalOpenSM() {
     this.modalService.open(EventStartNotificationsComponent, {
