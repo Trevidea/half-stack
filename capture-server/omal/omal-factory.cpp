@@ -3,6 +3,7 @@
 #include "virtual-host-conf.h"
 #include "network-quality-assessment.h"
 
+
 OMALFactory& OMALFactory::getInstance() {
     static OMALFactory instance;
     return instance;
