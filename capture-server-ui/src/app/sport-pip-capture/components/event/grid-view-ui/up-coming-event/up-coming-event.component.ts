@@ -37,7 +37,7 @@ export class UpComingEventComponent implements OnInit, OnDestroy ,OnChanges {
       }, 50);
     }
   }
-  
+
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.datasource && changes.datasource.currentValue) {
@@ -94,7 +94,6 @@ export class UpComingEventComponent implements OnInit, OnDestroy ,OnChanges {
   }
 
   clickedmenu(id: number) {
-    console.log("yes menu clicked ", id)
     this.eventId = id;
   }
 

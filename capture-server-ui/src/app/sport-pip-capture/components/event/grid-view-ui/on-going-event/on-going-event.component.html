@@ -8,8 +8,8 @@
       <div class="d-flex align-items-center Progress">
         In Progress {{item.countdown}}
       </div>
-      <div class="menu-container">
-        <app-menu-button [dropdownItems]="dropdownItems" ></app-menu-button>
+      <div class="menu-container" (click)="clickedmenu(item.id)">
+        <app-menu-button [dropdownItems]="dropdownItems"></app-menu-button>
       </div>
     </div>
     <div class="card-body pt-1 pb-0 custom-card-body">
@@ -31,7 +31,7 @@
             <button type="button" class="btn btn-warning btn-sm">
               Join
             </button>
-          </div> 
+          </div>
         </div>
         <div class="col-12 mt-1 card-text-style">
           <h4 class="ellipsis">{{item.title}}</h4>
@@ -57,7 +57,6 @@
 
 <core-sidebar class="modal modal-slide-in fade event-sidebar" name="ongoing-on-demand" overlayClass="modal-backdrop"
   hideOnEsc="true" preventBackgroundScroll="true">
-  <app-ondemand-event-detail-presenter *ngIf="opOngoingDetail" [eventData]="datasource" [startIndex]="startIndex" 
-  (OnClosed)="OnClosedDetail($event)"
-  ></app-ondemand-event-detail-presenter>
+  <app-ondemand-event-detail-presenter *ngIf="opOngoingDetail" [eventData]="datasource" [startIndex]="startIndex"
+    (OnClosed)="OnClosedDetail($event)"></app-ondemand-event-detail-presenter>
 </core-sidebar>
