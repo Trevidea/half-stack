@@ -5,7 +5,7 @@ const httpServer = http.createServer();
 
 const io = new Server(httpServer, {
   cors: {
-    origin: 'http://localhost:4200',
+    origin: '*',
   },
 });
 httpServer.listen(3001);
