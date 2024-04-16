@@ -27,29 +27,29 @@ void display_json(
    cout << prefix << jvalue.serialize() << endl;
 }
 
-void handle_network_quality_assessment(http_request request)
-{
-    // Perform network quality assessment here
-    std::vector<NetworkQualityAssessmentResult> results = NetworkQualityAssessment::assess();
+// void handle_network_quality_assessment(http_request request)
+// {
+//     // Perform network quality assessment here
+//     std::vector<NetworkQualityAssessmentResult> results = NetworkQualityAssessment::assess();
 
-    // Construct a JSON array to hold the assessment results
-    json::value response_json = json::value::array();
-    for (const auto& result : results) {
-        json::value result_json;
-        result_json[U("latency")] = json::value::number(result.latency);
-        result_json[U("jitter")] = json::value::number(result.jitter);
-        result_json[U("packetLoss")] = json::value::number(result.packetLoss);
-        result_json[U("bandwidth")] = json::value::number(result.bandwidth);
-        result_json[U("quality")] = json::value::string(utility::conversions::to_string_t(result.quality));
-        response_json.as_array()[response_json.as_array().size()] = result_json;
-    }
+//     // Construct a JSON array to hold the assessment results
+//     json::value response_json = json::value::array();
+//     for (const auto& result : results) {
+//         json::value result_json;
+//         result_json[U("latency")] = json::value::number(result.latency);
+//         result_json[U("jitter")] = json::value::number(result.jitter);
+//         result_json[U("packetLoss")] = json::value::number(result.packetLoss);
+//         result_json[U("bandwidth")] = json::value::number(result.bandwidth);
+//         result_json[U("quality")] = json::value::string(utility::conversions::to_string_t(result.quality));
+//         response_json.as_array()[response_json.as_array().size()] = result_json;
+//     }
 
-    // Send the JSON array response
-    http_response response(status_codes::OK);
-    response.headers().add(U("Content-Type"), U("application/json"));
-    response.set_body(response_json);
-    request.reply(response);
-}
+//     // Send the JSON array response
+//     http_response response(status_codes::OK);
+//     response.headers().add(U("Content-Type"), U("application/json"));
+//     response.set_body(response_json);
+//     request.reply(response);
+// }
 
 void handle_get(http_request request)
 {
@@ -218,7 +218,7 @@ int main()
       listener.support(methods::OPTIONS, handle_opt);
 
       // Bind the network quality assessment route
-      listener.support(methods::GET, handle_network_quality_assessment);
+      // listener.support(methods::GET, handle_network_quality_assessment);
 
       // Initialize an instance of OnDemandEvent
         OnDemandEvent onDemandEvent;
