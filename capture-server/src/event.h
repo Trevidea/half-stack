@@ -2,10 +2,9 @@
 #define EVENT_H
 
 #include <iostream>
-#include "publisher.h"
 #include "entity-base.h"
+#include "event-runner.h"
 
-#include "countdown.h"
 #include <map>
 
 class Event : public EntityBase
@@ -31,32 +30,7 @@ public:
     void closePreview(const Request &req, Response rsp);
 
 public:
-    class EventRunner
-    {
-    private:
-        Publisher m_pub;
-        Countdown m_start, m_end;
-
-    public:
-        EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration) : m_pub{"inproc://somename"},
-                        m_start{year, month, day, hour, min, sec, std::bind(&EventRunner::started, this)},
-                        m_end{m_start, duration, std::bind(&EventRunner::ended, this)}
-        {
-        }
-    void stop()
-    {
-        this->m_start.abort();
-        this->m_end.abort();
-    }
-    private:
-        void started(){
-            spdlog::trace("Event started..");
-        }
-        void ended()
-        {
-            spdlog::trace("Event ended..");
-        }
-    };
+    
 
 private:
     std::map<int, EventRunner *> m_runners;

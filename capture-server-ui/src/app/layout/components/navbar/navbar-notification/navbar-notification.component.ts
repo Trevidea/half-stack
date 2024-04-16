@@ -38,10 +38,10 @@ export class NavbarNotificationComponent implements OnInit {
     this._notificationsService.onApiDataChange.subscribe((res) => {
       this.notifications = res;
     });
-    // this.socketService.listen("hello").subscribe((data) => {
-    //   this.notification.push(data);
-    //   console.log(data);
-    //   // this.socketService.emit("message", "message UI");
-    // });
+    this.socketService.onEventTerminal().subscribe((data) => {
+      // this.notification.push(data);
+      console.log(data);
+      // this.socketService.emit("message", "message UI");
+    });
   }
 }

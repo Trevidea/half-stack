@@ -1,20 +1,41 @@
-@import '@core/scss/angular/libs/select.component.scss';
-@import '@core/scss/angular/libs/sweet-alerts.component.scss';
+@import "@core/scss/angular/libs/select.component.scss";
+@import "@core/scss/angular/libs/sweet-alerts.component.scss";
 
-label{
-    color: rgba(0, 0, 0, 1);
-    font-size: 14px;
+label {
+  color: rgba(0, 0, 0, 1);
+  font-size: 14px;
 }
 
-.dark-layout{
-    ::-webkit-calendar-picker-indicator {
-        filter: invert(1);
+.dark-layout {
+  ::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+}
+.validationIcon {
+  font-size: 14px;
+  color: #de2e21;
+}
+.addTypeBtn {
+  width: 100%;
+}
+.delete-event {
+  .connection-alert {
+    .icon-box:before {
+      content: none;
     }
+    .icon-box {
+      border: 3px solid rgba(245, 163, 10, 1);
+      .icon-text {
+        color: rgba(245, 163, 10, 1);
+      }
+    }
+    .btn-danger {
+      border-color: rgba(33, 96, 147, 1) !important;
+      background-color: rgba(33, 96, 147, 1) !important;
+
+      &:hover {
+        box-shadow: none !important;
+      }
+    }
+  }
 }
-.validationIcon{
-    font-size: 14px;
-    color: #DE2E21;
-  }
-  .addTypeBtn{
-    width: 100%;
-  }

@@ -1,15 +1,27 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewEncapsulation,
+} from "@angular/core";
 
 @Component({
-  selector: 'app-event-pagination',
-  templateUrl: './event-pagination.component.html',
-  styleUrls: ['./event-pagination.component.scss']
+  selector: "app-event-pagination",
+  templateUrl: "./event-pagination.component.html",
+  styleUrls: ["./event-pagination.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class EventPaginationComponent implements OnInit {
-  @Input() totalItems:any
-  @Input() startIndex: number = 0
-  @Input() endIndex: number
-  @Output() pageChange = new EventEmitter<{ startIndex: number, endIndex: number }>();
+  @Input() totalItems: any;
+  @Input() startIndex: number = 0;
+  @Input() endIndex: number;
+  @Output() pageChange = new EventEmitter<{
+    startIndex: number;
+    endIndex: number;
+  }>();
   @Output() pageSizeChange = new EventEmitter<number>();
   currentPage: number = 1;
   @Input() pageSize: number;
@@ -23,13 +35,19 @@ export class EventPaginationComponent implements OnInit {
   emitPreviousPage() {
     if (this.startIndex - this.pageSize >= 0) {
       const newStartIndex = this.startIndex - this.pageSize;
-      this.pageChange.emit({ startIndex: newStartIndex, endIndex: newStartIndex + this.pageSize });
+      this.pageChange.emit({
+        startIndex: newStartIndex,
+        endIndex: newStartIndex + this.pageSize,
+      });
     }
   }
 
   emitNextPage() {
     const newStartIndex = this.startIndex + this.pageSize;
-    this.pageChange.emit({ startIndex: newStartIndex, endIndex: newStartIndex + this.pageSize });
+    this.pageChange.emit({
+      startIndex: newStartIndex,
+      endIndex: newStartIndex + this.pageSize,
+    });
   }
 
   private updateCurrentPage() {
@@ -41,9 +59,7 @@ export class EventPaginationComponent implements OnInit {
     this.pageSizeChange.emit(this.pageSize);
     this.pageChange.emit({ startIndex: 0, endIndex: this.pageSize });
   }
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

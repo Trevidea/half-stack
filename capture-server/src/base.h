@@ -12,6 +12,8 @@ public:
     Base() = default;
     Base(Json::Value& model);
     void report();
+    std::string toString();
+    std::string toResponse();
     ~Base();
 protected:
     Json::Value m_model;

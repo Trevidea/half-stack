@@ -1,6 +1,5 @@
 set(ZMQ_SRC
     publisher.cpp
-    subscriber.cpp
     )
 find_package(cppzmq)
 # message(STATUS "ZeroMQ include directories: ${ZeroMQ_INCLUDE_DIR}")

@@ -121,16 +121,16 @@ export namespace Data {
     deviceType: string;
     network: string;
     quality: string;
-    ipAddress: string
+    ipAddress: string;
     trasnsmitStatus: string;
     received: string;
     retries: string;
   }
 
-  export enum NetWorkQuality { }
-  export enum Type { }
+  export enum NetWorkQuality {}
+  export enum Type {}
 
-  export enum Priority { }
+  export enum Priority {}
 
   export enum DataType {
     Type1 = "type1",
@@ -177,7 +177,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role { }
+  export interface Role {}
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -186,13 +186,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings { }
+  export interface DisplaySettings {}
 
-  export interface CustomizationSettings { }
+  export interface CustomizationSettings {}
 
-  export interface NotificationSettings { }
+  export interface NotificationSettings {}
 
-  export interface VideoResolutionSettings { }
+  export interface VideoResolutionSettings {}
   export enum DataStatus {
     Status1 = "status1",
     Status2 = "status2",
@@ -237,7 +237,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role { }
+  export interface Role {}
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -246,13 +246,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings { }
+  export interface DisplaySettings {}
 
-  export interface CustomizationSettings { }
+  export interface CustomizationSettings {}
 
-  export interface NotificationSettings { }
+  export interface NotificationSettings {}
 
-  export interface VideoResolutionSettings { }
+  export interface VideoResolutionSettings {}
 
   export interface Team extends Base {
     id: number;
@@ -398,7 +398,7 @@ export namespace Data {
     countdown: string;
     activeDevice: ActiveDevice[];
   }
-  export interface ActiveDevice extends Base {
+  export interface ActiveDevice {
     user: string;
     location: string;
     deviceId: string;
@@ -414,6 +414,12 @@ export namespace Views {
   export interface FormState {
     error: boolean;
     data: any;
+  }
+  export interface alerAction {
+    onCancel(): void;
+    onYes(): void;
+    onComplete: EventEmitter<boolean>;
+    data?: EventEmitter<any>;
   }
   export interface FormActions {
     onSave(): void;

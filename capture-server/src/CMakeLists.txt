@@ -15,8 +15,12 @@ set(HALF_STACK_SRC
     user-profile.cpp
     base.cpp
     event-preview.cpp
+    event-runner.cpp
     device.cpp
     countdown.cpp
+    worker-loop.cpp
+    connection-detail.cpp
+    live-event.cpp
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
 target_include_directories(half-stack PUBLIC "./" rest-client zmq)

@@ -7,23 +7,23 @@ import moment from "moment";
 
 export class EventBuilder extends AbstractBuilder<Data.Event, OnDemandEventFormView> {
     compose(m: Data.Event, v: OnDemandEventFormView) {
-
         v.id = m.id;
         v.title = m.title;
-        v.detail.cityAddress = m.detail[0].streetAdress;
-        v.detail.streetAdress = m.detail[0].cityAddress;
+        v.detail.cityAddress = m?.detail?.cityAddress;
+        v.detail.streetAdress = m?.detail?.streetAdress;
+        v.detail.type = m?.detail?.type;
         v.dtEvent = m.dt_event;
         v.levels.SelectedItem = m.level;
         v.programs.SelectedItem = m.program;
         v.sports.SelectedItem = m.sport;
         v.time = m.tm_event;
-        v.venue.location = m.venue[0].location
-        // Transformer.ComposeCollection(m.venue, v.venue, VenueBuilder)
-
+        v.venue.location = m?.venue?.location;
+        console.log("View data", v)
     }
+  
+
     decompose(v: OnDemandEventFormView): Data.Event {
-        // console.log("View data", v)
-         let formatedTime:number = this.formatTime(v.time)
+        console.log("View data",v)
         return {
             id: v.id,
             title: v.title,
@@ -33,25 +33,18 @@ export class EventBuilder extends AbstractBuilder<Data.Event, OnDemandEventFormV
             program: v.programs.SelectedItem,
             sport: v.sports.SelectedItem,
             year: 2024,
-            tm_event: formatedTime,
+            tm_event: v.time,
             venue: v.venue,
             status: "upcoming",
             type: 'on-demand',
-          
-
         };
 
     }
+    
     view(): OnDemandEventFormView {
         return new OnDemandEventFormView();
     }
 
-    formatTime(time: any): number {
-        if (!time) return 0;
-        const [hours, minutes] = time.split(':');
-        let formattedTime = hours + minutes;
-        return parseInt(formattedTime);
-    }
 }
 
 

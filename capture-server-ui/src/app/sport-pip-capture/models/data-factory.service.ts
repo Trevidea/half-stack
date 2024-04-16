@@ -35,9 +35,11 @@ export class DataFactoryService {
   read(type: string): Observable<any> {
     if (type == "api/event-preview") {
       const url = type;
+      console.log(url)
       return this._httpClient.get<any>(url);
     } else {
       const url = `${this._spModelUrl}/${type}`;
+      console.log(url)
       return this._httpClient.get<any>(url);
     }
   }
@@ -247,6 +249,12 @@ export class DataFactoryService {
       throw new Error("Method not implemented.");
     }
   }
+
+
+  eventPreviewJson(): Observable<Data.ConnectionPreview[]> {
+    return this._data('event-preview', ConnectionPreviewData)
+  }
+
 
   liveEventJson(): Observable<Data.LiveEventDetail[]> {
     const dummyData: Data.LiveEventDetail[] = [

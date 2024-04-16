@@ -4,6 +4,14 @@
 #include <string>
 #include <vector>
 #include <cmath>
+struct dtu_date
+{
+    int year, month, date;
+};
+struct dtu_time
+{
+    int hours, minutes, seconds;
+};
 
 inline std::string getFormattedDate(time_t rawtime)
 {
@@ -156,6 +164,22 @@ inline time_t getTimeFromSql(const std::string &dt)
 {
     tm t1 = getTmFromSql(dt);
     return mktime(&t1);
+}
+
+inline dtu_date getDTUDateFromSql(const std::string &date)
+{
+    tm t1 = getTmFromSql(date);
+    return {t1.tm_year + 1900, t1.tm_mon + 1, t1.tm_mday};
+}
+inline dtu_time getDTUTimeFromSql(const int &time)
+{
+    char arr[5] = {'\0'};
+    snprintf(arr, 5, "%04d", time);
+    std::string str = arr;
+    int hours = std::stoi(str.substr(0, 2));
+    int minutes = std::stoi(str.substr(2, 2));
+    int seconds = 0;
+    return {hours, minutes, seconds};
 }
 
 inline tm getTmFromFilter(const std::string &dt)

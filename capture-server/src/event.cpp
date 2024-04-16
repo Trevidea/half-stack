@@ -1,8 +1,8 @@
 #include "event.h"
 #include "gateway.h"
-#include "json/json.h"
-#include "sqlhelper.h"
-#include "pqxx/pqxx"
+#include "datetimeutils.h"
+#include <ctime>
+#include "publisher.h"
 
 Event::Event() : EntityBase("event")
 {
@@ -51,16 +51,38 @@ void Event::report()
 
 void Event::openPreview(const Request &req, Response rsp)
 {
-    if (this->m_runners.find(1) == this->m_runners.end())
-        this->m_runners.emplace(1, new EventRunner(2024, 4, 12, 11, 46, 0, 1));
+    const auto event = Event::byId<Event>(27);
+    if (!event.notSet())
+    {
+        const auto dt = getDTUDateFromSql(event.dtEvent());
+        const auto tm = getDTUTimeFromSql(event.tmEvent());
+        spdlog::trace("Event {}, date: {}, month: {}, year: {}, hours: {}, mins: {}",
+                      event.title(), dt.date, dt.month, dt.year, tm.hours, tm.minutes);
+        const auto &kvPair = this->m_runners.find(27);
+        if (kvPair != this->m_runners.end())
+        {
+            kvPair->second->stop();
+            this->m_runners.erase(27);
+        }
+        Json::Value response = Json::objectValue;
+        response["status"] = "success";
+        Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
+        
+        this->m_runners.emplace(27, new EventRunner(dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1));
+
+        rsp.setData(Gateway::instance().formatResponse({{response}}));
+    }
 }
 void Event::closePreview(const Request &req, Response rsp)
 {
-    if (this->m_runners.find(1) != this->m_runners.end())
+    if (this->m_runners.find(27) != this->m_runners.end())
     {
-        auto &runner = this->m_runners[1];
+        auto &runner = this->m_runners[27];
         runner->stop();
         delete runner;
         this->m_runners.erase(1);
     }
+    Json::Value response = Json::objectValue;
+    response["status"] = "success";
+    rsp.setData(Gateway::instance().formatResponse({{response}}));
 }

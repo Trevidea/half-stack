@@ -38,6 +38,7 @@ export class ModelServiceService {
   }
   readOne(type: string, id: number): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}?id=${id}`
+    console.log(url)
     return this._httpClient.get<any>(url);
   }
   update(type: string, entity: any, id: number) {
@@ -122,9 +123,9 @@ export class ModelServiceService {
       .pipe(map((data: I[]) => data.map((datum: I) => new type(datum))))
 
   }
-  // private _selectOne<M, I extends Data.Base>(resource: string, id: number, type: new (I: Data.Base) => M): Observable<M> {
-  //   return this._selectData(resource, id, type).pipe(map((data: M[]) => data.at(0)));
-  // }
+  private _selectOne<M, I extends Data.Base>(resource: string, id: number, type: new (I: Data.Base) => M): Observable<M> {
+    return this._selectData(resource, id, type).pipe(map((data: M[]) => data[0]));
+  }
   // MetaTypeJsonByKey(key: string)
   //   : Observable<Data.MetaType> {
   //   const url = `${this.pgUrl}/meta-type?key='${key}'`
@@ -162,8 +163,13 @@ export class ModelServiceService {
   _saveOnDemandEvent(data: any): Observable<any> {
     return this._httpClient.post<any>(this.apiUrl, data);
   }
-  eventJson(): Observable<Data.Event[]> {
+
+  eventList(): Observable<Data.Event[]> {
     return this._data('event', EventData)
+  }
+
+  eventJson(id: number): Observable<Data.Event> {
+    return this._selectOne('event', id, EventData)
   }
 
 
@@ -176,6 +182,14 @@ export class ModelServiceService {
     return this._httpClient.post<any>(url, data)
   }
 
+
+  // drake.in:1437/api/event/open-preview
+
+  openPreview(): Observable<any> {
+    const url = 'drake.in:1437/api/event/open-preview'
+    return this._httpClient.get<any>(url)
+
+  }
 
   liveEventJson(): Observable<Data.LiveEventDetail[]> {
     return this._data('liveEvent', LiveEventDetailData)
