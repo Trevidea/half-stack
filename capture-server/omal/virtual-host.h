@@ -5,13 +5,14 @@
 #include "virtual-host-conf.h" 
 #include "output-profile.h"
 #include <map>
+#include "watcher.h"
 
 class OMALFactory;
 
 
 class VirtualHost {
 public:
-    const char *DUMPS_BASE_LOCATION = "/tmp/ovenmediaengine/vod_dumps";
+    const char *DUMPS_BASE_LOCATION = "/Users/shreyapathak/mp4 dump";
     // const char *DUMPS_BASE_LOCATION = "/usr/share/ovenmediaengine/conf/html";
     friend class OMALFactory;
 
@@ -31,13 +32,23 @@ public:
     /// @param relativeOutputPath 
     /// @return 
     void setVODDumps(const std::string &streamName, const std::string &relativeOutputPath);
+
+    // Destructor declaration
+    ~VirtualHost();
+
 private:
     VirtualHost(const std::string& name, const vhost& vhost);
+
+    // Private member functions for watching VOD dumps
+    void watchVODDumps();
+    void stopWatchingVODDumps();
 
 private:
     std::string m_name;
     vhost m_vhost;
     std::string m_dumpsBaseLocation;
+
+    std::unique_ptr<Watcher> m_watcher; // Using unique_ptr to manage the lifetime of the Watcher object
 };
 
 #endif // VIRTUALHOST_H

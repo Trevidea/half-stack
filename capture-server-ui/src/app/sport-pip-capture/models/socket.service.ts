@@ -7,7 +7,7 @@ import { Socket, io } from 'socket.io-client';
 })
 export class SocketService {
   socket!: Socket;
-  url = 'ws://localhost:5000';
+  url = 'ws://localhost:5001';
 
   constructor() {
     this.socket = io(this.url);
