@@ -8,7 +8,7 @@ import { LiveEventBuilder } from "./builders/live-event";
 import { SocketService } from "app/sport-pip-capture/models/socket.service";
 @Component({
   selector: "app-connection-start-presenter",
-  template: '<app-connection-start></app-connection-start>',
+  template: `<app-connection-start [liveEventData]='liveEventData'></app-connection-start>`,
   styleUrls: ["./connection-start.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
@@ -25,8 +25,11 @@ export class ConnectionStartPresenter implements OnInit {
 
     this.socketService.onLiveEvent().subscribe(
       (data:any)=>{
-        this.liveEventData =JSON.parse(data);
+        const eventObject=JSON.parse(data);
+        this.liveEventData =eventObject.result[0][0];
         console.log("liveEventData",this.liveEventData)
+        // const eventObject = this.liveEventData.result[0][0];
+        // console.log("Event Object:", eventObject);
       }
     )
     // Transformer.ComposeCollectionAsync(this.dataFactory.liveEventJson(), this.ds.liveView, LiveEventBuilder)

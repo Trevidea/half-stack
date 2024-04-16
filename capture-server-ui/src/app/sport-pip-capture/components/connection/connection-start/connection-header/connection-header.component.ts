@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { EventService } from "@core/services/event -start.service";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -18,7 +18,7 @@ import { Timer } from "../../timer.service";
 export class ConnectionHeaderComponent implements OnInit {
   connectiondetail: boolean = false;
   undoEvent: boolean = false;
-
+ @Input()liveEventData:any
   currentTime: string;
   isTimerRunning = false;
   constructor(
