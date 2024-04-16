@@ -132,6 +132,7 @@ export class ModelServiceService {
     console.log(data)
 
     if (data.id) {
+      
       return this.update("event", data, data.id);
     } else {
       return this.create("event", data);

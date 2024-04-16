@@ -5,6 +5,7 @@ import { Transformer } from "app/blocks/transformer";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 import { LiveRangeView } from "./views/live-event";
 import { LiveEventBuilder } from "./builders/live-event";
+import { SocketService } from "app/sport-pip-capture/models/socket.service";
 @Component({
   selector: "app-connection-start-presenter",
   template: '<app-connection-start></app-connection-start>',
@@ -13,11 +14,14 @@ import { LiveEventBuilder } from "./builders/live-event";
 })
 export class ConnectionStartPresenter implements OnInit {
   ds!: LiveRangeView;
-  constructor(private dataFactory: DataFactoryService) {
+  constructor(private dataFactory: DataFactoryService,
+    private socketService: SocketService,
+  ) {
     this.ds = new LiveRangeView();
   }
 
   ngOnInit(): void {
+
     Transformer.ComposeCollectionAsync(this.dataFactory.liveEventJson(), this.ds.liveView, LiveEventBuilder)
     console.log(this.ds.liveView)
   }
