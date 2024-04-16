@@ -20,27 +20,33 @@ export class EventBuilder extends AbstractBuilder<Data.Event, OnDemandEventFormV
         v.venue.location = m?.venue?.location;
         console.log("View data", v)
     }
-  
+
 
     decompose(v: OnDemandEventFormView): Data.Event {
-        console.log("View data",v)
+        console.log("View data", v)
         return {
             id: v.id,
             title: v.title,
-            detail: v.detail,
+            detail: {
+                cityAddress: v.detail.cityAddress,
+                streetAdress: v.detail.streetAdress,
+                type: v.detail.type
+            },
             dt_event: v.dtEvent,
             level: v.levels.SelectedItem,
             program: v.programs.SelectedItem,
             sport: v.sports.SelectedItem,
             year: 2024,
             tm_event: v.time,
-            venue: v.venue,
+            venue: {
+                location: v.venue.location
+            },
             status: "upcoming",
             type: 'on-demand',
         };
 
     }
-    
+
     view(): OnDemandEventFormView {
         return new OnDemandEventFormView();
     }

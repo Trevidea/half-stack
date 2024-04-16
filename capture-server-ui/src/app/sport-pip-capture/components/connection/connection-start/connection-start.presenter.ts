@@ -14,6 +14,7 @@ import { SocketService } from "app/sport-pip-capture/models/socket.service";
 })
 export class ConnectionStartPresenter implements OnInit {
   ds!: LiveRangeView;
+  liveEventData:any
   constructor(private dataFactory: DataFactoryService,
     private socketService: SocketService,
   ) {
@@ -22,8 +23,14 @@ export class ConnectionStartPresenter implements OnInit {
 
   ngOnInit(): void {
 
-    Transformer.ComposeCollectionAsync(this.dataFactory.liveEventJson(), this.ds.liveView, LiveEventBuilder)
-    console.log(this.ds.liveView)
+    this.socketService.onLiveEvent().subscribe(
+      (data:any)=>{
+        this.liveEventData =JSON.parse(data);
+        console.log("liveEventData",this.liveEventData)
+      }
+    )
+    // Transformer.ComposeCollectionAsync(this.dataFactory.liveEventJson(), this.ds.liveView, LiveEventBuilder)
+    // console.log(this.ds.liveView)
   }
 
 
