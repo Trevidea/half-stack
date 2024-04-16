@@ -32,7 +32,11 @@ export class DateTimeService {
           this.popupShown = true;
         }
       } else {
-        item.countdown = 'end';
+        const runningDiff = Math.abs(diff); 
+        const runningHours = Math.floor(runningDiff / (1000 * 60 * 60));
+        const runningMinutes = Math.floor((runningDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const runningSeconds = Math.floor((runningDiff % (1000 * 60)) / 1000);
+        item.countdown = `In Progress ${this.padZero(runningHours)}:${this.padZero(runningMinutes)}:${this.padZero(runningSeconds)}`;
       }
     });
   }
