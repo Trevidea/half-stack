@@ -187,7 +187,7 @@ export class ModelServiceService {
   // drake.in:1437/api/event/open-preview
 
   openPreview(): Observable<any> {
-    const url = 'https://drake.in:1437/api/event/open-preview'
+    const url = 'http://drake.in:1437/api/event/open-preview'
     return this._httpClient.get<any>(url)
 
   }

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { DateTimeService } from '../../event-utility/date-time.service';
 import { UI } from '../../event-utility/event-ui-interface';
@@ -10,12 +10,13 @@ import { SocketService } from 'app/sport-pip-capture/models/socket.service';
   styleUrls: ['./up-coming-event.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class UpComingEventComponent implements OnInit, OnDestroy {
+export class UpComingEventComponent implements OnInit, OnDestroy{
   @Input() datasource;
   startIndex: number;
   openDetailmodel: boolean;
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
+  private countdownInterval: any;
   dropdownItems: UI.DropDownMenuItem[] = [
     { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => { } },
   ]
@@ -31,8 +32,17 @@ export class UpComingEventComponent implements OnInit, OnDestroy {
         this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
       }, 50);
     }
-
   }
+
+  // ngAfterViewInit(): void {
+  //   if (this.datasource) {
+  //     this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
+  //     this.countdownInterval = setInterval(() => {
+  //       this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
+  //     }, 50);
+  //   }
+  // }
+
 
   viewDetail(event: string, index: number) {
     this.startIndex = index
@@ -61,7 +71,7 @@ export class UpComingEventComponent implements OnInit, OnDestroy {
     return `${formattedDate}, ${formattedHours}:${formattedMinutes} ${amPm}`;
   }
 
-  private countdownInterval: any;
+
 
   navigateToEventPreview() {
     this.socketService.connectToRelayService()
