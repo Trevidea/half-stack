@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { environment } from 'environments/environment';
 import { PlyrComponent } from 'ngx-plyr';
 
 @Component({
@@ -9,7 +10,7 @@ import { PlyrComponent } from 'ngx-plyr';
 })
 export class PastEventViewComponent implements OnInit {
   // url = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
-  url = "http://drake.in:59919/spip_school_stream/ind_vs_pak/llhls.m3u8";
+  url = `${environment.spHLSUrl}/spip_school_stream/ind_vs_pak/llhls.m3u8`;
   // url = "assets/videos/2/output.m3u8";
   // get the component instance to have access to plyr instance
   @ViewChild(PlyrComponent)
