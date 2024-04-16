@@ -12,7 +12,7 @@ class OMALFactory;
 
 class VirtualHost {
 public:
-    const char *DUMPS_BASE_LOCATION = "/Users/shreyapathak/mp4 dump";
+    const char *DUMPS_BASE_LOCATION = "/tmp/ovenmediaengine/vod_dumps";
     // const char *DUMPS_BASE_LOCATION = "/usr/share/ovenmediaengine/conf/html";
     friend class OMALFactory;
 
