@@ -12,8 +12,8 @@
   </video>
   <div class="controls">
     <button (click)="play()">
-      <i data-feather="play" class="play"></i
-      ><i class="pause" data-feather="pause"></i>
+      <i data-feather="play" class="play" [size]="18"></i
+      ><i class="pause" data-feather="pause" [size]="18"></i>
     </button>
     <div style="align-self: center">
       <h6 style="margin-bottom: 0">{{ currentTime }}</h6>
@@ -24,7 +24,7 @@
       </div>
     </div>
     <button (click)="toggleVolumeSlider()">
-      <i class="fa fa-volume-up"></i>
+      <i class="volume" data-feather="volume-1" [size]="18"></i>
     </button>
     <nouislider
       *ngIf="showVolumeSlider"
@@ -39,11 +39,7 @@
       (ngModelChange)="setVolume($event)"
     ></nouislider>
     <button (click)="fullScreen()">
-      <span
-        data-feather="maximize"
-        size="20"
-        style="margin-bottom: 0.15em"
-      ></span>
+      <i class="maximize" data-feather="maximize" [size]="18"></i>
     </button>
   </div>
 </div>
