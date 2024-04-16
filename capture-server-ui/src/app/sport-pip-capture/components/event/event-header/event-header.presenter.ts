@@ -38,7 +38,7 @@ export class EventHeaderPresenter implements OnInit, AfterViewInit {
         this.ds.levels.onItemSelected(handler => this.onfilter());
         this.ds.sports.onItemSelected(handler => this.onfilter());
         this.ds.years.onItemSelected(handler => this.onfilter());
-        this.onfilter()
+         this.onfilter()
     }
 
     onfilter() {

@@ -106,8 +106,8 @@
               (click)="modalOpenSM('modalblock')">
               Cancel
             </button>
-            <button type="submit" class="btn btn-warning" [disabled]="!OnDemandForm.valid" rippleEffect
-              [swal]="SweetSave">
+            <button type="submit" class="btn btn-warning" [disabled]="!OnDemandForm.valid" rippleEffect (click)="save.emit()" 
+             >
               Save
             </button>
           </div>
@@ -117,7 +117,7 @@
   </div>
 </form>
 
-<swal #SweetCancel title="<strong>Discard<u> Event</u></strong>" text="Something went wrong!"
+<!-- <swal #SweetCancel title="<strong>Discard<u> Event</u></strong>" text="Something went wrong!"
   html="Are you sure you doesn’t want to create this event<b> ?</b> " icon="info" [focusCancel]="true"
   [showCloseButton]="true" [swalOptions]="{
     cancelButtonClass: 'btn btn-danger ml-1',
@@ -132,7 +132,7 @@
     confirmButtonClass: 'btn btn-primary'
   }" [confirmButtonText]="'Yes'" [cancelButtonText]="'Cancel'" [showCancelButton]="true" (cancel)="onSaveCancelClick()"
   (confirm)="onSaveYesClick()">
-</swal>
+</swal> -->
 
 <!-- Swal of Sweet Alert HTML -->
 <!-- <swal

@@ -96,6 +96,7 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     this.socketService.onEventTerminal().subscribe((data: string) => {
+      console.log("data",data)
       const message: { 'terminal': string } = JSON.parse(data);
       if (message.terminal == "start") {
         this.modalOpenMd('EventStartNotificationsComponent')
