@@ -7,7 +7,7 @@ import {
 import { header } from "./data";
 import { EventConnection$ } from "../connection-data";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { filter } from "rxjs/operators";
+import { filter, map } from "rxjs/operators";
 import { SocketService } from "app/sport-pip-capture/models/socket.service";
 @Component({
   selector: "app-connection-start",
@@ -93,6 +93,20 @@ export class ConnectionStartComponent implements OnInit {
     console.log(e);
   }
   ListType(e: any) {
-    console.log("E:::", e);
+    if (e == "all") {
+      EventConnection$.subscribe((data) => {
+        this.eventConnection = data;
+      });
+    } else {
+      EventConnection$.pipe(
+        map((data) => {
+          const filtered = data.filter((item) => item.type === e);
+          console.log("Filtered data:", filtered);
+          return filtered;
+        })
+      ).subscribe((filteredData) => {
+        this.eventConnection = filteredData;
+      });
+    }
   }
 }
