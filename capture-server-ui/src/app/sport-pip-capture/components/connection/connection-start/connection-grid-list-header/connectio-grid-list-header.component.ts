@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -13,16 +14,24 @@ export class ConnectioGridListHeaderComponent implements OnInit {
   allOrSubOrPub: string = "all";
   listOrGrid: string = "list";
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private route: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const param = this.route.snapshot.queryParamMap;
+    if (param.get("listOrGrid")) {
+      const listOrGrid = param.get("listOrGrid");
+      console.log(listOrGrid);
+      this.listOrGrid = listOrGrid;
+      this.listGrid(listOrGrid);
+    }
+    console.log("abc::", this.listOrGrid);
+  }
   listGrid(e: string) {
     this.messageListOrGrid.emit(e);
     this.listOrGrid = e;
   }
   getAllPubOrSub(e) {
     this.allOrSubOrPub = e;
-    console.log("clicked");
     this.pubSubAll.emit(e);
   }
   modalOpenForm(modalForm) {
