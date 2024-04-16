@@ -12,6 +12,7 @@
   font-weight: bolder;
   border: none;
   cursor: pointer;
+  padding-top: 0;
 }
 .controls .timeline {
   flex: 1;
@@ -82,8 +83,14 @@
 .volume {
   // padding-top: 0;
   // padding-bottom: 0.2em;
-  margin-bottom: 0.155em;
+  margin-bottom: 0.16em;
+}
+.pause {
+  margin-bottom: 0.16em;
+}
+.play {
+  margin-bottom: 0.16em;
 }
 .maximize {
-  margin-bottom: 0.155em;
+  margin-bottom: 0.16em;
 }
