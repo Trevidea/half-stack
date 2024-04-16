@@ -46,8 +46,9 @@ export class OndemandEventDetailComponent implements OnInit {
 
   editOnDemandEvent() {
     this.router.navigate(['/on-demand-event'], {
-      queryParams: { id:this.currentEvent?.id },
+      queryParams: { id: this.currentEvent?.id },
     })
   }
+
 
 }

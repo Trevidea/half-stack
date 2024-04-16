@@ -156,7 +156,7 @@ export class ModelServiceService {
   }
 
   eventList(): Observable<Data.Event[]> {
-    return this._data('event', EventData)
+    return this._data('events', EventData)
   }
 
   eventJson(id: number): Observable<Data.Event> {

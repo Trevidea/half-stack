@@ -6,7 +6,7 @@
     </div>
     <div class="card-img-overlay p-0 d-flex flex-column" style="height: 100px;">
       <div class="d-flex align-items-center Progress">
-        In Progress {{item.countdown}}
+        In Progress  {{calculateUpcomingCountdown(item) }}
       </div>
       <div class="menu-container" (click)="clickedmenu(item.id)">
         <app-menu-button [dropdownItems]="dropdownItems"></app-menu-button>
