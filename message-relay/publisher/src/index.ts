@@ -46,6 +46,14 @@ function sendEvent() {
       { id: 1, deviceName: 'oppo hand cam' },
       { id: 2, deviceName: 'iphone 15 Max pro' },
     ],
+    networkQuality: 'Excellent', // Hardcoded network quality
+    vodDumpFolders: ['/vod/folder1', '/vod/folder2'], // Hardcoded VOD dump folders
+    connectionRetries: 3, // Hardcoded connection retries
+    storageSummary: {
+      totalStorage: '100GB',
+      usedStorage: '50GB',
+      remainingStorage: '50GB'
+    } // Hardcoded storage summary
   };
   socket.send([topicfilter, JSON.stringify(startEvent)]);
 }
@@ -62,6 +70,7 @@ function sendEvent() {
 //     }, 2000);
 //   }, 3000);
 // }, 5000);
+// Loop to send events and status messages
 for (let index = 0; index < 10; index++) {
   setTimeout(() => {
     sendEvent();
@@ -73,5 +82,5 @@ for (let index = 0; index < 10; index++) {
       const preview = { eventStatus: 'Event Ready for Preview' };
       socket.send([topicfilter, JSON.stringify(preview)]);
     }, 2000);
-  }, 3000);
+  }, 3000 * index);
 }
