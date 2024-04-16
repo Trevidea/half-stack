@@ -1,12 +1,18 @@
 import { Server } from 'socket.io';
 import http from 'http';
 
+<<<<<<< HEAD
+const app = express();
+const server = app.listen(5001, () => {
+  console.log('running 5001');
+=======
 const httpServer = http.createServer();
 
 const io = new Server(httpServer, {
   cors: {
     origin: '*',
   },
+>>>>>>> bf33f2aac24836ed0185bc5aac07b7b7bacdf180
 });
 httpServer.listen(3001);
 console.log('Relay service running on port 3001');

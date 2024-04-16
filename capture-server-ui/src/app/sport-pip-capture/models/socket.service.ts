@@ -7,12 +7,17 @@ import { Socket, io } from 'socket.io-client';
   providedIn: 'root',
 })
 export class SocketService {
+<<<<<<< HEAD
+  socket!: Socket;
+  url = 'ws://localhost:5001';
+=======
   private socket!: Socket;
   url = environment.spRelayUrl;
 
   private liveEventSubject = new Subject<string>();
   private eventPreviewSubject = new Subject<string>();
   private eventTerminalSubject = new Subject<string>();
+>>>>>>> bf33f2aac24836ed0185bc5aac07b7b7bacdf180
 
   constructor() {
   }
