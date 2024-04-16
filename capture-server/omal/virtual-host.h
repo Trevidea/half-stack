@@ -35,7 +35,7 @@ public:
     void setVODDumps(const std::string &streamName, const std::string &relativeOutputPath);
 
     // Function to assess network quality
-    // NetworkQualityAssessmentResult assessNetworkQuality();
+    NetworkQualityAssessmentResult assessNetworkQuality();
 
     // Destructor declaration
     ~VirtualHost();
