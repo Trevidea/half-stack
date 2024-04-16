@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DragulaService } from "ng2-dragula";
 
@@ -8,24 +8,24 @@ import { DragulaService } from "ng2-dragula";
   templateUrl: "./connection-list.component.html",
   styleUrls: ["./connection-list.component.scss"],
   encapsulation: ViewEncapsulation.None,
-  providers: [DragulaService],
 })
 export class ConnectionListComponent implements OnInit {
   @Input() eventConnection: any;
+  @Input() listOrGrid: string;
   constructor(
-    private dragulaService: DragulaService,
     public modalService: NgbModal,
-    private router: Router
-  ) {
-    dragulaService.createGroup("handle-list", {
-      moves: function (el, container, handle) {
-        return handle.classList.contains("handle");
-      },
-    });
-  }
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
-  url = "";
+  ngOnInit(): void {
+    const param = this.route.snapshot.queryParamMap;
+    if (param.get("listOrGrid")) {
+      const listOrGrid = param.get("listOrGrid");
+      console.log(listOrGrid);
+      this.listOrGrid = listOrGrid;
+    }
+  }
   modalOpenSM(modalSM) {
     this.modalService.open(modalSM, {
       centered: true,
@@ -36,7 +36,9 @@ export class ConnectionListComponent implements OnInit {
     const id = item.id;
     const isOpen = item.role;
     if (isOpen == "Publisher") {
-      this.router.navigate([`/connection/connection-device-detail/${{ id }}`]);
+      this.router.navigate([`/connection/connection-device-detail/${{ id }}`], {
+        queryParams: { listOrGrid: `list` },
+      });
     }
   }
 }

@@ -40,15 +40,6 @@ export class EventPresenter implements OnInit {
         this.query.status = this.tabStateService.getActiveTab();
         this.filteredData = this.filterEvents(this.ds.event, this.query);
       })
-
-    // setInterval(() => {
-    //   Transformer.ComposeCollectionAsync(this.service.eventJson(), this.ds.event, EventRangeBuilder)
-    //     .then(() => {
-    //       this.query.status = this.tabStateService.getActiveTab();
-    //       this.filteredData = this.filterEvents(this.ds.event, this.query);
-    //     })
-    // }, 2000);
-
   }
 
   onFilter(filter: Data.FilterParams) {

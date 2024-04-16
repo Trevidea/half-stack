@@ -30,12 +30,12 @@ export class UpComingEventComponent implements OnInit, OnDestroy ,OnChanges {
     private socketService: SocketService,
   ) { }
   ngOnInit(): void {
-    if (this.datasource) {
-      this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
-      this.countdownInterval = setInterval(() => {
-        this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
-      }, 50);
-    }
+    // if (this.datasource) {
+    //   this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
+    //   this.countdownInterval = setInterval(() => {
+    //     this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
+    //   }, 50);
+    // }
   }
 
 

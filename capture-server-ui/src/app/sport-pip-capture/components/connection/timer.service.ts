@@ -1,60 +1,58 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, timer, Subscription } from "rxjs";
+import { Observable, interval } from "rxjs";
 import { map } from "rxjs/operators";
 
-@Injectable({
-  providedIn: "root",
-})
-export class TimerService {
-  private timer$: Observable<number>;
-  private totalSeconds = 0;
-  private timerSubject = new BehaviorSubject<string>("00:00:00");
-  private timerSubscription: Subscription;
+export class Timer {
+  private startTime: number;
+  private pausedTime: number = 0;
+  private isRunning: boolean = false;
 
-  constructor() {
-    this.timer$ = timer(0, 1000);
-    this.timerSubscription = this.timer$
-      .pipe(map(() => this.totalSeconds++))
-      .subscribe(() => {
-        this.timerSubject.next(this.formatTime());
-      });
-  }
-
-  private formatTime(): string {
-    const hours = Math.floor(this.totalSeconds / 3600);
-    const minutes = Math.floor((this.totalSeconds % 3600) / 60);
-    const seconds = this.totalSeconds % 60;
-
-    const formattedHours = hours.toString().padStart(2, "0");
-    const formattedMinutes = minutes.toString().padStart(2, "0");
-    const formattedSeconds = seconds.toString().padStart(2, "0");
-
-    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-  }
-
-  getTime(): Observable<string> {
-    return this.timerSubject.asObservable();
-  }
-
-  startTimer(startFrom?: number) {
-    if (startFrom !== undefined) {
-      this.totalSeconds = startFrom;
-    }
-    this.timerSubscription = this.timer$
-      .pipe(map(() => this.totalSeconds++))
-      .subscribe(() => {
-        this.timerSubject.next(this.formatTime());
-      });
-  }
-
-  pauseTimer() {
-    if (this.timerSubscription) {
-      this.timerSubscription.unsubscribe();
+  start(): void {
+    if (!this.isRunning) {
+      this.startTime = Date.now();
+      this.isRunning = true;
     }
   }
 
-  resetTimer() {
-    this.totalSeconds = 0;
-    this.timerSubject.next("00:00:00");
+  stop(): void {
+    if (this.isRunning) {
+      this.pausedTime = 0;
+      this.isRunning = false;
+    }
+  }
+
+  pause(): void {
+    if (this.isRunning) {
+      this.pausedTime += Date.now() - this.startTime;
+      this.isRunning = false;
+    }
+  }
+
+  resume(): void {
+    if (!this.isRunning) {
+      this.startTime = Date.now();
+      this.isRunning = true;
+    }
+  }
+
+  getElapsedTime(): Observable<string> {
+    return interval(1000).pipe(
+      map(() => {
+        const elapsed = this.isRunning
+          ? Date.now() - this.startTime + this.pausedTime
+          : this.pausedTime;
+
+        const hours = Math.floor(elapsed / 3600000);
+        const minutes = Math.floor((elapsed % 3600000) / 60000);
+        const seconds = Math.floor((elapsed % 60000) / 1000);
+
+        return `${this.formatTime(hours)}:${this.formatTime(
+          minutes
+        )}:${this.formatTime(seconds)}`;
+      })
+    );
+  }
+
+  private formatTime(time: number): string {
+    return time < 10 ? `0${time}` : `${time}`;
   }
 }

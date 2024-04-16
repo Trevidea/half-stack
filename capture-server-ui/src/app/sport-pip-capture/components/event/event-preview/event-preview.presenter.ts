@@ -10,7 +10,7 @@ import { ModelServiceService } from "app/sport-pip-capture/models/model-service.
 
 @Component({
   selector: "app-event-preview-presenter",
-  template: `<app-event-preview [datasource]='previewData'></app-event-preview>`,
+  template: `<app-event-preview [datasource]='previewData.result[0][0]'></app-event-preview>`,
   styleUrls: ["./event-preview.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
@@ -34,21 +34,13 @@ export class EventPreviewPresenter implements OnInit {
 
   ngOnInit(): void {
     console.log("Calling preview on service");
-    this.modelServiceService.openPreview().subscribe(
-      (data: any) => {
-        console.log(data)
-      },
-      (error) => {
-        console.error('openPreview Error occurred:', error);
-      }
-    )
-
+    this.modelServiceService.openPreview()
 
     this.subscription = this.socketService.onEventPreview().subscribe(
       (data) => {
-        this.previewData = data;
+        this.previewData = JSON.parse(data);
         console.log(data);
-        console.log("from preview constructor", data);
+        console.log("from preview constructor", this.previewData);
       },
       (error) => {
         console.error('Error occurred:', error);

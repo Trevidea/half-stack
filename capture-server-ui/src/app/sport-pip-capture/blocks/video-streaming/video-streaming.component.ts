@@ -8,20 +8,46 @@ import {
 } from "@angular/core";
 import { environment } from "environments/environment";
 import Hls from "hls.js";
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+  state,
+} from "@angular/animations";
 @Component({
   selector: "app-video-streaming",
   templateUrl: "./video-streaming.component.html",
   styleUrls: ["./video-streaming.component.scss"],
   encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger("volumeSliderAnimation", [
+      state(
+        "void",
+        style({
+          opacity: 0,
+        })
+      ),
+      state(
+        "*",
+        style({
+          opacity: 1,
+        })
+      ),
+      transition(":enter", animate("0.3s ease-in-out")),
+      transition(":leave", animate("0.3s ease-in-out")),
+    ]),
+  ],
 })
 export class VideoStreamingComponent implements OnInit {
-  @Input() liveStreamVideoPath: string =
-    `${environment.spHLSUrl}/spip_school_stream/ind_vs_pak/llhls.m3u8`;
+  @Input()
+  liveStreamVideoPath: string = `${environment.spHLSUrl}/spip_school_stream/ind_vs_pak/llhls.m3u8`;
   @ViewChild("liveStreamPlayer", { static: true })
   videoPlayer!: ElementRef<HTMLVideoElement>;
   public setVolumelenght: number = 15;
   private hls!: Hls;
   currentTime: string = "00:00";
+
   ngOnInit(): void {
     // Initialize hls.js
     this.hls = new Hls();
@@ -109,5 +135,14 @@ export class VideoStreamingComponent implements OnInit {
 
   toggleVolumeSlider() {
     this.showVolumeSlider = !this.showVolumeSlider;
+  }
+  seekTo(event: MouseEvent) {
+    const video = this.videoPlayer.nativeElement;
+    const bar = document.querySelector(".bar") as HTMLElement;
+    const rect = bar.getBoundingClientRect();
+    const posX = event.clientX - rect.left;
+    const percentage = (posX / bar.offsetWidth) * 100;
+    const seekTime = (percentage / 100) * video.duration;
+    video.currentTime = seekTime;
   }
 }

@@ -26,8 +26,8 @@
                                     <img src="assets/images/portrait/small/avatar-s-20.jpg" alt="avatar" />
                                 </div>
                                 <div class="ml-1">
-                                    <h4 class="mb-0">McQuaid vs Fairport, Football</h4>
-                                    <p class="small m-0">Scheduled Event</p>
+                                    <h4 class="mb-0">{{datasource.title}}</h4>
+                                    <p class="small m-0">{{datasource.type}}</p>
                                 </div>
 
                             </div>
@@ -38,16 +38,17 @@
                             </li>
                             <li class="list-group-item">
                                 <p style="margin-bottom: 5px; display: flex; align-items: center;">
-                                    <i class="feather" data-feather="clock"></i> &nbsp; Saturday, Sept 15th,
-                                    2:00 pm,
-                                    Varsity
+                                    <i class="feather" data-feather="clock"></i> &nbsp;
+                                    {{dateTimeservice.formatDateTime(datasource.dtEvent, datasource.time)}}
+                                    {{datasource.level}}
                                 </p>
                                 <p class="mb-0">
                                     <i class="feather" data-feather="map-pin"></i> &nbsp;
-                                    Fairport High School, 33 Union Street, Fairport
+                                    {{datasource.venue.location}}
                                 </p>
                             </li>
-                            <li class="list-group-item"></li>
+                            <li class="list-group-item">
+                            </li>
                         </ul>
                     </div>
                     <div class="col-lg-8 col-md-12 col-12 p-0">

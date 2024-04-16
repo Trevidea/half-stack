@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { EventService } from "@core/services/event -start.service";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 
-import { Subject, Subscription } from "rxjs";
+import { Observable, Subject, Subscription } from "rxjs";
 import { ConnectionAlertComponent } from "../../connection-alert/connection-alert.component";
 import { EventUndoNotificationComponent } from "../../connection-alert/event-undo-notification/event-undo-notification.component";
-import { TimerService } from "../../timer.service";
+import { Timer } from "../../timer.service";
 @Component({
   selector: "app-connection-header",
   templateUrl: "./connection-header.component.html",
@@ -18,44 +18,20 @@ import { TimerService } from "../../timer.service";
 export class ConnectionHeaderComponent implements OnInit {
   connectiondetail: boolean = false;
   undoEvent: boolean = false;
-
+ @Input()liveEventData:any
   currentTime: string;
   isTimerRunning = false;
-  private timerSubscription: Subscription;
   constructor(
     private router: Router,
     private event: EventService,
     private route: ActivatedRoute,
     private webSocketService: DataFactoryService,
-    private modelService: NgbModal,
-    private timerService: TimerService
+    private modelService: NgbModal
   ) {
-    this.timerSubscription = this.timerService.getTime().subscribe((time) => {
-      this.currentTime = time;
-    });
-  }
-  startTimer(e?: any) {
-    this.isTimerRunning = true;
-    this.timerService.startTimer(e);
-  }
-  pauseTimer() {
-    this.timerService.pauseTimer();
-  }
-  stopTimer() {
-    this.isTimerRunning = false;
+    this.timer = new Timer();
   }
 
-  resetTimer() {
-    this.timerService.resetTimer();
-    this.isTimerRunning = false;
-  }
-
-  ngOnDestroy() {
-    this.timerSubscription.unsubscribe();
-  }
-  ngOnInit(): void {
-    this.startTimer();
-  }
+  ngOnDestroy() {}
 
   closeDetail() {
     this.connectiondetail = false;
@@ -77,6 +53,9 @@ export class ConnectionHeaderComponent implements OnInit {
         (receivedEntry) => {
           console.log("received", receivedEntry);
           this.undoEvent = receivedEntry;
+          if (this.undoEvent == false) {
+            this.resumeTimer();
+          }
         }
       );
     }
@@ -96,5 +75,31 @@ export class ConnectionHeaderComponent implements OnInit {
       console.log("received", receivedEntry);
       this.undoEvent = receivedEntry;
     });
+  }
+
+  timer = new Timer();
+  elapsedTime$: Observable<string>;
+
+  ngOnInit() {
+    this.timer.start();
+    this.elapsedTime$ = this.timer.getElapsedTime();
+  }
+
+  startTimer() {
+    this.timer.start();
+    this.elapsedTime$ = this.timer.getElapsedTime();
+  }
+
+  stopTimer() {
+    this.timer.stop();
+    this.elapsedTime$ = this.timer.getElapsedTime();
+  }
+
+  pauseTimer() {
+    this.timer.pause();
+  }
+
+  resumeTimer() {
+    this.timer.resume();
   }
 }
