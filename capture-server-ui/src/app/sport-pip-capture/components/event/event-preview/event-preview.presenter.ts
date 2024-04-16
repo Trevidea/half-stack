@@ -33,6 +33,7 @@ export class EventPreviewPresenter implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("Calling preview on service");
     this.modelServiceService.openPreview().subscribe(
       (data: any) => {
         console.log(data)

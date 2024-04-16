@@ -322,7 +322,7 @@ void EntityBase::sync(const Request &req, Response &rsp)
     Json::Reader reader;
     Json::Value requestJson;
     reader.parse(reqData, requestJson);
-    const auto &jsUrl = requestJson.get("source", "http://drake.in:1337/api");
+    const auto &jsUrl = requestJson.get("source", DBManager::instance().getEnv("FS_URL", "http://drake.in:1337/api"));
     const auto &jsDeleteCriteria = requestJson.get("delete-criteria", "false");
     const auto &deleteSql = SqlHelper::ScriptRemove(this->entity(), jsDeleteCriteria.asString());
 

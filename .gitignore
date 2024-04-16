@@ -81,3 +81,4 @@ Thumbs.db
 /**/build
 # /**/Dockerfile
 /**/dependency
+/**/run.sh
