@@ -8,11 +8,36 @@ import {
 } from "@angular/core";
 import { environment } from "environments/environment";
 import Hls from "hls.js";
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+  state,
+} from "@angular/animations";
 @Component({
   selector: "app-video-streaming",
   templateUrl: "./video-streaming.component.html",
   styleUrls: ["./video-streaming.component.scss"],
   encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger("volumeSliderAnimation", [
+      state(
+        "void",
+        style({
+          opacity: 0,
+        })
+      ),
+      state(
+        "*",
+        style({
+          opacity: 1,
+        })
+      ),
+      transition(":enter", animate("0.3s ease-in-out")),
+      transition(":leave", animate("0.3s ease-in-out")),
+    ]),
+  ],
 })
 export class VideoStreamingComponent implements OnInit {
   @Input()
