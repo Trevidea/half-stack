@@ -18,7 +18,7 @@
     <div style="align-self: center">
       <h6 style="margin-bottom: 0">{{ currentTime }}</h6>
     </div>
-    <div class="timeline">
+    <div class="timeline" (click)="seekTo($event)">
       <div class="bar">
         <div class="inner"></div>
       </div>
