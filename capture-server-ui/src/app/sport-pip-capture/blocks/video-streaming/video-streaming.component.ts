@@ -47,6 +47,7 @@ export class VideoStreamingComponent implements OnInit {
   public setVolumelenght: number = 15;
   private hls!: Hls;
   currentTime: string = "00:00";
+
   ngOnInit(): void {
     // Initialize hls.js
     this.hls = new Hls();
