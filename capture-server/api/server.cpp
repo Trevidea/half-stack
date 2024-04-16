@@ -104,8 +104,7 @@ void handle_get(http_request request)
       }
 
       http_response response(status_codes::OK);
-      response.headers().add(U("Access-Control-Allow-Origin"), U("http://localhost:4200"));
-      response.headers().add(U("Access-Control-Allow-Origin"), U("https://mandrake.in"));
+      response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
       response.headers().add(U("Access-Control-Allow-Methods"), U("GET,POST,OPTIONS,DELETE,PUT"));
       response.headers().add(U("Access-Control-Allow-Headers"), U("Content-Type, x-requested-with"));
       spdlog::debug("Setting body in response...");
@@ -146,8 +145,7 @@ void handle_request(
 
    http_response response(status_codes::OK);
 
-   response.headers().add(U("Access-Control-Allow-Origin"), U("http://localhost:4200"));
-   response.headers().add(U("Access-Control-Allow-Origin"), U("https://mandrake.in"));
+   response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
    response.headers().add(U("Access-Control-Allow-Methods"), U("GET,POST,OPTIONS,DELETE,PUT"));
    response.headers().add(U("Access-Control-Allow-Headers"), U("Content-Type, x-requested-with"));
    response.set_body(answer);
@@ -201,8 +199,7 @@ void handle_opt(http_request request)
       spdlog::trace("header::{}={}", header.first, header.second);
    }
 
-   response.headers().add(U("Access-Control-Allow-Origin"), U("http://localhost:4200"));
-   response.headers().add(U("Access-Control-Allow-Origin"), U("https://mandrake.in"));
+   response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
    response.headers().add(U("Access-Control-Allow-Methods"), U("GET,POST,OPTIONS,DELETE,PUT"));
    response.headers().add(U("Access-Control-Allow-Headers"), U("Content-Type, x-requested-with, Authorization"));
    request.reply(response); // reply is done here
