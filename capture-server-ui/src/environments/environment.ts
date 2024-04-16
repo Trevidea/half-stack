@@ -6,7 +6,9 @@ export const environment = {
   production: false,
   hmr: false,
   spModelUrl:'http://drake.in:1437/api',
-  pgUrl:'http://drake.in:1437/api'
+  spRelayUrl:'http://drake.in:3001',
+  spFSUrl:'http://drake.in:1337/api',
+  spHLSUrl:'http://drake.in:59919',
 };
 
 /*

@@ -13,7 +13,7 @@ import { LiveEventDetailData } from "./live-event-detail";
   providedIn: 'root'
 })
 export class ModelServiceService {
-  private modelsServerUrl: string = environment.pgUrl;
+  private modelsServerUrl: string = environment.spModelUrl;
 
   constructor(private _httpClient: HttpClient, private _adapter: AdapterService) {
     this.saveEvent = this.saveEvent.bind(this);
@@ -126,29 +126,20 @@ export class ModelServiceService {
   private _selectOne<M, I extends Data.Base>(resource: string, id: number, type: new (I: Data.Base) => M): Observable<M> {
     return this._selectData(resource, id, type).pipe(map((data: M[]) => data[0]));
   }
-  // MetaTypeJsonByKey(key: string)
-  //   : Observable<Data.MetaType> {
-  //   const url = `${this.pgUrl}/meta-type?key='${key}'`
-  //   return this._httpClient.get<MetaTypeModel>(url);
-  // }
-  // MetaTypeJsonById(id: number)
-  //   : Observable<Data.MetaType> {
-  //   const url = `${this.pgUrl}/meta-type?id=${id}`
-  //   return this._httpClient.get<MetaTypeModel>(url);
-  // }
 
 
   saveEvent(data: Data.Event): Observable<Data.Event> {
     console.log(data)
 
     if (data.id) {
+      
       return this.update("event", data, data.id);
     } else {
       return this.create("event", data);
     }
   }
 
-  // http://drake.in:1437/api/on-demand-event
+  // http://localhost:1437/api/on-demand-event
 
   // saveOnDemandEvent(data: Data.OnDemandEvent): Observable<Data.OnDemandEvent> {
   //   console.log('saveOnDemandEvent', data)
@@ -159,7 +150,7 @@ export class ModelServiceService {
   //   }
   // }
 
-  private apiUrl = 'http://drake.in:1437/api/on-demand-event';
+  private apiUrl = `${environment.spModelUrl}/on-demand-event`;
   _saveOnDemandEvent(data: any): Observable<any> {
     return this._httpClient.post<any>(this.apiUrl, data);
   }
@@ -176,17 +167,17 @@ export class ModelServiceService {
   syncEvents(): Observable<any> {
     const url = `${this.modelsServerUrl}/event/sync`
     const data = {
-      'source': "http://localhost:1337/api/events",
+      'source': `${environment.spFSUrl}/events`,
       'delete-criteria': "dt_event >= now()"
     }
     return this._httpClient.post<any>(url, data)
   }
 
 
-  // drake.in:1437/api/event/open-preview
+  // localhost:1437/api/event/open-preview
 
   openPreview(): Observable<any> {
-    const url = 'drake.in:1437/api/event/open-preview'
+    const url = `${environment.spModelUrl}/event/open-preview`
     return this._httpClient.get<any>(url)
 
   }

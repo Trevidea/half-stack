@@ -13,7 +13,8 @@
                         <path d="M8.34619 8L16.3462 16" stroke="black" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                    <app-menu-button *ngIf="currentEvent?._status==='upcoming'" [dropdownItems]="dropdownItems"></app-menu-button>
+                    <app-menu-button *ngIf="currentEvent?._status==='upcoming'"
+                        [dropdownItems]="dropdownItems"></app-menu-button>
                 </div>
             </div>
         </div>
@@ -39,7 +40,33 @@
                         <div class=" d-flex align-items-center">
                             <i class="feather " data-feather="map-pin" width="13" hight="13"></i>&nbsp;&nbsp;
                             <p>
-                                {{ currentEvent?._detail?._cityAddress }}
+                                {{currentEvent?.venue?.location}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 sub-heading-box">
+                    <h5 class="sub-heading ">Team Info</h5>
+                </div>
+                <div class="col-12 col-box ">
+                    <div class="d-flex flex-column">
+                        <div class=" d-flex align-items-center mBottom">
+                            <i class="bi bi-trophy" width="13" hight="13"></i>&nbsp;&nbsp;
+                            <p>
+                                {{currentEvent?.sport }}
+                            </p>
+                        </div>
+                        <div class=" d-flex align-items-center mBottom">
+                            <i class="bi bi-person-standing-dress"></i>
+                            &nbsp;&nbsp;
+                            <p>
+                                {{currentEvent?.program}}
+                            </p>
+                        </div>
+                        <div class=" d-flex align-items-center">
+                            <i class="feather " data-feather="map-pin" width="13" hight="13"></i>&nbsp;&nbsp;
+                            <p>
+                                {{currentEvent?.level}}
                             </p>
                         </div>
                     </div>

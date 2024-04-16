@@ -30,7 +30,6 @@ export class ConnectionStartComponent implements OnInit {
   ) {
     this.socketService.onLiveEvent().subscribe((data) => {
       console.log(data);
-      // this.socketService.emit("message", "message UI");
     });
   }
   connectiondetail: boolean = false;
@@ -52,7 +51,7 @@ export class ConnectionStartComponent implements OnInit {
   closeDetail() {
     this.connectiondetail = false;
   }
-  viewStream() {}
+  viewStream() { }
   pause(item) {
     const index = this.eventConnection.findIndex((obj) => obj.id === item.id);
     if (
@@ -78,15 +77,15 @@ export class ConnectionStartComponent implements OnInit {
       }
     );
   }
-  block(item) {}
-  streaming() {}
-  delete() {}
+  block(item) { }
+  streaming() { }
+  delete() { }
   modalOpenForm(modalForm) {
     this.modalService.open(modalForm, {
       centered: true,
     });
   }
-  addNewDevice() {}
+  addNewDevice() { }
   listOrGrid: string = "list";
   listGrid(e: string) {
     this.listOrGrid = e;
