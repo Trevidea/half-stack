@@ -29,8 +29,8 @@ public:
     void openPreview(const Request &req, Response &rsp);
     void closePreview(const Request &req, Response &rsp);
 
-public:
-    
+private:
+    void closeAllPreviews();
 
 private:
     std::map<int, EventRunner *> m_runners;
