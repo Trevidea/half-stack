@@ -12,19 +12,19 @@
           class="light-text"
           style="margin-bottom: 0px; margin-right: 10px; width: 70px"
         >
-          {{ elapsedTime$ | async }}
+          {{ formattedTime }}
         </h5>
       </div>
       <div>
         <i
           *ngIf="!undoEvent"
           class="bi bi-pause-circle custom-bi-pause-circle cursor-pointer"
-          (click)="playPauseEvent('paues'); pauseTimer()"
+          (click)="playPauseEvent('paues'); timerService.pause()"
         ></i>
         <i
           *ngIf="undoEvent"
           class="bi bi-play-circle custom-bi-pause-circle cursor-pointer"
-          (click)="playPauseEvent('play'); startTimer()"
+          (click)="playPauseEvent('play'); timerService.resume()"
         ></i>
         <i
           class="bi bi-stop-circle custom-bi-stop-circle cursor-pointer"

@@ -7,7 +7,9 @@ import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.se
 import { Observable, Subject, Subscription } from "rxjs";
 import { ConnectionAlertComponent } from "../../connection-alert/connection-alert.component";
 import { EventUndoNotificationComponent } from "../../connection-alert/event-undo-notification/event-undo-notification.component";
-import { Timer } from "../../timer.service";
+import { Timer } from "../../timer";
+import { TimerService } from "../../timer.service";
+
 @Component({
   selector: "app-connection-header",
   templateUrl: "./connection-header.component.html",
@@ -21,14 +23,20 @@ export class ConnectionHeaderComponent implements OnInit {
   @Input() liveEventData: any;
   currentTime: string;
   isTimerRunning = false;
+
   constructor(
     private router: Router,
     private event: EventService,
     private route: ActivatedRoute,
     private webSocketService: DataFactoryService,
-    private modelService: NgbModal
-  ) {
-    this.timer = new Timer();
+    private modelService: NgbModal,
+    public timerService: Timer
+  ) {}
+  formattedTime: string = "00:00:00";
+  ngOnInit(): void {
+    this.timerService.getElapsedTime().subscribe((data) => {
+      this.formattedTime = data;
+    });
   }
 
   ngOnDestroy() {}
@@ -54,7 +62,7 @@ export class ConnectionHeaderComponent implements OnInit {
           console.log("received", receivedEntry);
           this.undoEvent = receivedEntry;
           if (this.undoEvent == false) {
-            this.resumeTimer();
+            this.timerService.resume();
           }
         }
       );
@@ -75,30 +83,5 @@ export class ConnectionHeaderComponent implements OnInit {
       console.log("received", receivedEntry);
       this.undoEvent = receivedEntry;
     });
-  }
-
-  timer = new Timer();
-  elapsedTime$: Observable<string>;
-  ngOnInit() {
-    this.timer.start();
-    this.elapsedTime$ = this.timer.getElapsedTime();
-  }
-
-  startTimer() {
-    this.timer.start();
-    this.elapsedTime$ = this.timer.getElapsedTime();
-  }
-
-  stopTimer() {
-    this.timer.stop();
-    this.elapsedTime$ = this.timer.getElapsedTime();
-  }
-
-  pauseTimer() {
-    this.timer.pause();
-  }
-
-  resumeTimer() {
-    this.timer.resume();
   }
 }

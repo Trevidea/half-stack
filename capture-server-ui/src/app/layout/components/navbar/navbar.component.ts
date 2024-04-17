@@ -22,6 +22,8 @@ import { User } from "app/auth/models";
 
 import { coreConfig } from "app/app-config";
 import { Router } from "@angular/router";
+import { TimerService } from "app/sport-pip-capture/components/connection/timer.service";
+import { Timer } from "app/sport-pip-capture/components/connection/timer";
 
 @Component({
   selector: "app-navbar",
@@ -90,7 +92,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private _coreMediaService: CoreMediaService,
     private _coreSidebarService: CoreSidebarService,
     private _mediaObserver: MediaObserver,
-    public _translateService: TranslateService
+    public _translateService: TranslateService,
+    public timerService: Timer
   ) {
     this._authenticationService.currentUser.subscribe(
       (x) => (this.currentUser = x)
@@ -194,6 +197,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
+    this.timerService.start();
+
     // get the currentUser details from localStorage
     this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
