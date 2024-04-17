@@ -31,8 +31,11 @@ export class EventsSyncComponent implements OnInit {
     console.log('clicked syncEvents');
     this.service.syncEvents().subscribe(
       (response) => {
+        this.percent = 100
         console.log('Response from syncEvents:', response);
         this.percent = 100
+        this.outerStrokeColor = 'transparent'
+        this.syncMessage = 'Events Synced' 
         this.uploadicon = 'assets/images/spip-icons/check.svg'
         this.backgroundColor = '#43C4631A'
 
