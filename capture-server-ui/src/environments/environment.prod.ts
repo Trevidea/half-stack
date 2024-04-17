@@ -2,8 +2,8 @@ export const environment = {
   production: true,
   hmr: false,
   apiUrl: 'http://localhost:3000/api',
-  spModelUrl:'http://localhost:1437/api',
-  spRelayUrl:'http://localhost:3001',
-  spFSUrl:'http://localhost:1337/api',
-  spHLSUrl:'http://localhost:59919',
+  spModelUrl:'https://api.sp-halfstack.site/api',
+  spRelayUrl:'https://relay.sp-halfstack.site',
+  spFSUrl:'https://strapi.sp-fullstack.site/api',
+  spHLSUrl:'https://dumps.sp-halfstack.site',
 };

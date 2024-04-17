@@ -10,8 +10,8 @@ private:
     int m_interval;
     std::function<void()> m_work;
     std::thread *mp_thread;
-    bool m_stopCalled;
-
+    bool m_stopCalled = false;
+    bool m_started = false;
 public:
     WorkerLoop(const int interval, std::function<void()> &&work);
     void start();

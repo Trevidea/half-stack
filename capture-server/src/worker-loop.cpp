@@ -16,14 +16,18 @@ void WorkerLoop::start()
                                               std::this_thread::sleep_for(std::chrono::seconds(this->m_interval));
                                           }
                                       }};
+    this->m_started = true;
 }
 
 void WorkerLoop::stop()
 {
     this->m_stopCalled = true;
-    if (this->mp_thread)
+    if (this->m_started)
     {
-        this->mp_thread->join();
+        if (this->mp_thread && this->mp_thread->joinable())
+        {
+            this->mp_thread->join();
+        }
         delete this->mp_thread;
     }
 }

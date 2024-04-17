@@ -27,12 +27,12 @@ void Event::report()
                               {
                                   this->create(req, rsp);
                               });
-    Gateway::instance().route("GET", "/api/event/open-preview", // To request INSERT
+    Gateway::instance().route("POST", "/api/event/open-preview", // To request INSERT
                               [this](const Request &req, Response &rsp)
                               {
                                   this->openPreview(req, rsp);
                               });
-    Gateway::instance().route("GET", "/api/event/close-preview", // To request INSERT
+    Gateway::instance().route("POST", "/api/event/close-preview", // To request INSERT
                               [this](const Request &req, Response &rsp)
                               {
                                   this->closePreview(req, rsp);
@@ -49,40 +49,51 @@ void Event::report()
                               });
 }
 
-void Event::openPreview(const Request &req, Response rsp)
+void Event::openPreview(const Request &req, Response &rsp)
 {
-    const auto event = Event::byId<Event>(27);
+    Json::Value request = req.json();
+    const int eventId = request.get("eventId", -1).asInt();
+    spdlog::trace("Open preview request for: {}", eventId);
+
+    Json::Value response = Json::objectValue;
+    response["status"] = "success";
+    const auto event = Event::byId<Event>(eventId);
     if (!event.notSet())
     {
         const auto dt = getDTUDateFromSql(event.dtEvent());
         const auto tm = getDTUTimeFromSql(event.tmEvent());
         spdlog::trace("Event {}, date: {}, month: {}, year: {}, hours: {}, mins: {}",
                       event.title(), dt.date, dt.month, dt.year, tm.hours, tm.minutes);
-        const auto &kvPair = this->m_runners.find(27);
+        const auto &kvPair = this->m_runners.find(eventId);
         if (kvPair != this->m_runners.end())
         {
+            spdlog::trace("Runner already exists for event {}. Stopping runner - just in case", eventId);
             kvPair->second->stop();
-            this->m_runners.erase(27);
+            this->m_runners.erase(kvPair);
         }
-        Json::Value response = Json::objectValue;
-        response["status"] = "success";
-        Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
-        
-        this->m_runners.emplace(27, new EventRunner(dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1));
 
-        rsp.setData(Gateway::instance().formatResponse({{response}}));
+        Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
+        spdlog::trace("Creating a new runner for event id {}", eventId);
+        this->m_runners.emplace(eventId, new EventRunner(dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1));
     }
+    const std::string strRsp = Gateway::instance().formatResponse({{response}});
+    spdlog::trace("setting response: {}", strRsp);
+    rsp.setData(strRsp);
 }
-void Event::closePreview(const Request &req, Response rsp)
+void Event::closePreview(const Request &req, Response &rsp)
 {
-    if (this->m_runners.find(27) != this->m_runners.end())
+    Json::Value request = req.json();
+    const int eventId = request.get("eventId", -1).asInt();
+    spdlog::trace("Close preview request for: {}", eventId);
+
+    Json::Value response = Json::objectValue;
+    response["status"] = "success";
+    if (this->m_runners.find(eventId) != this->m_runners.end())
     {
-        auto &runner = this->m_runners[27];
+        auto &runner = this->m_runners[eventId];
         runner->stop();
         delete runner;
         this->m_runners.erase(1);
     }
-    Json::Value response = Json::objectValue;
-    response["status"] = "success";
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }

@@ -1,7 +1,6 @@
 #include <cpprest/http_listener.h>
 #include "gateway.h"
 #include "on-demand-event.h"
-#include "network-quality-assessment.h"
 #pragma comment(lib, "cpprest143_2_10")
 using namespace web;
 using namespace web::http;
@@ -27,85 +26,37 @@ void display_json(
    cout << prefix << jvalue.serialize() << endl;
 }
 
-void handle_network_quality_assessment(http_request request)
-{
-    // Perform network quality assessment here
-    std::vector<NetworkQualityAssessmentResult> results = NetworkQualityAssessment::assess();
-
-    // Construct a JSON array to hold the assessment results
-    json::value response_json = json::value::array();
-    for (const auto& result : results) {
-        json::value result_json;
-        result_json[U("latency")] = json::value::number(result.latency);
-        result_json[U("jitter")] = json::value::number(result.jitter);
-        result_json[U("packetLoss")] = json::value::number(result.packetLoss);
-        result_json[U("bandwidth")] = json::value::number(result.bandwidth);
-        result_json[U("quality")] = json::value::string(utility::conversions::to_string_t(result.quality));
-        response_json.as_array()[response_json.as_array().size()] = result_json;
-    }
-
-    // Send the JSON array response
-    http_response response(status_codes::OK);
-    response.headers().add(U("Content-Type"), U("application/json"));
-    response.set_body(response_json);
-    request.reply(response);
-}
-
 void handle_get(http_request request)
 {
-    TRACE("\nhandle GET\n");
 
-    auto uri = request.absolute_uri();
+   TRACE("\nhandle GET\n");
 
-    // Check if the request is for the network quality assessment endpoint
-    if (uri.path() == "/network-quality-assessment") {
-        // Perform network quality assessment here
-        std::vector<NetworkQualityAssessmentResult> results = NetworkQualityAssessment::assess();
+   auto answer = json::value::object();
 
-        // Construct a JSON array to hold the assessment results
-        json::value response_json = json::value::array();
-        for (const auto& result : results) {
-            json::value result_json;
-            result_json[U("latency")] = json::value::number(result.latency);
-            result_json[U("jitter")] = json::value::number(result.jitter);
-            result_json[U("packetLoss")] = json::value::number(result.packetLoss);
-            result_json[U("bandwidth")] = json::value::number(result.bandwidth);
-            result_json[U("quality")] = json::value::string(utility::conversions::to_string_t(result.quality));
-            response_json.as_array()[response_json.as_array().size()] = result_json;
-        }
+   auto uri = request.absolute_uri();
 
-        // Send the JSON array response
-        http_response response(status_codes::OK);
-        response.headers().add(U("Content-Type"), U("application/json"));
-        response.set_body(response_json);
-        request.reply(response);
-    } else {
-        // Handle other GET requests
+   answer["Absolute URI"] = json::value::string(uri.to_string());
+   auto reponse = Gateway::instance().request("GET", uri.path(), uri::decode(uri.query()), "");
+   spdlog::trace("response received {}", reponse.data());
+   try
+   {
+      /* code */
+      auto val = json::value::parse(reponse.data());
 
-        auto answer = json::value::object();
+      answer["Gateway Response"] = val;
+   }
+   catch (const std::exception &e)
+   {
+      std::cerr << e.what() << '\n';
+   }
 
-        answer["Absolute URI"] = json::value::string(uri.to_string());
-        auto reponse = Gateway::instance().request("GET", uri.path(), uri::decode(uri.query()), "");
-        spdlog::trace("response received {}", reponse.data());
-        try
-        {
-            auto val = json::value::parse(reponse.data());
-
-            answer["Gateway Response"] = val;
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << '\n';
-        }
-
-        http_response response(status_codes::OK);
-        response.headers().add(U("Access-Control-Allow-Origin"), U("http://localhost:4200"));
-        response.headers().add(U("Access-Control-Allow-Methods"), U("GET,POST,OPTIONS,DELETE,PUT"));
-        response.headers().add(U("Access-Control-Allow-Headers"), U("Content-Type, x-requested-with"));
-        spdlog::debug("Setting body in response...");
-        response.set_body(answer);
-        request.reply(response); // reply is done here
-    }
+   http_response response(status_codes::OK);
+   response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
+   response.headers().add(U("Access-Control-Allow-Methods"), U("GET,POST,OPTIONS,DELETE,PUT"));
+   response.headers().add(U("Access-Control-Allow-Headers"), U("Content-Type, x-requested-with"));
+   spdlog::debug("Setting body in response...");
+   response.set_body(answer);
+   request.reply(response); // reply is done here
 }
 
 void handle_request(
@@ -140,7 +91,7 @@ void handle_request(
 
    http_response response(status_codes::OK);
 
-   response.headers().add(U("Access-Control-Allow-Origin"), U("http://localhost:4200"));
+   response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
    response.headers().add(U("Access-Control-Allow-Methods"), U("GET,POST,OPTIONS,DELETE,PUT"));
    response.headers().add(U("Access-Control-Allow-Headers"), U("Content-Type, x-requested-with"));
    response.set_body(answer);
@@ -157,12 +108,11 @@ void handle_post(http_request request)
        {
           auto uri = request.absolute_uri();
 
-         answer["Absolute URI"] = json::value::string(uri.to_string());
-         auto result = Gateway::instance().request("POST", uri.path(), uri.query(), jvalue.serialize());
-
+          answer["Absolute URI"] = json::value::string(uri.to_string());
+          auto result = Gateway::instance().request("POST", uri.path(), uri.query(), jvalue.serialize());
           auto val = json::value::parse(result.data());
 
-         answer["Gateway Response"] = val;
+          answer["Gateway Response"] = val;
        });
 }
 
@@ -181,7 +131,7 @@ void handle_put(http_request request)
 
           auto val = json::value::parse(result.data());
 
-         answer["Gateway Response"] = val;
+          answer["Gateway Response"] = val;
        });
 }
 void handle_opt(http_request request)
@@ -193,9 +143,8 @@ void handle_opt(http_request request)
    {
       spdlog::trace("header::{}={}", header.first, header.second);
    }
-   
-   
-   response.headers().add(U("Access-Control-Allow-Origin"), U("http://localhost:4200"));
+
+   response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
    response.headers().add(U("Access-Control-Allow-Methods"), U("GET,POST,OPTIONS,DELETE,PUT"));
    response.headers().add(U("Access-Control-Allow-Headers"), U("Content-Type, x-requested-with, Authorization"));
    request.reply(response); // reply is done here
@@ -239,9 +188,9 @@ int main()
       listener.support(methods::OPTIONS, handle_opt);
 
       // Initialize an instance of OnDemandEvent
-        OnDemandEvent onDemandEvent;
-        // Setup routes for handling on-demand event-related requests
-        onDemandEvent.report();
+      OnDemandEvent onDemandEvent;
+      // Setup routes for handling on-demand event-related requests
+      onDemandEvent.report();
 
       spdlog::trace("Created listener at 0.0.0.0:1437");
 
