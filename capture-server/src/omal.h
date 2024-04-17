@@ -10,8 +10,9 @@ private:
 public:
     Omal();
     void report();
+    void assessNetworkQuality(const Request &req, Response &rsp);
     ~Omal();
 };
 
 
-#endif // HOLIDAY_H
+#endif // OMAL_H

@@ -26,11 +26,11 @@ public:
     std::string type() const { return m_model.get<std::string>("type"); }
 
 public:
-    void openPreview(const Request &req, Response rsp);
-    void closePreview(const Request &req, Response rsp);
+    void openPreview(const Request &req, Response &rsp);
+    void closePreview(const Request &req, Response &rsp);
 
-public:
-    
+private:
+    void closeAllPreviews();
 
 private:
     std::map<int, EventRunner *> m_runners;
