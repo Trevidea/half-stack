@@ -164,7 +164,6 @@ void handle_post(http_request request)
 
           answer["Absolute URI"] = json::value::string(uri.to_string());
           auto result = Gateway::instance().request("POST", uri.path(), uri.query(), jvalue.serialize());
-
           auto val = json::value::parse(result.data());
 
           answer["Gateway Response"] = val;
