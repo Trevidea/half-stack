@@ -1,7 +1,6 @@
 #include <cpprest/http_listener.h>
 #include "gateway.h"
 #include "on-demand-event.h"
-#include "network-quality-assessment.h"
 #pragma comment(lib, "cpprest143_2_10")
 using namespace web;
 using namespace web::http;
@@ -27,90 +26,37 @@ void display_json(
    cout << prefix << jvalue.serialize() << endl;
 }
 
-void handle_network_quality_assessment(http_request request)
-{
-   // Perform network quality assessment here
-   std::vector<NetworkQualityAssessmentResult> results = NetworkQualityAssessment::assess();
-
-   // Construct a JSON array to hold the assessment results
-   json::value response_json = json::value::array();
-   for (const auto &result : results)
-   {
-      json::value result_json;
-      result_json[U("latency")] = json::value::number(result.latency);
-      result_json[U("jitter")] = json::value::number(result.jitter);
-      result_json[U("packetLoss")] = json::value::number(result.packetLoss);
-      result_json[U("bandwidth")] = json::value::number(result.bandwidth);
-      result_json[U("quality")] = json::value::string(utility::conversions::to_string_t(result.quality));
-      response_json.as_array()[response_json.as_array().size()] = result_json;
-   }
-
-   // Send the JSON array response
-   http_response response(status_codes::OK);
-   response.headers().add(U("Content-Type"), U("application/json"));
-   response.set_body(response_json);
-   request.reply(response);
-}
-
 void handle_get(http_request request)
 {
+
    TRACE("\nhandle GET\n");
+
+   auto answer = json::value::object();
 
    auto uri = request.absolute_uri();
 
-   // Check if the request is for the network quality assessment endpoint
-   if (uri.path() == "/network-quality-assessment")
+   answer["Absolute URI"] = json::value::string(uri.to_string());
+   auto reponse = Gateway::instance().request("GET", uri.path(), uri::decode(uri.query()), "");
+   spdlog::trace("response received {}", reponse.data());
+   try
    {
-      // Perform network quality assessment here
-      std::vector<NetworkQualityAssessmentResult> results = NetworkQualityAssessment::assess();
+      /* code */
+      auto val = json::value::parse(reponse.data());
 
-      // Construct a JSON array to hold the assessment results
-      json::value response_json = json::value::array();
-      for (const auto &result : results)
-      {
-         json::value result_json;
-         result_json[U("latency")] = json::value::number(result.latency);
-         result_json[U("jitter")] = json::value::number(result.jitter);
-         result_json[U("packetLoss")] = json::value::number(result.packetLoss);
-         result_json[U("bandwidth")] = json::value::number(result.bandwidth);
-         result_json[U("quality")] = json::value::string(utility::conversions::to_string_t(result.quality));
-         response_json.as_array()[response_json.as_array().size()] = result_json;
-      }
-
-      // Send the JSON array response
-      http_response response(status_codes::OK);
-      response.headers().add(U("Content-Type"), U("application/json"));
-      response.set_body(response_json);
-      request.reply(response);
+      answer["Gateway Response"] = val;
    }
-   else
+   catch (const std::exception &e)
    {
-      // Handle other GET requests
-
-      auto answer = json::value::object();
-
-      answer["Absolute URI"] = json::value::string(uri.to_string());
-      auto reponse = Gateway::instance().request("GET", uri.path(), uri::decode(uri.query()), "");
-      spdlog::trace("response received {}", reponse.data());
-      try
-      {
-         auto val = json::value::parse(reponse.data());
-
-         answer["Gateway Response"] = val;
-      }
-      catch (const std::exception &e)
-      {
-         std::cerr << e.what() << '\n';
-      }
-
-      http_response response(status_codes::OK);
-      response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
-      response.headers().add(U("Access-Control-Allow-Methods"), U("GET,POST,OPTIONS,DELETE,PUT"));
-      response.headers().add(U("Access-Control-Allow-Headers"), U("Content-Type, x-requested-with"));
-      spdlog::debug("Setting body in response...");
-      response.set_body(answer);
-      request.reply(response); // reply is done here
+      std::cerr << e.what() << '\n';
    }
+
+   http_response response(status_codes::OK);
+   response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
+   response.headers().add(U("Access-Control-Allow-Methods"), U("GET,POST,OPTIONS,DELETE,PUT"));
+   response.headers().add(U("Access-Control-Allow-Headers"), U("Content-Type, x-requested-with"));
+   spdlog::debug("Setting body in response...");
+   response.set_body(answer);
+   request.reply(response); // reply is done here
 }
 
 void handle_request(

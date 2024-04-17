@@ -82,5 +82,5 @@ for (let index = 0; index < 10; index++) {
       const preview = { eventStatus: 'Event Ready for Preview' };
       socket.send([topicfilter, JSON.stringify(preview)]);
     }, 2000);
-  }, 3000 * index);
+  }, 3000);
 }
