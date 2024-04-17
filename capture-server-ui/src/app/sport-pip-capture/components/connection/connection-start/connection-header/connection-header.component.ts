@@ -18,7 +18,7 @@ import { Timer } from "../../timer.service";
 export class ConnectionHeaderComponent implements OnInit {
   connectiondetail: boolean = false;
   undoEvent: boolean = false;
- @Input()liveEventData:any
+  @Input() liveEventData: any;
   currentTime: string;
   isTimerRunning = false;
   constructor(
@@ -79,7 +79,6 @@ export class ConnectionHeaderComponent implements OnInit {
 
   timer = new Timer();
   elapsedTime$: Observable<string>;
-
   ngOnInit() {
     this.timer.start();
     this.elapsedTime$ = this.timer.getElapsedTime();

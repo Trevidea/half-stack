@@ -1,6 +1,10 @@
+import { Injectable, inject } from "@angular/core";
 import { Observable, interval } from "rxjs";
 import { map } from "rxjs/operators";
 
+@Injectable({
+  providedIn: "root",
+})
 export class Timer {
   private startTime: number;
   private pausedTime: number = 0;
