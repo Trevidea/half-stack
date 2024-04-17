@@ -38,6 +38,11 @@ void Event::report()
                               {
                                   this->closePreview(req, rsp);
                               });
+    Gateway::instance().route("POST", "/api/event/sync", // To request INSERT
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  this->sync(req, rsp);
+                              });
     Gateway::instance().route("PUT", "/api/event", // To request UPDATE
                               [this](const Request &req, Response &rsp)
                               {
