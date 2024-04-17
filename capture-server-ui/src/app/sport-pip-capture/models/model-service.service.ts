@@ -132,7 +132,7 @@ export class ModelServiceService {
     console.log(data)
 
     if (data.id) {
-      
+
       return this.update("event", data, data.id);
     } else {
       return this.create("event", data);
@@ -168,7 +168,7 @@ export class ModelServiceService {
     const url = `${this.modelsServerUrl}/event/sync`
     const data = {
       'source': `${environment.spFSUrl}/events`,
-      'delete-criteria': "dt_event >= now()"
+      'delete-criteria': "type='scheduled'"
     }
     return this._httpClient.post<any>(url, data)
   }
@@ -176,17 +176,17 @@ export class ModelServiceService {
 
 
 
-  openPreview(data:{"eventId":number}): Observable<any> {
+  openPreview(data: { "eventId": number }): Observable<any> {
     const url = `${environment.spModelUrl}/event/open-preview`
     console.log(data);
-    return this._httpClient.post<any>(url,data)
+    return this._httpClient.post<any>(url, data)
 
   }
 
-  closePreview(data:{"eventId":number}): Observable<any> {
+  closePreview(data: { "eventId": number }): Observable<any> {
     const url = `${environment.spModelUrl}/event/close-preview`
     console.log(data);
-    return this._httpClient.post<any>(url,data)
+    return this._httpClient.post<any>(url, data)
 
   }
 
