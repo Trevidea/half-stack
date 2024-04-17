@@ -4,7 +4,7 @@
       <img class="img-fluid" src="../../../../../assets/images/pip-image/card-image.png" alt="Card image cap" />
       <div class="card-img-overlay p-0 d-flex flex-column" style="height: 100px;">
         <div class="d-flex align-items-center Progress">
-          Starts in {{item.countdown}}
+          {{item.countdown}}
         </div>
         <div class="menu-container" (click)="clickedmenu(item.id)">
           <app-menu-button [dropdownItems]="dropdownItems"></app-menu-button>
@@ -27,7 +27,7 @@
                 View
               </button>
               <button type="button" class="btn btn-warning  btn-sm" style="box-shadow: none;"
-                (click)="navigateToEventPreview()">
+                (click)="navigateToEventPreview(item.id)">
                 Preview
               </button>
             </div>

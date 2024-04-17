@@ -174,15 +174,25 @@ export class ModelServiceService {
   }
 
 
-  // localhost:1437/api/event/open-preview
 
-  openPreview(): Observable<any> {
+
+  openPreview(data:{"eventId":number}): Observable<any> {
     const url = `${environment.spModelUrl}/event/open-preview`
-    return this._httpClient.get<any>(url)
+    console.log(data);
+    return this._httpClient.post<any>(url,data)
+
+  }
+
+  closePreview(data:{"eventId":number}): Observable<any> {
+    const url = `${environment.spModelUrl}/event/close-preview`
+    console.log(data);
+    return this._httpClient.post<any>(url,data)
 
   }
 
   liveEventJson(): Observable<Data.LiveEventDetail[]> {
     return this._data('liveEvent', LiveEventDetailData)
   }
+
+  // /api/event/close-preview
 }

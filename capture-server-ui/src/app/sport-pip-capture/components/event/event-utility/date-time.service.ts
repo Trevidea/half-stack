@@ -27,18 +27,13 @@ export class DateTimeService {
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        item.countdown = `${this.padZero(days)} days, ${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
+        item.countdown = `Starts in ${this.padZero(days)} days, ${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
         if (!this.popupShown && diff <= 1000) {
           this.modalOpenSM();
           this.popupShown = true;
         }
       } else {
-        const runningDiff = Math.abs(diff);
-        // console.log('runningDiff:', diff);
-        const runningHours = Math.floor(runningDiff / (1000 * 60 * 60));
-        const runningMinutes = Math.floor((runningDiff % (1000 * 60 * 60)) / (1000 * 60));
-        const runningSeconds = Math.floor((runningDiff % (1000 * 60)) / 1000);
-        item.countdown = `${this.padZero(runningHours)}:${this.padZero(runningMinutes)}:${this.padZero(runningSeconds)}`;
+        item.countdown = 'Started'
       }
     });
   }
@@ -121,6 +116,8 @@ export class DateTimeService {
     // Concatenating all components to form the final date string
     return `${month} ${dayString}, ${weekday}`;
   }
+
+  
   formatTime(timeNumber) {
     if (isNaN(timeNumber) || timeNumber === null || timeNumber === undefined, timeNumber === 0) {
       return "00:00";

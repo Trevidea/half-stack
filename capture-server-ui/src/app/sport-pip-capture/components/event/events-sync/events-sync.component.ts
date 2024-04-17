@@ -29,26 +29,25 @@ export class EventsSyncComponent implements OnInit {
     this.syncMessage = 'Syncing Events'
     this.percent = 5
     console.log('clicked syncEvents');
-    setTimeout(() => {
-      this.service.syncEvents().subscribe(
-        (response) => {
-          this.percent = 100
-          this.uploadicon = 'assets/images/spip-icons/check.svg'
-          this.backgroundColor = 'rgba(222, 46, 33, 0.10)'
-          console.log('Response from syncEvents:', response);
-        },
-        (error) => {
-          console.error('Error occurred while syncing events:', error);
-          this.failed = true
-          this.uploadicon = 'assets/images/spip-icons/x.svg'
-          this.backgroundColor = 'rgba(222, 46, 33, 0.10)'
-          this.outerStrokeColor = 'transparent'
-          this.syncMessage = 'Sync Failed'
-          this.subSyncMessage = 'Try again  to sync event'
-        }
-      );
-    }, 1000)
+    this.service.syncEvents().subscribe(
+      (response) => {
+        console.log('Response from syncEvents:', response);
+        this.percent = 100
+        this.uploadicon = 'assets/images/spip-icons/check.svg'
+        this.backgroundColor = '#43C4631A'
+
+      },
+      (error) => {
+        console.error('Error occurred while syncing events:', error);
+        this.failed = true
+        this.uploadicon = 'assets/images/spip-icons/x.svg'
+        this.backgroundColor = 'rgba(222, 46, 33, 0.10)'
+        this.outerStrokeColor = 'transparent'
+        this.syncMessage = 'Sync Failed'
+        this.subSyncMessage = 'Try again  to sync event'
+      }
+    );
   }
 
-  
+
 }

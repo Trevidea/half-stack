@@ -26,7 +26,6 @@ export class EventRange implements Views.Datasource {
 }
 export class EventView implements Views.Datasource {
     private _id: number;
-    v: {};
     public get id(): number {
         return this._id;
     }
@@ -40,6 +39,14 @@ export class EventView implements Views.Datasource {
     }
     public set countdown(v: string) {
         this._countdown = v;
+    }
+
+    private _ongoingCountdown: string;
+    public get ongoingCountdown(): string {
+        return this._ongoingCountdown;
+    }
+    public set ongoingCountdown(v: string) {
+        this._ongoingCountdown = v;
     }
 
     private _time: number;

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { Subscription, interval } from 'rxjs';
 import { DateTimeService } from '../../event-utility/date-time.service';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./on-going-event.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class OnGoingEventComponent implements OnInit, OnDestroy {
+export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
   startIndex: number;
   eventId: number;
   opOngoingDetail: boolean = false;
@@ -27,13 +27,20 @@ export class OnGoingEventComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    if (this.datasource) {
-      this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
+
+  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.datasource && changes.datasource.currentValue) {
+      this.updateCountdownForOngoingEvents(this.datasource);
+      if (this.countdownInterval) {
+        clearInterval(this.countdownInterval);
+      }
       this.countdownInterval = setInterval(() => {
-        this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
-      }, 1000);
+        this.updateCountdownForOngoingEvents(this.datasource);
+      }, 50);
     }
-   console.log(this.datasource)
   }
 
   eventDetail(event: string, index: number) {
@@ -43,12 +50,10 @@ export class OnGoingEventComponent implements OnInit, OnDestroy {
   }
 
   OnClosedDetail(data: any) {
-    console.log("core side bar closed")
     this.opOngoingDetail = false
   }
 
   clickedmenu(id: number) {
-    console.log("yes menu clicked ", id)
     this.eventId = id;
   }
 
@@ -66,30 +71,29 @@ export class OnGoingEventComponent implements OnInit, OnDestroy {
     }
   }
 
-  calculateUpcomingCountdown(event: any): string {
-    const eventDateTime = new Date(event.dtEvent || "");
-    eventDateTime.setHours(Math.floor(event.time || 0 / 100));
-    eventDateTime.setMinutes((event.time || 0) % 100);
-
-    // Calculate the difference between the current time and the event start time
+  //Will replace it in  dateTimeservice
+  updateCountdownForOngoingEvents(events: any[]) {
     const now = new Date();
-    const diff = now.getTime() - eventDateTime.getTime();
+    events.forEach(event => {
+      const eventDateTime = new Date(event.dtEvent);
+      eventDateTime.setHours(Math.floor(event.time / 100));
+      eventDateTime.setMinutes(event.time % 100);
 
-    // Convert the difference to positive if it's negative
-    const diffMillis = Math.abs(diff);
-
-    // Calculate hours, minutes, and seconds from the difference
-    const hours = Math.floor(diffMillis / (1000 * 60 * 60));
-    const minutes = Math.floor((diffMillis % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diffMillis % (1000 * 60)) / 1000);
-
-    // Format the running time as HH:mm:ss
-    return `${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
+      if (now >= eventDateTime) {
+        const elapsedTime = now.getTime() - eventDateTime.getTime();
+        const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+        const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+        const formattedTime = ` In Progress ${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
+        event.ongoingCountdown = formattedTime;
+      }
+    });
   }
 
-  padZero(num: number): string {
+  padZero(num) {
     return num < 10 ? `0${num}` : `${num}`;
   }
+
 
 
 }
