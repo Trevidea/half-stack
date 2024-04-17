@@ -34,6 +34,8 @@ import { ExampleModule } from "./sport-pip/example/example.module";
 import { SettingModule } from "./sport-pip-capture/components/setting/setting.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { RouterModule, Routes } from "@angular/router";
+import { TimerService } from "./sport-pip-capture/components/connection/timer.service";
+import { Timer } from "./sport-pip-capture/components/connection/timer";
 
 const appRoutes: Routes = [
   {
@@ -169,6 +171,8 @@ const appRoutes: Routes = [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // ! IMPORTANT: Provider used to create fake backend, comment while using real API
     fakeBackendProvider,
+    TimerService,
+    Timer,
   ],
   bootstrap: [AppComponent],
 })
