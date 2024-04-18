@@ -1,7 +1,8 @@
-@import '@core/scss/base/bootstrap-extended/include'; // Bootstrap includes
-@import '@core/scss/base/components/include'; // Components includes
+@import "@core/scss/base/bootstrap-extended/include"; // Bootstrap includes
+@import "@core/scss/base/components/include"; // Components includes
 
 // To open dd on right
+
 .dropdown-menu-right {
   right: 0 !important;
   left: auto !important;

@@ -36,6 +36,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { RouterModule, Routes } from "@angular/router";
 import { TimerService } from "./sport-pip-capture/components/connection/timer.service";
 import { Timer } from "./sport-pip-capture/components/connection/timer";
+import { UserProfileComponent } from "./user-profile/user-profile.component";
 
 const appRoutes: Routes = [
   {
