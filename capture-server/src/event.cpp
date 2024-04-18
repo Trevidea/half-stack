@@ -30,6 +30,7 @@ void Event::report()
     Gateway::instance().route("POST", "/api/event/open-preview", // To request INSERT
                               [this](const Request &req, Response &rsp)
                               {
+                                  this->closeAllPreviews();
                                   this->openPreview(req, rsp);
                               });
     Gateway::instance().route("POST", "/api/event/close-preview", // To request INSERT
@@ -37,9 +38,15 @@ void Event::report()
                               {
                                   this->closePreview(req, rsp);
                               });
+    Gateway::instance().route("POST", "/api/event/sync", // To request INSERT
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  this->sync(req, rsp);
+                              });
     Gateway::instance().route("PUT", "/api/event", // To request UPDATE
                               [this](const Request &req, Response &rsp)
                               {
+                                  this->closeAllPreviews();
                                   this->update(req, rsp);
                               });
     Gateway::instance().route("DELETE", "/api/event", // To request DELETE
@@ -48,7 +55,15 @@ void Event::report()
                                   this->remove(req, rsp);
                               });
 }
-
+void Event::closeAllPreviews()
+{
+    for (auto &&runner : this->m_runners)
+    {
+        runner.second->stop();
+        delete runner.second;
+    }
+    this->m_runners.clear();
+}
 void Event::openPreview(const Request &req, Response &rsp)
 {
     Json::Value request = req.json();
