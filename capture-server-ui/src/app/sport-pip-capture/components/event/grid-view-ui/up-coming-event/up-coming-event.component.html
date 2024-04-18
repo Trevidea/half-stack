@@ -54,7 +54,8 @@
 
 <core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-scheduled" overlayClass="modal-backdrop"
   hideOnEsc="true">
-  <app-schedual-event-detail-presenter *ngIf="openDetailmodel"></app-schedual-event-detail-presenter>
+  <app-schedual-event-detail-presenter [eventData]="datasource" *ngIf="openDetailmodel" detailType='upcoming'
+    [startIndex]="startIndex"></app-schedual-event-detail-presenter>
 </core-sidebar>
 
 <core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-on-demand" overlayClass="modal-backdrop"

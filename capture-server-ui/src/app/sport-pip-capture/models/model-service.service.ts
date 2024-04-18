@@ -166,9 +166,14 @@ export class ModelServiceService {
 
   syncEvents(): Observable<any> {
     const url = `${this.modelsServerUrl}/event/sync`
-    const data = {
-      'source': `${environment.spFSUrl}/events`,
-      'delete-criteria': "type='scheduled'"
+    // const data = {
+    //   'source': `${environment.spFSUrl}/events`,
+    //   'delete-criteria': "type='scheduled'"
+    // }
+
+    const data =  {
+      "source": "https://strapi.sp-fullstack.site",
+        "delete-criteria": "type='scheduled'"
     }
     return this._httpClient.post<any>(url, data)
   }
