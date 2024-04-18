@@ -5,6 +5,8 @@ import {
   HostBinding,
   HostListener,
   ViewEncapsulation,
+  Renderer2,
+  ElementRef,
 } from "@angular/core";
 import { MediaObserver } from "@angular/flex-layout";
 
@@ -93,7 +95,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private _coreSidebarService: CoreSidebarService,
     private _mediaObserver: MediaObserver,
     public _translateService: TranslateService,
-    public timerService: Timer
+    public timerService: Timer,
+    private renderer: Renderer2,
+    private elementRef: ElementRef
   ) {
     this._authenticationService.currentUser.subscribe(
       (x) => (this.currentUser = x)
@@ -188,6 +192,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this._authenticationService.logout();
 
     this._router.navigate(["/pages/authentication/login-v2"]);
+  }
+  userProfile(key) {
+    this._coreSidebarService.getSidebarRegistry(key).toggleOpen();
   }
 
   // Lifecycle Hooks
