@@ -10,7 +10,7 @@ import { ModelServiceService } from "app/sport-pip-capture/models/model-service.
 
 @Component({
   selector: "app-event-preview-presenter",
-  template: `<app-event-preview [datasource]='previewData.result[0][0]'></app-event-preview>`,
+  template: `<app-event-preview [datasource]='previewData?.result[0]?.[0]'></app-event-preview>`,
   styleUrls: ["./event-preview.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
@@ -18,34 +18,41 @@ export class EventPreviewPresenter implements OnInit {
   previewData!: any;
   private subscription: Subscription;
   ds!: RangeEventPreviewView;
+  eventId: number
   constructor(
     private route: ActivatedRoute,
     private socketService: SocketService,
     private dataFactoryService: DataFactoryService,
     private modelServiceService: ModelServiceService,
   ) {
-    // this.socketService.onEventPreview().subscribe((data) => {
-    //   this.previewData = data;
-    //   console.log(data);
-    //   console.log("from preview constructor", data);
-    // });
-    // this.ds = new RangeEventPreviewView();
+    this.route.queryParams.subscribe(params => {
+      this.eventId = parseInt(params['eventId']);
+      console.log(this.eventId)
+    });
+
   }
 
   ngOnInit(): void {
-    console.log("Calling preview on service");
-    this.modelServiceService.openPreview()
-
-    this.subscription = this.socketService.onEventPreview().subscribe(
+    console.log("Subscribing to onEventPreview");
+    
+    this.socketService.onEventPreview().subscribe(
       (data) => {
         this.previewData = JSON.parse(data);
-        console.log(data);
-        console.log("from preview constructor", this.previewData);
+        console.log("from preview  this.previewData", this.previewData);
       },
       (error) => {
         console.error('Error occurred:', error);
       }
     );
-    console.log("from preview  this.previewData", this.previewData, this.subscription);
+
+    this.modelServiceService.openPreview({ eventId: this.eventId }).subscribe(
+      (data: any) => {
+        console.log("data", data)
+      },
+      (error: any) => {
+        console.log(error)
+      }
+    );
+
   }
 }

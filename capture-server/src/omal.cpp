@@ -7,7 +7,7 @@ Omal::Omal() : EntityBase("omal")
 {
 }
 
-void Omal::report()
+void Omal::report() 
 {
     EntityBase::report();
     Gateway::instance().route("GET", "/api/omal/vod-dumps", // To request LIST

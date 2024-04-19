@@ -59,9 +59,10 @@ export class UpComingEventComponent implements OnInit, OnDestroy ,OnChanges {
   }
 
   OnClosedDetail(data: any) {
-    console.log("core side bar closed")
     this.openDetailmodel = false
   }
+
+
 
   formatDateTime(dateTimeString: string, time: number): string {
     const dateOptions: Intl.DateTimeFormatOptions = {
@@ -81,9 +82,10 @@ export class UpComingEventComponent implements OnInit, OnDestroy ,OnChanges {
 
 
 
-  navigateToEventPreview() {
-    this.socketService.connectToRelayService()
-    this.router.navigate(['/event/event-preview']);
+  navigateToEventPreview(eventId:number) {
+    this.router.navigate(['/event/event-preview'],{
+      queryParams: { eventId: eventId }
+    });
   }
 
 

@@ -21,22 +21,19 @@ export class DateTimeService {
       eventDateTime.setHours(Math.floor(item._time / 100));
       eventDateTime.setMinutes(item._time % 100);
       const diff = eventDateTime.getTime() - now.getTime();
+      // console.log('Time Difference (ms):', diff);
       if (diff >= 0) {
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        item.countdown = `${this.padZero(days)} days, ${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
+        item.countdown = `Starts in ${this.padZero(days)} days, ${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
         if (!this.popupShown && diff <= 1000) {
           this.modalOpenSM();
           this.popupShown = true;
         }
       } else {
-        const runningDiff = Math.abs(diff); 
-        const runningHours = Math.floor(runningDiff / (1000 * 60 * 60));
-        const runningMinutes = Math.floor((runningDiff % (1000 * 60 * 60)) / (1000 * 60));
-        const runningSeconds = Math.floor((runningDiff % (1000 * 60)) / 1000);
-        item.countdown = `In Progress ${this.padZero(runningHours)}:${this.padZero(runningMinutes)}:${this.padZero(runningSeconds)}`;
+        item.countdown = 'Started'
       }
     });
   }
@@ -119,6 +116,8 @@ export class DateTimeService {
     // Concatenating all components to form the final date string
     return `${month} ${dayString}, ${weekday}`;
   }
+
+  
   formatTime(timeNumber) {
     if (isNaN(timeNumber) || timeNumber === null || timeNumber === undefined, timeNumber === 0) {
       return "00:00";

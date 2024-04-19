@@ -7,7 +7,7 @@
 class Base: public Handler
 {
 private:
-    
+
 public:
     Base() = default;
     Base(Json::Value& model);
@@ -18,7 +18,5 @@ public:
 protected:
     Json::Value m_model;
 };
-
-
 
 #endif //BASE_H

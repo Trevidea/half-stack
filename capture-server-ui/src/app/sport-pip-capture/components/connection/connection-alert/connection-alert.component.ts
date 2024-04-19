@@ -9,6 +9,7 @@ import {
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EventUndoNotificationComponent } from "./event-undo-notification/event-undo-notification.component";
 import { EventEndNotifictionsComponent } from "../../event-notifications/event-end-notifictions/event-end-notifictions.component";
+import { SocketService } from "app/sport-pip-capture/models/socket.service";
 
 @Component({
   selector: "app-connection-alert",
@@ -24,7 +25,8 @@ export class ConnectionAlertComponent implements OnInit {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   constructor(
     private modalService: NgbModal,
-    public activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal,
+    private socketService: SocketService,
   ) {}
 
   ngOnInit(): void {
@@ -33,10 +35,11 @@ export class ConnectionAlertComponent implements OnInit {
   close() {
     this.modalService.dismissAll();
   }
-  YesSure() {
+  YesSure() { 
     if (this.title == "End Event") {
+      
       this.modalService.dismissAll();
-      //  EventUndoNotificationComponent,
+     
       const undoNotification = this.modalService.open(
         EventEndNotifictionsComponent,
         {

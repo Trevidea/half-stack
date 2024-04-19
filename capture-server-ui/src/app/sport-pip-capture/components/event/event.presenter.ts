@@ -45,7 +45,6 @@ export class EventPresenter implements OnInit {
   onFilter(filter: Data.FilterParams) {
     this.query = filter;
     this.filteredData = this.filterEvents(this.ds.event, this.query);
-    console.log(this.filteredData)
   }
 
   onTabChange(): void {
@@ -54,7 +53,6 @@ export class EventPresenter implements OnInit {
   }
 
   filterEvents(data, query) {
-    console.log(query)
     return data.filter(item => {
       for (const key in query) {
         if (query[key] !== null && item[key] !== query[key]) {
