@@ -29,7 +29,7 @@ void Gateway::init()
     this->m_entities.push_back(new Event());
     this->m_entities.push_back(new UserProfile());
     this->m_entities.push_back(new EventPreview());
-    this->m_entities.push_back(new StreamingDevice());
+    // this->m_entities.push_back(new StreamingDevice());
     for (auto &&e : this->m_entities)
     {
         e->report();
