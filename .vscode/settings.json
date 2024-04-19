@@ -127,5 +127,5 @@
     "*.dat": "cpp",
     "filesystem": "cpp"
   },
-  "cmake.sourceDirectory": "C:/git/half-stack/capture-server/api"
+  "cmake.sourceDirectory": "/Users/shreyapathak/git/half-stack/capture-server/build/_deps/libpqxx-src/src"
 }
