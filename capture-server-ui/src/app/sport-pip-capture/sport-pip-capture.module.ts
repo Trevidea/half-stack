@@ -91,7 +91,6 @@ import { PipConformationModalComponent } from "./blocks/pip-conformation-modal/p
 import { EventPreviewComponent } from "./components/event/event-preview/event-preview.component";
 import { ActiveDevicesComponent } from "./components/event/event-preview/active-devices/active-devices.component";
 import { EventPreviewPresenter } from "./components/event/event-preview/event-preview.presenter";
-
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
