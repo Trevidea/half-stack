@@ -68,25 +68,26 @@ export class CreateOnDemandEventPresenter implements OnInit {
     });
     // MetaTypeJson
     Transformer.ComposeObjectAsync(
-      this.dataFactory.MetaTypeJson("PROGRAM"),
+      this.dataFactory.MetaTypeByKey("PROGRAM"),
       this.ds.programs,
       MetaTypeBuilder
     );
-    Transformer.ComposeObject(
-      this.dataFactory.EventSports(),
+    Transformer.ComposeObjectAsync(
+      this.dataFactory.MetaTypeByKey("SPORT"),
       this.ds.sports,
-      ArrayBuilder
+      MetaTypeBuilder
     );
-    Transformer.ComposeObject(
-      this.dataFactory.EventLevel(),
+    Transformer.ComposeObjectAsync(
+      this.dataFactory.MetaTypeByKey("LEVEL"),
       this.ds.levels,
-      ArrayBuilder
+      MetaTypeBuilder
     );
-    Transformer.ComposeObject(
-      this.dataFactory.EventProgram(),
-      this.ds.programs,
-      ArrayBuilder
-    );
+    // Transformer.ComposeObject(
+    //   this.dataFactory.EventLevel(),
+    //   this.ds.levels,
+    //   ArrayBuilder
+    // );
+
     Transformer.ComposeObject(
       this.dataFactory.EventYear(),
       this.ds.years,
@@ -122,6 +123,18 @@ export class CreateOnDemandEventPresenter implements OnInit {
         const data = await e.modal.open();
         if (data) {
           Transformer.ComposeAndSelect(this.ds.programs, data.newItem);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    });
+    this.ds.levels.onAddingNewItem(async (e: { modal: Views.ModalHost }) => {
+      e.modal.component = TypesPresenter;
+      e.modal.properties["key"] = "LEVEL";
+      try {
+        const data = await e.modal.open();
+        if (data) {
+          Transformer.ComposeAndSelect(this.ds.levels, data.newItem);
         }
       } catch (err) {
         console.log(err);

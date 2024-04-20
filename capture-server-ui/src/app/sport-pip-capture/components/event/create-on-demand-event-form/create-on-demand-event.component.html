@@ -178,8 +178,21 @@
             #ngmLevel="ngModel"
             ><ng-option *ngFor="let item of datasource.levels" [value]="item">{{
               item
-            }}</ng-option></ng-select
-          >
+            }}</ng-option>
+            <ng-template ng-footer-tmp class="p-2">
+              <button
+                (click)="datasource.levels.AddingNewItem(level)"
+                class="addTypeBtn btn btn-sm btn-success"
+                rippleEffect
+              >
+                + Add New Level
+              </button>
+              <inline-form-modal
+                #level
+                modalTitle="New Level"
+              ></inline-form-modal>
+            </ng-template>
+          </ng-select>
           <app-validation-alert controlName="Level" [control]="ngmLevel">
           </app-validation-alert>
         </div>

@@ -74,17 +74,56 @@ export class DataFactoryService {
       );
   }
   MetaTypeByKey(key: string): Observable<Data.MetaType> {
-    const url = `${this._spModelUrl}/meta-type/key/${key}`;
-    return this._httpClient.get<MetaTypeData>(url);
+    const url = `${this._spModelUrl}/meta-type?key='${key}'`;
+    return this._httpClient.get<MetaTypeData>(url).pipe(
+      map((response) => {
+        const result = response["Gateway Response"].result[0];
+        // Check if all required fields exist
+        const idField = result.find((item) => item.field === "id");
+        const nameField = result.find((item) => item.field === "name");
+        const valuesField = result.find((item) => item.field === "values");
+        const keyField = result.find((item) => item.field === "key");
+
+        if (!nameField || !valuesField || !keyField || !idField) {
+          throw new Error("Some required fields are missing in the response.");
+        }
+        const id = idField.value;
+        const name = nameField.value;
+        const valuesString = valuesField.value;
+        const values = JSON.parse(valuesString);
+        const key = keyField.value;
+        return { id: id, name: name, values: values, key: key };
+      })
+    );
   }
 
-  // MetaTypeJson(): Observable<Data.MetaType[]> {
-  //   return this._data(`meta-types`, MetaTypeData);
-  // }
-  MetaTypeJson(key: string): Observable<Data.MetaType> {
-    const url = `${this._spModelUrl}/meta-type/key/${key}`;
-    return this._httpClient.get<MetaTypeData>(url);
+  MetaTypeJson(): Observable<Data.MetaType[]> {
+    return this._data(`meta-types`, MetaTypeData);
   }
+  // MetaTypeJson(key: string): Observable<Data.MetaType> {
+  //   const url = `${this._spModelUrl}/meta-type?key='${key}'`;
+  //   return this._httpClient.get<MetaTypeData>(url).pipe(
+  //     map((response) => {
+  //       const result = response["Gateway Response"].result[0];
+  //       // Check if all required fields exist
+  //       const idField = result.find((item) => item.field === "id");
+  //       const nameField = result.find((item) => item.field === "name");
+  //       const valuesField = result.find((item) => item.field === "values");
+  //       const keyField = result.find((item) => item.field === "key");
+
+  //       if (!nameField || !valuesField || !keyField || !idField) {
+  //         throw new Error("Some required fields are missing in the response.");
+  //       }
+  //       const id = idField.value;
+  //       const name = nameField.value;
+  //       const valuesString = valuesField.value;
+  //       const values = JSON.parse(valuesString);
+  //       const key = keyField.value;
+  //       return { id: id, name: name, values: values, key: key };
+  //     })
+  //   );
+  // }
+
   private _get<I extends Data.Base>(
     resource: string,
     id: number

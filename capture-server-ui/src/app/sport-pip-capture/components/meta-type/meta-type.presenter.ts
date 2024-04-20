@@ -23,6 +23,6 @@ export class MetaTypePresenter implements OnInit {
     this.ds = new MetaTypeCollectionStrategyView();
   }
   ngOnInit(): void {
-    // Transformer.ComposeCollectionAsync(this.dataFactory.MetaTypeJson('abc'), this.ds.metatype, MetaTypeBuilder)
+    // Transformer.ComposeCollectionAsync(this.dataFactory.MetaTypeJson(), this.ds.metatype, MetaTypeBuilder)
   }
 }
