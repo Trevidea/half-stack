@@ -35,11 +35,11 @@ export class DataFactoryService {
   read(type: string): Observable<any> {
     if (type == "api/event-preview") {
       const url = type;
-      console.log(url)
+      console.log(url);
       return this._httpClient.get<any>(url);
     } else {
       const url = `${this._spModelUrl}/${type}`;
-      console.log(url)
+      console.log(url);
       return this._httpClient.get<any>(url);
     }
   }
@@ -77,8 +77,13 @@ export class DataFactoryService {
     const url = `${this._spModelUrl}/meta-type/key/${key}`;
     return this._httpClient.get<MetaTypeData>(url);
   }
-  MetaTypeJson(): Observable<Data.MetaType[]> {
-    return this._data(`meta-types`, MetaTypeData);
+
+  // MetaTypeJson(): Observable<Data.MetaType[]> {
+  //   return this._data(`meta-types`, MetaTypeData);
+  // }
+  MetaTypeJson(key: string): Observable<Data.MetaType> {
+    const url = `${this._spModelUrl}/meta-type/key/${key}`;
+    return this._httpClient.get<MetaTypeData>(url);
   }
   private _get<I extends Data.Base>(
     resource: string,
@@ -250,11 +255,9 @@ export class DataFactoryService {
     }
   }
 
-
   eventPreviewJson(): Observable<Data.ConnectionPreview[]> {
-    return this._data('event-preview', ConnectionPreviewData)
+    return this._data("event-preview", ConnectionPreviewData);
   }
-
 
   liveEventJson(): Observable<Data.LiveEventDetail[]> {
     const dummyData: Data.LiveEventDetail[] = [
