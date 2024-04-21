@@ -187,13 +187,9 @@ Json::Value EntityBase::update(const Request &request, Response &response)
 
     const auto sql = SqlHelper::ScriptUpdate(parsedJson);
     std::string result = this->executeSqlStr(sql);
-    Json::Value columns = parsedJson["columns"];
-    std::string newItem = columns[columns.size() - 1]["value"].asString();
-    Json::Value returnValue;
-    returnValue["item"] = newItem;
     response.setData(result);
     response.complete();
-    return returnValue;
+    return parsedJson;
 }
 Json::Value EntityBase::remove(const Request &request, Response &response)
 {
