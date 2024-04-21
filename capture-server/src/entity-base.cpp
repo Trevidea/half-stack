@@ -187,26 +187,9 @@ Json::Value EntityBase::update(const Request &request, Response &response)
 
     const auto sql = SqlHelper::ScriptUpdate(parsedJson);
     std::string result = this->executeSqlStr(sql);
-
-    if (parsedJson["table"] == "meta_type")
-    {
-        Json::Value columns = parsedJson["columns"];
-        std::string newItem = columns[columns.size() - 1]["value"].asString();
-
-        Json::Value returnValue;
-        returnValue["item"] = newItem;
-
-        response.setData(returnValue.toStyledString());
-        response.complete();
-
-        return returnValue;
-    }
-    else
-    {
-        response.setData(result);
-        response.complete();
-        return parsedJson;
-    }
+    response.setData(result);
+    response.complete();
+    return parsedJson;
 }
 Json::Value EntityBase::remove(const Request &request, Response &response)
 {
