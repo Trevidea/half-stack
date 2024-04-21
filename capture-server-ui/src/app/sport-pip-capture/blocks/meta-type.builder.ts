@@ -10,7 +10,6 @@ export class MetaTypeBuilder extends AbstractBuilder<
     return new Collection<string>();
   }
   compose(m: Data.MetaType, v: Collection<string>) {
-    console.log("meta-type Builder ::", m);
     m.values.forEach((t) => v.Add(t));
   }
   decompose(v: Collection<string>): Data.MetaType {

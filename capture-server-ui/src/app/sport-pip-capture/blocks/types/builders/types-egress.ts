@@ -14,7 +14,6 @@ export class TypesEgressBuilder extends AbstractBuilder<
   }
   decompose(v: TypesView): Data.MetaTypeEgress {
     const values = v.existingTypes.concat([v.newType]);
-    console.log("decompose value :::", values);
     return {
       id: v.id,
       values: values,

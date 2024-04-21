@@ -10,7 +10,6 @@ import {
 
 export class Transformer {
   static ComposeAndSelect(collection: Collection<string>, newItem: string) {
-    console.log("newItem transformer ::::", newItem);
     collection.Add(newItem);
 
     collection.SelectedItem = newItem;

@@ -7,6 +7,8 @@ import Swal from "sweetalert2";
 import { AbstractBuilder } from "./strategies";
 import { Transformer } from "./transformer";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
+import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
+import { HttpClient } from "@angular/common/http";
 
 export class PresenterAction<M, V> implements Views.FormActions {
   onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -41,8 +43,6 @@ export class PresenterAction<M, V> implements Views.FormActions {
       this.saveAction,
       this.builder,
       (success: boolean, data: any, err: any = null) => {
-        console.log("data", data);
-        console.log("err", err);
         if (!success) {
           this.onComplete.emit(false);
 
@@ -53,9 +53,8 @@ export class PresenterAction<M, V> implements Views.FormActions {
           this.state = { error: false, data: data };
           //navigate
           this.router.navigate([this.resource]);
-          console.log("data after save ", data);
           const id = data["Gateway Response"]["result"][0][0]["value"];
-          console.log("event id to save in data base ", id);
+
           // this.opensweetalertsave();
 
           this.data.emit({ id: id });
@@ -125,10 +124,12 @@ export class ModalActions<M, V> implements Views.FormActions {
 
           this.state = { error: true, data: err };
         } else {
-          console.log("ActionData", data);
           this.onComplete.emit(true);
           this.state = { error: false, data: data };
           //navigate
+          if (data["Gateway Response"].count == 0) {
+            data = { newItem: this.primaryView["newType"] };
+          }
           this.onClose.emit(data);
         }
       }

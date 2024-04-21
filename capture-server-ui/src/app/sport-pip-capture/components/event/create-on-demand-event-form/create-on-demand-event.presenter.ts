@@ -52,7 +52,6 @@ export class CreateOnDemandEventPresenter implements OnInit {
     );
     this.actions.data.subscribe((data: any) => {
       if (data) {
-        console.log(data);
         let ondemandEvent = { event_id: data.id, owner_id: 1 };
         this.saveDemand(ondemandEvent);
       }
@@ -62,7 +61,6 @@ export class CreateOnDemandEventPresenter implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.eventId = parseInt(params["id"]);
-      console.log(this.eventId);
     });
     // MetaTypeJson
     Transformer.ComposeObjectAsync(
@@ -98,7 +96,6 @@ export class CreateOnDemandEventPresenter implements OnInit {
         this.ds,
         EventBuilder
       ).then(() => {});
-      console.log(this.ds);
     }
 
     this.ds.sports.onAddingNewItem(async (e: { modal: Views.ModalHost }) => {
@@ -171,9 +168,7 @@ export class CreateOnDemandEventPresenter implements OnInit {
       ],
     };
     this.modelServiceService._saveOnDemandEvent(requestData).subscribe(
-      (response) => {
-        console.log("Data saved successfully:", response);
-      },
+      (response) => {},
       (error) => {
         console.error("Error saving data:", error);
         // Handle error

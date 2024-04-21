@@ -11,7 +11,6 @@ export class TypesBuilder extends AbstractBuilder<Data.MetaType, TypesView> {
   }
   decompose(v: TypesView): Data.MetaType {
     const values = v.existingTypes.concat([v.newType]);
-    console.log("types :::", values);
     return {
       id: v.id,
       key: v.key,
