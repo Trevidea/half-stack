@@ -44,8 +44,7 @@ import { TimeFormatPipe } from "./pipes/time-formate.pipe";
 import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
 import { ValidationAlertComponent } from "./components/validation-alert/validation-alert.component";
 import { MetaTypeComponent } from "./components/meta-type/meta-type.component";
-import { TypesPresenter } from "app/sport-pip/components/types/types.presenter";
-import { TypesComponent } from "app/sport-pip/components/types/types.component";
+
 import { FormHostDirective } from "./blocks/inline-modal/form-host.directive";
 import { FormHostComponent } from "./blocks/inline-modal/form-host/form-host.component";
 import { InlineModalComponent } from "./blocks/inline-modal/inline-modal.component";
@@ -91,6 +90,8 @@ import { PipConformationModalComponent } from "./blocks/pip-conformation-modal/p
 import { EventPreviewComponent } from "./components/event/event-preview/event-preview.component";
 import { ActiveDevicesComponent } from "./components/event/event-preview/active-devices/active-devices.component";
 import { EventPreviewPresenter } from "./components/event/event-preview/event-preview.presenter";
+import { TypesComponent } from "./blocks/types/types.component";
+import { TypesPresenter } from "./blocks/types/types.presenter";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,

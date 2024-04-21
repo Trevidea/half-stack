@@ -51,9 +51,20 @@ export class DataFactoryService {
   }
 
   update(type: string, entity: any, id: number) {
-    const url = `${this._spModelUrl}/${type}/${id}`;
+    if (type == "meta-type/value") {
+      const url = `${this._spModelUrl}/meta-type?id='${id}'`;
+      const value = JSON.stringify(entity.values);
+      const data = {
+        table: "meta_type",
+        columns: [{ field: "values", type: 1, value: `${value}` }],
+        criteria: [{ field: "id", value: `${id}` }],
+      };
+      return this._httpClient.put<any>(url, data);
+    } else {
+      const url = `${this._spModelUrl}/${type}/${id}`;
+      return this._httpClient.put<any>(url, entity);
+    }
     // console.log(url)
-    return this._httpClient.put<any>(url, entity);
   }
 
   delete(type: string, id: number) {
@@ -97,32 +108,32 @@ export class DataFactoryService {
     );
   }
 
-  MetaTypeJson(): Observable<Data.MetaType[]> {
-    return this._data(`meta-types`, MetaTypeData);
-  }
-  // MetaTypeJson(key: string): Observable<Data.MetaType> {
-  //   const url = `${this._spModelUrl}/meta-type?key='${key}'`;
-  //   return this._httpClient.get<MetaTypeData>(url).pipe(
-  //     map((response) => {
-  //       const result = response["Gateway Response"].result[0];
-  //       // Check if all required fields exist
-  //       const idField = result.find((item) => item.field === "id");
-  //       const nameField = result.find((item) => item.field === "name");
-  //       const valuesField = result.find((item) => item.field === "values");
-  //       const keyField = result.find((item) => item.field === "key");
-
-  //       if (!nameField || !valuesField || !keyField || !idField) {
-  //         throw new Error("Some required fields are missing in the response.");
-  //       }
-  //       const id = idField.value;
-  //       const name = nameField.value;
-  //       const valuesString = valuesField.value;
-  //       const values = JSON.parse(valuesString);
-  //       const key = keyField.value;
-  //       return { id: id, name: name, values: values, key: key };
-  //     })
-  //   );
+  // MetaTypeJson(): Observable<Data.MetaType[]> {
+  //   return this._data(`meta-types`, MetaTypeData);
   // }
+  MetaTypeJson(): Observable<Data.MetaType> {
+    const url = `${this._spModelUrl}/meta-types`;
+    return this._httpClient.get<MetaTypeData>(url).pipe(
+      map((response) => {
+        const result = response["Gateway Response"].result[0];
+        // Check if all required fields exist
+        const idField = result.find((item) => item.field === "id");
+        const nameField = result.find((item) => item.field === "name");
+        const valuesField = result.find((item) => item.field === "values");
+        const keyField = result.find((item) => item.field === "key");
+
+        if (!nameField || !valuesField || !keyField || !idField) {
+          throw new Error("Some required fields are missing in the response.");
+        }
+        const id = idField.value;
+        const name = nameField.value;
+        const valuesString = valuesField.value;
+        const values = JSON.parse(valuesString);
+        const key = keyField.value;
+        return { id: id, name: name, values: values, key: key };
+      })
+    );
+  }
 
   private _get<I extends Data.Base>(
     resource: string,
@@ -287,7 +298,6 @@ export class DataFactoryService {
   }
   SaveMetaType(data: Data.MetaTypeEgress): Observable<Data.MetaTypeEgress> {
     if (data.id) {
-      // console.log('::::::', data, data.id)
       return this.update("meta-type/value", data, data.id);
     } else {
       throw new Error("Method not implemented.");

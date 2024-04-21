@@ -6,7 +6,6 @@
 #include "model.h"
 #include "client-factory.h"
 
-
 /// @brief
 /// @param model
 EntityBase::EntityBase(const Model &model) : m_model{model}
@@ -188,9 +187,13 @@ Json::Value EntityBase::update(const Request &request, Response &response)
 
     const auto sql = SqlHelper::ScriptUpdate(parsedJson);
     std::string result = this->executeSqlStr(sql);
+    Json::Value columns = parsedJson["columns"];
+    std::string newItem = columns[columns.size() - 1]["value"].asString();
+    Json::Value returnValue;
+    returnValue["item"] = newItem;
     response.setData(result);
     response.complete();
-    return parsedJson;
+    return returnValue;
 }
 Json::Value EntityBase::remove(const Request &request, Response &response)
 {

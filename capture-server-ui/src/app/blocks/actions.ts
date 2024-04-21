@@ -9,158 +9,157 @@ import { Transformer } from "./transformer";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
 
 export class PresenterAction<M, V> implements Views.FormActions {
+  onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
+  data: EventEmitter<any> = new EventEmitter<any>();
+  protected state: Views.FormState = null;
+  fn: () => V = null;
+  static fromLazyPull<M, V>(
+    resource: string,
+    primaryView: () => V,
+    saveAction: { (data: M): Observable<M> },
+    builder: new () => AbstractBuilder<M, V>,
+    router: Router
+  ) {
+    const p = new PresenterAction(resource, null, saveAction, builder, router);
+    p.fn = primaryView;
+    return p;
+  }
+  constructor(
+    private resource: string,
+    public primaryView: V,
+    public saveAction: { (data: M): Observable<M> },
+    public builder: new () => AbstractBuilder<M, V>,
+    private router: Router
+  ) {
+    this.state = { error: false, data: [] };
+  }
+  onSave(): void {
+    if (this.fn) this.primaryView = this.fn();
 
-    onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
-    data: EventEmitter<any> = new EventEmitter<any>();
-    protected state: Views.FormState = null;
-    fn: () => V = null;
-    static fromLazyPull<M, V>(
-        resource: string,
-        primaryView: () => V,
-        saveAction: { (data: M): Observable<M> },
-        builder: new () => AbstractBuilder<M, V>,
-        router: Router) {
-        const p = new PresenterAction(resource, null, saveAction, builder, router)
-        p.fn = primaryView;
-        return p;
-    }
-    constructor(
-        private resource: string,
-        public primaryView: V,
-        public saveAction: { (data: M): Observable<M> },
-        public builder: new () => AbstractBuilder<M, V>,
-        private router: Router) {
-        this.state = { error: false, data: [] };
-    }
-    onSave(): void {
-        if (this.fn)
-            this.primaryView = this.fn();
+    Transformer.Serialize(
+      this.primaryView,
+      this.saveAction,
+      this.builder,
+      (success: boolean, data: any, err: any = null) => {
+        console.log("data", data);
+        console.log("err", err);
+        if (!success) {
+          this.onComplete.emit(false);
 
-        Transformer.Serialize(this.primaryView, this.saveAction, this.builder,
-            ((success: boolean, data: any, err: any = null) => {
-                console.log('data', data)
-                console.log('err', err)
-                if (!success) {
+          this.state = { error: true, data: err };
+          this.opensweetalertsave();
+        } else {
+          this.onComplete.emit(true);
+          this.state = { error: false, data: data };
+          //navigate
+          this.router.navigate([this.resource]);
+          console.log("data after save ", data);
+          const id = data["Gateway Response"]["result"][0][0]["value"];
+          console.log("event id to save in data base ", id);
+          // this.opensweetalertsave();
 
-                    this.onComplete.emit(false);
-
-                    this.state = { error: true, data: err };
-                    this.opensweetalertsave();
-                }
-                else {
-
-                    this.onComplete.emit(true);
-                    this.state = { error: false, data: data };
-                    //navigate
-                    this.router.navigate([this.resource])
-                    console.log("data after save ", data)
-                    const id = data['Gateway Response']['result'][0][0]['value'];
-                    console.log("event id to save in data base ", id)
-                    // this.opensweetalertsave();
-
-                    this.data.emit({ "id": id })
-                }
-            }));
-    }
-
-    onCancel(): void {
-        //navigate
-        this.router.navigate([this.resource])
-    }
-
-    opensweetalertsave() {
-        if (this.state.error == true) {
-            var msg = "";
-            msg = this.state.data?.error?.error?.message;
-            const errs = this.state.data?.error?.error?.details?.errors;
-            if (Array.isArray(errs)) {
-                errs.forEach(err => {
-                    msg += `<h5 style="color: red;">${(err as any).path[0]}</h5><br /><br>`
-                })
-            }
-            if (errs && errs.find(err => (err as any).path[0] === "roNumber")) {
-                Swal.fire({
-                    title: "Validation Error",
-                    html: `<h5 style="color: red;">RO Number not available. Your RO Number has been incremented. Try saving again.</h5><br /><br>`,
-                    icon: 'error'
-                });
-            }
-            else {
-                Swal.fire({
-                    title: "Validation Error",
-                    html: msg,
-                    icon: 'error'
-                });
-            }
+          this.data.emit({ id: id });
         }
-        else {
-            Swal.fire({
-                title: "Success",
-                html: `<h5 style="color: green;">Record Saved</h5><br /><br>`,
-                icon: 'success',
-            });
-        }
+      }
+    );
+  }
+
+  onCancel(): void {
+    //navigate
+    this.router.navigate([this.resource]);
+  }
+
+  opensweetalertsave() {
+    if (this.state.error == true) {
+      var msg = "";
+      msg = this.state.data?.error?.error?.message;
+      const errs = this.state.data?.error?.error?.details?.errors;
+      if (Array.isArray(errs)) {
+        errs.forEach((err) => {
+          msg += `<h5 style="color: red;">${
+            (err as any).path[0]
+          }</h5><br /><br>`;
+        });
+      }
+      if (errs && errs.find((err) => (err as any).path[0] === "roNumber")) {
+        Swal.fire({
+          title: "Validation Error",
+          html: `<h5 style="color: red;">RO Number not available. Your RO Number has been incremented. Try saving again.</h5><br /><br>`,
+          icon: "error",
+        });
+      } else {
+        Swal.fire({
+          title: "Validation Error",
+          html: msg,
+          icon: "error",
+        });
+      }
+    } else {
+      Swal.fire({
+        title: "Success",
+        html: `<h5 style="color: green;">Record Saved</h5><br /><br>`,
+        icon: "success",
+      });
     }
+  }
 }
 export class ModalActions<M, V> implements Views.FormActions {
-    onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();;
-    constructor(
-        public primaryView: V,
-        public saveAction: { (data: M): Observable<M> },
-        public builder: new () => AbstractBuilder<M, V>,
-        private onClose: EventEmitter<any>) {
-        this.state = { error: false, data: [] };
-    }
-    protected state: Views.FormState = null;
-    onSave(): void {
-        Transformer.Serialize(this.primaryView, this.saveAction, this.builder,
-            ((success: boolean, data: any, err: any = null) => {
-                if (!success) {
-                    this.onComplete.emit(false);
+  onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
+  constructor(
+    public primaryView: V,
+    public saveAction: { (data: M): Observable<M> },
+    public builder: new () => AbstractBuilder<M, V>,
+    private onClose: EventEmitter<any>
+  ) {
+    this.state = { error: false, data: [] };
+  }
+  protected state: Views.FormState = null;
+  onSave(): void {
+    Transformer.Serialize(
+      this.primaryView,
+      this.saveAction,
+      this.builder,
+      (success: boolean, data: any, err: any = null) => {
+        if (!success) {
+          this.onComplete.emit(false);
 
-                    this.state = { error: true, data: err };
-                }
-                else {
-                    console.log('ActionData', data)
-                    this.onComplete.emit(true);
-                    this.state = { error: false, data: data };
-                    //navigate
-                    this.onClose.emit(data);
-                }
-            }));
-    }
-    onCancel(): void {
-        this.onClose.emit(null);
-    }
-
+          this.state = { error: true, data: err };
+        } else {
+          console.log("ActionData", data);
+          this.onComplete.emit(true);
+          this.state = { error: false, data: data };
+          //navigate
+          const newData = { newItem: `abc` };
+          this.onClose.emit(newData);
+        }
+      }
+    );
+  }
+  onCancel(): void {
+    this.onClose.emit(null);
+  }
 }
 
-
-@Injectable(
-    {
-        providedIn: "root"
-    }
-)
+@Injectable({
+  providedIn: "root",
+})
 export class WorkflowActions implements Views.FormActions {
-    onComplete: EventEmitter<boolean>;
-    private _resource: string;
-    public get resource(): string {
-        return this._resource;
-    }
-    public set resource(v: string) {
-        this._resource = v;
-    }
+  onComplete: EventEmitter<boolean>;
+  private _resource: string;
+  public get resource(): string {
+    return this._resource;
+  }
+  public set resource(v: string) {
+    this._resource = v;
+  }
 
-    constructor(private router: Router) {
+  constructor(private router: Router) {}
+  onSave(): void {
+    this.onComplete.emit(true);
 
-    }
-    onSave(): void {
-        this.onComplete.emit(true);
-
-        this.router.navigate([this.resource])
-    }
-    onCancel(): void {
-        this.router.navigate([this.resource])
-    }
-
+    this.router.navigate([this.resource]);
+  }
+  onCancel(): void {
+    this.router.navigate([this.resource]);
+  }
 }

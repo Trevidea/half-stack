@@ -6,12 +6,10 @@ import { ArrayBuilder } from "app/sport-pip-capture/blocks/array.builder";
 import { Data, Views } from "app/sport-pip-capture/models/capture-interface";
 import { PresenterAction } from "app/blocks/actions";
 import { ActivatedRoute, Router } from "@angular/router";
-import { TypesPresenter } from "app/sport-pip/components/types/types.presenter";
 import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
-import { stringify } from "querystring";
 import { EventBuilder } from "./buliders/event";
-import { OnDemandEventBuilder } from "./buliders/on-demand-event";
 import { MetaTypeBuilder } from "app/sport-pip-capture/blocks/meta-type.builder";
+import { TypesPresenter } from "app/sport-pip-capture/blocks/types/types.presenter";
 @Component({
   selector: "app-create-on-demand-event-presenter",
   template: `<app-create-on-demand-event
@@ -105,11 +103,15 @@ export class CreateOnDemandEventPresenter implements OnInit {
 
     this.ds.sports.onAddingNewItem(async (e: { modal: Views.ModalHost }) => {
       e.modal.component = TypesPresenter;
-      e.modal.properties["key"] = "SPORTS";
+      e.modal.properties["key"] = "SPORT";
+      console.log("this.ds.programs ", this.ds.sports);
       try {
         const data = await e.modal.open();
+        //  const newData = (e.modal.properties["newItem"] = "abcItem");
+        console.log("onAddingNewItem e.modal ", e.modal);
         if (data) {
           Transformer.ComposeAndSelect(this.ds.sports, data.newItem);
+          console.log("modal Data:: 2", this.ds.sports.SelectedItem);
         }
       } catch (err) {
         console.log(err);
@@ -119,6 +121,7 @@ export class CreateOnDemandEventPresenter implements OnInit {
     this.ds.programs.onAddingNewItem(async (e: { modal: Views.ModalHost }) => {
       e.modal.component = TypesPresenter;
       e.modal.properties["key"] = "PROGRAM";
+
       try {
         const data = await e.modal.open();
         if (data) {
