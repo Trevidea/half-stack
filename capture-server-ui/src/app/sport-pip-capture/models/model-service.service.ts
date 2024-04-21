@@ -51,6 +51,7 @@ export class ModelServiceService {
       })
     );
   }
+
   delete(type: string, id: number): Observable<any> {
     let _type = type;
     const pos = type.indexOf("_");
@@ -170,7 +171,13 @@ export class ModelServiceService {
       return this.create("event", data);
     }
   }
-
+  saveMetaType(data: Data.MetaType): Observable<Data.MetaType> {
+    if (data.id) {
+      return this.update(`meta-type?key=${data.id}`, data, data.id);
+    } else {
+      return this.create("event", data);
+    }
+  }
   // http://localhost:1437/api/on-demand-event
 
   // saveOnDemandEvent(data: Data.OnDemandEvent): Observable<Data.OnDemandEvent> {

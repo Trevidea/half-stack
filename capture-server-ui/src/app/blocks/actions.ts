@@ -129,8 +129,7 @@ export class ModalActions<M, V> implements Views.FormActions {
           this.onComplete.emit(true);
           this.state = { error: false, data: data };
           //navigate
-          const newData = { newItem: `abc` };
-          this.onClose.emit(newData);
+          this.onClose.emit(data);
         }
       }
     );

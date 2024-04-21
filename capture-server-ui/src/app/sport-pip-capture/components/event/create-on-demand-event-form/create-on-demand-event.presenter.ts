@@ -104,14 +104,10 @@ export class CreateOnDemandEventPresenter implements OnInit {
     this.ds.sports.onAddingNewItem(async (e: { modal: Views.ModalHost }) => {
       e.modal.component = TypesPresenter;
       e.modal.properties["key"] = "SPORT";
-      console.log("this.ds.programs ", this.ds.sports);
       try {
         const data = await e.modal.open();
-        //  const newData = (e.modal.properties["newItem"] = "abcItem");
-        console.log("onAddingNewItem e.modal ", e.modal);
         if (data) {
           Transformer.ComposeAndSelect(this.ds.sports, data.newItem);
-          console.log("modal Data:: 2", this.ds.sports.SelectedItem);
         }
       } catch (err) {
         console.log(err);

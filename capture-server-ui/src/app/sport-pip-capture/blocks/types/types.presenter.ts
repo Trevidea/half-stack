@@ -55,6 +55,5 @@ export class TypesPresenter {
       TypesEgressBuilder,
       onClose
     );
-    this.ds.newType;
   }
 }
