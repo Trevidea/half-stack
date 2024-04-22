@@ -13,7 +13,7 @@ import { ArrayBuilder } from "app/sport-pip-capture/blocks/array.builder";
     styleUrls: ['./event-header.component.scss'],
 })
 
-export class EventHeaderPresenter implements OnInit, AfterViewInit {
+export class EventHeaderPresenter implements OnInit{
     ds!: headerView;
     status: string
     @Output() filter = new EventEmitter<Data.FilterParams>();
@@ -38,7 +38,7 @@ export class EventHeaderPresenter implements OnInit, AfterViewInit {
         this.ds.levels.onItemSelected(handler => this.onfilter());
         this.ds.sports.onItemSelected(handler => this.onfilter());
         this.ds.years.onItemSelected(handler => this.onfilter());
-         this.onfilter()
+        //  this.onfilter()
     }
 
     onfilter() {
@@ -65,8 +65,6 @@ export class EventHeaderPresenter implements OnInit, AfterViewInit {
             status: status
         });
     }
-    ngAfterViewInit(): void {
-        // this.onfilter()
-    }
+
 
 }

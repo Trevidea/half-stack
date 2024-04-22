@@ -43,8 +43,12 @@ export class EventPresenter implements OnInit {
   }
 
   onFilter(filter: Data.FilterParams) {
-    this.query = filter;
-    this.filteredData = this.filterEvents(this.ds.event, this.query);
+    setTimeout(() => {
+      this.query = filter;
+      this.filteredData = this.filterEvents(this.ds.event, this.query);
+      console.log(this.query)
+    },0)
+
   }
 
   onTabChange(): void {

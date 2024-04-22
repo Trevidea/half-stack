@@ -7,6 +7,7 @@ import { Injectable } from "@angular/core";
 import { Data } from "./capture-interface";
 import { EventData } from "./event";
 import { LiveEventDetailData } from "./live-event-detail";
+import { MetaTypeData } from "./meta-type";
 
 
 @Injectable({
@@ -66,8 +67,6 @@ export class ModelServiceService {
     }));
   }
 
-
-
   deleteView(type: string, id: number): Observable<any> {
     // const url = `${this.strapiUrl}/${type}/del/${id}`
     const url = `${this.modelsServerUrl}/${type}/view/${id}`
@@ -106,11 +105,11 @@ export class ModelServiceService {
       })));
   }
 
-
   private _data<M, I extends Data.Base>(resource: string, type: new (I: Data.Base) => M): Observable<M[]> {
     return this._getList<I>(resource)
       .pipe(map((data: I[]) => { console.log(":::::", data); return data.map((datum: I) => new type(datum)) }));
   }
+
   private _datum<M, I extends Data.Base>(resource: string, id: number, type: new (I: Data.Base) => M): Observable<M> {
 
     return this._get<I>(resource, id)
@@ -118,37 +117,25 @@ export class ModelServiceService {
       .pipe(map((datum: I) => new type(datum)))
       ;
   }
+
   private _selectData<M, I extends Data.Base>(resource: string, id: number, type: new (I: Data.Base) => M): Observable<M[]> {
     return this._getSelectedList<I>(resource, id)
       .pipe(map((data: I[]) => data.map((datum: I) => new type(datum))))
 
   }
+
   private _selectOne<M, I extends Data.Base>(resource: string, id: number, type: new (I: Data.Base) => M): Observable<M> {
     return this._selectData(resource, id, type).pipe(map((data: M[]) => data[0]));
   }
 
 
   saveEvent(data: Data.Event): Observable<Data.Event> {
-    console.log(data)
-
     if (data.id) {
-
       return this.update("event", data, data.id);
     } else {
       return this.create("event", data);
     }
   }
-
-  // http://localhost:1437/api/on-demand-event
-
-  // saveOnDemandEvent(data: Data.OnDemandEvent): Observable<Data.OnDemandEvent> {
-  //   console.log('saveOnDemandEvent', data)
-  //   if (data.id) {
-  //     return this.update("on-demand-event", data, data.id);
-  //   } else {
-  //     return this.create("on-demand-event", data);
-  //   }
-  // }
 
   private apiUrl = `${environment.spModelUrl}/on-demand-event`;
   _saveOnDemandEvent(data: any): Observable<any> {
@@ -163,41 +150,38 @@ export class ModelServiceService {
     return this._selectOne('event', id, EventData)
   }
 
-
   syncEvents(): Observable<any> {
     const url = `${this.modelsServerUrl}/event/sync`
-    // const data = {
-    //   'source': `${environment.spFSUrl}/events`,
-    //   'delete-criteria': "type='scheduled'"
-    // }
-
-    const data =  {
+    const data = {
       "source": "https://strapi.sp-fullstack.site",
-        "delete-criteria": "type='scheduled'"
+      "delete-criteria": "type='scheduled'"
     }
     return this._httpClient.post<any>(url, data)
   }
-
-
-
 
   openPreview(data: { "eventId": number }): Observable<any> {
     const url = `${environment.spModelUrl}/event/open-preview`
     console.log(data);
     return this._httpClient.post<any>(url, data)
-
   }
 
   closePreview(data: { "eventId": number }): Observable<any> {
     const url = `${environment.spModelUrl}/event/close-preview`
     console.log(data);
     return this._httpClient.post<any>(url, data)
-
   }
 
   liveEventJson(): Observable<Data.LiveEventDetail[]> {
     return this._data('liveEvent', LiveEventDetailData)
   }
 
-  // /api/event/close-preview
+  MetaTypeByKey(key: string): Observable<Data.MetaType> {
+    const url = `${environment.spModelUrl}/meta-type/key/${key}`;
+    return this._httpClient.get<MetaTypeData>(url);
+  }
+
+  MetaTypeJson(): Observable<Data.MetaType[]> {
+    return this._data('meta-types', MetaTypeData);
+  }
+
 }

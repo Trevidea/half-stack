@@ -37,7 +37,7 @@ export class EventComponent implements OnInit{
     this.onTabChange.emit();
   }
 
-
+ 
   CreateOnDemandEvent() {
     this.router.navigate(['on-demand-event'])
   }
