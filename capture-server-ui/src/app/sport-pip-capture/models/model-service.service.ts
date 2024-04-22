@@ -164,19 +164,14 @@ export class ModelServiceService {
   }
 
   saveEvent(data: Data.Event): Observable<Data.Event> {
-<<<<<<< HEAD
-=======
     console.log(data);
 
->>>>>>> a0c205f2109bccc0060000d8c4faaabd91b7dded
     if (data.id) {
       return this.update("event", data, data.id);
     } else {
       return this.create("event", data);
     }
   }
-<<<<<<< HEAD
-=======
   saveMetaType(data: Data.MetaType): Observable<Data.MetaType> {
     if (data.id) {
       return this.update(`meta-type?key=${data.id}`, data, data.id);
@@ -194,7 +189,6 @@ export class ModelServiceService {
   //     return this.create("on-demand-event", data);
   //   }
   // }
->>>>>>> a0c205f2109bccc0060000d8c4faaabd91b7dded
 
   private apiUrl = `${environment.spModelUrl}/on-demand-event`;
   _saveOnDemandEvent(data: any): Observable<any> {
@@ -210,20 +204,6 @@ export class ModelServiceService {
   }
 
   syncEvents(): Observable<any> {
-<<<<<<< HEAD
-    const url = `${this.modelsServerUrl}/event/sync`
-    const data = {
-      "source": "https://strapi.sp-fullstack.site",
-      "delete-criteria": "type='scheduled'"
-    }
-    return this._httpClient.post<any>(url, data)
-  }
-
-  openPreview(data: { "eventId": number }): Observable<any> {
-    const url = `${environment.spModelUrl}/event/open-preview`
-    console.log(data);
-    return this._httpClient.post<any>(url, data)
-=======
     const url = `${this.modelsServerUrl}/event/sync`;
     // const data = {
     //   'source': `${environment.spFSUrl}/events`,
@@ -241,17 +221,12 @@ export class ModelServiceService {
     const url = `${environment.spModelUrl}/event/open-preview`;
     console.log(data);
     return this._httpClient.post<any>(url, data);
->>>>>>> a0c205f2109bccc0060000d8c4faaabd91b7dded
   }
 
   closePreview(data: { eventId: number }): Observable<any> {
     const url = `${environment.spModelUrl}/event/close-preview`;
     console.log(data);
-<<<<<<< HEAD
-    return this._httpClient.post<any>(url, data)
-=======
     return this._httpClient.post<any>(url, data);
->>>>>>> a0c205f2109bccc0060000d8c4faaabd91b7dded
   }
 
   liveEventJson(): Observable<Data.LiveEventDetail[]> {
