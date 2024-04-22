@@ -43,7 +43,7 @@ export namespace Data {
     on_premise: boolean;
     pin: string;
   }
-  
+
   export interface Venue {
     location: string;
   }

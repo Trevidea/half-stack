@@ -1,5 +1,3 @@
-app-user-profile {
-  height: 100%;
-  flex-direction: column;
-  display: flex;
+app-user-profile::backdrop {
+  background-color: black !important;
 }

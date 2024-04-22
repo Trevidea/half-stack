@@ -4,10 +4,11 @@
   </div>
   <div class="modal-body">
     <!-- <app-types></app-types> -->
-    <app-form-host [data]="properties" [component]="component"
-      (close)="close($event)"></app-form-host>
-  </div> 
+    <app-form-host
+      [data]="properties"
+      [component]="component"
+      (close)="close($event)"
+    ></app-form-host>
+  </div>
   <!--  [data]="properties" -->
 </ng-template>
-<!-- <app-form-host [component]="component" [data]="properties"
-(close)="close($event)"></app-form-host> -->

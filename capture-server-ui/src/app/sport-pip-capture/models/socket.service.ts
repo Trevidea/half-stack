@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { environment } from 'environments/environment';
-import { Subject } from 'rxjs';
-import { Socket, io } from 'socket.io-client';
+import { Injectable } from "@angular/core";
+import { environment } from "environments/environment";
+import { Subject } from "rxjs";
+import { Socket, io } from "socket.io-client";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class SocketService {
   private socket!: Socket;
@@ -19,20 +19,16 @@ export class SocketService {
   }
 
   connectToRelayService(): void {
-    console.log("connectToRelayService called")
     this.socket = io(this.url);
-    
-    this.socket.on('live-event', (message: string) => {
-      console.log(message)
+
+    this.socket.on("live-event", (message: string) => {
       this.liveEventSubject.next(message);
     });
 
-    this.socket.on('event-preview', (message: string) => {
-      console.log(message)
+    this.socket.on("event-preview", (message: string) => {
       this.eventPreviewSubject.next(message);
     });
-    this.socket.on('event-terminal', (message: string) => {
-      console.log(message)
+    this.socket.on("event-terminal", (message: string) => {
       this.eventTerminalSubject.next(message);
     });
   }
@@ -42,7 +38,7 @@ export class SocketService {
       this.socket.disconnect();
     }
   }
-  
+
   onLiveEvent(): Subject<string> {
     return this.liveEventSubject;
   }

@@ -36,7 +36,8 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { RouterModule, Routes } from "@angular/router";
 import { TimerService } from "./sport-pip-capture/components/connection/timer.service";
 import { Timer } from "./sport-pip-capture/components/connection/timer";
-import { UserProfileComponent } from "./user-profile/user-profile.component";
+import { CaptureDashboardComponent } from './capture-dashboard/capture-dashboard.component';
+import { DashboardHeaderComponent } from './capture-dashboard/dashboard-header/dashboard-header.component';
 
 const appRoutes: Routes = [
   {
@@ -139,6 +140,8 @@ const appRoutes: Routes = [
     BasicCustomContextMenuComponent,
     AnimatedCustomContextMenuComponent,
     SubMenuCustomContextMenuComponent,
+    CaptureDashboardComponent,
+    DashboardHeaderComponent,
   ],
   imports: [
     BrowserModule,
