@@ -29,8 +29,7 @@ export class EventPresenter implements OnInit {
   }
 
   ngOnInit(): void {
-
-    Transformer.ComposeCollectionAsync(this.service.eventList(), this.ds.event, EventRangeBuilder)
+     Transformer.ComposeCollectionAsync(this.service.eventList(), this.ds.event, EventRangeBuilder)
       .then(() => {
         this.query.status = this.tabStateService.getActiveTab();
         this.filteredData = this.filterEvents(this.ds.event, this.query);
@@ -61,6 +60,7 @@ export class EventPresenter implements OnInit {
       return true;
     });
   }
+
 
 
 }

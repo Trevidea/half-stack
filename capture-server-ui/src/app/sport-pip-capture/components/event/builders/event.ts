@@ -5,13 +5,14 @@ import moment from "moment";
 
 export class EventRangeBuilder extends AbstractBuilder<Data.Event, EventView> {
     compose(m: Data.Event, v: EventView) {
-        
+
         v.id = m.id;
         v.dtEvent = m.dt_event;
         v.level = m.level;
         v.program = m.program;
         v.sport = m.sport;
         v.status = this.getEventStatus(moment(`${m.dt_event} ${this.formatTime(m.tm_event)}`, "YYYY-MM-DD HH:mm"), m.id); // This line assigns the status
+        // v.status=m.status;
         v.title = m.title;
         v.detail.cityAddress = m?.detail?.cityAddress;
         v.detail.streetAdress = m?.detail?.streetAdress;

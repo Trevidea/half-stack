@@ -37,11 +37,19 @@ export class ModelServiceService {
     const url = `${this.modelsServerUrl}/${type}`;
     return this._httpClient.get<any>(url);
   }
+
+  readWithQuery(query: string): Observable<any> {
+    const url = `${this.modelsServerUrl}/${query}`
+    console.log("readWithQuery", url)
+    return this._httpClient.get<any>(url)
+  }
+
   readOne(type: string, id: number): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}?id=${id}`;
     console.log(url);
     return this._httpClient.get<any>(url);
   }
+
   update(type: string, entity: any, id: number) {
     const url = `${this.modelsServerUrl}/${type}`;
     // entity.values = JSON.parse(entity.values)
@@ -101,6 +109,7 @@ export class ModelServiceService {
       )
     );
   }
+
   private _getList<I extends Data.Base>(resource: string): Observable<I[]> {
     return this._adapter.demodulate(resource, this.read(resource)).pipe(
       map((models) =>
@@ -110,6 +119,8 @@ export class ModelServiceService {
       )
     );
   }
+
+
 
   private _get<I extends Data.Base>(
     resource: string,
@@ -135,6 +146,9 @@ export class ModelServiceService {
       })
     );
   }
+
+
+
   private _datum<M, I extends Data.Base>(
     resource: string,
     id: number,
@@ -163,6 +177,7 @@ export class ModelServiceService {
     );
   }
 
+
   saveEvent(data: Data.Event): Observable<Data.Event> {
     console.log(data);
 
@@ -179,16 +194,7 @@ export class ModelServiceService {
       return this.create("event", data);
     }
   }
-  // http://localhost:1437/api/on-demand-event
 
-  // saveOnDemandEvent(data: Data.OnDemandEvent): Observable<Data.OnDemandEvent> {
-  //   console.log('saveOnDemandEvent', data)
-  //   if (data.id) {
-  //     return this.update("on-demand-event", data, data.id);
-  //   } else {
-  //     return this.create("on-demand-event", data);
-  //   }
-  // }
 
   private apiUrl = `${environment.spModelUrl}/on-demand-event`;
   _saveOnDemandEvent(data: any): Observable<any> {
@@ -203,13 +209,15 @@ export class ModelServiceService {
     return this._selectOne("event", id, EventData);
   }
 
+
+  // http://drake.in:1437/api/event?status='upcoming'&type='on-demand'
+  eventsBasedOnStatusJson(status: string): Observable<Data.Event[]> {
+    return this._data(`event?status='${status}'`, EventData);
+
+  }
+
   syncEvents(): Observable<any> {
     const url = `${this.modelsServerUrl}/event/sync`;
-    // const data = {
-    //   'source': `${environment.spFSUrl}/events`,
-    //   'delete-criteria': "type='scheduled'"
-    // }
-
     const data = {
       source: "https://strapi.sp-fullstack.site",
       "delete-criteria": "type='scheduled'",

@@ -25,14 +25,10 @@ export class EventHeaderPresenter implements OnInit{
 
 
     ngOnInit(): void {
-        // Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("SPORTS"), this.ds.sports, MetaTypeBuilder);
-        // Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("PROGRAM"), this.ds.programs, MetaTypeBuilder);
-        // Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("LEVELS"), this.ds.levels, MetaTypeBuilder);
-        // Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("YEARS"), this.ds.years, MetaTypeBuilder);
-        Transformer.ComposeObject(this.dataFactory.EventSports(), this.ds.sports, ArrayBuilder)
+        Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("SPORT"), this.ds.sports, MetaTypeBuilder);
+        Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("PROGRAM"), this.ds.programs, MetaTypeBuilder);
+        Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("LEVEL"), this.ds.levels, MetaTypeBuilder);
         Transformer.ComposeObject(this.dataFactory.EventYear(), this.ds.years, ArrayBuilder);
-        Transformer.ComposeObject(this.dataFactory.EventLevel(), this.ds.levels, ArrayBuilder)
-        Transformer.ComposeObject(this.dataFactory.EventProgram(), this.ds.programs, ArrayBuilder)
 
         this.ds.programs.onItemSelected(handler => this.onfilter());
         this.ds.levels.onItemSelected(handler => this.onfilter());
