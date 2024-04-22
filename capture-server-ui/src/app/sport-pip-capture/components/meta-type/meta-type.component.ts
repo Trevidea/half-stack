@@ -63,7 +63,7 @@ export class MetaTypeComponent implements OnInit {
     this.metaType = { id: null, values: [], key: "string", name: "string" };
     setTimeout(() => {
       this.OnChangeType(0, this.datasource.metatype[0]);
-    }, 5000);
+    }, 1000);
   }
 
   selectedIndex: number | null = null;
