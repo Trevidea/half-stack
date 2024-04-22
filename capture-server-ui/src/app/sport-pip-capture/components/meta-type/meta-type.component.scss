@@ -5,6 +5,16 @@
   border-left: 1px solid #ccc;
   padding-left: 10px;
 }
+.spinner-border {
+  display: inline-block;
+  width: 4rem;
+  height: 4rem;
+}
+.custom-card {
+  border-left: 10px solid #4c67aa;
+  border-right: 10px solid #4c67aa;
+  border-bottom: 10px solid #4c67aa;
+}
 .custom-card-header {
   color: #ffffff;
   background-color: #4c67aa !important;
@@ -12,6 +22,14 @@
 .dark-layout {
   .custom-card-header {
     background-color: chocolate !important;
+  }
+  .custom-card {
+    border-left: 10px solid chocolate;
+    border-right: 10px solid chocolate;
+    border-bottom: 10px solid chocolate;
+  }
+  .custome-stepper-title {
+    color: #ffffff;
   }
 }
 .custome-stepper-header {

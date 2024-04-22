@@ -25,7 +25,22 @@
   >
     <i data-feather="framer" [size]="20"></i> Meta-Types
   </div>
-  <div class="card-body">
+  <div
+    *ngIf="isLoading"
+    class="card-body custom-card p-1"
+    style="align-items: center; display: flex; justify-content: center"
+  >
+    <div class="d-flex align-items-center">
+      <div
+        class="spinner-border ml-auto text-light"
+        role="status"
+        aria-hidden="true"
+      ></div>
+      <strong class="ml-1"> <h3>Loading...</h3> </strong>
+    </div>
+  </div>
+
+  <div class="card-body custom-card" *ngIf="!isLoading">
     <div class="row">
       <div class="col-3">
         <div *ngFor="let item of datasource.metatype; let i = index">
@@ -78,7 +93,7 @@
           </div>
         </div>
         <div
-          class="input-group mt-1"
+          class="input-group mt-1 input-added-item"
           *ngFor="let data of metaType.values; let i = index"
         >
           <input

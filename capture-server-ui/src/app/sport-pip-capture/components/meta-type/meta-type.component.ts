@@ -1,14 +1,10 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   Input,
-  OnChanges,
   OnInit,
-  SimpleChanges,
   ViewEncapsulation,
 } from "@angular/core";
-import { Collection } from "app/blocks/collection";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 
 @Component({
@@ -19,7 +15,7 @@ import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.se
 })
 export class MetaTypeComponent implements OnInit {
   showSidebar: boolean = false;
-
+  isLoading: boolean = true;
   toggleSidebar() {
     this.showSidebar = !this.showSidebar;
   }
@@ -61,8 +57,10 @@ export class MetaTypeComponent implements OnInit {
 
   ngOnInit(): void {
     this.metaType = { id: null, values: [], key: "string", name: "string" };
+
     setTimeout(() => {
       this.OnChangeType(0, this.datasource.metatype[0]);
+      this.isLoading = false;
     }, 1000);
   }
 
