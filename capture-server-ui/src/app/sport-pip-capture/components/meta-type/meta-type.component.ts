@@ -75,7 +75,7 @@ export class MetaTypeComponent implements OnInit {
     this.newValue = "";
     this.datasource.metatype.forEach(
       (element: { backgroundColor: string; color: string }) => {
-        element.backgroundColor = "white";
+        // element.backgroundColor = "white";
         element.color = "black";
       }
     );
@@ -91,7 +91,6 @@ export class MetaTypeComponent implements OnInit {
     if (index !== -1) {
       this.metaType.values.splice(index, 1);
       const data = this.metaType.values;
-      console.log("if", data);
       this.dataFactory
         .update("meta-type/value", this.metaType, this.metaType.id)
         .subscribe((d) => {
@@ -100,7 +99,6 @@ export class MetaTypeComponent implements OnInit {
     } else {
       this.metaType.values.push(item);
       const data = this.metaType.values;
-      console.log("else", data, this.metaType.id);
       this.dataFactory
         .update("meta-type/value", this.metaType, this.metaType.id)
         .subscribe((d) => {
