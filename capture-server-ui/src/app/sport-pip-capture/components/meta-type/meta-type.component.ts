@@ -75,7 +75,7 @@ export class MetaTypeComponent implements OnInit {
     this.newValue = "";
     this.datasource.metatype.forEach(
       (element: { backgroundColor: string; color: string }) => {
-        // element.backgroundColor = "white";
+        element.backgroundColor = "aliceblue";
         element.color = "black";
       }
     );
