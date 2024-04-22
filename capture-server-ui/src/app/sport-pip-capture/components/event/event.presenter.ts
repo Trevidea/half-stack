@@ -1,15 +1,10 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { DataFactoryService } from 'app/sport-pip-capture/models/data-factory.service';
 import { EventRange } from './views/event';
 import { Transformer } from 'app/blocks/transformer';
 import { EventRangeBuilder } from './builders/event';
-import { ArrayBuilder } from 'app/sport-pip-capture/blocks/array.builder';
 import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 import { Data } from 'app/sport-pip-capture/models/capture-interface';
 import { TabStateService } from './event-utility/nav';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EventComponent } from './event.component';
 
 @Component({
   selector: 'app-event-presenter',
@@ -34,8 +29,7 @@ export class EventPresenter implements OnInit {
   }
 
   ngOnInit(): void {
-
-    Transformer.ComposeCollectionAsync(this.service.eventList(), this.ds.event, EventRangeBuilder)
+     Transformer.ComposeCollectionAsync(this.service.eventList(), this.ds.event, EventRangeBuilder)
       .then(() => {
         this.query.status = this.tabStateService.getActiveTab();
         this.filteredData = this.filterEvents(this.ds.event, this.query);
@@ -43,8 +37,12 @@ export class EventPresenter implements OnInit {
   }
 
   onFilter(filter: Data.FilterParams) {
-    this.query = filter;
-    this.filteredData = this.filterEvents(this.ds.event, this.query);
+    setTimeout(() => {
+      this.query = filter;
+      this.filteredData = this.filterEvents(this.ds.event, this.query);
+      console.log(this.query)
+    },0)
+
   }
 
   onTabChange(): void {
@@ -62,6 +60,7 @@ export class EventPresenter implements OnInit {
       return true;
     });
   }
+
 
 
 }

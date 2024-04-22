@@ -14,10 +14,7 @@ export class OndemandEventDetailComponent implements OnInit {
   @Input() currentIndex: number;
   @Input() detailType: string
   // currentIndex: number = 0;
-  dropdownItems: UI.DropDownMenuItem[] = [
-    { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => { } },
-    { label: 'Edit Event', icon: 'edit', type: 'feather', action: () => this.editOnDemandEvent() },
-  ]
+  @Input() dropdownItems: UI.DropDownMenuItem[];
   constructor(private _coreSidebarService: CoreSidebarService, public dateTimeservice: DateTimeService, private router: Router,) { }
   ngOnInit(): void {
     console.log(this.datasource, this.currentIndex);
@@ -44,11 +41,11 @@ export class OndemandEventDetailComponent implements OnInit {
   }
 
 
-  editOnDemandEvent() {
-    this.router.navigate(['/on-demand-event'], {
-      queryParams: { id: this.currentEvent?.id },
-    })
-  }
+  // editOnDemandEvent() {
+  //   this.router.navigate(['/on-demand-event'], {
+  //     queryParams: { id: this.currentEvent?.id },
+  //   })
+  // }
 
 
 }

@@ -78,11 +78,7 @@ export class CreateOnDemandEventPresenter implements OnInit {
       this.ds.levels,
       MetaTypeBuilder
     );
-    // Transformer.ComposeObject(
-    //   this.dataFactory.EventLevel(),
-    //   this.ds.levels,
-    //   ArrayBuilder
-    // );
+ 
 
     Transformer.ComposeObject(
       this.dataFactory.EventYear(),
@@ -138,12 +134,7 @@ export class CreateOnDemandEventPresenter implements OnInit {
     });
   }
 
-  // formatTime(time: any): number {
-  //   if (!time) return 0;
-  //   const [hours, minutes] = time.split(':');
-  //   let formattedTime = hours + minutes;
-  //   return parseInt(formattedTime);
-  // }
+
 
   ////just for testing ///////
   saveDemand(data: { event_id: number; owner_id: number }) {

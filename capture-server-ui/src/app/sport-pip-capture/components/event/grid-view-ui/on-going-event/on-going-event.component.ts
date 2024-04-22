@@ -57,6 +57,7 @@ export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
     this.eventId = id;
   }
 
+
   editOnDemandEvent() {
     this.router.navigate(['/on-demand-event'],
       {
@@ -65,13 +66,21 @@ export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
     )
   }
 
+  deleteEvent(){
+    
+  }
+
+
+
+
+
   ngOnDestroy(): void {
     if (this.countdownInterval) {
       clearInterval(this.countdownInterval);
     }
   }
 
-  //Will replace it in  dateTimeservice
+  ///////// Will replace it in  dateTimeservice //// 
   updateCountdownForOngoingEvents(events: any[]) {
     const now = new Date();
     events.forEach(event => {
