@@ -111,26 +111,34 @@ export class DataFactoryService {
   // MetaTypeJson(): Observable<Data.MetaType[]> {
   //   return this._data(`meta-types`, MetaTypeData);
   // }
-  MetaTypeJson(): Observable<Data.MetaType> {
+  MetaTypeJson(): Observable<Data.MetaType[]> {
     const url = `${this._spModelUrl}/meta-types`;
-    return this._httpClient.get<MetaTypeData>(url).pipe(
+    return this._httpClient.get<MetaTypeData[]>(url).pipe(
       map((response) => {
-        const result = response["Gateway Response"].result[0];
-        // Check if all required fields exist
-        const idField = result.find((item) => item.field === "id");
-        const nameField = result.find((item) => item.field === "name");
-        const valuesField = result.find((item) => item.field === "values");
-        const keyField = result.find((item) => item.field === "key");
+        const result = response["Gateway Response"].result;
+        const metaTypes: Data.MetaType[] = [];
 
-        if (!nameField || !valuesField || !keyField || !idField) {
-          throw new Error("Some required fields are missing in the response.");
-        }
-        const id = idField.value;
-        const name = nameField.value;
-        const valuesString = valuesField.value;
-        const values = JSON.parse(valuesString);
-        const key = keyField.value;
-        return { id: id, name: name, values: values, key: key };
+        result.forEach((item: any[]) => {
+          const idField = item.find((field) => field.field === "id");
+          const nameField = item.find((field) => field.field === "name");
+          const valuesField = item.find((field) => field.field === "values");
+          const keyField = item.find((field) => field.field === "key");
+
+          if (!idField || !nameField || !valuesField || !keyField) {
+            throw new Error(
+              "Some required fields are missing in the response."
+            );
+          }
+
+          const id = idField.value;
+          const name = nameField.value;
+          const valuesString = valuesField.value;
+          const values = JSON.parse(valuesString);
+          const key = keyField.value;
+          metaTypes.push({ id, name, values, key });
+        });
+
+        return metaTypes;
       })
     );
   }

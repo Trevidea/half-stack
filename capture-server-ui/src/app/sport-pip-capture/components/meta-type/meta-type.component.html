@@ -1,27 +1,64 @@
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-lg-4 col-xl-4 d-none d-md-block">
+      <p>abc</p>
+    </div>
+    <div class="col-lg-8 col-xl-8 col-md-12">
+      <span class="d-md-none" (click)="toggleSidebar()">
+        <i data-feather="menu" [size]="20"></i>
+      </span>
+      <p>hello</p>
+      <div class="sidebar" [ngClass]="{ 'show-sidebar': showSidebar }">
+        <span class="float-right p-1" (click)="toggleSidebar()">
+          <i data-feather="x" [size]="20"></i>
+        </span>
+        <div class="mt-1"></div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
 <div class="card">
+  <div
+    class="card-header custom-card-header"
+    style="align-items: center; justify-content: center; padding: 0.7em"
+  >
+    <i data-feather="framer" [size]="20"></i> Meta-Types
+  </div>
   <div class="card-body">
     <div class="row">
       <div class="col-3">
         <div *ngFor="let item of datasource.metatype; let i = index">
           <div
             class="d-flex bd-highlight mt-1 custome-stepper"
-            (click)="OnChangeType(i,item)"
+            (click)="OnChangeType(i, item)"
           >
             <div
               class="bd-highlight custome-stepper-header"
-              [ngStyle]="{ 'background-color': item.backgroundColor,'color':item.color }"
+              style="
+                width: 40px;
+                height: 40px;
+                align-items: center;
+                display: flex;
+                justify-content: center;
+              "
+              [ngStyle]="{
+                'background-color': item.backgroundColor,
+                color: item.color
+              }"
             >
-              {{ i + 1 }}
+              <span>
+                {{ i + 1 }}
+              </span>
             </div>
             <div class="bd-highlight ml-1 mt-1">
               <div class="custome-stepper-title">{{ item.name }}</div>
-              <div class="custome-stepper-sub-title">{{ item.name }}</div>
             </div>
           </div>
         </div>
       </div>
       <div class="col-9 vertical-line">
-        <div class="input-group">
+        <div class="input-group mt-1">
           <input
             type="text"
             class="form-control"
@@ -29,19 +66,21 @@
             [(ngModel)]="newValue"
             aria-describedby="button-addon2"
           />
-          <!-- (keyup)="onKeyUp()" -->
           <div class="input-group-append" id="button-addon2">
-            <button class="btn btn-outline-primary" type="button" rippleEffect (click)="UpdateRow(newValue)">
+            <button
+              class="btn btn-outline-primary"
+              type="button"
+              rippleEffect
+              (click)="UpdateRow(newValue)"
+            >
               <i class="bi bi-plus-lg"></i>
             </button>
-
           </div>
         </div>
         <div
           class="input-group mt-1"
           *ngFor="let data of metaType.values; let i = index"
         >
-
           <input
             type="text"
             class="form-control"
@@ -51,7 +90,7 @@
             id="{{ data }}"
             value="{{ data }}"
           />
-    
+
           <div class="input-group-append" id="button-addon2">
             <button
               class="btn btn-outline-primary"
@@ -61,11 +100,9 @@
             >
               <i class="bi bi-trash"></i>
             </button>
-         
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
