@@ -3,8 +3,8 @@ import { MetaTypeCollectionStrategyView } from "./views/meta-types";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Transformer } from "app/blocks/transformer";
-import { MetaTypeBuilder } from "app/sport-pip-capture/blocks/meta-type.builder";
-// import { MetaTypeBuilder } from "./builders/meta-types";
+import { MetaTypeBuilder } from "./builders/meta-types";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-meta-type-presenter",
@@ -18,11 +18,20 @@ export class MetaTypePresenter implements OnInit {
   constructor(
     private dataFactory: DataFactoryService,
     router: Router,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    public http: HttpClient
   ) {
     this.ds = new MetaTypeCollectionStrategyView();
   }
+  metaTypes = [];
   ngOnInit(): void {
-    // Transformer.ComposeCollectionAsync(this.dataFactory.MetaTypeJson(), this.ds.metatype, MetaTypeBuilder)
+    this.dataFactory.MetaTypeJson().subscribe((data) => {
+      console.log(data);
+    });
+    Transformer.ComposeCollectionAsync(
+      this.dataFactory.MetaTypeJson(),
+      this.ds.metatype,
+      MetaTypeBuilder
+    );
   }
 }
