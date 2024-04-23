@@ -72,7 +72,7 @@ void Event::openPreview(const Request &req, Response &rsp)
     Json::Value response = Json::objectValue;
     response["status"] = "success";
     const auto event = Event::byId<Event>(eventId);
-    
+
     if (!event.notSet())
     {
         const auto dt = getDTUDateFromSql(event.dtEvent());
@@ -103,12 +103,12 @@ void Event::closePreview(const Request &req, Response &rsp)
 
     Json::Value response = Json::objectValue;
     response["status"] = "success";
-    if (this->m_runners.find(eventId) != this->m_runners.end())
+    const auto &kvPair = this->m_runners.find(eventId);
+    if (kvPair != this->m_runners.end())
     {
-        auto &runner = this->m_runners[eventId];
-        runner->stop();
-        delete runner;
-        this->m_runners.erase(1);
+        spdlog::trace("Runner found for event {}. closing preview!", eventId);
+        kvPair->second->stop();
+        this->m_runners.erase(kvPair);
     }
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
