@@ -2,8 +2,33 @@
 @import "@core/scss/angular/libs/select.component.scss";
 
 .vertical-line {
-  border-left: 1px solid #ccc;
+  border-left: 2px solid #ccc;
   padding-left: 10px;
+  max-height: 80vh;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  transition: overflow-y 1.3s ease;
+}
+.show-scroll {
+  overflow-y: auto;
+  transition: overflow-y 0.03s ease-in-out;
+  z-index: 1000;
+}
+.vertical-line::-webkit-scrollbar {
+  width: 5px;
+}
+
+.vertical-line::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.vertical-line::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+}
+
+.vertical-line::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 .spinner-border {
   display: inline-block;
@@ -51,6 +76,7 @@
 }
 .custome-stepper {
   cursor: pointer;
+  margin-bottom: 10px;
 }
 .custome-stepper:hover {
   &.custome-stepper-header {

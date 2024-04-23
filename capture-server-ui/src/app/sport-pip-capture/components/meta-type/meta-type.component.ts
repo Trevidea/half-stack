@@ -19,7 +19,15 @@ export class MetaTypeComponent implements OnInit {
   toggleSidebar() {
     this.showSidebar = !this.showSidebar;
   }
+  showScrollbar: boolean = false;
 
+  handleMouseEnter() {
+    this.showScrollbar = true;
+  }
+
+  handleMouseLeave() {
+    this.showScrollbar = false;
+  }
   @Input() datasource: any;
   newValue: string;
   backgroundColors: { [key: number]: string } = {};

@@ -40,7 +40,11 @@
     </div>
   </div>
 
-  <div class="card-body custom-card" *ngIf="!isLoading">
+  <div
+    class="card-body custom-card"
+    *ngIf="!isLoading"
+    style="padding-bottom: 0px"
+  >
     <div class="row">
       <div class="col-3">
         <div *ngFor="let item of datasource.metatype; let i = index">
@@ -72,7 +76,12 @@
           </div>
         </div>
       </div>
-      <div class="col-9 vertical-line">
+      <div
+        class="col-9 vertical-line"
+        (mouseenter)="handleMouseEnter()"
+        (mouseleave)="handleMouseLeave()"
+        [ngClass]="{ 'show-scroll': showScrollbar }"
+      >
         <div class="input-group mt-1">
           <input
             type="text"
@@ -92,31 +101,31 @@
             </button>
           </div>
         </div>
-        <div
-          class="input-group mt-1 input-added-item"
-          *ngFor="let data of metaType.values; let i = index"
-        >
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Button on right"
-            aria-describedby="button-addon2"
-            disabled
-            id="{{ data }}"
-            value="{{ data }}"
-          />
+        <ng-container *ngFor="let data of metaType.values; let last = last">
+          <div class="input-group mt-1 input-added-item">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Button on right"
+              aria-describedby="button-addon2"
+              disabled
+              id="{{ data }}"
+              value="{{ data }}"
+            />
 
-          <div class="input-group-append" id="button-addon2">
-            <button
-              class="btn btn-outline-primary"
-              type="button"
-              (click)="UpdateRow(data)"
-              rippleEffect
-            >
-              <i class="bi bi-trash"></i>
-            </button>
+            <div class="input-group-append" id="button-addon2">
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                (click)="UpdateRow(data)"
+                rippleEffect
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
           </div>
-        </div>
+          <div *ngIf="last" style="padding-bottom: 10px"></div>
+        </ng-container>
       </div>
     </div>
   </div>
