@@ -8,7 +8,7 @@ import { TabStateService } from './event-utility/nav';
 
 @Component({
   selector: 'app-event-presenter',
-  template: `<app-event  [datasource]="filteredData" (filter)="onFilter($event)" (onTabChange)="onTabChange()" ></app-event>`,
+  template: `<app-event  [datasource]="filteredData | appFilter : searchItem" (filter)="onFilter($event)" (onTabChange)="onTabChange()" ></app-event>`,
   styleUrls: ['./event.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
@@ -21,7 +21,7 @@ export class EventPresenter implements OnInit {
   ds!: EventRange
   filteredData!: any;
   progress: number = 0;
-
+  searchItem: string
   constructor(
     private service: ModelServiceService,
     private tabStateService: TabStateService) {
@@ -29,7 +29,7 @@ export class EventPresenter implements OnInit {
   }
 
   ngOnInit(): void {
-     Transformer.ComposeCollectionAsync(this.service.eventList(), this.ds.event, EventRangeBuilder)
+    Transformer.ComposeCollectionAsync(this.service.eventList(), this.ds.event, EventRangeBuilder)
       .then(() => {
         this.query.status = this.tabStateService.getActiveTab();
         this.filteredData = this.filterEvents(this.ds.event, this.query);
@@ -41,7 +41,7 @@ export class EventPresenter implements OnInit {
       this.query = filter;
       this.filteredData = this.filterEvents(this.ds.event, this.query);
       console.log(this.query)
-    },0)
+    }, 0)
 
   }
 
