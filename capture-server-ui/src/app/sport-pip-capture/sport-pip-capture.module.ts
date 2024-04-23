@@ -169,12 +169,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PipConformationModalComponent,
     EventsDetailPresenter,
     EventsDetailComponent,
-<<<<<<< HEAD
-    FilterPipe
-=======
-
     FilterPipe,
->>>>>>> cc328d061459182e95dd686dbee79625fab91d05
   ],
   providers: [
     {
