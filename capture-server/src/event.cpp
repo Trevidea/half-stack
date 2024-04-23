@@ -30,7 +30,6 @@ void Event::report()
     Gateway::instance().route("POST", "/api/event/open-preview", // To request INSERT
                               [this](const Request &req, Response &rsp)
                               {
-                                  this->closeAllPreviews();
                                   this->openPreview(req, rsp);
                               });
     Gateway::instance().route("POST", "/api/event/close-preview", // To request INSERT
