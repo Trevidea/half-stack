@@ -42,3 +42,10 @@ ExModelNotFoundException::ExModelNotFoundException(const std::string &entity, co
 ExModelNotFoundException::~ExModelNotFoundException()
 {
 }
+ExInvalidPreviewDurationException::ExInvalidPreviewDurationException(const std::string &eventId, const int duration) : m_eventId{eventId},
+                                                                                              m_duration{duration}
+{
+}
+ExInvalidPreviewDurationException::~ExInvalidPreviewDurationException()
+{
+}

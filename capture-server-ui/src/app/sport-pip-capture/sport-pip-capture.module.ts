@@ -92,8 +92,12 @@ import { ActiveDevicesComponent } from "./components/event/event-preview/active-
 import { EventPreviewPresenter } from "./components/event/event-preview/event-preview.presenter";
 import { TypesComponent } from "./blocks/types/types.component";
 import { TypesPresenter } from "./blocks/types/types.presenter";
+<<<<<<< HEAD
 import { EventsDetailPresenter } from "./components/event/events-detail/events-detail.presenter";
 import { EventsDetailComponent } from "./components/event/events-detail/events-detail.component";
+=======
+import { FilterPipe } from "./components/meta-type/filter";
+>>>>>>> fc20beff99576bbc8154a59b26bad4bad9f634ec
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -170,9 +174,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EventUndoNotificationComponent,
     EventEndedModalComponent,
     PipConformationModalComponent,
+<<<<<<< HEAD
     EventsDetailPresenter,
     EventsDetailComponent
 
+=======
+    FilterPipe,
+>>>>>>> fc20beff99576bbc8154a59b26bad4bad9f634ec
   ],
   providers: [
     {

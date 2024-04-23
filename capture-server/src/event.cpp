@@ -73,6 +73,7 @@ void Event::openPreview(const Request &req, Response &rsp)
     Json::Value response = Json::objectValue;
     response["status"] = "success";
     const auto event = Event::byId<Event>(eventId);
+    
     if (!event.notSet())
     {
         const auto dt = getDTUDateFromSql(event.dtEvent());
