@@ -17,7 +17,8 @@ export class MetaTypeComponent implements OnInit {
   isLoading: boolean = true;
   @Input() datasource: any;
   newValue: string;
-
+  searchMetaValue: string;
+  searchMetaType: string;
   constructor(
     private el: ElementRef,
     private dataFactory: DataFactoryService
@@ -102,7 +103,4 @@ export class MetaTypeComponent implements OnInit {
       }
     }, 100);
   }
-
-  searchMetaValue;
-  searchMetaType;
 }
