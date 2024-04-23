@@ -91,6 +91,7 @@ export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   clickedmenu(id: number) {
+    console.log("pare", id)
     this.eventId = id;
   }
 

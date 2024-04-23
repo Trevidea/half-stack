@@ -43,10 +43,10 @@ export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  eventDetail(event: string, index: number) {
+  eventDetail(e: string, index: number) {
     this.startIndex = index
     this.opOngoingDetail = true
-    this._coreSidebarService.getSidebarRegistry('ongoing-' + event).toggleOpen();
+    this._coreSidebarService.getSidebarRegistry(e).toggleOpen();
   }
 
   OnClosedDetail(data: any) {
@@ -57,7 +57,6 @@ export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
     this.eventId = id;
   }
 
-
   editOnDemandEvent() {
     this.router.navigate(['/on-demand-event'],
       {
@@ -67,12 +66,7 @@ export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   deleteEvent(){
-    
-  }
-
-
-
-
+      }
 
   ngOnDestroy(): void {
     if (this.countdownInterval) {
