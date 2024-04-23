@@ -5,7 +5,6 @@ MetaType::MetaType(): EntityBase("meta_type")
 {
 }
 
-
 void MetaType::report()
 {
     EntityBase::report();
