@@ -14,23 +14,9 @@ import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.se
   encapsulation: ViewEncapsulation.None,
 })
 export class MetaTypeComponent implements OnInit {
-  showSidebar: boolean = false;
   isLoading: boolean = true;
-  toggleSidebar() {
-    this.showSidebar = !this.showSidebar;
-  }
-  showScrollbar: boolean = false;
-
-  handleMouseEnter() {
-    this.showScrollbar = true;
-  }
-
-  handleMouseLeave() {
-    this.showScrollbar = false;
-  }
   @Input() datasource: any;
   newValue: string;
-  backgroundColors: { [key: number]: string } = {};
 
   constructor(
     private el: ElementRef,
@@ -64,15 +50,8 @@ export class MetaTypeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.metaType = { id: null, values: [], key: "string", name: "string" };
-
-    setTimeout(() => {
-      this.OnChangeType(0, this.datasource.metatype[0]);
-      this.isLoading = false;
-    }, 1000);
+    this.observeDataSourceChanges();
   }
-
-  selectedIndex: number | null = null;
 
   OnChangeType(
     i: number,
@@ -112,5 +91,15 @@ export class MetaTypeComponent implements OnInit {
         });
     }
     this.newValue = "";
+  }
+
+  private observeDataSourceChanges(): void {
+    const interval = setInterval(() => {
+      if (this.datasource.metatype.length > 0) {
+        this.OnChangeType(0, this.datasource.metatype[0]);
+        this.isLoading = false;
+        clearInterval(interval);
+      }
+    }, 100);
   }
 }
