@@ -35,8 +35,6 @@
             class="form-control"
           />
         </div>
-
-        <!-- (keyup)="filterUpdate($event)" -->
         <div
           *ngFor="
             let item of datasource.metatype | appFilter : searchMetaType;
@@ -72,13 +70,18 @@
         </div>
       </div>
       <div class="col-9 vertical-line">
-        <div class="w-50 mt-1">
-          <input
-            type="search"
-            placeholder="Search"
-            class="form-control"
-            [(ngModel)]="searchMetaValue"
-          />
+        <div class="d-flex align-items-center">
+          <div class="w-50 mt-1">
+            <input
+              type="search"
+              placeholder="Search"
+              class="form-control"
+              [(ngModel)]="searchMetaValue"
+            />
+          </div>
+          <div class="mt-1 ml-auto">
+            <h3 style="text-transform: uppercase">{{ listHeader }}</h3>
+          </div>
         </div>
         <div class="input-group mt-1">
           <input

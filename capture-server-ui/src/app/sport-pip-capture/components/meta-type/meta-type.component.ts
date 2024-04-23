@@ -19,6 +19,7 @@ export class MetaTypeComponent implements OnInit {
   newValue: string;
   searchMetaValue: string;
   searchMetaType: string;
+  listHeader: string;
   constructor(
     private el: ElementRef,
     private dataFactory: DataFactoryService
@@ -67,6 +68,7 @@ export class MetaTypeComponent implements OnInit {
     );
     this.datasource.metatype[i].backgroundColor = "#b9b9c3";
     this.datasource.metatype[i].color = "white";
+    this.listHeader = item.name;
     this.metaType = item;
   }
   UpdateRow(item: string) {
