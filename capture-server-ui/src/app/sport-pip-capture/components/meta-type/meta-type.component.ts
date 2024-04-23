@@ -102,4 +102,7 @@ export class MetaTypeComponent implements OnInit {
       }
     }, 100);
   }
+
+  searchMetaValue;
+  searchMetaType;
 }
