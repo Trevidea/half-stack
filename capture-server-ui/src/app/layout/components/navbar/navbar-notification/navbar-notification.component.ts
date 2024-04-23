@@ -39,8 +39,7 @@ export class NavbarNotificationComponent implements OnInit {
       this.notifications = res;
     });
     this.socketService.onEventTerminal().subscribe((data) => {
-      // this.notification.push(data);
-      console.log(data);
+      // this.notification.push
       // this.socketService.emit("message", "message UI");
     });
   }

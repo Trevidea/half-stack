@@ -73,7 +73,7 @@
   </div>
   <div class="card-footer bg-transparent p-1">
     <app-event-pagination [totalItems]="datasource" [pageSize]="pageSize" [startIndex]="startIndex"
-      class="d-md-none d-lg-block d-none" [endIndex]="endIndex" (pageSizeChange)="updatePageSize($event)"
+     [endIndex]="endIndex" (pageSizeChange)="updatePageSize($event)"
       (pageChange)="onPageChange($event)"></app-event-pagination>
   </div>
 </div>

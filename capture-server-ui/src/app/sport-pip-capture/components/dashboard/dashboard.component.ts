@@ -146,6 +146,21 @@ export class CaptureDashboardComponent implements OnInit {
       }
     });
   }
+
+  ongoingEvent = [
+    {
+      date: Date.now(),
+      name: "McQuaid vs Fairfort",
+      address: "Fairport High School, 33 Union Street, Fairport",
+      time: "00:22:08",
+    },
+    {
+      date: Date.now(),
+      name: "McQuaid vs Fairfort",
+      address: "Fairport High School, 33 Union Street, Fairport",
+      time: "00:22:08",
+    },
+  ];
 }
 export const colors = {
   solid: {

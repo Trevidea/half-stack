@@ -1,48 +1,36 @@
+// streaming-device.cpp
 #include "streaming-device.h"
-#include <iostream> // Include for demo purposes
 
-void addDeviceRoute(StreamingDevice& device) {
-    std::string deviceName, streamKey;
+StreamingDevice::StreamingDevice() {}
 
-    // Prompt user to enter device_name
-    std::cout << "Enter device_name: ";
-    std::getline(std::cin, deviceName);
-
-    // Prompt user to enter stream_key
-    std::cout << "Enter stream_key: ";
-    std::getline(std::cin, streamKey);
-
-    // Add device using entered device_name and stream_key
-    device.addDevice(deviceName, streamKey);
+StreamingDevice::StreamingDevice(const std::string& deviceName, const std::string& streamKey)
+    : Device(), m_blocked(false) {
+    // Set device properties using inherited methods
+    setUser(deviceName);
+    setDeviceId(streamKey);
 }
 
-void viewDeviceRoute(const StreamingDevice& device) {
-    device.viewDevice();
+void StreamingDevice::addDevice(const std::string& deviceName, const std::string& streamKey) {
+    // Implement addDevice using inherited methods from Device class
+    setUser(deviceName);
+    setDeviceId(streamKey);
+    std::cout << "Adding device: " << deviceName << std::endl;
+    // Example: Save device to database
 }
 
-void deleteDeviceRoute(StreamingDevice& device) {
-    device.deleteDevice();
+void StreamingDevice::viewDevice() const {
+    // Implement viewDevice using inherited methods from Device class
+    std::cout << "Device Name: " << user() << ", Stream Key: " << deviceId() << std::endl;
 }
 
-void blockDeviceRoute(StreamingDevice& device) {
-    device.blockDevice();
+void StreamingDevice::deleteDevice() {
+    // Implement deleteDevice using inherited methods from Device class
+    std::cout << "Deleting device: " << user() << std::endl;
+    // Example: Remove device from database
 }
 
-int main() {
-    // Create a device instance
-    StreamingDevice device;
-
-    // Call addDeviceRoute to add a streaming device
-    addDeviceRoute(device);
-
-    // View device route
-    viewDeviceRoute(device);
-
-    // Delete device route
-    deleteDeviceRoute(device);
-
-    // Block device route
-    blockDeviceRoute(device);
-
-    return 0;
+void StreamingDevice::blockDevice() {
+    // Implement blockDevice using inherited methods from Device class
+    m_blocked = true; // Set m_blocked to true
+    std::cout << "Blocking device: " << user() << std::endl;
 }
