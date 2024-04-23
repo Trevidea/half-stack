@@ -99,9 +99,13 @@ export class MetaTypeComponent implements OnInit {
   private observeDataSourceChanges(): void {
     const interval = setInterval(() => {
       if (this.datasource.metatype.length > 0) {
-        this.OnChangeType(0, this.datasource.metatype[0]);
-        this.isLoading = false;
-        clearInterval(interval);
+        try {
+          this.OnChangeType(0, this.datasource.metatype[0]);
+          this.isLoading = false;
+          clearInterval(interval);
+        } catch (err) {
+          console.log(err);
+        }
       }
     }, 100);
   }
