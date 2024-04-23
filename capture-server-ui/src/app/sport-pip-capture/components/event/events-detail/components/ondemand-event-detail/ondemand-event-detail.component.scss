@@ -1,4 +1,4 @@
-.on-going-event-details {
+.on-demandevent-details {
     .inprogess {
         font-family: 'Outfit';
         font-size: 10px;
@@ -42,14 +42,6 @@
         line-height: 18px;
     }
 
-    .fixed-footer {
-        position: sticky;
-        bottom: 0;
-        width: 100%;
-        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-        padding: 15px;
-        z-index: 999;
-    }
 
     .table th,
     .table td {
@@ -81,8 +73,5 @@
         margin-bottom: 5px;
     }
 
-    .btn-warning {
-        padding: 7px 7rem !important;
-    }
-
+    
 }

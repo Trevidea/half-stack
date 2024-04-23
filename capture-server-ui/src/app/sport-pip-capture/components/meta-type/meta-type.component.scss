@@ -2,8 +2,20 @@
 @import "@core/scss/angular/libs/select.component.scss";
 
 .vertical-line {
-  border-left: 1px solid #ccc;
+  border-left: 2px solid #ccc;
   padding-left: 10px;
+  min-height: 80vh;
+}
+.list-header {
+  margin-bottom: 0;
+  text-transform: uppercase;
+  text-transform: uppercase;
+  background-color: #4c67aae6;
+  padding: 2px 6px 2px 6px;
+  border-radius: 7px;
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 1.2px;
 }
 .spinner-border {
   display: inline-block;
@@ -31,6 +43,16 @@
   .custome-stepper-title {
     color: #ffffff;
   }
+  .list-header {
+    margin-bottom: 0;
+    text-transform: uppercase;
+    text-transform: uppercase;
+    background-color: #d2691eb3;
+    padding: 2px 6px 2px 6px;
+    border-radius: 7px;
+    color: #ffffff;
+    letter-spacing: 1.2px;
+  }
 }
 .custome-stepper-header {
   padding: 1em;
@@ -51,6 +73,7 @@
 }
 .custome-stepper {
   cursor: pointer;
+  margin-bottom: 10px;
 }
 .custome-stepper:hover {
   &.custome-stepper-header {
@@ -58,31 +81,4 @@
     padding: 1em;
     border-radius: 10%;
   }
-}
-@media (max-width: 991.98px) {
-  .container .row .col-lg-6.col-xl-6.d-none.d-md-block {
-    display: none;
-  }
-}
-
-.sidebar {
-  position: fixed;
-  top: 65px;
-  left: -250px;
-  bottom: 0;
-  width: 250px;
-  background-color: #f0f0f0;
-  overflow-y: auto;
-  transition: left 0.3s ease;
-  z-index: 1000;
-}
-
-.show-sidebar {
-  left: 0;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
 }

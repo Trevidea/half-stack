@@ -67,10 +67,8 @@ import { MenuButtonComponent } from "./components/event/event-utility/menu-butto
 import { EventPaginationComponent } from "./components/event-pagination/event-pagination.component";
 import { DemoMosaicModule } from "./mosaic.module";
 import { VideoStreamingComponent } from "./blocks/video-streaming/video-streaming.component";
-import { SchedualEventDetailPresenter } from "./components/event/events-detail/schedual-event-detail/schedual-event-detail.presenter";
-import { SchedualEventDetailComponent } from "./components/event/events-detail/schedual-event-detail/schedual-event-detail.component";
-import { OndemandEventDetailComponent } from "./components/event/events-detail/ondemand-event-detail/ondemand-event-detail.component";
-import { OndemandEventDetailPresenter } from "./components/event/events-detail/ondemand-event-detail/ondemand-event-detail.presenter";
+import { SchedualEventDetailComponent } from "./components/event/events-detail/components/schedual-event-detail/schedual-event-detail.component";
+import { OndemandEventDetailComponent } from "./components/event/events-detail/components/ondemand-event-detail/ondemand-event-detail.component";
 import { NouisliderModule } from "ng2-nouislider";
 import { ConnectioGridListHeaderComponent } from "./components/connection/connection-start/connection-grid-list-header/connectio-grid-list-header.component";
 import { ConnectionGridComponent } from "./components/connection/connection-start/connection-grid/connection-grid.component";
@@ -92,6 +90,9 @@ import { ActiveDevicesComponent } from "./components/event/event-preview/active-
 import { EventPreviewPresenter } from "./components/event/event-preview/event-preview.presenter";
 import { TypesComponent } from "./blocks/types/types.component";
 import { TypesPresenter } from "./blocks/types/types.presenter";
+import { EventsDetailPresenter } from "./components/event/events-detail/events-detail.presenter";
+import { EventsDetailComponent } from "./components/event/events-detail/events-detail.component";
+import { FilterPipe } from "./components/meta-type/filter";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -152,9 +153,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EventPreviewPresenter,
     VideoStreamingComponent,
     SchedualEventDetailComponent,
-    SchedualEventDetailPresenter,
     OndemandEventDetailComponent,
-    OndemandEventDetailPresenter,
     EventsSyncComponent,
     ConnectioGridListHeaderComponent,
     ConnectionListComponent,
@@ -168,6 +167,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EventUndoNotificationComponent,
     EventEndedModalComponent,
     PipConformationModalComponent,
+    EventsDetailPresenter,
+    EventsDetailComponent,
+    FilterPipe,
   ],
   providers: [
     {
