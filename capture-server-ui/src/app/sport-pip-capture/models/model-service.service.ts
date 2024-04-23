@@ -35,6 +35,7 @@ export class ModelServiceService {
   }
   read(type: string): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}`;
+    console.log(url)
     return this._httpClient.get<any>(url);
   }
 
@@ -81,6 +82,13 @@ export class ModelServiceService {
   }
 
   deleteView(type: string, id: number): Observable<any> {
+    // const url = `${this.strapiUrl}/${type}/del/${id}`
+    const url = `${this.modelsServerUrl}/${type}/view/${id}`;
+    console.log(url);
+    return this._httpClient.delete<any>(url);
+  }
+
+  deleteEvent(type: string, id: number): Observable<any> {
     // const url = `${this.strapiUrl}/${type}/del/${id}`
     const url = `${this.modelsServerUrl}/${type}/view/${id}`;
     console.log(url);
@@ -187,6 +195,7 @@ export class ModelServiceService {
       return this.create("event", data);
     }
   }
+
   saveMetaType(data: Data.MetaType): Observable<Data.MetaType> {
     if (data.id) {
       return this.update(`meta-type?key=${data.id}`, data, data.id);
@@ -209,11 +218,12 @@ export class ModelServiceService {
     return this._selectOne("event", id, EventData);
   }
 
-
-  // http://drake.in:1437/api/event?status='upcoming'&type='on-demand'
-  eventsBasedOnStatusJson(status: string): Observable<Data.Event[]> {
+  eventsBasedOnStatus(status: string): Observable<Data.Event[]> {
     return this._data(`event?status='${status}'`, EventData);
+  }
 
+  eventDetails(status: string, type: string): Observable<Data.Event[]> {
+    return this._data(`event?status='${status}'&type='${type}'`, EventData);
   }
 
   syncEvents(): Observable<any> {
