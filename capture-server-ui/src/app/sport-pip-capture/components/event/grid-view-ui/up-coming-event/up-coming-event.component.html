@@ -22,7 +22,7 @@
           </div>
           <div class="col-8  card-btn-conatiner  ">
             <div class="card-buttons ml-auto">
-              <button type="button" class="btn btn-flat-dark btn-sm  mr-md-1 " (click)="viewDetail(item.type,i)"
+              <button type="button" class="btn btn-flat-dark btn-sm  mr-md-1 " (click)="viewDetail('detail',i)"
                 rippleEffect>
                 Details
               </button>
@@ -52,14 +52,16 @@
 
 
 
-<core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-scheduled" overlayClass="modal-backdrop"
+<!-- <core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-scheduled" overlayClass="modal-backdrop"
   hideOnEsc="true">
   <app-schedual-event-detail-presenter [eventData]="datasource" *ngIf="openDetailmodel" detailType='upcoming'
     [startIndex]="startIndex"></app-schedual-event-detail-presenter>
-</core-sidebar>
+</core-sidebar> -->
 
-<core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-on-demand" overlayClass="modal-backdrop"
+<core-sidebar class="modal modal-slide-in fade event-sidebar" name="detail" overlayClass="modal-backdrop"
   (OnClosed)="OnClosedDetail($event)" hideOnEsc="true">
-  <app-ondemand-event-detail-presenter [eventData]="datasource" *ngIf="openDetailmodel" detailType='upcoming'
-    [startIndex]="startIndex"></app-ondemand-event-detail-presenter>
+  <!-- <app-ondemand-event-detail-presenter [eventData]="datasource" *ngIf="openDetailmodel" detailType='upcoming' [dropdownItems]="dropdownItems"
+    [startIndex]="startIndex"></app-ondemand-event-detail-presenter> -->
+  <app-events-detail-presenter [eventData]="datasource" *ngIf="openDetailmodel" detailType='upcoming'
+    [dropdownItems]="dropdownItems" [startIndex]="startIndex"></app-events-detail-presenter>
 </core-sidebar>
