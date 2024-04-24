@@ -37,7 +37,7 @@ ExModelNotFoundException::~ExModelNotFoundException()
 }
 ExInvalidPreviewDurationException::ExInvalidPreviewDurationException(const std::string &eventId, const int duration)
 {
-    snprintf(this->msg, 128, "The duration of %d minutes for the evnet %s is more than the 60 minutes limit for the preview to start.", duration, eventId.c_str());
+    snprintf(this->msg, 128, "The duration of %d minutes for the event %s is more than the 60 minutes limit for the preview to start.", duration, eventId.c_str());
 }
 ExInvalidPreviewDurationException::~ExInvalidPreviewDurationException()
 {
