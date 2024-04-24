@@ -33,7 +33,7 @@ public:
 
 private:
     void closeAllPreviews();
-    inline int minutesToStart() const
+    inline long minutesToStart() const
     {
         int mins = 0;
         const auto dt = this->getDTUDate();
@@ -42,9 +42,9 @@ private:
         std::tm dttEvent{tm.seconds, tm.minutes, tm.hours, dt.date, dt.month - 1, dt.year - 1900};
         std::chrono::time_point tpEvent = std::chrono::system_clock::from_time_t(std::mktime(&dttEvent));
         std::chrono::time_point now = std::chrono::system_clock::now();
-        std::chrono::duration diff = tpEvent - now;
-        spdlog::trace("Date of event: {}, and now it is {}. Time to start in microsecs {} and mins {}", getDateStringFromTimePoint(tpEvent), getDateStringFromTimePoint(now), diff.count(), diff.count()/6e+7);
-        return diff.count()/6e+7;
+        auto minutes = std::chrono::duration_cast<std::chrono::minutes>(tpEvent - now);
+        spdlog::trace("Date of event: {}, and now it is {}. Time to start in mins {}", getDateStringFromTimePoint(tpEvent), getDateStringFromTimePoint(now), minutes.count());
+        return minutes.count();
     }
     inline dtu_date getDTUDate() const
     {
