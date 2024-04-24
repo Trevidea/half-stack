@@ -21,20 +21,19 @@ export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
   eventId: number;
 
   dropdownItems: UI.DropDownMenuItem[] = [
-    { label: 'Edit Event', icon: 'edit', type: 'feather', action: () => this.editOnDemandEvent()},
-    { label: 'Share Event', icon: 'share', type: 'feather', action: () => {}},
-    { label: 'Remove Event', icon: 'trash', type: 'feather', action: () =>this.deleteEvent()},
-
+    { label: 'Edit Event', icon: 'edit', type: 'feather', action: () => this.editOnDemandEvent() },
+    { label: 'Share Event', icon: 'share', type: 'feather', action: () => { } },
+    { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => this.deleteEvent() },
   ]
+
   constructor(private _coreSidebarService: CoreSidebarService,
     private dateTimeservice: DateTimeService,
     private router: Router,
     private Modelservice: ModelServiceService,
   ) { }
-  
+
   ngOnInit(): void {
   }
-
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.datasource && changes.datasource.currentValue) {
@@ -48,17 +47,15 @@ export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-
-  viewDetail(event: string, index: number) {
+  openDetailView(key: string, index: number) {
     this.startIndex = index
     this.openDetailmodel = true
-    this._coreSidebarService.getSidebarRegistry('detail').toggleOpen();
+    this._coreSidebarService.getSidebarRegistry(key).toggleOpen();
   }
 
   OnClosedDetail(data: any) {
     this.openDetailmodel = false
   }
-
 
   formatDateTime(dateTimeString: string, time: number): string {
     const dateOptions: Intl.DateTimeFormatOptions = {
@@ -75,7 +72,6 @@ export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
     const formattedDate = date.toLocaleDateString('en-US', dateOptions);
     return `${formattedDate}, ${formattedHours}:${formattedMinutes} ${amPm}`;
   }
-
 
 
   navigateToEventPreview(eventId: number) {

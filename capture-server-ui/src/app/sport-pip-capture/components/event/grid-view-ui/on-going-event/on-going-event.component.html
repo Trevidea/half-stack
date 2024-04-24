@@ -25,7 +25,7 @@
         <div class="col-8 card-btn-conatiner">
           <div class="card-buttons ml-auto">
             <button type="button" class="btn btn-flat-dark btn-sm mr-md-1" rippleEffect
-              (click)="eventDetail('detail',i)">
+              (click)="openDetailView('ongoing-detail',i)">
               Details
             </button>
             <button type="button" class="btn btn-warning btn-sm">
@@ -50,8 +50,8 @@
 
 </div>
 
-<core-sidebar class="modal modal-slide-in fade event-sidebar" name="detail" overlayClass="modal-backdrop"
-  (OnClosed)="OnClosedDetail($event)" hideOnEsc="true">
+<core-sidebar class="modal modal-slide-in fade event-sidebar" name="ongoing-detail" overlayClass="modal-backdrop"
+  (OnClosed)="OnClosedDetailView($event)" hideOnEsc="true">
   <app-events-detail-presenter [eventData]="datasource" *ngIf="opOngoingDetail" (clickedmenu)="clickedmenu($event)"
-    [dropdownItems]="dropdownItems" [startIndex]="startIndex"></app-events-detail-presenter>
+    [sidebarkey]="'ongoing-detail'" [dropdownItems]="dropdownItems" [startIndex]="startIndex"></app-events-detail-presenter>
 </core-sidebar>
