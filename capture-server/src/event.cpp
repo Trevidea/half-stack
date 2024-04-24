@@ -1,8 +1,10 @@
 #include "event.h"
 #include "gateway.h"
-#include "datetimeutils.h"
 #include <ctime>
 #include "publisher.h"
+#include "half-stack-exceptions.h"
+
+
 
 Event::Event() : EntityBase("event")
 {
@@ -75,10 +77,16 @@ void Event::openPreview(const Request &req, Response &rsp)
 
     if (!event.notSet())
     {
-        const auto dt = getDTUDateFromSql(event.dtEvent());
-        const auto tm = getDTUTimeFromSql(event.tmEvent());
+        const auto dt = event.getDTUDate();
+        const auto tm = event.getDTUTime();
         spdlog::trace("Event {}, date: {}, month: {}, year: {}, hours: {}, mins: {}",
                       event.title(), dt.date, dt.month, dt.year, tm.hours, tm.minutes);
+        
+        if(event.minutesToStart() > 60)
+        {
+            throw ExInvalidPreviewDurationException(event.title(), event.minutesToStart());
+        }
+
         const auto &kvPair = this->m_runners.find(eventId);
         if (kvPair != this->m_runners.end())
         {

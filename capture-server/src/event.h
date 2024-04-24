@@ -4,7 +4,8 @@
 #include <iostream>
 #include "entity-base.h"
 #include "event-runner.h"
-
+#include <chrono>
+#include "datetimeutils.h"
 #include <map>
 
 class Event : public EntityBase
@@ -31,6 +32,27 @@ public:
 
 private:
     void closeAllPreviews();
+    inline int minutesToStart() const
+    {
+        int mins = 0;
+        const auto dt = this->getDTUDate();
+        const auto tm = this->getDTUTime();
+
+        std::tm dttEvent{tm.seconds, tm.minutes, tm.hours, dt.date, dt.month - 1, dt.year - 1900};
+        std::chrono::time_point tpEvent = std::chrono::system_clock::from_time_t(std::mktime(&dttEvent));
+        std::chrono::time_point now = std::chrono::system_clock::now();
+        std::chrono::duration diff = tpEvent - now;
+        spdlog::trace("Time to start in microsecs {} and mins {}", diff.count(), diff.count()/6e+7);
+        return diff.count()/6e+7;
+    }
+    inline dtu_date getDTUDate() const
+    {
+        return getDTUDateFromSql(this->dtEvent());
+    }
+    inline dtu_time getDTUTime() const
+    {
+        return getDTUTimeFromSql(this->tmEvent());
+    }
 
 private:
     std::map<int, EventRunner *> m_runners;
