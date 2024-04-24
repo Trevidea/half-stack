@@ -117,7 +117,7 @@ export class DateTimeService {
     return `${month} ${dayString}, ${weekday}`;
   }
 
-  
+
   formatTime(timeNumber) {
     if (isNaN(timeNumber) || timeNumber === null || timeNumber === undefined, timeNumber === 0) {
       return "00:00";
@@ -130,8 +130,28 @@ export class DateTimeService {
     return formattedTime;
   }
 
+  ////countdown for on going event ///////////
 
+  updateCountdownForOngoingEvents(events: any[]) {
+    const now = new Date();
+    events.forEach(event => {
+      const eventDateTime = new Date(event.dtEvent);
+      eventDateTime.setHours(Math.floor(event.time / 100));
+      eventDateTime.setMinutes(event.time % 100);
 
+      if (now >= eventDateTime) {
+        const elapsedTime = now.getTime() - eventDateTime.getTime();
+        const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+        const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+        const formattedTime = ` In Progress ${this._padZero(hours)}:${this._padZero(minutes)}:${this._padZero(seconds)}`;
+        event.ongoingCountdown = formattedTime;
+      }
+    });
+  }
+  _padZero(num) {
+    return num < 10 ? `0${num}` : `${num}`;
+  }
 
 
 

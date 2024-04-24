@@ -1,6 +1,8 @@
 <div class="row on-demandevent-details" style="padding-top: 7px;" *ngIf="datasource?.type !='scheduled'">
     <div class="col-12 ">
-        <h6 ass="inprogess">{{datasource?._countdown}}</h6>
+        <h6 class="inprogess" *ngIf="datasource?._countdown">{{datasource?._countdown}}</h6>
+        <h6 class="inprogess" *ngIf="datasource?.ongoingCountdown">{{datasource?.ongoingCountdown}}</h6>
+        
         <h5 class="card-title ">{{datasource?._title}}</h5>
         <div class="badge on-demand-event">{{datasource?._type| eventTypeTransform}}</div>
     </div>

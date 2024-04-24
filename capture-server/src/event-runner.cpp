@@ -54,10 +54,14 @@ EventRunner::EventRunner(const int year, const int month, const int day, const i
 
 void EventRunner::stop()
 {
-    this->m_start.abort();
-    this->m_end.abort();
-    this->mp_eventPreviewPublisher->stop();
-    this->mp_liveEventPublisher->stop();
+    if (!this->m_stopped)
+    {
+        this->m_stopped = true;
+        this->m_start.abort();
+        this->m_end.abort();
+        this->mp_eventPreviewPublisher->stop();
+        this->mp_liveEventPublisher->stop();
+    }
 }
 void EventRunner::eventStarted()
 {

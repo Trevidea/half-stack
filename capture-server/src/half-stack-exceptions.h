@@ -1,5 +1,5 @@
-#ifndef PAYROLLEXCEPTIONS_H
-#define PAYROLLEXCEPTIONS_H
+#ifndef HALFSTACKEXCEPTIONS_H
+#define HALFSTACKEXCEPTIONS_H
 #include <iostream>
 #include <exception>
 
@@ -64,31 +64,15 @@ public:
 class ExInvalidPreviewDurationException: public std::exception
 {
 private:
-    std::string m_eventId;
-    int m_duration;
+    char msg[128] = {'\0'};
 public:
     ExInvalidPreviewDurationException(const std::string &eventId, const int duration);
     const char *what() const noexcept
     {
-        char msg[128] = {'\0'};
-        snprintf(msg, 128, "The duration of %d minutes for the evnetId %s is more than the 60 minutes limit for the preview to start.", this->m_duration, this->m_eventId.c_str());
         return msg;
     }
     ~ExInvalidPreviewDurationException();
 };
 
-class ExMonthMissingInRequest: public std::exception
-{
-private:
-    std::string m_internalMsg;
-    const char * m_msg = "The action requires the month of payroll to process. Please send the month in query-string in format MMYYYY. ";
-public:
-    ExMonthMissingInRequest();
-    const char *what() const noexcept
-    {
-        return this->m_msg;
-    }
-    ~ExMonthMissingInRequest();
-};
 
-#endif // PAYROLLEXCEPTIONS_H
+#endif // HALFSTACKEXCEPTIONS_H

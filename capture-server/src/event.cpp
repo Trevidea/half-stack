@@ -1,8 +1,10 @@
 #include "event.h"
 #include "gateway.h"
-#include "datetimeutils.h"
 #include <ctime>
 #include "publisher.h"
+#include "half-stack-exceptions.h"
+
+
 
 Event::Event() : EntityBase("event")
 {
@@ -30,7 +32,6 @@ void Event::report()
     Gateway::instance().route("POST", "/api/event/open-preview", // To request INSERT
                               [this](const Request &req, Response &rsp)
                               {
-                                  this->closeAllPreviews();
                                   this->openPreview(req, rsp);
                               });
     Gateway::instance().route("POST", "/api/event/close-preview", // To request INSERT
@@ -73,13 +74,19 @@ void Event::openPreview(const Request &req, Response &rsp)
     Json::Value response = Json::objectValue;
     response["status"] = "success";
     const auto event = Event::byId<Event>(eventId);
-    
+
     if (!event.notSet())
     {
-        const auto dt = getDTUDateFromSql(event.dtEvent());
-        const auto tm = getDTUTimeFromSql(event.tmEvent());
+        const auto dt = event.getDTUDate();
+        const auto tm = event.getDTUTime();
         spdlog::trace("Event {}, date: {}, month: {}, year: {}, hours: {}, mins: {}",
                       event.title(), dt.date, dt.month, dt.year, tm.hours, tm.minutes);
+        
+        if(event.minutesToStart() > 60)
+        {
+            throw ExInvalidPreviewDurationException(event.title(), event.minutesToStart());
+        }
+
         const auto &kvPair = this->m_runners.find(eventId);
         if (kvPair != this->m_runners.end())
         {
@@ -104,12 +111,12 @@ void Event::closePreview(const Request &req, Response &rsp)
 
     Json::Value response = Json::objectValue;
     response["status"] = "success";
-    if (this->m_runners.find(eventId) != this->m_runners.end())
+    const auto &kvPair = this->m_runners.find(eventId);
+    if (kvPair != this->m_runners.end())
     {
-        auto &runner = this->m_runners[eventId];
-        runner->stop();
-        delete runner;
-        this->m_runners.erase(1);
+        spdlog::trace("Runner found for event {}. closing preview!", eventId);
+        kvPair->second->stop();
+        this->m_runners.erase(kvPair);
     }
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }

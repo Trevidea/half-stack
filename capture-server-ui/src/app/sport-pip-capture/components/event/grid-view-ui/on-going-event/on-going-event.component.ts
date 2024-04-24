@@ -27,36 +27,36 @@ export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
 
 
   ngOnInit(): void {
-
   }
 
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.datasource && changes.datasource.currentValue) {
-      this.updateCountdownForOngoingEvents(this.datasource);
+      this.dateTimeservice.updateCountdownForOngoingEvents(this.datasource);
       if (this.countdownInterval) {
         clearInterval(this.countdownInterval);
       }
       this.countdownInterval = setInterval(() => {
-        this.updateCountdownForOngoingEvents(this.datasource);
+        this.dateTimeservice.updateCountdownForOngoingEvents(this.datasource);
       }, 50);
     }
   }
 
-  eventDetail(event: string, index: number) {
+
+  openDetailView(key: string, index: number) {
     this.startIndex = index
     this.opOngoingDetail = true
-    this._coreSidebarService.getSidebarRegistry('ongoing-' + event).toggleOpen();
+    this._coreSidebarService.getSidebarRegistry(key).toggleOpen();
   }
 
-  OnClosedDetail(data: any) {
+  OnClosedDetailView(data: any) {
     this.opOngoingDetail = false
   }
+
 
   clickedmenu(id: number) {
     this.eventId = id;
   }
-
 
   editOnDemandEvent() {
     this.router.navigate(['/on-demand-event'],
@@ -66,12 +66,9 @@ export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
     )
   }
 
-  deleteEvent(){
-    
+
+  deleteEvent() {
   }
-
-
-
 
 
   ngOnDestroy(): void {
@@ -80,28 +77,7 @@ export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  ///////// Will replace it in  dateTimeservice //// 
-  updateCountdownForOngoingEvents(events: any[]) {
-    const now = new Date();
-    events.forEach(event => {
-      const eventDateTime = new Date(event.dtEvent);
-      eventDateTime.setHours(Math.floor(event.time / 100));
-      eventDateTime.setMinutes(event.time % 100);
 
-      if (now >= eventDateTime) {
-        const elapsedTime = now.getTime() - eventDateTime.getTime();
-        const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
-        const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
-        const formattedTime = ` In Progress ${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
-        event.ongoingCountdown = formattedTime;
-      }
-    });
-  }
-
-  padZero(num) {
-    return num < 10 ? `0${num}` : `${num}`;
-  }
 
 
 

@@ -14,7 +14,6 @@ export class OndemandEventDetailComponent implements OnInit {
   @Input() dropdownItems: UI.DropDownMenuItem[];
   constructor(private _coreSidebarService: CoreSidebarService, public dateTimeservice: DateTimeService, private router: Router,) { }
   ngOnInit(): void {
-    console.log(this.datasource);
   }
 
 

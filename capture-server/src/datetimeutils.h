@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <cmath>
+#include <chrono>
+
 struct dtu_date
 {
     int year, month, date;
@@ -171,6 +173,14 @@ inline dtu_date getDTUDateFromSql(const std::string &date)
     tm t1 = getTmFromSql(date);
     return {t1.tm_year + 1900, t1.tm_mon + 1, t1.tm_mday};
 }
+inline std::string getDateStringFromTimePoint(std::chrono::system_clock::time_point &tp)
+{
+    std::time_t t = std::chrono::system_clock::to_time_t(tp);
+    char buf[20] = {'\0'};
+    strftime(buf, 20, "%Y-%m-%d %H:%M:%S", localtime(&t));
+    return std::string(buf);
+}
+
 inline dtu_time getDTUTimeFromSql(const int &time)
 {
     char arr[5] = {'\0'};

@@ -11,18 +11,18 @@ import { OnDemandBuilder } from './builders/ondemand-event';
 
 @Component({
   selector: 'app-events-detail-presenter',
-  template: `<app-events-detail [datasource]="eventData" [dropdownItems]='dropdownItems' [currentIndex]='startIndex' [detailType]='detailType'></app-events-detail>`,
+  template: `<app-events-detail [datasource]="eventData" [dropdownItems]='dropdownItems' [currentIndex]='startIndex' [sidebarkey]='sidebarkey'
+  (clickedmenu)='clickmenu($event)'></app-events-detail>`,
   styleUrls: ['./events-detail.component.scss']
 })
 export class EventsDetailPresenter implements OnInit {
   @Input() eventData: any;
-  @Input() detailType: string;
   @Input() dropdownItems: UI.DropDownMenuItem[]
   ds!: OnDemandEventRange;
   status: string;
   @Input() startIndex: number
   @Output() clickedmenu = new EventEmitter<number>()
-
+  @Input() sidebarkey: any
   constructor(private service: ModelServiceService,
     private tabStateService: TabStateService) {
     this.ds = new OnDemandEventRange();
@@ -36,4 +36,11 @@ export class EventsDetailPresenter implements OnInit {
     // }
 
   }
+
+  clickmenu(id: number) {
+    console.log('detail to parent', id)
+    this.clickedmenu.emit(id)
+  }
+
+
 }

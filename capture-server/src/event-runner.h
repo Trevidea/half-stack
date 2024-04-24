@@ -23,6 +23,7 @@ private:
     std::string getLiveEventData();
     bool m_eventStarted = false;
     bool m_previewStarted = false;
+    bool m_stopped = false;
 };
 
 #endif // EVENT_RUNNER_H
