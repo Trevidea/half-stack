@@ -1,10 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Transformer } from "app/blocks/transformer";
-import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 import { SocketService } from "app/sport-pip-capture/models/socket.service";
 import { RangeEventPreviewView } from "./views/event-preview";
-import { EventPreviewBuilder } from "./builders/event-preview";
 import { Subscription } from "rxjs";
 import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 
@@ -16,13 +13,11 @@ import { ModelServiceService } from "app/sport-pip-capture/models/model-service.
 })
 export class EventPreviewPresenter implements OnInit {
   previewData!: any;
-  private subscription: Subscription;
   ds!: RangeEventPreviewView;
   eventId: number
   constructor(
     private route: ActivatedRoute,
     private socketService: SocketService,
-    private dataFactoryService: DataFactoryService,
     private modelServiceService: ModelServiceService,
   ) {
     this.route.queryParams.subscribe(params => {
@@ -34,7 +29,7 @@ export class EventPreviewPresenter implements OnInit {
 
   ngOnInit(): void {
     console.log("Subscribing to onEventPreview");
-    
+
     this.socketService.onEventPreview().subscribe(
       (data) => {
         this.previewData = JSON.parse(data);
@@ -55,4 +50,7 @@ export class EventPreviewPresenter implements OnInit {
     );
 
   }
+
+
 }
+

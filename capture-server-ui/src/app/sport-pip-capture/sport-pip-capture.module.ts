@@ -93,6 +93,7 @@ import { TypesPresenter } from "./blocks/types/types.presenter";
 import { EventsDetailPresenter } from "./components/event/events-detail/events-detail.presenter";
 import { EventsDetailComponent } from "./components/event/events-detail/events-detail.component";
 import { FilterPipe } from "./components/meta-type/filter";
+import { AddDeviceComponent } from "./components/add-device/add-device.component";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -170,6 +171,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EventsDetailPresenter,
     EventsDetailComponent,
     FilterPipe,
+    AddDeviceComponent
   ],
   providers: [
     {

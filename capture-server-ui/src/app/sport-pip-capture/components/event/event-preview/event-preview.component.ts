@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { DateTimeService } from '../event-utility/date-time.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-event-preview',
@@ -10,11 +11,11 @@ import { DateTimeService } from '../event-utility/date-time.service';
 export class EventPreviewComponent implements OnInit {
   @Input() datasource: any
   private countdownInterval: any;
- 
-  constructor(public dateTimeservice: DateTimeService,) { }
+
+  constructor(public dateTimeservice: DateTimeService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-  
+
   }
   calculateUpcomingCountdown(item: any): string {
     const now = new Date();
@@ -40,5 +41,5 @@ export class EventPreviewComponent implements OnInit {
     return num < 10 ? `0${num}` : `${num}`;
   }
 
-
+  
 }
