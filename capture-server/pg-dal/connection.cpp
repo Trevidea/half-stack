@@ -116,7 +116,7 @@ void Connection::executeNonTrx(const std::string &sql)
         this->m_lastResult = work.exec(sql);
         spdlog::trace("complete_nt..name={}, instance={}, threadId={}", this->m_name, this->m_thisRefId, this->index(t_id));
 
-        // if (DBManager::instance().s_printResults)
+        if (DBManager::instance().s_printResults)
             this->printResult();
     }
     catch (const pqxx::sql_error &se)
@@ -137,7 +137,7 @@ void Connection::executeTrx(const std::string &sql)
             this->m_lastResult = Transaction::exec(sql);
             spdlog::trace("complete_trx..name={}, instance={}, threadId={}", this->m_name, this->m_thisRefId, this->index(t_id));
 
-            // if (DBManager::instance().s_printResults)
+            if (DBManager::instance().s_printResults)
                 this->printResult();
         }
         else
@@ -146,7 +146,7 @@ void Connection::executeTrx(const std::string &sql)
             this->m_lastResult = work.exec(sql);
             spdlog::trace("complete_trx_commit..name={}, instance={}, threadId={}", this->m_name, this->m_thisRefId, this->index(t_id));
 
-            // if (DBManager::instance().s_printResults)
+            if (DBManager::instance().s_printResults)
                 this->printResult();
 
             work.commit();
