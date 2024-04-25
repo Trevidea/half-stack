@@ -46,8 +46,8 @@ export class ModelServiceService {
     const url = `${this.modelsServerUrl}/${type}?id=${id}`;
     return this._httpClient.get<any>(url);
   }
-  readOneUsingKey(type: string, key: string): Observable<any> {
-    const url = `${this.modelsServerUrl}/${type}?key=${key}`;
+  readOneUsingKey(type: string, key: string, keyType: string): Observable<any> {
+    const url = `${this.modelsServerUrl}/${type}?${keyType}=${key}`;
     return this._httpClient.get<any>(url);
   }
 
@@ -113,10 +113,11 @@ export class ModelServiceService {
   }
   private _getSelectedMetaType<I extends Data.Base>(
     resource: string,
-    key: string
+    key: string,
+    keyType: string
   ): Observable<I[]> {
     return this._adapter
-      .demodulate(resource, this.readOneUsingKey(resource, key))
+      .demodulate(resource, this.readOneUsingKey(resource, key, keyType))
       .pipe(
         map((models) =>
           models.map((model: any) => {
@@ -180,9 +181,10 @@ export class ModelServiceService {
   private _selectMetaData<M, I extends Data.Base>(
     resource: string,
     key: string,
+    keyType: string,
     type: new (I: Data.Base) => M
   ): Observable<M[]> {
-    return this._getSelectedMetaType<I>(resource, key).pipe(
+    return this._getSelectedMetaType<I>(resource, key, keyType).pipe(
       map((data: I[]) => data.map((datum: I) => new type(datum)))
     );
   }
@@ -199,9 +201,10 @@ export class ModelServiceService {
   private _selectMetaOne<M, I extends Data.Base>(
     resource: string,
     key: string,
+    keyType: string,
     type: new (I: Data.Base) => M
   ): Observable<M> {
-    return this._selectMetaData(resource, key, type).pipe(
+    return this._selectMetaData(resource, key, keyType, type).pipe(
       map((data: M[]) => data[0])
     );
   }
@@ -267,7 +270,7 @@ export class ModelServiceService {
   }
 
   MetaTypeByKey(key: string): Observable<Data.MetaType> {
-    return this._selectMetaOne("meta-type", `'${key}'`, MetaTypeData);
+    return this._selectMetaOne("meta-type", `'${key}'`, "key", MetaTypeData);
   }
 
   MetaTypeJson(): Observable<Data.MetaType[]> {
