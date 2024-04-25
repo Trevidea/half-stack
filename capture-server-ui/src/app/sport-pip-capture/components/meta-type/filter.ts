@@ -9,7 +9,6 @@ export class FilterPipe implements PipeTransform {
     if (!searchText) {
       return items;
     }
-    console.log(typeof items[0]);
     if (typeof items[0] == "string") {
       searchText = searchText.toLocaleLowerCase();
 

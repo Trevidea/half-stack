@@ -71,6 +71,15 @@ export class MetaTypeComponent implements OnInit {
     this.listHeader = item.name;
     this.metaType = item;
   }
+  isAdded: boolean = false;
+  findValue(e) {
+    let index = this.metaType.values.indexOf(e);
+    console.log(index);
+    if (index == 0) {
+      this.isAdded = true;
+    }
+    return index;
+  }
   UpdateRow(item: string) {
     let elementToRemove = item;
 
