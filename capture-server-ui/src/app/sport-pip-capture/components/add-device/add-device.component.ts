@@ -8,7 +8,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   encapsulation:ViewEncapsulation.None
 })
 export class AddDeviceComponent implements OnInit {
-
+  deviceName
+  streamingKey
   constructor(public activeModal:NgbActiveModal) { }
 
   ngOnInit(): void {
