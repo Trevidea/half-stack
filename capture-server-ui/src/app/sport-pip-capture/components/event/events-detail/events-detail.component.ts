@@ -15,7 +15,7 @@ export class EventsDetailComponent implements OnInit {
   @Input() sidebarkey: number;
   @Input() dropdownItems: UI.DropDownMenuItem[];
   @Output() clickedmenu = new EventEmitter<number>()
-  constructor(private _coreSidebarService: CoreSidebarService, public dateTimeservice: DateTimeService, private router: Router,) { }
+  constructor(private _coreSidebarService: CoreSidebarService, public dateTimeservice: DateTimeService) { }
 
   ngOnInit(): void {
     console.log(this.datasource, this.currentIndex);

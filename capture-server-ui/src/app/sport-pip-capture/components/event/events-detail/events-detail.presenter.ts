@@ -23,7 +23,7 @@ export class EventsDetailPresenter implements OnInit {
   @Input() startIndex: number
   @Output() clickedmenu = new EventEmitter<number>()
   @Input() sidebarkey: any
-  constructor(private service: ModelServiceService,
+  constructor(
     private tabStateService: TabStateService) {
     this.ds = new OnDemandEventRange();
   }

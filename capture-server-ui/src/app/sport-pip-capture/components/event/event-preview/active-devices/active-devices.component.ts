@@ -15,7 +15,7 @@ export class ActiveDevicesComponent implements OnInit {
     { label: 'Block', icon: 'slash', type: 'feather', action: () => { } },
     { label: 'Remove', icon: 'trash', type: 'feather', action: () => { } },
   ]
-  constructor(private modalService: NgbModal, private route: ActivatedRoute) { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
   }
