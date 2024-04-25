@@ -1,30 +1,39 @@
-<div class="card-title-box">
-    <h5 class="card-title">Active Devices</h5>
+<div class="card-header">
+    <h4 class="card-title mb-0">Active Devices</h4>
+    <button type="button" class="btn btn-warning mt-0" (click)="modalOpenForm(modalForm)" rippleEffect>Add
+        Device</button>
 </div>
-<div class="table-responsive">
-    <table class="table" style="min-width: max-content;">
-        <thead>
-            <tr>
-                <th>Action</th>
-                <th>User</th>
-                <th>Location</th>
-                <th>Device ID</th>
-                <th>Device Type</th>
-                <th>Network</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <app-menu-button [dropdownItems]="dropdownItems"></app-menu-button>
-                </td>
-                <td>Coach S.</td>
-                <td>Press Box</td>
-                <td>iPad15</td>
-                <td>iPad</td>
-                <td>Penfield-524</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="card-body p-0">
+    <div class="table-responsive">
+        <table class="table" style="min-width: max-content;">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>User</th>
+                    <th>Location</th>
+                    <th>Device ID</th>
+                    <th>Device Type</th>
+                    <th>Network</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <app-menu-button [dropdownItems]="dropdownItems"></app-menu-button>
+                    </td>
+                    <td>Coach S.</td>
+                    <td>Press Box</td>
+                    <td>iPad15</td>
+                    <td>iPad</td>
+                    <td>Penfield-524</td>
+                </tr>
+            </tbody>
+        </table>
 
+    </div>
 </div>
+
+
+<ng-template #modalForm let-modal>
+    <app-add-device></app-add-device>
+</ng-template>

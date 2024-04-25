@@ -1,0 +1,10 @@
+.card-title-box {
+    // margin: 0 1rem 1rem 0rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .btn-warning {
+        background-color: rgba(245, 163, 10, 1) !important;
+    }
+}

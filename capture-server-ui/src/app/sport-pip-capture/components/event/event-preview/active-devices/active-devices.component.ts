@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UI } from 'app/sport-pip-capture/components/event/event-utility/event-ui-interface';
 
 @Component({
@@ -12,9 +14,14 @@ export class ActiveDevicesComponent implements OnInit {
     { label: 'Block', icon: 'slash', type: 'feather', action: () => { } },
     { label: 'Remove', icon: 'trash', type: 'feather', action: () => { } },
   ]
-  constructor() { }
+  constructor(private modalService: NgbModal, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
-
+  
+  modalOpenForm(modalForm) {
+    this.modalService.open(modalForm, {
+      centered: true,
+    });
+  }
 }
