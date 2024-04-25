@@ -57,7 +57,7 @@
           type="button "
           class="btn btn-warning ml-1"
           rippleEffect
-          (click)="modalOpenForm(modalForm)"
+          (click)="modalOpenForm('addDevice')"
         >
           Add Device
         </button>
@@ -66,7 +66,7 @@
   </div>
 </div>
 
-<ng-template #modalForm let-modal>
+<!-- <ng-template #modalForm let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="myModalLabel1">Add Device</h4>
     <button
@@ -110,7 +110,7 @@
       Add
     </button>
   </div>
-</ng-template>
+</ng-template> -->
 
 <!-- <div class="row p-2 connection-list-grid-header" style="margin: 0">
   <div class="col-md-12 col-lg-6 col-6 d-flex align-items-center">

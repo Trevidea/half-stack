@@ -1,0 +1,27 @@
+<div class="modal-header justify-content-end">
+    <i class="bi bi-x-lg cursor-pointer" (click)="activeModal.dismiss('Cross click')"></i>
+</div>
+<div class="modal-body" tabindex="0" ngbAutofocus>
+    <h2 class="modal-title mb-2" id="myModalLabel1">Add Device</h2>
+    <form #AddStreamkeyForm="ngForm">
+    <label>Device Name </label>
+    <div class="form-group">
+        <input type="text" placeholder="Device Name" class="form-control" name="dname" required [(ngModel)]="deviceName"
+            #ngmdeviceName="ngModel" />
+    </div>
+    <app-validation-alert controlName="Device Name" [control]="ngmdeviceName">
+    </app-validation-alert>
+    <label>Streaming Key </label>
+    <div class="form-group">
+        <input type="text" placeholder="Streaming Key" class="form-control" required name="skey"
+            [(ngModel)]="streamingKey" #ngmSkey="ngModel" />
+        <app-validation-alert controlName="Streaming Key " [control]="ngmSkey">
+        </app-validation-alert>
+    </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" [disabled]="!AddStreamkeyForm.valid" class="btn btn-warning" (click)="activeModal.close('Accept click'); " rippleEffect>
+        Add
+    </button>
+</div>

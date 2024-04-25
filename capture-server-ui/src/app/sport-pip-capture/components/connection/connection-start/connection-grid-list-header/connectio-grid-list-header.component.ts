@@ -7,6 +7,7 @@ import {
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { AddDeviceComponent } from "app/sport-pip-capture/components/add-device/add-device.component";
 
 @Component({
   selector: "app-connectio-grid-list-header",
@@ -42,7 +43,7 @@ export class ConnectioGridListHeaderComponent implements OnInit {
     this.pubSubAll.emit(e);
   }
   modalOpenForm(modalForm) {
-    this.modalService.open(modalForm, {
+    this.modalService.open(AddDeviceComponent, {
       centered: true,
     });
   }
