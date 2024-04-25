@@ -64,21 +64,20 @@ export class CreateOnDemandEventPresenter implements OnInit {
     });
     // MetaTypeJson
     Transformer.ComposeObjectAsync(
-      this.dataFactory.MetaTypeByKey("PROGRAM"),
+      this.modelServiceService.MetaTypeByKey("PROGRAM"),
       this.ds.programs,
       MetaTypeBuilder
     );
     Transformer.ComposeObjectAsync(
-      this.dataFactory.MetaTypeByKey("SPORT"),
+      this.modelServiceService.MetaTypeByKey("SPORT"),
       this.ds.sports,
       MetaTypeBuilder
     );
     Transformer.ComposeObjectAsync(
-      this.dataFactory.MetaTypeByKey("LEVEL"),
+      this.modelServiceService.MetaTypeByKey("LEVEL"),
       this.ds.levels,
       MetaTypeBuilder
     );
- 
 
     Transformer.ComposeObject(
       this.dataFactory.EventYear(),
@@ -133,8 +132,6 @@ export class CreateOnDemandEventPresenter implements OnInit {
       }
     });
   }
-
-
 
   ////just for testing ///////
   saveDemand(data: { event_id: number; owner_id: number }) {

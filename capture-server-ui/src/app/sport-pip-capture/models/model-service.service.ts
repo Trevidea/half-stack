@@ -1,13 +1,14 @@
 import { environment } from "environments/environment";
 import { AdapterService } from "./adapter.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { first, map, mergeMap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { Data } from "./capture-interface";
 import { EventData } from "./event";
 import { LiveEventDetailData } from "./live-event-detail";
 import { MetaTypeData } from "./meta-type";
+import { error, warn } from "console";
 
 @Injectable({
   providedIn: "root",
@@ -35,14 +36,14 @@ export class ModelServiceService {
   }
   read(type: string): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}`;
-    console.log(url)
+    console.log(url);
     return this._httpClient.get<any>(url);
   }
 
   readWithQuery(query: string): Observable<any> {
-    const url = `${this.modelsServerUrl}/${query}`
-    console.log("readWithQuery", url)
-    return this._httpClient.get<any>(url)
+    const url = `${this.modelsServerUrl}/${query}`;
+    console.log("readWithQuery", url);
+    return this._httpClient.get<any>(url);
   }
 
   readOne(type: string, id: number): Observable<any> {
@@ -50,14 +51,22 @@ export class ModelServiceService {
     console.log(url);
     return this._httpClient.get<any>(url);
   }
+  readOneUsingKey(type: string, key: string): Observable<any> {
+    const url = `${this.modelsServerUrl}/${type}?key=${key}`;
+    console.log(url);
+    return this._httpClient.get<any>(url);
+  }
 
   update(type: string, entity: any, id: number) {
     const url = `${this.modelsServerUrl}/${type}`;
     // entity.values = JSON.parse(entity.values)
+    console.log("Event-data", entity);
+
     return this._adapter.modulateOne(type, entity).pipe(
       mergeMap((modata) => {
-        console.log(url, "::", modata);
-        return this._httpClient.put<any>(url, modata);
+        console.log("URL :::", url, "::", modata);
+        return of(null);
+        // return this._httpClient.put<any>(url, modata);
       })
     );
   }
@@ -104,7 +113,6 @@ export class ModelServiceService {
     const url = `${this.modelsServerUrl}/${type}/views`;
     return this._httpClient.get<any>(url);
   }
-
   private _getSelectedList<I extends Data.Base>(
     resource: string,
     id: number
@@ -117,7 +125,20 @@ export class ModelServiceService {
       )
     );
   }
-
+  private _getSelectedMetaType<I extends Data.Base>(
+    resource: string,
+    key: string
+  ): Observable<I[]> {
+    return this._adapter
+      .demodulate(resource, this.readOneUsingKey(resource, key))
+      .pipe(
+        map((models) =>
+          models.map((model: any) => {
+            return model as I;
+          })
+        )
+      );
+  }
   private _getList<I extends Data.Base>(resource: string): Observable<I[]> {
     return this._adapter.demodulate(resource, this.read(resource)).pipe(
       map((models) =>
@@ -127,8 +148,6 @@ export class ModelServiceService {
       )
     );
   }
-
-
 
   private _get<I extends Data.Base>(
     resource: string,
@@ -155,8 +174,6 @@ export class ModelServiceService {
     );
   }
 
-
-
   private _datum<M, I extends Data.Base>(
     resource: string,
     id: number,
@@ -175,6 +192,15 @@ export class ModelServiceService {
       map((data: I[]) => data.map((datum: I) => new type(datum)))
     );
   }
+  private _selectMetaData<M, I extends Data.Base>(
+    resource: string,
+    key: string,
+    type: new (I: Data.Base) => M
+  ): Observable<M[]> {
+    return this._getSelectedMetaType<I>(resource, key).pipe(
+      map((data: I[]) => data.map((datum: I) => new type(datum)))
+    );
+  }
   private _selectOne<M, I extends Data.Base>(
     resource: string,
     id: number,
@@ -185,10 +211,17 @@ export class ModelServiceService {
     );
   }
 
+  private _selectMetaOne<M, I extends Data.Base>(
+    resource: string,
+    key: string,
+    type: new (I: Data.Base) => M
+  ): Observable<M> {
+    return this._selectMetaData(resource, key, type).pipe(
+      map((data: M[]) => data[0])
+    );
+  }
 
   saveEvent(data: Data.Event): Observable<Data.Event> {
-    console.log(data);
-
     if (data.id) {
       return this.update("event", data, data.id);
     } else {
@@ -203,7 +236,6 @@ export class ModelServiceService {
       return this.create("event", data);
     }
   }
-
 
   private apiUrl = `${environment.spModelUrl}/on-demand-event`;
   _saveOnDemandEvent(data: any): Observable<any> {
@@ -252,12 +284,10 @@ export class ModelServiceService {
   }
 
   MetaTypeByKey(key: string): Observable<Data.MetaType> {
-    const url = `${environment.spModelUrl}/meta-type/key/${key}`;
-    return this._httpClient.get<MetaTypeData>(url);
+    return this._selectMetaOne("meta-type", `'${key}'`, MetaTypeData);
   }
 
   MetaTypeJson(): Observable<Data.MetaType[]> {
-    return this._data('meta-types', MetaTypeData);
+    return this._data("meta-types", MetaTypeData);
   }
-
 }
