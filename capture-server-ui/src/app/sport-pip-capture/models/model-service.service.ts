@@ -26,47 +26,37 @@ export class ModelServiceService {
 
   create(type: string, entity: any): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}`;
-    console.log(url);
     return this._adapter.modulateOne(type, entity).pipe(
       mergeMap((modata) => {
-        console.log("modulateOne", modata);
         return this._httpClient.post<any>(url, modata);
       })
     );
   }
   read(type: string): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}`;
-    console.log(url);
     return this._httpClient.get<any>(url);
   }
 
   readWithQuery(query: string): Observable<any> {
     const url = `${this.modelsServerUrl}/${query}`;
-    console.log("readWithQuery", url);
     return this._httpClient.get<any>(url);
   }
 
   readOne(type: string, id: number): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}?id=${id}`;
-    console.log(url);
     return this._httpClient.get<any>(url);
   }
   readOneUsingKey(type: string, key: string): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}?key=${key}`;
-    console.log(url);
     return this._httpClient.get<any>(url);
   }
 
   update(type: string, entity: any, id: number) {
     const url = `${this.modelsServerUrl}/${type}`;
-    // entity.values = JSON.parse(entity.values)
-    console.log("Event-data", entity);
 
     return this._adapter.modulateOne(type, entity).pipe(
       mergeMap((modata) => {
-        console.log("URL :::", url, "::", modata);
-        return of(null);
-        // return this._httpClient.put<any>(url, modata);
+        return this._httpClient.put<any>(url, modata);
       })
     );
   }
@@ -80,7 +70,6 @@ export class ModelServiceService {
     let url = `${this.modelsServerUrl}/${_type}`;
     return this._adapter.modulateOne(type, { id: id }).pipe(
       mergeMap((modata) => {
-        console.log("sending DELETE on ", url, "with data:\n", modata);
         const httpOptions = {
           headers: new HttpHeaders({ "Content-Type": "application/json" }),
           body: modata,
@@ -91,16 +80,13 @@ export class ModelServiceService {
   }
 
   deleteView(type: string, id: number): Observable<any> {
-    // const url = `${this.strapiUrl}/${type}/del/${id}`
     const url = `${this.modelsServerUrl}/${type}/view/${id}`;
-    console.log(url);
     return this._httpClient.delete<any>(url);
   }
 
   deleteEvent(type: string, id: number): Observable<any> {
     // const url = `${this.strapiUrl}/${type}/del/${id}`
     const url = `${this.modelsServerUrl}/${type}/view/${id}`;
-    console.log(url);
     return this._httpClient.delete<any>(url);
   }
 
@@ -168,7 +154,6 @@ export class ModelServiceService {
   ): Observable<M[]> {
     return this._getList<I>(resource).pipe(
       map((data: I[]) => {
-        console.log(":::::", data);
         return data.map((datum: I) => new type(datum));
       })
     );
@@ -269,13 +254,11 @@ export class ModelServiceService {
 
   openPreview(data: { eventId: number }): Observable<any> {
     const url = `${environment.spModelUrl}/event/open-preview`;
-    console.log(data);
     return this._httpClient.post<any>(url, data);
   }
 
   closePreview(data: { eventId: number }): Observable<any> {
     const url = `${environment.spModelUrl}/event/close-preview`;
-    console.log(data);
     return this._httpClient.post<any>(url, data);
   }
 
