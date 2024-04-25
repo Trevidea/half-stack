@@ -52,7 +52,29 @@ export class MetaTypeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // const os = navigator.platform;
+    // console.log("Operating System:", os);
+    // const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+    // console.log("Is Portrait Mode:", isPortrait);
+
     this.observeDataSourceChanges();
+    this.getConnectionType();
+  }
+  getConnectionType() {
+    if (navigator as any) {
+      const connection = (navigator as any).connection;
+      const online = (navigator as any).onLine;
+      const downlink: number = (navigator as any).connection.downlink;
+      const rtt: number = (navigator as any).connection.rtt; // get rtt time in milliseconds
+      console.log("RRT::", rtt);
+      console.log("Download Link::", downlink);
+      console.log("Network Information:", connection);
+
+      // Accessing effectiveType to estimate network quality
+      console.log("Effective connection type:", connection.effectiveType);
+    } else {
+      console.log("Network Information API is not supported.");
+    }
   }
 
   OnChangeType(
@@ -117,5 +139,16 @@ export class MetaTypeComponent implements OnInit {
         }
       }
     }, 100);
+  }
+  initService() {
+    const conn = (navigator as any).connection;
+    if (conn) {
+      if (conn.saveData) {
+        // do something
+      }
+      const connectionlist = ["slow-2g", "2g", "3g", "4g"];
+      const effectiveType = conn.effectiveType;
+      console.log("effectiveType", effectiveType);
+    }
   }
 }

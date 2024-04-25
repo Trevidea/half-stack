@@ -10,7 +10,7 @@ export class MetaTypeBuilder extends AbstractBuilder<
     return new Collection<string>();
   }
   compose(m: Data.MetaType, v: Collection<string>) {
-    m.values.forEach((t) => v.Add(t));
+    JSON.parse(m.values as any).forEach((t) => v.Add(t));
   }
   decompose(v: Collection<string>): Data.MetaType {
     throw new Error("Method not implemented.");
