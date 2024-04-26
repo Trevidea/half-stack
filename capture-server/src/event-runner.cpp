@@ -33,13 +33,36 @@ std::string EventRunner::getEventPreviewData()
     return ep.toResponse();
 }
 std::string EventRunner::getLiveEventData()
-{
+{      
     LiveEvent le;
-    le.setDtEvent("2024-04-15");
+    le.setSport("Football");
     le.setLevel("University");
     le.setProgram("Men");
-    le.setSport("Football");
-    le.setStatus("Upcoming");
+    le.setYear(2024);
+    le.setDtEvent("2024-04-15");
+    le.setTime(1402);
+    le.setVenueLocation("Delhi");
+    le.setDetailType("Scheduled Event");
+    le.setDetailStreetAddress("Sector 32");
+    le.setDetailCityAddress("Delhi");
+    le.setTitle("Manchester vs Barcelona");
+    le.setStatus("Upcoming");       
+
+    ConnectionDetail connectionDetail;
+    connectionDetail.setId(1);
+    connectionDetail.setName("Device1");
+    connectionDetail.setRole("Transmitter");
+    connectionDetail.setLocation("North End");
+    connectionDetail.setDevice("iPad");
+    connectionDetail.setNetwork("WiFi");
+    connectionDetail.setQuality(QualityEnum::Good);
+    connectionDetail.setIpAddress("192.168.1.1");
+    connectionDetail.setTransmitStatus(TransmitEnum::Streaming);
+    connectionDetail.setFilesReceived(10);
+    connectionDetail.setRetries(3);
+
+    le.setConnectionDetails({connectionDetail});
+
     return le.toResponse();
 }
 EventRunner::EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration) : mp_eventPreviewPublisher{new WorkerLoop(2, [this]()
@@ -48,7 +71,7 @@ EventRunner::EventRunner(const int year, const int month, const int day, const i
                                                                                                                                                                                   { Publisher::instance().publish("live-event", this->getLiveEventData()); })},
                                                                                                                                              m_start{year, month, day, hour, min, sec, std::bind(&EventRunner::eventStarted, this)},
                                                                                                                                              m_end{m_start, duration, std::bind(&EventRunner::eventEnded, this)}
-{
+{     
     this->mp_eventPreviewPublisher->start();
 }
 
