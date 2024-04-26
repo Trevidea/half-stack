@@ -14,7 +14,6 @@ public:
     EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration);
     void stop();
     ~EventRunner();
-    
 
 private:
     void eventStarted();

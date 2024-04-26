@@ -1,5 +1,6 @@
 // streaming-device.cpp
 #include "streaming-device.h"
+#include "event.h"
 
 StreamingDevice::StreamingDevice() {}
 

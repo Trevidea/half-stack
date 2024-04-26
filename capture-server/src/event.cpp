@@ -3,8 +3,7 @@
 #include <ctime>
 #include "publisher.h"
 #include "half-stack-exceptions.h"
-
-
+#include "streaming-device.h"
 
 Event::Event() : EntityBase("event")
 {
@@ -65,6 +64,7 @@ void Event::closeAllPreviews()
     }
     this->m_runners.clear();
 }
+
 void Event::openPreview(const Request &req, Response &rsp)
 {
     Json::Value request = req.json();
@@ -81,8 +81,13 @@ void Event::openPreview(const Request &req, Response &rsp)
         const auto tm = event.getDTUTime();
         spdlog::trace("Event {}, date: {}, month: {}, year: {}, hours: {}, mins: {}",
                       event.title(), dt.date, dt.month, dt.year, tm.hours, tm.minutes);
+<<<<<<< HEAD
+
+        if (event.minutesToStart() > 60)
+=======
         auto minsToStart = event.minutesToStart();
         if(minsToStart > 60)
+>>>>>>> 623e2fbf87e8a62d8e7fe7960c4a7683f561ac46
         {
             throw ExInvalidPreviewDurationException(event.title(), minsToStart);
         }

@@ -8,6 +8,7 @@
 #include "datetimeutils.h"
 #include <map>
 #include <ctime>
+#include "streaming-device.h"
 
 class Event : public EntityBase
 {
@@ -30,7 +31,8 @@ public:
 public:
     void openPreview(const Request &req, Response &rsp);
     void closePreview(const Request &req, Response &rsp);
-
+    
+    
 private:
     void closeAllPreviews();
     inline long minutesToStart() const
@@ -57,6 +59,7 @@ private:
 
 private:
     std::map<int, EventRunner *> m_runners;
+    // std::map<int, StreamingDevice> m_devices;
 };
 
 #endif // EVENT_H
