@@ -11,16 +11,18 @@
                 <th>ACTION</th>
             </tr>
         </thead>
-        <tbody>
-            <tr *ngFor="let item of datasource">
-                <td>
+        <tbody *ngIf="datasource!=null">
+            <tr *ngFor="let item of datasource ;  let i = index">
+                <td class="cursor-pointer" (click)="openDetailView('upcoming-detail-list',i)">
                     <img src="assets/images/pip-image/Event-card.png" class="img-fluid" alt="..."
                         style="max-width: 60px; max-height: 36px; border-radius: 4px; margin-right: 5px;">
-                        {{item.title}}
+                    {{item.title}}
                 </td>
                 <td>{{item.type}}</td>
-                <td>{{dateTimeService.formatEventDate(item.dtEvent)}}</td>
-                <td class="cursor-pointer">{{dateTimeService.formatTime(item.time)}}</td>
+                <td>{{dateTimeservice.formatEventDate(item.dtEvent)}}</td>
+                <!-- <td>{{dateTimeservice.formatEventDate(item.dtEvent)}}</td> -->
+                <!-- <td class="cursor-pointer">{{item.time}}</td> -->
+                <td>{{dateTimeservice.formatTime(item.time)}}</td>
                 <td>{{item.venue.location}}</td>
                 <td>{{item.sport}}</td>
                 <td class="">
@@ -31,3 +33,11 @@
     </table>
 
 </div>
+
+
+<core-sidebar class="modal modal-slide-in fade event-sidebar" name="upcoming-detail-list"
+    overlayClass="modal-backdrop" (OnClosed)="OnClosedDetail($event)" hideOnEsc="true">
+    <app-events-detail-presenter [eventData]="datasource" *ngIf="openDetailmodel" (clickedmenu)="clickedmenu($event)"
+        [sidebarkey]="'upcoming-detail-list'" [dropdownItems]="dropdownItems"
+        [startIndex]="startIndex"></app-events-detail-presenter>
+</core-sidebar>

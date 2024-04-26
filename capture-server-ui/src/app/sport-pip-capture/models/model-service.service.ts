@@ -46,6 +46,7 @@ export class ModelServiceService {
     const url = `${this.modelsServerUrl}/${type}?id=${id}`;
     return this._httpClient.get<any>(url);
   }
+
   getEntitiesByDynamicQuery(
     type: string,
     key: string,
@@ -57,7 +58,6 @@ export class ModelServiceService {
 
   update(type: string, entity: any, id: number) {
     const url = `${this.modelsServerUrl}/${type}`;
-
     return this._adapter.modulateOne(type, entity).pipe(
       mergeMap((modata) => {
         return this._httpClient.put<any>(url, modata);
@@ -115,6 +115,7 @@ export class ModelServiceService {
       )
     );
   }
+
   private _getSelectedQueryType<I extends Data.Base>(
     resource: string,
     key: string,
@@ -133,6 +134,7 @@ export class ModelServiceService {
         )
       );
   }
+
   private _getList<I extends Data.Base>(resource: string): Observable<I[]> {
     return this._adapter.demodulate(resource, this.read(resource)).pipe(
       map((models) =>

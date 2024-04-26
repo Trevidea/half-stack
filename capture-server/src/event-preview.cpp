@@ -1,6 +1,7 @@
 #include "event-preview.h"
 #include "gateway.h"
 #include "device.h"
+#include "event.h"
 
 EventPreview::EventPreview(Json::Value &model) : Base(model)
 {
@@ -21,20 +22,45 @@ void EventPreview::report()
                                       device.setDeviceType("iPad");
                                       device.setLocation("North-End");
                                   }
-                                this->setDetailType("ondemand");
-                                this->setStreetAddress("Indoor Stadium, Pakhowal road");
-                                this->setDtEvent("2024-04-15");
-                                this->setEventType("ondemand");
-                                this->setLevel("University");
-                                this->setProgram("Men");
-                                this->setSport("Football");
-                                this->setStatus("Upcoming");
-                                this->setTime(1830);
-                                this->setTitle("Mumbai Indians vs Kolkatta Knightriders");
-                                this->setVenueLocation("Ludhiana");
-                                this->setYear(2024);
+                                  this->setDetailType("ondemand");
+                                  this->setStreetAddress("Indoor Stadium, Pakhowal road");
+                                  this->setDtEvent("2024-04-15");
+                                  this->setEventType("ondemand");
+                                  this->setLevel("University");
+                                  this->setProgram("Men");
+                                  this->setSport("Football");
+                                  this->setStatus("Upcoming");
+                                  this->setTime(1830);
+                                  this->setTitle("Mumbai Indians vs Kolkatta Knightriders");
+                                  this->setVenueLocation("Ludhiana");
+                                  this->setYear(2024);
                                   const std::string response = Gateway::instance().formatResponse({{this->m_model}});
                                   rsp.setData(response);
+                              });
+
+    Gateway::instance().route("POST", "/api/event-preview/add-device",
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  // Extract deviceName and streamKey from the request
+                                  Json::Value requestData = req.json();
+                                  std::string deviceName = requestData["deviceName"].asString();
+                                  std::string streamKey = requestData["streamKey"].asString();
+
+                                  // Call the addStreamingDevice method of the Event class
+                                  Event event;
+                                  event.addStreamingDevice(deviceName, streamKey);
+
+                                  // Prepare the response as a map of string keys and values
+                                  std::map<std::string, std::string> responseData;
+                                  responseData["status"] = "success";
+                                  responseData["message"] = "Streaming device added successfully";
+
+                                  // Convert the response data to a vector of maps
+                                  std::vector<std::map<std::string, std::string>> responseVector;
+                                  responseVector.push_back(responseData);
+
+                                  // Pass the response data to formatResponse
+                                  rsp.setData(Gateway::instance().formatResponse(responseVector));
                               });
 }
 

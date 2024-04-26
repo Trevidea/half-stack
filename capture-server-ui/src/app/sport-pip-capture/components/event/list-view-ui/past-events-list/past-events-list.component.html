@@ -12,7 +12,7 @@
                 <th>ACTION</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="datasource!=null">
             <tr *ngFor="let item of datasource">
                 <td>
                     <img src="assets/images/pip-image/Event-card.png" class="img-fluid" alt="..."

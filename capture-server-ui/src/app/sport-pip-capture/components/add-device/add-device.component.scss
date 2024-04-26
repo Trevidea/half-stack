@@ -1,0 +1,10 @@
+@import '@core/scss/angular/libs/toastr.component.scss';
+.toast-title {
+    color: #000 !important;
+  }
+
+  .dark-layout{
+    .toast-title {
+        color: #fdfdfd !important;
+      }
+  }
