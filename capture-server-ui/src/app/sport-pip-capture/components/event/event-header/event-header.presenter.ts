@@ -6,6 +6,7 @@ import { MetaTypeBuilder } from "app/sport-pip-capture/blocks/meta-type.builder"
 import { Data } from "app/sport-pip-capture/models/capture-interface";
 import { TabStateService } from "../event-utility/nav";
 import { ArrayBuilder } from "app/sport-pip-capture/blocks/array.builder";
+import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 
 @Component({
     selector: 'app-header-presenter',
@@ -13,21 +14,21 @@ import { ArrayBuilder } from "app/sport-pip-capture/blocks/array.builder";
     styleUrls: ['./event-header.component.scss'],
 })
 
-export class EventHeaderPresenter implements OnInit{
+export class EventHeaderPresenter implements OnInit {
     ds!: headerView;
     status: string
     @Output() filter = new EventEmitter<Data.FilterParams>();
 
-    constructor(private dataFactory: DataFactoryService, private tabStateService: TabStateService) {
+    constructor(private dataFactory: DataFactoryService, private modelServiceService: ModelServiceService, private tabStateService: TabStateService) {
         this.ds = new headerView();
     }
 
 
 
     ngOnInit(): void {
-        Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("SPORT"), this.ds.sports, MetaTypeBuilder);
-        Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("PROGRAM"), this.ds.programs, MetaTypeBuilder);
-        Transformer.ComposeObjectAsync(this.dataFactory.MetaTypeByKey("LEVEL"), this.ds.levels, MetaTypeBuilder);
+        Transformer.ComposeObjectAsync(this.modelServiceService.MetaTypeByKey("SPORT"), this.ds.sports, MetaTypeBuilder);
+        Transformer.ComposeObjectAsync(this.modelServiceService.MetaTypeByKey("PROGRAM"), this.ds.programs, MetaTypeBuilder);
+        Transformer.ComposeObjectAsync(this.modelServiceService.MetaTypeByKey("LEVEL"), this.ds.levels, MetaTypeBuilder);
         Transformer.ComposeObject(this.dataFactory.EventYear(), this.ds.years, ArrayBuilder);
 
         this.ds.programs.onItemSelected(handler => this.onfilter());

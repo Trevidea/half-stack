@@ -42,7 +42,6 @@ export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-
   openDetailView(key: string, index: number) {
     this.startIndex = index
     this.opOngoingDetail = true
@@ -52,7 +51,6 @@ export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
   OnClosedDetailView(data: any) {
     this.opOngoingDetail = false
   }
-
 
   clickedmenu(id: number) {
     this.eventId = id;

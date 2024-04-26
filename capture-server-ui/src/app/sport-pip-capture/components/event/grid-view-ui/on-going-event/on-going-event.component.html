@@ -28,7 +28,8 @@
               (click)="openDetailView('ongoing-detail',i)">
               Details
             </button>
-            <button type="button" class="btn btn-warning btn-sm">
+            <button type="button" class="btn btn-warning btn-sm" [routerLink]="'/connection'"
+              [queryParams]="{ eventStarted:true }">
               View
             </button>
           </div>
@@ -53,5 +54,6 @@
 <core-sidebar class="modal modal-slide-in fade event-sidebar" name="ongoing-detail" overlayClass="modal-backdrop"
   (OnClosed)="OnClosedDetailView($event)" hideOnEsc="true">
   <app-events-detail-presenter [eventData]="datasource" *ngIf="opOngoingDetail" (clickedmenu)="clickedmenu($event)"
-    [sidebarkey]="'ongoing-detail'" [dropdownItems]="dropdownItems" [startIndex]="startIndex"></app-events-detail-presenter>
+    [sidebarkey]="'ongoing-detail'" [dropdownItems]="dropdownItems"
+    [startIndex]="startIndex"></app-events-detail-presenter>
 </core-sidebar>

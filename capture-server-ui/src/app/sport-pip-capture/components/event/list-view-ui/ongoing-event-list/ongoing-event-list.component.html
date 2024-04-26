@@ -12,9 +12,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of datasource">
-                <td style="width: 180px;">{{item.countdown}}</td>
-                <td>
+            <tr *ngFor="let item of datasource ; let i = index">
+                <td style="max-width: 150px;">{{item.ongoingCountdown}}</td>
+                <td class="cursor-pointer"(click)="openDetailView('ongoing-detail',i)">
                     <img src="assets/images/pip-image/Event-card.png" class="img-fluid" alt="..."
                         style="max-width: 60px; max-height: 36px; border-radius: 4px; margin-right: 5px;">
                     {{item.title}}
@@ -24,10 +24,15 @@
                 <td class="cursor-pointer">{{dateTimeService.formatTime(item.time)}}</td>
                 <td>{{item.venue.location}}</td>
                 <td class="">
-                    <app-menu-button [dropdownItems]="dropdownItems" ></app-menu-button>
+                    <app-menu-button [dropdownItems]="dropdownItems"></app-menu-button>
                 </td>
             </tr>
         </tbody>
     </table>
-
 </div>
+
+<core-sidebar class="modal modal-slide-in fade event-sidebar" name="ongoing-detail" overlayClass="modal-backdrop"
+  (OnClosed)="OnClosedDetailView($event)" hideOnEsc="true">
+  <app-events-detail-presenter [eventData]="datasource" *ngIf="opOngoingDetail" (clickedmenu)="clickedmenu($event)"
+    [sidebarkey]="'ongoing-detail'" [dropdownItems]="dropdownItems" [startIndex]="startIndex"></app-events-detail-presenter>
+</core-sidebar>

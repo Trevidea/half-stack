@@ -15,7 +15,7 @@ export class SocketService {
   private eventTerminalSubject = new Subject<string>();
 
   constructor() {
-    // this.connectToRelayService();
+     this.connectToRelayService();
   }
 
   connectToRelayService(): void {
