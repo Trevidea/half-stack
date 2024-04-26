@@ -8,8 +8,8 @@ import { Socket, io } from "socket.io-client";
 })
 export class SocketService {
   private socket!: Socket;
-  url = environment.spRelayUrl;
-
+  // url = environment.spRelayUrl;
+  url = "http://localhost:3001";
   private liveEventSubject = new Subject<string>();
   private eventPreviewSubject = new Subject<string>();
   private eventTerminalSubject = new Subject<string>();

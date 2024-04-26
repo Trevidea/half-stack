@@ -10,7 +10,6 @@ import {
   ViewEncapsulation,
 } from "@angular/core";
 import { ColumnMode, SelectionType } from "@swimlane/ngx-datatable";
-import { PreviousEventsConnection } from "./data";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 
 @Component({
@@ -35,15 +34,15 @@ export class PreviousEventsConnectionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dataFactory.read("connection-with-past-details").subscribe(
-      (res: any) => {
-        // console.log(res)
-        this.rows = res;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    // this.dataFactory.read("connection-with-past-details").subscribe(
+    //   (res: any) => {
+    //     // console.log(res)
+    //     this.rows = res;
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
   }
   header = [
     { name: "Name Of Event", sort: true, sortDirection: null },
