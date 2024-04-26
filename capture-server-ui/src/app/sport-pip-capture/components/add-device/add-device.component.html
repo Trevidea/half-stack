@@ -21,7 +21,7 @@
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" [disabled]="!AddStreamkeyForm.valid" class="btn btn-warning" (click)="activeModal.close('Accept click'); " rippleEffect>
+    <button type="button" [disabled]="!AddStreamkeyForm.valid" class="btn btn-warning" (click)="onsave()"  rippleEffect>
         Add
     </button>
 </div>

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { DateTimeService } from '../event-utility/date-time.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { GlobalConfig, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-event-preview',
@@ -12,7 +13,9 @@ export class EventPreviewComponent implements OnInit {
   @Input() datasource: any
   private countdownInterval: any;
 
-  constructor(public dateTimeservice: DateTimeService, private modalService: NgbModal) { }
+  constructor(public dateTimeservice: DateTimeService, private modalService: NgbModal,
+   
+  ) { }
 
   ngOnInit(): void {
 

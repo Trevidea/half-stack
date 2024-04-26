@@ -95,6 +95,7 @@ import { EventsDetailComponent } from "./components/event/events-detail/events-d
 import { FilterPipe } from "./components/meta-type/filter";
 import { AddDeviceComponent } from "./components/add-device/add-device.component";
 import { HttpClientModule } from "@angular/common/http";
+import { ToastrModule } from "ngx-toastr";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -205,7 +206,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       showImage: true,
     }),
     DragulaModule.forRoot(),
-    HttpClientModule 
+    HttpClientModule ,
+    ToastrModule
   ],
 })
 export class SportPipCaptureModule {}
