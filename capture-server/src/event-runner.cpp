@@ -61,6 +61,32 @@ std::string EventRunner::getLiveEventData()
     connectionDetail.setFilesReceived(10);
     connectionDetail.setRetries(3);
 
+    ConnectionDetail connectionDetail1;
+    connectionDetail1.setId(2);
+    connectionDetail1.setName("Device2");
+    connectionDetail1.setRole("Receiver");
+    connectionDetail1.setLocation("South End");
+    connectionDetail1.setDevice("iPhone");
+    connectionDetail1.setNetwork("Mobile Data");
+    connectionDetail1.setQuality(QualityEnum::Average);
+    connectionDetail1.setIpAddress("192.168.1.2");
+    connectionDetail1.setTransmitStatus(TransmitEnum::Receiving);
+    connectionDetail1.setFilesReceived(5);
+    connectionDetail1.setRetries(2);
+
+    ConnectionDetail connectionDetail2;
+    connectionDetail2.setId(3);
+    connectionDetail2.setName("Device3");
+    connectionDetail2.setRole("Transmitter");
+    connectionDetail2.setLocation("East End");
+    connectionDetail2.setDevice("MacBook");
+    connectionDetail2.setNetwork("WiFi");
+    connectionDetail2.setQuality(QualityEnum::Poor);
+    connectionDetail2.setIpAddress("192.168.1.3");
+    connectionDetail2.setTransmitStatus(TransmitEnum::Streaming);
+    connectionDetail1.setFilesReceived(5);
+    connectionDetail1.setRetries(2);
+
     le.setConnectionDetails({connectionDetail});
 
     return le.toResponse();
