@@ -81,13 +81,8 @@ void Event::openPreview(const Request &req, Response &rsp)
         const auto tm = event.getDTUTime();
         spdlog::trace("Event {}, date: {}, month: {}, year: {}, hours: {}, mins: {}",
                       event.title(), dt.date, dt.month, dt.year, tm.hours, tm.minutes);
-<<<<<<< HEAD
-
-        if (event.minutesToStart() > 60)
-=======
         auto minsToStart = event.minutesToStart();
-        if(minsToStart > 60)
->>>>>>> 623e2fbf87e8a62d8e7fe7960c4a7683f561ac46
+        if (minsToStart > 60)
         {
             throw ExInvalidPreviewDurationException(event.title(), minsToStart);
         }
@@ -124,4 +119,13 @@ void Event::closePreview(const Request &req, Response &rsp)
         this->m_runners.erase(kvPair);
     }
     rsp.setData(Gateway::instance().formatResponse({{response}}));
+}
+
+void Event::addStreamingDevice(const std::string& deviceName, const std::string& streamKey) {
+    // Create a new Device instance with the provided information
+    Device newDevice;
+    newDevice.setDeviceType("Streaming");
+    newDevice.setUser(deviceName);
+    newDevice.setNetwork(streamKey);
+
 }
