@@ -199,6 +199,7 @@ const std::vector<Device> &EventPreview::activeDevices() const
 void EventPreview::handleAddDevice(const Request &req, Response &rsp) {
     // Extract deviceName and streamKey from the request
     Json::Value requestData = req.json();
+    std::string eventId = requestData["eventId"].asString();
     std::string deviceName = requestData["deviceName"].asString();
     std::string streamKey = requestData["streamKey"].asString();
 
