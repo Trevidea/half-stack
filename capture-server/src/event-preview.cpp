@@ -2,6 +2,7 @@
 #include "gateway.h"
 #include "device.h"
 #include "event.h"
+#include "entity-base.h"
 
 EventPreview::EventPreview(Json::Value &model) : Base(model)
 {
@@ -195,8 +196,7 @@ const std::vector<Device> &EventPreview::activeDevices() const
     return m_activeDevice;
 }
 
-void EventPreview::handleAddDevice(const Request &req, Response &rsp)
-{
+void EventPreview::handleAddDevice(const Request &req, Response &rsp) {
     // Extract deviceName and streamKey from the request
     Json::Value requestData = req.json();
     std::string deviceName = requestData["deviceName"].asString();
@@ -206,40 +206,20 @@ void EventPreview::handleAddDevice(const Request &req, Response &rsp)
     Event event;
     event.addStreamingDevice(deviceName, streamKey);
 
-    // Insert the added device into the database
-    Json::Value insertJson;
-    insertJson["table"] = "devices";
-    
-    // Construct the columns for insertion
-    Json::Value typeColumn;
-    typeColumn["field"] = "type";
-    typeColumn["value"] = "iPad";
-    typeColumn["type"] = 1;  // Assuming type 1 is for strings
-
-    Json::Value nameColumn;
-    nameColumn["field"] = "name";
-    nameColumn["value"] = deviceName;
-    nameColumn["type"] = 1;  // Assuming type 1 is for strings
-
-    Json::Value codeColumn;
-    codeColumn["field"] = "code";
-    codeColumn["value"] = "0000";
-    codeColumn["type"] = 1;  // Assuming type 1 is for strings
-
-    insertJson["columns"].append(typeColumn);
-    insertJson["columns"].append(nameColumn);
-    insertJson["columns"].append(codeColumn);
-
-    std::string sqlInsert = SqlHelper::ScriptInsert(insertJson);
-    // Execute the SQL insert statement (replace this with your actual database execution code)
-    // int insertedId = executeAndReturnId(sqlInsert);
-    // For demonstration purposes, let's just print the SQL query
-    std::cout << "Executing SQL query: " << sqlInsert << std::endl;
+    // Execute SQL query using executeSqlJson() from Base class
+    Base base; // Create an instance of Base
+    std::string sql = "INSERT INTO devices (type, name, code) VALUES ('ipad', '" + deviceName + "', '0000')";
+    Json::Value result = base.executeSqlJson(sql);
 
     // Prepare the response
     std::map<std::string, std::string> responseData;
-    responseData["status"] = "success";
-    responseData["message"] = "Streaming device added successfully";
+    if (!result.empty()) {
+        responseData["status"] = "success";
+        responseData["message"] = "Streaming device added successfully";
+    } else {
+        responseData["status"] = "error";
+        responseData["message"] = "Failed to add streaming device";
+    }
 
     // Convert the response data to a vector of maps
     std::vector<std::map<std::string, std::string>> responseVector;
@@ -248,3 +228,5 @@ void EventPreview::handleAddDevice(const Request &req, Response &rsp)
     // Pass the response data to formatResponse
     rsp.setData(Gateway::instance().formatResponse(responseVector));
 }
+
+
