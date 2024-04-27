@@ -33,7 +33,7 @@ std::string EventRunner::getEventPreviewData()
     return ep.toResponse();
 }
 std::string EventRunner::getLiveEventData()
-{      
+{
     LiveEvent le;
     le.setSport("Football");
     le.setLevel("University");
@@ -46,7 +46,7 @@ std::string EventRunner::getLiveEventData()
     le.setDetailStreetAddress("Sector 32");
     le.setDetailCityAddress("Delhi");
     le.setTitle("Manchester vs Barcelona");
-    le.setStatus("Upcoming");       
+    le.setStatus("Upcoming");
 
     ConnectionDetail connectionDetail;
     connectionDetail.setId(1);
@@ -84,20 +84,21 @@ std::string EventRunner::getLiveEventData()
     connectionDetail2.setQuality(QualityEnum::Poor);
     connectionDetail2.setIpAddress("192.168.1.3");
     connectionDetail2.setTransmitStatus(TransmitEnum::Streaming);
-    connectionDetail1.setFilesReceived(5);
-    connectionDetail1.setRetries(2);
+    connectionDetail2.setFilesReceived(5); 
+    connectionDetail2.setRetries(2);      
 
     le.setConnectionDetails({connectionDetail, connectionDetail1, connectionDetail2});
 
     return le.toResponse();
 }
+
 EventRunner::EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration) : mp_eventPreviewPublisher{new WorkerLoop(2, [this]()
                                                                                                                                                                                      { Publisher::instance().publish("event-preview", this->getEventPreviewData()); })},
                                                                                                                                              mp_liveEventPublisher{new WorkerLoop(2, [this]()
                                                                                                                                                                                   { Publisher::instance().publish("live-event", this->getLiveEventData()); })},
                                                                                                                                              m_start{year, month, day, hour, min, sec, std::bind(&EventRunner::eventStarted, this)},
                                                                                                                                              m_end{m_start, duration, std::bind(&EventRunner::eventEnded, this)}
-{     
+{
     this->mp_eventPreviewPublisher->start();
 }
 

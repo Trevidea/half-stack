@@ -1,4 +1,6 @@
 #include "live-event.h"
+#include "gateway.h"
+#include "base.h"
 
 LiveEvent::LiveEvent() {}
 
@@ -153,11 +155,9 @@ std::vector<ConnectionDetail> LiveEvent::connectionDetails()
     return connectionDetails;
 }
 
-void LiveEvent::setConnectionDetails(const std::vector<ConnectionDetail> &connectionDetails)
-{
+void LiveEvent::setConnectionDetails(const std::vector<ConnectionDetail>& connectionDetails) {
     Json::Value details(Json::arrayValue);
-    for (auto detail : connectionDetails)
-    {
+    for (auto detail : connectionDetails) {
         Json::Value connectionDetail;
         connectionDetail["id"] = detail.id();
         connectionDetail["name"] = detail.name();

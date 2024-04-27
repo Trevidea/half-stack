@@ -197,7 +197,6 @@ const std::vector<Device> &EventPreview::activeDevices() const
 
 void EventPreview::handleAddDevice(const Request &req, Response &rsp)
 {
-    // Implementation of the handleAddDevice function
     // Extract deviceName and streamKey from the request
     Json::Value requestData = req.json();
     std::string deviceName = requestData["deviceName"].asString();
@@ -207,9 +206,37 @@ void EventPreview::handleAddDevice(const Request &req, Response &rsp)
     Event event;
     event.addStreamingDevice(deviceName, streamKey);
 
+    // Insert the added device into the database
+    Json::Value insertJson;
+    insertJson["table"] = "devices";
     
+    // Construct the columns for insertion
+    Json::Value typeColumn;
+    typeColumn["field"] = "type";
+    typeColumn["value"] = "iPad";
+    typeColumn["type"] = 1;  // Assuming type 1 is for strings
 
-    // Prepare the response as a map of string keys and values
+    Json::Value nameColumn;
+    nameColumn["field"] = "name";
+    nameColumn["value"] = deviceName;
+    nameColumn["type"] = 1;  // Assuming type 1 is for strings
+
+    Json::Value codeColumn;
+    codeColumn["field"] = "code";
+    codeColumn["value"] = "0000";
+    codeColumn["type"] = 1;  // Assuming type 1 is for strings
+
+    insertJson["columns"].append(typeColumn);
+    insertJson["columns"].append(nameColumn);
+    insertJson["columns"].append(codeColumn);
+
+    std::string sqlInsert = SqlHelper::ScriptInsert(insertJson);
+    // Execute the SQL insert statement (replace this with your actual database execution code)
+    // int insertedId = executeAndReturnId(sqlInsert);
+    // For demonstration purposes, let's just print the SQL query
+    std::cout << "Executing SQL query: " << sqlInsert << std::endl;
+
+    // Prepare the response
     std::map<std::string, std::string> responseData;
     responseData["status"] = "success";
     responseData["message"] = "Streaming device added successfully";
