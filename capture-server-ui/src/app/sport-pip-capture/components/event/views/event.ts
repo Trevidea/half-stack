@@ -32,7 +32,6 @@ export class EventView implements Views.Datasource {
 
   private _countdown: string;
   public get countdown(): string {
-    console.log(this._countdown);
     return this._countdown;
   }
   public set countdown(v: string) {

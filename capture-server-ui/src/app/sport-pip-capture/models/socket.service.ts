@@ -8,14 +8,14 @@ import { Socket, io } from "socket.io-client";
 })
 export class SocketService {
   private socket!: Socket;
-  // url = environment.spRelayUrl;
-  url = "http://localhost:3001";
+  url = environment.spRelayUrl;
+  // url = "http://localhost:3001";
   private liveEventSubject = new Subject<string>();
   private eventPreviewSubject = new Subject<string>();
   private eventTerminalSubject = new Subject<string>();
 
   constructor() {
-     this.connectToRelayService();
+    this.connectToRelayService();
   }
 
   connectToRelayService(): void {
