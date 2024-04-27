@@ -126,7 +126,8 @@
     "__availability": "cpp",
     "*.dat": "cpp",
     "filesystem": "cpp",
-    "exception": "cpp"
+    "exception": "cpp",
+    "pqxx": "cpp"
   },
   "cmake.sourceDirectory": "/Users/shreyapathak/git/half-stack/capture-server/build/_deps/libpqxx-src/src"
 }

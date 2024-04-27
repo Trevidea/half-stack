@@ -3,6 +3,7 @@
 
 #include "base.h"
 #include "device.h" // Include Device header
+#include "event.h"
 
 class EventPreview : public Base {
 public:
@@ -59,6 +60,8 @@ public:
     // ActiveDevice array
     std::vector<Device>& activeDevices();
     const std::vector<Device>& activeDevices() const;
+
+    void handleAddDevice(const Request &req, Response &rsp);
 
 private:
     std::vector<Device> m_activeDevice;
