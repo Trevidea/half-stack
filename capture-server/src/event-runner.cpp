@@ -87,7 +87,7 @@ std::string EventRunner::getLiveEventData()
     connectionDetail1.setFilesReceived(5);
     connectionDetail1.setRetries(2);
 
-    le.setConnectionDetails({connectionDetail});
+    le.setConnectionDetails({connectionDetail, connectionDetail1, connectionDetail2});
 
     return le.toResponse();
 }

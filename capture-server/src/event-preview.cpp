@@ -207,6 +207,8 @@ void EventPreview::handleAddDevice(const Request &req, Response &rsp)
     Event event;
     event.addStreamingDevice(deviceName, streamKey);
 
+    
+
     // Prepare the response as a map of string keys and values
     std::map<std::string, std::string> responseData;
     responseData["status"] = "success";

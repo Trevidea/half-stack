@@ -186,12 +186,6 @@ int main()
       listener.support(methods::PUT, handle_put);
       listener.support(methods::DEL, handle_del);
       listener.support(methods::OPTIONS, handle_opt);
-
-      // Initialize an instance of OnDemandEvent
-      OnDemandEvent onDemandEvent;
-      // Setup routes for handling on-demand event-related requests
-      onDemandEvent.report();
-
       spdlog::trace("Created listener at 0.0.0.0:1437");
 
       listener
