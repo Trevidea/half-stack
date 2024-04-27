@@ -4,6 +4,8 @@
 #include "publisher.h"
 #include "half-stack-exceptions.h"
 #include "streaming-device.h"
+#include <pqxx/pqxx>
+#include <sstream>
 
 Event::Event() : EntityBase("event")
 {
@@ -55,6 +57,7 @@ void Event::report()
                                   this->remove(req, rsp);
                               });
 }
+
 void Event::closeAllPreviews()
 {
     for (auto &&runner : this->m_runners)
@@ -103,6 +106,7 @@ void Event::openPreview(const Request &req, Response &rsp)
     spdlog::trace("setting response: {}", strRsp);
     rsp.setData(strRsp);
 }
+
 void Event::closePreview(const Request &req, Response &rsp)
 {
     Json::Value request = req.json();
@@ -124,8 +128,7 @@ void Event::closePreview(const Request &req, Response &rsp)
 void Event::addStreamingDevice(const std::string& deviceName, const std::string& streamKey) {
     // Create a new Device instance with the provided information
     Device newDevice;
-    newDevice.setDeviceType("Streaming");
+    newDevice.setDeviceType("iPad");
     newDevice.setUser(deviceName);
-    newDevice.setNetwork(streamKey);
-
+    newDevice.setNetwork("0000");
 }
