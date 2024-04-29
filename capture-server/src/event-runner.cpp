@@ -10,10 +10,10 @@ std::string EventRunner::getEventPreviewData()
 
     ep.setCityAddress("Ludhiana");
     ep.setDtEvent("2024-05-01");
-    ep.activeDevices().push_back(Device());
+    ep.activeDevices().push_back(EventDevice());
     {
         auto &device = ep.activeDevices().back();
-        device.setDeviceId("1");
+        device.setDeviceId(1);
         device.setDeviceType("iPad");
         device.setLocation("North-End");
     }

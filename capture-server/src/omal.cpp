@@ -5,6 +5,18 @@
 
 Omal::Omal() : EntityBase("omal")
 {
+    // Watch VOD dump folders when Omal object is created
+    std::string vodDumpDir = "/tmp/ovenmediaengine/vod_dumps"; // Update this with the actual directory path
+    auto vodDumpCallback = [this](const std::string& filename)
+    {
+        // Handle the VOD dump file change here
+        // You can implement logic to respond to file changes, such as updating the list of VOD dumps
+        std::cout << "VOD dump file changed: " << filename << std::endl;
+    };
+
+    // Create a Watcher instance to watch the VOD dump directory
+    m_vodDumpWatcher = std::make_unique<Watcher>(vodDumpDir, vodDumpCallback);
+    m_vodDumpWatcher->start(); // Start watching the directory
 }
 
 void Omal::report() 
@@ -24,6 +36,7 @@ void Omal::report()
                               {
                                   this->assessNetworkQuality(req, rsp);
                               });
+                              
 }
 
 void Omal::assessNetworkQuality(const Request &req, Response &rsp)
@@ -49,4 +62,9 @@ void Omal::assessNetworkQuality(const Request &req, Response &rsp)
 
 Omal::~Omal()
 {
+    // Stop the watcher when Omal object is destroyed
+    if (m_vodDumpWatcher)
+    {
+        m_vodDumpWatcher->stop();
+    }
 }

@@ -3,7 +3,6 @@
 #include <iostream>
 #include <spdlog/spdlog.h>
 #include <map>
-#include "watcher.h"
 
 namespace fs = std::filesystem;
 
@@ -11,30 +10,6 @@ VirtualHost::VirtualHost(const std::string &name, const vhost &vhost) : m_name(n
                                                                         m_vhost(vhost),
                                                                         m_dumpsBaseLocation{DUMPS_BASE_LOCATION}
 {
-    //Start watching VOD dumps when initializing a VirtualHost instance
-    watchVODDumps();
-}
-
-VirtualHost::~VirtualHost() {
-    // Stop watching VOD dumps when destroying a VirtualHost instance
-    stopWatchingVODDumps();
-}
-
-void VirtualHost::watchVODDumps() {
-    auto callback = [this](const std::string& filename) {
-        spdlog::info("Change detected in VOD dump folder: {}", filename);
-        // Implement your logic to handle the change (e.g., process the new file)
-    };
-
-    m_watcher = std::make_unique<Watcher>(m_dumpsBaseLocation, callback);
-    m_watcher->start();
-}
-
-void VirtualHost::stopWatchingVODDumps() {
-    if (m_watcher) {
-        m_watcher->stop();
-        m_watcher.reset();
-    }
 }
 
 std::string VirtualHost::createStream(const std::string &app, const std::string &key, const OutputProfile &profile)
@@ -69,4 +44,3 @@ void VirtualHost::setVODDumps(const std::string &streamName, const std::string &
 {
 
 }
-
