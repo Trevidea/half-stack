@@ -1,7 +1,10 @@
 import { Injectable } from "@angular/core";
 import { environment } from "environments/environment";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
+import { map } from "rxjs/operators";
 import { Socket, io } from "socket.io-client";
+import { Data } from "./capture-interface";
+import { LiveEventDetailData } from "./live-event-detail";
 
 @Injectable({
   providedIn: "root",
@@ -50,4 +53,16 @@ export class SocketService {
   onEventTerminal(): Subject<string> {
     return this.eventTerminalSubject;
   }
+
+  _onLiveEvent(): Observable<Data.LiveEventConnectionDetail> {
+    return this.liveEventSubject.pipe(
+      map((data: any) => {
+        console.log(data)
+        const eventObject = JSON.parse(data);
+        const liveEventConnectionDetail: Data.LiveEventConnectionDetail = eventObject.result[0][0];
+        return new LiveEventDetailData(liveEventConnectionDetail);
+      })
+    );
+  }
+
 }

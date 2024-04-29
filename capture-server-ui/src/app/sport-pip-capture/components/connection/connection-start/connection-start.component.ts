@@ -18,10 +18,9 @@ import { SocketService } from "app/sport-pip-capture/models/socket.service";
   encapsulation: ViewEncapsulation.None,
 })
 export class ConnectionStartComponent implements OnInit {
-  @Input() datasource:any ;
-  @Input() eventConnection:any[] = []
+  @Input() datasource: any;
+  eventConnection: any[] = []
   header: string[];
-  // eventConnection: any[] = [];
   deviceName: string;
   streamingKey: string;
   allOrSubOrPub: string = "all";
@@ -37,10 +36,19 @@ export class ConnectionStartComponent implements OnInit {
   }
   connectiondetail: boolean = false;
   ngOnInit(): void {
+    console.log("checking where daata is comming or not  ", this.datasource)
     this.header = header;
-
+    EventConnection$.subscribe(
+      (data) => {
+        this.eventConnection = data;
+      },
+      (error) => {
+        console.log("error:::", error);
+      }
+    );
     console.log(this.eventConnection);
   }
+
   ConnectionDetails(yes: boolean) {
     this.connectiondetail = yes;
   }

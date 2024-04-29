@@ -1,119 +1,101 @@
 import { DataBase } from "./model";
 import { Data } from "./capture-interface";
 
-export class LiveEventDetailData extends DataBase<Data.LiveEventDetail> {
-
-
-
-    public get name(): string {
-        return this._model.name;
+export class LiveEventDetailData extends DataBase<Data.LiveEventConnectionDetail> {
+    private _sport: string;
+    public get sport(): string {
+        return this._model.sport;
     }
-    public set name(v: string) {
-        this._model.name = v;
+    public set sport(v: string) {
+        this._model.sport = v;
     }
 
 
-    public get role(): string {
-        return this._model.role;
+    private _level: string;
+    public get level(): string {
+        return this._model.level;
     }
-    public set role(v: string) {
-        this._model.role = v;
-    }
-
-
-    private _location: string;
-    public get location(): string {
-        return this._location;
-    }
-    public set location(v: string) {
-        this._location = v;
-    }
-
-    public get userId(): number {
-        return this._model.userId;
-    }
-    public set userId(v: number) {
-        this._model.userId = v;
-    }
-
-    private _deviceId: string;
-    public get deviceId(): string {
-        return this._deviceId;
-    }
-    public set deviceId(v: string) {
-        this._deviceId = v;
+    public set level(v: string) {
+        this._model.level = v;
     }
 
 
-    private _deviceType: string;
-    public get deviceType(): string {
-        return this._model.deviceType;
+    private _program: string;
+    public get program(): string {
+        return this._model.program;
     }
-    public set deviceType(v: string) {
-        this._model.deviceType = v;
+    public set program(v: string) {
+        this._model.program = v;
+    }
+
+    private _year: number;
+    public get year(): number {
+        return this._model.year;
+    }
+    public set year(v: number) {
+        this._model.year = v;
+    }
+
+    private _dtEvent: string;
+    public get dtEvent(): string {
+        return this._model.dtEvent;
+    }
+    public set dtEvent(v: string) {
+        this._model.dtEvent = v;
+    }
+
+    private _time: number;
+    public get time(): number {
+        return this._model.time;
+    }
+    public set time(v: number) {
+        this._model.time = v;
+    }
+
+    private _venue: Data.Venue;
+    public get venue(): Data.Venue {
+        return this._model.venue;
+    }
+    public set venue(v: Data.Venue) {
+        this._model.venue = v;
+    }
+
+    public get detail(): Data.Detail {
+        return this._model.detail;
+    }
+    public set detail(v: Data.Detail) {
+        this._model.detail = v;
+    }
+
+    public get title(): string {
+        return this._model.title;
+    }
+    public set title(v: string) {
+        this._model.title = v;
+    }
+
+    public get status(): string {
+        return this._model.status;
+    }
+    public set status(v: string) {
+        this._model.status = v;
+    }
+
+    private _type: string;
+    public get type(): string {
+        return this._type;
+    }
+    public set type(v: string) {
+        this._model.type = v;
     }
 
 
-    public get network(): string {
-        return this._model.network;
-    }
-    public set network(v: string) {
-        this._model.network = v;
-    }
 
-
-    private _quality: string;
-    public get quality(): string {
-        return this._quality;
+    private _connectionDetails: Data.ConnectionDetails[];
+    public get connectionDetails(): Data.ConnectionDetails[] {
+        return this._model.connectionDetails;
     }
-    public set quality(v: string) {
-        this._quality = v;
+    public set connectionDetails(v: Data.ConnectionDetails[]) {
+        this._model.connectionDetails = v;
     }
-
-
-    private _ipAddress: string;
-    public get ipAddress(): string {
-        return this._ipAddress;
-    }
-    public set ipAddress(v: string) {
-        this._ipAddress = v;
-    }
-
-
-    private _trasnsmitStatus: string;
-    public get trasnsmitStatus(): string {
-        return this._trasnsmitStatus;
-    }
-    public set trasnsmitStatus(v: string) {
-        this._trasnsmitStatus = v;
-    }
-
-
-    private _received: string;
-    public get received(): string {
-        return this._received;
-    }
-    public set received(v: string) {
-        this._received = v;
-    }
-
-
-    private _retries: string;
-    public get retries(): string {
-        return this._retries;
-    }
-    public set retries(v: string) {
-        this._retries = v;
-    }
-
 }
-// location: string;
-// userId: number;
-// deviceId: string;
-// deviceType: string;
-// network: string;
-// quality: string;
-// ipAddress: string
-// trasnsmitStatus: string;
-// received: string;
-// retries:string; 
