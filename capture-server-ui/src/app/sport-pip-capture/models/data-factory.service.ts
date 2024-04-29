@@ -5,7 +5,7 @@ import { Observable, of } from "rxjs";
 import { map, mergeMap } from "rxjs/operators";
 import { Data } from "./capture-interface";
 import { ConnectionData } from "./connection";
-import { DeviceData } from "./device";
+// import { DeviceData } from "./device";
 import { UserProfileData } from "./user-profile";
 import { EventData } from "./event";
 import { DistributionData } from "./distribution";

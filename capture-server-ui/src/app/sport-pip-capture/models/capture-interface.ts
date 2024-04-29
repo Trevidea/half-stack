@@ -93,12 +93,12 @@ export namespace Data {
     dtShared: string;
   }
 
-  export interface Device extends Base {
-    id: number;
-    type: string;
-    name: string;
-    code: string;
-  }
+  // export interface Device extends Base {
+  //   id: number;
+  //   type: string;
+  //   name: string;
+  //   code: string;
+  // }
 
   export interface Connection extends Base {
     id: number;
@@ -128,16 +128,7 @@ export namespace Data {
     connectionDetails: ConnectionDetails[]
   }
 
-  // "filesReceived": 10,
-  // "id": 1,
-  // "ipAddress": "192.168.1.1",
-  // "location": "North End",
-  // "name": "Device1",
-  // "network": "WiFi",
-  // "quality": 0,
-  // "retries": 3,
-  // "role": "Transmitter",
-  // "transmitStatus": 1
+
   export interface ConnectionDetails extends Base {
     id: number;
     name: string;
