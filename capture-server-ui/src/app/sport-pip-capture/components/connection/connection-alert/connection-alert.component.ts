@@ -56,7 +56,9 @@ export class ConnectionAlertComponent implements OnInit {
         size: "700",
       };
       undoNotification.componentInstance.undoEvent = this.undoEvent;
-      this.service.closePreview({ eventId: this.eventId });
+      this.service.closePreview({ eventId: +this.eventId }).subscribe((res) => {
+        console.log(res);
+      });
 
       undoNotification.result.then(
         (selectedItems) => {
