@@ -5,33 +5,50 @@
     <h2 class="modal-title mb-2" id="myModalLabel1">Add Device</h2>
     <form #AddStreamkeyForm="ngForm">
         <div class="form-group">
-            <label>User Name</label>
+            <label>User Name<span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="userName" required #ngmUser="ngModel"
-                [(ngModel)]="streamingKey" />
+                [(ngModel)]="datasource.userName" />
             <app-validation-alert controlName="User Name" [control]="ngmUser">
             </app-validation-alert>
         </div>
 
+        <!-- <div class="form-group">
+            <label>Device Name<span class="text-danger">*</span></label>
+            <ng-select name="dname" [(ngModel)]="datasource.deviceName.SelectedItem" required #ngmdeviceName="ngModel">
+                <ng-option *ngFor="let item of datasource.deviceName" [value]="item">{{ item }}</ng-option>
+            </ng-select>
+            <app-validation-alert controlName="Device Name" [control]="ngmdeviceName">
+            </app-validation-alert>
+        </div> -->
         <div class="form-group">
-            <label>Device Name </label>
-            <input type="text" class="form-control" name="dname" required [(ngModel)]="deviceName"
+            <label>Device Name<span class="text-danger">*</span> </label>
+            <input type="text" class="form-control" name="dname" required [(ngModel)]="datasource.deviceName.SelectedItem"
                 #ngmdeviceName="ngModel" />
             <app-validation-alert controlName="Device Name" [control]="ngmdeviceName">
             </app-validation-alert>
         </div>
 
         <div class="form-group">
-            <label>PIN</label>
-            <input type="text" class="form-control" required name="pin" [(ngModel)]="streamingKey" #ngmPIN="ngModel" />
+            <label>PIN<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" required name="pin" [(ngModel)]="datasource.pin"
+                #ngmPIN="ngModel" />
             <app-validation-alert controlName="PIN" [control]="ngmPIN">
             </app-validation-alert>
         </div>
 
         <div class="form-group">
-            <label>Location</label>
-            <input type="text" class="form-control" required name="location" [(ngModel)]="streamingKey"
-                #ngmlocation="ngModel" />
-            <app-validation-alert controlName="Location" [control]="ngmlocation">
+            <label>Location<span class="text-danger">*</span></label>
+            <ng-select name="location" [(ngModel)]="datasource.location.SelectedItem" required #ngmlocation="ngModel">
+                <ng-option *ngFor="let item of datasource.location" [value]="item">{{ item }}</ng-option>
+                <ng-template ng-footer-tmp class="p-2">
+                    <button (click)="datasource.location.AddingNewItem(location)"
+                        class="addTypeBtn btn btn-sm btn-success" rippleEffect>
+                        + Add New Location
+                    </button>
+                    <inline-form-modal #location modalTitle="New location"></inline-form-modal>
+                </ng-template>
+            </ng-select>
+            <app-validation-alert controlName="location" [control]="ngmlocation">
             </app-validation-alert>
         </div>
     </form>

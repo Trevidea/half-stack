@@ -114,7 +114,6 @@ export class Transformer {
       var modelData!: M;
       data.subscribe(
         (model: M) => {
-          // console.log(model)
           modelData = model;
         },
         (err) => {
@@ -122,7 +121,6 @@ export class Transformer {
           reject(err);
         },
         () => {
-          // console.log("calling compose..")
           od.compose(modelData);
           resolve(modelData);
         }
@@ -180,7 +178,6 @@ export class Transformer {
           reject(err);
         },
         () => {
-          console.log("calling compose..");
           od.compose(modelData);
           resolve(modelData);
         }

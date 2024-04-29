@@ -16,12 +16,11 @@ set(HALF_STACK_SRC
     base.cpp
     event-preview.cpp
     event-runner.cpp
-    device.cpp
+    event-device.cpp
     countdown.cpp
     worker-loop.cpp
     connection-detail.cpp
     live-event.cpp
-    streaming-device.cpp
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
 target_include_directories(half-stack PUBLIC "./" rest-client zmq)

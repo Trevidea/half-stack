@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalConfig, ToastrService } from 'ngx-toastr';
 
@@ -6,17 +6,16 @@ import { GlobalConfig, ToastrService } from 'ngx-toastr';
   selector: 'app-add-device',
   templateUrl: './add-device.component.html',
   styleUrls: ['./add-device.component.scss'],
-  encapsulation:ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None
 })
 export class AddDeviceComponent implements OnInit {
-  deviceName
-  streamingKey
+  @Input() datasource: any
   private toastRef: any;
   private options: GlobalConfig;
-  
-  constructor(public activeModal:NgbActiveModal,private toastr: ToastrService) {
+
+  constructor(public activeModal: NgbActiveModal, private toastr: ToastrService) {
     this.options = this.toastr.toastrConfig;
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -27,7 +26,7 @@ export class AddDeviceComponent implements OnInit {
     });
   }
 
-  onsave(){
+  onsave() {
     this.toastrSuccess()
     // this.activeModal.close('Accept click')
   }

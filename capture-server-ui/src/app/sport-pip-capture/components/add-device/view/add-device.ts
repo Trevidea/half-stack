@@ -1,3 +1,4 @@
+import { Collection } from "app/blocks/collection";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
 
 export class AddDeviceView implements Views.Datasource {
@@ -18,11 +19,14 @@ export class AddDeviceView implements Views.Datasource {
     }
 
 
-    private _deviceName: string;
-    public get deviceName(): string {
+    private _deviceName: Collection<string>;
+    public get deviceName(): Collection<string> {
+        if (!this._deviceName) {
+            this._deviceName = new Collection<string>();
+        }
         return this._deviceName;
     }
-    public set deviceName(v: string) {
+    public set deviceName(v: Collection<string>) {
         this._deviceName = v;
     }
 
@@ -36,11 +40,14 @@ export class AddDeviceView implements Views.Datasource {
     }
 
 
-    private _location: string;
-    public get location(): string {
+    private _location: Collection<string>;
+    public get location(): Collection<string> {
+        if (!this._location) {
+            this._location = new Collection<string>();
+        }
         return this._location;
     }
-    public set location(v: string) {
+    public set location(v: Collection<string>) {
         this._location = v;
     }
 

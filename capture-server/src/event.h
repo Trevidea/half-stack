@@ -8,8 +8,7 @@
 #include "datetimeutils.h"
 #include <map>
 #include <ctime>
-#include "streaming-device.h"
-#include "device.h"
+#include "event-device.h"
 
 class Event : public EntityBase
 {
@@ -32,7 +31,7 @@ public:
 public:
     void openPreview(const Request &req, Response &rsp);
     void closePreview(const Request &req, Response &rsp);
-    void addStreamingDevice(const std::string& deviceName, const std::string& streamKey);
+    void handleAddDevice(const Request &req, Response &rsp);
     
 private:
     void closeAllPreviews();

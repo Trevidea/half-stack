@@ -65,5 +65,8 @@ export class EventPreviewPresenter implements OnInit {
     );
   }
 
+
+  
+
 }
 
