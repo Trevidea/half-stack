@@ -23,7 +23,7 @@ export class ConnectionStartPresenter implements OnInit {
   }
 
   ngOnInit(): void {
-    Transformer.ComposeObjectAsync(
+    Transformer._ComposeLiveObjectAsync(
       this.socketService._onLiveEvent(),
       this.ds,
       LiveEventBuilder
