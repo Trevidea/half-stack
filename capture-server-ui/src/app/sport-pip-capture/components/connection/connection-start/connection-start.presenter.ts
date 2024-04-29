@@ -36,7 +36,6 @@ export class ConnectionStartPresenter implements OnInit {
   }
   ListType(e: any) {
     this.ds = this.socketDs;
-    console.log("e-presenter::", e);
     let type = e;
     if (e == "sub") {
       type = "Subscriber";
