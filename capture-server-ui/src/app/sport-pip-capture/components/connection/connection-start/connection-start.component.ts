@@ -19,7 +19,7 @@ import { SocketService } from "app/sport-pip-capture/models/socket.service";
 })
 export class ConnectionStartComponent implements OnInit {
   @Input() datasource: any;
-  eventConnection: any[] = []
+  eventConnection: any[] = [];
   header: string[];
   deviceName: string;
   streamingKey: string;
@@ -31,7 +31,7 @@ export class ConnectionStartComponent implements OnInit {
     private socketService: SocketService
   ) {
     this.socketService.onLiveEvent().subscribe((data) => {
-      console.log(data);
+      // console.log(data);
     });
   }
   connectiondetail: boolean = false;
@@ -45,7 +45,7 @@ export class ConnectionStartComponent implements OnInit {
         console.log("error:::", error);
       }
     );
-    console.log(this.eventConnection);
+    // console.log(this.eventConnection);
   }
 
   ConnectionDetails(yes: boolean) {
@@ -54,7 +54,7 @@ export class ConnectionStartComponent implements OnInit {
   closeDetail() {
     this.connectiondetail = false;
   }
-  viewStream() { }
+  viewStream() {}
   pause(item) {
     const index = this.eventConnection.findIndex((obj) => obj.id === item.id);
     if (
@@ -80,19 +80,19 @@ export class ConnectionStartComponent implements OnInit {
       }
     );
   }
-  block(item) { }
-  streaming() { }
-  delete() { }
+  block(item) {}
+  streaming() {}
+  delete() {}
   modalOpenForm(modalForm) {
     this.modalService.open(modalForm, {
       centered: true,
     });
   }
-  addNewDevice() { }
+  addNewDevice() {}
   listOrGrid: string = "list";
   listGrid(e: string) {
     this.listOrGrid = e;
-    console.log(e);
+    // console.log(e);
   }
   ListType(e: any) {
     if (e == "all") {
@@ -103,7 +103,7 @@ export class ConnectionStartComponent implements OnInit {
       EventConnection$.pipe(
         map((data) => {
           const filtered = data.filter((item) => item.type === e);
-          console.log("Filtered data:", filtered);
+          // console.log("Filtered data:", filtered);
           return filtered;
         })
       ).subscribe((filteredData) => {

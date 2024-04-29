@@ -1,34 +1,46 @@
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
-import { Subscription, interval } from 'rxjs';
-import { DateTimeService } from '../../event-utility/date-time.service';
-import { UI } from '../../event-utility/event-ui-interface';
-import { Router } from '@angular/router';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  ViewEncapsulation,
+} from "@angular/core";
+import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
+import { Subscription, interval } from "rxjs";
+import { DateTimeService } from "../../event-utility/date-time.service";
+import { UI } from "../../event-utility/event-ui-interface";
+import { Router } from "@angular/router";
 @Component({
-  selector: 'app-on-going-event',
-  templateUrl: './on-going-event.component.html',
-  styleUrls: ['./on-going-event.component.scss'],
+  selector: "app-on-going-event",
+  templateUrl: "./on-going-event.component.html",
+  styleUrls: ["./on-going-event.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
 export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
   startIndex: number;
   eventId: number;
   opOngoingDetail: boolean = false;
-  @Input() datasource: any
+  @Input() datasource: any;
   private countdownInterval: any;
   dropdownItems: UI.DropDownMenuItem[] = [
-    { label: 'Edit Event', icon: 'edit', type: 'feather', action: () => this.editOnDemandEvent() },
-    { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => { } },
-  ]
-  constructor(private _coreSidebarService: CoreSidebarService,
+    {
+      label: "Edit Event",
+      icon: "edit",
+      type: "feather",
+      action: () => this.editOnDemandEvent(),
+    },
+    { label: "Remove Event", icon: "trash", type: "feather", action: () => {} },
+  ];
+  constructor(
+    private _coreSidebarService: CoreSidebarService,
     private dateTimeservice: DateTimeService,
     private router: Router
-  ) { }
+  ) {}
 
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.datasource && changes.datasource.currentValue) {
@@ -43,13 +55,13 @@ export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   openDetailView(key: string, index: number) {
-    this.startIndex = index
-    this.opOngoingDetail = true
+    this.startIndex = index;
+    this.opOngoingDetail = true;
     this._coreSidebarService.getSidebarRegistry(key).toggleOpen();
   }
 
   OnClosedDetailView(data: any) {
-    this.opOngoingDetail = false
+    this.opOngoingDetail = false;
   }
 
   clickedmenu(id: number) {
@@ -57,26 +69,16 @@ export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   editOnDemandEvent() {
-    this.router.navigate(['/on-demand-event'],
-      {
-        queryParams: { id: this.eventId },
-      }
-    )
+    this.router.navigate(["/on-demand-event"], {
+      queryParams: { id: this.eventId },
+    });
   }
 
-
-  deleteEvent() {
-  }
-
+  deleteEvent() {}
 
   ngOnDestroy(): void {
     if (this.countdownInterval) {
       clearInterval(this.countdownInterval);
     }
   }
-
-
-
-
-
 }

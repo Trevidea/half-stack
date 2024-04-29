@@ -1,4 +1,3 @@
-
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Transformer } from "app/blocks/transformer";
@@ -15,19 +14,19 @@ import { EventConnection$ } from "../connection-data";
 })
 export class ConnectionStartPresenter implements OnInit {
   ds!: liveEventDetail;
-  liveEventData: any[] = []
-  constructor(private dataFactory: DataFactoryService,
-    private socketService: SocketService,
+  liveEventData: any[] = [];
+  constructor(
+    private dataFactory: DataFactoryService,
+    private socketService: SocketService
   ) {
     this.ds = new liveEventDetail();
   }
 
   ngOnInit(): void {
-
-    Transformer._ComposeLiveObjectAsync(this.socketService._onLiveEvent(), this.ds, LiveEventBuilder)
-    console.log("liveEventData", this.ds)
+    Transformer.ComposeObjectAsync(
+      this.socketService._onLiveEvent(),
+      this.ds,
+      LiveEventBuilder
+    );
   }
-
-
-
 }

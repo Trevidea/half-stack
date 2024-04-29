@@ -10,6 +10,7 @@ import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EventUndoNotificationComponent } from "./event-undo-notification/event-undo-notification.component";
 import { EventEndNotifictionsComponent } from "../../event-notifications/event-end-notifictions/event-end-notifictions.component";
 import { SocketService } from "app/sport-pip-capture/models/socket.service";
+import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 
 @Component({
   selector: "app-connection-alert",
@@ -22,11 +23,13 @@ export class ConnectionAlertComponent implements OnInit {
   @Input() title: string;
   @Input() description: string;
   @Input() undoEvent: boolean;
+  @Input() eventId: number;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   constructor(
     private modalService: NgbModal,
     public activeModal: NgbActiveModal,
     private socketService: SocketService,
+    private service: ModelServiceService
   ) {}
 
   ngOnInit(): void {
@@ -35,11 +38,10 @@ export class ConnectionAlertComponent implements OnInit {
   close() {
     this.modalService.dismissAll();
   }
-  YesSure() { 
+  YesSure() {
     if (this.title == "End Event") {
-      
       this.modalService.dismissAll();
-     
+
       const undoNotification = this.modalService.open(
         EventEndNotifictionsComponent,
         {
@@ -54,12 +56,13 @@ export class ConnectionAlertComponent implements OnInit {
         size: "700",
       };
       undoNotification.componentInstance.undoEvent = this.undoEvent;
+      this.service.closePreview({ eventId: this.eventId });
 
       undoNotification.result.then(
         (selectedItems) => {
           this.undoEvent = selectedItems;
           console.log("Parent :::", this.undoEvent, selectedItems);
-          // this.passEntry.emit(this.undoEvent);
+          this.passEntry.emit(this.undoEvent);
         },
         (reason) => {}
       );

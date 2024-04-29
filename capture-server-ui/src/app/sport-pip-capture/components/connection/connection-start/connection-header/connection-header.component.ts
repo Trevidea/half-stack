@@ -21,7 +21,7 @@ import { ModelServiceService } from "app/sport-pip-capture/models/model-service.
 export class ConnectionHeaderComponent implements OnInit {
   connectiondetail: boolean = false;
   undoEvent: boolean = false;
-  @Input()datasource: any;
+  @Input() datasource: any;
   currentTime: string;
   isTimerRunning = false;
 
@@ -33,7 +33,7 @@ export class ConnectionHeaderComponent implements OnInit {
     private modelService: NgbModal,
     public timerService: Timer,
     private service: ModelServiceService
-  ) { }
+  ) {}
   formattedTime: string = "00:00:00";
   ngOnInit(): void {
     this.timerService.getElapsedTime().subscribe((data) => {
@@ -41,7 +41,7 @@ export class ConnectionHeaderComponent implements OnInit {
     });
   }
 
-  ngOnDestroy() { }
+  ngOnDestroy() {}
 
   closeDetail() {
     this.connectiondetail = false;
@@ -61,7 +61,6 @@ export class ConnectionHeaderComponent implements OnInit {
       modelRef.componentInstance.undoEvent = true;
       modelRef.componentInstance.updateEventStatus.subscribe(
         (receivedEntry) => {
-          console.log("received", receivedEntry);
           this.undoEvent = receivedEntry;
           if (this.undoEvent == false) {
             this.timerService.resume();
@@ -71,21 +70,21 @@ export class ConnectionHeaderComponent implements OnInit {
     }
   }
   modalOpenSM(modalblock) {
-    // const modeldata = this.modelService.open(ConnectionAlertComponent, {
-    //   centered: true,
-    //   size: "sm",
-    // });
+    const modeldata = this.modelService.open(ConnectionAlertComponent, {
+      centered: true,
+      size: "sm",
+    });
 
-    // modeldata.componentInstance.undoEvent = false;
-    // modeldata.componentInstance.title = "End Event";
-    // modeldata.componentInstance.description =
-    //   "Are you sure you want to end the <br> event ?";
-
-    // modeldata.componentInstance.passEntry.subscribe((receivedEntry) => {
-    //   console.log("received", receivedEntry);
-    //   this.undoEvent = receivedEntry;
-    // });
-    // this.service.closePreview({eventId: })
-    console.log(this.datasource)
+    modeldata.componentInstance.undoEvent = false;
+    modeldata.componentInstance.title = "End Event";
+    modeldata.componentInstance.description =
+      "Are you sure you want to end the <br> event ?";
+    this.route.queryParams.subscribe((params) => {
+      modeldata.componentInstance.eventId = params["eventId"];
+    });
+    modeldata.componentInstance.passEntry.subscribe((receivedEntry) => {
+      // this.undoEvent = receivedEntry;
+      // this.service.closePreview({eventId: })
+    });
   }
 }

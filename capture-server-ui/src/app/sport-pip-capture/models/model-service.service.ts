@@ -271,6 +271,7 @@ export class ModelServiceService {
 
   closePreview(data: { eventId: number }): Observable<any> {
     const url = `${environment.spModelUrl}/event/close-preview`;
+
     return this._httpClient.post<any>(url, data);
   }
 
