@@ -53,9 +53,6 @@ export class ConnectionStartPresenter implements OnInit {
         return connection.role === type;
       }),
     };
-    console.log("FILTER DATA ::", filteredData);
-    console.log("DS DATA ::", this.ds);
-    console.log("SocketDs DATA ::", this.socketDs);
     this.ds = filteredData as any;
     return this.ds;
   }
