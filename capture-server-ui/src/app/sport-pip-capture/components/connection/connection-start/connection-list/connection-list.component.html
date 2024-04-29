@@ -81,11 +81,11 @@
             {{ item.location }}
           </td>
           <td (click)="detail(item)">
-            {{ item.device }}
+            <!-- {{ item.device }} -->
           </td>
 
           <td (click)="detail(item)">
-            {{ item.deviceType }}
+            {{ item.device }}
           </td>
           <td (click)="detail(item)">
             {{ item.network }}
@@ -93,7 +93,7 @@
           <td (click)="detail(item)">
             <div class="badge badge-pill" [ngClass]="{
                 'badge-light-danger': item.quality === 0,
-                'badge-light-success': item.quality === 1
+                'badge-light-success': item.quality === 2
               }">
               {{ item.quality }}
             </div>

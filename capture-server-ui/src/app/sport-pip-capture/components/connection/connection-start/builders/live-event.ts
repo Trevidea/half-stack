@@ -42,6 +42,7 @@ export class ConnectionDetailsBuilder extends AbstractBuilder<Data.ConnectionDet
         v.role = m.role;
         v.network=m.network;
         v.transmitStatus = m.transmitStatus;
+        console.log("view of live event ConnectionDetails" ,v)
     }
     decompose(v: ConnectionDetailsView): Data.ConnectionDetails {
         return;
