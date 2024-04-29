@@ -50,11 +50,11 @@ std::string EventRunner::getLiveEventData()
 
     ConnectionDetail connectionDetail;
     connectionDetail.setId(1);
-    connectionDetail.setName("Device1");
-    connectionDetail.setRole("Transmitter");
-    connectionDetail.setLocation("North End");
-    connectionDetail.setDevice("iPad");
-    connectionDetail.setNetwork("WiFi");
+    connectionDetail.setName("Coach S.");
+    connectionDetail.setRole("Subscriber");
+    connectionDetail.setLocation("Press Box");
+    connectionDetail.setDevice("iPad15");
+    connectionDetail.setNetwork("Penfield-532");
     connectionDetail.setQuality(QualityEnum::Good);
     connectionDetail.setIpAddress("192.168.1.1");
     connectionDetail.setTransmitStatus(TransmitEnum::Streaming);
@@ -63,12 +63,12 @@ std::string EventRunner::getLiveEventData()
 
     ConnectionDetail connectionDetail1;
     connectionDetail1.setId(2);
-    connectionDetail1.setName("Device2");
-    connectionDetail1.setRole("Receiver");
-    connectionDetail1.setLocation("South End");
-    connectionDetail1.setDevice("iPhone");
-    connectionDetail1.setNetwork("Mobile Data");
-    connectionDetail1.setQuality(QualityEnum::Average);
+    connectionDetail1.setName("Coach J.");
+    connectionDetail1.setRole("Publisher");
+    connectionDetail1.setLocation("Sideline");
+    connectionDetail1.setDevice("iPad22");
+    connectionDetail1.setNetwork("Penfield-532");
+    connectionDetail1.setQuality(QualityEnum::Poor);
     connectionDetail1.setIpAddress("192.168.1.2");
     connectionDetail1.setTransmitStatus(TransmitEnum::Receiving);
     connectionDetail1.setFilesReceived(5);
@@ -76,11 +76,11 @@ std::string EventRunner::getLiveEventData()
 
     ConnectionDetail connectionDetail2;
     connectionDetail2.setId(3);
-    connectionDetail2.setName("Device3");
-    connectionDetail2.setRole("Transmitter");
-    connectionDetail2.setLocation("East End");
-    connectionDetail2.setDevice("MacBook");
-    connectionDetail2.setNetwork("WiFi");
+    connectionDetail2.setName("Coach M.");
+    connectionDetail2.setRole("Subscriber");
+    connectionDetail2.setLocation("Press Box");
+    connectionDetail2.setDevice("Camcorder");
+    connectionDetail2.setNetwork("Penfield-532");
     connectionDetail2.setQuality(QualityEnum::Poor);
     connectionDetail2.setIpAddress("192.168.1.3");
     connectionDetail2.setTransmitStatus(TransmitEnum::Streaming);
