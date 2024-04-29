@@ -36,7 +36,6 @@ export class ConnectionStartComponent implements OnInit {
   }
   connectiondetail: boolean = false;
   ngOnInit(): void {
-    console.log("checking where daata is comming or not  ", this.datasource)
     this.header = header;
     EventConnection$.subscribe(
       (data) => {

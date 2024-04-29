@@ -1,7 +1,7 @@
 <div class="container-fluid preview-container p-0">
     <div class="row">
         <div class="col-12 mb-1 back-button">
-            <button type="button" class="btn btn-icon btn-warning" rippleEffect [routerLink]="'/event'" >
+            <button type="button" class="btn btn-icon btn-warning" rippleEffect [routerLink]="'/event'">
                 <span [data-feather]="'arrow-left'"></span></button>
         </div>
         <div class="col-12" style="min-height:80vh;">
@@ -50,11 +50,18 @@
                             <li class="list-group-item">
                             </li>
                         </ul>
+               
+                        <div class="form-group mt-auto">
+                            <button type="button" class="btn btn-outline-danger btn-block" rippleEffect>Block level
+                                button</button>
+                        </div>
+
+
                     </div>
                     <div class="col-lg-8 col-md-12 col-12 p-0">
-                  
-                            <app-active-devices></app-active-devices>
-                    
+
+                        <app-active-devices></app-active-devices>
+
                     </div>
                 </div>
             </div>

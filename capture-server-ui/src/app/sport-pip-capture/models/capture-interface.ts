@@ -149,6 +149,7 @@ export namespace Data {
     transmitStatus: string;
     retries: string;
     filesReceived: number;
+    network: string;
 
   }
 

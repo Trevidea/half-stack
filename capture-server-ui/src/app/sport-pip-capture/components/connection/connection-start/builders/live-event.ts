@@ -5,7 +5,6 @@ import { Transformer } from "app/blocks/transformer";
 
 export class LiveEventBuilder extends AbstractBuilder<Data.LiveEventConnectionDetail, liveEventDetail> {
     compose(m: Data.LiveEventConnectionDetail, v: liveEventDetail) {
-        console.log("::::::::::", m)
         v.title = m.title;
         v.detail.cityAddress = m?.detail?.cityAddress;
         v.detail.streetAdress = m?.detail?.streetAdress;
@@ -20,8 +19,6 @@ export class LiveEventBuilder extends AbstractBuilder<Data.LiveEventConnectionDe
         v.time = m.time;
         v.type = m.type;
         Transformer.ComposeCollection(m?.connectionDetails, v?.connectionDetails, ConnectionDetailsBuilder)
-
-        console.log("console view data", v)
     }
     decompose(v: liveEventDetail): Data.LiveEventConnectionDetail {
         return;
@@ -41,9 +38,11 @@ export class ConnectionDetailsBuilder extends AbstractBuilder<Data.ConnectionDet
         v.name = m.name;
         v.quality = m.quality;
         v.received = m.filesReceived;
-        v.retries = m.retries
-        v.role = m.role
-        v.transmitStatus = m.transmitStatus
+        v.retries = m.retries;
+        v.role = m.role;
+        v.network=m.network;
+        v.transmitStatus = m.transmitStatus;
+        console.log("view of live event ConnectionDetails" ,v)
     }
     decompose(v: ConnectionDetailsView): Data.ConnectionDetails {
         return;
