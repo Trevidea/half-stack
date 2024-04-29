@@ -97,6 +97,7 @@ import { AddDeviceComponent } from "./components/add-device/add-device.component
 import { HttpClientModule } from "@angular/common/http";
 import { ToastrModule } from "ngx-toastr";
 import { CustomDateTimeFormatPipe } from "./components/event/event-utility/customDateTimeFormat";
+import { AddDevicePresenter } from "./components/add-device/add-device.presenter";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -175,7 +176,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EventsDetailComponent,
     FilterPipe,
     AddDeviceComponent,
-    CustomDateTimeFormatPipe
+    CustomDateTimeFormatPipe,
+    AddDevicePresenter
 
   ],
   providers: [
@@ -209,8 +211,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       showImage: true,
     }),
     DragulaModule.forRoot(),
-    HttpClientModule ,
+    HttpClientModule,
     ToastrModule
   ],
 })
-export class SportPipCaptureModule {}
+export class SportPipCaptureModule { }

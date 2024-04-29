@@ -93,12 +93,14 @@ export namespace Data {
     dtShared: string;
   }
 
-  // export interface Device extends Base {
-  //   id: number;
-  //   type: string;
-  //   name: string;
-  //   code: string;
-  // }
+
+  export interface Device extends Base {
+    id: number;
+    userName: string;
+    deviceName: string;
+    pin: string;
+    location: string;
+  }
 
   export interface Connection extends Base {
     id: number;

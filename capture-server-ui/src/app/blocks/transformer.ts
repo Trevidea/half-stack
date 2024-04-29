@@ -170,7 +170,6 @@ export class Transformer {
       var modelData!: M;
       data.subscribe(
         (model: M) => {
-          console.log(model)
           modelData = model;
           od.compose(modelData);
         },
