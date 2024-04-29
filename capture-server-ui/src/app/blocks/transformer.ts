@@ -161,7 +161,7 @@ export class Transformer {
     return srlz;
   }
 
-// this is for just testing  becouse live event comming continuously  
+  // this is for just testing  becouse live event comming continuously
   static _ComposeLiveObjectAsync<M, V, T extends AbstractBuilder<M, V>>(
     data: Observable<M>,
     view: V,
@@ -172,7 +172,6 @@ export class Transformer {
       var modelData!: M;
       data.subscribe(
         (model: M) => {
-          console.log(model)
           modelData = model;
           od.compose(modelData);
         },
@@ -181,7 +180,7 @@ export class Transformer {
           reject(err);
         },
         () => {
-          console.log("calling compose..")
+          console.log("calling compose..");
           od.compose(modelData);
           resolve(modelData);
         }

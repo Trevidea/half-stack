@@ -1,12 +1,22 @@
 <app-connection-header [datasource]="datasource"></app-connection-header>
 
 <div class="card">
-  <app-connectio-grid-list-header (messageListOrGrid)="listGrid($event)"
-    (pubSubAll)="ListType($event)"></app-connectio-grid-list-header>
+  <app-connectio-grid-list-header
+    (messageListOrGrid)="listGrid($event)"
+    (pubSubAll)="onPubSubAll($event)"
+  ></app-connectio-grid-list-header>
 
-  <app-connection-grid *ngIf="listOrGrid == 'grid'" [eventConnection]="eventConnection" [datasource]="datasource"
-    [listOrGrid]="listOrGrid"></app-connection-grid>
+  <app-connection-grid
+    *ngIf="listOrGrid == 'grid'"
+    [eventConnection]="eventConnection"
+    [datasource]="datasource"
+    [listOrGrid]="listOrGrid"
+  ></app-connection-grid>
 
-  <app-connection-list *ngIf="listOrGrid == 'list'" [eventConnection]="eventConnection" [datasource]="datasource"
-    [listOrGrid]="listOrGrid"></app-connection-list>
+  <app-connection-list
+    *ngIf="listOrGrid == 'list'"
+    [eventConnection]="eventConnection"
+    [datasource]="datasource"
+    [listOrGrid]="listOrGrid"
+  ></app-connection-list>
 </div>

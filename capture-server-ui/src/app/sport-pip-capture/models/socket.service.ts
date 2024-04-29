@@ -54,14 +54,44 @@ export class SocketService {
     return this.eventTerminalSubject;
   }
 
-  _onLiveEvent(): Observable<Data.LiveEventConnectionDetail> {
+  _onLiveEvent(type: string): Observable<Data.LiveEventConnectionDetail> {
     return this.liveEventSubject.pipe(
       map((data: any) => {
         const eventObject = JSON.parse(data);
+
         const liveEventConnectionDetail: Data.LiveEventConnectionDetail =
           eventObject.result[0][0];
         return new LiveEventDetailData(liveEventConnectionDetail);
       })
     );
   }
+  // _onLiveEvent(type: string): Observable<Data.LiveEventConnectionDetail> {
+  //   console.log(type);
+  //   return this.liveEventSubject.pipe(
+  //     map((data: any) => {
+  //       const eventObject = JSON.parse(data);
+  //       const liveEventConnectionDetail: Data.LiveEventConnectionDetail =
+  //         eventObject.result[0][0];
+
+  //       if (type === "all") {
+  //         console.log(liveEventConnectionDetail);
+  //         return new LiveEventDetailData(liveEventConnectionDetail);
+  //       } else {
+  //         console.log("called else");
+  //         const filteredData = {
+  //           ...liveEventConnectionDetail,
+  //           connectionDetails:
+  //             liveEventConnectionDetail.connectionDetails.filter(
+  //               (connection) => {
+  //                 console.log(connection, type);
+  //                 return connection.role === type;
+  //               }
+  //             ),
+  //         };
+
+  //         return new LiveEventDetailData(filteredData);
+  //       }
+  //     })
+  //   );
+  // }
 }
