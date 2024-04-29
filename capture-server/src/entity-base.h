@@ -14,6 +14,9 @@
 
 class EntityBase : public Handler
 {
+
+    friend class Event;
+
 private:
     std::string executeSqlStr(const std::string &sql);
     Json::Value executeSqlJson(const std::string &sql);

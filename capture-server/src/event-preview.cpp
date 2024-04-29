@@ -1,8 +1,6 @@
 #include "event-preview.h"
 #include "gateway.h"
-#include "device.h"
 #include "event.h"
-#include "entity-base.h"
 
 EventPreview::EventPreview(Json::Value &model) : Base(model)
 {
@@ -11,39 +9,6 @@ EventPreview::EventPreview(Json::Value &model) : Base(model)
 void EventPreview::report()
 {
     Base::report();
-    Gateway::instance().route("GET", "/api/event-preview",
-                              [this](const Request &req, Response &rsp)
-                              {
-                                  this->setCityAddress("Ludhiana");
-                                  this->setDtEvent("2024-05-01");
-                                  this->activeDevices().push_back(Device());
-                                  {
-                                      auto &device = this->activeDevices().back();
-                                      device.setDeviceId("1");
-                                      device.setDeviceType("iPad");
-                                      device.setLocation("North-End");
-                                  }
-                                  this->setDetailType("ondemand");
-                                  this->setStreetAddress("Indoor Stadium, Pakhowal road");
-                                  this->setDtEvent("2024-04-15");
-                                  this->setEventType("ondemand");
-                                  this->setLevel("University");
-                                  this->setProgram("Men");
-                                  this->setSport("Football");
-                                  this->setStatus("Upcoming");
-                                  this->setTime(1830);
-                                  this->setTitle("Mumbai Indians vs Kolkatta Knightriders");
-                                  this->setVenueLocation("Ludhiana");
-                                  this->setYear(2024);
-                                  const std::string response = Gateway::instance().formatResponse({{this->m_model}});
-                                  rsp.setData(response);
-                              });
-
-    Gateway::instance().route("POST", "/api/event-preview/add-device",
-                              [this](const Request &req, Response &rsp)
-                              {
-                                  this->handleAddDevice(req, rsp);
-                              });
 }
 
 std::string EventPreview::dtEvent() const
@@ -186,48 +151,48 @@ void EventPreview::setCountdown(const std::string &value)
     m_model["countdown"] = value;
 }
 
-std::vector<Device> &EventPreview::activeDevices()
+std::vector<EventDevice> &EventPreview::activeDevices()
 {
     return m_activeDevice;
 }
 
-const std::vector<Device> &EventPreview::activeDevices() const
+const std::vector<EventDevice> &EventPreview::activeDevices() const
 {
     return m_activeDevice;
 }
 
-void EventPreview::handleAddDevice(const Request &req, Response &rsp) {
-    // Extract deviceName and streamKey from the request
-    Json::Value requestData = req.json();
-    std::string eventId = requestData["eventId"].asString();
-    std::string deviceName = requestData["deviceName"].asString();
-    std::string streamKey = requestData["streamKey"].asString();
+// void EventPreview::handleAddDevice(const Request &req, Response &rsp) {
+//     // Extract deviceName and streamKey from the request
+//     Json::Value requestData = req.json();
+//     std::string eventId = requestData["eventId"].asString();
+//     std::string deviceName = requestData["deviceName"].asString();
+//     std::string streamKey = requestData["streamKey"].asString();
 
-    // Call the addStreamingDevice method of the Event class
-    Event event;
-    event.addStreamingDevice(deviceName, streamKey);
+//     // Call the addStreamingDevice method of the Event class
+//     Event event;
+//     event.addStreamingDevice(deviceName, streamKey);
 
-    // Execute SQL query using executeSqlJson() from Base class
-    Base base; // Create an instance of Base
-    std::string sql = "INSERT INTO devices (type, name, code) VALUES ('ipad', '" + deviceName + "', '0000')";
-    Json::Value result = base.executeSqlJson(sql);
+//     // Execute SQL query using executeSqlJson() from Base class
+//     Base base; // Create an instance of Base
+//     std::string sql = "INSERT INTO devices (type, name, code) VALUES ('ipad', '" + deviceName + "', '0000')";
+//     Json::Value result = base.executeSqlJson(sql);
 
-    // Prepare the response
-    std::map<std::string, std::string> responseData;
-    if (!result.empty()) {
-        responseData["status"] = "success";
-        responseData["message"] = "Streaming device added successfully";
-    } else {
-        responseData["status"] = "error";
-        responseData["message"] = "Failed to add streaming device";
-    }
+//     // Prepare the response
+//     std::map<std::string, std::string> responseData;
+//     if (!result.empty()) {
+//         responseData["status"] = "success";
+//         responseData["message"] = "Streaming device added successfully";
+//     } else {
+//         responseData["status"] = "error";
+//         responseData["message"] = "Failed to add streaming device";
+//     }
 
-    // Convert the response data to a vector of maps
-    std::vector<std::map<std::string, std::string>> responseVector;
-    responseVector.push_back(responseData);
+//     // Convert the response data to a vector of maps
+//     std::vector<std::map<std::string, std::string>> responseVector;
+//     responseVector.push_back(responseData);
 
-    // Pass the response data to formatResponse
-    rsp.setData(Gateway::instance().formatResponse(responseVector));
-}
+//     // Pass the response data to formatResponse
+//     rsp.setData(Gateway::instance().formatResponse(responseVector));
+// }
 
 

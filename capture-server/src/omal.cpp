@@ -24,6 +24,7 @@ void Omal::report()
                               {
                                   this->assessNetworkQuality(req, rsp);
                               });
+                              
 }
 
 void Omal::assessNetworkQuality(const Request &req, Response &rsp)
