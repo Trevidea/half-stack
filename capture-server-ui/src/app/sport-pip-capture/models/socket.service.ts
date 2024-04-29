@@ -57,12 +57,12 @@ export class SocketService {
   _onLiveEvent(): Observable<Data.LiveEventConnectionDetail> {
     return this.liveEventSubject.pipe(
       map((data: any) => {
-        console.log(data)
+        console.log("Live event data :::", data);
         const eventObject = JSON.parse(data);
-        const liveEventConnectionDetail: Data.LiveEventConnectionDetail = eventObject.result[0][0];
+        const liveEventConnectionDetail: Data.LiveEventConnectionDetail =
+          eventObject.result[0][0];
         return new LiveEventDetailData(liveEventConnectionDetail);
       })
     );
   }
-
 }
