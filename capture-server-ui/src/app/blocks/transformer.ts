@@ -116,7 +116,6 @@ export class Transformer {
         (model: M) => {
           console.log(model)
           modelData = model;
-          od.compose(modelData);
         },
         (err) => {
           console.log(err);
@@ -160,5 +159,34 @@ export class Transformer {
     );
     srlz.serialize(response);
     return srlz;
+  }
+
+// this is for just testing  becouse live event comming continuously  
+  static _ComposeLiveObjectAsync<M, V, T extends AbstractBuilder<M, V>>(
+    data: Observable<M>,
+    view: V,
+    builder: new () => T
+  ): Promise<M> {
+    let promise: Promise<M> = new Promise<M>((resolve, reject) => {
+      let od: ObjectStrategy<M, V, T> = new ObjectStrategy(view, builder);
+      var modelData!: M;
+      data.subscribe(
+        (model: M) => {
+          console.log(model)
+          modelData = model;
+          od.compose(modelData);
+        },
+        (err) => {
+          console.log(err);
+          reject(err);
+        },
+        () => {
+          console.log("calling compose..")
+          od.compose(modelData);
+          resolve(modelData);
+        }
+      );
+    });
+    return promise;
   }
 }
