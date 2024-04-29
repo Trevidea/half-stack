@@ -316,24 +316,5 @@ export class DataFactoryService {
     return this._data("event-preview", ConnectionPreviewData);
   }
 
-  liveEventJson(): Observable<Data.LiveEventDetail[]> {
-    const dummyData: Data.LiveEventDetail[] = [
-      {
-        id: 1,
-        name: "Jon",
-        role: "Coach S.",
-        location: "Press Box",
-        userId: 123,
-        deviceId: "iPad15",
-        deviceType: "iPad",
-        network: "Penfield-5",
-        quality: "Poor",
-        ipAddress: "127.0.0.1",
-        trasnsmitStatus: "Receiving",
-        received: "22 files",
-        retries: "2",
-      },
-    ];
-    return of(dummyData);
-  }
+ 
 }

@@ -112,26 +112,50 @@ export namespace Data {
     location: string;
   }
 
-  export interface LiveEventDetail extends Base {
+  export interface LiveEventConnectionDetail extends Base {
+    id: number
+    sport?: string;
+    level?: string;
+    program?: string;
+    year?: number;
+    dtEvent?: string;
+    time?: number;
+    venue?: Venue;
+    detail?: Detail;
+    title?: string;
+    status?: string;
+    type: string;
+    connectionDetails: ConnectionDetails[]
+  }
+
+  // "filesReceived": 10,
+  // "id": 1,
+  // "ipAddress": "192.168.1.1",
+  // "location": "North End",
+  // "name": "Device1",
+  // "network": "WiFi",
+  // "quality": 0,
+  // "retries": 3,
+  // "role": "Transmitter",
+  // "transmitStatus": 1
+  export interface ConnectionDetails extends Base {
     id: number;
     name: string;
     role: string;
     location: string;
-    userId: number;
-    deviceId: string;
-    deviceType: string;
-    network: string;
+    device: string;
     quality: string;
     ipAddress: string;
-    trasnsmitStatus: string;
-    received: string;
+    transmitStatus: string;
     retries: string;
+    filesReceived: number;
+
   }
 
-  export enum NetWorkQuality {}
-  export enum Type {}
+  export enum NetWorkQuality { }
+  export enum Type { }
 
-  export enum Priority {}
+  export enum Priority { }
 
   export enum DataType {
     Type1 = "type1",
@@ -178,7 +202,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role {}
+  export interface Role { }
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -187,13 +211,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings {}
+  export interface DisplaySettings { }
 
-  export interface CustomizationSettings {}
+  export interface CustomizationSettings { }
 
-  export interface NotificationSettings {}
+  export interface NotificationSettings { }
 
-  export interface VideoResolutionSettings {}
+  export interface VideoResolutionSettings { }
   export enum DataStatus {
     Status1 = "status1",
     Status2 = "status2",
@@ -238,7 +262,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role {}
+  export interface Role { }
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -247,13 +271,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings {}
+  export interface DisplaySettings { }
 
-  export interface CustomizationSettings {}
+  export interface CustomizationSettings { }
 
-  export interface NotificationSettings {}
+  export interface NotificationSettings { }
 
-  export interface VideoResolutionSettings {}
+  export interface VideoResolutionSettings { }
 
   export interface Team extends Base {
     id: number;

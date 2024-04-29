@@ -31,6 +31,7 @@ export class EventPresenter implements OnInit {
     private tabStateService: TabStateService
   ) {
     this.ds = new EventRange();
+    
   }
 
   ngOnInit(): void {

@@ -11,14 +11,16 @@ import { DragulaService } from "ng2-dragula";
 })
 export class ConnectionListComponent implements OnInit {
   @Input() eventConnection: any;
+  @Input() datasource: any;
   @Input() listOrGrid: string;
   constructor(
     public modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    console.log("live event conection detail", this.eventConnection)
     const param = this.route.snapshot.queryParamMap;
     if (param.get("listOrGrid")) {
       const listOrGrid = param.get("listOrGrid");

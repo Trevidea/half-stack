@@ -9,6 +9,7 @@ import { ConnectionAlertComponent } from "../../connection-alert/connection-aler
 import { EventUndoNotificationComponent } from "../../connection-alert/event-undo-notification/event-undo-notification.component";
 import { Timer } from "../../timer";
 import { TimerService } from "../../timer.service";
+import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 
 @Component({
   selector: "app-connection-header",
@@ -20,7 +21,7 @@ import { TimerService } from "../../timer.service";
 export class ConnectionHeaderComponent implements OnInit {
   connectiondetail: boolean = false;
   undoEvent: boolean = false;
-  @Input() liveEventData: any;
+  @Input()datasource: any;
   currentTime: string;
   isTimerRunning = false;
 
@@ -30,8 +31,9 @@ export class ConnectionHeaderComponent implements OnInit {
     private route: ActivatedRoute,
     private webSocketService: DataFactoryService,
     private modelService: NgbModal,
-    public timerService: Timer
-  ) {}
+    public timerService: Timer,
+    private service: ModelServiceService
+  ) { }
   formattedTime: string = "00:00:00";
   ngOnInit(): void {
     this.timerService.getElapsedTime().subscribe((data) => {
@@ -39,7 +41,7 @@ export class ConnectionHeaderComponent implements OnInit {
     });
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() { }
 
   closeDetail() {
     this.connectiondetail = false;
@@ -69,19 +71,21 @@ export class ConnectionHeaderComponent implements OnInit {
     }
   }
   modalOpenSM(modalblock) {
-    const modeldata = this.modelService.open(ConnectionAlertComponent, {
-      centered: true,
-      size: "sm",
-    });
+    // const modeldata = this.modelService.open(ConnectionAlertComponent, {
+    //   centered: true,
+    //   size: "sm",
+    // });
 
-    modeldata.componentInstance.undoEvent = false;
-    modeldata.componentInstance.title = "End Event";
-    modeldata.componentInstance.description =
-      "Are you sure you want to end the <br> event ?";
+    // modeldata.componentInstance.undoEvent = false;
+    // modeldata.componentInstance.title = "End Event";
+    // modeldata.componentInstance.description =
+    //   "Are you sure you want to end the <br> event ?";
 
-    modeldata.componentInstance.passEntry.subscribe((receivedEntry) => {
-      console.log("received", receivedEntry);
-      this.undoEvent = receivedEntry;
-    });
+    // modeldata.componentInstance.passEntry.subscribe((receivedEntry) => {
+    //   console.log("received", receivedEntry);
+    //   this.undoEvent = receivedEntry;
+    // });
+    // this.service.closePreview({eventId: })
+    console.log(this.datasource)
   }
 }

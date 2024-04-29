@@ -96,6 +96,7 @@ import { FilterPipe } from "./components/meta-type/filter";
 import { AddDeviceComponent } from "./components/add-device/add-device.component";
 import { HttpClientModule } from "@angular/common/http";
 import { ToastrModule } from "ngx-toastr";
+import { CustomDateTimeFormatPipe } from "./components/event/event-utility/customDateTimeFormat";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -173,7 +174,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EventsDetailPresenter,
     EventsDetailComponent,
     FilterPipe,
-    AddDeviceComponent
+    AddDeviceComponent,
+    CustomDateTimeFormatPipe
+
   ],
   providers: [
     {
