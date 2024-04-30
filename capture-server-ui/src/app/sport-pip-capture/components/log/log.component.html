@@ -1,11 +1,9 @@
 <div class="card log-warraper p-0 m-0">
   <div class="card-header p-1">
-    <app-log-filter style="width: 100%;"></app-log-filter>
+    <app-log-filter style="width: 100%"></app-log-filter>
   </div>
   <div class="card-body m-0 p-0">
-
     <div class="table-responsive">
-
       <table class="table mt-1">
         <thead>
           <tr>
@@ -17,40 +15,25 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td scope="row" style="vertical-align:top">Event</td>
-            <td style="vertical-align:top">Create Event</td>
-            <td style="vertical-align:top">
-
+          <tr *ngFor="let item of datasource.logs">
+            <td scope="row" style="vertical-align: top">{{ item.category }}</td>
+            <td style="vertical-align: top">{{ item.subject }}</td>
+            <td style="vertical-align: top">
               <div class="media">
-                <img src="assets/images/avatars/1.png" class="rounded mr-1" height="25" alt="team" />
-                <div class="media-body">
-                  Coach Steven
-                </div>
+                <img
+                  src="assets/images/avatars/1.png"
+                  class="rounded mr-1"
+                  height="25"
+                  alt="team"
+                />
+                <div class="media-body">{{ item.user }}</div>
               </div>
             </td>
-            <td style="vertical-align:top">Created event:
-              <span>
-                <ul>
-                  <li>
-                    Added name of the event as “McQuaid vs Fairport”
-                  </li>
-                  <li>
-
-                    Chose “Football” as the sports category
-                  </li>
-                  <li>
-
-                    Exported roster from excel sheet
-                  </li>
-                </ul>
-              </span>
-
-              <br>
+            <td style="vertical-align: top">
+              {{ item.action }}
             </td>
-            <td style="vertical-align:top">19 May 2022</td>
+            <td style="vertical-align: top">{{ item.timestamp }}</td>
           </tr>
-
         </tbody>
       </table>
     </div>
