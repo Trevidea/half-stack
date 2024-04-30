@@ -32,13 +32,7 @@ export class ConnectionStartComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private socketService: SocketService
   ) {
-<<<<<<< HEAD
-    // this.socketService.onLiveEvent().subscribe((data) => {
-    //   // console.log(data);
-    // });
-=======
-    this.socketService.onLiveEvent().subscribe((data) => {});
->>>>>>> 63e034da0e4282e8f9f204d14b3b7cb12a3ec379
+  
   }
   connectiondetail: boolean = false;
   ngOnInit(): void {
