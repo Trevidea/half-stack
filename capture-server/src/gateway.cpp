@@ -13,6 +13,7 @@
 #include <map>
 #include <json/json.h>
 #include "event-device.h"
+#include "device.h"
 
 Gateway::Gateway()
 {
@@ -30,6 +31,7 @@ void Gateway::init()
     this->m_entities.push_back(new UserProfile());
     this->m_entities.push_back(new EventPreview());
     this->m_entities.push_back(new EventDevice());
+    this->m_entities.push_back(new Device());
     for (auto &&e : this->m_entities)
     {
         e->report();

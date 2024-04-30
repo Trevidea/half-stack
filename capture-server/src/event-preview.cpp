@@ -160,39 +160,3 @@ const std::vector<EventDevice> &EventPreview::activeDevices() const
 {
     return m_activeDevice;
 }
-
-// void EventPreview::handleAddDevice(const Request &req, Response &rsp) {
-//     // Extract deviceName and streamKey from the request
-//     Json::Value requestData = req.json();
-//     std::string eventId = requestData["eventId"].asString();
-//     std::string deviceName = requestData["deviceName"].asString();
-//     std::string streamKey = requestData["streamKey"].asString();
-
-//     // Call the addStreamingDevice method of the Event class
-//     Event event;
-//     event.addStreamingDevice(deviceName, streamKey);
-
-//     // Execute SQL query using executeSqlJson() from Base class
-//     Base base; // Create an instance of Base
-//     std::string sql = "INSERT INTO devices (type, name, code) VALUES ('ipad', '" + deviceName + "', '0000')";
-//     Json::Value result = base.executeSqlJson(sql);
-
-//     // Prepare the response
-//     std::map<std::string, std::string> responseData;
-//     if (!result.empty()) {
-//         responseData["status"] = "success";
-//         responseData["message"] = "Streaming device added successfully";
-//     } else {
-//         responseData["status"] = "error";
-//         responseData["message"] = "Failed to add streaming device";
-//     }
-
-//     // Convert the response data to a vector of maps
-//     std::vector<std::map<std::string, std::string>> responseVector;
-//     responseVector.push_back(responseData);
-
-//     // Pass the response data to formatResponse
-//     rsp.setData(Gateway::instance().formatResponse(responseVector));
-// }
-
-
