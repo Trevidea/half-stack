@@ -7,6 +7,9 @@ import { Views } from 'app/sport-pip-capture/models/capture-interface';
 import { Transformer } from 'app/blocks/transformer';
 import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 import { MetaTypeBuilder } from 'app/sport-pip-capture/blocks/meta-type.builder';
+import { PresenterAction } from 'app/blocks/actions';
+import { AddDeviceBuilder } from './builder/add-device';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-device-presenter',
@@ -19,13 +22,24 @@ export class AddDevicePresenter implements OnInit {
   private options: GlobalConfig;
   ds!: AddDeviceView
   actions!: Views.FormActions;
-  constructor(public activeModal: NgbActiveModal, private toastr: ToastrService, private modelServiceService: ModelServiceService) {
+  constructor(public activeModal: NgbActiveModal, 
+    private toastr: ToastrService, 
+    private modelServiceService: ModelServiceService,
+    private router:Router
+  ) {
     this.ds = new AddDeviceView();
     this.options = this.toastr.toastrConfig;
+    this.actions = new PresenterAction(
+      "event",
+      this.ds,
+      this.modelServiceService.saveDevice,
+      AddDeviceBuilder,
+      router
+    );
   }
 
   ngOnInit(): void {
-    
+
     Transformer.ComposeObjectAsync(this.modelServiceService.MetaTypeByKey("LOCATION"), this.ds.location, MetaTypeBuilder);
     this.ds.location.onAddingNewItem(async (e: { modal: Views.ModalHost }) => {
       e.modal.component = TypesPresenter;

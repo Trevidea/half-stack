@@ -239,7 +239,9 @@ export class ModelServiceService {
     return this._httpClient.post<any>(this.apiUrl, data);
   }
 
-  
+  saveDevice(data:Data.Device):Observable<Data.Device>{
+    return this.create("event-preview/add-device", data);
+  }
   eventList(): Observable<Data.Event[]> {
     return this._data("event", EventData);
   }
