@@ -11,6 +11,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 export class ConnectionGridComponent implements OnInit {
   @Input() eventConnection: any;
   @Input() listOrGrid: string;
+  @Input() datasource: any;
   constructor(
     private modalService: NgbModal,
     private router: Router,
@@ -24,6 +25,7 @@ export class ConnectionGridComponent implements OnInit {
       console.log(listOrGrid);
       this.listOrGrid = listOrGrid;
     }
+    console.log("Grid data Source:::", this.datasource);
   }
   modalOpenSM(modalSM) {
     this.modalService.open(modalSM, {

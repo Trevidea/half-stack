@@ -96,24 +96,6 @@ export class ConnectionStartComponent implements OnInit {
     this.listOrGrid = e;
     // console.log(e);
   }
-  // ListType(e: any) {
-  //   if (e == "all") {
-  //     EventConnection$.subscribe((data) => {
-  //       console.log(data);
-  //       this.eventConnection = data;
-  //     });
-  //   } else {
-  //     EventConnection$.pipe(
-  //       map((data) => {
-  //         const filtered = data.filter((item) => item.type === e);
-  //         // console.log("Filtered data:", filtered);
-  //         return filtered;
-  //       })
-  //     ).subscribe((filteredData) => {
-  //       this.eventConnection = filteredData;
-  //     });
-  //   }
-  // }
   @Output() pubSubAll: EventEmitter<any> = new EventEmitter<any>();
 
   onPubSubAll(event: any) {

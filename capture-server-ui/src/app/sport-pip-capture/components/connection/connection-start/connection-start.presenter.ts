@@ -53,6 +53,7 @@ export class ConnectionStartPresenter implements OnInit {
       }),
     };
     this.ds = filteredData as any;
+    console.log(this.ds);
     return this.ds;
   }
 }
