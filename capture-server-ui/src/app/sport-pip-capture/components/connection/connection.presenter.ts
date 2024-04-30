@@ -26,10 +26,8 @@ export class ConnectionPresenter implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("called connection presenter::");
     this.route.queryParams.subscribe((params) => {
       this.eventStarted = params["eventStarted"];
-      console.log("ID:", this.eventStarted);
     });
     // Transformer.ComposeCollectionAsync(this.dataFactory.PreviousConnection(), this.ds.Connection, PreviousConnectionBuilder)
   }

@@ -32,9 +32,13 @@ export class ConnectionStartComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private socketService: SocketService
   ) {
+<<<<<<< HEAD
     // this.socketService.onLiveEvent().subscribe((data) => {
     //   // console.log(data);
     // });
+=======
+    this.socketService.onLiveEvent().subscribe((data) => {});
+>>>>>>> 63e034da0e4282e8f9f204d14b3b7cb12a3ec379
   }
   connectiondetail: boolean = false;
   ngOnInit(): void {
@@ -95,24 +99,6 @@ export class ConnectionStartComponent implements OnInit {
     this.listOrGrid = e;
     // console.log(e);
   }
-  // ListType(e: any) {
-  //   if (e == "all") {
-  //     EventConnection$.subscribe((data) => {
-  //       console.log(data);
-  //       this.eventConnection = data;
-  //     });
-  //   } else {
-  //     EventConnection$.pipe(
-  //       map((data) => {
-  //         const filtered = data.filter((item) => item.type === e);
-  //         // console.log("Filtered data:", filtered);
-  //         return filtered;
-  //       })
-  //     ).subscribe((filteredData) => {
-  //       this.eventConnection = filteredData;
-  //     });
-  //   }
-  // }
   @Output() pubSubAll: EventEmitter<any> = new EventEmitter<any>();
 
   onPubSubAll(event: any) {

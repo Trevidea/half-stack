@@ -1,16 +1,14 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 
 @Component({
-  selector: 'app-log',
-  templateUrl: './log.component.html',
-  styleUrls: ['./log.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: "app-log",
+  templateUrl: "./log.component.html",
+  styleUrls: ["./log.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class LogComponent implements OnInit {
+  @Input() datasource: any;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

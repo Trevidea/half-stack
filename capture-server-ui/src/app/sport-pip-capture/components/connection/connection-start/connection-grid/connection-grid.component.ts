@@ -11,6 +11,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 export class ConnectionGridComponent implements OnInit {
   @Input() eventConnection: any;
   @Input() listOrGrid: string;
+  @Input() datasource: any;
   constructor(
     private modalService: NgbModal,
     private router: Router,
@@ -21,7 +22,6 @@ export class ConnectionGridComponent implements OnInit {
     const param = this.route.snapshot.queryParamMap;
     if (param.get("listOrGrid")) {
       const listOrGrid = param.get("listOrGrid");
-      console.log(listOrGrid);
       this.listOrGrid = listOrGrid;
     }
   }

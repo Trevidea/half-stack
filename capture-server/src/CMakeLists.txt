@@ -16,6 +16,7 @@ set(HALF_STACK_SRC
     base.cpp
     event-preview.cpp
     event-runner.cpp
+    device.cpp
     event-device.cpp
     countdown.cpp
     worker-loop.cpp

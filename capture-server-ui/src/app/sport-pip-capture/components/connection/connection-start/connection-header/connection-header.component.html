@@ -1,38 +1,61 @@
 <div class="card connection-header">
-  <div class="p-1 d-flex justify-content-between align-items-center connection-header-top"
-    style="border-radius: 0.428rem">
+  <div
+    class="p-1 d-flex justify-content-between align-items-center connection-header-top"
+    style="border-radius: 0.428rem"
+  >
     <div>
       <h4 class="light-text" style="margin-bottom: 0">Live Event Streaming</h4>
     </div>
     <div class="d-flex align-items-center">
       <div>
-        <h5 class="light-text" style="margin-bottom: 0px; margin-right: 10px; width: 70px">
+        <h5
+          class="light-text"
+          style="margin-bottom: 0px; margin-right: 10px; width: 70px"
+        >
           {{ formattedTime }}
         </h5>
       </div>
       <div>
-        <i *ngIf="!undoEvent" class="bi bi-pause-circle custom-bi-pause-circle cursor-pointer"
-          (click)="playPauseEvent('paues'); timerService.pause()"></i>
-        <i *ngIf="undoEvent" class="bi bi-play-circle custom-bi-pause-circle cursor-pointer"
-          (click)="playPauseEvent('play'); timerService.resume()"></i>
-        <i class="bi bi-stop-circle custom-bi-stop-circle cursor-pointer" (click)="modalOpenSM('modalblock')"></i>
+        <i
+          *ngIf="!undoEvent"
+          class="bi bi-pause-circle custom-bi-pause-circle cursor-pointer"
+          (click)="playPauseEvent('paues'); timerService.pause()"
+        ></i>
+        <i
+          *ngIf="undoEvent"
+          class="bi bi-play-circle custom-bi-pause-circle cursor-pointer"
+          (click)="playPauseEvent('play'); timerService.resume()"
+        ></i>
+        <i
+          class="bi bi-stop-circle custom-bi-stop-circle cursor-pointer"
+          (click)="modalOpenSM('modalblock')"
+        ></i>
       </div>
     </div>
   </div>
   <div class="row" style="padding: 0.5em; margin: 0">
-    <div class="col-xxl-4 col-xl-7 col-lg-7 col-md-7 sm-12 mb-md-1" style="align-self: center">
+    <div
+      class="col-xxl-4 col-xl-7 col-lg-7 col-md-7 sm-12 mb-md-1"
+      style="align-self: center"
+    >
       <div style="align-self: center">
-        <h3 class="text-nowrap light-text">{{datasource.title}}</h3>
-        <div class="d-flex  align-items-center flex-md-wrap">
+        <h3 class="text-nowrap light-text">{{ datasource.title }}</h3>
+        <div class="d-flex align-items-center flex-md-wrap">
           <div class="d-flex align-items-center">
             <i class="bi bi-clock"></i>
-            <p class="mb-0 text-nowrap dark-white-text" style="margin-left: 0.2em">
-              {{ datasource.dtEvent | customDateTimeFormat: datasource.time }}
+            <p
+              class="mb-0 text-nowrap dark-white-text"
+              style="margin-left: 0.2em"
+            >
+              {{ datasource.dtEvent | customDateTimeFormat : datasource.time }}
             </p>
           </div>
           <div class="d-flex align-items-center ml-xl-1 ml-xxl-0 ml-xxxl-0">
             <i class="bi bi-geo-alt"></i>
-            <p class="mb-0 text-nowrap dark-white-text" style="margin-left: 0.2em">
+            <p
+              class="mb-0 text-nowrap dark-white-text"
+              style="margin-left: 0.2em"
+            >
               Fairport
             </p>
           </div>
@@ -42,7 +65,10 @@
     <div class="col-xxl-8 col-xl-5 col-lg-5 col-md-5 sm-12">
       <div class="row">
         <div class="col-xxl-4 col-xl-12 mb-xxl-0 mb-lg-1 mb-md-1 mb-sm-1">
-          <div class="card h-100 p-1 custome-bg" style="border-radius: 10px; border: 1px solid transparent">
+          <div
+            class="card h-100 p-1 custome-bg"
+            style="border-radius: 10px; border: 1px solid transparent"
+          >
             <div class="d-flex">
               <i class="bi bi-file-earmark-text custom-earmark"></i>
               <div class="ml-1">
@@ -71,7 +97,10 @@
           </div>
         </div>
         <div class="col-xxl-4 col-md-4 d-none d-xxl-block">
-          <div class="card h-100 p-1 custome-bg" style="border-radius: 10px; border: 1px solid transparent">
+          <div
+            class="card h-100 p-1 custome-bg"
+            style="border-radius: 10px; border: 1px solid transparent"
+          >
             <div>
               <div style="display: flex">
                 <i class="bi bi-tablet custom-tablet"></i>
@@ -81,14 +110,17 @@
                     <i class="bi bi-arrow-down-left custom-arrow-down-left"></i>
                     <p class="dark-white-text">Receiving</p>
                   </div>
-                  <div style="
+                  <div
+                    style="
                       white-space: nowrap;
                       position: absolute;
                       bottom: 10px;
                       left: 8px;
-                    ">
+                    "
+                  >
                     <p class="dark-white-text" style="margin-bottom: 0">
-                      Connection Duration:- 01:00:45
+                      Connection Duration:-
+                      {{ longestDurationDevice(datasource.ongoingCountdown) }}
                     </p>
                   </div>
                 </div>
@@ -98,7 +130,10 @@
           </div>
         </div>
         <div class="col-xxl-4 col-md-4 d-none d-xxl-block">
-          <div class="card h-100 p-1 custome-bg" style="border-radius: 10px; border: 1px solid transparent">
+          <div
+            class="card h-100 p-1 custome-bg"
+            style="border-radius: 10px; border: 1px solid transparent"
+          >
             <div>
               <div style="display: flex">
                 <i class="bi bi-camera-video custom-camera-video"></i>
@@ -108,14 +143,16 @@
                     <i class="bi bi-arrow-up-right custom-arrow-up-right"></i>
                     <p class="dark-white-text">Sending</p>
                   </div>
-                  <div style="
+                  <div
+                    style="
                       white-space: nowrap;
                       position: absolute;
                       bottom: 10px;
                       left: 8px;
-                    ">
+                    "
+                  >
                     <p class="dark-white-text" style="margin-bottom: 0">
-                      Connection Duration:- 01:00:45
+                      Connection Duration:- {{ datasource.ongoingCountdown }}
                     </p>
                   </div>
                 </div>
@@ -127,7 +164,10 @@
       </div>
     </div>
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-md-1 d-xxl-none">
-      <div class="card custome-bg" style="border-radius: 10px; border: 1px solid transparent">
+      <div
+        class="card custome-bg"
+        style="border-radius: 10px; border: 1px solid transparent"
+      >
         <div style="border-radius: 10px; padding: 0.5em; margin-left: 0.5em">
           <div style="display: flex">
             <i class="bi bi-tablet custom-tablet"></i>
@@ -138,7 +178,10 @@
                 <p class="dark-white-text">Receiving</p>
               </div>
               <div style="white-space: nowrap">
-                <p class="dark-white-text">Connection Duration:- 01:00:45</p>
+                <p class="dark-white-text">
+                  Connection Duration:-
+                  {{ longestDurationDevice(datasource.ongoingCountdown) }}
+                </p>
               </div>
             </div>
             <br />
@@ -147,7 +190,10 @@
       </div>
     </div>
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-xxl-none">
-      <div class="card custome-bg" style="border-radius: 10px; border: 1px solid transparent">
+      <div
+        class="card custome-bg"
+        style="border-radius: 10px; border: 1px solid transparent"
+      >
         <div style="border-radius: 10px; padding: 0.5em; margin-left: 0.5em">
           <div style="display: flex">
             <i class="bi bi-camera-video custom-camera-video"></i>
@@ -158,7 +204,9 @@
                 <p class="dark-white-text">Sending</p>
               </div>
               <div style="white-space: nowrap">
-                <p class="dark-white-text">Connection Duration:- 01:00:45</p>
+                <p class="dark-white-text">
+                  Connection Duration:- {{ datasource.ongoingCountdown }}
+                </p>
               </div>
             </div>
             <br />
@@ -169,6 +217,9 @@
   </div>
 </div>
 <ng-template #modalblock let-modal style="width: 100px; height: 100px">
-  <app-connection-alert [title]="'End Event'" [description]="'Are you sure you want to end the <br> event ?'"
-    [undoEvent]="undoEvent"></app-connection-alert>
+  <app-connection-alert
+    [title]="'End Event'"
+    [description]="'Are you sure you want to end the <br> event ?'"
+    [undoEvent]="undoEvent"
+  ></app-connection-alert>
 </ng-template>

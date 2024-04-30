@@ -13,17 +13,19 @@ import { PreviousEventsConnectionData } from "./previous-events-connection";
 import { MetaTypeData } from "./meta-type";
 import { FileIndexData } from "./file-index";
 import { ConnectionPreviewData } from "./connection-preview";
+import { logData } from "../components/log/builder/log";
 @Injectable({
   providedIn: "root",
 })
 export class DataFactoryService {
   private _spModelUrl: string = environment.spModelUrl;
-
+  logData: any;
   constructor(private _httpClient: HttpClient) {
     this.SaveUserProfileJson = this.SaveUserProfileJson.bind(this);
     this.SaveDistributionList = this.SaveDistributionList.bind(this);
     this.SaveOnDemandFormJson = this.SaveOnDemandFormJson.bind(this);
     this.SaveMetaType = this.SaveMetaType.bind(this);
+    this.logData = of(logData);
   }
 
   create(type: string, entity: any): Observable<any> {
@@ -315,6 +317,7 @@ export class DataFactoryService {
   eventPreviewJson(): Observable<Data.ConnectionPreview[]> {
     return this._data("event-preview", ConnectionPreviewData);
   }
-
- 
+  Logs(): Observable<Data.Log[]> {
+    return this.logData;
+  }
 }

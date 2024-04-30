@@ -6,7 +6,13 @@ export namespace Data {
     id: number;
     _path?: number;
   }
-
+  export interface Log extends Base {
+    category: string;
+    subject: string;
+    user: string;
+    action: string;
+    timestamp: string;
+  }
   export interface Distribution extends Base {
     id: number;
     name: string;
@@ -123,7 +129,7 @@ export namespace Data {
   }
 
   export interface LiveEventConnectionDetail extends Base {
-    id: number
+    id: number;
     sport?: string;
     level?: string;
     program?: string;
@@ -135,9 +141,8 @@ export namespace Data {
     title?: string;
     status?: string;
     type: string;
-    connectionDetails: ConnectionDetails[]
+    connectionDetails: ConnectionDetails[];
   }
-
 
   export interface ConnectionDetails extends Base {
     id: number;
@@ -151,13 +156,12 @@ export namespace Data {
     retries: string;
     filesReceived: number;
     network: string;
-
   }
 
-  export enum NetWorkQuality { }
-  export enum Type { }
+  export enum NetWorkQuality {}
+  export enum Type {}
 
-  export enum Priority { }
+  export enum Priority {}
 
   export enum DataType {
     Type1 = "type1",
@@ -204,7 +208,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role { }
+  export interface Role {}
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -213,13 +217,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings { }
+  export interface DisplaySettings {}
 
-  export interface CustomizationSettings { }
+  export interface CustomizationSettings {}
 
-  export interface NotificationSettings { }
+  export interface NotificationSettings {}
 
-  export interface VideoResolutionSettings { }
+  export interface VideoResolutionSettings {}
   export enum DataStatus {
     Status1 = "status1",
     Status2 = "status2",
@@ -264,7 +268,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role { }
+  export interface Role {}
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -273,13 +277,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings { }
+  export interface DisplaySettings {}
 
-  export interface CustomizationSettings { }
+  export interface CustomizationSettings {}
 
-  export interface NotificationSettings { }
+  export interface NotificationSettings {}
 
-  export interface VideoResolutionSettings { }
+  export interface VideoResolutionSettings {}
 
   export interface Team extends Base {
     id: number;
