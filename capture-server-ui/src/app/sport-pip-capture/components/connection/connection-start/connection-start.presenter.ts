@@ -33,6 +33,7 @@ export class ConnectionStartPresenter implements OnInit {
       LiveEventBuilder
     );
     this.ds = this.socketDs;
+    console.log(this.socketDs);
   }
   ListType(e: any) {
     this.ds = this.socketDs;
@@ -53,7 +54,6 @@ export class ConnectionStartPresenter implements OnInit {
       }),
     };
     this.ds = filteredData as any;
-    console.log(this.ds);
     return this.ds;
   }
 }
