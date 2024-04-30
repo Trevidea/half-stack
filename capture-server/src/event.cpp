@@ -63,6 +63,32 @@ void Event::report()
                               });
 }
 
+void Event::validateEventId(int eventId) {
+    try {
+        // Retrieve the event by its ID
+        auto event = EntityBase::byId<Event>(eventId);
+
+        // Check if the event is upcoming or live based on minutes to start
+        auto minsToStart = event.minutesToStart();
+        if (minsToStart >= 0) {
+            // Event is upcoming or live
+            spdlog::trace("Event ID {} is upcoming or live.", eventId);
+        } else {
+            // Event is not upcoming or live
+            spdlog::error("Event ID {} does not correspond to an upcoming or live event.", eventId);
+            throw std::runtime_error("Event ID does not correspond to an upcoming or live event.");
+        }
+    } catch (const ExModelNotFoundException &e) {
+        // Handle the case where the event is not found
+        spdlog::error("Event ID {} not found.", eventId);
+        throw std::runtime_error("Event ID not found.");
+    } catch (const std::exception &e) {
+        // Handle other exceptions
+        spdlog::error("An error occurred while validating event ID {}: {}", eventId, e.what());
+        throw;
+    }
+}
+
 void Event::closeAllPreviews()
 {
     for (auto &&runner : this->m_runners)
@@ -187,9 +213,4 @@ void Event::handleAddDevice(const Request &req, Response &rsp) {
         rsp.setError("An error occurred while adding the device to the event: " + std::string(e.what()));
     }
 }
-
-
-
-
-
 

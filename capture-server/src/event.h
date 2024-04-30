@@ -32,6 +32,7 @@ public:
     void openPreview(const Request &req, Response &rsp);
     void closePreview(const Request &req, Response &rsp);
     void handleAddDevice(const Request &req, Response &rsp);
+    void validateEventId(int eventId); // Declaration of validateEventId function
     
 private:
     void closeAllPreviews();
