@@ -1,4 +1,4 @@
-// device.cpp
+// event-device.cpp
 #include "event-device.h"
 
 EventDevice::EventDevice() : EntityBase("event_device") {}
@@ -15,14 +15,14 @@ void EventDevice::setUserId(int value)
     m_model.set("user_id", value);
 }
 
-std::string EventDevice::location() const
+std::string EventDevice::name() const
 {
-    return this->m_model.get<std::string>("location");
+    return this->m_model.get<std::string>("name");
 }
 
-void EventDevice::setLocation(const std::string &value)
+void EventDevice::setName(const std::string &value)
 {
-    m_model.set("location", value);
+    m_model.set("name", value);
 }
 
 int EventDevice::deviceId() const
@@ -43,6 +43,26 @@ std::string EventDevice::deviceType() const
 void EventDevice::setDeviceType(const std::string &value)
 {
     m_model.set("deviceType", value);
+}
+
+std::string EventDevice::status() const
+{
+    return this->m_model.get<std::string>("status");
+}
+
+void EventDevice::setStatus(const std::string &value)
+{
+    m_model.set("status", value);
+}
+
+std::string EventDevice::location() const
+{
+    return this->m_model.get<std::string>("location");
+}
+
+void EventDevice::setLocation(const std::string &value)
+{
+    m_model.set("location", value);
 }
 
 std::string EventDevice::network() const

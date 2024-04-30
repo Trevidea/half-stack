@@ -2,11 +2,13 @@
 #include "gateway.h"
 #include "omal-factory.h"
 #include "virtual-host.h"
+#include <functional>
 
+// /tmp/ovenmediaengine/vod_dumps
 Omal::Omal() : EntityBase("omal")
 {
     // Watch VOD dump folders when Omal object is created
-    std::string vodDumpDir = "/tmp/ovenmediaengine/vod_dumps"; // Update this with the actual directory path
+    std::string vodDumpDir = "/Users/shreyapathak/mp4 dump"; // Update this with the actual directory path
     auto vodDumpCallback = [this](const std::string& filename)
     {
         // Handle the VOD dump file change here
@@ -17,6 +19,16 @@ Omal::Omal() : EntityBase("omal")
     // Create a Watcher instance to watch the VOD dump directory
     m_vodDumpWatcher = std::make_unique<Watcher>(vodDumpDir, vodDumpCallback);
     m_vodDumpWatcher->start(); // Start watching the directory
+}
+
+void Omal::createVHost(const Request &req, Response &rsp)
+{
+    // Handle creating new VHost
+    // Parse the request body and extract necessary information
+    // Use the information to create a new VHost
+
+    // Send appropriate response
+    rsp.setData("New VHost created successfully.");
 }
 
 void Omal::report() 
@@ -37,6 +49,12 @@ void Omal::report()
                                   this->assessNetworkQuality(req, rsp);
                               });
                               
+    // Add routes for creating new VHost and application
+    Gateway::instance().route("POST", "/api/create-vhost",
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  this->createVHost(req, rsp);
+                              });
 }
 
 void Omal::assessNetworkQuality(const Request &req, Response &rsp)
