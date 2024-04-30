@@ -4,6 +4,7 @@
       style="width: 100%"
       [users]="users"
       [categories]="categories"
+      (inputValueChange)="onInputValueChange($event)"
     ></app-log-filter>
   </div>
   <div class="card-body m-0 p-0">
@@ -11,81 +12,49 @@
       <table class="table mt-1">
         <thead>
           <tr>
-            <th scope="col" (click)="toggleArrow()">
-              <div style="display: flex">
-                <div class=" ">CATEGORY</div>
+            <th
+              *ngFor="let key of logKeys; let i = index"
+              (click)="toggleArrow(key, i)"
+              class="header-cell"
+            >
+              <div style="display: flex; cursor: pointer">
+                <div class=" ">{{ key }}</div>
                 <i
                   class="bi bi-arrow-down ml-2"
                   [style.transform]="
-                    'rotate(' + (180 - arrowDirection) + 'deg)'
+                    'rotate(' + (180 - arrowDirection[i]) + 'deg)'
                   "
                 ></i>
                 <i
                   class="bi bi-arrow-up"
                   style="margin-left: -5px"
                   [style.transform]="
-                    'rotate(' + (180 - arrowDirection) + 'deg)'
+                    'rotate(' + (180 - arrowDirection[i]) + 'deg)'
                   "
                 ></i>
-              </div>
-            </th>
-            <th scope="col">
-              <div style="display: flex">
-                <div class=" ">SUBJECT</div>
-                <div class="ml-2">
-                  <i class="bi bi-arrow-down"></i>
-                </div>
-                <i class="bi bi-arrow-up" style="margin-left: -5px"></i>
-              </div>
-            </th>
-            <th scope="col">
-              <div style="display: flex">
-                <div class=" ">USER</div>
-                <div class="ml-2">
-                  <i class="bi bi-arrow-down"></i>
-                </div>
-                <i class="bi bi-arrow-up" style="margin-left: -5px"></i>
-              </div>
-            </th>
-            <th scope="col">
-              <div style="display: flex">
-                <div class=" ">ACTION</div>
-                <div class="ml-2">
-                  <i class="bi bi-arrow-down"></i>
-                </div>
-                <i class="bi bi-arrow-up" style="margin-left: -5px"></i>
-              </div>
-            </th>
-            <th>
-              <div style="display: flex">
-                <div class=" ">DATE</div>
-                <div class="ml-2">
-                  <i class="bi bi-arrow-down"></i>
-                </div>
-                <i class="bi bi-arrow-up" style="margin-left: -5px"></i>
               </div>
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of datasource.logs">
-            <td scope="row" style="vertical-align: top">{{ item.category }}</td>
-            <td style="vertical-align: top">{{ item.subject }}</td>
-            <td style="vertical-align: top">
+          <tr
+            *ngFor="
+              let item of datasource.logs | logSearch : searchText;
+              let i = index
+            "
+          >
+            <td *ngFor="let key of logKeys" class="text-nowrap">
               <div class="media">
                 <img
-                  src="assets/images/avatars/1.png"
+                  src="assets/images/avatars/{{ i + 1 }}.png"
                   class="rounded mr-1"
                   height="25"
                   alt="team"
+                  *ngIf="key == 'user'"
                 />
-                <div class="media-body">{{ item.user }}</div>
+                {{ item[key] }}
               </div>
             </td>
-            <td style="vertical-align: top">
-              {{ item.action }}
-            </td>
-            <td style="vertical-align: top">{{ item.timestamp }}</td>
           </tr>
         </tbody>
       </table>

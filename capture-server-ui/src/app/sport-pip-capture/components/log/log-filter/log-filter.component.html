@@ -6,12 +6,20 @@
         <span class="input-group-text"><i data-feather="search"></i></span>
       </div>
       <input
+        type="search"
+        placeholder="Search"
+        class="form-control"
+        (keyup)="searchText($event.target.value)"
+        (input)="onInputChange($event)"
+      />
+      <!-- <input
         type="text"
         class="form-control"
         id="searchbar"
         name="searchbar"
         placeholder="Search..."
-      />
+        (keyup)="searchText($event.target.value)"
+      /> -->
     </div>
   </div>
   <div class="col-md-6 col-lg-2 col-12">

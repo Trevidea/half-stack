@@ -10,12 +10,39 @@ export class LogComponent implements OnInit {
   @Input() datasource: any;
   @Input() users: any;
   @Input() categories: any;
+  @Input() logKeys: any;
+  searchText: string = "";
+
   constructor() {}
 
   ngOnInit(): void {}
-  arrowDirection: number = 0; // 0 for down, 180 for up
+  arrowDirection: number[] = [];
+  currentSortColumn: string | null = null;
+  isAscending: boolean = true;
+  toggleArrow(column: string, index: number) {
+    // this.arrowDirection[i] = this.arrowDirection[i] === 0 ? 180 : 0;
+    if (this.currentSortColumn === column) {
+      this.isAscending = !this.isAscending;
+    } else {
+      this.currentSortColumn = column;
+      this.isAscending = true;
+    }
+    this.arrowDirection = Array(this.logKeys.length).fill(0);
+    this.arrowDirection[index] = this.isAscending ? 180 : 0;
+    this.datasource.logs.sort((a, b) => {
+      const aValue = a[column];
+      const bValue = b[column];
+      if (typeof aValue === "string" && typeof bValue === "string") {
+        return this.isAscending
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue);
+      } else {
+        return this.isAscending ? aValue - bValue : bValue - aValue;
+      }
+    });
+  }
 
-  toggleArrow() {
-    this.arrowDirection = this.arrowDirection === 0 ? 180 : 0;
+  onInputValueChange(value: string) {
+    this.searchText = value;
   }
 }

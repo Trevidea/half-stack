@@ -3,7 +3,6 @@ import { LogRangeView, LogView } from "./views/log";
 import { Transformer } from "app/blocks/transformer";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 import { EventRangeBuilder } from "./builder/log";
-import { LogData } from "app/sport-pip-capture/models/data";
 import { Data } from "app/sport-pip-capture/models/capture-interface";
 
 @Component({
@@ -12,6 +11,7 @@ import { Data } from "app/sport-pip-capture/models/capture-interface";
     [datasource]="ds"
     [users]="users"
     [categories]="categories"
+    [logKeys]="logKeys"
   ></app-log>`,
   styleUrls: ["./log.component.scss"],
   encapsulation: ViewEncapsulation.None,
@@ -20,9 +20,9 @@ export class LogPresentert implements OnInit {
   ds!: LogRangeView;
   users: string[] = [];
   userSet = new Set<string>();
-
   categories: string[] = [];
   categorySet = new Set<string>();
+  logKeys: string[] = [];
   constructor(private dataService: DataFactoryService) {
     this.ds = new LogRangeView();
   }
@@ -39,12 +39,18 @@ export class LogPresentert implements OnInit {
           this.userSet.add(item.user);
         }
       });
-
       logs.forEach((item) => {
         if (!this.categorySet.has(item.category)) {
           this.categories.push(item.category);
           this.categorySet.add(item.category);
         }
+      });
+      logs.forEach((item) => {
+        Object.keys(item).forEach((key) => {
+          if (!this.logKeys.includes(key)) {
+            this.logKeys.push(key);
+          }
+        });
       });
     });
   }
