@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddDeviceComponent } from 'app/sport-pip-capture/components/add-device/add-device.component';
@@ -12,6 +12,7 @@ import { UI } from 'app/sport-pip-capture/components/event/event-utility/event-u
   encapsulation: ViewEncapsulation.None
 })
 export class ActiveDevicesComponent implements OnInit {
+  @Input() eventId: any;
   dropdownItems: UI.DropDownMenuItem[] = [
     { label: 'Block', icon: 'slash', type: 'feather', action: () => { } },
     { label: 'Remove', icon: 'trash', type: 'feather', action: () => { } },
@@ -19,12 +20,14 @@ export class ActiveDevicesComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
+
   }
-  
-  openAddDeviceModal(){
-    this.modalService.open(AddDevicePresenter, {
+
+  openAddDeviceModal() {
+    const modalRef = this.modalService.open(AddDevicePresenter, {
       centered: true,
       size: 'md'
     });
+    modalRef.componentInstance.eventId = this.eventId;
   }
 }

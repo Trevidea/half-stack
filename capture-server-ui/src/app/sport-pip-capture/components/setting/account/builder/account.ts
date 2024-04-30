@@ -5,8 +5,8 @@ import { AccountView } from "../views/account-view";
 export class AccountBuilder extends AbstractBuilder<Data.UserProfile, AccountView>{
     compose(m: Data.UserProfile, v: AccountView) {
         v.id = m.id;
-        v.firstName = m.firstName;
-        v.lastName = m.lastName;
+        v.firstName = m.firstname;
+        v.lastName = m.lastname;
         v.phoneNumber = m.phone;
         v.role = "Operator"
         v.dateOfBirth = v.dateOfBirth;
@@ -17,8 +17,8 @@ export class AccountBuilder extends AbstractBuilder<Data.UserProfile, AccountVie
     decompose(v: AccountView): Data.UserProfile {
         return{
             id : v.id,
-            firstName:v.firstName,
-            lastName : v.lastName,
+            firstname:v.firstName,
+            lastname : v.lastName,
             email : v.email,
             phone: v.phoneNumber,
             role:v.role,

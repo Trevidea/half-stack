@@ -2,31 +2,24 @@
     <i class="bi bi-x-lg cursor-pointer" (click)="activeModal.dismiss('Cross click')"></i>
 </div>
 <div class="modal-body" tabindex="0" ngbAutofocus>
-    <h2 class="modal-title mb-2" id="myModalLabel1">Add Device</h2>
+    <h2 class="modal-title mb-2" id="myModalLabel1">Add device to event</h2>
     <form #AddStreamkeyForm="ngForm">
-        <div class="form-group">
-            <label>User Name<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" name="userName" required #ngmUser="ngModel"
-                [(ngModel)]="datasource.userName" />
-            <app-validation-alert controlName="User Name" [control]="ngmUser">
-            </app-validation-alert>
-        </div>
 
-        <!-- <div class="form-group">
+        <div class="form-group">
             <label>Device Name<span class="text-danger">*</span></label>
             <ng-select name="dname" [(ngModel)]="datasource.deviceName.SelectedItem" required #ngmdeviceName="ngModel">
-                <ng-option *ngFor="let item of datasource.deviceName" [value]="item">{{ item }}</ng-option>
+                <ng-option *ngFor="let item of datasource.deviceName" [value]="item">{{ item.value }}</ng-option>
             </ng-select>
             <app-validation-alert controlName="Device Name" [control]="ngmdeviceName">
             </app-validation-alert>
-        </div> -->
-        <div class="form-group">
+        </div>
+        <!-- <div class="form-group">
             <label>Device Name<span class="text-danger">*</span> </label>
-            <input type="text" class="form-control" name="dname" required [(ngModel)]="datasource.deviceName.SelectedItem"
-                #ngmdeviceName="ngModel" />
+            <input type="text" class="form-control" name="dname" required
+                [(ngModel)]="datasource.deviceName.SelectedItem" #ngmdeviceName="ngModel" />
             <app-validation-alert controlName="Device Name" [control]="ngmdeviceName">
             </app-validation-alert>
-        </div>
+        </div> -->
 
         <div class="form-group">
             <label>PIN<span class="text-danger">*</span></label>
@@ -51,10 +44,21 @@
             <app-validation-alert controlName="location" [control]="ngmlocation">
             </app-validation-alert>
         </div>
+
+        <div class="form-group">
+            <label>User Name<span class="text-danger">*</span></label>
+            <ng-select name="dname" [(ngModel)]="datasource.userName.SelectedItem" required #ngmUser="ngModel">
+                <ng-option *ngFor="let item of datasource.userName" [value]="item">{{ item.value }}</ng-option>
+            </ng-select>
+            <app-validation-alert controlName="User Name" [control]="ngmUser">
+            </app-validation-alert>
+        </div>
+
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" [disabled]="!AddStreamkeyForm.valid" class="btn btn-warning" (click)="onsave()" rippleEffect>
+    <button type="button" [disabled]="!AddStreamkeyForm.valid" class="btn btn-warning" (click)="onsave();save.emit()"
+        rippleEffect>
         Add
     </button>
 </div>
