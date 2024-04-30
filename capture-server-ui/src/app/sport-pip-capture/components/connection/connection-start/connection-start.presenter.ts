@@ -5,6 +5,8 @@ import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.se
 import { liveEventDetail } from "./views/live-event";
 import { LiveEventBuilder } from "./builders/live-event";
 import { SocketService } from "app/sport-pip-capture/models/socket.service";
+import { Data } from "app/sport-pip-capture/models/capture-interface";
+import { LiveEventDetailData } from "app/sport-pip-capture/models/live-event-detail";
 @Component({
   selector: "app-connection-start-presenter",
   template: `<app-connection-start
@@ -47,13 +49,18 @@ export class ConnectionStartPresenter implements OnInit {
       this.ds = this.socketDs;
       return this.ds;
     }
-    const filteredData = {
-      ...this.ds,
+    const liveEventDetail = {
+      title: this.ds.title,
+      countdown: this.ds.countdown,
+      dtEvent: this.ds.dtEvent,
+      ongoingCountdown: this.ds.ongoingCountdown,
+      time: this.ds.time,
+
       connectionDetails: this.ds.connectionDetails.filter((connection) => {
         return connection.role === type;
       }),
     };
-    this.ds = filteredData as any;
+    this.ds = liveEventDetail as any;
     return this.ds;
   }
 }
