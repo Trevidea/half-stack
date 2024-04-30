@@ -17,14 +17,12 @@ export class ConnectionListComponent implements OnInit {
     public modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    console.log("live event conection detail", this.eventConnection)
     const param = this.route.snapshot.queryParamMap;
     if (param.get("listOrGrid")) {
       const listOrGrid = param.get("listOrGrid");
-      console.log(listOrGrid);
       this.listOrGrid = listOrGrid;
     }
   }

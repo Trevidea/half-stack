@@ -22,10 +22,8 @@ export class ConnectionGridComponent implements OnInit {
     const param = this.route.snapshot.queryParamMap;
     if (param.get("listOrGrid")) {
       const listOrGrid = param.get("listOrGrid");
-      console.log(listOrGrid);
       this.listOrGrid = listOrGrid;
     }
-    console.log("Grid data Source:::", this.datasource);
   }
   modalOpenSM(modalSM) {
     this.modalService.open(modalSM, {

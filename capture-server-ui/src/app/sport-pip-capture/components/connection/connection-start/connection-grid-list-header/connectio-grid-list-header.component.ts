@@ -29,11 +29,9 @@ export class ConnectioGridListHeaderComponent implements OnInit {
     const param = this.route.snapshot.queryParamMap;
     if (param.get("listOrGrid")) {
       const listOrGrid = param.get("listOrGrid");
-      console.log(listOrGrid);
       this.listOrGrid = listOrGrid;
       this.listGrid(listOrGrid);
     }
-    console.log("abc::", this.listOrGrid);
   }
   listGrid(e: string) {
     this.messageListOrGrid.emit(e);
