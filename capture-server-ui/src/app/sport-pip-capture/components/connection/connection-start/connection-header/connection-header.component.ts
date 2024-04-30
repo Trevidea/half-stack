@@ -101,4 +101,27 @@ export class ConnectionHeaderComponent implements OnInit {
       // this.service.closePreview({eventId: })
     });
   }
+
+  longestDurationDevice(durationString) {
+    if (durationString !== undefined) {
+      const components = durationString?.split(/[^\d]+/);
+
+      let days = parseInt(components[0]);
+      let hours = parseInt(components[1]);
+      let minutes = parseInt(components[2]);
+      let seconds = parseInt(components[3]);
+      let totalMinutes = days * 24 * 60 + hours * 60 + minutes;
+      totalMinutes -= 10;
+      days = Math.floor(totalMinutes / (24 * 60));
+      totalMinutes %= 24 * 60;
+      hours = Math.floor(totalMinutes / 60);
+      minutes = totalMinutes % 60;
+      return `${days} days ${hours}:${String(minutes).padStart(
+        2,
+        "0"
+      )}:${String(seconds).padStart(2, "0")}`;
+    } else {
+      return "Finding device ";
+    }
+  }
 }
