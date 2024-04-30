@@ -28,14 +28,6 @@ export class liveEventDetail implements Views.Datasource {
         this._id = v;
     }
 
-    private _countdown: string;
-    public get countdown(): string {
-        return this._countdown;
-    }
-    public set countdown(v: string) {
-        this._countdown = v;
-    }
-
     private _ongoingCountdown: string;
     public get ongoingCountdown(): string {
         return this._ongoingCountdown;

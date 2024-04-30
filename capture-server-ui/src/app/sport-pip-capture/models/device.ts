@@ -1,30 +1,33 @@
-import { DataBase } from "./model";
 import { Data } from "./capture-interface";
+import { DataBase } from "./model";
 
 export class DeviceData extends DataBase<Data.Device> {
 
-    private _userName: string;
-    public get userName(): string {
-        return this._userName;
+    private _type: string;
+    public get type(): string {
+        return this._model.type;
     }
-    public set userName(v: string) {
-        this._userName = v;
-    }
-
-    private _deviceName: string;
-    public get deviceName(): string {
-        return this._deviceName;
-    }
-    public set deviceName(v: string) {
-        this._deviceName = v;
+    public set type(v: string) {
+        this._model.type = v;
     }
 
-    private _pin: string;
-    public get pin(): string {
-        return this._pin;
+
+    private _name: string;
+    public get name(): string {
+        return this._model.name;
     }
-    public set pin(v: string) {
-        this._pin = v;
+    public set name(v: string) {
+        this._model.name = v;
     }
+
+
+    private _code: string;
+    public get code(): string {
+        return this._model.code;
+    }
+    public set code(v: string) {
+        this._model.code = v;
+    }
+
 
 }

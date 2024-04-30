@@ -94,12 +94,20 @@ export namespace Data {
   }
 
 
+  export interface EventDevice extends Base {
+    id: number;
+    user_id: number;
+    device_id: number;
+    pin: string;
+    event_id:number
+    location: string;
+  }
+
   export interface Device extends Base {
     id: number;
-    userName: string;
-    deviceName: string;
-    pin: string;
-    location: string;
+    type: string;
+    name: string;
+    code: string;
   }
 
   export interface Connection extends Base {
@@ -189,8 +197,8 @@ export namespace Data {
 
   export interface UserProfile extends Base {
     id: number;
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
     email: string;
     phone: string;
     role: Role;
@@ -249,8 +257,8 @@ export namespace Data {
 
   export interface UserProfile extends Base {
     id: number;
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
     email: string;
     phone: string;
     role: Role;

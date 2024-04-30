@@ -9,6 +9,8 @@ import { EventData } from "./event";
 import { LiveEventDetailData } from "./live-event-detail";
 import { MetaTypeData } from "./meta-type";
 import { error, warn } from "console";
+import { UserProfileData } from "./user-profile";
+import { DeviceData } from "./device";
 
 @Injectable({
   providedIn: "root",
@@ -21,6 +23,7 @@ export class ModelServiceService {
     private _adapter: AdapterService
   ) {
     this.saveEvent = this.saveEvent.bind(this);
+    this.saveDevice = this.saveDevice.bind(this);
     // this.saveOnDemandEvent = this.saveOnDemandEvent.bind(this)
   }
 
@@ -32,6 +35,13 @@ export class ModelServiceService {
       })
     );
   }
+
+  createWithOut(type: string, entity: any): Observable<any> {
+    const url = `${this.modelsServerUrl}/${type}`;
+    return this._httpClient.post<any>(url,entity);
+    
+  }
+
   read(type: string): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}`;
     return this._httpClient.get<any>(url);
@@ -239,9 +249,11 @@ export class ModelServiceService {
     return this._httpClient.post<any>(this.apiUrl, data);
   }
 
-  saveDevice(data:Data.Device):Observable<Data.Device>{
-    return this.create("event-preview/add-device", data);
+  saveDevice(data: Data.EventDevice): Observable<Data.EventDevice> {
+    console.log(data)
+    return this.createWithOut("event/add-device", data);
   }
+
   eventList(): Observable<Data.Event[]> {
     return this._data("event", EventData);
   }
@@ -278,10 +290,13 @@ export class ModelServiceService {
     return this._httpClient.post<any>(url, data);
   }
 
-  // liveEventJson(): Observable<Data.LiveEventDetail[]> {
-  //   return this._data("liveEvent", LiveEventDetailData);
-  // }
+  userJson(): Observable<Data.UserProfile[]> {
+    return this._data('user-profiles', UserProfileData)
+  }
 
+  deviceJson(): Observable<Data.Device[]> {
+    return this._data('devices', DeviceData)
+  }
   MetaTypeByKey(key: string): Observable<Data.MetaType> {
     return this._selectQueryOne("meta-type", `'${key}'`, "key", MetaTypeData);
   }

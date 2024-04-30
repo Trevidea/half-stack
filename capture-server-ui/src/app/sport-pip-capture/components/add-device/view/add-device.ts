@@ -1,4 +1,5 @@
 import { Collection } from "app/blocks/collection";
+import { SelectItemView } from "app/blocks/collection-item";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
 
 export class AddDeviceView implements Views.Datasource {
@@ -10,23 +11,26 @@ export class AddDeviceView implements Views.Datasource {
         this._id = v;
     }
 
-    private _userName: string;
-    public get userName(): string {
+    private _userName: Collection<SelectItemView>;
+    public get userName(): Collection<SelectItemView> {
+        if (!this._userName) {
+            this._userName = new Collection<SelectItemView>()
+        }
         return this._userName;
     }
-    public set userName(v: string) {
+    public set userName(v: Collection<SelectItemView>) {
         this._userName = v;
     }
 
 
-    private _deviceName: Collection<string>;
-    public get deviceName(): Collection<string> {
+    private _deviceName: Collection<SelectItemView>;
+    public get deviceName(): Collection<SelectItemView> {
         if (!this._deviceName) {
-            this._deviceName = new Collection<string>();
+            this._deviceName = new Collection<SelectItemView>();
         }
         return this._deviceName;
     }
-    public set deviceName(v: Collection<string>) {
+    public set deviceName(v: Collection<SelectItemView>) {
         this._deviceName = v;
     }
 
@@ -50,6 +54,16 @@ export class AddDeviceView implements Views.Datasource {
     public set location(v: Collection<string>) {
         this._location = v;
     }
+ 
 
+    
+    private _eventId : number;
+    public get eventId() : number {
+        return this._eventId;
+    }
+    public set eventId(v : number) {
+        this._eventId = v;
+    }
+    
 
 }

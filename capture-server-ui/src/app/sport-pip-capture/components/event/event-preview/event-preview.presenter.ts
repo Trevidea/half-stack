@@ -2,12 +2,11 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { SocketService } from "app/sport-pip-capture/models/socket.service";
 import { RangeEventPreviewView } from "./views/event-preview";
-import { Subscription } from "rxjs";
 import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 
 @Component({
   selector: "app-event-preview-presenter",
-  template: `<app-event-preview [datasource]='previewData?.result[0]?.[0]' (closePreview)='onClosePreview()'></app-event-preview>`,
+  template: `<app-event-preview [datasource]='previewData?.result[0]?.[0]' (closePreview)='onClosePreview()' [eventId]="eventId"></app-event-preview>`,
   styleUrls: ["./event-preview.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
@@ -20,16 +19,14 @@ export class EventPreviewPresenter implements OnInit {
     private socketService: SocketService,
     private modelServiceService: ModelServiceService,
   ) {
-    this.route.queryParams.subscribe(params => {
-      this.eventId = parseInt(params['eventId']);
-      console.log(this.eventId)
+    this.route.params.subscribe(params => {
+      this.eventId = +params['id'];
+      console.log('ID:', this.eventId);
     });
 
   }
 
   ngOnInit(): void {
-    console.log("Subscribing to onEventPreview");
-
     this.socketService.onEventPreview().subscribe(
       (data) => {
         this.previewData = JSON.parse(data);
@@ -54,7 +51,6 @@ export class EventPreviewPresenter implements OnInit {
   }
 
   onClosePreview() {
-     console.log("clicked closed preview ")
     this.modelServiceService.closePreview({ eventId: this.eventId }).subscribe(
       (data: any) => {
         console.log("data", data)
@@ -66,7 +62,7 @@ export class EventPreviewPresenter implements OnInit {
   }
 
 
-  
+
 
 }
 

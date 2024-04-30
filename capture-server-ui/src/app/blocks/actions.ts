@@ -47,7 +47,7 @@ export class PresenterAction<M, V> implements Views.FormActions {
           this.onComplete.emit(false);
 
           this.state = { error: true, data: err };
-          this.opensweetalertsave();
+          // this.opensweetalertsave();
         } else {
           this.onComplete.emit(true);
           this.state = { error: false, data: data };

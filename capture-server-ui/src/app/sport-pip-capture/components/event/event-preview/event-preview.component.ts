@@ -10,11 +10,12 @@ import { GlobalConfig, ToastrService } from 'ngx-toastr';
   encapsulation: ViewEncapsulation.None
 })
 export class EventPreviewComponent implements OnInit {
-  @Input() datasource: any
+  @Input() datasource: any;
+  @Input() eventId: any;
   private countdownInterval: any;
-  @Output() closePreview =  new EventEmitter()
+  @Output() closePreview = new EventEmitter()
   constructor(public dateTimeservice: DateTimeService, private modalService: NgbModal,
-   
+
   ) { }
 
   ngOnInit(): void {
@@ -44,5 +45,5 @@ export class EventPreviewComponent implements OnInit {
     return num < 10 ? `0${num}` : `${num}`;
   }
 
-  
+
 }

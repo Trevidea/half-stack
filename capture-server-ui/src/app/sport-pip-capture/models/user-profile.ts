@@ -4,18 +4,18 @@ import { Data } from "./capture-interface";
 
 export class UserProfileData extends DataBase<Data.UserProfile>{
     
-    public get firstName() : string {
-        return this._model.firstName;
+    public get firstname() : string {
+        return this._model.firstname;
     }
-    public set firstName(v : string) {
-        this._model.firstName = v;
+    public set firstname(v : string) {
+        this._model.firstname = v;
     }
    
-    public get lastName() : string {
-        return this._model.lastName;
+    public get lastname() : string {
+        return this._model.lastname;
     }
-    public set lastName(v : string) {
-        this._model.lastName = v;
+    public set lastname(v : string) {
+        this._model.lastname = v;
     }
 
     

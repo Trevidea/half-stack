@@ -26,7 +26,7 @@ export class Range<T> extends Array<T> {
 
   private addNewDispatcher = new EventDispatcher<AddingNewEvent>();
   public onAddingNewItem(handler: Handler<AddingNewEvent>): void {
-    console.log("addnewDiapatcher", this.addNewDispatcher);
+    // console.log("addnewDiapatcher", this.addNewDispatcher);
     this.addNewDispatcher.register(handler);
   }
   Clear(): void {

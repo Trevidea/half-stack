@@ -32,9 +32,9 @@ export class ConnectionStartComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private socketService: SocketService
   ) {
-    this.socketService.onLiveEvent().subscribe((data) => {
-      // console.log(data);
-    });
+    // this.socketService.onLiveEvent().subscribe((data) => {
+    //   // console.log(data);
+    // });
   }
   connectiondetail: boolean = false;
   ngOnInit(): void {
@@ -47,7 +47,6 @@ export class ConnectionStartComponent implements OnInit {
         console.log("error:::", error);
       }
     );
-    // console.log(this.eventConnection);
   }
 
   ConnectionDetails(yes: boolean) {

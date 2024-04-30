@@ -75,8 +75,7 @@ export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
 
 
   navigateToEventPreview(eventId: number) {
-    this.router.navigate(['/event/event-preview'], {
-      queryParams: { eventId: eventId }
+    this.router.navigate([`/event/event-preview/${eventId}`], {
     });
   }
 

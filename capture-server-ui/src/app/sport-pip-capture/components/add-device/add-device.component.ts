@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalConfig, ToastrService } from 'ngx-toastr';
 
@@ -12,7 +12,8 @@ export class AddDeviceComponent implements OnInit {
   @Input() datasource: any
   private toastRef: any;
   private options: GlobalConfig;
-
+  @Output() save = new EventEmitter();
+  @Output() cancel = new EventEmitter();
   constructor(public activeModal: NgbActiveModal, private toastr: ToastrService) {
     this.options = this.toastr.toastrConfig;
   }
@@ -27,7 +28,7 @@ export class AddDeviceComponent implements OnInit {
   }
 
   onsave() {
-    this.toastrSuccess()
+    // this.toastrSuccess()
     // this.activeModal.close('Accept click')
   }
 }
