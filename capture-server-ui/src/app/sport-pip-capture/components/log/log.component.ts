@@ -13,4 +13,9 @@ export class LogComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+  arrowDirection: number = 0; // 0 for down, 180 for up
+
+  toggleArrow() {
+    this.arrowDirection = this.arrowDirection === 0 ? 180 : 0;
+  }
 }

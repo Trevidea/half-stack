@@ -11,11 +11,60 @@
       <table class="table mt-1">
         <thead>
           <tr>
-            <th scope="col">CATEGORY</th>
-            <th scope="col">SUBJECT</th>
-            <th scope="col">USER</th>
-            <th scope="col">ACTION</th>
-            <th>DATE</th>
+            <th scope="col" (click)="toggleArrow()">
+              <div style="display: flex">
+                <div class=" ">CATEGORY</div>
+                <i
+                  class="bi bi-arrow-down ml-2"
+                  [style.transform]="
+                    'rotate(' + (180 - arrowDirection) + 'deg)'
+                  "
+                ></i>
+                <i
+                  class="bi bi-arrow-up"
+                  style="margin-left: -5px"
+                  [style.transform]="
+                    'rotate(' + (180 - arrowDirection) + 'deg)'
+                  "
+                ></i>
+              </div>
+            </th>
+            <th scope="col">
+              <div style="display: flex">
+                <div class=" ">SUBJECT</div>
+                <div class="ml-2">
+                  <i class="bi bi-arrow-down"></i>
+                </div>
+                <i class="bi bi-arrow-up" style="margin-left: -5px"></i>
+              </div>
+            </th>
+            <th scope="col">
+              <div style="display: flex">
+                <div class=" ">USER</div>
+                <div class="ml-2">
+                  <i class="bi bi-arrow-down"></i>
+                </div>
+                <i class="bi bi-arrow-up" style="margin-left: -5px"></i>
+              </div>
+            </th>
+            <th scope="col">
+              <div style="display: flex">
+                <div class=" ">ACTION</div>
+                <div class="ml-2">
+                  <i class="bi bi-arrow-down"></i>
+                </div>
+                <i class="bi bi-arrow-up" style="margin-left: -5px"></i>
+              </div>
+            </th>
+            <th>
+              <div style="display: flex">
+                <div class=" ">DATE</div>
+                <div class="ml-2">
+                  <i class="bi bi-arrow-down"></i>
+                </div>
+                <i class="bi bi-arrow-up" style="margin-left: -5px"></i>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
