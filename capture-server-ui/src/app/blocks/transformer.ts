@@ -159,7 +159,7 @@ export class Transformer {
     return srlz;
   }
 
-// this is for just testing  becouse live event comming continuously  
+  // this is for just testing  becouse live event comming continuously
   static _ComposeLiveObjectAsync<M, V, T extends AbstractBuilder<M, V>>(
     data: Observable<M>,
     view: V,
