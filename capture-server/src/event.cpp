@@ -63,26 +63,35 @@ void Event::report()
                               });
 }
 
-void Event::validateEventId(int eventId) {
-    try {
+void Event::validateEventId(int eventId)
+{
+    try
+    {
         // Retrieve the event by its ID
         auto event = EntityBase::byId<Event>(eventId);
 
         // Check if the event is upcoming or live based on minutes to start
         auto minsToStart = event.minutesToStart();
-        if (minsToStart >= 0) {
+        if (minsToStart >= 0)
+        {
             // Event is upcoming or live
             spdlog::trace("Event ID {} is upcoming or live.", eventId);
-        } else {
+        }
+        else
+        {
             // Event is not upcoming or live
             spdlog::error("Event ID {} does not correspond to an upcoming or live event.", eventId);
             throw std::runtime_error("Event ID does not correspond to an upcoming or live event.");
         }
-    } catch (const ExModelNotFoundException &e) {
+    }
+    catch (const ExModelNotFoundException &e)
+    {
         // Handle the case where the event is not found
         spdlog::error("Event ID {} not found.", eventId);
         throw std::runtime_error("Event ID not found.");
-    } catch (const std::exception &e) {
+    }
+    catch (const std::exception &e)
+    {
         // Handle other exceptions
         spdlog::error("An error occurred while validating event ID {}: {}", eventId, e.what());
         throw;
@@ -156,7 +165,8 @@ void Event::closePreview(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
 
-void Event::handleAddDevice(const Request &req, Response &rsp) {
+void Event::handleAddDevice(const Request &req, Response &rsp)
+{
     // Extract device_id, user_id, location, and event_id from the request JSON
     Json::Value requestData = req.json();
     int device_id = requestData["device_id"].asInt();
@@ -164,7 +174,8 @@ void Event::handleAddDevice(const Request &req, Response &rsp) {
     std::string location = requestData["location"].asString();
 
     // Check if event_id is present in the request JSON
-    if (!requestData.isMember("event_id")) {
+    if (!requestData.isMember("event_id"))
+    {
         // Respond with an error message indicating that event_id is required
         rsp.setError("Event ID is required in the request.");
         return;
@@ -172,8 +183,10 @@ void Event::handleAddDevice(const Request &req, Response &rsp) {
 
     // Retrieve the event_id from the request JSON
     int event_id = requestData["event_id"].asInt();
+    std::string pin = requestData["pin"].asString(); // Assuming "pin" represents the PIN
 
-    try {
+    try
+    {
         // Retrieve the event by its ID
         auto event = EntityBase::byId<Event>(event_id);
 
@@ -183,7 +196,7 @@ void Event::handleAddDevice(const Request &req, Response &rsp) {
         sql += std::to_string(device_id) + ", ";
         sql += std::to_string(user_id) + ", ";
         sql += "'" + location + "', ";
-        sql += "'0000')"; // Hardcoded value for pin
+        sql += "'" + pin + "')";
 
         // Execute the SQL statement
         EntityBase entityBase("event_device");
@@ -197,7 +210,7 @@ void Event::handleAddDevice(const Request &req, Response &rsp) {
         responseData["device_id"] = std::to_string(device_id);
         responseData["user_id"] = std::to_string(user_id);
         responseData["location"] = location;
-        responseData["pin"] = "0000"; // Hardcoded value for pin
+        responseData["pin"] = pin;
 
         // Convert the response data to a vector of maps
         std::vector<std::map<std::string, std::string>> responseVector;
@@ -205,12 +218,15 @@ void Event::handleAddDevice(const Request &req, Response &rsp) {
 
         // Pass the response data to formatResponse
         rsp.setData(Gateway::instance().formatResponse(responseVector));
-    } catch (const ExModelNotFoundException &e) {
+    }
+    catch (const ExModelNotFoundException &e)
+    {
         // Handle the case where the event is not found
         rsp.setError("The specified event was not found.");
-    } catch (const std::exception &e) {
+    }
+    catch (const std::exception &e)
+    {
         // Handle other exceptions
         rsp.setError("An error occurred while adding the device to the event: " + std::string(e.what()));
     }
 }
-
