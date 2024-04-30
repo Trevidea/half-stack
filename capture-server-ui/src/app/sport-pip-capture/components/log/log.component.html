@@ -1,6 +1,10 @@
 <div class="card log-warraper p-0 m-0">
   <div class="card-header p-1">
-    <app-log-filter style="width: 100%"></app-log-filter>
+    <app-log-filter
+      style="width: 100%"
+      [users]="users"
+      [categories]="categories"
+    ></app-log-filter>
   </div>
   <div class="card-body m-0 p-0">
     <div class="table-responsive">
