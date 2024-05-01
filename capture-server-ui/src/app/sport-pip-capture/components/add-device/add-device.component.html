@@ -6,7 +6,7 @@
     <form #AddStreamkeyForm="ngForm">
 
         <div class="form-group">
-            <label>Device Name<span class="text-danger">*</span></label>
+            <label>Device<span class="text-danger">*</span></label>
             <ng-select name="dname" [(ngModel)]="datasource.deviceName.SelectedItem" required #ngmdeviceName="ngModel">
                 <ng-option *ngFor="let item of datasource.deviceName" [value]="item">{{ item.value }}</ng-option>
             </ng-select>

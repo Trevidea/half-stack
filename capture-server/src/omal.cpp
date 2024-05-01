@@ -37,6 +37,14 @@ void Omal::report()
                                   this->assessNetworkQuality(req, rsp);
                               });
                               
+    Gateway::instance().route("GET", "/api/omal/app", // To request LIST
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  Json::Value response=Json::objectValue;
+                                  response["app"]="spip";
+                                  const auto &strResponse = Gateway::instance().formatResponse({{response}});
+                                  rsp.setData(strResponse);
+                              });
 }
 
 void Omal::assessNetworkQuality(const Request &req, Response &rsp)

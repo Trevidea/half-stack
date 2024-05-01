@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { SocketService } from "app/sport-pip-capture/models/socket.service";
-import { RangeEventPreviewView } from "./views/event-preview";
+import { EventPreview, RangeEventPreviewView } from "./views/event-preview";
 import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
+import { Transformer } from "app/blocks/transformer";
+import { EventPreviewBuilder } from "./builders/event-preview";
 
 @Component({
   selector: "app-event-preview-presenter",
@@ -12,7 +14,7 @@ import { ModelServiceService } from "app/sport-pip-capture/models/model-service.
 })
 export class EventPreviewPresenter implements OnInit {
   previewData!: any;
-  ds!: RangeEventPreviewView;
+  ds!: EventPreview;
   eventId: number
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +25,7 @@ export class EventPreviewPresenter implements OnInit {
       this.eventId = +params['id'];
       console.log('ID:', this.eventId);
     });
-
+    this.ds = new EventPreview();
   }
 
   ngOnInit(): void {
@@ -46,8 +48,8 @@ export class EventPreviewPresenter implements OnInit {
       }
     );
 
-
-
+    Transformer._ComposeLiveObjectAsync(this.socketService._onEventPreview(), this.ds, EventPreviewBuilder);
+    console.log(this.ds)
   }
 
   onClosePreview() {

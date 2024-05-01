@@ -286,7 +286,6 @@ export class ModelServiceService {
 
   closePreview(data: { eventId: number }): Observable<any> {
     const url = `${environment.spModelUrl}/event/close-preview`;
-
     return this._httpClient.post<any>(url, data);
   }
 
@@ -297,6 +296,7 @@ export class ModelServiceService {
   deviceJson(): Observable<Data.Device[]> {
     return this._data('devices', DeviceData)
   }
+  
   MetaTypeByKey(key: string): Observable<Data.MetaType> {
     return this._selectQueryOne("meta-type", `'${key}'`, "key", MetaTypeData);
   }

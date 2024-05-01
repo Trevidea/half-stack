@@ -5,6 +5,7 @@ import { map } from "rxjs/operators";
 import { Socket, io } from "socket.io-client";
 import { Data } from "./capture-interface";
 import { LiveEventDetailData } from "./live-event-detail";
+import { ConnectionPreviewData } from "./connection-preview";
 
 @Injectable({
   providedIn: "root",
@@ -54,15 +55,25 @@ export class SocketService {
     return this.eventTerminalSubject;
   }
 
-  _onLiveEvent(type: string): Observable<Data.LiveEventConnectionDetail> {
+  _onLiveEvent(): Observable<Data.LiveEventConnectionDetail> {
     return this.liveEventSubject.pipe(
       map((data: any) => {
         const eventObject = JSON.parse(data);
-
-        const liveEventConnectionDetail: Data.LiveEventConnectionDetail =
-          eventObject.result[0][0];
+        const liveEventConnectionDetail: Data.LiveEventConnectionDetail = eventObject.result[0][0];
         return new LiveEventDetailData(liveEventConnectionDetail);
       })
     );
   }
+
+  _onEventPreview(): Observable<Data.ConnectionPreview> {
+    return this.eventPreviewSubject.pipe(
+      map((data: any) => {
+        console.log(data)
+        const eventObject = JSON.parse(data);
+        const previewDetail:Data.ConnectionPreview = eventObject.result[0][0];
+        return new ConnectionPreviewData(previewDetail)
+      })
+    );
+  }
+
 }

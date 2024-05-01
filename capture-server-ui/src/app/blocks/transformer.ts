@@ -40,7 +40,7 @@ export class Transformer {
     return promise;
   }
 
-  constructor() {}
+  constructor() { }
 
   static ComposeCollectionAsync<M, V, T extends AbstractBuilder<M, V>>(
     data: Observable<M[]>,
@@ -169,8 +169,10 @@ export class Transformer {
       let od: ObjectStrategy<M, V, T> = new ObjectStrategy(view, builder);
       var modelData!: M;
       data.subscribe(
+
         (model: M) => {
           modelData = model;
+          console.log(model)
           od.compose(modelData);
         },
         (err) => {
