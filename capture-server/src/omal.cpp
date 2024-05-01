@@ -83,9 +83,8 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     // Log the incoming request
     spdlog::trace("Incoming Control Server request:\n{}", req.data());
 
-    // Construct the response with 'allowed' set to true as a boolean value
-    Json::Value jsonResponse;
-    jsonResponse["allowed"] = Json::Value(true); // Explicitly set 'allowed' as a boolean value
+    // Construct the response with 'allowed' set to true
+    Json::Value jsonResponse = true; // 'allowed' is set to true
 
     // Log the response
     spdlog::trace("Outgoing Control Server response:\n{}", Json::FastWriter().write(jsonResponse));
@@ -95,8 +94,6 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 
     // No need to send the response to the control server
 }
-
-
 
 Omal::~Omal()
 {
