@@ -99,12 +99,12 @@ export class EventPreview implements Views.Datasource {
     return this._countdown;
   }
 
-  get activeDevice(): Collection<ActiveDeviceView> {
-    if (!this._activeDevice) {
-      this._activeDevice = new Collection<ActiveDeviceView>();
-    }
-    return this._activeDevice;
-  }
+  // get activeDevice(): Collection<ActiveDeviceView> {
+  //   if (!this._activeDevice) {
+  //     this._activeDevice = new Collection<ActiveDeviceView>();
+  //   }
+  //   return this._activeDevice;
+  // }
 
   // Setters
   set id(value: number) {
@@ -163,9 +163,18 @@ export class EventPreview implements Views.Datasource {
     this._countdown = value;
   }
 
-  set activeDevice(value: Collection<ActiveDeviceView>) {
-    this._activeDevice = value;
+
+  private _previewActiveDevice: Range<ActiveDeviceView>;
+  public get previewActiveDevice(): Range<ActiveDeviceView> {
+    if (!this._previewActiveDevice) {
+      this._previewActiveDevice = new Range<ActiveDeviceView>()
+    }
+    return this._previewActiveDevice;
   }
+  public set previewActiveDevice(v: Range<ActiveDeviceView>) {
+    this._previewActiveDevice = v;
+  }
+
 }
 
 export class ActiveDeviceView {
@@ -208,5 +217,15 @@ export class ActiveDeviceView {
   }
   public set user(v: string) {
     this._user = v;
+  }
+}
+
+export class VenueView {
+  private _location: string;
+  public get location(): string {
+    return this._location;
+  }
+  public set location(v: string) {
+    this._location = v;
   }
 }

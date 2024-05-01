@@ -38,8 +38,8 @@ export class ModelServiceService {
 
   createWithOut(type: string, entity: any): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}`;
-    return this._httpClient.post<any>(url,entity);
-    
+    return this._httpClient.post<any>(url, entity);
+
   }
 
   read(type: string): Observable<any> {
@@ -249,6 +249,11 @@ export class ModelServiceService {
     return this._httpClient.post<any>(this.apiUrl, data);
   }
 
+  fetechApplicationDetail(): Observable<any> {
+    const url = `${environment.spModelUrl}/omal/app`
+    return this._httpClient.get(url)
+  }
+
   saveDevice(data: Data.EventDevice): Observable<Data.EventDevice> {
     console.log(data)
     return this.createWithOut("event/add-device", data);
@@ -286,7 +291,6 @@ export class ModelServiceService {
 
   closePreview(data: { eventId: number }): Observable<any> {
     const url = `${environment.spModelUrl}/event/close-preview`;
-
     return this._httpClient.post<any>(url, data);
   }
 
@@ -297,6 +301,7 @@ export class ModelServiceService {
   deviceJson(): Observable<Data.Device[]> {
     return this._data('devices', DeviceData)
   }
+
   MetaTypeByKey(key: string): Observable<Data.MetaType> {
     return this._selectQueryOne("meta-type", `'${key}'`, "key", MetaTypeData);
   }

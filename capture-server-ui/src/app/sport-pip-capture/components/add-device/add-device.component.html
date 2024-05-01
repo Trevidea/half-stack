@@ -6,7 +6,7 @@
     <form #AddStreamkeyForm="ngForm">
 
         <div class="form-group">
-            <label>Device Name<span class="text-danger">*</span></label>
+            <label>Device<span class="text-danger">*</span></label>
             <ng-select name="dname" [(ngModel)]="datasource.deviceName.SelectedItem" required #ngmdeviceName="ngModel">
                 <ng-option *ngFor="let item of datasource.deviceName" [value]="item">{{ item.value }}</ng-option>
             </ng-select>
@@ -23,9 +23,10 @@
 
         <div class="form-group">
             <label>PIN<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" required name="pin" [(ngModel)]="datasource.pin"
-                #ngmPIN="ngModel" />
-            <app-validation-alert controlName="PIN" [control]="ngmPIN">
+            <input type="text" class="form-control" pattern="[0-9]*" minlength="6" maxlength="6" required name="pin"
+                [(ngModel)]="datasource.pin" #ngmPIN="ngModel" />
+            <app-validation-alert controlName="PIN" [patternmassage]="'Only numerical value is allowed e.g.. 010101'"
+                [control]="ngmPIN">
             </app-validation-alert>
         </div>
 
@@ -41,7 +42,7 @@
                     <inline-form-modal #location modalTitle="New location"></inline-form-modal>
                 </ng-template>
             </ng-select>
-            <app-validation-alert controlName="location" [control]="ngmlocation">
+            <app-validation-alert controlName="Location" [control]="ngmlocation">
             </app-validation-alert>
         </div>
 

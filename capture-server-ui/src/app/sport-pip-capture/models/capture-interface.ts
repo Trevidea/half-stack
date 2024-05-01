@@ -415,25 +415,20 @@ export namespace Data {
     sport: string;
     status: string;
     title: string;
-    detail: {
-      cityAddress: string;
-      streetAdress: string;
-      type: string;
-    };
+    detail: Detail;
     year: number;
-    venue: {
-      location: string;
-    };
+    venue: Venue;
     time: number;
     type: string;
     countdown: string;
     activeDevice: ActiveDevice[];
   }
   export interface ActiveDevice {
-    user: string;
+    name: string;
     location: string;
     deviceId: string;
     deviceType: string;
+    status: string;
     network: string;
   }
 }

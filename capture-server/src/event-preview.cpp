@@ -1,6 +1,7 @@
 #include "event-preview.h"
 #include "gateway.h"
 #include "event.h"
+#include <json/json.h>
 
 EventPreview::EventPreview(Json::Value &model) : Base(model)
 {
@@ -159,4 +160,23 @@ std::vector<EventDevice> &EventPreview::activeDevices()
 const std::vector<EventDevice> &EventPreview::activeDevices() const
 {
     return m_activeDevice;
+}
+
+void EventPreview::setActiveDevices(const std::vector<EventDevice> &activeDevices)
+{
+    // Clear the existing active devices in the model
+    m_model["activeDevices"] = Json::arrayValue;
+
+    // Populate the model with the new active devices
+    for (const auto &device : activeDevices)
+    {
+        Json::Value jsonDevice;
+        jsonDevice["deviceId"] = device.deviceId();
+        jsonDevice["deviceType"] = device.deviceType();
+        jsonDevice["name"] = device.name();
+        jsonDevice["status"] = device.status();
+        jsonDevice["location"] = device.location();
+        jsonDevice["network"] = device.network();
+        m_model["activeDevices"].append(jsonDevice);
+    }
 }
