@@ -88,8 +88,10 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     jsonResponse["allowed"] = true; // Set the "allowed" field to true
 
     // Set the response data directly as a boolean
-    rsp.setData(jsonResponse["allowed"].asBool());
+    bool allowed = jsonResponse["allowed"].asBool();
+    rsp.setData(allowed);
 }
+
 
 Omal::~Omal()
 {
