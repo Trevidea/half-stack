@@ -81,54 +81,21 @@ void Omal::assessNetworkQuality(const Request &req, Response &rsp)
 void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 {
     // Log the incoming request
-    std::cout << "Incoming Control Server request:\n" << req.data() << std::endl;
+    spdlog::trace("Incoming Control Server request:\n{}", req.data());
 
-    // Extract necessary data from the request
-    std::string direction = req.json()["request"]["direction"].asString();
-    std::string protocol = req.json()["request"]["protocol"].asString();
-    std::string status = req.json()["request"]["status"].asString();
-    std::string url = req.json()["request"]["url"].asString();
-    std::string newUrl = req.json()["request"]["new_url"].asString();
-
-    // Construct the client JSON object
-    Json::Value clientJson;
-    clientJson["address"] = req.json()["client"]["address"];
-    clientJson["port"] = req.json()["client"]["port"];
-    clientJson["user_agent"] = req.json()["client"]["user_agent"];
-
-    // Construct the request JSON object
-    Json::Value requestJson;
-    requestJson["direction"] = direction;
-    requestJson["protocol"] = protocol;
-    requestJson["status"] = status;
-    requestJson["url"] = url;
-    requestJson["new_url"] = newUrl;
-    requestJson["time"] = ""; // Add the current time here
-
-    // Construct the complete JSON object
-    Json::Value fullJson;
-    fullJson["client"] = clientJson;
-    fullJson["request"] = requestJson;
-
-    // Log the full JSON object
-    std::cout << "Full JSON request:\n" << Json::FastWriter().write(fullJson) << std::endl;
-
-    // Construct the response based on the AdmissionWebhooks documentation
+    // Construct the response with 'allowed' set to true
     Json::Value jsonResponse;
-    if (status == "closing") {
-        jsonResponse["allowed"] = true; // Or false based on your logic
-    } else {
-        jsonResponse["allowed"] = true; // Or false based on your logic
-    }
+    jsonResponse["allowed"] = true;
 
     // Log the response
-    std::cout << "Outgoing Control Server response:\n" << Json::FastWriter().write(jsonResponse) << std::endl;
+    spdlog::trace("Outgoing Control Server response:\n{}", Json::FastWriter().write(jsonResponse));
 
     // Set the response data
     rsp.setData(Json::FastWriter().write(jsonResponse));
 
     // Send the response to the control server
     std::string controlServerUrl = "https://drake.in:1437/api/control-server";
+    // Here you can use an HTTP client library to send the response to the control server
 }
 
 Omal::~Omal()
