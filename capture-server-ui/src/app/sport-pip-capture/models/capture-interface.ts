@@ -424,10 +424,11 @@ export namespace Data {
     activeDevice: ActiveDevice[];
   }
   export interface ActiveDevice {
-    user: string;
+    name: string
     location: string;
     deviceId: string;
     deviceType: string;
+    status:string
     network: string;
   }
 }

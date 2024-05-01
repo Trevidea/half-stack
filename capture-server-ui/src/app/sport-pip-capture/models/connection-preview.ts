@@ -141,4 +141,7 @@ export class ConnectionPreviewData extends DataBase<Data.ConnectionPreview> {
   set activeDevice(value: Data.ActiveDevice[]) {
     this._model.activeDevice = value;
   }
+
+
+  
 }
