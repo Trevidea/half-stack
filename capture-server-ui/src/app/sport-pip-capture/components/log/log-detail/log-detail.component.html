@@ -1,18 +1,16 @@
 <div class="modal-dialog sidebar-lg">
   <div class="modal-content p-0">
-    <div class="modal-header p-0 bg-transparent ml-1 mt-1">
-      <div
-        style="
-          background-color: #f3f3f5;
-          border-radius: 5px;
-          padding: 0px 2px 0px 2px;
-          cursor: pointer;
-        "
-        (click)="closeLog()"
-      >
+    <div class="modal-header p-0 bg-transparent ml-1" style="margin-top: 0.2em">
+      <div style="cursor: pointer" (click)="closeLog()">
         <i
           class="bi bi-x"
-          style="font-size: 15px; margin-top: 0.2em; color: #0d0d0d"
+          style="
+            font-size: 25px;
+            color: #0d0d0d;
+            background-color: #f3f3f5;
+            border-radius: 5px;
+            padding: 0 3px 0 3px;
+          "
         ></i>
       </div>
     </div>
@@ -50,24 +48,30 @@
         </div>
       </div>
     </div>
-    <div class="modal-footer" style="padding: 2px">
+    <div
+      class="modal-footer"
+      style="padding: 2px; box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.08)"
+    >
       <div
-        style="
-          background-color: #f7f7f7;
-          padding: 5px 8px;
-          border-radius: 5px;
-          cursor: pointer;
-        "
+        style="padding: 3px 6px; border-radius: 5px; cursor: pointer"
+        [style.background-color]="index == 0 ? '#ededed' : '#f7f7f7'"
+        (click)="previous($event)"
+        rippleEffect
       >
         <i class="bi bi-chevron-left"></i>
       </div>
       <div
         style="
           background-color: #ededed;
-          padding: 5px 8px;
+          padding: 3px 6px;
           border-radius: 5px;
           cursor: pointer;
         "
+        [style.background-color]="
+          this.index > this.datasource.length + 1 ? '#ededed' : '#f7f7f7'
+        "
+        (click)="next($event)"
+        rippleEffect
       >
         <i class="bi bi-chevron-right"></i>
       </div>

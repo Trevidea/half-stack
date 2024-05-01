@@ -48,13 +48,22 @@ export class LogComponent implements OnInit {
     this.searchText = value;
   }
   rowData: any;
+  rowIndex: any;
   logDetail(index) {
     this._coreSidebarService.getSidebarRegistry(`log-detail`).toggleOpen();
+    this.rowIndex = index;
     this.rowData = this.datasource.logs.filter((d, i) => {
       if (i == index) {
         return d;
       }
     });
-    console.log("Row Data::", this.rowData);
+  }
+  changeRequest(ind) {
+    this.rowIndex = ind;
+    this.rowData = this.datasource.logs.filter((d, i) => {
+      if (i == ind) {
+        return d;
+      }
+    });
   }
 }

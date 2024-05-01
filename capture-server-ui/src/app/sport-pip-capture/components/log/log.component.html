@@ -48,6 +48,7 @@
             "
             (click)="logDetail(i)"
             class="cursor-pointer"
+            [style.background-color]="rowIndex == i ? '#d9eaef' : 'transparent'"
           >
             <td *ngFor="let key of logKeys" class="text-nowrap">
               <div class="media" *ngIf="key !== 'details'">
@@ -73,5 +74,9 @@
   overlayClass="modal-backdrop"
   hideOnEsc="true"
 >
-  <app-log-detail [datasource]="rowData"></app-log-detail>
+  <app-log-detail
+    [datasource]="rowData"
+    [index]="rowIndex"
+    (changeRequest)="changeRequest($event)"
+  ></app-log-detail>
 </core-sidebar>
