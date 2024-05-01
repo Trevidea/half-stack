@@ -10,7 +10,7 @@ Omal::Omal() : EntityBase("omal")
 {
     // Watch VOD dump folders when Omal object is created
     std::string vodDumpDir = "/tmp/ovenmediaengine/vod_dumps"; // Update this with the actual directory path
-    auto vodDumpCallback = [this](const std::string& filename)
+    auto vodDumpCallback = [this](const std::string &filename)
     {
         // Handle the VOD dump file change here
         // You can implement logic to respond to file changes, such as updating the list of VOD dumps
@@ -32,7 +32,7 @@ void Omal::createVHost(const Request &req, Response &rsp)
     rsp.setData("New VHost created successfully.");
 }
 
-void Omal::report() 
+void Omal::report()
 {
     EntityBase::report();
     Gateway::instance().route("GET", "/api/omal/vod-dumps", // To request LIST
@@ -49,51 +49,49 @@ void Omal::report()
                               {
                                   this->assessNetworkQuality(req, rsp);
                               });
-                              
-<<<<<<< HEAD
+
     Gateway::instance().route("GET", "/api/omal/app", // To request LIST
                               [this](const Request &req, Response &rsp)
                               {
-                                  Json::Value response=Json::objectValue;
-                                  response["app"]="spip";
+                                  Json::Value response = Json::objectValue;
+                                  response["app"] = "spip";
                                   const auto &strResponse = Gateway::instance().formatResponse({{response}});
                                   rsp.setData(strResponse);
-=======
-    // Add routes for creating new VHost and application
-    Gateway::instance().route("POST", "/api/create-vhost",
-                              [this](const Request &req, Response &rsp)
-                              {
-                                  this->createVHost(req, rsp);
->>>>>>> e787ea354b1054371be6545fb48cc43d773acbb4
-                              });
-}
+                              })
+        // Add routes for creating new VHost and application
+        Gateway::instance()
+            .route("POST", "/api/create-vhost",
+                   [this](const Request &req, Response &rsp)
+                   {
+                       this->createVHost(req, rsp);
+                   });
 
-void Omal::assessNetworkQuality(const Request &req, Response &rsp)
-{
-    // Perform network quality assessment
-    std::vector<NetworkQualityAssessmentResult> results = NetworkQualityAssessment::assess();
-
-    // Convert assessment results to JSON and set it as response data
-    Json::Value jsonResults;
-    for (const auto &result : results)
+    void Omal::assessNetworkQuality(const Request &req, Response &rsp)
     {
-        Json::Value jsonResult;
-        jsonResult["latency"] = result.latency;
-        jsonResult["jitter"] = result.jitter;
-        jsonResult["packetLoss"] = result.packetLoss;
-        jsonResult["bandwidth"] = result.bandwidth;
-        jsonResult["quality"] = result.quality;
-        jsonResults.append(jsonResult);
+        // Perform network quality assessment
+        std::vector<NetworkQualityAssessmentResult> results = NetworkQualityAssessment::assess();
+
+        // Convert assessment results to JSON and set it as response data
+        Json::Value jsonResults;
+        for (const auto &result : results)
+        {
+            Json::Value jsonResult;
+            jsonResult["latency"] = result.latency;
+            jsonResult["jitter"] = result.jitter;
+            jsonResult["packetLoss"] = result.packetLoss;
+            jsonResult["bandwidth"] = result.bandwidth;
+            jsonResult["quality"] = result.quality;
+            jsonResults.append(jsonResult);
+        }
+
+        rsp.setData(Json::FastWriter().write(jsonResults));
     }
 
-    rsp.setData(Json::FastWriter().write(jsonResults));
-}
-
-Omal::~Omal()
-{
-    // Stop the watcher when Omal object is destroyed
-    if (m_vodDumpWatcher)
+    Omal::~Omal()
     {
-        m_vodDumpWatcher->stop();
+        // Stop the watcher when Omal object is destroyed
+        if (m_vodDumpWatcher)
+        {
+            m_vodDumpWatcher->stop();
+        }
     }
-}

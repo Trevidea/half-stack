@@ -9,6 +9,8 @@ import { FormControl } from '@angular/forms';
 export class ValidationAlertComponent implements OnInit {
   @Input() control:any
   @Input() controlName:string = "Control"
+  @Input() patternmassage:any
+  
   constructor() { }
 
   ngOnInit(): void {

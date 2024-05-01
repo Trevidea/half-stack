@@ -5,7 +5,8 @@ import { Transformer } from "app/blocks/transformer";
 
 export class EventPreviewBuilder extends AbstractBuilder<Data.ConnectionPreview, EventPreview> {
   compose(m: Data.ConnectionPreview, v: EventPreview) {
-    m.countdown = v.countdown;
+    console.log(":::::model of preview", m)
+    v.title = m.title
     m.title = v.title;
     m.program = v.program;
     //  Transformer.ComposeCollection(
@@ -29,13 +30,13 @@ export class EventPreviewBuilder extends AbstractBuilder<Data.ConnectionPreview,
     return new EventPreview();
   }
 }
-export class ActiveDeviceBuilder extends AbstractBuilder<Data.ActiveDevice,ActiveDeviceView> {
+export class ActiveDeviceBuilder extends AbstractBuilder<Data.ActiveDevice, ActiveDeviceView> {
   compose(m: Data.ActiveDevice, v: ActiveDeviceView) {
     m.deviceId = v.deviceId;
     m.deviceType = v.deviceType;
     m.location = v.location;
     m.network = v.network;
-    m.user = v.user;
+    m.name = v.user;
   }
   decompose(v: ActiveDeviceView): Data.ActiveDevice {
     throw new Error("Method not implemented.");
