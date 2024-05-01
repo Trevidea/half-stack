@@ -3,6 +3,8 @@
 #include <iostream>
 #include "entity-base.h"
 #include "watcher.h"
+#include "request.h"
+#include "response.h"
 
 class Omal: public EntityBase
 {
@@ -13,6 +15,7 @@ public:
     Omal();
     void report();
     void assessNetworkQuality(const Request &req, Response &rsp);
+    void createVHost(const Request &req, Response &rsp);
     ~Omal();
 };
 

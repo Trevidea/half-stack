@@ -30,6 +30,9 @@ std::string EventRunner::getEventPreviewData()
     ep.setVenueLocation("Ludhiana");
     ep.setYear(2024);
 
+    // Populate active devices
+    ep.populateActiveDevices();
+
     return ep.toResponse();
 }
 std::string EventRunner::getLiveEventData()

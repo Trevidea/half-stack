@@ -2,17 +2,17 @@
 #define EVENTPREVIEW_H
 
 #include "base.h"
-#include "event-device.h" // Include Device header
-#include "event.h"
+#include "event-device.h" // Include EventDevice header
+#include <vector>
 
-class EventPreview : public Base
-{
+class EventPreview : public Base {
 public:
     void report() override;
     EventPreview() = default;
     EventPreview(Json::Value &model);
 
     // Getter and Setter properties
+
     std::string dtEvent() const;
     void setDtEvent(const std::string &value);
 
@@ -31,7 +31,6 @@ public:
     std::string title() const;
     void setTitle(const std::string &value);
 
-    // Getter and Setter properties for detail
     std::string cityAddress() const;
     void setCityAddress(const std::string &value);
 
@@ -41,11 +40,9 @@ public:
     std::string detailType() const;
     void setDetailType(const std::string &value);
 
-    // Getter and Setter properties for venue
     std::string venueLocation() const;
     void setVenueLocation(const std::string &value);
 
-    // Getter and Setter properties for other members
     int year() const;
     void setYear(int value);
 
@@ -61,6 +58,9 @@ public:
     // ActiveDevice array
     std::vector<EventDevice> &activeDevices();
     const std::vector<EventDevice> &activeDevices() const;
+
+    // Method to populate hardcoded active devices
+    void populateActiveDevices();
 
 private:
     std::vector<EventDevice> m_activeDevice;
