@@ -22,21 +22,7 @@ Omal::Omal() : EntityBase("omal")
     m_vodDumpWatcher->start(); // Start watching the directory
 }
 
-<<<<<<< HEAD
-void Omal::createVHost(const Request &req, Response &rsp)
-{
-    // Handle creating new VHost
-    // Parse the request body and extract necessary information
-    // Use the information to create a new VHost
-
-    // Send appropriate response
-    rsp.setData("New VHost created successfully.");
-}
-
 void Omal::report()
-=======
-void Omal::report() 
->>>>>>> 986748d51e66e89ff48ab42355a0e92af907ce42
 {
     EntityBase::report();
     Gateway::instance().route("GET", "/api/omal/vod-dumps", // To request LIST
@@ -53,11 +39,7 @@ void Omal::report()
                               {
                                   this->assessNetworkQuality(req, rsp);
                               });
-<<<<<<< HEAD
 
-=======
-                              
->>>>>>> 986748d51e66e89ff48ab42355a0e92af907ce42
     Gateway::instance().route("GET", "/api/omal/app", // To request LIST
                               [this](const Request &req, Response &rsp)
                               {
@@ -65,51 +47,34 @@ void Omal::report()
                                   response["app"] = "spip";
                                   const auto &strResponse = Gateway::instance().formatResponse({{response}});
                                   rsp.setData(strResponse);
-<<<<<<< HEAD
-                              })
-        // Add routes for creating new VHost and application
-        Gateway::instance()
-            .route("POST", "/api/create-vhost",
-                   [this](const Request &req, Response &rsp)
-                   {
-                       this->createVHost(req, rsp);
-                   });
-=======
                               });
 
     // Implement route for Control Server
-    Gateway::instance().route("POST", "/api/control-server", 
+    Gateway::instance().route("POST", "/api/control-server",
                               [this](const Request &req, Response &rsp)
                               {
                                   handleControlServerRequest(req, rsp);
                               });
 }
->>>>>>> 986748d51e66e89ff48ab42355a0e92af907ce42
 
-    void Omal::assessNetworkQuality(const Request &req, Response &rsp)
+void Omal::assessNetworkQuality(const Request &req, Response &rsp)
+{
+    // Perform network quality assessment
+    std::vector<NetworkQualityAssessmentResult> results = NetworkQualityAssessment::assess();
+
+    // Convert assessment results to JSON and set it as response data
+    Json::Value jsonResults;
+    for (const auto &result : results)
     {
-        // Perform network quality assessment
-        std::vector<NetworkQualityAssessmentResult> results = NetworkQualityAssessment::assess();
-
-        // Convert assessment results to JSON and set it as response data
-        Json::Value jsonResults;
-        for (const auto &result : results)
-        {
-            Json::Value jsonResult;
-            jsonResult["latency"] = result.latency;
-            jsonResult["jitter"] = result.jitter;
-            jsonResult["packetLoss"] = result.packetLoss;
-            jsonResult["bandwidth"] = result.bandwidth;
-            jsonResult["quality"] = result.quality;
-            jsonResults.append(jsonResult);
-        }
-
-        rsp.setData(Json::FastWriter().write(jsonResults));
+        Json::Value jsonResult;
+        jsonResult["latency"] = result.latency;
+        jsonResult["jitter"] = result.jitter;
+        jsonResult["packetLoss"] = result.packetLoss;
+        jsonResult["bandwidth"] = result.bandwidth;
+        jsonResult["quality"] = result.quality;
+        jsonResults.append(jsonResult);
     }
 
-<<<<<<< HEAD
-    Omal::~Omal()
-=======
     rsp.setData(Json::FastWriter().write(jsonResults));
 }
 
@@ -128,16 +93,14 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     // Set the response data
     rsp.setData(Json::FastWriter().write(jsonResponse));
 
-    // Send the response to the control server
-    std::string controlServerUrl = "https://drake.in:1437/api/control-server";
-    // Here you can use an HTTP client library to send the response to the control server
+    // No need to send the response to the control server
 }
+
 
 Omal::~Omal()
 {
     // Stop the watcher when Omal object is destroyed
     if (m_vodDumpWatcher)
->>>>>>> 986748d51e66e89ff48ab42355a0e92af907ce42
     {
         // Stop the watcher when Omal object is destroyed
         if (m_vodDumpWatcher)
@@ -145,3 +108,4 @@ Omal::~Omal()
             m_vodDumpWatcher->stop();
         }
     }
+}
