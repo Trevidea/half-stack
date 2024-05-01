@@ -4,6 +4,7 @@
 #include "event-preview.h"
 #include "live-event.h"
 #include "gateway.h"
+
 std::string EventRunner::getEventPreviewData()
 {
     EventPreview ep;
@@ -29,9 +30,29 @@ std::string EventRunner::getEventPreviewData()
     ep.setTitle("Mumbai Indians vs Kolkatta Knightriders");
     ep.setVenueLocation("Ludhiana");
     ep.setYear(2024);
+    
+   // Hardcoded population of active devices
+    EventDevice device1;
+    device1.setDeviceId(1);
+    device1.setDeviceType("iPad");
+    device1.setName("Coach P.");
+    device1.setStatus("Active");
+    device1.setLocation("North-End");
+    device1.setNetwork("Penfield-532");
 
-    // Populate active devices
-    ep.populateActiveDevices();
+    EventDevice device2;
+    device2.setDeviceId(2);
+    device2.setDeviceType("Camcorder");
+    device2.setName("Coach K.");
+    device2.setStatus("Inactive");
+    device2.setLocation("Press Box");
+    device2.setNetwork("Penfield-532");
+
+    // Add active devices to the event preview
+    std::vector<EventDevice> activeDevices;
+    activeDevices.push_back(device1);
+    activeDevices.push_back(device2);
+    ep.setActiveDevices(activeDevices);
 
     return ep.toResponse();
 }

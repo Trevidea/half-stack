@@ -162,26 +162,17 @@ const std::vector<EventDevice> &EventPreview::activeDevices() const
     return m_activeDevice;
 }
 
-void EventPreview::populateActiveDevices()
-{
-    // Hardcoded population of active devices
-    EventDevice device1;
-    device1.setDeviceId(1);
-    device1.setDeviceType("iPad");
-    device1.setName("Coach P.");
-    device1.setStatus("Active");
-    device1.setLocation("North-End");
-    device1.setNetwork("Penfield-532");
-
-    EventDevice device2;
-    device2.setDeviceId(2);
-    device2.setDeviceType("Camcorder");
-    device2.setName("Coach K.");
-    device2.setStatus("Inactive");
-    device2.setLocation("Press Box");
-    device2.setNetwork("Penfield-532");
-
-    // Adding devices to the event preview
-    m_activeDevice.push_back(device1);
-    m_activeDevice.push_back(device2);
+void EventPreview::setActiveDevices(const std::vector<EventDevice>& activeDevices) {
+    Json::Value devices(Json::arrayValue);
+    for (const auto& device : activeDevices) {
+        Json::Value jsonDevice;
+        jsonDevice["deviceId"] = device.deviceId();
+        jsonDevice["deviceType"] = device.deviceType();
+        jsonDevice["name"] = device.name();
+        jsonDevice["status"] = device.status();
+        jsonDevice["location"] = device.location();
+        jsonDevice["network"] = device.network();
+        devices.append(jsonDevice);
+    }
+    m_model["activeDevices"] = devices;
 }
