@@ -78,6 +78,19 @@ void Omal::assessNetworkQuality(const Request &req, Response &rsp)
     rsp.setData(Json::FastWriter().write(jsonResults));
 }
 
+void sendHttpPostRequest(const std::string& url, const std::string& postData)
+{
+    // Construct the cURL command
+    std::string command = "curl -X POST -H \"Content-Type: application/json\" -d '" + postData + "' " + url;
+
+    // Execute the command
+    int result = system(command.c_str());
+    if (result != 0) {
+        // Handle error
+        // You might want to log the error or handle it appropriately
+    }
+}
+
 void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 {
     // Log the incoming request
@@ -87,15 +100,19 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     Json::Value jsonResponse;
     jsonResponse["allowed"] = true;
 
+    // Convert the response to JSON string
+    std::string responseData = Json::FastWriter().write(jsonResponse);
+
     // Log the response
-    spdlog::trace("Outgoing Control Server response:\n{}", Json::FastWriter().write(jsonResponse));
+    spdlog::trace("Outgoing Control Server response:\n{}", responseData);
 
     // Set the response data
-    rsp.setData(Json::FastWriter().write(jsonResponse));
+    rsp.setData(responseData);
 
-    // No need to send the response to the control server
+    // Send the response to the control server
+    std::string controlServerUrl = "http://localhost:1437/api/control-server";
+    sendHttpPostRequest(controlServerUrl, responseData);
 }
-
 
 Omal::~Omal()
 {
