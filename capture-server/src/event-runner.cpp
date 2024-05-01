@@ -30,28 +30,35 @@ std::string EventRunner::getEventPreviewData()
     ep.setTitle("Mumbai Indians vs Kolkatta Knightriders");
     ep.setVenueLocation("Ludhiana");
     ep.setYear(2024);
-    
-   // Hardcoded population of active devices
-    EventDevice device1;
-    device1.setDeviceId(1);
-    device1.setDeviceType("iPad");
-    device1.setName("Coach P.");
-    device1.setStatus("Active");
-    device1.setLocation("North-End");
-    device1.setNetwork("Penfield-532");
 
-    EventDevice device2;
-    device2.setDeviceId(2);
-    device2.setDeviceType("Camcorder");
-    device2.setName("Coach K.");
-    device2.setStatus("Inactive");
-    device2.setLocation("Press Box");
-    device2.setNetwork("Penfield-532");
-
-    // Add active devices to the event preview
+    // Set active devices
     std::vector<EventDevice> activeDevices;
-    activeDevices.push_back(device1);
-    activeDevices.push_back(device2);
+
+    // First set of active devices
+    {
+        EventDevice device;
+        device.setDeviceId(1);
+        device.setDeviceType("iPad");
+        device.setName("Coach P.");
+        device.setStatus("Active");
+        device.setLocation("North-End");
+        device.setNetwork("Penfield-532");
+        activeDevices.push_back(device);
+    }
+
+    // Second set of active devices
+    {
+        EventDevice device;
+        device.setDeviceId(2);
+        device.setDeviceType("Camcorder");
+        device.setName("Coach K.");
+        device.setStatus("Inactive");
+        device.setLocation("Press Box");
+        device.setNetwork("Penfield-532");
+        activeDevices.push_back(device);
+    }
+
+    // Set active devices in the event preview
     ep.setActiveDevices(activeDevices);
 
     return ep.toResponse();
@@ -108,8 +115,8 @@ std::string EventRunner::getLiveEventData()
     connectionDetail2.setQuality(QualityEnum::Poor);
     connectionDetail2.setIpAddress("192.168.1.3");
     connectionDetail2.setTransmitStatus(TransmitEnum::Streaming);
-    connectionDetail2.setFilesReceived(5); 
-    connectionDetail2.setRetries(2);      
+    connectionDetail2.setFilesReceived(5);
+    connectionDetail2.setRetries(2);
 
     le.setConnectionDetails({connectionDetail, connectionDetail1, connectionDetail2});
 

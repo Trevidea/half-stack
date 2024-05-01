@@ -22,16 +22,6 @@ Omal::Omal() : EntityBase("omal")
     m_vodDumpWatcher->start(); // Start watching the directory
 }
 
-void Omal::createVHost(const Request &req, Response &rsp)
-{
-    // Handle creating new VHost
-    // Parse the request body and extract necessary information
-    // Use the information to create a new VHost
-
-    // Send appropriate response
-    rsp.setData("New VHost created successfully.");
-}
-
 void Omal::report() 
 {
     EntityBase::report();

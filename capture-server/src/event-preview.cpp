@@ -162,9 +162,14 @@ const std::vector<EventDevice> &EventPreview::activeDevices() const
     return m_activeDevice;
 }
 
-void EventPreview::setActiveDevices(const std::vector<EventDevice>& activeDevices) {
-    Json::Value devices(Json::arrayValue);
-    for (const auto& device : activeDevices) {
+void EventPreview::setActiveDevices(const std::vector<EventDevice> &activeDevices)
+{
+    // Clear the existing active devices in the model
+    m_model["activeDevices"] = Json::arrayValue;
+
+    // Populate the model with the new active devices
+    for (const auto &device : activeDevices)
+    {
         Json::Value jsonDevice;
         jsonDevice["deviceId"] = device.deviceId();
         jsonDevice["deviceType"] = device.deviceType();
@@ -172,7 +177,6 @@ void EventPreview::setActiveDevices(const std::vector<EventDevice>& activeDevice
         jsonDevice["status"] = device.status();
         jsonDevice["location"] = device.location();
         jsonDevice["network"] = device.network();
-        devices.append(jsonDevice);
+        m_model["activeDevices"].append(jsonDevice);
     }
-    m_model["activeDevices"] = devices;
 }
