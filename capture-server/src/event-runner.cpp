@@ -58,6 +58,18 @@ std::string EventRunner::getEventPreviewData()
         activeDevices.push_back(device);
     }
 
+    // Third set of active devices
+    {
+        EventDevice device;
+        device.setDeviceId(3);
+        device.setDeviceType("Smartphone");
+        device.setName("Coach Q.");
+        device.setStatus("Active");
+        device.setLocation("South-End");
+        device.setNetwork("Penfield-532");
+        activeDevices.push_back(device);
+    }
+
     // Set active devices in the event preview
     ep.setActiveDevices(activeDevices);
 
