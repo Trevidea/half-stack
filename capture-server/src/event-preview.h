@@ -54,10 +54,13 @@ public:
 
     std::string countdown() const;
     void setCountdown(const std::string &value);
-    
+
     // ActiveDevice array
     std::vector<EventDevice> &activeDevices();
     const std::vector<EventDevice> &activeDevices() const;
+
+    // Method to populate hardcoded active devices
+    void populateActiveDevices();
 
 private:
     std::vector<EventDevice> m_activeDevice;

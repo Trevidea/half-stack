@@ -30,26 +30,8 @@ std::string EventRunner::getEventPreviewData()
     ep.setVenueLocation("Ludhiana");
     ep.setYear(2024);
 
-    // Hardcoded population of active devices
-    EventDevice device1;
-    device1.setDeviceId(1);
-    device1.setDeviceType("iPad");
-    device1.setName("Coach P.");
-    device1.setStatus("Active");
-    device1.setLocation("North-End");
-    device1.setNetwork("Penfield-532");
-
-    EventDevice device2;
-    device2.setDeviceId(2);
-    device2.setDeviceType("Camcorder");
-    device2.setName("Coach K.");
-    device2.setStatus("Inactive");
-    device2.setLocation("Press Box");
-    device2.setNetwork("Penfield-532");
-
-    // Adding devices to the event preview
-    ep.activeDevices().push_back(device1);
-    ep.activeDevices().push_back(device2);
+    // Populate active devices
+    ep.populateActiveDevices();
 
     return ep.toResponse();
 }
