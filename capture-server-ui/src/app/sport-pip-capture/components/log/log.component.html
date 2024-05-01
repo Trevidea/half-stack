@@ -4,6 +4,7 @@
       style="width: 100%"
       [users]="users"
       [categories]="categories"
+      [datasource]="datasource"
       (inputValueChange)="onInputValueChange($event)"
     ></app-log-filter>
   </div>
@@ -42,6 +43,8 @@
               let item of datasource.logs | logSearch : searchText;
               let i = index
             "
+            (click)="logDetail(i)"
+            class="cursor-pointer"
           >
             <td *ngFor="let key of logKeys" class="text-nowrap">
               <div class="media">
@@ -61,3 +64,11 @@
     </div>
   </div>
 </div>
+<core-sidebar
+  class="modal modal-slide-in fade"
+  name="log-detail"
+  overlayClass="modal-backdrop"
+  hideOnEsc="true"
+>
+  <app-log-detail [datasource]="rowData"></app-log-detail>
+</core-sidebar>

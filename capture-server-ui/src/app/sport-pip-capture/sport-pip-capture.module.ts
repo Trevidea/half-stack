@@ -99,12 +99,14 @@ import { ToastrModule } from "ngx-toastr";
 import { CustomDateTimeFormatPipe } from "./components/event/event-utility/customDateTimeFormat";
 import { AddDevicePresenter } from "./components/add-device/add-device.presenter";
 import { LogSearchPipe } from "./components/log/log.pipe";
+import { LogDetailComponent } from "./components/log/log-detail/log-detail.component";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
 };
 @NgModule({
   declarations: [
+    LogDetailComponent,
     TimeFormatPipe,
     SportPipCaptureComponent,
     CaptureDashboardComponent,

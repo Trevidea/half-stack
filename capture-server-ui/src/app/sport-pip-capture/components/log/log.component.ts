@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
 
 @Component({
   selector: "app-log",
@@ -11,14 +12,15 @@ export class LogComponent implements OnInit {
   @Input() users: any;
   @Input() categories: any;
   @Input() logKeys: any;
-  searchText: string = "";
-
-  constructor() {}
-
-  ngOnInit(): void {}
   arrowDirection: number[] = [];
   currentSortColumn: string | null = null;
   isAscending: boolean = true;
+  searchText: string = "";
+
+  constructor(private _coreSidebarService: CoreSidebarService) {}
+
+  ngOnInit(): void {}
+
   toggleArrow(column: string, index: number) {
     // this.arrowDirection[i] = this.arrowDirection[i] === 0 ? 180 : 0;
     if (this.currentSortColumn === column) {
@@ -44,5 +46,15 @@ export class LogComponent implements OnInit {
 
   onInputValueChange(value: string) {
     this.searchText = value;
+  }
+  rowData: any;
+  logDetail(index) {
+    this._coreSidebarService.getSidebarRegistry(`log-detail`).toggleOpen();
+    this.rowData = this.datasource.logs.filter((d, i) => {
+      if (i == index) {
+        return d;
+      }
+    });
+    console.log("Row Data::", this.rowData);
   }
 }

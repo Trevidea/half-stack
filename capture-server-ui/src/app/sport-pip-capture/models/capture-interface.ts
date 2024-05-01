@@ -12,6 +12,7 @@ export namespace Data {
     user: string;
     action: string;
     timestamp: string;
+    details: any[];
   }
   export interface Distribution extends Base {
     id: number;
@@ -99,13 +100,12 @@ export namespace Data {
     dtShared: string;
   }
 
-
   export interface EventDevice extends Base {
     id: number;
     user_id: number;
     device_id: number;
     pin: string;
-    event_id:number
+    event_id: number;
     location: string;
   }
 
