@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalConfig, ToastrService } from 'ngx-toastr';
 import { AddDeviceView } from './view/add-device';
@@ -7,7 +7,7 @@ import { Views } from 'app/sport-pip-capture/models/capture-interface';
 import { Transformer } from 'app/blocks/transformer';
 import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 import { MetaTypeBuilder } from 'app/sport-pip-capture/blocks/meta-type.builder';
-import { PresenterAction } from 'app/blocks/actions';
+import { ModalActions, PresenterAction } from 'app/blocks/actions';
 import { AddDeviceBuilder } from './builder/add-device';
 import { Router } from '@angular/router';
 import { UserProfileData } from 'app/sport-pip-capture/models/user-profile';
@@ -25,7 +25,7 @@ export class AddDevicePresenter implements OnInit {
   @Input() eventId: number;
   appName: string;
   _url: string
-
+  onClose: EventEmitter<any>
   private options: GlobalConfig;
   ds!: AddDeviceView
   actions!: Views.FormActions;
@@ -37,8 +37,7 @@ export class AddDevicePresenter implements OnInit {
     this.ds = new AddDeviceView();
     this.options = this.toastr.toastrConfig;
 
-
-    this.actions = new PresenterAction(this._url, this.ds, this.modelServiceService.saveDevice, AddDeviceBuilder, router);
+    this.actions = new ModalActions(this.ds, this.modelServiceService.saveDevice, AddDeviceBuilder, this.onClose)
     this.actions.onComplete.subscribe((result) => {
       console.log(result);
       if (result) {
@@ -52,6 +51,7 @@ export class AddDevicePresenter implements OnInit {
       (userItem: UserProfileData) => {
         return new SelectItemView(userItem.id, userItem.firstname + ' ' + userItem.lastname);
       })
+
     Transformer.ComposeCollectionViewAsync(this.modelServiceService.deviceJson(), this.ds.deviceName,
       (deviceItem: DeviceData) => {
         return new SelectItemView(deviceItem.id, deviceItem.name);
@@ -60,7 +60,6 @@ export class AddDevicePresenter implements OnInit {
 
   ngOnInit(): void {
     this.ds.eventId = this.eventId
-    this._url = `event/event-preview/${this.eventId}`
     Transformer.ComposeObjectAsync(this.modelServiceService.MetaTypeByKey("LOCATION"), this.ds.location, MetaTypeBuilder);
     this.ds.location.onAddingNewItem(async (e: { modal: Views.ModalHost }) => {
       e.modal.component = TypesPresenter;
@@ -98,8 +97,10 @@ export class AddDevicePresenter implements OnInit {
       closeButton: true
     });
   }
-  onsave() {
+  onsave(onClose: EventEmitter<any>) {
     this.toastrSuccess()
+
+
     // this.activeModal.close('Accept click')
   }
 }
