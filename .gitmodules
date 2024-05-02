@@ -13,3 +13,6 @@
 [submodule "capture-server/dependency/cppzmq"]
 	path = capture-server/dependency/cppzmq
 	url = https://github.com/zeromq/cppzmq.git
+[submodule "capture-server/dependency/googletest"]
+	path = capture-server/dependency/googletest
+	url = https://github.com/google/googletest.git

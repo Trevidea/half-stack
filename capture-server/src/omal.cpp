@@ -39,7 +39,6 @@ void Omal::report()
                               {
                                   this->assessNetworkQuality(req, rsp);
                               });
-
     Gateway::instance().route("GET", "/api/omal/app", // To request LIST
                               [this](const Request &req, Response &rsp)
                               {
@@ -80,18 +79,15 @@ void Omal::assessNetworkQuality(const Request &req, Response &rsp)
 
 void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 {
-    // Log the incoming request
     spdlog::trace("Incoming Control Server request:\n{}", req.data());
 
     // Construct the response JSON object with only the "allowed" field
     Json::Value jsonResponse;
     jsonResponse["allowed"] = true; // Set the "allowed" field to true
 
-    // Set the response data directly as a boolean
-    bool allowed = jsonResponse["allowed"].asBool();
-    rsp.setData(allowed);
+    // Set the response data
+    rsp.setData(Json::FastWriter().write(jsonResponse));
 }
-
 
 Omal::~Omal()
 {

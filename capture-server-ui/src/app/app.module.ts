@@ -169,6 +169,7 @@ const appRoutes: Routes = [
     SportPipCaptureModule,
     ExampleModule,
     SettingModule,
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

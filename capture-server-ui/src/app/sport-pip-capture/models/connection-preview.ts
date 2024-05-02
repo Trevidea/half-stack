@@ -3,145 +3,97 @@ import { Data } from "./capture-interface";
 import { Collection } from "app/blocks/collection";
 
 export class ConnectionPreviewData extends DataBase<Data.ConnectionPreview> {
-  private _id: number;
-  private _dtEvent: string;
-  private _level: string;
-  private _program: string;
-  private _sport: string;
-  private _status: string;
-  private _title: string;
-  private _detail: {
-    cityAddress: string;
-    streetAdress: string;
-    type: string;
-  };
-  private _year: number;
-  private _venue: {
-    location: string;
-  };
-  private _time: number;
-  private _type: string;
-  private _countdown: string;
-  private _activeDevice: Data.ActiveDevice;
 
-  // Getters
-  get id(): number {
-    return this._model.id;
-  }
-
-  get dtEvent(): string {
+  public get dtEvent(): string {
     return this._model.dtEvent;
   }
+  public set dtEvent(v: string) {
+    this._model.dtEvent = v;
+  }
 
-  get level(): string {
+  public get level(): string {
     return this._model.level;
   }
+  public set level(v: string) {
+    this._model.level = v;
+  }
 
-  get program(): string {
+
+  public get program(): string {
     return this._model.program;
   }
+  public set program(v: string) {
+    this._model.program = v;
+  }
 
-  get sport(): string {
+
+  public get sport(): string {
     return this._model.sport;
   }
+  public set sport(v: string) {
+    this._model.sport = v;
+  }
 
-  get status(): string {
+  public get status(): string {
     return this._model.status;
   }
+  public set status(v: string) {
+    this._model.status = v;
+  }
 
-  get title(): string {
+
+  public get title(): string {
     return this._model.title;
   }
+  public set title(v: string) {
+    this._model.title = v;
+  }
 
-  get detail(): { cityAddress: string; streetAdress: string; type: string } {
+
+  public get detail(): Data.Detail {
     return this._model.detail;
   }
+  public set detail(v: Data.Detail) {
+    this._model.detail = v;
+  }
 
-  get year(): number {
+
+  public get year(): number {
     return this._model.year;
   }
+  public set year(v: number) {
+    this._model.year = v;
+  }
 
-  get venue(): { location: string } {
+
+  public get venue(): Data.Venue {
     return this._model.venue;
   }
+  public set venue(v: Data.Venue) {
+    this._model.venue = v;
+  }
 
-  get time(): number {
+  public get time(): number {
     return this._model.time;
   }
-
-  get type(): string {
-    return this._model.type;
+  public set time(v: number) {
+    this._model.time = v;
   }
 
-  get countdown(): string {
-    return this._model.countdown;
+
+  private _type: string;
+  public get type(): string {
+    return this._type;
+  }
+  public set type(v: string) {
+    this._type = v;
   }
 
-  get activeDevice(): Data.ActiveDevice[] {
+  public get activeDevice(): Data.ActiveDevice[] {
     return this._model.activeDevice;
   }
-
-  // Setters
-  set id(value: number) {
-    this._model.id = value;
+  public set activeDevice(v: Data.ActiveDevice[]) {
+    this._model.activeDevice = v;
   }
 
-  set dtEvent(value: string) {
-    this._model.dtEvent = value;
-  }
-
-  set level(value: string) {
-    this._model.level = value;
-  }
-
-  set program(value: string) {
-    this._model.program = value;
-  }
-
-  set sport(value: string) {
-    this._model.sport = value;
-  }
-
-  set status(value: string) {
-    this._model.status = value;
-  }
-
-  set title(value: string) {
-    this._model.title = value;
-  }
-
-  set detail(value: {
-    cityAddress: string;
-    streetAdress: string;
-    type: string;
-  }) {
-    this._model.detail = value;
-  }
-
-  set year(value: number) {
-    this._model.year = value;
-  }
-
-  set venue(value: { location: string }) {
-    this._model.venue = value;
-  }
-
-  set time(value: number) {
-    this._model.time = value;
-  }
-
-  set type(value: string) {
-    this._model.type = value;
-  }
-
-  set countdown(value: string) {
-    this._model.countdown = value;
-  }
-
-  set activeDevice(value: Data.ActiveDevice[]) {
-    this._model.activeDevice = value;
-  }
-
-
-  
 }

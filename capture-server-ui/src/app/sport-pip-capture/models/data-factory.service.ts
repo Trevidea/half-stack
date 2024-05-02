@@ -200,9 +200,9 @@ export class DataFactoryService {
   DistributionsListJson(): Observable<Data.Distribution[]> {
     return this._data("distributions", DistributionData);
   }
-  getEventPreview(): Observable<Data.ConnectionPreview[]> {
-    return this._data("api/event-preview", ConnectionPreviewData);
-  }
+  // getEventPreview(): Observable<Data.ConnectionPreview[]> {
+  //   return this._data("api/event-preview", ConnectionPreviewData);
+  // }
   DistributionJson(id: number): Observable<Data.Distribution> {
     return this._datum("distribution", id, DistributionData);
   }
@@ -314,9 +314,9 @@ export class DataFactoryService {
     }
   }
 
-  eventPreviewJson(): Observable<Data.ConnectionPreview[]> {
-    return this._data("event-preview", ConnectionPreviewData);
-  }
+  // eventPreviewJson(): Observable<Data.ConnectionPreview[]> {
+  //   return this._data("event-preview", ConnectionPreviewData);
+  // }
   Logs(): Observable<Data.Log[]> {
     return this.logData;
   }

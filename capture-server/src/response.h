@@ -16,7 +16,6 @@ public:
 
     std::string data();
     void setData(const std::string &d);
-    void setData(bool b); // New method declaration
 
     inline int id() {
         return this->m_id;

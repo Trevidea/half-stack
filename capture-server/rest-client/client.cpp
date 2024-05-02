@@ -23,3 +23,7 @@ void Client::get(std::function<void(const std::string &)> &&success, std::functi
               { success(body); })
         .wait();
 }
+void Client::wait()
+{
+    spdlog::trace("wait called in rest client");
+}

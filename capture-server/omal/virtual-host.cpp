@@ -6,7 +6,7 @@
 
 namespace fs = std::filesystem;
 
-VirtualHost::VirtualHost(const std::string &name, const vhost &vhost) : m_name(name),
+VirtualHost::VirtualHost(const std::string &name, const omal::vhost &vhost) : m_name(name),
                                                                         m_vhost(vhost),
                                                                         m_dumpsBaseLocation{DUMPS_BASE_LOCATION}
 {

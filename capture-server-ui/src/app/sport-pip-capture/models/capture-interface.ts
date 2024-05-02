@@ -420,7 +420,6 @@ export namespace Data {
     venue: Venue;
     time: number;
     type: string;
-    countdown: string;
     activeDevice: ActiveDevice[];
   }
   export interface ActiveDevice {
