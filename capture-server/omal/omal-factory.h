@@ -17,7 +17,7 @@ public:
     void operator=(const OMALFactory&) = delete;
 private:
     OMALFactory();
-
+    int createOrFind(const std::string &name, char const * err = nullptr);
 private:
     const char* serverIP = "localhost";
     const char *port = "8081";

@@ -38,11 +38,11 @@ public:
     ~VirtualHost();
 
 private:
-    VirtualHost(const std::string& name, const vhost& vhost);
+    VirtualHost(const std::string& name, const omal::vhost& vhost);
 
 private:
     std::string m_name;
-    vhost m_vhost;
+    omal::vhost m_vhost;
     std::string m_dumpsBaseLocation;
 };
 

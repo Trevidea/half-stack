@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.16.0)
 
+
 project(capture-server VERSION 1.0.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -45,6 +46,7 @@ add_git_submodule(dependency/cpprestsdk)
 add_git_submodule(dependency/spdlog)
 add_git_submodule(dependency/libzmq)
 add_git_submodule(dependency/cppzmq)
+add_git_submodule(dependency/googletest)
 
 add_subdirectory(dependency)
 add_subdirectory(pg-dal)
@@ -53,4 +55,5 @@ add_subdirectory(src)
 add_subdirectory(rest-client)
 add_subdirectory(api)
 add_subdirectory(zmq)
+add_subdirectory(tests)
 # add_subdirectory(tests)

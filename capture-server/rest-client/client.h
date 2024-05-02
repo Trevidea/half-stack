@@ -25,6 +25,7 @@ public:
     friend class Rest::ClientFactory;
 public:
     void get(std::function<void(const std::string&)> &&success, std::function<void(const std::string&)> &&failure, int timeout = 10);
+    void wait();
 };
 
 
