@@ -33,9 +33,8 @@ void Omal::createVHost(const Request &req, Response &rsp)
     rsp.setData("New VHost created successfully.");
 }
 
-void Omal::report()
-=======
-void Omal::report() 
+void Omal::report() == == == =
+                                 void Omal::report() 
 >>>>>>> 986748d51e66e89ff48ab42355a0e92af907ce42
 {
     EntityBase::report();
@@ -53,11 +52,7 @@ void Omal::report()
                               {
                                   this->assessNetworkQuality(req, rsp);
                               });
-<<<<<<< HEAD
 
-=======
-                              
->>>>>>> 986748d51e66e89ff48ab42355a0e92af907ce42
     Gateway::instance().route("GET", "/api/omal/app", // To request LIST
                               [this](const Request &req, Response &rsp)
                               {
@@ -65,58 +60,47 @@ void Omal::report()
                                   response["app"] = "spip";
                                   const auto &strResponse = Gateway::instance().formatResponse({{response}});
                                   rsp.setData(strResponse);
-<<<<<<< HEAD
-                              })
-        // Add routes for creating new VHost and application
-        Gateway::instance()
-            .route("POST", "/api/create-vhost",
-                   [this](const Request &req, Response &rsp)
-                   {
-                       this->createVHost(req, rsp);
-                   });
-=======
                               });
 
     // Implement route for Control Server
-    Gateway::instance().route("POST", "/api/control-server", 
+    Gateway::instance().route("POST", "/api/control-server",
                               [this](const Request &req, Response &rsp)
                               {
                                   handleControlServerRequest(req, rsp);
                               });
 }
->>>>>>> 986748d51e66e89ff48ab42355a0e92af907ce42
 
-    void Omal::assessNetworkQuality(const Request &req, Response &rsp)
+void Omal::assessNetworkQuality(const Request &req, Response &rsp)
+{
+    // Perform network quality assessment
+    std::vector<NetworkQualityAssessmentResult> results = NetworkQualityAssessment::assess();
+
+    // Convert assessment results to JSON and set it as response data
+    Json::Value jsonResults;
+    for (const auto &result : results)
     {
-        // Perform network quality assessment
-        std::vector<NetworkQualityAssessmentResult> results = NetworkQualityAssessment::assess();
-
-        // Convert assessment results to JSON and set it as response data
-        Json::Value jsonResults;
-        for (const auto &result : results)
-        {
-            Json::Value jsonResult;
-            jsonResult["latency"] = result.latency;
-            jsonResult["jitter"] = result.jitter;
-            jsonResult["packetLoss"] = result.packetLoss;
-            jsonResult["bandwidth"] = result.bandwidth;
-            jsonResult["quality"] = result.quality;
-            jsonResults.append(jsonResult);
-        }
-
-        rsp.setData(Json::FastWriter().write(jsonResults));
+        Json::Value jsonResult;
+        jsonResult["latency"] = result.latency;
+        jsonResult["jitter"] = result.jitter;
+        jsonResult["packetLoss"] = result.packetLoss;
+        jsonResult["bandwidth"] = result.bandwidth;
+        jsonResult["quality"] = result.quality;
+        jsonResults.append(jsonResult);
     }
 
-<<<<<<< HEAD
-    Omal::~Omal()
-=======
     rsp.setData(Json::FastWriter().write(jsonResults));
+}
+
+<<<<<<< HEAD
+Omal::~Omal() == == == =
+                           rsp.setData(Json::FastWriter().write(jsonResults));
 }
 
 void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 {
     // Log the incoming request
-    std::cout << "Incoming Control Server request:\n" << req.data() << std::endl;
+    std::cout << "Incoming Control Server request:\n"
+              << req.data() << std::endl;
 
     // Extract necessary data from the request
     std::string direction = req.json()["request"]["direction"].asString();
@@ -146,18 +130,23 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     fullJson["request"] = requestJson;
 
     // Log the full JSON object
-    std::cout << "Full JSON request:\n" << Json::FastWriter().write(fullJson) << std::endl;
+    std::cout << "Full JSON request:\n"
+              << Json::FastWriter().write(fullJson) << std::endl;
 
     // Construct the response based on the AdmissionWebhooks documentation
     Json::Value jsonResponse;
-    if (status == "closing") {
+    if (status == "closing")
+    {
         jsonResponse["allowed"] = true; // Or false based on your logic
-    } else {
+    }
+    else
+    {
         jsonResponse["allowed"] = true; // Or false based on your logic
     }
 
     // Log the response
-    std::cout << "Outgoing Control Server response:\n" << Json::FastWriter().write(jsonResponse) << std::endl;
+    std::cout << "Outgoing Control Server response:\n"
+              << Json::FastWriter().write(jsonResponse) << std::endl;
 
     // Set the response data
     rsp.setData(Json::FastWriter().write(jsonResponse));

@@ -10,7 +10,16 @@ export class AddDeviceView implements Views.Datasource {
     public set id(v: number) {
         this._id = v;
     }
-
+   
+    
+    private _appName : string;
+    public get appName() : string {
+        return this._appName;
+    }
+    public set appName(v : string) {
+        this._appName = v;
+    }
+    
     private _userName: Collection<SelectItemView>;
     public get userName(): Collection<SelectItemView> {
         if (!this._userName) {

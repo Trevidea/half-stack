@@ -23,6 +23,7 @@ import { DeviceData } from 'app/sport-pip-capture/models/device';
 })
 export class AddDevicePresenter implements OnInit {
   @Input() eventId: number;
+  appName: string;
   _url: string
 
   private options: GlobalConfig;
@@ -49,12 +50,10 @@ export class AddDevicePresenter implements OnInit {
 
     Transformer.ComposeCollectionViewAsync(this.modelServiceService.userJson(), this.ds.userName,
       (userItem: UserProfileData) => {
-        console.log(userItem)
         return new SelectItemView(userItem.id, userItem.firstname + ' ' + userItem.lastname);
       })
     Transformer.ComposeCollectionViewAsync(this.modelServiceService.deviceJson(), this.ds.deviceName,
       (deviceItem: DeviceData) => {
-        console.log(deviceItem)
         return new SelectItemView(deviceItem.id, deviceItem.name);
       })
   }
@@ -76,6 +75,10 @@ export class AddDevicePresenter implements OnInit {
       }
     });
 
+    this.modelServiceService.fetechApplicationDetail().subscribe((data) => {
+      const appValue = data["Gateway Response"]["result"][0][0]["app"];
+      this.ds.appName = appValue
+    })
 
   }
 
