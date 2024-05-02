@@ -22,20 +22,7 @@ Omal::Omal() : EntityBase("omal")
     m_vodDumpWatcher->start(); // Start watching the directory
 }
 
-<<<<<<< HEAD
-void Omal::createVHost(const Request &req, Response &rsp)
-{
-    // Handle creating new VHost
-    // Parse the request body and extract necessary information
-    // Use the information to create a new VHost
-
-    // Send appropriate response
-    rsp.setData("New VHost created successfully.");
-}
-
-void Omal::report() == == == =
-                                 void Omal::report() 
->>>>>>> 986748d51e66e89ff48ab42355a0e92af907ce42
+void Omal::report()
 {
     EntityBase::report();
     Gateway::instance().route("GET", "/api/omal/vod-dumps", // To request LIST
@@ -91,75 +78,23 @@ void Omal::assessNetworkQuality(const Request &req, Response &rsp)
     rsp.setData(Json::FastWriter().write(jsonResults));
 }
 
-<<<<<<< HEAD
-Omal::~Omal() == == == =
-                           rsp.setData(Json::FastWriter().write(jsonResults));
-}
-
 void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 {
-    // Log the incoming request
-    std::cout << "Incoming Control Server request:\n"
-              << req.data() << std::endl;
+    spdlog::trace("Incoming Control Server request:\n{}", req.data());
 
-    // Extract necessary data from the request
-    std::string direction = req.json()["request"]["direction"].asString();
-    std::string protocol = req.json()["request"]["protocol"].asString();
-    std::string status = req.json()["request"]["status"].asString();
-    std::string url = req.json()["request"]["url"].asString();
-    std::string newUrl = req.json()["request"]["new_url"].asString();
-
-    // Construct the client JSON object
-    Json::Value clientJson;
-    clientJson["address"] = req.json()["client"]["address"];
-    clientJson["port"] = req.json()["client"]["port"];
-    clientJson["user_agent"] = req.json()["client"]["user_agent"];
-
-    // Construct the request JSON object
-    Json::Value requestJson;
-    requestJson["direction"] = direction;
-    requestJson["protocol"] = protocol;
-    requestJson["status"] = status;
-    requestJson["url"] = url;
-    requestJson["new_url"] = newUrl;
-    requestJson["time"] = ""; // Add the current time here
-
-    // Construct the complete JSON object
-    Json::Value fullJson;
-    fullJson["client"] = clientJson;
-    fullJson["request"] = requestJson;
-
-    // Log the full JSON object
-    std::cout << "Full JSON request:\n"
-              << Json::FastWriter().write(fullJson) << std::endl;
-
-    // Construct the response based on the AdmissionWebhooks documentation
+    // Construct the response JSON object with only the "allowed" field
     Json::Value jsonResponse;
-    if (status == "closing")
-    {
-        jsonResponse["allowed"] = true; // Or false based on your logic
-    }
-    else
-    {
-        jsonResponse["allowed"] = true; // Or false based on your logic
-    }
+    jsonResponse["allowed"] = true; // Set the "allowed" field to true
 
-    // Log the response
-    std::cout << "Outgoing Control Server response:\n"
-              << Json::FastWriter().write(jsonResponse) << std::endl;
-
-    // Set the response data
-    rsp.setData(Json::FastWriter().write(jsonResponse));
-
-    // Send the response to the control server
-    std::string controlServerUrl = "https://drake.in:1437/api/control-server";
+    // Set the response data directly as a boolean
+    bool allowed = jsonResponse["allowed"].asBool();
+    rsp.setData(allowed);
 }
 
 Omal::~Omal()
 {
     // Stop the watcher when Omal object is destroyed
     if (m_vodDumpWatcher)
->>>>>>> 986748d51e66e89ff48ab42355a0e92af907ce42
     {
         // Stop the watcher when Omal object is destroyed
         if (m_vodDumpWatcher)
@@ -167,3 +102,4 @@ Omal::~Omal()
             m_vodDumpWatcher->stop();
         }
     }
+}

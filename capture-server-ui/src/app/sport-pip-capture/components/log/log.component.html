@@ -4,6 +4,7 @@
       style="width: 100%"
       [users]="users"
       [categories]="categories"
+      [datasource]="datasource"
       (inputValueChange)="onInputValueChange($event)"
     ></app-log-filter>
   </div>
@@ -17,7 +18,10 @@
               (click)="toggleArrow(key, i)"
               class="header-cell"
             >
-              <div style="display: flex; cursor: pointer">
+              <div
+                style="display: flex; cursor: pointer"
+                *ngIf="key !== 'details'"
+              >
                 <div class=" ">{{ key }}</div>
                 <i
                   class="bi bi-arrow-down ml-2"
@@ -42,9 +46,12 @@
               let item of datasource.logs | logSearch : searchText;
               let i = index
             "
+            (click)="logDetail(i)"
+            class="cursor-pointer"
+            [style.background-color]="rowIndex == i ? '#d9eaef' : 'transparent'"
           >
             <td *ngFor="let key of logKeys" class="text-nowrap">
-              <div class="media">
+              <div class="media" *ngIf="key !== 'details'">
                 <img
                   src="assets/images/avatars/{{ i + 1 }}.png"
                   class="rounded mr-1"
@@ -61,3 +68,16 @@
     </div>
   </div>
 </div>
+<core-sidebar
+  class="modal modal-slide-in fade"
+  name="log-detail"
+  overlayClass="modal-backdrop"
+  hideOnEsc="true"
+>
+  <app-log-detail
+    [datasource]="rowData"
+    [index]="rowIndex"
+    (changeRequest)="changeRequest($event)"
+    [imgUrl]="'assets/images/avatars/{{ rowIndex + 1 }}.png'"
+  ></app-log-detail>
+</core-sidebar>

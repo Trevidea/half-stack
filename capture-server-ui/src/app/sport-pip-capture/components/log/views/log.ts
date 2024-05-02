@@ -1,4 +1,4 @@
-import { Range } from "app/blocks/collection";
+import { Collection, Range } from "app/blocks/collection";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
 
 export class LogRangeView implements Views.Datasource {
@@ -12,6 +12,28 @@ export class LogRangeView implements Views.Datasource {
   }
   public set logst(v: Range<LogView>) {
     this._logs = v;
+  }
+
+  private _categories: Collection<string>;
+  public get Categories(): Collection<string> {
+    if (!this._categories) {
+      this._categories = new Collection<string>();
+    }
+    return this._categories;
+  }
+  public set categories(v: Collection<string>) {
+    this._categories = v;
+  }
+
+  private _users: Range<string>;
+  public get users(): Range<string> {
+    if (!this.users) {
+      this._users = new Range<string>();
+    }
+    return this._users;
+  }
+  public set users(v: Range<string>) {
+    this._users = v;
   }
 }
 
@@ -56,6 +78,14 @@ export class LogView implements Views.Datasource {
   }
   public set timestamp(v: string) {
     this._timestamp = v;
+  }
+
+  private _details: any[];
+  public get details(): any[] {
+    return this._details;
+  }
+  public set details(v: any[]) {
+    this._details = v;
   }
 }
 

@@ -12,14 +12,6 @@
         (keyup)="searchText($event.target.value)"
         (input)="onInputChange($event)"
       />
-      <!-- <input
-        type="text"
-        class="form-control"
-        id="searchbar"
-        name="searchbar"
-        placeholder="Search..."
-        (keyup)="searchText($event.target.value)"
-      /> -->
     </div>
   </div>
   <div class="col-md-6 col-lg-2 col-12">
@@ -62,7 +54,7 @@
         maxlength="10"
         type="text"
         ngbDatepicker
-        placeholder="yyyy-mm-dd"
+        placeholder="MM-DD-YYYY"
         name="fromDate"
         #fromDate="ngbDatepicker"
       />
@@ -83,7 +75,7 @@
         maxlength="10"
         type="text"
         ngbDatepicker
-        placeholder="yyyy-mm-dd"
+        placeholder="MM-DD-YYYY"
         name="toDate"
         #toDate="ngbDatepicker"
       />
