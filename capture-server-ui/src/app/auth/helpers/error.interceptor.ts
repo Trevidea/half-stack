@@ -27,7 +27,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         }
       }),
       catchError((error: HttpErrorResponse) => {
-        console.log("Error Occurred !!!",error)
+        console.log("Error Occurred ",error)
         if ([401, 403].indexOf(error.status) !== -1) {
           this._router.navigate(['/pages/miscellaneous/not-authorized']);
         };
@@ -36,10 +36,10 @@ export class ErrorInterceptor implements HttpInterceptor {
           // Handle network error
           this.modalService.openErrorModal("Network error occurred. Please check your internet connection and try again.");
         } else if (error.error instanceof ErrorEvent) {
-          // Handle client-side error
+          // Handling  client-side error
           this.modalService.openErrorModal("An error occurred on the client side. Please try again later.");
         } else {
-          // Handle server-side error
+          // Handlindling server-side error
           let errorMessage = "An error occurred while processing your request.";
           if (error.error && error.error.message) {
             errorMessage = error.error.message;
