@@ -50,7 +50,6 @@ void Omal::report()
                                   this->assessNetworkQuality(req, rsp);
                               });
                               
-<<<<<<< HEAD
     Gateway::instance().route("GET", "/api/omal/app", // To request LIST
                               [this](const Request &req, Response &rsp)
                               {
@@ -58,13 +57,6 @@ void Omal::report()
                                   response["app"]="spip";
                                   const auto &strResponse = Gateway::instance().formatResponse({{response}});
                                   rsp.setData(strResponse);
-=======
-    // Add routes for creating new VHost and application
-    Gateway::instance().route("POST", "/api/create-vhost",
-                              [this](const Request &req, Response &rsp)
-                              {
-                                  this->createVHost(req, rsp);
->>>>>>> e787ea354b1054371be6545fb48cc43d773acbb4
                               });
 }
 
