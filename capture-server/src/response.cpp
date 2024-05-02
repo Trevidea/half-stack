@@ -12,16 +12,6 @@ void Response::setData(const std::string &d)
 {
     this->m_data = d;
 }
-
-void Response::setData(bool b)
-{
-    if (b) {
-        this->m_data = "true";
-    } else {
-        this->m_data = "false";
-    }
-}
-
 void Response::complete()
 {
     //create a functional here to inform the subscribers that the work has been completed

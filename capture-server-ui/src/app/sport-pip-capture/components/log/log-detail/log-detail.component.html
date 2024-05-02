@@ -53,9 +53,10 @@
       style="padding: 2px; box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.08)"
     >
       <div
-        style="padding: 3px 6px; border-radius: 5px; cursor: pointer"
+        style="padding: 3px 6px; border-radius: 5px"
         [style.background-color]="index == 0 ? '#ededed' : '#f7f7f7'"
         (click)="previous($event)"
+        [style.cursor]="index == 0 + 1 ? 'pointer' : ''"
         rippleEffect
       >
         <i class="bi bi-chevron-left"></i>
@@ -69,6 +70,9 @@
         "
         [style.background-color]="
           this.index > this.datasource?.length + 1 ? '#ededed' : '#f7f7f7'
+        "
+        [style.cursor]="
+          this.index > this.datasource?.length + 1 ? '' : 'pointer'
         "
         (click)="next($event)"
         rippleEffect
