@@ -15,9 +15,10 @@ import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.s
   encapsulation: ViewEncapsulation.None,
 })
 export class LogDetailComponent implements OnInit {
+  @Output() changeRequest = new EventEmitter<any>();
   @Input() datasource: any;
   @Input() index: number;
-  @Output() changeRequest = new EventEmitter<any>();
+  @Input() imgUrl: string;
   constructor(private _coreSidebarService: CoreSidebarService) {}
   ngOnInit(): void {
     console.log("log-modal:::", this.datasource);

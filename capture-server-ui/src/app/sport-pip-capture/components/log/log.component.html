@@ -78,5 +78,6 @@
     [datasource]="rowData"
     [index]="rowIndex"
     (changeRequest)="changeRequest($event)"
+    [imgUrl]="'assets/images/avatars/{{ rowIndex + 1 }}.png'"
   ></app-log-detail>
 </core-sidebar>

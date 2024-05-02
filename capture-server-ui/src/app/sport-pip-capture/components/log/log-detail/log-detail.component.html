@@ -27,7 +27,7 @@
         <div class="d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center">
             <img
-              src="../../../../../assets/images/avatars/1-small.png"
+              src="assets/images/avatars/{{ index + 1 }}.png"
               class="rounded mr-1"
               height="25"
               alt=""
@@ -68,7 +68,7 @@
           cursor: pointer;
         "
         [style.background-color]="
-          this.index > this.datasource.length + 1 ? '#ededed' : '#f7f7f7'
+          this.index > this.datasource?.length + 1 ? '#ededed' : '#f7f7f7'
         "
         (click)="next($event)"
         rippleEffect
