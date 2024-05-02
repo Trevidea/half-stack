@@ -8,8 +8,9 @@ private:
     static int s_count;
     int m_id = 0;
     std::string m_data;
-    bool m_hasError = false; // Declare m_hasError here
+    bool m_hasError = false;
     std::string m_errorMessage;
+    int m_statusCode = 200; // Default status code is 200 OK
 
 public:
     Response();
@@ -30,10 +31,19 @@ public:
     void setError(const std::string &errorMessage) {
         m_hasError = true;
         m_errorMessage = errorMessage;
+        m_statusCode = 400; // Setting default error status code to 400 Bad Request
     }
 
     std::string getErrorMessage() const {
         return m_errorMessage;
+    }
+
+    void setStatus(int statusCode) {
+        m_statusCode = statusCode;
+    }
+
+    int getStatusCode() const {
+        return m_statusCode;
     }
 
     ~Response();

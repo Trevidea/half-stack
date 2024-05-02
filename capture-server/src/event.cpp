@@ -169,26 +169,27 @@ void Event::handleAddDevice(const Request &req, Response &rsp)
 {
     // Extract device_id, user_id, location, and event_id from the request JSON
     Json::Value requestData = req.json();
-    int device_id = requestData["device_id"].asInt();
-    int user_id = requestData["user_id"].asInt();
-    std::string location = requestData["location"].asString();
 
-    // Check if event_id is present in the request JSON
-    if (!requestData.isMember("event_id"))
+    // Check if all required fields are present in the request JSON
+    if (!requestData.isMember("device_id") || !requestData.isMember("user_id") ||
+        !requestData.isMember("location") || !requestData.isMember("event_id") || !requestData.isMember("pin"))
     {
-        // Respond with an error message indicating that event_id is required
-        rsp.setError("Event ID is required in the request.");
+        // Respond with a 400 Bad Request status code and an error message indicating missing required fields
+        rsp.setError("Incomplete request. Please provide device_id, user_id, location, event_id, and pin.");
+        rsp.setStatus(400); // Setting HTTP response status code
         return;
     }
 
-    // Retrieve the event_id from the request JSON
+    int device_id = requestData["device_id"].asInt();
+    int user_id = requestData["user_id"].asInt();
+    std::string location = requestData["location"].asString();
     int event_id = requestData["event_id"].asInt();
     std::string pin = requestData["pin"].asString(); // Assuming "pin" represents the PIN
 
     try
     {
-        // Retrieve the event by its ID
-        auto event = EntityBase::byId<Event>(event_id);
+        // Validate the event ID
+        validateEventId(event_id);
 
         // Prepare the SQL statement to insert the new device into the event_device table
         std::string sql = "INSERT INTO event_device (event_id, device_id, user_id, location, pin) VALUES (";
@@ -218,15 +219,25 @@ void Event::handleAddDevice(const Request &req, Response &rsp)
 
         // Pass the response data to formatResponse
         rsp.setData(Gateway::instance().formatResponse(responseVector));
+        rsp.setStatus(201); // Setting HTTP response status code to 201 Created
     }
-    catch (const ExModelNotFoundException &e)
+    catch (const std::invalid_argument& e)
     {
-        // Handle the case where the event is not found
-        rsp.setError("The specified event was not found.");
+        // Handle invalid argument exceptions (e.g., non-integer values) with a 400 Bad Request status code
+        rsp.setError("Invalid argument: " + std::string(e.what()));
+        rsp.setStatus(400); // Setting HTTP response status code
+    }
+    catch (const std::runtime_error &e)
+    {
+        // Handle runtime errors (e.g., event not found) with a 404 Not Found status code
+        rsp.setError("Error: " + std::string(e.what()));
+        rsp.setStatus(404); // Setting HTTP response status code
     }
     catch (const std::exception &e)
     {
-        // Handle other exceptions
+        // Handle other exceptions with a generic 500 Internal Server Error status code
         rsp.setError("An error occurred while adding the device to the event: " + std::string(e.what()));
+        rsp.setStatus(500); // Setting HTTP response status code
     }
 }
+
