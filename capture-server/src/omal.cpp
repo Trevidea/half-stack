@@ -87,11 +87,17 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     Json::Value jsonResponse;
     jsonResponse["allowed"] = true; // Set the "allowed" field to true
 
-    // Set the response data directly as a boolean
-    bool allowed = jsonResponse["allowed"].asBool();
-    rsp.setData(allowed);
-}
+    // Serialize the JSON response
+    Json::StreamWriterBuilder builder;
+    builder["indentation"] = ""; // No indentation
+    std::string responseData = Json::writeString(builder, jsonResponse);
 
+    // Log the response
+    spdlog::trace("Outgoing Control Server response:\n{}", responseData);
+
+    // Set the response data
+    rsp.setData(responseData);
+}
 
 Omal::~Omal()
 {
