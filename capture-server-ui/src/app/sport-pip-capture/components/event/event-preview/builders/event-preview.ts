@@ -19,8 +19,7 @@ export class EventPreviewBuilder extends AbstractBuilder<Data.ConnectionPreview,
     m.dtEvent = v.dtEvent;
     m.time = v.time;
     m.type = v.type;
-    m.detail = v.detail;
-    m.countdown = v.countdown;
+    // m.detail = v.detail;
     m.venue = v.venue;
   }
   decompose(v: EventPreview): Data.ConnectionPreview {

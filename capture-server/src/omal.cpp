@@ -80,7 +80,6 @@ void Omal::assessNetworkQuality(const Request &req, Response &rsp)
 
 void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 {
-    // Log the incoming request
     spdlog::trace("Incoming Control Server request:\n{}", req.data());
 
     // Construct the response JSON object with only the "allowed" field
