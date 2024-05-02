@@ -20,9 +20,7 @@ export class LogDetailComponent implements OnInit {
   @Input() index: number;
   @Input() imgUrl: string;
   constructor(private _coreSidebarService: CoreSidebarService) {}
-  ngOnInit(): void {
-    console.log("log-modal:::", this.datasource);
-  }
+  ngOnInit(): void {}
   closeLog() {
     this._coreSidebarService.getSidebarRegistry(`log-detail`).toggleOpen();
   }
@@ -35,7 +33,6 @@ export class LogDetailComponent implements OnInit {
     }
   }
   next(event: MouseEvent) {
-    console.log(this.index);
     if (this.index > this.datasource.length + 1) {
       event.preventDefault();
       event.stopPropagation();
