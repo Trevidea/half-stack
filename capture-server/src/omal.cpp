@@ -10,7 +10,7 @@ Omal::Omal() : EntityBase("omal")
 {
     // Watch VOD dump folders when Omal object is created
     std::string vodDumpDir = "/tmp/ovenmediaengine/vod_dumps"; // Update this with the actual directory path
-    auto vodDumpCallback = [this](const std::string& filename)
+    auto vodDumpCallback = [this](const std::string &filename)
     {
         // Handle the VOD dump file change here
         // You can implement logic to respond to file changes, such as updating the list of VOD dumps
@@ -22,17 +22,7 @@ Omal::Omal() : EntityBase("omal")
     m_vodDumpWatcher->start(); // Start watching the directory
 }
 
-void Omal::createVHost(const Request &req, Response &rsp)
-{
-    // Handle creating new VHost
-    // Parse the request body and extract necessary information
-    // Use the information to create a new VHost
-
-    // Send appropriate response
-    rsp.setData("New VHost created successfully.");
-}
-
-void Omal::report() 
+void Omal::report()
 {
     EntityBase::report();
     Gateway::instance().route("GET", "/api/omal/vod-dumps", // To request LIST
@@ -49,14 +39,20 @@ void Omal::report()
                               {
                                   this->assessNetworkQuality(req, rsp);
                               });
-                              
     Gateway::instance().route("GET", "/api/omal/app", // To request LIST
                               [this](const Request &req, Response &rsp)
                               {
-                                  Json::Value response=Json::objectValue;
-                                  response["app"]="spip";
+                                  Json::Value response = Json::objectValue;
+                                  response["app"] = "spip";
                                   const auto &strResponse = Gateway::instance().formatResponse({{response}});
                                   rsp.setData(strResponse);
+                              });
+
+    // Implement route for Control Server
+    Gateway::instance().route("POST", "/api/control-server",
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  handleControlServerRequest(req, rsp);
                               });
 }
 
@@ -81,11 +77,27 @@ void Omal::assessNetworkQuality(const Request &req, Response &rsp)
     rsp.setData(Json::FastWriter().write(jsonResults));
 }
 
+void Omal::handleControlServerRequest(const Request &req, Response &rsp)
+{
+    spdlog::trace("Incoming Control Server request:\n{}", req.data());
+
+    // Construct the response JSON object with only the "allowed" field
+    Json::Value jsonResponse;
+    jsonResponse["allowed"] = true; // Set the "allowed" field to true
+
+    // Set the response data
+    rsp.setData(Json::FastWriter().write(jsonResponse));
+}
+
 Omal::~Omal()
 {
     // Stop the watcher when Omal object is destroyed
     if (m_vodDumpWatcher)
     {
-        m_vodDumpWatcher->stop();
+        // Stop the watcher when Omal object is destroyed
+        if (m_vodDumpWatcher)
+        {
+            m_vodDumpWatcher->stop();
+        }
     }
 }

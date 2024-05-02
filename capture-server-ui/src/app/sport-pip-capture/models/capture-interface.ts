@@ -12,6 +12,7 @@ export namespace Data {
     user: string;
     action: string;
     timestamp: string;
+    details: any[];
   }
   export interface Distribution extends Base {
     id: number;
@@ -99,13 +100,12 @@ export namespace Data {
     dtShared: string;
   }
 
-
   export interface EventDevice extends Base {
     id: number;
     user_id: number;
     device_id: number;
     pin: string;
-    event_id: number
+    event_id: number;
     location: string;
   }
 
@@ -158,10 +158,10 @@ export namespace Data {
     network: string;
   }
 
-  export enum NetWorkQuality { }
-  export enum Type { }
+  export enum NetWorkQuality {}
+  export enum Type {}
 
-  export enum Priority { }
+  export enum Priority {}
 
   export enum DataType {
     Type1 = "type1",
@@ -208,7 +208,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role { }
+  export interface Role {}
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -217,13 +217,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings { }
+  export interface DisplaySettings {}
 
-  export interface CustomizationSettings { }
+  export interface CustomizationSettings {}
 
-  export interface NotificationSettings { }
+  export interface NotificationSettings {}
 
-  export interface VideoResolutionSettings { }
+  export interface VideoResolutionSettings {}
   export enum DataStatus {
     Status1 = "status1",
     Status2 = "status2",
@@ -268,7 +268,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role { }
+  export interface Role {}
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -277,13 +277,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings { }
+  export interface DisplaySettings {}
 
-  export interface CustomizationSettings { }
+  export interface CustomizationSettings {}
 
-  export interface NotificationSettings { }
+  export interface NotificationSettings {}
 
-  export interface VideoResolutionSettings { }
+  export interface VideoResolutionSettings {}
 
   export interface Team extends Base {
     id: number;
@@ -420,14 +420,14 @@ export namespace Data {
     venue: Venue;
     time: number;
     type: string;
-    countdown: string;
     activeDevice: ActiveDevice[];
   }
   export interface ActiveDevice {
-    user: string;
+    name: string;
     location: string;
     deviceId: string;
     deviceType: string;
+    status: string;
     network: string;
   }
 }

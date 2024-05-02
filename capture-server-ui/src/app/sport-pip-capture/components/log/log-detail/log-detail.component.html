@@ -1,0 +1,84 @@
+<div class="modal-dialog sidebar-lg">
+  <div class="modal-content p-0">
+    <div class="modal-header p-0 bg-transparent ml-1" style="margin-top: 0.2em">
+      <div style="cursor: pointer" (click)="closeLog()">
+        <i
+          class="bi bi-x"
+          style="
+            font-size: 25px;
+            color: #0d0d0d;
+            background-color: #f3f3f5;
+            border-radius: 5px;
+            padding: 0 3px 0 3px;
+          "
+        ></i>
+      </div>
+    </div>
+    <div class="modal-body mt-1" *ngIf="datasource">
+      <div *ngFor="let item of datasource">
+        <small>{{ item.category }}</small>
+        <h3>
+          {{
+            item.subject == "Create Event"
+              ? "Create On-Demand Event"
+              : item.subject
+          }}
+        </h3>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <img
+              src="assets/images/avatars/{{ index + 1 }}.png"
+              class="rounded mr-1"
+              height="25"
+              alt=""
+            />
+            {{ item.user }}
+          </div>
+          <div>{{ item.timestamp }}</div>
+        </div>
+
+        <div>
+          <h4 class="mt-1">Activity</h4>
+          <div *ngFor="let log of item.details">
+            <div class="d-flex mt-1">
+              <small class="text-nowrap">{{ log.time }}</small>
+              <small style="margin-left: 15px">{{ log.activity }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal-footer"
+      style="padding: 2px; box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.08)"
+    >
+      <div
+        style="padding: 3px 6px; border-radius: 5px"
+        [style.background-color]="index == 0 ? '#ededed' : '#f7f7f7'"
+        (click)="previous($event)"
+        [style.cursor]="index == 0 + 1 ? 'pointer' : ''"
+        rippleEffect
+      >
+        <i class="bi bi-chevron-left"></i>
+      </div>
+      <div
+        style="
+          background-color: #ededed;
+          padding: 3px 6px;
+          border-radius: 5px;
+          cursor: pointer;
+        "
+        [style.background-color]="
+          this.index > this.datasource?.length + 1 ? '#ededed' : '#f7f7f7'
+        "
+        [style.cursor]="
+          this.index > this.datasource?.length + 1 ? '' : 'pointer'
+        "
+        (click)="next($event)"
+        rippleEffect
+      >
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </div>
+  </div>
+</div>

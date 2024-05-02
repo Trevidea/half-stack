@@ -8,7 +8,7 @@ import { EventPreviewBuilder } from "./builders/event-preview";
 
 @Component({
   selector: "app-event-preview-presenter",
-  template: `<app-event-preview [datasource]='previewData?.result[0]?.[0]' (closePreview)='onClosePreview()' [eventId]="eventId"></app-event-preview>`,
+  template: `<app-event-preview  [datasource]='previewData?.result[0]?.[0]' (closePreview)='onClosePreview()' [eventId]="eventId"></app-event-preview>`,
   styleUrls: ["./event-preview.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
@@ -32,7 +32,6 @@ export class EventPreviewPresenter implements OnInit {
     this.socketService.onEventPreview().subscribe(
       (data) => {
         this.previewData = JSON.parse(data);
-        console.log("from preview  this.previewData", this.previewData);
       },
       (error) => {
         console.error('Error occurred:', error);
@@ -48,8 +47,7 @@ export class EventPreviewPresenter implements OnInit {
       }
     );
 
-    Transformer._ComposeLiveObjectAsync(this.socketService._onEventPreview(), this.ds, EventPreviewBuilder);
-    console.log(this.ds)
+    Transformer._ComposeLiveObjectAsync(this.socketService._onPreviewEvent(), this.ds, EventPreviewBuilder);
   }
 
   onClosePreview() {

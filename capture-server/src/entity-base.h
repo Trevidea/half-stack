@@ -17,6 +17,7 @@ class EntityBase : public Handler
 
     friend class Event;
     friend class Device;
+    friend class Connection;
 
 private:
     std::string executeSqlStr(const std::string &sql);

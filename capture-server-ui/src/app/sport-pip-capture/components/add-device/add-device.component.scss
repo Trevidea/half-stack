@@ -1,19 +1,29 @@
 @import '@core/scss/angular/libs/toastr.component.scss';
 @import "@core/scss/angular/libs/select.component.scss";
+
 .toast-title {
-    color: #000 !important;
+  color: #000 !important;
+}
+
+label {
+  color: #0F0F0F;
+  font-size: 14px;
+}
+
+.dark-layout {
+  .toast-title {
+    color: #fdfdfd !important;
   }
 
-  label{
-    color: #0F0F0F;
-    font-size: 14px;
+  label {
+    color: #fff;
   }
+}
 
-  .dark-layout{
-    .toast-title {
-        color: #fdfdfd !important;
-      }
-      label{
-        color: #fff;
-      }
-  }
+.appname {
+  font-family: 'Outfit';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17.64px;
+  text-align: left;
+}

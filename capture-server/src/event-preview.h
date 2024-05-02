@@ -59,8 +59,7 @@ public:
     std::vector<EventDevice> &activeDevices();
     const std::vector<EventDevice> &activeDevices() const;
 
-    // Method to populate hardcoded active devices
-    void populateActiveDevices();
+    void setActiveDevices(const std::vector<EventDevice>& activeDevices);
 
 private:
     std::vector<EventDevice> m_activeDevice;

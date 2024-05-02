@@ -15,7 +15,8 @@ public:
     Omal();
     void report();
     void assessNetworkQuality(const Request &req, Response &rsp);
-    void createVHost(const Request &req, Response &rsp);
+    void handleControlServerRequest(const Request &req, Response &rsp);
+
     ~Omal();
 };
 
