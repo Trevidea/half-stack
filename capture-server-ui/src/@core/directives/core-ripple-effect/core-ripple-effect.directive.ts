@@ -1,9 +1,9 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit } from "@angular/core";
 
-import * as Waves from 'node-waves';
+import * as Waves from "node-waves";
 
 @Directive({
-  selector: '[rippleEffect]'
+  selector: "[rippleEffect]",
 })
 export class RippleEffectDirective {
   // Private
@@ -22,14 +22,14 @@ export class RippleEffectDirective {
 
     if (
       // Attach ripple with light style i.e solid variant of button
-      !this._nativeElement.className.split(' ').some(function (c) {
+      !this._nativeElement.className.split(" ").some(function (c) {
         return /btn-outline-.*/.test(c);
       }) &&
-      !this._nativeElement.className.split(' ').some(function (c) {
+      !this._nativeElement.className.split(" ").some(function (c) {
         return /btn-flat-.*/.test(c);
       })
     ) {
-      Waves.attach(this._nativeElement, ['waves-float', 'waves-light']);
+      Waves.attach(this._nativeElement, ["waves-float", "waves-light"]);
     } else {
       // Attach ripple with transparent style i.e flat, outline variant of button
       Waves.attach(this._nativeElement);
