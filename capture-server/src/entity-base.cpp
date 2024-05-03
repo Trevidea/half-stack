@@ -16,7 +16,7 @@ EntityBase::EntityBase(const Model &model) : m_model{model}
 EntityBase::EntityBase(const std::string &entity) : m_entity{entity}
 {
 }
-/// @brief
+/// @brief 
 void EntityBase::report()
 {
     char schemaUrl[128] = {0};
@@ -149,6 +149,10 @@ void EntityBase::function(const Request &request, Response &response, const std:
     response.complete();
 }
 
+/// @brief 
+/// @param request 
+/// @param response 
+/// @param view 
 void EntityBase::view(const Request &request, Response &response, const std::string &view)
 {
     const std::string jsonString = SqlHelper::JsonStub(view);
@@ -171,6 +175,10 @@ void EntityBase::view(const Request &request, Response &response, const std::str
     response.complete();
 }
 
+/// @brief 
+/// @param request 
+/// @param response 
+/// @return 
 Json::Value EntityBase::create(const Request &request, Response &response)
 {
     Json::Value parsedJson = request.json();
@@ -181,6 +189,10 @@ Json::Value EntityBase::create(const Request &request, Response &response)
     response.complete();
     return parsedJson;
 }
+/// @brief 
+/// @param request 
+/// @param response 
+/// @return 
 Json::Value EntityBase::update(const Request &request, Response &response)
 {
     Json::Value parsedJson = request.json();
@@ -191,6 +203,10 @@ Json::Value EntityBase::update(const Request &request, Response &response)
     response.complete();
     return parsedJson;
 }
+/// @brief 
+/// @param request 
+/// @param response 
+/// @return 
 Json::Value EntityBase::remove(const Request &request, Response &response)
 {
     Json::Value parsedJson = request.json();
@@ -202,6 +218,9 @@ Json::Value EntityBase::remove(const Request &request, Response &response)
     return parsedJson;
 }
 
+/// @brief 
+/// @param request 
+/// @param response 
 void EntityBase::schema(const Request &request, Response &response)
 {
     const auto sql = SqlHelper::SchemaSql(this->entity());
