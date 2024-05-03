@@ -4,12 +4,13 @@ import { Transformer } from "app/blocks/transformer";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 import { PreviousConnectionBuilder } from "./previous-events-connection/builders/previous-connection";
 import { PreviousConnectionView, RangePreviousConnection } from "./previous-events-connection/views/previous-connection";
+import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 // import { ConnectionObjecView } from "./previous-events-connection/views/previous-connection";
 // [datasource]="ds"
 @Component({
   selector: "app-connection-presenter",
   template: `<app-connection
-   
+   [datasource]="ds.PreviousConnections"
     [_isEventStarted]="eventStarted"
   ></app-connection>`,
   styleUrls: ["./connection.component.scss"],
@@ -20,7 +21,7 @@ export class ConnectionPresenter implements OnInit {
   eventStarted: boolean;
   constructor(
     private router: Router,
-    private dataFactory: DataFactoryService,
+    private modelService: ModelServiceService,
     private route: ActivatedRoute
   ) {
     this.ds = new RangePreviousConnection();
@@ -30,6 +31,6 @@ export class ConnectionPresenter implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.eventStarted = params["eventStarted"];
     });
-    //  Transformer.ComposeCollectionAsync(this.dataFactory.PreviousConnection(), this.ds.Connection, PreviousConnectionBuilder)
+    Transformer.ComposeCollectionAsync(this.modelService.PreviousConnection(), this.ds.PreviousConnections, PreviousConnectionBuilder)
   }
 }

@@ -1,10 +1,8 @@
 <div class="card p-0" *ngIf="!eventStarted">
-  <app-previous-events-connection
-    [datasource]="datasource.Connection"
-    [previousEventsConnection]="previousEventsConnection"
-    (startEvent)="isEventStarted($event)"
-  ></app-previous-events-connection>
+  <app-previous-events-connection [datasource]="datasource"
+    (startEvent)="isEventStarted($event)"></app-previous-events-connection>
 </div>
 <div *ngIf="eventStarted">
   <router-outlet></router-outlet>
 </div>
+<!-- [previousEventsConnection]="previousEventsConnection" -->
