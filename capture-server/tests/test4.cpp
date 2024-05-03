@@ -46,15 +46,6 @@ TEST(ScriptInsertTest, BasicTest)
     // Step 2: Verify Input Data
     std::cout << "Input JSON: " << json << std::endl;
 
-    // Step 3: Inspect Implementation
-    // If necessary, review the implementation of the ScriptInsert function in the SqlHelper class.
-
-    // Step 4: Debugging
-    // If needed, use a debugger to step through the ScriptInsert function.
-
-    // Step 5: Check for Recent Changes
-    // Review any recent changes in the ScriptInsert function or related code.
-
     // Declare that the generated SQL statement matches the expected SQL statement
     EXPECT_EQ(generatedSql, expectedSql);
 }

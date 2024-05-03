@@ -3,7 +3,10 @@
 #define EVENTDEVICE_H
 
 #include "entity-base.h"
+#include "request.h"
+#include "response.h"
 #include "json/json.h" 
+#include "sqlhelper.h"
 
 class EventDevice : public EntityBase {
 public:
@@ -32,6 +35,9 @@ public:
 
     std::string network() const;
     void setNetwork(const std::string& value);
+
+    // Method to create a new event device record in the database
+    void create(const Request& request, Response& response);
 
 private:
 };

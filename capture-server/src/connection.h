@@ -90,6 +90,7 @@ public:
     }
 
     void getDetails(const Request &request, Response &response);
+    void getActivities(const Request &request, Response &response);
 
     ~Connection();
 };
