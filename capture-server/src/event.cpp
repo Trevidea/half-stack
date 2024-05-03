@@ -176,20 +176,72 @@ void Event::handleAddDevice(const Request& req, Response& rsp) {
             rsp.setError("Event ID is required in the request.");
             return;
         }
-        
-        int event_id = requestData["event_id"].asInt();
 
-        // Create an instance of EventDevice and call create method to save data in the database
-        EventDevice e;
-        e.create(req, rsp);
-    } catch (const ExModelNotFoundException& e) {
-        // Handle the case where the event is not found
-        rsp.setError("The specified event was not found.");
+        // Extract other necessary data from the request JSON
+        int event_id = requestData["event_id"].asInt();
+        int device_id = requestData["device_id"].asInt();
+        int user_id = requestData["user_id"].asInt();
+        std::string location = requestData["location"].asString();
+        std::string pin = requestData["pin"].asString();
+
+        // Create JSON object for ScriptInsert
+        Json::Value insertJson;
+        insertJson["table"] = "event_device";
+        
+        // Construct columns
+        Json::Value column1;
+        column1["field"] = "device_id";
+        column1["type"] = 0; // Assuming type 0 represents integer
+        column1["value"] = device_id;
+        insertJson["columns"].append(column1);
+
+        Json::Value column2;
+        column2["field"] = "event_id";
+        column2["type"] = 0; // Assuming type 0 represents integer
+        column2["value"] = event_id;
+        insertJson["columns"].append(column2);
+
+        Json::Value column3;
+        column3["field"] = "location";
+        column3["type"] = 1; // Assuming type 1 represents string
+        column3["value"] = location;
+        insertJson["columns"].append(column3);
+
+        Json::Value column4;
+        column4["field"] = "pin";
+        column4["type"] = 1; // Assuming type 1 represents string
+        column4["value"] = pin;
+        insertJson["columns"].append(column4);
+
+        Json::Value column5;
+        column5["field"] = "user_id";
+        column5["type"] = 0; // Assuming type 0 represents integer
+        column5["value"] = user_id;
+        insertJson["columns"].append(column5);
+
+        // Generate SQL statement using ScriptInsert
+        std::string sql = SqlHelper::ScriptInsert(insertJson);
+
+        // Execute the SQL statement
+        std::string result = executeSqlStr(sql);
+
+        // Check if the execution was successful
+        if (result == "SUCCESS") {
+            // Provide a success message in the response
+            rsp.setData("Device saved successfully.");
+        } else {
+            // Provide an error message if the execution failed
+            rsp.setError("Failed to save the device to the event.");
+        }
+
+        rsp.complete();
     } catch (const std::exception& e) {
-        // Handle other exceptions
+        // Handle exceptions
         rsp.setError("An error occurred while adding the device to the event: " + std::string(e.what()));
     }
 }
+
+
 
 
 

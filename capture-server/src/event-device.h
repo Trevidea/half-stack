@@ -7,11 +7,13 @@
 #include "response.h"
 #include "json/json.h" 
 #include "sqlhelper.h"
+#include "gateway.h"
 
 class EventDevice : public EntityBase {
 public:
     // Constructors
     EventDevice();
+    void report();
     EventDevice(Json::Value& model);
 
     // Getter and Setter properties
@@ -36,8 +38,11 @@ public:
     std::string network() const;
     void setNetwork(const std::string& value);
 
-    // Method to create a new event device record in the database
-    void create(const Request& request, Response& response);
+    int eventId() const;
+    void setEventId(int value);
+
+    std::string pin() const;
+    void setPin(const std::string& value);
 
 private:
 };
