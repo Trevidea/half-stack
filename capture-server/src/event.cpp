@@ -165,56 +165,31 @@ void Event::closePreview(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
 
-void Event::handleAddDevice(const Request &req, Response &rsp)
-{
-    try
-    {
+void Event::handleAddDevice(const Request& req, Response& rsp) {
+    try {
         // Extract data from the request JSON
         Json::Value requestData = req.json();
-        int device_id = req.getColumn<int>("device_id");
-        int user_id = req.getColumn<int>("user_id");
-        std::string location = req.getColumn<std::string>("location");
-
+        
         // Check if event_id is present in the request JSON
-        if (!requestData.isMember("event_id"))
-        {
+        if (!requestData.isMember("event_id")) {
             // Respond with an error message indicating that event_id is required
             rsp.setError("Event ID is required in the request.");
             return;
         }
-
-        // Retrieve the event_id from the request JSON
+        
         int event_id = requestData["event_id"].asInt();
-        std::string pin = requestData["pin"].asString(); // Assuming "pin" represents the PIN
 
-        // Retrieve the event by its ID
-        auto event = EntityBase::byId<Event>(event_id);
-
-        // Prepare the data to be inserted
-        Json::Value data;
-        data["event_id"] = event_id;
-        data["device_id"] = device_id;
-        data["user_id"] = user_id;
-        data["location"] = location;
-        data["pin"] = pin;
-
-        // Create a Request object from the JSON data
-        Request requestDataWrapper("", data.toStyledString());
-
-        // Create the EventDevice entity and insert data
+        // Create an instance of EventDevice and call create method to save data in the database
         EventDevice e;
-        e.create(requestDataWrapper, rsp);
-    }
-    catch (const ExModelNotFoundException &e)
-    {
+        e.create(req, rsp);
+    } catch (const ExModelNotFoundException& e) {
         // Handle the case where the event is not found
         rsp.setError("The specified event was not found.");
-    }
-    catch (const std::exception &e)
-    {
+    } catch (const std::exception& e) {
         // Handle other exceptions
         rsp.setError("An error occurred while adding the device to the event: " + std::string(e.what()));
     }
 }
+
 
 
