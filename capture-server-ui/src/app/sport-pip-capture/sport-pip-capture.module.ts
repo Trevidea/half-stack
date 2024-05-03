@@ -23,7 +23,7 @@ import { CreateOnDemandEventComponent } from "./components/event/create-on-deman
 import { EventConnectionDetailComponent } from "./components/connection/event-connection-detail/event-connection-detail.component";
 import { ConnectionDeviceDetailComponent } from "./components/connection/connection-device-detail/connection-device-detail.component";
 import { LogComponent } from "./components/log/log.component";
-import { LogPresentert } from "./components/log/log.presenter";
+// import { LogPresentert } from "./components/log/log.presenter";
 import { SharedComponent } from "./components/shared/shared.component";
 import { SharedPresenter } from "./components/shared/shared.presenter";
 import { PERFECT_SCROLLBAR_CONFIG } from "ngx-perfect-scrollbar";
@@ -101,12 +101,17 @@ import { AddDevicePresenter } from "./components/add-device/add-device.presenter
 import { LogSearchPipe } from "./components/log/log.pipe";
 import { LogDetailComponent } from "./components/log/log-detail/log-detail.component";
 import { ErrorModalComponent } from "./blocks/error-modal/error-modal.component";
+import { LogSummaryComponent } from "./components/log/log-summary/log-summary.component";
+import { LogListPresentert } from "./components/log/log-list/log-list.presenter";
+import { LogListComponent } from "./components/log/log-list/log-list.component";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
 };
 @NgModule({
   declarations: [
+    LogListComponent,
+    LogListPresentert,
     LogDetailComponent,
     TimeFormatPipe,
     SportPipCaptureComponent,
@@ -125,7 +130,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EventConnectionDetailComponent,
     ConnectionDeviceDetailComponent,
     LogComponent,
-    LogPresentert,
+    // LogPresentert,
     SharedComponent,
     SharedPresenter,
     OngoingComponent,
@@ -183,7 +188,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CustomDateTimeFormatPipe,
     AddDevicePresenter,
     LogSearchPipe,
-    ErrorModalComponent
+    ErrorModalComponent,
+    LogSummaryComponent,
   ],
   providers: [
     {
@@ -220,4 +226,4 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ToastrModule,
   ],
 })
-export class SportPipCaptureModule { }
+export class SportPipCaptureModule {}
