@@ -1,0 +1,96 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex align-items-center">
+      <div
+        style="
+          margin-right: 1em;
+          background-color: #f3f3f5;
+          margin-bottom: 7px;
+          padding: 0.6em 0.8em;
+          border-radius: 10px;
+          cursor: pointer;
+        "
+        (click)="back()"
+      >
+        <i
+          class="bi bi-arrow-left"
+          style="color: #0f0f0f; -webkit-text-stroke: 1px"
+        ></i>
+      </div>
+      <div class="flex-grow-1">
+        <h4>
+          {{
+            datasource[0]._subject == "Create Event"
+              ? "Create On-Demand Event"
+              : datasource[0]._subject
+          }}
+        </h4>
+        {{ datasource[0]._timestamp }}
+      </div>
+      <div>
+        <img
+          src="assets/images/avatars/{{ +detailIndex + 1 }}.png"
+          class="rounded mr-1"
+          height="25"
+          alt=""
+        />{{ datasource[0]._user }}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">field</th>
+        <th scope="col">description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Process</th>
+        <td>Database Access Layer</td>
+      </tr>
+      <tr>
+        <th scope="row">TID</th>
+        <td>-</td>
+      </tr>
+      <tr>
+        <th scope="row">Area</th>
+        <td>Capture Server</td>
+      </tr>
+      <tr>
+        <th scope="row">Category</th>
+        <td>SQL Helper</td>
+      </tr>
+
+      <tr>
+        <th scope="row">Event ID</th>
+        <td>GUID</td>
+      </tr>
+
+      <tr>
+        <th scope="row">Level</th>
+        <td>Trace</td>
+      </tr>
+
+      <tr>
+        <th scope="row">Message</th>
+        <td>-</td>
+      </tr>
+
+      <tr>
+        <th scope="row">Correlation</th>
+        <td>-</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<core-sidebar
+  class="modal modal-slide-in fade"
+  name="log-detail"
+  overlayClass="modal-backdrop"
+  hideOnEsc="true"
+>
+  <app-log-detail></app-log-detail>
+</core-sidebar>

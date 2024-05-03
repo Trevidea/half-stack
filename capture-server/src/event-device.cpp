@@ -3,7 +3,16 @@
 
 EventDevice::EventDevice() : EntityBase("event_device") {}
 
-// EventDevice::EventDevice(Json::Value &model) : EntityBase(model) {}
+void EventDevice::report()
+{
+    EntityBase::report();
+    
+    Gateway::instance().route("POST", "/api/event-devices", // To request INSERT
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  this->create(req, rsp);
+                              });
+}
 
 int EventDevice::userId() const
 {
@@ -73,4 +82,24 @@ std::string EventDevice::network() const
 void EventDevice::setNetwork(const std::string &value)
 {
     m_model.set("network", value);
+}
+
+int EventDevice::eventId() const
+{
+    return this->m_model.get<int>("event_id");
+}
+
+void EventDevice::setEventId(int value)
+{
+    m_model.set("event_id", value);
+}
+
+std::string EventDevice::pin() const
+{
+    return this->m_model.get<std::string>("pin");
+}
+
+void EventDevice::setPin(const std::string &value)
+{
+    m_model.set("pin", value);
 }

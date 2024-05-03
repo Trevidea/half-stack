@@ -165,68 +165,83 @@ void Event::closePreview(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
 
-void Event::handleAddDevice(const Request &req, Response &rsp)
-{
-    // Extract device_id, user_id, location, and event_id from the request JSON
-    Json::Value requestData = req.json();
-    int device_id = requestData["device_id"].asInt();
-    int user_id = requestData["user_id"].asInt();
-    std::string location = requestData["location"].asString();
+void Event::handleAddDevice(const Request& req, Response& rsp) {
+    try {
+        // Extract data from the request JSON
+        Json::Value requestData = req.json();
+        
+        // Check if event_id is present in the request JSON
+        if (!requestData.isMember("event_id")) {
+            // Respond with an error message indicating that event_id is required
+            rsp.setError("Event ID is required in the request.");
+            return;
+        }
 
-    // Check if event_id is present in the request JSON
-    if (!requestData.isMember("event_id"))
-    {
-        // Respond with an error message indicating that event_id is required
-        rsp.setError("Event ID is required in the request.");
-        return;
-    }
+        // Extract other necessary data from the request JSON
+        int event_id = requestData["event_id"].asInt();
+        int device_id = requestData["device_id"].asInt();
+        int user_id = requestData["user_id"].asInt();
+        std::string location = requestData["location"].asString();
+        std::string pin = requestData["pin"].asString();
 
-    // Retrieve the event_id from the request JSON
-    int event_id = requestData["event_id"].asInt();
-    std::string pin = requestData["pin"].asString(); // Assuming "pin" represents the PIN
+        // Create JSON object for ScriptInsert
+        Json::Value insertJson;
+        insertJson["table"] = "event_device";
+        
+        // Construct columns
+        Json::Value column1;
+        column1["field"] = "device_id";
+        column1["type"] = 0; // Assuming type 0 represents integer
+        column1["value"] = device_id;
+        insertJson["columns"].append(column1);
 
-    try
-    {
-        // Retrieve the event by its ID
-        auto event = EntityBase::byId<Event>(event_id);
+        Json::Value column2;
+        column2["field"] = "event_id";
+        column2["type"] = 0; // Assuming type 0 represents integer
+        column2["value"] = event_id;
+        insertJson["columns"].append(column2);
 
-        // Prepare the SQL statement to insert the new device into the event_device table
-        std::string sql = "INSERT INTO event_device (event_id, device_id, user_id, location, pin) VALUES (";
-        sql += std::to_string(event_id) + ", ";
-        sql += std::to_string(device_id) + ", ";
-        sql += std::to_string(user_id) + ", ";
-        sql += "'" + location + "', ";
-        sql += "'" + pin + "')";
+        Json::Value column3;
+        column3["field"] = "location";
+        column3["type"] = 1; // Assuming type 1 represents string
+        column3["value"] = location;
+        insertJson["columns"].append(column3);
+
+        Json::Value column4;
+        column4["field"] = "pin";
+        column4["type"] = 1; // Assuming type 1 represents string
+        column4["value"] = pin;
+        insertJson["columns"].append(column4);
+
+        Json::Value column5;
+        column5["field"] = "user_id";
+        column5["type"] = 0; // Assuming type 0 represents integer
+        column5["value"] = user_id;
+        insertJson["columns"].append(column5);
+
+        // Generate SQL statement using ScriptInsert
+        std::string sql = SqlHelper::ScriptInsert(insertJson);
 
         // Execute the SQL statement
-        EntityBase entityBase("event_device");
-        std::string result = entityBase.executeSqlStr(sql);
+        std::string result = executeSqlStr(sql);
 
-        // Prepare the success response
-        std::map<std::string, std::string> responseData;
-        responseData["status"] = "success";
-        responseData["message"] = "EventDevice added successfully";
-        responseData["event_id"] = std::to_string(event_id);
-        responseData["device_id"] = std::to_string(device_id);
-        responseData["user_id"] = std::to_string(user_id);
-        responseData["location"] = location;
-        responseData["pin"] = pin;
+        // Check if the execution was successful
+        if (result == "SUCCESS") {
+            // Provide a success message in the response
+            rsp.setData("Device saved successfully.");
+        } else {
+            // Provide an error message if the execution failed
+            rsp.setError("Failed to save the device to the event.");
+        }
 
-        // Convert the response data to a vector of maps
-        std::vector<std::map<std::string, std::string>> responseVector;
-        responseVector.push_back(responseData);
-
-        // Pass the response data to formatResponse
-        rsp.setData(Gateway::instance().formatResponse(responseVector));
-    }
-    catch (const ExModelNotFoundException &e)
-    {
-        // Handle the case where the event is not found
-        rsp.setError("The specified event was not found.");
-    }
-    catch (const std::exception &e)
-    {
-        // Handle other exceptions
+        rsp.complete();
+    } catch (const std::exception& e) {
+        // Handle exceptions
         rsp.setError("An error occurred while adding the device to the event: " + std::string(e.what()));
     }
 }
+
+
+
+
+

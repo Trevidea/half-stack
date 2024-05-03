@@ -1,4 +1,4 @@
-<div class="modal-dialog sidebar-lg">
+<div class="modal-dialog sidebar-lg" style="width: 40%">
   <div class="modal-content p-0">
     <div class="modal-header p-0 bg-transparent ml-1" style="margin-top: 0.2em">
       <div style="cursor: pointer" (click)="closeLog()">
@@ -49,9 +49,19 @@
       </div>
     </div>
     <div
-      class="modal-footer"
+      class="modal-footer d-flex"
       style="padding: 2px; box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.08)"
     >
+      <div class="mr-auto">
+        <button
+          type="button"
+          class="btn btn-warning btn-sm"
+          rippleEffect
+          (click)="details()"
+        >
+          See Detail
+        </button>
+      </div>
       <div
         style="padding: 3px 6px; border-radius: 5px"
         [style.background-color]="index == 0 ? '#ededed' : '#f7f7f7'"

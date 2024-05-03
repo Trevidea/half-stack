@@ -2,11 +2,10 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { CaptureDashboardPresenter } from "./components/dashboard/dashboard.presenter";
 import { ConnectionPresenter } from "./components/connection/connection.presenter";
-import { LogPresentert } from "./components/log/log.presenter";
+// import { LogPresentert } from "./components/log/log.presenter";
 import { SharedPresenter } from "./components/shared/shared.presenter";
 import { AuthGuard } from "app/auth/helpers/auth.guards";
 import { ConnectionDeviceDetailComponent } from "./components/connection/connection-device-detail/connection-device-detail.component";
-import { ConnectionStartComponent } from "./components/connection/connection-start/connection-start.component";
 import { EventPresenter } from "./components/event/event.presenter";
 import { CreateOnDemandEventPresenter } from "./components/event/create-on-demand-event-form/create-on-demand-event.presenter";
 import { MetaTypePresenter } from "./components/meta-type/meta-type.presenter";
@@ -14,13 +13,23 @@ import { PastEventViewPresenter } from "./components/event/grid-view-ui/past-eve
 import { DatatablesService } from "app/main/tables/datatables/datatables.service";
 import { ConnectionStartPresenter } from "./components/connection/connection-start/connection-start.presenter";
 import { EventPreviewPresenter } from "./components/event/event-preview/event-preview.presenter";
-import { EventPreviewComponent } from "./components/event/event-preview/event-preview.component";
+import { LogSummaryComponent } from "./components/log/log-summary/log-summary.component";
+import { LogListPresentert } from "./components/log/log-list/log-list.presenter";
+import { LogComponent } from "./components/log/log.component";
 
 const routes: Routes = [
   {
     path: "capture-dashboard",
     component: CaptureDashboardPresenter,
     canActivate: [AuthGuard],
+  },
+  {
+    path: "logs",
+    component: LogComponent,
+    children: [
+      { path: "", component: LogListPresentert },
+      { path: "detail", component: LogSummaryComponent },
+    ],
   },
   {
     path: "connection",
@@ -41,8 +50,9 @@ const routes: Routes = [
     },
     data: { animation: "datatables" },
   },
+
   { path: "meta-types", component: MetaTypePresenter },
-  { path: "logs", component: LogPresentert },
+
   { path: "on-demand-event", component: CreateOnDemandEventPresenter },
   { path: "shared", component: SharedPresenter },
 
