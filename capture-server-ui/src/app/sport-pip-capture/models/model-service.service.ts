@@ -11,12 +11,13 @@ import { MetaTypeData } from "./meta-type";
 import { error, warn } from "console";
 import { UserProfileData } from "./user-profile";
 import { DeviceData } from "./device";
+import { PreviousEventsConnectionData } from "./previous-events-connection";
 
 @Injectable({
   providedIn: "root",
 })
 export class ModelServiceService {
-  private modelsServerUrl: string = environment.spModelUrl;
+  public modelsServerUrl: string = environment.spModelUrl;
 
   constructor(
     private _httpClient: HttpClient,
@@ -36,11 +37,11 @@ export class ModelServiceService {
     );
   }
 
-  createWithOut(type: string, entity: any): Observable<any> {
-    const url = `${this.modelsServerUrl}/${type}`;
-    return this._httpClient.post<any>(url, entity);
+  // createWithOut(type: string, entity: any): Observable<any> {
+  //   const url = `${this.modelsServerUrl}/${type}`;
+  //   return this._httpClient.post<any>(url, entity);
 
-  }
+  // }
 
   read(type: string): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}`;
@@ -256,7 +257,7 @@ export class ModelServiceService {
 
   saveDevice(data: Data.EventDevice): Observable<Data.EventDevice> {
     console.log(data)
-    return this.createWithOut("event/add-device", data);
+    return this.create("event/add-device", data);
   }
 
   eventList(): Observable<Data.Event[]> {
@@ -300,6 +301,10 @@ export class ModelServiceService {
 
   deviceJson(): Observable<Data.Device[]> {
     return this._data('devices', DeviceData)
+  }
+
+  PreviousConnection(): Observable<Data.PreviousEventsConnection[]> {
+    return this._data('connections', PreviousEventsConnectionData)
   }
 
   MetaTypeByKey(key: string): Observable<Data.MetaType> {

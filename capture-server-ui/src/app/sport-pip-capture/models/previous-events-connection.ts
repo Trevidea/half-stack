@@ -1,85 +1,45 @@
 import { DataBase } from "./model";
 import { Data } from "./capture-interface";
 
-export class PreviousEventsConnectionData extends DataBase<Data.PreviousEventsConnection>{
-
-    public get userId(): number {
-        return this._model.userId;
+export class PreviousEventsConnectionData extends DataBase<Data.PreviousEventsConnection> {
+    private _eventName: string;
+    public get eventName(): string {
+        return this._eventName;
     }
-    public set userId(v: number) {
-        this._model.userId = v;
-    }
-
-
-    private _NetworkQuality: string = "abc";
-    public get "Network Quality"(): string {
-        return this._model["Network Quality"];
-    }
-    public set "Network Quality"(v: string) {
-        this._model["Network Quality"] = v;
+    public set eventName(v: string) {
+        this._eventName = v;
     }
 
-    public get "IP Address"(): string {
-        return this._model["IP Address"];
+    private _date: string;
+    public get date(): string {
+        return this._date;
     }
-    public set "IP Address"(v: string) {
-        this._model["IP Address"] = v;
-    }
-
-
-    private _Time: string;
-    public get Time(): string {
-        return this._model.Time;
-    }
-    public set Time(v: string) {
-        this._model.Time = v;
+    public set date(v: string) {
+        this._date = v;
     }
 
-
-    public get "Connection Date"(): string {
-        return this._model["Connection Date"];
+    private _total_connections: string;
+    public get total_connections(): string {
+        return this._total_connections;
     }
-    public set "Connection Date"(v: string) {
-        this._model["Connection Date"] = v;
+    public set total_connections(v: string) {
+        this._total_connections = v;
+    }
+
+    private _duration: string;
+    public get duration(): string {
+        return this._duration;
+    }
+    public set duration(v: string) {
+        this._duration = v;
+    }
+
+    private _most_connected_device: string;
+    public get most_connected_device(): string {
+        return this._most_connected_device;
+    }
+    public set most_connected_device(v: string) {
+        this._most_connected_device = v;
     }
 
 }
-/*
-
-        
-        "Is Disabled": boolean,
-        "Type": string,
-        "Connection Date": string,
-        "Priority": string,
-        "Location": string,
-        "First Name": string,
-        "Last Name": string,
-        "Email": string,
-        "Phone": string,
-        "Role": string,
-        "Address": string,
-        "eventId": number,
-        "Shared Date": string,
-        "Team Name": string,
-        "detail": [
-            {
-                "cityAddress": string,
-                "streetAdress": string,
-                "type": string
-            }
-        ],
-        "Event Date": string,
-        "Level": string,
-        "Day Halve": string,
-        "onPremise": boolean,
-        "Program": string,
-        "Sport": string,
-        "Time": string,
-        "Year": number,
-        "venue": [
-            {
-                "location": string
-            }
-        ],
-        "Status": string
-*/

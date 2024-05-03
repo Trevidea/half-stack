@@ -158,10 +158,10 @@ export namespace Data {
     network: string;
   }
 
-  export enum NetWorkQuality {}
-  export enum Type {}
+  export enum NetWorkQuality { }
+  export enum Type { }
 
-  export enum Priority {}
+  export enum Priority { }
 
   export enum DataType {
     Type1 = "type1",
@@ -208,7 +208,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role {}
+  export interface Role { }
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -217,13 +217,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings {}
+  export interface DisplaySettings { }
 
-  export interface CustomizationSettings {}
+  export interface CustomizationSettings { }
 
-  export interface NotificationSettings {}
+  export interface NotificationSettings { }
 
-  export interface VideoResolutionSettings {}
+  export interface VideoResolutionSettings { }
   export enum DataStatus {
     Status1 = "status1",
     Status2 = "status2",
@@ -268,7 +268,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role {}
+  export interface Role { }
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -277,71 +277,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings {}
+  export interface DisplaySettings { }
 
-  export interface CustomizationSettings {}
+  export interface CustomizationSettings { }
 
-  export interface NotificationSettings {}
+  export interface NotificationSettings { }
 
-  export interface VideoResolutionSettings {}
-
-  export interface Team extends Base {
-    id: number;
-    name: string;
-    logo: string;
-  }
-  export interface PastConnection extends Base {
-    connection: PreviousEventsConnection[];
-  }
-  export interface MetaType extends Base {
-    name: string;
-    key: string;
-    values: string[];
-  }
-  export interface MetaTypeEgress extends Base {
-    newItem: string;
-    values: string[];
-  }
-  export interface PreviousEventsConnection extends Base {
-    userId: number;
-    "Network Quality": string;
-    "IP Address": string;
-    // "Is Disabled": boolean,
-    // "Type": string,
-    "Connection Date": string;
-    // "Priority": string,
-    // "Location": string,
-    // "First Name": string,
-    // "Last Name": string,
-    // "Email": string,
-    // "Phone": string,
-    // "Role": string,
-    // "Address": string,
-    // "eventId": number,
-    // "Shared Date": string,
-    // "Team Name": string,
-    // "detail": [
-    //     {
-    //         "cityAddress": string,
-    //         "streetAdress": string,
-    //         "type": string
-    //     }
-    // ],
-    // "Event Date": string,
-    // "Level": string,
-    // "Day Halve": string,
-    // "onPremise": boolean,
-    // "Program": string,
-    // "Sport": string,
-    Time: string;
-    // "Year": number,
-    // "venue": [
-    //     {
-    //         "location": string
-    //     }
-    // ],
-    // "Status": string
-  }
+  export interface VideoResolutionSettings { }
 
   export interface Team extends Base {
     id: number;
@@ -361,45 +303,32 @@ export namespace Data {
     values: string[];
   }
   export interface PreviousEventsConnection extends Base {
-    userId: number;
-    "Network Quality": string;
-    "IP Address": string;
-    // "Is Disabled": boolean,
-    // "Type": string,
-    "Connection Date": string;
-    // "Priority": string,
-    // "Location": string,
-    // "First Name": string,
-    // "Last Name": string,
-    // "Email": string,
-    // "Phone": string,
-    // "Role": string,
-    // "Address": string,
-    // "eventId": number,
-    // "Shared Date": string,
-    // "Team Name": string,
-    // "detail": [
-    //     {
-    //         "cityAddress": string,
-    //         "streetAdress": string,
-    //         "type": string
-    //     }
-    // ],
-    // "Event Date": string,
-    // "Level": string,
-    // "Day Halve": string,
-    // "onPremise": boolean,
-    // "Program": string,
-    // "Sport": string,
-    Time: string;
-    // "Year": number,
-    // "venue": [
-    //     {
-    //         "location": string
-    //     }
-    // ],
-    // "Status": string
+    eventName: string;
+    date: string;
+    total_connections: string;
+    duration: string;
+    most_connected_device: string
+
   }
+
+  export interface Team extends Base {
+    id: number;
+    name: string;
+    logo: string;
+  }
+  // export interface PastConnection extends Base {
+  //   connection: PreviousEventsConnection[];
+  // }
+  export interface MetaType extends Base {
+    name: string;
+    key: string;
+    values: string[];
+  }
+  export interface MetaTypeEgress extends Base {
+    newItem: string;
+    values: string[];
+  }
+
 
   export interface FilterParams {
     year?: number;
