@@ -49,6 +49,7 @@
             (click)="logDetail(i)"
             class="cursor-pointer"
             [style.background-color]="rowIndex == i ? '#F2F5F8' : 'transparent'"
+            [ngClass]="rowIndex === i ? 'selected-row' : ''"
           >
             <td *ngFor="let key of logKeys" class="text-nowrap">
               <div class="media" *ngIf="key !== 'details'">
