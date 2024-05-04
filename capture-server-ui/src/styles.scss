@@ -24,3 +24,14 @@
 html .navbar-sticky .app-content {
   padding: calc(2rem + 4.45rem) 0.5rem 0 0.5rem;
 }
+.dark-layout {
+  table {
+    tbody {
+      tr {
+        td {
+          color: #fdfdfd !important;
+        }
+      }
+    }
+  }
+}

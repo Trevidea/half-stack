@@ -104,6 +104,8 @@ import { ErrorModalComponent } from "./blocks/error-modal/error-modal.component"
 import { LogSummaryComponent } from "./components/log/log-summary/log-summary.component";
 import { LogListPresentert } from "./components/log/log-list/log-list.presenter";
 import { LogListComponent } from "./components/log/log-list/log-list.component";
+import { OvenMediaServerFormComponent } from "./components/connection/connection-device-detail/oven-media-server-form/oven-media-server-form.component";
+import { RelayStreamComponent } from "./components/connection/connection-device-detail/relay-stream/relay-stream.component";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -190,6 +192,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LogSearchPipe,
     ErrorModalComponent,
     LogSummaryComponent,
+    OvenMediaServerFormComponent,
+    RelayStreamComponent,
   ],
   providers: [
     {

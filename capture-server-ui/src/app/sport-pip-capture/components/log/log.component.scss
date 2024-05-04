@@ -16,3 +16,11 @@
 i.bi {
   transition: transform 0.3s ease-in-out;
 }
+.selected-row {
+  background-color: #f2f5f8;
+}
+.dark-layout {
+  .selected-row {
+    background-color: #23292e !important;
+  }
+}
