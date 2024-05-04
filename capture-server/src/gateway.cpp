@@ -14,6 +14,7 @@
 #include <json/json.h>
 #include "event-device.h"
 #include "device.h"
+#include "event-connection.h"
 
 Gateway::Gateway()
 {
@@ -32,6 +33,7 @@ void Gateway::init()
     this->m_entities.push_back(new EventPreview());
     this->m_entities.push_back(new EventDevice());
     this->m_entities.push_back(new Device());
+    this->m_entities.push_back(new EventConnection());
     for (auto &&e : this->m_entities)
     {
         e->report();

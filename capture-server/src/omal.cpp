@@ -4,8 +4,6 @@
 #include "virtual-host.h"
 #include <functional>
 
-// /Users/shreyapathak/mp4 dump
-// /tmp/ovenmediaengine/vod_dumps
 Omal::Omal() : EntityBase("omal")
 {
     // Watch VOD dump folders when Omal object is created
