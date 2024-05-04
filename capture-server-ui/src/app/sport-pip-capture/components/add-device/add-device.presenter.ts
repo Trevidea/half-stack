@@ -48,7 +48,7 @@ export class AddDevicePresenter implements OnInit {
 
     Transformer.ComposeCollectionViewAsync(this.modelServiceService.userJson(), this.ds.userName,
       (userItem: UserProfileData) => {
-        return new SelectItemView(userItem.id, userItem.firstname + ' ' + userItem.lastname);
+        return new SelectItemView(userItem.id, userItem.firstname + '' + userItem.lastname);
       })
 
     Transformer.ComposeCollectionViewAsync(this.modelServiceService.deviceJson(), this.ds.deviceName,
@@ -79,8 +79,6 @@ export class AddDevicePresenter implements OnInit {
     })
 
   }
-
-
 
   toastrSuccess() {
     this.activeModal.close('Accept click')

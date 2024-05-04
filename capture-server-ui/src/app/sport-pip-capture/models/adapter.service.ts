@@ -98,7 +98,7 @@ export class AdapterService {
     console.log("Table", type);
     const pos = type.indexOf("-");
     if (pos >= 0) {
-      type = type.split("-").join("");
+      type = type.split("-").join("_");
     }
     console.log(data);
     return this.ngToCpp(data, type).pipe(
