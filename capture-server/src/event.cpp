@@ -56,7 +56,7 @@ void Event::report()
                                   this->remove(req, rsp);
                               });
     // Route for adding a device to the event
-    Gateway::instance().route("POST", "/api/event/add-device",
+    Gateway::instance().route("POST", "/api/add-device",
                               [this](const Request &req, Response &rsp)
                               {
                                   this->handleAddDevice(req, rsp);

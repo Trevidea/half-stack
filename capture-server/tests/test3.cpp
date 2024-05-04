@@ -1,4 +1,4 @@
-//UNit test for the ScriptInsert function of SqlHelper class
+//Unit test for the ScriptInsert function of SqlHelper class
 
 #include <gtest/gtest.h>
 #include <json/json.h>
@@ -25,5 +25,38 @@ TEST(ScriptInsertTest, EmptyColumnsTest) {
     std::string generatedSql =  SqlHelper::ScriptInsert(json);
 
     // Declare that the generated SQL string matches the expected SQL string
+    EXPECT_EQ(generatedSql, expectedSql);
+}
+
+
+TEST(ScriptInsertTest, BasicTest)
+{
+    // Create a JSON object to simulate input data
+    Json::Value json;
+    json["table"] = "test_table";
+    Json::Value columns(Json::arrayValue);
+
+    // Create the first column object and set its field name and value (with double quotes)
+    Json::Value column1;
+    column1["field"] = "column1";
+    column1["value"] = "\"value1\"";
+    columns.append(column1);
+
+    // Create the second column object and set its field name and value (with double quotes)
+    Json::Value column2;
+    column2["field"] = "column2";
+    column2["value"] = "\"value2\"";
+    columns.append(column2);
+
+    // Set the array of columns in the JSON object
+    json["columns"] = columns;
+
+    // Define the expected SQL statement
+    std::string expectedSql = "INSERT INTO test_table (column1, column2) VALUES (\"value1\", \"value2\") RETURNING id";
+
+    // Call the ScriptInsert function from the SqlHelper class with the JSON object and get the generated SQL statement
+    std::string generatedSql = SqlHelper::ScriptInsert(json);
+
+    // Declare that the generated SQL statement matches the expected SQL statement
     EXPECT_EQ(generatedSql, expectedSql);
 }

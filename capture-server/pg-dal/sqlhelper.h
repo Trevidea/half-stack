@@ -114,7 +114,7 @@ public:
 
         return sql_insert;
     }
-
+    
     //-----------------------------------------------------------------------------------
 
     static std::string ScriptUpdate(const Json::Value &json)
