@@ -93,6 +93,13 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-outline-secondary">Cancel</button>
-  <button class="btn btn-warning">Save</button>
+  <button
+    class="btn btn-outline-secondary"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    Cancel
+  </button>
+  <button class="btn btn-warning" (click)="activeModal.dismiss('Cross click')">
+    Save
+  </button>
 </div>
