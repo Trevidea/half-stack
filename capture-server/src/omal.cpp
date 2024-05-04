@@ -9,7 +9,7 @@
 Omal::Omal() : EntityBase("omal")
 {
     // Watch VOD dump folders when Omal object is created
-    std::string vodDumpDir = "/Users/shreyapathak/mp4 dump"; // Update this with the actual directory path
+    std::string vodDumpDir = "/tmp/ovenmediaengine/vod_dumps"; // Update this with the actual directory path
     auto vodDumpCallback = [this](const std::string &filename)
     {
         // Handle the VOD dump file change here

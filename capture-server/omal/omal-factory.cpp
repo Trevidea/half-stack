@@ -18,11 +18,8 @@ int OMALFactory::createOrFind(const std::string &name, char const *err)
     const std::string baseUrl = DBManager::instance().getEnv("OM_URL", "http://drake.in:1437/v1");
     snprintf(ep, 128, "%s/vhosts", baseUrl.c_str());
     auto rest = Rest::ClientFactory::getInstance().create(ep);
-    rest.get([](const std::string &result){
-        
-    }, [&err](const std::string &error){
-        err = error.c_str();
-    });
+    std::string pass, fail;
+    rest.get(pass, fail);
     err = (char*)"no error";
     return 1;
 }

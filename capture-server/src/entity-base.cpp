@@ -16,7 +16,7 @@ EntityBase::EntityBase(const Model &model) : m_model{model}
 EntityBase::EntityBase(const std::string &entity) : m_entity{entity}
 {
 }
-/// @brief 
+/// @brief
 void EntityBase::report()
 {
     char schemaUrl[128] = {0};
@@ -149,10 +149,10 @@ void EntityBase::function(const Request &request, Response &response, const std:
     response.complete();
 }
 
-/// @brief 
-/// @param request 
-/// @param response 
-/// @param view 
+/// @brief
+/// @param request
+/// @param response
+/// @param view
 void EntityBase::view(const Request &request, Response &response, const std::string &view)
 {
     const std::string jsonString = SqlHelper::JsonStub(view);
@@ -175,10 +175,10 @@ void EntityBase::view(const Request &request, Response &response, const std::str
     response.complete();
 }
 
-/// @brief 
-/// @param request 
-/// @param response 
-/// @return 
+/// @brief
+/// @param request
+/// @param response
+/// @return
 Json::Value EntityBase::create(const Request &request, Response &response)
 {
     Json::Value parsedJson = request.json();
@@ -189,10 +189,10 @@ Json::Value EntityBase::create(const Request &request, Response &response)
     response.complete();
     return parsedJson;
 }
-/// @brief 
-/// @param request 
-/// @param response 
-/// @return 
+/// @brief
+/// @param request
+/// @param response
+/// @return
 Json::Value EntityBase::update(const Request &request, Response &response)
 {
     Json::Value parsedJson = request.json();
@@ -203,10 +203,10 @@ Json::Value EntityBase::update(const Request &request, Response &response)
     response.complete();
     return parsedJson;
 }
-/// @brief 
-/// @param request 
-/// @param response 
-/// @return 
+/// @brief
+/// @param request
+/// @param response
+/// @return
 Json::Value EntityBase::remove(const Request &request, Response &response)
 {
     Json::Value parsedJson = request.json();
@@ -218,9 +218,9 @@ Json::Value EntityBase::remove(const Request &request, Response &response)
     return parsedJson;
 }
 
-/// @brief 
-/// @param request 
-/// @param response 
+/// @brief
+/// @param request
+/// @param response
 void EntityBase::schema(const Request &request, Response &response)
 {
     const auto sql = SqlHelper::SchemaSql(this->entity());
@@ -346,7 +346,7 @@ void EntityBase::sync(const Request &req, Response &rsp)
 
     Client client = factory.create(jsUrl.asString());
     client.get([this, &rsp, &reader, &deleteSql](const std::string &response)
-               {
+                    {
                     
                    /*A.***Event data from the Full Stack - STRAPI****/
                    Json::Value responseJson;
@@ -419,14 +419,17 @@ void EntityBase::sync(const Request &req, Response &rsp)
                    
                     auto jsResult = this->executeSqlJson(sql);
                    trs.commit();
-                   rsp.setData(Json::FastWriter().write(jsResult)); },
-               [](const std::string &s)
-               {
-                   spdlog::error("failure..{}", s);
-               });
+                   rsp.setData(Json::FastWriter().write(jsResult)); 
+                   rsp.complete(); },
 
-    rsp.setData("Sync operation completed successfully.");
-    rsp.complete();
+                    [&rsp](const std::string &s)
+                    {
+                        Json::Value jsErr = Json::objectValue;
+                        jsErr["error"] = s;
+                        spdlog::error("failure..{}", s);
+                        rsp.setData(Gateway::instance().formatResponse({{jsErr}}));
+                        rsp.complete();
+                    });
 }
 
 bool EntityBase::notSet() const
