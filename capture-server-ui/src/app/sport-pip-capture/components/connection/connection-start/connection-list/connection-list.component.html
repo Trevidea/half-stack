@@ -58,9 +58,19 @@
                 ></i>
                 {{ item.transmitStatus == "Paused" ? "Resume" : "Pause" }}
               </button>
+              <button
+                *ngIf="item.role == 'Publisher'"
+                mc-dropdown-item
+                [mcDropdownTriggerFor]="appDropdownNested"
+                (click)="streaming()"
+              >
+                <i data-feather="loader" class="mr-50 mb-25"></i> Relay
+              </button>
               <button mc-dropdown-item (click)="modalOpenSM(modalblock)">
-                <i data-feather="slash" class="mr-50 mb-25"></i>
-                Block
+                <span style="color: red">
+                  <i data-feather="slash" class="mr-50 mb-25"></i>
+                </span>
+                <span style="color: red"> Block </span>
                 <ng-template
                   #modalblock
                   let-modal
@@ -77,16 +87,10 @@
                 </ng-template>
               </button>
 
-              <button
-                *ngIf="item.role == 'Publisher'"
-                mc-dropdown-item
-                [mcDropdownTriggerFor]="appDropdownNested"
-                (click)="streaming()"
-              >
-                <i data-feather="loader" class="mr-50 mb-25"></i> Relay
-              </button>
               <button mc-dropdown-item (click)="delete()">
-                <i data-feather="trash-2" class="mr-50 mb-25"></i> Delete
+                <span style="color: red">
+                  <i data-feather="trash-2" class="mr-50 mb-25"></i> Delete
+                </span>
               </button>
             </mc-dropdown>
 
