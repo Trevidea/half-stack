@@ -27,8 +27,7 @@ export class AddDeviceComponent implements OnInit {
     });
   }
 
-  onsave() {
-    // this.toastrSuccess()
-    // this.activeModal.close('Accept click')
-  }
+  // onsave() {
+  //   this.activeModal.close('Accept click')
+  // }
 }

@@ -174,7 +174,6 @@ export class Transformer {
           od.compose(modelData);
         },
         (err) => {
-          console.log(err);
           reject(err);
         },
         () => {

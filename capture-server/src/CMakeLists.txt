@@ -21,7 +21,7 @@ set(HALF_STACK_SRC
     countdown.cpp
     worker-loop.cpp
     connection-detail.cpp
-    connection.cpp
+    event-connection.cpp
     live-event.cpp
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})

@@ -1,69 +1,77 @@
 import { Collection, Range } from "app/blocks/collection";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
 
-
-
-export class ConnectionObjecView implements Views.Datasource {
-    id: number;
-
-    private _Connection: Collection<PreviousConnectionView>;
-    public get Connection(): Collection<PreviousConnectionView> {
-        if (!this._Connection) {
-            this._Connection = new Collection<PreviousConnectionView>()
-        }
-        return this._Connection;
+export class RangePreviousConnection implements Views.Datasource {
+  
+    
+    private _id : number;
+    public get id() : number {
+        return this._id;
     }
-    public set Connection(v: Collection<PreviousConnectionView>) {
-        this._Connection = v;
+    public set id(v : number) {
+        this._id = v;
+    }
+    
+    private _PreviousConnections: Range<PreviousConnectionView>;
+    public get PreviousConnections(): Range<PreviousConnectionView> {
+        if (!this._PreviousConnections) {
+            this._PreviousConnections = new Range<PreviousConnectionView>();
+        }
+        return this._PreviousConnections;
+    }
+    public set PreviousConnections(v: Range<PreviousConnectionView>) {
+        this._PreviousConnections = v;
     }
 
 }
+
 export class PreviousConnectionView implements Views.Datasource {
-    id: number;
-
-
-    private _userId: number;
-    public get userId(): number {
-        return this._userId;
+    private _id: number;
+    public get id(): number {
+        return this._id;
     }
-    public set userId(v: number) {
-        this._userId = v;
+    public set id(v: number) {
+        this._id = v;
     }
-
-
-    private "_Network Quality": string;
-    public get "Network Quality"(): string {
-        return this["_Network Quality"];
+    
+    private _eventName : string;
+    public get eventName() : string {
+        return this._eventName;
     }
-    public set "Network Quality"(v: string) {
-        this["_Network Quality"] = v;
+    public set eventName(v : string) {
+        this._eventName = v;
     }
-
-
-    private "_IP Address": string;
-    public get "IP Address"(): string {
-        return this["_IP Address"];
+    
+    private _date: string;
+    public get date(): string {
+        return this._date;
     }
-    public set "IP Address"(v: string) {
-        this["_IP Address"] = v;
+    public set date(v: string) {
+        this._date = v;
     }
 
-
-    private _Time: string;
-    public get Time(): string {
-        return this._Time;
+    private _totalonnections: string;
+    public get totalonnections(): string {
+        return this._totalonnections;
     }
-    public set Time(v: string) {
-        this._Time = v;
-    }
-
-    private "_Connection Date": string;
-    public get "Connection Date"(): string {
-        return this["_Connection Date"];
-    }
-    public set "Connection Date"(v: string) {
-        this["_Connection Date"] = v;
+    public set totalonnections(v: string) {
+        this._totalonnections = v;
     }
 
+    private _duration: string;
+    public get duration(): string {
+        return this._duration;
+    }
+    public set duration(v: string) {
+        this._duration = v;
+    }
+
+    private _mostonnectedDevice: string;
+    public get mostonnectedDevice(): string {
+        return this._mostonnectedDevice;
+    }
+    public set mostonnectedDevice(v: string) {
+        this._mostonnectedDevice = v;
+    }
 
 }

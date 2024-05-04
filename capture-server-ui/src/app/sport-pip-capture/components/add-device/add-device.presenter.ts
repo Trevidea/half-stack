@@ -39,7 +39,6 @@ export class AddDevicePresenter implements OnInit {
 
     this.actions = new ModalActions(this.ds, this.modelServiceService.saveDevice, AddDeviceBuilder, this.onClose)
     this.actions.onComplete.subscribe((result) => {
-      console.log(result);
       if (result) {
         this.toastrSuccess()
       } else {
@@ -99,8 +98,5 @@ export class AddDevicePresenter implements OnInit {
   }
   onsave(onClose: EventEmitter<any>) {
     this.toastrSuccess()
-
-
-    // this.activeModal.close('Accept click')
   }
 }

@@ -3,19 +3,19 @@ import { Data } from "app/sport-pip-capture/models/capture-interface";
 import { PreviousConnectionView } from "../views/previous-connection";
 
 
-export class PreviousConnectionBuilder extends AbstractBuilder<Data.PreviousEventsConnection, PreviousConnectionView>{
+export class PreviousConnectionBuilder extends AbstractBuilder<Data.PreviousEventsConnection, PreviousConnectionView> {
     compose(m: Data.PreviousEventsConnection, v: PreviousConnectionView) {
-        v.id = m.id
-        v["Network Quality"] = m["Network Quality"]
-        v.userId = m.userId;
-        v["Connection Date"] = m["Connection Date"]
-        v["IP Address"] = m["IP Address"]
-        v.Time = m.Time
-
+        v.eventName = m.eventName;
+        v.date = m.date;
+        v.duration = m.duration;
+        v.totalonnections = m.total_connections;
+        v.mostonnectedDevice = m.most_connected_device;
     }
+    
     decompose(v: PreviousConnectionView): Data.PreviousEventsConnection {
-        throw new Error("Method not implemented.");
+        return;
     }
+
     view(): PreviousConnectionView {
         return new PreviousConnectionView()
     }

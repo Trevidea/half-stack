@@ -191,12 +191,12 @@ export class DataFactoryService {
   // ConnectionJson(id: number): Observable<Data.Connection> {
   //   return this._datum('connections', id, ConnectionData);
   // }
-  PreviousConnection(): Observable<Data.PreviousEventsConnection[]> {
-    return this._data(
-      "connection-with-past-details",
-      PreviousEventsConnectionData
-    );
-  }
+  // PreviousConnection(): Observable<Data.PreviousEventsConnection[]> {
+  //   return this._data(
+  //     "connection-with-past-details",
+  //     PreviousEventsConnectionData
+  //   );
+  // }
   DistributionsListJson(): Observable<Data.Distribution[]> {
     return this._data("distributions", DistributionData);
   }
