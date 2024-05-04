@@ -14,20 +14,20 @@ namespace Rest
     class ClientFactory;
 } // namespace Rest
 
-
-
-class Client {
+class Client
+{
 private:
     http_client client;
     std::mutex mutex;
-    Client(const std::string& url);
+    Client(const std::string &url);
+
 public:
     friend class Rest::ClientFactory;
+
 public:
-    void get(std::function<void(const std::string&)> &&success, std::function<void(const std::string&)> &&failure, int timeout = 10);
+    void get(std::function<void(const std::string &)> &&success, std::function<void(const std::string &)> &&failure, int timeout = 10);
+    void get(std::string &success, std::string &failure, int timeout = 10);
     void wait();
 };
 
-
-
-#endif //CLIENT_H
+#endif // CLIENT_H

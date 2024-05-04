@@ -19,12 +19,12 @@ using namespace std;
 
 map<utility::string_t, utility::string_t> dictionary;
 
-void display_json(
-    json::value const &jvalue,
-    utility::string_t const &prefix)
-{
-   cout << prefix << jvalue.serialize() << endl;
-}
+// void display_json(
+//     json::value const &jvalue,
+//     utility::string_t const &prefix)
+// {
+//    cout << prefix << jvalue.serialize() << endl;
+// }
 
 void handle_get(http_request request)
 {
@@ -38,17 +38,9 @@ void handle_get(http_request request)
    answer["Absolute URI"] = json::value::string(uri.to_string());
    auto reponse = Gateway::instance().request("GET", uri.path(), uri::decode(uri.query()), "");
    spdlog::trace("response received {}", reponse.data());
-   try
-   {
-      /* code */
-      auto val = json::value::parse(reponse.data());
+   auto val = json::value::parse(reponse.data());
 
-      answer["Gateway Response"] = val;
-   }
-   catch (const std::exception &e)
-   {
-      std::cerr << e.what() << '\n';
-   }
+   answer["Gateway Response"] = val;
 
    http_response response(status_codes::OK);
    response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
@@ -74,7 +66,7 @@ void handle_request(
             auto const & jvalue = task.get();
 
             spdlog::trace("Incoming data..{}", jvalue.serialize());
-            display_json(jvalue, "R: ");
+            // display_json(jvalue, "R: ");
 
             if (!jvalue.is_null())
             {
@@ -87,7 +79,7 @@ void handle_request(
          } })
        .wait();
 
-   display_json(answer, "S: ");
+   // display_json(answer, "S: ");
 
    http_response response(status_codes::OK);
 
@@ -111,7 +103,7 @@ void handle_post(http_request request)
           answer["Absolute URI"] = json::value::string(uri.to_string());
           auto result = Gateway::instance().request("POST", uri.path(), uri.query(), jvalue.serialize());
           auto val = json::value::parse(result.data());
-         
+
           answer["Gateway Response"] = val;
        });
 }
