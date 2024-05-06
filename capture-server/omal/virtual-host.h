@@ -34,7 +34,8 @@ public:
     /// @param relativeOutputPath
     /// @return
     void setVODDumps(const std::string &streamName, const std::string &relativeOutputPath);
-    Json::Value deepCreate();
+    Json::Value deepFindOrCreate();
+    Json::Value createApp(const std::string &app);
 
     // Destructor declaration
     ~VirtualHost();

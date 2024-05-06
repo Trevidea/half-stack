@@ -3,6 +3,7 @@
 #include "omal-factory.h"
 #include "virtual-host.h"
 #include <functional>
+#include <regex>
 
 Omal::Omal() : EntityBase("omal")
 {
@@ -26,15 +27,23 @@ void Omal::report()
     Gateway::instance().route("POST", "/api/omal/create-vhost",
                               [this](const Request &req, Response &rsp)
                               {
+                                  auto &vh = OMALFactory::getInstance().create("spip");
+                                  auto result = vh.deepFindOrCreate();
+
+                                  auto strResponse = Gateway::instance().formatResponse({{result}});
+                                  rsp.setData(strResponse);
+                              });
+    Gateway::instance().route("POST", "/api/omal/create-app",
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  auto &vh = OMALFactory::getInstance().create("spip");
+
                                   const auto &jsReq = req.json();
                                   int eventId = jsReq["eventId"].asInt();
 
                                   std::stringstream ss;
                                   ss << eventId;
-
-                                  auto &vh = OMALFactory::getInstance().create(ss.str());
-                                  auto result = vh.deepCreate();
-
+                                  Json::Value result = vh.createApp(ss.str());
                                   auto strResponse = Gateway::instance().formatResponse({{result}});
                                   rsp.setData(strResponse);
                               });
@@ -62,7 +71,7 @@ void Omal::report()
                               });
 
     // Implement route for Control Server
-    Gateway::instance().route("POST", "/api/control-server",
+    Gateway::instance().route("POST", "/api/omal/control-server",
                               [this](const Request &req, Response &rsp)
                               {
                                   handleControlServerRequest(req, rsp);
@@ -93,8 +102,50 @@ void Omal::assessNetworkQuality(const Request &req, Response &rsp)
     rsp.setData(Json::FastWriter().write(jsonResults));
 }
 
+/*
+POST /configured/target/url/ HTTP/1.1
+Content-Length: 325
+Content-Type: application/json
+Accept: application/json
+X-OME-Signature: f871jd991jj1929jsjd91pqa0amm1
+{
+  "client": 
+  {
+    "address": "211.233.58.86",
+    "port": 29291,
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+  },
+  "request":
+  {
+    "direction": "incoming | outgoing",
+    "protocol": "webrtc | rtmp | srt | llhls | thumbnail",
+    "status": "opening | closing",
+    "url": "scheme://host[:port]/app/stream/file?query=value&query2=value2",
+    "new_url": "scheme://host[:port]/app/new_stream/file?query=value&query2=value2",
+    "time": ""2021-05-12T13:45:00.000Z"
+  }
+}
+*/
 void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 {
+    Json::Value omRequest = req.json();
+    const std::string strUrl = omRequest["request"]["url"].asString();
+    std::regex urlPattern(R"(rtmp://[^/]+/([^/]+)/([^/]+)/([^/]+)/)");
+
+    std::smatch matches;  // Used to store the results of the match
+
+    if (std::regex_search(strUrl, matches, urlPattern)) {
+        if (matches.size() == 4) { // matches[0] will be the whole string, matches[1-3] will be the groups
+            spdlog::trace("App: {}",matches[1].str());
+            spdlog::trace("Username: {}", matches[2].str());
+            spdlog::trace("Stream Key: {}", matches[3].str());
+            
+        }
+    } else {
+        spdlog::trace("No match found");
+    }
+
+
     spdlog::trace("Incoming Control Server request:\n{}", req.data());
 
     // Construct the response JSON object with only the "allowed" field
