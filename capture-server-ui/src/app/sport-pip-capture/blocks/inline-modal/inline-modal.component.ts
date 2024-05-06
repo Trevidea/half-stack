@@ -1,5 +1,9 @@
 import { Component, Input, TemplateRef, Type, ViewChild } from "@angular/core";
-import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import {
+  NgbActiveModal,
+  NgbModal,
+  NgbModalRef,
+} from "@ng-bootstrap/ng-bootstrap";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
 
 @Component({
