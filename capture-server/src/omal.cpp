@@ -23,6 +23,21 @@ Omal::Omal() : EntityBase("omal")
 void Omal::report()
 {
     EntityBase::report();
+    Gateway::instance().route("POST", "/api/omal/create-vhost",
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  const auto &jsReq = req.json();
+                                  int eventId = jsReq["eventId"].asInt();
+
+                                  std::stringstream ss;
+                                  ss << eventId;
+
+                                  auto &vh = OMALFactory::getInstance().create(ss.str());
+                                  auto result = vh.deepCreate();
+
+                                  auto strResponse = Gateway::instance().formatResponse({{result}});
+                                  rsp.setData(strResponse);
+                              });
     Gateway::instance().route("GET", "/api/omal/vod-dumps", // To request LIST
                               [this](const Request &req, Response &rsp)
                               {
@@ -53,7 +68,10 @@ void Omal::report()
                                   handleControlServerRequest(req, rsp);
                               });
 }
-
+void Omal::openPreview(const Request &req, Response &rsp)
+{
+    const auto &jsRequest = req.json();
+}
 void Omal::assessNetworkQuality(const Request &req, Response &rsp)
 {
     // Perform network quality assessment
@@ -84,7 +102,7 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     jsonResponse["allowed"] = true; // Set the "allowed" field to true
 
     // Set the response data
-    rsp.setData(Json::FastWriter().write(jsonResponse));
+    rsp.setRawData(jsonResponse);
 }
 
 Omal::~Omal()

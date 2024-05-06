@@ -2,6 +2,7 @@
 #define RESPONSE_H
 
 #include <iostream>
+#include <request.h>
 
 class Response {
 private:
@@ -11,12 +12,14 @@ private:
     bool m_hasError = false;
     std::string m_errorMessage;
     int m_statusCode = 200; // Default status code is 200 OK
-
+    request::detail m_detail;
 public:
-    Response();
+    Response() = default;
+    Response(const request::detail &detail);
 
     std::string data();
     void setData(const std::string &d);
+    void setRawData(const Json::Value &d);
 
     inline int id() {
         return this->m_id;

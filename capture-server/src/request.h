@@ -47,6 +47,12 @@ struct query
             this->empty = true;
     }
 };
+namespace request
+{
+    struct detail{
+        std::string method, path;
+    };
+} // namespace request
 
 class Request
 {

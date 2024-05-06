@@ -5,8 +5,8 @@
 #include "watcher.h"
 #include "request.h"
 #include "response.h"
-
-class Omal: public EntityBase
+    
+class Omal : public EntityBase
 {
 private:
     std::unique_ptr<Watcher> m_vodDumpWatcher; // Member variable to hold the Watcher instance
@@ -18,7 +18,9 @@ public:
     void handleControlServerRequest(const Request &req, Response &rsp);
 
     ~Omal();
-};
 
+private:
+    void openPreview(const Request &req, Response &rsp);
+};
 
 #endif // OMAL_H
