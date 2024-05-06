@@ -54,8 +54,8 @@ void Gateway::route(const std::string &method, const std::string &path, const st
 // UNIT TEST THIS
 Response &Gateway::request(std::string method, const std::string &path, const std::string &query, const std::string &data)
 {
-    std::cout << "request received.." << std::endl;
-    Response r;
+    spdlog::trace("request received..method:{}, path:{}", method, path);
+    Response r{{method, path}};
     int x = r.id();
     this->m_reg[x] = std::move(r);
 

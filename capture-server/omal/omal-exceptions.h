@@ -29,4 +29,17 @@ public:
     ~ExVHostCreationException();
 };
 
+class ExOMResourceAccessException: public std::exception
+{
+private:
+    char msg[128] = {'\0'};
+public:
+    ExOMResourceAccessException(const std::string &resource);
+    const char *what() const noexcept
+    {
+        return msg;
+    }
+    ~ExOMResourceAccessException();
+};
+
 #endif // OMALEXCEPTIONS_H

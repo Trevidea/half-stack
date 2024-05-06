@@ -19,38 +19,12 @@ using namespace std;
 
 map<utility::string_t, utility::string_t> dictionary;
 
-// void display_json(
-//     json::value const &jvalue,
-//     utility::string_t const &prefix)
-// {
-//    cout << prefix << jvalue.serialize() << endl;
-// }
-
-void handle_get(http_request request)
+void configure_response_headers(web::http::http_response &response)
 {
-
-   TRACE("\nhandle GET\n");
-
-   auto answer = json::value::object();
-
-   auto uri = request.absolute_uri();
-
-   answer["Absolute URI"] = json::value::string(uri.to_string());
-   auto reponse = Gateway::instance().request("GET", uri.path(), uri::decode(uri.query()), "");
-   spdlog::trace("response received {}", reponse.data());
-   auto val = json::value::parse(reponse.data());
-
-   answer["Gateway Response"] = val;
-
-   http_response response(status_codes::OK);
    response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
    response.headers().add(U("Access-Control-Allow-Methods"), U("GET,POST,OPTIONS,DELETE,PUT"));
-   response.headers().add(U("Access-Control-Allow-Headers"), U("Content-Type, x-requested-with"));
-   spdlog::debug("Setting body in response...");
-   response.set_body(answer);
-   request.reply(response); // reply is done here
+   response.headers().add(U("Access-Control-Allow-Headers"), U("Content-Type, x-requested-with, Authorization"));
 }
-
 void handle_request(
     http_request request,
     function<void(json::value const &, json::value &)> action)
@@ -66,9 +40,8 @@ void handle_request(
             auto const & jvalue = task.get();
 
             spdlog::trace("Incoming data..{}", jvalue.serialize());
-            // display_json(jvalue, "R: ");
 
-            if (!jvalue.is_null())
+            // if (!jvalue.is_null())//Don't check for POSTED data
             {
                action(jvalue, answer);
             }
@@ -79,15 +52,46 @@ void handle_request(
          } })
        .wait();
 
-   // display_json(answer, "S: ");
-
    http_response response(status_codes::OK);
 
-   response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
-   response.headers().add(U("Access-Control-Allow-Methods"), U("GET,POST,OPTIONS,DELETE,PUT"));
-   response.headers().add(U("Access-Control-Allow-Headers"), U("Content-Type, x-requested-with"));
+   configure_response_headers(response);
+
    response.set_body(answer);
-   request.reply(response); // reply is done here
+   request.reply(response);
+}
+
+void handle(web::json::value &answer, const std::string &method, const web::uri &uri, const std::string &data = "")
+{
+   auto jsObject = json::value::object();
+   auto result = Gateway::instance().request(method, uri.path(), uri::decode(uri.query()), data);
+   auto val = json::value::parse(result.data());
+   answer = std::move(val);
+}
+
+void handle_opt(http_request request)
+{
+   TRACE("\nhandle OPTIONS\n");
+   spdlog::trace("Received options request from..{}", request.absolute_uri().to_string());
+   http_response response(status_codes::OK);
+   for (auto &&header : request.headers())
+   {
+      spdlog::trace("header::{}={}", header.first, header.second);
+   }
+
+   configure_response_headers(response);
+
+   request.reply(response);
+}
+
+void handle_get(http_request request)
+{
+   TRACE("\nhandle GET\n");
+   handle_request(
+       request,
+       [&request](json::value const &jvalue, json::value &answer)
+       {
+          handle(answer, "GET", request.absolute_uri());
+       });
 }
 
 void handle_post(http_request request)
@@ -98,13 +102,7 @@ void handle_post(http_request request)
        request,
        [&request](json::value const &jvalue, json::value &answer)
        {
-          auto uri = request.absolute_uri();
-
-          answer["Absolute URI"] = json::value::string(uri.to_string());
-          auto result = Gateway::instance().request("POST", uri.path(), uri.query(), jvalue.serialize());
-          auto val = json::value::parse(result.data());
-
-          answer["Gateway Response"] = val;
+          handle(answer, "POST", request.absolute_uri(), jvalue.serialize());
        });
 }
 
@@ -116,30 +114,8 @@ void handle_put(http_request request)
        request,
        [&request](json::value const &jvalue, json::value &answer)
        {
-          auto uri = request.absolute_uri();
-
-          answer["Absolute URI"] = json::value::string(uri.to_string());
-          auto result = Gateway::instance().request("PUT", uri.path(), uri.query(), jvalue.serialize());
-
-          auto val = json::value::parse(result.data());
-
-          answer["Gateway Response"] = val;
+          handle(answer, "PUT", request.absolute_uri(), jvalue.serialize());
        });
-}
-void handle_opt(http_request request)
-{
-   TRACE("\nhandle OPTIONS\n");
-   spdlog::trace("Received options request from..{}", request.absolute_uri().to_string());
-   http_response response(status_codes::OK);
-   for (auto &&header : request.headers())
-   {
-      spdlog::trace("header::{}={}", header.first, header.second);
-   }
-
-   response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
-   response.headers().add(U("Access-Control-Allow-Methods"), U("GET,POST,OPTIONS,DELETE,PUT"));
-   response.headers().add(U("Access-Control-Allow-Headers"), U("Content-Type, x-requested-with, Authorization"));
-   request.reply(response); // reply is done here
 }
 void handle_del(http_request request)
 {
@@ -149,14 +125,7 @@ void handle_del(http_request request)
        request,
        [&request](json::value const &jvalue, json::value &answer)
        {
-          auto uri = request.absolute_uri();
-
-          answer["Absolute URI"] = json::value::string(uri.to_string());
-          auto result = Gateway::instance().request("DELETE", uri.path(), uri.query(), jvalue.serialize());
-
-          auto val = json::value::parse(result.data());
-
-          answer["Gateway Response"] = val;
+          handle(answer, "DELETE", request.absolute_uri(), jvalue.serialize());
        });
 }
 

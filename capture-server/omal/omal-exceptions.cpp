@@ -15,3 +15,11 @@ ExVHostCreationException::ExVHostCreationException(const std::string &name)
 ExVHostCreationException::~ExVHostCreationException()
 {
 }
+
+ExOMResourceAccessException::ExOMResourceAccessException(const std::string &resource)
+{
+    snprintf(this->msg, 128, "Unable to access Oven Media resource: %s.", resource.c_str());
+}
+ExOMResourceAccessException::~ExOMResourceAccessException()
+{
+}

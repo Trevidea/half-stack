@@ -10,14 +10,13 @@ class OMALFactory {
 public:
     static OMALFactory& getInstance();
 
-    VirtualHost& create(const std::string& name);
     std::string baseUrl();
 
     OMALFactory(const OMALFactory&) = delete;
     void operator=(const OMALFactory&) = delete;
+    VirtualHost& create(const std::string& name);
 private:
     OMALFactory();
-    int createOrFind(const std::string &name, char const * err = nullptr);
 private:
     const char* serverIP = "localhost";
     const char *port = "8081";

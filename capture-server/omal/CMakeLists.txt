@@ -2,6 +2,7 @@ set(OMAL_SRC
     output-profile.cpp
     omal-factory.cpp
     virtual-host.cpp
+    virtual-app.cpp
     omal-exceptions.cpp
     watcher.cpp)
 add_library(omal STATIC ${OMAL_SRC})
