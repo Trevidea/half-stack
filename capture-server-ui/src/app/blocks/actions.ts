@@ -52,13 +52,15 @@ export class PresenterAction<M, V> implements Views.FormActions {
           this.onComplete.emit(true);
           this.state = { error: false, data: data };
           //navigate
-          this.router.navigate([this.resource]);
+          if (this.resource != '' && null) {
+            this.router.navigate([this.resource]);
+          }
+          const id = data["Gateway Response"]["result"][0][0]["value"];
+          if (id != null) {
 
-          if (data["Gateway Response"]["result"][0][0]["value"] !== null) {
-            const id = data["Gateway Response"]["result"][0][0]["value"];
             this.data.emit({ id: id });
           }
-          // this.opensweetalertsave();
+
         }
       }
     );

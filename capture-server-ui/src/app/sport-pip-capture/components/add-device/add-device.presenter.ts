@@ -36,19 +36,27 @@ export class AddDevicePresenter implements OnInit {
   ) {
     this.ds = new AddDeviceView();
     this.options = this.toastr.toastrConfig;
-
-    this.actions = new ModalActions(this.ds, this.modelServiceService.saveDevice, AddDeviceBuilder, this.onClose)
+    this.actions = new PresenterAction('', this.ds, this.modelServiceService.saveDevice, AddDeviceBuilder, router);
     this.actions.onComplete.subscribe((result) => {
+      console.log(result);
       if (result) {
         this.toastrSuccess()
       } else {
         this.toastrError()
       }
     });
+    // this.actions = new ModalActions(this.ds, this.modelServiceService.saveDevice, AddDeviceBuilder, this.onClose)
+    // this.actions.onComplete.subscribe((result) => {
+    //   if (result) {
+    //     this.toastrSuccess()
+    //   } else {
+    //     this.toastrError()
+    //   }
+    // });
 
     Transformer.ComposeCollectionViewAsync(this.modelServiceService.userJson(), this.ds.userName,
       (userItem: UserProfileData) => {
-        return new SelectItemView(userItem.id, userItem.firstname + ' ' + userItem.lastname);
+        return new SelectItemView(userItem.id, userItem.firstname + '' + userItem.lastname);
       })
 
     Transformer.ComposeCollectionViewAsync(this.modelServiceService.deviceJson(), this.ds.deviceName,
@@ -79,8 +87,6 @@ export class AddDevicePresenter implements OnInit {
     })
 
   }
-
-
 
   toastrSuccess() {
     this.activeModal.close('Accept click')

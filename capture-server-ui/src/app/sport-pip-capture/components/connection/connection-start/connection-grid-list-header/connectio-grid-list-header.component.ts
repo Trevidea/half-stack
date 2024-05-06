@@ -1,13 +1,13 @@
 import {
   Component,
   EventEmitter,
+  Input,
   OnInit,
   Output,
   ViewEncapsulation,
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { AddDeviceComponent } from "app/sport-pip-capture/components/add-device/add-device.component";
 import { AddDevicePresenter } from "app/sport-pip-capture/components/add-device/add-device.presenter";
 
 @Component({
@@ -19,11 +19,11 @@ import { AddDevicePresenter } from "app/sport-pip-capture/components/add-device/
 export class ConnectioGridListHeaderComponent implements OnInit {
   @Output() messageListOrGrid = new EventEmitter<string>();
   @Output() pubSubAll = new EventEmitter<string>();
-
+  @Input() eventId: number = 34;
   allOrSubOrPub: string = "all";
   listOrGrid: string = "list";
 
-  constructor(private modalService: NgbModal, private route: ActivatedRoute) {}
+  constructor(private modalService: NgbModal, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const param = this.route.snapshot.queryParamMap;
@@ -41,9 +41,12 @@ export class ConnectioGridListHeaderComponent implements OnInit {
     this.allOrSubOrPub = e;
     this.pubSubAll.emit(e);
   }
-  modalOpenForm(modalForm) {
-    this.modalService.open(AddDevicePresenter, {
+
+  openAddDeviceModal() {
+    const modalRef = this.modalService.open(AddDevicePresenter, {
       centered: true,
+      size: 'md'
     });
+    modalRef.componentInstance.eventId = this.eventId;
   }
 }

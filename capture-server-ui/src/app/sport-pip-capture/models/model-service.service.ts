@@ -25,7 +25,6 @@ export class ModelServiceService {
   ) {
     this.saveEvent = this.saveEvent.bind(this);
     this.saveDevice = this.saveDevice.bind(this);
-    // this.saveOnDemandEvent = this.saveOnDemandEvent.bind(this)
   }
 
   create(type: string, entity: any): Observable<any> {
@@ -36,12 +35,6 @@ export class ModelServiceService {
       })
     );
   }
-
-  // createWithOut(type: string, entity: any): Observable<any> {
-  //   const url = `${this.modelsServerUrl}/${type}`;
-  //   return this._httpClient.post<any>(url, entity);
-
-  // }
 
   read(type: string): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}`;
@@ -189,6 +182,7 @@ export class ModelServiceService {
       .pipe(first())
       .pipe(map((datum: I) => new type(datum)));
   }
+
   private _selectData<M, I extends Data.Base>(
     resource: string,
     id: number,
@@ -198,6 +192,7 @@ export class ModelServiceService {
       map((data: I[]) => data.map((datum: I) => new type(datum)))
     );
   }
+
   private _selectQueryData<M, I extends Data.Base>(
     resource: string,
     key: string,
@@ -208,6 +203,7 @@ export class ModelServiceService {
       map((data: I[]) => data.map((datum: I) => new type(datum)))
     );
   }
+
   private _selectOne<M, I extends Data.Base>(
     resource: string,
     id: number,
@@ -250,18 +246,20 @@ export class ModelServiceService {
     return this._httpClient.post<any>(this.apiUrl, data);
   }
 
-  fetechApplicationDetail(): Observable<any> {
-    const url = `${environment.spModelUrl}/omal/app`
-    return this._httpClient.get(url)
-  }
-
   saveDevice(data: Data.EventDevice): Observable<Data.EventDevice> {
     console.log(data)
-    return this.create("event", data);
+    return this.create("event-device", data);
   }
+
+
 
   eventList(): Observable<Data.Event[]> {
     return this._data("event", EventData);
+  }
+
+  fetechApplicationDetail(): Observable<any> {
+    const url = `${environment.spModelUrl}/omal/app`
+    return this._httpClient.get(url)
   }
 
   eventJson(id: number): Observable<Data.Event> {
