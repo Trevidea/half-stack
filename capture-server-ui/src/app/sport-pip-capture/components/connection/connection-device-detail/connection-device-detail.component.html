@@ -20,12 +20,15 @@
       <button
         type="button"
         class="btn btn-warning mr-1"
-        (click)="modalOpen('relay-stream')"
+        (click)="datasource.relayStream.AddingNewItem(relayStream)"
         rippleEffect
       >
         Relay Stream
+        <!-- (click)="modalOpen('relay-stream')" -->
       </button>
+      <inline-form-modal #relayStream modalTitle=""></inline-form-modal>
     </div>
+
     <div>
       <button type="button" class="btn btn-outline-secondary" rippleEffect>
         <span [data-feather]="'pause'" [class]="'mr-25'"></span>Pause
@@ -48,11 +51,16 @@
               <button
                 type="button"
                 class="btn btn-warning"
-                (click)="modalOpen('mediaSetting')"
+                (click)="datasource.mediaSetting.AddingNewItem(mediaSetting)"
                 rippleEffect
               >
                 Edit Media settings
               </button>
+              <!-- (click)="modalOpen('mediaSetting')" -->
+              <inline-form-modal
+                #mediaSetting
+                modalTitle=""
+              ></inline-form-modal>
             </div>
           </div>
           <div class="col-2 col-md-3">
@@ -303,11 +311,13 @@
           <button
             type="button"
             class="btn btn-warning btn-block"
-            (click)="modalOpen('mediaSetting')"
+            (click)="datasource.mediaSetting.AddingNewItem(mediaSetting)"
             rippleEffect
           >
             Edit Media settings
           </button>
+          <!-- (click)="modalOpen('mediaSetting')" -->
+          <inline-form-modal #mediaSetting modalTitle=""></inline-form-modal>
         </div>
       </div>
     </div>
