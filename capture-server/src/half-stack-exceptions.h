@@ -1,3 +1,4 @@
+//half-stack-exceptions.h
 #ifndef HALFSTACKEXCEPTIONS_H
 #define HALFSTACKEXCEPTIONS_H
 #include <iostream>

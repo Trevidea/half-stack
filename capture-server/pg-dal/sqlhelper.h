@@ -13,6 +13,23 @@ class SqlHelper
 {
 private:
     /************HELPER FUNCTIONS***********/
+
+    /**
+     * \brief Formats a JSON value into a string representation based on its type.
+     *
+     * This function takes a Json::Value object and formats its value into a string
+     * representation according to its type. The supported types are:
+     *   - 1: string
+     *   - 3: bool
+     *   - 4: date
+     *   - 5: jsonb
+     *   - 0, 2: int, float
+     *
+     * If the JSON object does not have a "value" field, it returns "NULL".
+     *
+     * \param json The Json::Value object to format.
+     * \return A string representation of the JSON value.
+     */
     static std::string formatValue(const Json::Value &json)
     {
         if (!json["value"])
@@ -51,6 +68,17 @@ private:
         return value;
     }
 
+    /**
+     * \brief Builds SQL criteria string based on JSON criteria.
+     *
+     * This function takes a Json::Value object containing criteria and builds
+     * an SQL criteria string based on the criteria specified in the JSON.
+     * Each criterion consists of a field, an operator (optional), and a value.
+     * If the JSON object does not contain criteria, an empty string is returned.
+     *
+     * \param json The Json::Value object containing criteria.
+     * \return An SQL criteria string built from the JSON criteria.
+     */
     static std::string criteriaBuilder(const Json::Value &json)
     {
         std::string criteria = "";
@@ -74,6 +102,18 @@ private:
         }
         return criteria;
     }
+
+    /**
+     * \brief Builds SQL parameter string based on JSON criteria.
+     *
+     * This function takes a Json::Value object containing criteria and builds
+     * an SQL parameter string based on the criteria specified in the JSON.
+     * Each parameter consists of a field and a value.
+     * If the JSON object does not contain criteria, an empty string is returned.
+     *
+     * \param json The Json::Value object containing criteria.
+     * \return An SQL parameter string built from the JSON criteria.
+     */
     static std::string paramsBuilder(const Json::Value &json)
     {
         std::string criteria = "";
@@ -114,7 +154,7 @@ public:
 
         return sql_insert;
     }
-    
+
     //-----------------------------------------------------------------------------------
 
     static std::string ScriptUpdate(const Json::Value &json)

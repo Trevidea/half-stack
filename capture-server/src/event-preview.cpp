@@ -164,6 +164,13 @@ const std::vector<EventDevice> &EventPreview::activeDevices() const
 
 void EventPreview::setActiveDevices(const std::vector<EventDevice> &activeDevices)
 {
+    // Check if the provided vector is empty
+    if (activeDevices.empty())
+    {
+        // Throw an exception indicating that no active devices were provided
+        throw ExEntityNotSet();
+    }
+
     // Clear the existing active devices in the model
     m_model["activeDevices"] = Json::arrayValue;
 
