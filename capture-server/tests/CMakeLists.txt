@@ -3,7 +3,8 @@ set(TEST_SRC
     test1.cpp
     test2.cpp
     test3.cpp
-    # test4.cpp
+    test4.cpp
+    # test5.cpp
     # "sqlhelpertests.cpp"
     # "sqldatabasetests.cpp"
     )
