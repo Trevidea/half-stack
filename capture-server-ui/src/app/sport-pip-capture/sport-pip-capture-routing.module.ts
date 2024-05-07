@@ -36,7 +36,11 @@ const routes: Routes = [
     path: "connection",
     component: ConnectionPresenter,
     children: [
-      { path: "", component: ConnectionStartPresenter },
+      {
+        path: "",
+        component: ConnectionStartPresenter,
+        data: { animation: "toasts" },
+      },
       // {
       //   path: "connection-device-detail/:id",
       //   component: ConnectionDeviceDetailComponent,

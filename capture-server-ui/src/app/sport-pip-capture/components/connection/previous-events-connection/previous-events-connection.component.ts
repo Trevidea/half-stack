@@ -11,6 +11,7 @@ import {
 } from "@angular/core";
 import { ColumnMode, SelectionType } from "@swimlane/ngx-datatable";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
+import { NotificationDIsplayService } from "../../notification-display/notification-display.service";
 
 @Component({
   selector: "app-previous-events-connection",
@@ -30,10 +31,20 @@ export class PreviousEventsConnectionComponent implements OnInit {
   public rows: any;
   constructor(
     private dataFactory: DataFactoryService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    public notificationDIsplayService: NotificationDIsplayService
   ) {}
-
+  public hideNotification: boolean = true;
+  public notificationtStyle: object = {};
+  notification(data, delayTime) {
+    this.notificationDIsplayService.show(data, {
+      delay: delayTime,
+      autohide: false,
+    });
+    // this.notificationtStyle = { left: 0, right: "unset" };
+  }
   ngOnInit(): void {
+    this.notification("additional data can be pass", 2000);
     // this.dataFactory.read("connection-with-past-details").subscribe(
     //   (res: any) => {
     //     // console.log(res)
