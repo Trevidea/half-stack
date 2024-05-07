@@ -4,6 +4,7 @@
 #include "virtual-host.h"
 #include <functional>
 #include <regex>
+#include "event-device.h"
 
 Omal::Omal() : EntityBase("omal")
 {
@@ -109,7 +110,7 @@ Content-Type: application/json
 Accept: application/json
 X-OME-Signature: f871jd991jj1929jsjd91pqa0amm1
 {
-  "client": 
+  "client":
   {
     "address": "211.233.58.86",
     "port": 29291,
@@ -132,19 +133,28 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     const std::string strUrl = omRequest["request"]["url"].asString();
     std::regex urlPattern(R"(rtmp://[^/]+/([^/]+)/([^/]+)/([^/]+)/)");
 
-    std::smatch matches;  // Used to store the results of the match
+    std::smatch matches; // Used to store the results of the match
 
-    if (std::regex_search(strUrl, matches, urlPattern)) {
-        if (matches.size() == 4) { // matches[0] will be the whole string, matches[1-3] will be the groups
-            spdlog::trace("App: {}",matches[1].str());
+    if (std::regex_search(strUrl, matches, urlPattern))
+    {
+        if (matches.size() == 4)
+        { // matches[0] will be the whole string, matches[1-3] will be the groups
+            spdlog::trace("App: {}", matches[1].str());
             spdlog::trace("Username: {}", matches[2].str());
             spdlog::trace("Stream Key: {}", matches[3].str());
-            
+
+            //Query the database to check if the cobination exists
+            EventDevice eventDevice;
+            const std::string strQry = "";
+            Response r;
+            eventDevice.find(Request(strQry, ""), r);
+
         }
-    } else {
+    }
+    else
+    {
         spdlog::trace("No match found");
     }
-
 
     spdlog::trace("Incoming Control Server request:\n{}", req.data());
 

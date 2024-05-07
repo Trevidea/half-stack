@@ -15,6 +15,7 @@ public:
     EventDevice();
     void report();
     EventDevice(Json::Value& model);
+    void find(const Request &request, Response &response);
 
     // Getter and Setter properties
     int userId() const;
@@ -43,6 +44,9 @@ public:
 
     std::string pin() const;
     void setPin(const std::string& value);
+
+    // Method to check if the combination exists
+    bool combinationExists(int eventId, int userId, const std::string& pin);
 
 private:
 };
