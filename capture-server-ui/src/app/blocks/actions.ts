@@ -7,8 +7,6 @@ import Swal from "sweetalert2";
 import { AbstractBuilder } from "./strategies";
 import { Transformer } from "./transformer";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
-import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
-import { HttpClient } from "@angular/common/http";
 
 export class PresenterAction<M, V> implements Views.FormActions {
   onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -52,15 +50,13 @@ export class PresenterAction<M, V> implements Views.FormActions {
           this.onComplete.emit(true);
           this.state = { error: false, data: data };
           //navigate
-          if (this.resource != '' && null) {
+          if (this.resource != "" && null) {
             this.router.navigate([this.resource]);
           }
           const id = data["Gateway Response"]["result"][0][0]["value"];
           if (id != null) {
-
             this.data.emit({ id: id });
           }
-
         }
       }
     );
@@ -78,8 +74,9 @@ export class PresenterAction<M, V> implements Views.FormActions {
       const errs = this.state.data?.error?.error?.details?.errors;
       if (Array.isArray(errs)) {
         errs.forEach((err) => {
-          msg += `<h5 style="color: red;">${(err as any).path[0]
-            }</h5><br /><br>`;
+          msg += `<h5 style="color: red;">${
+            (err as any).path[0]
+          }</h5><br /><br>`;
         });
       }
       if (errs && errs.find((err) => (err as any).path[0] === "roNumber")) {
@@ -155,7 +152,7 @@ export class WorkflowActions implements Views.FormActions {
     this._resource = v;
   }
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
   onSave(): void {
     this.onComplete.emit(true);
 

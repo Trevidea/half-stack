@@ -103,10 +103,7 @@ Json::Value VirtualHost::createApp(const std::string &app)
     ret["app"] = appRet;
     return ret;
 }
-std::string VirtualHost::createStream(const std::string &app, const std::string &key, const OutputProfile &profile)
-{
-    return "";
-}
+
 std::map<std::string, std::string> VirtualHost::getVODDumps()
 {
     std::map<std::string, std::string> dumps;
@@ -131,7 +128,4 @@ std::map<std::string, std::string> VirtualHost::getVODDumps()
     return dumps;
 }
 
-void VirtualHost::setVODDumps(const std::string &streamName, const std::string &relativeOutputPath)
-{
-}
 VirtualHost::~VirtualHost(){}

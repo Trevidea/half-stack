@@ -16,6 +16,7 @@ import { EventPreviewPresenter } from "./components/event/event-preview/event-pr
 import { LogSummaryComponent } from "./components/log/log-summary/log-summary.component";
 import { LogListPresentert } from "./components/log/log-list/log-list.presenter";
 import { LogComponent } from "./components/log/log.component";
+import { ConnectionDeviceDetailPresenter } from "./components/connection/connection-device-detail/connection-device-detail.presenter";
 
 const routes: Routes = [
   {
@@ -36,9 +37,13 @@ const routes: Routes = [
     component: ConnectionPresenter,
     children: [
       { path: "", component: ConnectionStartPresenter },
+      // {
+      //   path: "connection-device-detail/:id",
+      //   component: ConnectionDeviceDetailComponent,
+      // },
       {
         path: "connection-device-detail/:id",
-        component: ConnectionDeviceDetailComponent,
+        component: ConnectionDeviceDetailPresenter,
       },
     ],
   },

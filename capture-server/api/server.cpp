@@ -60,6 +60,14 @@ void handle_request(
    request.reply(response);
 }
 
+void handle(web::json::value &answer, const std::string &method, const web::uri &uri, const std::string &data = "")
+{
+   auto jsObject = json::value::object();
+   auto result = Gateway::instance().request(method, uri.path(), uri::decode(uri.query()), data);
+   auto val = json::value::parse(result.data());
+   answer = std::move(val);
+}
+
 void handle_opt(http_request request)
 {
    TRACE("\nhandle OPTIONS\n");
@@ -74,13 +82,7 @@ void handle_opt(http_request request)
 
    request.reply(response);
 }
-void handle(web::json::value &answer, const std::string &method, const web::uri &uri, const std::string &data = "")
-{
-   auto jsObject = json::value::object();
-   auto result = Gateway::instance().request(method, uri.path(), uri::decode(uri.query()), data);
-   auto val = json::value::parse(result.data());
-   answer = std::move(val);
-}
+
 void handle_get(http_request request)
 {
    TRACE("\nhandle GET\n");
@@ -89,11 +91,6 @@ void handle_get(http_request request)
        [&request](json::value const &jvalue, json::value &answer)
        {
           handle(answer, "GET", request.absolute_uri());
-          //  auto uri = request.absolute_uri();
-          //  answer["Absolute URI"] = json::value::string(uri.to_string());
-          //  auto result = Gateway::instance().request("GET", uri.path(), uri::decode(uri.query()), "");
-          //  auto val = json::value::parse(result.data());
-          //  answer["Gateway Response"] = val;
        });
 }
 
@@ -106,11 +103,6 @@ void handle_post(http_request request)
        [&request](json::value const &jvalue, json::value &answer)
        {
           handle(answer, "POST", request.absolute_uri(), jvalue.serialize());
-          //  auto uri = request.absolute_uri();
-          //  answer["Absolute URI"] = json::value::string(uri.to_string());
-          //  auto result = Gateway::instance().request("POST", uri.path(), uri.query(), jvalue.serialize());
-          //  auto val = json::value::parse(result.data());
-          //  answer["Gateway Response"] = val;
        });
 }
 
@@ -123,11 +115,6 @@ void handle_put(http_request request)
        [&request](json::value const &jvalue, json::value &answer)
        {
           handle(answer, "PUT", request.absolute_uri(), jvalue.serialize());
-          //  auto uri = request.absolute_uri();
-          //  answer["Absolute URI"] = json::value::string(uri.to_string());
-          //  auto result = Gateway::instance().request("PUT", uri.path(), uri.query(), jvalue.serialize());
-          //  auto val = json::value::parse(result.data());
-          //  answer["Gateway Response"] = val;
        });
 }
 void handle_del(http_request request)
@@ -139,11 +126,6 @@ void handle_del(http_request request)
        [&request](json::value const &jvalue, json::value &answer)
        {
           handle(answer, "DELETE", request.absolute_uri(), jvalue.serialize());
-          //  auto uri = request.absolute_uri();
-          //  answer["Absolute URI"] = json::value::string(uri.to_string());
-          //  auto result = Gateway::instance().request("DELETE", uri.path(), uri.query(), jvalue.serialize());
-          //  auto val = json::value::parse(result.data());
-          //  answer["Gateway Response"] = val;
        });
 }
 

@@ -1,7 +1,7 @@
 import { environment } from "environments/environment";
 import { AdapterService } from "./adapter.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable, of } from "rxjs";
+import { Observable, forkJoin, of } from "rxjs";
 import { first, map, mergeMap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { Data } from "./capture-interface";
@@ -12,6 +12,7 @@ import { error, warn } from "console";
 import { UserProfileData } from "./user-profile";
 import { DeviceData } from "./device";
 import { PreviousEventsConnectionData } from "./previous-events-connection";
+import { HostConnectionDeviceDetailData } from "./connection-device-detail";
 
 @Injectable({
   providedIn: "root",
@@ -247,23 +248,69 @@ export class ModelServiceService {
   }
 
   saveDevice(data: Data.EventDevice): Observable<Data.EventDevice> {
-    console.log(data)
+    console.log(data);
     return this.create("event-device", data);
   }
-
-
 
   eventList(): Observable<Data.Event[]> {
     return this._data("event", EventData);
   }
 
   fetechApplicationDetail(): Observable<any> {
-    const url = `${environment.spModelUrl}/omal/app`
-    return this._httpClient.get(url)
+    const url = `${environment.spModelUrl}/omal/app`;
+    return this._httpClient.get(url);
   }
 
   eventJson(id: number): Observable<Data.Event> {
     return this._selectOne("event", id, EventData);
+  }
+  // hostConnectionDeviceDetailJson(
+  //   id: number
+  // ): Observable<Data.HostConnectionDeviceDetail> {
+  //   return this._selectOne(
+  //     `host-connection-device-detail`,
+  //     id,
+  //     HostConnectionDeviceDetailData
+  //   );
+  // }
+  hostConnectionDeviceDetailJson(
+    id: number
+  ): Observable<Data.HostConnectionDeviceDetail> {
+    const staticData: Data.HostConnectionDeviceDetail = {
+      id: 1,
+      eventId: 123,
+      transmitStatus: "success",
+      deviceType: "desktop",
+      userName: "john_doe",
+      deviceId: "abc123",
+      ipAddress: "192.168.1.100",
+      retries: 2,
+      internetConnection: 1,
+      chunkDuration: "30s",
+      partHoldBack: "5s",
+      segmentDuration: 120,
+      segmentCount: 5,
+      hostConnectionQuality: [
+        {
+          id: 1,
+          deviceId: 123,
+          startForm: "12:30:00",
+          end: "3:45 pm",
+          videoQuality: 1,
+          duration: 180,
+        },
+        {
+          id: 2,
+          deviceId: 123,
+          startForm: "2:00:00",
+          end: "5:30 pm",
+          videoQuality: 0,
+          duration: "2h",
+        },
+      ],
+    };
+
+    return of(staticData);
   }
 
   eventsBasedOnStatus(status: string): Observable<Data.Event[]> {
@@ -294,15 +341,15 @@ export class ModelServiceService {
   }
 
   userJson(): Observable<Data.UserProfile[]> {
-    return this._data('user-profiles', UserProfileData)
+    return this._data("user-profiles", UserProfileData);
   }
 
   deviceJson(): Observable<Data.Device[]> {
-    return this._data('devices', DeviceData)
+    return this._data("devices", DeviceData);
   }
 
   PreviousConnection(): Observable<Data.PreviousEventsConnection[]> {
-    return this._data('connections', PreviousEventsConnectionData)
+    return this._data("connections", PreviousEventsConnectionData);
   }
 
   MetaTypeByKey(key: string): Observable<Data.MetaType> {

@@ -14,6 +14,51 @@ export namespace Data {
     timestamp: string;
     details: any[];
   }
+  export interface RelayStream extends Base {
+    eventName: string;
+    eventId: number;
+    sharedWith: SharedWith[];
+  }
+  export interface HostConnectionDeviceDetail extends Base {
+    eventId: number;
+    transmitStatus: string;
+    deviceType: string;
+    userName: string;
+    deviceId: string;
+    ipAddress: string | number;
+    retries: number;
+    internetConnection: number;
+    chunkDuration: string;
+    partHoldBack: string;
+    segmentDuration: number;
+    segmentCount: number;
+    hostConnectionQuality: HostConnectionQuality[];
+  }
+  export interface HostConnectionQuality extends Base {
+    deviceId: number;
+    startForm: string; ///timeFormate 1:49:00
+    end: string; /// timeFormate 4:16 pm
+    videoQuality: number; /// 0 or 1
+    duration: number | string;
+  }
+  export interface OvenMediaServer extends Base {
+    name: string;
+    rtmpServer: string;
+    bitRate: number;
+    sampleRate: number;
+    keyFrameInterval: number;
+    frameRate: number;
+    statusCode: number;
+    partHoldBack: number;
+    segmentCount: number;
+    segmentDuration: number;
+    streamWorkerCount: number;
+    sentbytes: number;
+  }
+  export interface SharedWith extends Base {
+    name: string;
+    url: string;
+  }
   export interface Distribution extends Base {
     id: number;
     name: string;
@@ -158,10 +203,10 @@ export namespace Data {
     network: string;
   }
 
-  export enum NetWorkQuality { }
-  export enum Type { }
+  export enum NetWorkQuality {}
+  export enum Type {}
 
-  export enum Priority { }
+  export enum Priority {}
 
   export enum DataType {
     Type1 = "type1",
@@ -208,7 +253,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role { }
+  export interface Role {}
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -217,13 +262,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings { }
+  export interface DisplaySettings {}
 
-  export interface CustomizationSettings { }
+  export interface CustomizationSettings {}
 
-  export interface NotificationSettings { }
+  export interface NotificationSettings {}
 
-  export interface VideoResolutionSettings { }
+  export interface VideoResolutionSettings {}
   export enum DataStatus {
     Status1 = "status1",
     Status2 = "status2",
@@ -268,7 +313,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role { }
+  export interface Role {}
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -277,13 +322,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings { }
+  export interface DisplaySettings {}
 
-  export interface CustomizationSettings { }
+  export interface CustomizationSettings {}
 
-  export interface NotificationSettings { }
+  export interface NotificationSettings {}
 
-  export interface VideoResolutionSettings { }
+  export interface VideoResolutionSettings {}
 
   export interface Team extends Base {
     id: number;
@@ -307,8 +352,7 @@ export namespace Data {
     date: string;
     total_connections: string;
     duration: string;
-    most_connected_device: string
-
+    most_connected_device: string;
   }
 
   export interface Team extends Base {
@@ -329,7 +373,6 @@ export namespace Data {
     values: string[];
   }
 
-
   export interface FilterParams {
     year?: number;
     program?: string;
@@ -348,7 +391,7 @@ export namespace Data {
     year: number;
     venue: Venue;
     time: number;
-    type: string;
+    type : string;
     activeDevice: ActiveDevice[];
   }
   export interface ActiveDevice {

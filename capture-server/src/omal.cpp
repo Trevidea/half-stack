@@ -129,7 +129,13 @@ X-OME-Signature: f871jd991jj1929jsjd91pqa0amm1
 */
 void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 {
+    Json::Value jsonResponse;
+    jsonResponse["allowed"] = false;
+
+    spdlog::trace("Incoming Control Server request:\n{}", req.data());
+
     Json::Value omRequest = req.json();
+
     const std::string strUrl = omRequest["request"]["url"].asString();
     std::regex urlPattern(R"(rtmp://[^/]+/([^/]+)/([^/]+)/([^/]+)/)");
 
@@ -138,31 +144,31 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     if (std::regex_search(strUrl, matches, urlPattern))
     {
         if (matches.size() == 4)
-        { // matches[0] will be the whole string, matches[1-3] will be the groups
-            spdlog::trace("App: {}", matches[1].str());
-            spdlog::trace("Username: {}", matches[2].str());
-            spdlog::trace("Stream Key: {}", matches[3].str());
+        {
+            const std::string eventId = matches[1].str();
+            const std::string userId = matches[2].str();
+            const std::string pin = matches[3].str();
 
-            //Query the database to check if the cobination exists
-            EventDevice eventDevice;
-            const std::string strQry = "";
-            Response r;
-            eventDevice.find(Request(strQry, ""), r);
+            spdlog::trace("eventId: {}, userId: {}, pin: {}", eventId, userId, pin);
 
+            EventDevice ed;
+            char query[128] = {'\0'};
+            snprintf(query, 128, "user_id=%s&event_id=%s&pin='%s'",
+                     userId.c_str(), eventId.c_str(), pin.c_str());
+            const auto result = ed.find<EventDevice>(query);
+            jsonResponse["allowed"] = (result.size() > 0);
+        }
+        else
+        {
+            // throw invalid url exception
         }
     }
     else
     {
+        // throw invalid url exception
         spdlog::trace("No match found");
     }
 
-    spdlog::trace("Incoming Control Server request:\n{}", req.data());
-
-    // Construct the response JSON object with only the "allowed" field
-    Json::Value jsonResponse;
-    jsonResponse["allowed"] = true; // Set the "allowed" field to true
-
-    // Set the response data
     rsp.setRawData(jsonResponse);
 }
 
