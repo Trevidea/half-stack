@@ -9,22 +9,23 @@ import { AccountPresenter } from './account/account.presenter';
 import { SharingPresenter } from './sharing/sharing.presenter';
 import { FilePresenter } from './files/files.presenter';
 import { RouterModule, Routes } from '@angular/router';
+import { UserComponent } from './user/user.component';
 
 
 const routes: Routes = [
   {
-    path: ':settings', component: SettingComponent,
+    path: 'settings', component: SettingComponent,
     children: [
-
-      { path: 'account', component: AccountPresenter },
+      { path: '', component: AccountPresenter },
       { path: 'file', component: FilePresenter },
+      { path: 'user', component: UserComponent },
       { path: 'sharing', component: SharingPresenter },
       { path: 'preferences', component: PreferencesComponent },
       { path: 'licenese', component: LiceneseComponent }
 
     ]
   },
-  
+
 ];
 
 @NgModule({

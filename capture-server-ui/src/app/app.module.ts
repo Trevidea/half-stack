@@ -54,7 +54,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "sport-pip-capture-ui-setting",
+    path: "settings",
     loadChildren: () =>
       import("./sport-pip-capture/components/setting/setting.module").then(
         (m) => m.SettingModule
@@ -169,7 +169,7 @@ const appRoutes: Routes = [
     SportPipCaptureModule,
     ExampleModule,
     SettingModule,
-    
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -181,4 +181,4 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

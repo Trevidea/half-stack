@@ -144,6 +144,7 @@ export class ModelServiceService {
     return this._adapter.demodulate(resource, this.read(resource)).pipe(
       map((models) =>
         models.map((model: any) => {
+          console.log(model)
           return model as I;
         })
       )
@@ -247,9 +248,13 @@ export class ModelServiceService {
     return this._httpClient.post<any>(this.apiUrl, data);
   }
 
-  saveDevice(data: Data.EventDevice): Observable<Data.EventDevice> {
+  saveEventDevice(data: Data.EventDevice): Observable<Data.EventDevice> {
     console.log(data);
     return this.create("event-device", data);
+  }
+  saveDevice(data: Data.Device): Observable<Data.Device> {
+    console.log(data);
+    return this.create("devices", data);
   }
 
   eventList(): Observable<Data.Event[]> {
@@ -311,6 +316,10 @@ export class ModelServiceService {
     };
 
     return of(staticData);
+  }
+
+  deviceList(): Observable<Data.Device[]> {
+    return this._data('devices', DeviceData)
   }
 
   eventsBasedOnStatus(status: string): Observable<Data.Event[]> {

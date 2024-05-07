@@ -50,7 +50,7 @@ export class PresenterAction<M, V> implements Views.FormActions {
           this.onComplete.emit(true);
           this.state = { error: false, data: data };
           //navigate
-          if (this.resource != "" && null) {
+          if (this.resource !=="") {
             this.router.navigate([this.resource]);
           }
           const id = data["Gateway Response"]["result"][0][0]["value"];
