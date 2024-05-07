@@ -7,7 +7,7 @@ import { PresenterAction } from 'app/blocks/actions';
 
 @Component({
   selector: 'app-device-presenter',
-  template: `<app-device [datasource]='ds.deviceView'></app-device>`,
+  template: `<app-device [datasource]='ds.deviceView' (onAddDevice)='loadDeviceList()'></app-device>`,
   styleUrls: ['./device.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
@@ -18,8 +18,10 @@ export class DevicePresenter implements OnInit {
   }
 
   ngOnInit(): void {
-    Transformer.ComposeCollectionAsync(this.modelservice.deviceList(), this.ds.deviceView, DeviceBuilder)
-
+    this.loadDeviceList();
   }
 
+  loadDeviceList() {
+    Transformer.ComposeCollectionAsync(this.modelservice.deviceList(), this.ds.deviceView, DeviceBuilder)
+  }
 }

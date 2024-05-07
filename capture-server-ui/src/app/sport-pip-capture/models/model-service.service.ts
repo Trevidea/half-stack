@@ -144,7 +144,6 @@ export class ModelServiceService {
     return this._adapter.demodulate(resource, this.read(resource)).pipe(
       map((models) =>
         models.map((model: any) => {
-          console.log(model)
           return model as I;
         })
       )

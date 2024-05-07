@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeviceFormPresenter } from '../device-form/device-form.presenter';
 
@@ -10,16 +10,26 @@ import { DeviceFormPresenter } from '../device-form/device-form.presenter';
 })
 export class DeviceComponent implements OnInit {
   @Input() datasource: any;
+  @Output() onAddDevice = new EventEmitter();
+
   constructor(private ngbModel: NgbModal) { }
 
   ngOnInit(): void {
-    console.log(this.datasource)
   }
 
   openDeviceForm() {
-    this.ngbModel.open(DeviceFormPresenter, {
+    const modalRef = this.ngbModel.open(DeviceFormPresenter, {
       centered: true,
       size: 'md'
+    })
+    modalRef.shown.subscribe(o => {
+      const inst: DeviceFormPresenter = modalRef.componentInstance;
+      inst.onUpdate.subscribe(res => {
+        console.log(res)
+        if (res) {
+          this.onAddDevice.emit();
+        }
+      });
     })
   }
 

@@ -43,19 +43,7 @@ export class DeviceView implements Views.Datasource {
         this._deviceName = v;
     }
 
-
-    // private _deviceType: Collection<string>;
-    // public get deviceType(): Collection<string> {
-    //     if (this._deviceType) {
-    //         this._deviceType = new Collection<string>();
-    //     }
-    //     return this._deviceType;
-    // }
-    // public set deviceType(v: Collection<string>) {
-    //     this._deviceType = v;
-    // }
-    
-    
+   
     private _deviceType : string;
     public get deviceType() : string {
         return this._deviceType;

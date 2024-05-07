@@ -2,7 +2,7 @@
     <i class="bi bi-x-lg cursor-pointer" (click)="activeModal.dismiss('Cross click')"></i>
 </div>
 <div class="modal-body" tabindex="0" ngbAutofocus>
-    <h2 class="modal-title" id="myModalLabel1">Add device to event</h2>
+    <h2 class="modal-title" id="myModalLabel1">Create New Device</h2>
     <form>
 
         <div class="form-group">
@@ -17,9 +17,9 @@
                 <ng-template ng-footer-tmp class="p-2">
                     <button (click)="datasource.type.AddingNewItem(type)" class="addTypeBtn btn btn-sm btn-success"
                         rippleEffect>
-                        + Add New Location
+                        + Add Device Type
                     </button>
-                    <inline-form-modal #type modalTitle="New Device Type"></inline-form-modal>
+                    <inline-form-modal #type modalTitle="Add Device Type"></inline-form-modal>
                 </ng-template>
             </ng-select>
         </div>
@@ -32,7 +32,8 @@
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-warning" (click)="save.emit()" rippleEffect>
+    <button type="button" class="btn btn-warning" (click)="save.emit() ;activeModal.dismiss('Cross click')"
+        rippleEffect>
         Add
     </button>
 </div>

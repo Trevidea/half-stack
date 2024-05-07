@@ -10,7 +10,6 @@ export class MetaTypeBuilder extends AbstractBuilder<
     return new Collection<string>();
   }
   compose(m: Data.MetaType, v: Collection<string>) {
-    console.log(m)
     JSON.parse(m.values as any).forEach((t) => v.Add(t));
   }
   decompose(v: Collection<string>): Data.MetaType {

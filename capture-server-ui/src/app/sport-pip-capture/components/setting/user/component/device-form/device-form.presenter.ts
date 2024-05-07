@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { DeviceFormView } from './view/device-form';
 import { Views } from 'app/sport-pip-capture/models/capture-interface';
 import { Transformer } from 'app/blocks/transformer';
@@ -19,13 +19,13 @@ import { Router } from '@angular/router';
 export class DeviceFormPresenter implements OnInit {
   ds!: DeviceFormView;
   actions!: Views.FormActions;
+  @Output() onUpdate = new EventEmitter<any>();
   constructor(private modelService: ModelServiceService, private router: Router) {
     this.ds = new DeviceFormView();
-    this.actions = new PresenterAction('', this.ds, this.modelService.saveDevice, DeviceFormBuilder, router);
+    this.actions = new PresenterAction(null, this.ds, this.modelService.saveDevice, DeviceFormBuilder, router);
     this.actions.onComplete.subscribe((result) => {
-      console.log(result);
       if (result) {
-      } else {
+        this.onUpdate.emit(result);
       }
     });
   }
@@ -45,6 +45,10 @@ export class DeviceFormPresenter implements OnInit {
         console.log(err);
       }
     });
+  }
+
+  onclose() {
+
   }
 
 }

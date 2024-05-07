@@ -4,7 +4,6 @@ import { DeviceView } from "../view/device";
 
 export class DeviceBuilder implements AbstractBuilder<Data.Device, DeviceView> {
     compose(m: Data.Device, v: DeviceView) {
-        console.log(m)
         v.id = m.id;
         v.deviceCode = m.code;
         v.deviceName = m.name;
