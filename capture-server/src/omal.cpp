@@ -78,10 +78,12 @@ void Omal::report()
                                   handleControlServerRequest(req, rsp);
                               });
 }
+
 void Omal::openPreview(const Request &req, Response &rsp)
 {
     const auto &jsRequest = req.json();
 }
+
 void Omal::assessNetworkQuality(const Request &req, Response &rsp)
 {
     // Perform network quality assessment
@@ -161,11 +163,13 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
         else
         {
             // throw invalid url exception
+            throw ExInvalidUrlException(strUrl);
         }
     }
     else
     {
         // throw invalid url exception
+        throw ExInvalidUrlException(strUrl);
         spdlog::trace("No match found");
     }
 

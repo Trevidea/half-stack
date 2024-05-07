@@ -109,6 +109,7 @@ import { RelayStreamComponent } from "./components/connection/connection-device-
 import { OvenMediaServerFormPresenter } from "./components/connection/connection-device-detail/oven-media-server-form/oven-media-server-from.Presenter";
 import { RelayStreamPresenter } from "./components/connection/connection-device-detail/relay-stream/relay-stream.presenter";
 import { ConnectionDeviceDetailPresenter } from "./components/connection/connection-device-detail/connection-device-detail.presenter";
+import { NotificationDisplayComponent } from "./components/notification-display/notification-display.component";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -200,6 +201,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     OvenMediaServerFormPresenter,
     RelayStreamPresenter,
     ConnectionDeviceDetailPresenter,
+    NotificationDisplayComponent,
   ],
   providers: [
     {
@@ -233,7 +235,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     }),
     DragulaModule.forRoot(),
     HttpClientModule,
-    ToastrModule,
+    ToastrModule.forRoot(),
   ],
 })
 export class SportPipCaptureModule {}

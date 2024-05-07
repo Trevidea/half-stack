@@ -215,30 +215,41 @@
                   ></i>
                   {{ item.transmitStatus == "Paused" ? "Resume " : "Pause" }}
                 </button>
-                <button mc-dropdown-item (click)="modalOpenSM(modalblock)">
-                  <i data-feather="slash" class="mr-50 mb-25"></i> Block
-                  <ng-template #modalblock let-modal>
-                    <app-connection-alert
-                      [title]="'Block User'"
-                      [description]="
-                        'Are you sure you want to block user  <br>' +
-                        item.user +
-                        '?'
-                      "
-                    ></app-connection-alert>
-                  </ng-template>
+                <button mc-dropdown-item>
+                  <i data-feather="star" class="mr-50 mb-25"></i>
+                  Remove as Primary Device
                 </button>
-
                 <button
                   *ngIf="item.role == 'Publisher'"
                   mc-dropdown-item
                   [mcDropdownTriggerFor]="appDropdownNested"
                 >
-                  <i data-feather="loader" class="mr-50 mb-25"></i> Streaming
+                  <i data-feather="loader" class="mr-50 mb-25"></i> Relay
                 </button>
-                <button mc-dropdown-item (click)="delete()">
-                  <i data-feather="trash-2" class="mr-50 mb-25"></i> Delete
-                </button>
+                <span class="danger-dropdown">
+                  <button mc-dropdown-item (click)="modalOpenSM(modalblock)">
+                    <span style="color: red">
+                      <i data-feather="slash" class="mr-50 mb-25"></i> Block
+                      <ng-template #modalblock let-modal>
+                        <app-connection-alert
+                          [title]="'Block User'"
+                          [description]="
+                            'Are you sure you want to block user  <br>' +
+                            item.user +
+                            '?'
+                          "
+                        ></app-connection-alert>
+                      </ng-template>
+                    </span>
+                  </button>
+                </span>
+                <span class="danger-dropdown">
+                  <button mc-dropdown-item (click)="delete()">
+                    <span style="color: red">
+                      <i data-feather="trash-2" class="mr-50 mb-25"></i> Delete
+                    </span>
+                  </button>
+                </span>
               </mc-dropdown>
 
               <mc-dropdown #appDropdownNested="mcDropdown">
