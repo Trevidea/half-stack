@@ -391,7 +391,7 @@ export namespace Data {
     year: number;
     venue: Venue;
     time: number;
-    type: string;
+    type : string;
     activeDevice: ActiveDevice[];
   }
   export interface ActiveDevice {
