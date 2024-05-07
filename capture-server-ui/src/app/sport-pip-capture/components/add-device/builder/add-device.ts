@@ -7,7 +7,6 @@ export class AddDeviceBuilder extends AbstractBuilder<Data.EventDevice, AddDevic
 
     }
     decompose(v: AddDeviceView): Data.EventDevice {
-        console.log("::::view of add dive ",v)
         return {
             id: v.id,
             user_id: v.userName.SelectedItem.key,
@@ -18,7 +17,7 @@ export class AddDeviceBuilder extends AbstractBuilder<Data.EventDevice, AddDevic
         }
     }
     view(): AddDeviceView {
-        throw new Error("Method not implemented.");
+        return new AddDeviceView();
     }
 
 }

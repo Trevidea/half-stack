@@ -1,0 +1,23 @@
+<div class="card user-class">
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+        <li ngbNavItem>
+            <a ngbNavLink>Registered User</a>
+            <ng-template ngbNavContent>
+                <app-registered-user-presenter></app-registered-user-presenter>
+            </ng-template>
+        </li>
+        <li ngbNavItem>
+            <a ngbNavLink>Blocked User</a>
+            <ng-template ngbNavContent>
+                <app-blocked-user-presenter></app-blocked-user-presenter>
+            </ng-template>
+        </li>
+        <li ngbNavItem>
+            <a ngbNavLink>Device</a>
+            <ng-template ngbNavContent>
+                <app-device-presenter></app-device-presenter>
+            </ng-template>
+        </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>

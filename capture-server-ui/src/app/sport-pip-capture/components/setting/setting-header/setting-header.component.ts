@@ -8,18 +8,21 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class SettingHeaderComponent implements OnInit {
   selectedTab = '';
-  headerTranslation: number = 0; 
+  headerTranslation: number = 0;
   constructor(private router: Router, private renderer: Renderer2, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
     const param = this.route.snapshot.params['settings'];
-    
-    if(param == 'settings'){
-      this.router.navigate(['settings/account'])
+
+    if (param == 'settings') {
+      this.router.navigate(['settings'])
     }
 
   }
 
+  isActive(route: string): boolean {
+    return this.router.url === route;
+  }
 
 }

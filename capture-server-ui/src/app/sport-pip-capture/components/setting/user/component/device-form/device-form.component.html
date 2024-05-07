@@ -1,0 +1,39 @@
+<div class="modal-header justify-content-end">
+    <i class="bi bi-x-lg cursor-pointer" (click)="activeModal.dismiss('Cross click')"></i>
+</div>
+<div class="modal-body" tabindex="0" ngbAutofocus>
+    <h2 class="modal-title" id="myModalLabel1">Create New Device</h2>
+    <form>
+
+        <div class="form-group">
+            <label>Device Name</label>
+            <input type="text" class="form-control" name="deviceName" [(ngModel)]="datasource.deviceName" />
+        </div>
+
+        <div class="form-group">
+            <label>Device Type </label>
+            <ng-select name="device" [(ngModel)]="datasource.type.SelectedItem">
+                <ng-option *ngFor="let item of datasource.type" [value]="item">{{ item }}</ng-option>
+                <ng-template ng-footer-tmp class="p-2">
+                    <button (click)="datasource.type.AddingNewItem(type)" class="addTypeBtn btn btn-sm btn-success"
+                        rippleEffect>
+                        + Add Device Type
+                    </button>
+                    <inline-form-modal #type modalTitle="Add Device Type"></inline-form-modal>
+                </ng-template>
+            </ng-select>
+        </div>
+
+        <div class="form-group">
+            <label>Device Code</label>
+            <input type="text" class="form-control" name="code" [(ngModel)]="datasource.deviceCode" />
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="save.emit() ;activeModal.dismiss('Cross click')"
+        rippleEffect>
+        Add
+    </button>
+</div>

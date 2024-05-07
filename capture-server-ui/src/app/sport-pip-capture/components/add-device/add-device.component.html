@@ -14,13 +14,6 @@
             <app-validation-alert controlName="Device Name" [control]="ngmdeviceName">
             </app-validation-alert>
         </div>
-        <!-- <div class="form-group">
-            <label>Device Name </label>
-            <input type="text" class="form-control" name="dname" required
-                [(ngModel)]="datasource.deviceName.SelectedItem" #ngmdeviceName="ngModel" />
-            <app-validation-alert controlName="Device Name" [control]="ngmdeviceName">
-            </app-validation-alert>
-        </div> -->
 
         <div class="form-group">
             <label>PIN</label>
@@ -36,11 +29,11 @@
             <ng-select name="location" [(ngModel)]="datasource.location.SelectedItem" required #ngmlocation="ngModel">
                 <ng-option *ngFor="let item of datasource.location" [value]="item">{{ item }}</ng-option>
                 <ng-template ng-footer-tmp class="p-2">
-                    <button (click)="datasource.location.AddingNewItem(location)"
+                    <button (click)="datasource.location.AddingNewItem(DeviceType)"
                         class="addTypeBtn btn btn-sm btn-success" rippleEffect>
                         + Add New Location
                     </button>
-                    <inline-form-modal #location modalTitle="New location"></inline-form-modal>
+                    <inline-form-modal #DeviceType modalTitle="New location"></inline-form-modal>
                 </ng-template>
             </ng-select>
             <app-validation-alert controlName="Location" [control]="ngmlocation">
