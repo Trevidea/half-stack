@@ -1,3 +1,4 @@
+import { DatePipe } from "@angular/common";
 import { Collection, Range } from "app/blocks/collection";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
 
@@ -74,7 +75,7 @@ export class LogView implements Views.Datasource {
 
   private _timestamp: string;
   public get timestamp(): string {
-    return this._timestamp;
+    return DateFormate.formatDate(this._timestamp);
   }
   public set timestamp(v: string) {
     this._timestamp = v;
@@ -88,7 +89,15 @@ export class LogView implements Views.Datasource {
     this._details = v;
   }
 }
+export class DateFormate {
+  static datePipe = new DatePipe("en-US");
 
+  static formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const format = "dd MMMM yyyy 'at' h:mm a";
+    return this.datePipe.transform(date, format) || "";
+  }
+}
 /*
   category: string,
   subject: string,

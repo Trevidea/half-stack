@@ -4,6 +4,7 @@ import { Transformer } from "app/blocks/transformer";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 import { EventRangeBuilder } from "../builder/log";
 import { Data } from "app/sport-pip-capture/models/capture-interface";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-log-presenter",
