@@ -106,6 +106,9 @@ import { LogListPresentert } from "./components/log/log-list/log-list.presenter"
 import { LogListComponent } from "./components/log/log-list/log-list.component";
 import { OvenMediaServerFormComponent } from "./components/connection/connection-device-detail/oven-media-server-form/oven-media-server-form.component";
 import { RelayStreamComponent } from "./components/connection/connection-device-detail/relay-stream/relay-stream.component";
+import { OvenMediaServerFormPresenter } from "./components/connection/connection-device-detail/oven-media-server-form/oven-media-server-from.Presenter";
+import { RelayStreamPresenter } from "./components/connection/connection-device-detail/relay-stream/relay-stream.presenter";
+import { ConnectionDeviceDetailPresenter } from "./components/connection/connection-device-detail/connection-device-detail.presenter";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -194,6 +197,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LogSummaryComponent,
     OvenMediaServerFormComponent,
     RelayStreamComponent,
+    OvenMediaServerFormPresenter,
+    RelayStreamPresenter,
+    ConnectionDeviceDetailPresenter,
   ],
   providers: [
     {

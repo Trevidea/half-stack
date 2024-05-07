@@ -1,6 +1,5 @@
 import { DataBase } from "./model";
 import { Data } from "./capture-interface";
-import { Collection } from "app/blocks/collection";
 
 export class ConnectionPreviewData extends DataBase<Data.ConnectionPreview> {
 
