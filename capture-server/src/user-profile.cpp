@@ -37,6 +37,7 @@ void UserProfile::report()
                                   this->remove(req, rsp);
                               });
 }
+
 UserProfile::~UserProfile() {
     // Destructor implementation, if needed
 }
