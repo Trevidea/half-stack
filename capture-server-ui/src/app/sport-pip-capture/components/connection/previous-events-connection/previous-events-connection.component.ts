@@ -39,7 +39,7 @@ export class PreviousEventsConnectionComponent implements OnInit {
   notification(data, delayTime) {
     this.notificationDIsplayService.show(data, {
       delay: delayTime,
-      autohide: false,
+      autohide: true,
     });
     // this.notificationtStyle = { left: 0, right: "unset" };
   }
