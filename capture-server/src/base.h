@@ -15,7 +15,6 @@ public:
     void report();
     std::string toString();
     std::string toResponse();
-    Json::Value executeSqlJson(const std::string &sql); // Declaration of executeSqlJson method
     ~Base();
 protected:
     Json::Value m_model;
