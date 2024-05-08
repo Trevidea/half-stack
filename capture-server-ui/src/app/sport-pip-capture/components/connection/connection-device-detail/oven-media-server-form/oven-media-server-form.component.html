@@ -259,6 +259,7 @@
       [swal]="SweetAlertError"
       rippleEffect
       [disabled]="!OmForm.valid"
+      (click)="formValidation(OmForm)"
     >
       Save
     </button>
@@ -277,5 +278,6 @@
   text="Something went wrong 😍 Try Again 😜!"
   [swalOptions]="{ confirmButtonClass: 'btn btn-primary' }"
   icon="error"
+  (confirm)="onConfirm()"
 >
 </swal>
