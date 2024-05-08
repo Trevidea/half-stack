@@ -92,4 +92,44 @@ int VirtualApp::deepCreate(const std::string &name, char *msg)
     }
     return result;
 }
-VirtualApp::~VirtualApp(){}
+
+std::vector<const std::string> VirtualApp::getStreamsList()
+{
+    std::vector<const std::string> list;
+
+    char ep[128] = {'\0'};
+    const std::string baseUrl = DBManager::instance().getEnv("OM_URL", "http://drake.in:8081/v1");
+    snprintf(ep, 128, "%s/vhosts/%s/apps/%s/streams", baseUrl.c_str(), this->m_vhost.c_str(), this->m_name.c_str());
+    auto rest = Rest::ClientFactory::getInstance().create(ep);
+    std::string pass, fail;
+    int result = rest.get(pass, fail, "drake", "drake_ome");
+    if (result != 0)
+        throw ExOMResourceAccessException(ep);
+    Json::Value jsResult = Json::objectValue;
+    Json::Reader().parse(pass, jsResult);
+    Json::Value jsVHostArray = jsResult["response"];
+    for (auto &&stream : jsVHostArray)
+    {
+        list.push_back(stream.asString());
+    }
+    return list;
+}
+Json::Value VirtualApp::getStreamInfo(const std::string &streamKey)
+{
+    std::vector<const std::string> list;
+
+    char ep[128] = {'\0'};
+    const std::string baseUrl = DBManager::instance().getEnv("OM_URL", "http://drake.in:8081/v1");
+    snprintf(ep, 128, "%s/vhosts/%s/apps/%s/streams/%s",
+             baseUrl.c_str(), this->m_vhost.c_str(), this->m_name.c_str(), streamKey.c_str());
+    auto rest = Rest::ClientFactory::getInstance().create(ep);
+    std::string pass, fail;
+    int result = rest.get(pass, fail, "drake", "drake_ome");
+    if (result != 0)
+        throw ExOMResourceAccessException(ep);
+    Json::Value jsResult = Json::objectValue;
+    Json::Reader().parse(pass, jsResult);
+    Json::Value jsStreamInfo = jsResult["response"];
+    return std::move(jsStreamInfo);
+}
+VirtualApp::~VirtualApp() {}

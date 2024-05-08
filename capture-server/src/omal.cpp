@@ -5,6 +5,7 @@
 #include <functional>
 #include <regex>
 #include "event-device.h"
+#include <vector>
 
 Omal::Omal() : EntityBase("omal")
 {
@@ -44,7 +45,8 @@ void Omal::report()
 
                                   std::stringstream ss;
                                   ss << eventId;
-                                  Json::Value result = vh.createApp(ss.str());
+                                  Json::Value result = Json::objectValue;
+                                  vh.createApp(ss.str(), result);
                                   auto strResponse = Gateway::instance().formatResponse({{result}});
                                   rsp.setData(strResponse);
                               });
@@ -70,6 +72,27 @@ void Omal::report()
                                   const auto &strResponse = Gateway::instance().formatResponse({{response}});
                                   rsp.setData(strResponse);
                               });
+    Gateway::instance().route("GET", "/api/omal/streams-list", // To request LIST
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  const auto eventId = req.getQueryValue("event-id");
+                                  const std::vector<const std::string> list = this->fetchStreamsList(eventId);
+                                  Json::Value resp = Json::arrayValue;
+                                  for (auto &&stream : list)
+                                  {
+                                      resp.append(Json::Value(stream));
+                                  }
+                                  rsp.setData(Gateway::instance().formatResponse({{resp}}));
+                              });
+    Gateway::instance().route("POST", "/api/omal/stream-info", // To request LIST
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  const auto data = req.json();
+                                  const std::string eventId = data["event-id"].asString();
+                                  const std::string streamKey = data["stream-key"].asString();
+
+                                  const auto info = this->fetchStreamInfo(eventId, streamKey);
+                              });
 
     // Implement route for Control Server
     Gateway::instance().route("POST", "/api/omal/control-server",
@@ -78,10 +101,27 @@ void Omal::report()
                                   handleControlServerRequest(req, rsp);
                               });
 }
+std::vector<const std::string> Omal::fetchStreamsList(const std::string &eventId)
+{
+    auto vhost = OMALFactory::getInstance().create("spip");
+    Json::Value result = Json::objectValue;
+    auto app = vhost.createApp(eventId, result, true);
+    return app.getStreamsList();
+}
+
+Json::Value Omal::fetchStreamInfo(const std::string &eventId, const std::string &streamKey)
+{
+    auto vhost = OMALFactory::getInstance().create("spip");
+    Json::Value result = Json::objectValue;
+    auto app = vhost.createApp(eventId, result, true);
+    return app.getStreamInfo(streamKey);
+}
+
 void Omal::openPreview(const Request &req, Response &rsp)
 {
     const auto &jsRequest = req.json();
 }
+
 void Omal::assessNetworkQuality(const Request &req, Response &rsp)
 {
     // Perform network quality assessment
@@ -166,7 +206,6 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     else
     {
         // throw invalid url exception
-        spdlog::trace("No match found");
     }
 
     rsp.setRawData(jsonResponse);
