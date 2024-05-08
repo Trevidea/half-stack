@@ -13,6 +13,24 @@ class SqlHelper
 {
 private:
     /************HELPER FUNCTIONS***********/
+
+    /**
+     * \brief Formats a JSON value into a string representation based on its type.
+     *
+     * This function takes a Json::Value object and formats its value into a string
+     * representation according to its type. The supported types are:
+     *   - 1: string
+     *   - 3: bool
+     *   - 4: date
+     *   - 5: jsonb
+     *   - 0, 2: int, float
+     *
+     * If the JSON object does not have a "value" field, it returns "NULL".
+     *
+     * \param json The Json::Value object to format.
+     * \return A string representation of the JSON value.
+     */
+
     static std::string formatValue(const Json::Value &json)
     {
         if (!json["value"])
@@ -51,6 +69,18 @@ private:
         return value;
     }
 
+    /**
+     * \brief Builds SQL criteria string based on JSON criteria.
+     *
+     * This function takes a Json::Value object containing criteria and builds
+     * an SQL criteria string based on the criteria specified in the JSON.
+     * Each criterion consists of a field, an operator (optional), and a value.
+     * If the JSON object does not contain criteria, an empty string is returned.
+     *
+     * \param json The Json::Value object containing criteria.
+     * \return An SQL criteria string built from the JSON criteria.
+     */
+
     static std::string criteriaBuilder(const Json::Value &json)
     {
         std::string criteria = "";
@@ -74,6 +104,19 @@ private:
         }
         return criteria;
     }
+
+    /**
+     * \brief Builds SQL parameter string based on JSON criteria.
+     *
+     * This function takes a Json::Value object containing criteria and builds
+     * an SQL parameter string based on the criteria specified in the JSON.
+     * Each parameter consists of a field and a value.
+     * If the JSON object does not contain criteria, an empty string is returned.
+     *
+     * \param json The Json::Value object containing criteria.
+     * \return An SQL parameter string built from the JSON criteria.
+     */
+
     static std::string paramsBuilder(const Json::Value &json)
     {
         std::string criteria = "";
@@ -96,6 +139,18 @@ private:
     /***************************************/
 
 public:
+    /**
+     * \brief Constructs an SQL INSERT statement with RETURNING clause.
+     *
+     * This function constructs an SQL INSERT statement for inserting data into a specified table
+     * using the provided JSON object. It extracts column names and values from the JSON and
+     * constructs the INSERT statement accordingly. The constructed statement includes a RETURNING
+     * clause to retrieve the inserted ID.
+     *
+     * \param json The Json::Value object containing table name and column data.
+     * \return An SQL INSERT statement with RETURNING clause.
+     */
+
     static std::string ScriptInsert(const Json::Value &json)
     {
         std::string tablename = json["table"].asString();
@@ -114,8 +169,20 @@ public:
 
         return sql_insert;
     }
-    
+
     //-----------------------------------------------------------------------------------
+
+    /**
+     * \brief Constructs an SQL UPDATE statement.
+     *
+     * This function constructs an SQL UPDATE statement for updating data in a specified table
+     * using the provided JSON object. It extracts column names and values from the JSON and
+     * constructs the SET clause accordingly. Additionally, it includes criteria for updating
+     * specific rows if provided in the JSON.
+     *
+     * \param json The Json::Value object containing table name, column data, and optional criteria.
+     * \return An SQL UPDATE statement.
+     */
 
     static std::string ScriptUpdate(const Json::Value &json)
     {
@@ -165,6 +232,17 @@ public:
 
     //-----------------------------------------------------------------------------------
 
+    /**
+     * \brief Constructs an SQL DELETE statement.
+     *
+     * This function constructs an SQL DELETE statement for removing data from a specified table
+     * based on the provided criteria in the JSON object. The criteria for deletion can be
+     * specified in the JSON object.
+     *
+     * \param json The Json::Value object containing table name and optional criteria.
+     * \return An SQL DELETE statement.
+     */
+
     static std::string ScriptRemove(const Json::Value &json)
     {
         std::string tablename = json["table"].asString();
@@ -189,6 +267,18 @@ public:
         sql_delete.replace(idx, 10, criteria);
         return sql_delete;
     }
+
+    /**
+     * \brief Constructs an SQL DELETE statement.
+     *
+     * This function constructs an SQL DELETE statement for removing data from a specified table
+     * based on the provided criteria.
+     *
+     * \param tableName The name of the table from which data will be removed.
+     * \param criteria The criteria for deletion in the WHERE clause.
+     * \return An SQL DELETE statement.
+     */
+
     static std::string ScriptRemove(const std::string &tableName, const std::string &criteria)
     {
 
@@ -212,6 +302,17 @@ public:
     }
 
     //-----------------------------------------------------------------------------------
+
+    /**
+     * \brief Generates a JSON stub for a given table name.
+     *
+     * This function generates a JSON stub containing an empty array for columns
+     * and an empty array for criteria, with the specified table name.
+     *
+     * \param tableName The name of the table to include in the JSON stub.
+     * \return A JSON stub string.
+     */
+
     static std::string JsonStub(const std::string &tableName)
     {
         char js[1024] = {0};
@@ -224,6 +325,17 @@ public:
         snprintf(js, 1024, fmt, tableName.c_str());
         return js;
     }
+
+    /**
+     * \brief Generates an SQL query to retrieve schema information for a specified table.
+     *
+     * This function generates an SQL query to retrieve column names and data types
+     * from the information schema for the specified table.
+     *
+     * \param tableName The name of the table for which schema information is to be retrieved.
+     * \return An SQL query string.
+     */
+
     static std::string SchemaSql(const std::string &tableName)
     {
         char sql[1024] = {0};
@@ -238,6 +350,17 @@ public:
         return sql;
     }
     //-----------------------------------------------------------------------------------
+
+    /**
+     * \brief Constructs an SQL SELECT statement.
+     *
+     * This function constructs an SQL SELECT statement for retrieving data from a specified table
+     * based on the provided criteria in the JSON object. If no criteria are provided, it retrieves
+     * all records from the table.
+     *
+     * \param json The Json::Value object containing table name and optional criteria.
+     * \return An SQL SELECT statement.
+     */
 
     static std::string ScriptSelect(const Json::Value &json)
     {
@@ -263,6 +386,16 @@ public:
         return sql_select;
     }
     //-----------------------------------------------------------------------------------
+
+    /**
+     * \brief Constructs an SQL SELECT statement with function call syntax.
+     *
+     * This function constructs an SQL SELECT statement to call a function on a specified table
+     * based on the provided parameters in the JSON object.
+     *
+     * \param json The Json::Value object containing table name and parameters for the function call.
+     * \return An SQL SELECT statement with function call syntax.
+     */
 
     static std::string ScriptFunction(const Json::Value &json)
     {

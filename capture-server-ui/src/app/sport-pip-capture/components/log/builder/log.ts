@@ -25,7 +25,7 @@ export const logData = [
     subject: "Create Event",
     user: "Coach Steven",
     action: "A created event named as McQuaid vs Fairport",
-    timestamp: "19 May 2022 at 9:00 am",
+    timestamp: "2024-05-01 12:14:48.554",
     details: [
       {
         time: "09:00 am",
@@ -58,7 +58,7 @@ export const logData = [
     subject: "Delete  Event",
     user: "Coach John",
     action: "A deleted event named ‘Riverhawks vs Huskers’",
-    timestamp: "18 May 2022 at 10:10 pm",
+    timestamp: "2024-05-03 23:14:48.554",
     details: [
       {
         time: "10:10 pm",
@@ -72,7 +72,7 @@ export const logData = [
     subject: "Pin",
     user: "Gavin Gohar",
     action: "Created PIN for an event named Bluelock vs Team Red ",
-    timestamp: "16 May 2022 at 10:10 pm",
+    timestamp: "2024-05-04 12:14:48.554",
     details: [
       {
         time: "10:05 pm",
@@ -89,7 +89,36 @@ export const logData = [
     subject: "Device Connection",
     user: "Shane Smith",
     action: "Device name iPad15 connected with the server on 12:12:00",
-    timestamp: "16 May 2022 at 11:10 pm",
+    timestamp: "2024-05-08 09:14:48.554",
+    details: [
+      {
+        time: "11:00 pm",
+        activity: "Connection for event named McQuaid vs Fairport started",
+      },
+      {
+        time: "11:02 pm",
+        activity: "Device named iPad15 send request to join with the server",
+      },
+      {
+        time: "11:05 pm",
+        activity: "Notification appeared",
+      },
+      {
+        time: "11:06 pm",
+        activity: "Accepted the request of joining the device",
+      },
+      {
+        time: "11:10 pm",
+        activity: "Device named iPad15  connected with the server",
+      },
+    ],
+  },
+  {
+    category: "Notification",
+    subject: "Device Connection",
+    user: "Shane Smith",
+    action: "Device name iPad15 connected with the server on 12:12:00",
+    timestamp: "2024-05-10 09:14:48.554",
     details: [
       {
         time: "11:00 pm",

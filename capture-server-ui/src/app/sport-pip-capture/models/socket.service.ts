@@ -65,17 +65,17 @@ export class SocketService {
     );
   }
 
-  _onPreviewEvent(): Observable<Data.ConnectionPreview> {
-    return this.onEventPreview().pipe(
-      map((data) => {
-        const eventObject = JSON.parse(data);
-        const previewEventData: Data.ConnectionPreview = eventObject.result[0]?.[0]
-        console.log(previewEventData)
-        // return new ConnectionPreviewData(previewEventData)
-        return null
-      })
-    )
-  }
+  // _onPreviewEvent(): Observable<Data.ConnectionPreview> {
+  //   return this.onEventPreview().pipe(
+  //     map((data) => {
+  //       const eventObject = JSON.parse(data);
+  //       const previewEventData: Data.ConnectionPreview = eventObject.result[0]?.[0]
+  //       console.log(previewEventData)
+  //       // return new ConnectionPreviewData(previewEventData)
+  //       return null
+  //     })
+  //   )
+  // }
 
 
 }

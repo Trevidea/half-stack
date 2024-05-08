@@ -7,6 +7,18 @@ void EventDevice::report()
 {
     EntityBase::report();
     
+    Gateway::instance().route("GET", "/api/event-devices", // To request INSERT
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  this->list(req, rsp);
+                              });
+
+    Gateway::instance().route("GET", "/api/event-devices", // To request INSERT
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  this->find(req, rsp);
+                              });
+
     Gateway::instance().route("POST", "/api/event-devices", // To request INSERT
                               [this](const Request &req, Response &rsp)
                               {

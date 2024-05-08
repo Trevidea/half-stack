@@ -23,7 +23,7 @@ export class AccountPresenter implements OnInit {
 
     }
     ngOnInit(): void {
-        Transformer.ComposeObjectAsync(this.dataFactory.UserProfileJson(this.ds.id), this.ds, AccountBuilder)
+        // Transformer.ComposeObjectAsync(this.dataFactory.UserProfileJson(this.ds.id), this.ds, AccountBuilder)
     }
 
 }

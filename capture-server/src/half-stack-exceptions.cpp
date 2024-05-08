@@ -27,7 +27,6 @@ ExFieldMissingInRequest::~ExFieldMissingInRequest()
 {
 }
 
-
 ExModelNotFoundException::ExModelNotFoundException(const std::string &entity, const int id) : m_entity{entity},
                                                                                               m_id{id}
 {
@@ -42,3 +41,13 @@ ExInvalidPreviewDurationException::ExInvalidPreviewDurationException(const std::
 ExInvalidPreviewDurationException::~ExInvalidPreviewDurationException()
 {
 }
+
+ExInvalidUrlException::ExInvalidUrlException(const std::string &url)
+    : m_message("Invalid URL format. Expected 'rtmp://" + url + "/") {}
+
+const char *ExInvalidUrlException::what() const noexcept
+{
+    return m_message.c_str();
+}
+
+ExInvalidUrlException::~ExInvalidUrlException() noexcept {}

@@ -1,4 +1,12 @@
-import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { DatePipe } from "@angular/common";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
 
@@ -6,6 +14,8 @@ import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.s
   selector: "app-log-list",
   templateUrl: "./log-list.component.html",
   styleUrls: ["../log.component.scss"],
+
+  providers: [DatePipe],
   encapsulation: ViewEncapsulation.None,
 })
 export class LogListComponent implements OnInit {
@@ -13,6 +23,7 @@ export class LogListComponent implements OnInit {
   @Input() users: any;
   @Input() categories: any;
   @Input() logKeys: any;
+  @Output() filterChild = new EventEmitter<boolean>();
   arrowDirection: number[] = [];
   currentSortColumn: string | null = null;
   isAscending: boolean = true;
@@ -20,7 +31,8 @@ export class LogListComponent implements OnInit {
 
   constructor(
     private _coreSidebarService: CoreSidebarService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -78,5 +90,13 @@ export class LogListComponent implements OnInit {
         return d;
       }
     });
+  }
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const format = "dd MMMM yyyy 'at' h:mm a";
+    return this.datePipe.transform(date, format) || "";
+  }
+  filter(e) {
+    this.filterChild.emit(e);
   }
 }

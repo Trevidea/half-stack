@@ -6,6 +6,7 @@
       [categories]="categories"
       [datasource]="datasource"
       (inputValueChange)="onInputValueChange($event)"
+      (filter)="filter($event)"
     ></app-log-filter>
   </div>
   <div class="card-body m-0 p-0">
@@ -60,6 +61,7 @@
                   alt="team"
                   *ngIf="key == 'user'"
                 />
+                <!-- {{ key == "timestamp" ? formatDate(item[key]) : item[key] }} -->
                 {{ item[key] }}
               </div>
             </td>

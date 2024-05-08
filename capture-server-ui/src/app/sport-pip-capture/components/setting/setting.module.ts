@@ -27,8 +27,15 @@ import { NgSelectModule } from "@ng-select/ng-select";
 import { CorePipesModule } from "@core/pipes/pipes.module";
 import { CoreSidebarModule } from "@core/components";
 import { Ng2FlatpickrModule } from "ng2-flatpickr";
-
-
+import { UserComponent } from "./user/user.component";
+import { RegisteredUserComponent } from './user/component/registered-user/registered-user.component';
+import { BlockedUserComponent } from './user/component/blocked-user/blocked-user.component';
+import { DeviceComponent } from './user/component/device/device.component';
+import { RegisteredUserPresenter } from "./user/component/registered-user/registered-user.presenterts";
+import { BlockedUserPresenter } from "./user/component/blocked-user/blocked-user.presenter";
+import { DevicePresenter } from "./user/component/device/devicepresenter";
+import { DeviceFormComponent } from './user/component/device-form/device-form.component';
+import { DeviceFormPresenter } from "./user/component/device-form/device-form.presenter";
 
 @NgModule({
   declarations: [
@@ -45,10 +52,19 @@ import { Ng2FlatpickrModule } from "ng2-flatpickr";
     CoachHomeSidebarComponent,
     DistributionListComponent,
     DistributionListPresenter,
-    SettingBodyComponent ,
+    SettingBodyComponent,
     SharingPresenter,
-    FilePresenter
-    ],
+    FilePresenter,
+    UserComponent,
+    RegisteredUserComponent,
+    BlockedUserComponent,
+    DeviceComponent,
+    RegisteredUserPresenter,
+    BlockedUserPresenter,
+    DevicePresenter,
+    DeviceFormComponent,
+    DeviceFormPresenter
+  ],
   imports: [
     CommonModule,
     FormsModule,

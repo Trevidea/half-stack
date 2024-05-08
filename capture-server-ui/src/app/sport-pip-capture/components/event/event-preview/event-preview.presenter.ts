@@ -31,6 +31,8 @@ export class EventPreviewPresenter implements OnInit {
   ngOnInit(): void {
     this.socketService.onEventPreview().subscribe(
       (data) => {
+
+        console.log("data without json ", data)
         this.previewData = JSON.parse(data);
       },
       (error) => {
@@ -47,7 +49,7 @@ export class EventPreviewPresenter implements OnInit {
       }
     );
 
-     Transformer._ComposeLiveObjectAsync(this.socketService._onPreviewEvent(), this.ds, EventPreviewBuilder);
+    //  Transformer._ComposeLiveObjectAsync(this.socketService._onPreviewEvent(), this.ds, EventPreviewBuilder);
   }
 
   onClosePreview() {
