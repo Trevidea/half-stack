@@ -17,7 +17,6 @@ export class OvenMediaServerFormComponent implements OnInit {
   ngOnInit(): void {}
 
   formValidation(form: NgForm) {
-    console.log(form);
     Object.keys(form.controls).forEach((key) => {
       const control = form.controls[key];
       if (control.invalid) {
