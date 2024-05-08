@@ -6,7 +6,6 @@
 #include "db-manager.h"
 #include "client-factory.h"
 #include "omal-exceptions.h"
-#include "virtual-app.h"
 
 namespace fs = std::filesystem;
 
@@ -95,13 +94,26 @@ int VirtualHost::deepCreate(const std::string &name, char *msg)
     }
     return result;
 }
-Json::Value VirtualHost::createApp(const std::string &app)
+VirtualApp VirtualHost::createApp(const std::string &app, Json::Value &result, bool findOnly)
 {
-    Json::Value ret = this->deepFindOrCreate();
+    result = std::move(this->deepFindOrCreate());
     VirtualApp vapp{app, this->m_name};
-    Json::Value appRet = vapp.deepFindOrCreate();
-    ret["app"] = appRet;
-    return ret;
+    if (findOnly)
+    {
+        const int intResult = vapp.deepFind(this->m_name);
+        Json::Value jsResult = Json::objectValue;
+        jsResult["vapp-created"] = false;
+        jsResult["vapp-existed"] = intResult;
+        jsResult["vapp-error"] = "";
+        jsResult["vapp-result"] = intResult;
+        result["app"] = jsResult;
+    }
+    else
+    {
+        Json::Value appRet = vapp.deepFindOrCreate();
+        result["app"] = appRet;
+    }
+    return std::move(vapp);
 }
 
 std::map<std::string, std::string> VirtualHost::getVODDumps()
@@ -128,4 +140,4 @@ std::map<std::string, std::string> VirtualHost::getVODDumps()
     return dumps;
 }
 
-VirtualHost::~VirtualHost(){}
+VirtualHost::~VirtualHost() {}

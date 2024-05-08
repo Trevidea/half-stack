@@ -132,6 +132,7 @@ void handle_del(http_request request)
 int main()
 {
    spdlog::set_level(spdlog::level::trace); // Set global log level to debug
+   spdlog::set_pattern("[%Y-%m-%d %H:%M:%S.%e] [%i] [%l] [%t] %v");
    spdlog::trace("Welcome to spdlog version {}.{}.{}  !", SPDLOG_VER_MAJOR, SPDLOG_VER_MINOR, SPDLOG_VER_PATCH);
    Gateway::instance().init();
    try

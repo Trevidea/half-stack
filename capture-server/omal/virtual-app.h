@@ -8,6 +8,7 @@
 #include "watcher.h"
 #include "network-quality-assessment.h"
 #include <json/json.h>
+#include  <vector>
 
 class VirtualHost;
 
@@ -18,6 +19,8 @@ public:
     friend class VirtualHost;
     // Destructor declaration
     ~VirtualApp();
+    std::vector<const std::string> getStreamsList();
+    Json::Value getStreamInfo(const std::string &streamKey);
 
 private:
     VirtualApp(const std::string &name, const std::string &vhost);
