@@ -56,31 +56,6 @@ export class LogListPresentert implements OnInit {
   }
 
   populateFilterData() {
-    // let selectedFromDate = `"${this.ds?.dateRangeFrom?.["year"]}-${
-    //   this.ds?.dateRangeFrom?.["month"] < 10
-    //     ? "0" + this.ds?.dateRangeFrom?.["month"]
-    //     : this.ds?.dateRangeFrom?.["month"]
-    // }-${
-    //   this.ds.dateRangeFrom?.["day"] < 10
-    //     ? "0" + this.ds?.dateRangeFrom?.["day"]
-    //     : this.ds?.dateRangeFrom?.["day"]
-    // }"`;
-    // let selectedToDate = `"${this.ds?.dateRangeTo?.["year"]}-${
-    //   this.ds?.dateRangeTo?.["month"] < 10
-    //     ? "0" + this.ds?.dateRangeTo?.["month"]
-    //     : this.ds?.dateRangeTo?.["month"]
-    // }-${
-    //   this.ds.dateRangeTo?.["day"] < 10
-    //     ? "0" + this.ds?.dateRangeTo?.["day"]
-    //     : this.ds?.dateRangeTo?.["day"]
-    // }"`;
-    // if(selectedToDate == "undefined-undefined-undefined"){
-    //   selectedToDate =
-    // }
-    console.log(UI.DateHelper.dateToString(this.ds.dateRangeTo, "yyyy-mm-dd"));
-    console.log(
-      UI.DateHelper.dateToString(this.ds.dateRangeFrom, "yyyy-mm-dd")
-    );
     Transformer.ComposeCollectionAsync(
       this.dataService.Logs({
         category: this.ds.category,

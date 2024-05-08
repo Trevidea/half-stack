@@ -37,7 +37,5 @@ export class LogFilterComponent implements OnInit {
     this.inputValueChange.emit("");
   }
   constructor() {}
-  ngOnInit(): void {
-    console.log(this.datasource);
-  }
+  ngOnInit(): void {}
 }
