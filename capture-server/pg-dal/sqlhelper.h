@@ -30,7 +30,6 @@ private:
      * \param json The Json::Value object to format.
      * \return A string representation of the JSON value.
      */
-
     static std::string formatValue(const Json::Value &json)
     {
         if (!json["value"])
@@ -80,7 +79,6 @@ private:
      * \param json The Json::Value object containing criteria.
      * \return An SQL criteria string built from the JSON criteria.
      */
-
     static std::string criteriaBuilder(const Json::Value &json)
     {
         std::string criteria = "";
@@ -116,7 +114,6 @@ private:
      * \param json The Json::Value object containing criteria.
      * \return An SQL parameter string built from the JSON criteria.
      */
-
     static std::string paramsBuilder(const Json::Value &json)
     {
         std::string criteria = "";
@@ -150,7 +147,6 @@ public:
      * \param json The Json::Value object containing table name and column data.
      * \return An SQL INSERT statement with RETURNING clause.
      */
-
     static std::string ScriptInsert(const Json::Value &json)
     {
         std::string tablename = json["table"].asString();
@@ -183,7 +179,6 @@ public:
      * \param json The Json::Value object containing table name, column data, and optional criteria.
      * \return An SQL UPDATE statement.
      */
-
     static std::string ScriptUpdate(const Json::Value &json)
     {
         // get table name from jsonString and store in tablename variable
@@ -242,7 +237,6 @@ public:
      * \param json The Json::Value object containing table name and optional criteria.
      * \return An SQL DELETE statement.
      */
-
     static std::string ScriptRemove(const Json::Value &json)
     {
         std::string tablename = json["table"].asString();
@@ -278,7 +272,6 @@ public:
      * \param criteria The criteria for deletion in the WHERE clause.
      * \return An SQL DELETE statement.
      */
-
     static std::string ScriptRemove(const std::string &tableName, const std::string &criteria)
     {
 
@@ -312,7 +305,6 @@ public:
      * \param tableName The name of the table to include in the JSON stub.
      * \return A JSON stub string.
      */
-
     static std::string JsonStub(const std::string &tableName)
     {
         char js[1024] = {0};
@@ -335,7 +327,6 @@ public:
      * \param tableName The name of the table for which schema information is to be retrieved.
      * \return An SQL query string.
      */
-
     static std::string SchemaSql(const std::string &tableName)
     {
         char sql[1024] = {0};
@@ -361,7 +352,6 @@ public:
      * \param json The Json::Value object containing table name and optional criteria.
      * \return An SQL SELECT statement.
      */
-
     static std::string ScriptSelect(const Json::Value &json)
     {
         std::string tablename = json["table"].asString();
@@ -396,7 +386,6 @@ public:
      * \param json The Json::Value object containing table name and parameters for the function call.
      * \return An SQL SELECT statement with function call syntax.
      */
-
     static std::string ScriptFunction(const Json::Value &json)
     {
         std::string tablename = json["table"].asString();
