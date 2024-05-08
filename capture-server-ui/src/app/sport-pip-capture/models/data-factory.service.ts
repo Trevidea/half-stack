@@ -317,7 +317,27 @@ export class DataFactoryService {
   // eventPreviewJson(): Observable<Data.ConnectionPreview[]> {
   //   return this._data("event-preview", ConnectionPreviewData);
   // }
-  Logs(): Observable<Data.Log[]> {
-    return this.logData;
+
+  Logs(filter?: any): Observable<Data.Log[]> {
+    if (filter) {
+      return this.logData.pipe(
+        map((logData: any) => {
+          return logData.filter((entry: any) => {
+            const entryDate = new Date(entry.timestamp);
+            const fromDate = new Date(filter.startDate);
+            const toDate = new Date(filter.endDate);
+            toDate.setDate(toDate.getDate() + 1);
+            return (
+              (filter.category == null || entry.category === filter.category) &&
+              (filter.user == null || entry.user === filter.user) &&
+              (filter.startDate == "01-01-2000" || entryDate >= fromDate) &&
+              (filter.endDate == "01-01-2000" || entryDate <= toDate)
+            );
+          });
+        })
+      );
+    } else {
+      return this.logData;
+    }
   }
 }

@@ -55,18 +55,16 @@ export class DeviceFormPresenter implements OnInit {
       MetaTypeBuilder
     );
     this.ds.type.onAddingNewItem(async (e: { modal: Views.ModalHost }) => {
-      setTimeout(async () => {
-        e.modal.component = TypesPresenter;
-        e.modal.properties["key"] = "DEVICETYPE";
-        try {
-          const data = await e.modal.open();
-          if (data) {
-            Transformer.ComposeAndSelect(this.ds.type, data.newItem);
-          }
-        } catch (err) {
-          console.log(err);
+      e.modal.component = TypesPresenter;
+      e.modal.properties["key"] = "DEVICETYPE";
+      try {
+        const data = await e.modal.open();
+        if (data) {
+          Transformer.ComposeAndSelect(this.ds.type, data.newItem);
         }
-      }, 1000);
+      } catch (err) {
+        console.log(err);
+      }
     });
   }
 

@@ -318,7 +318,7 @@ export class ModelServiceService {
   }
 
   deviceList(): Observable<Data.Device[]> {
-    return this._data('devices', DeviceData)
+    return this._data("devices", DeviceData);
   }
 
   eventsBasedOnStatus(status: string): Observable<Data.Event[]> {

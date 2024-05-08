@@ -29,7 +29,7 @@ export class LogFilterComponent implements OnInit {
   @Input() datasource: any;
   @Output() inputValueChange = new EventEmitter<string>();
   @Output() filterKeys = new EventEmitter<string>();
-
+  @Output() filter = new EventEmitter<boolean>();
   searchText(value: string) {
     this.inputValueChange.emit(value);
   }
@@ -37,5 +37,7 @@ export class LogFilterComponent implements OnInit {
     this.inputValueChange.emit("");
   }
   constructor() {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.datasource);
+  }
 }
