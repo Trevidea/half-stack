@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { UserProfileData } from 'app/sport-pip-capture/models/user-profile';
 import { SelectItemView } from 'app/blocks/collection-item';
 import { DeviceData } from 'app/sport-pip-capture/models/device';
+import { DevicesBuilder } from './builder/device';
 
 @Component({
   selector: 'app-add-device-presenter',
@@ -45,16 +46,20 @@ export class AddDevicePresenter implements OnInit {
         this.toastrError()
       }
     });
- 
+
     Transformer.ComposeCollectionViewAsync(this.modelServiceService.userJson(), this.ds.userName,
       (userItem: UserProfileData) => {
         return new SelectItemView(userItem.id, userItem.firstname + '' + userItem.lastname);
       })
 
-    Transformer.ComposeCollectionViewAsync(this.modelServiceService.deviceJson(), this.ds.deviceName,
+    Transformer.ComposeCollectionViewAsync(this.modelServiceService.deviceList(), this.ds.deviceName,
       (deviceItem: DeviceData) => {
         return new SelectItemView(deviceItem.id, deviceItem.name);
       })
+
+    this.ds.deviceName.onItemSelected((e: { selectedItem: SelectItemView }) => {
+      Transformer.ComposeObjectAsync(this.modelServiceService.deviceById(e.selectedItem.key), this.ds, DevicesBuilder)
+    })
   }
 
   ngOnInit(): void {

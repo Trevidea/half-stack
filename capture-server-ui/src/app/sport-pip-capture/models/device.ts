@@ -29,10 +29,10 @@ export class DeviceData extends DataBase<Data.Device> {
 
     private _pin: string;
     public get pin(): string {
-        return this._pin;
+        return this._model.pin;
     }
     public set pin(v: string) {
-        this._pin = v;
+        this._model.pin = v;
     }
 
 

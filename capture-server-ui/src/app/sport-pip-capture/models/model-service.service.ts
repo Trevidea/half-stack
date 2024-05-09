@@ -26,6 +26,7 @@ export class ModelServiceService {
   ) {
     this.saveEvent = this.saveEvent.bind(this);
     this.saveDevice = this.saveDevice.bind(this);
+    this.saveEventDevice = this.saveEventDevice.bind(this);
   }
 
   create(type: string, entity: any): Observable<any> {
@@ -49,6 +50,7 @@ export class ModelServiceService {
 
   readOne(type: string, id: number): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}?id=${id}`;
+    console.log(url)
     return this._httpClient.get<any>(url);
   }
 
@@ -157,6 +159,7 @@ export class ModelServiceService {
     return this._adapter.demodulate(resource, this.readOne(resource, id)).pipe(
       map((models) =>
         models.map((model: any) => {
+          console.log(model)
           return model as I;
         })
       )
@@ -352,8 +355,9 @@ export class ModelServiceService {
     return this._data("user-profiles", UserProfileData);
   }
 
-  deviceJson(): Observable<Data.Device[]> {
-    return this._data("devices", DeviceData);
+  deviceById(id: number): Observable<Data.Device> {
+    console.log(id)
+    return this._selectOne("devices", id, DeviceData);
   }
 
   PreviousConnection(): Observable<Data.PreviousEventsConnection[]> {
