@@ -3,7 +3,9 @@
 </div>
 <div class="modal-body" tabindex="0" ngbAutofocus>
     <h2 class="modal-title" id="myModalLabel1">Add device to event</h2>
-    <h4 class=" appname mb-2">{{datasource.appName}}</h4>
+    <div class="url-box">{{constructRtmpUrl()}}
+        <button class="btn btn-outline-primary" (click)="copyCode(rtmpUrl)" rippleEffect>Copy!</button>
+    </div>
     <form #AddStreamkeyForm="ngForm">
 
         <div class="form-group">
