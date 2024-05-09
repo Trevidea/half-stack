@@ -42,4 +42,14 @@ export class DeviceFormView implements Views.Datasource {
     public set deviceCode(v: string) {
         this._deviceCode = v;
     }
+
+    
+    private _pin : string;
+    public get pin() : string {
+        return this._pin;
+    }
+    public set pin(v : string) {
+        this._pin = v;
+    }
+    
 }

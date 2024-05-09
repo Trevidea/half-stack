@@ -159,6 +159,7 @@ export namespace Data {
     type: string;
     name: string;
     code: string;
+    pin:string
   }
 
   export interface Connection extends Base {

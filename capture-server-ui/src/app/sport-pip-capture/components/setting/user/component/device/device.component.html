@@ -1,20 +1,14 @@
 <div class="row device-perent">
-    <div class="col-12 d-flex align-items-center justify-content-end mb-1 mt-0">
+    <div class="col-12 d-flex align-items-center justify-content-end mb-0">
         <button type="button" class="btn btn-warning" rippleEffect (click)="openDeviceForm()">Create new device</button>
     </div>
     <div class="col-12 grid">
         <div class="card" *ngFor="let item of datasource">
-            <div class="card-body d-flex flex-column">
-                <div class=" d-flex align-items-center ">
-                    <i class="bi bi-camera-video custom-camera-video mr-1"></i>
-                    <div style="width: 100%;">
-                        <h5>{{item.deviceName}}</h5>
-                        <div class=" d-flex align-items-center  justify-content-between">
-                            <div>{{item.deviceType}}</div>
-                            <div>{{item.deviceCode}}</div>
-                        </div>
-                    </div>
-
+            <div class="card-body">
+                <h5>{{item.deviceName}}</h5>
+                <div class=" d-flex align-items-center justify-content-between mb-1">
+                    <div>{{item.deviceType}}</div>
+                    <div>{{item.deviceCode}}</div>
                 </div>
                 <button type="button" class="btn btn-outline-secondary btn-block" rippleEffect>Remove</button>
             </div>
