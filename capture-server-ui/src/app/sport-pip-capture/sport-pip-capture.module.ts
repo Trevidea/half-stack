@@ -45,9 +45,9 @@ import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
 import { ValidationAlertComponent } from "./components/validation-alert/validation-alert.component";
 import { MetaTypeComponent } from "./components/meta-type/meta-type.component";
 
-import { FormHostDirective } from "./blocks/inline-modal/form-host.directive";
-import { FormHostComponent } from "./blocks/inline-modal/form-host/form-host.component";
-import { InlineModalComponent } from "./blocks/inline-modal/inline-modal.component";
+// import { FormHostDirective } from "./blocks/inline-modal/form-host.directive";
+// import { FormHostComponent } from "./blocks/inline-modal/form-host/form-host.component";
+// import { InlineModalComponent } from "./blocks/inline-modal/inline-modal.component";
 import { MetaTypePresenter } from "./components/meta-type/meta-type.presenter";
 import { EventHeaderPresenter } from "./components/event/event-header/event-header.presenter";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -110,6 +110,7 @@ import { OvenMediaServerFormPresenter } from "./components/connection/connection
 import { RelayStreamPresenter } from "./components/connection/connection-device-detail/relay-stream/relay-stream.presenter";
 import { ConnectionDeviceDetailPresenter } from "./components/connection/connection-device-detail/connection-device-detail.presenter";
 import { NotificationDisplayComponent } from "./components/notification-display/notification-display.component";
+import { InlineFormeModule } from "./blocks/inline-modal/inline-form-module";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -158,9 +159,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MetaTypeComponent,
     TypesPresenter,
     TypesComponent,
-    FormHostDirective,
-    FormHostComponent,
-    InlineModalComponent,
+    // FormHostDirective,
+    // FormHostComponent,
+    // InlineModalComponent,
     MetaTypePresenter,
     EventHeaderPresenter,
     EventPreviewComponent,
@@ -236,6 +237,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DragulaModule.forRoot(),
     HttpClientModule,
     ToastrModule.forRoot(),
+    InlineFormeModule,
   ],
 })
 export class SportPipCaptureModule {}
