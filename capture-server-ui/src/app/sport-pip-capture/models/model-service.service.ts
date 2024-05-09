@@ -50,7 +50,6 @@ export class ModelServiceService {
 
   readOne(type: string, id: number): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}?id=${id}`;
-    console.log(url)
     return this._httpClient.get<any>(url);
   }
 
@@ -356,7 +355,6 @@ export class ModelServiceService {
   }
 
   deviceById(id: number): Observable<Data.Device> {
-    console.log(id)
     return this._selectOne("devices", id, DeviceData);
   }
 

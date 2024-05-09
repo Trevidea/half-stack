@@ -37,7 +37,7 @@ export class AddDevicePresenter implements OnInit {
   ) {
     this.ds = new AddDeviceView();
     this.options = this.toastr.toastrConfig;
-    this.actions = new PresenterAction('', this.ds, this.modelServiceService.saveEventDevice, AddDeviceBuilder, router);
+    this.actions = new PresenterAction(null, this.ds, this.modelServiceService.saveEventDevice, AddDeviceBuilder, router);
     this.actions.onComplete.subscribe((result) => {
       console.log(result);
       if (result) {

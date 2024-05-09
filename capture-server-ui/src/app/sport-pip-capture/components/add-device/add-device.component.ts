@@ -9,7 +9,9 @@ import { GlobalConfig, ToastrService } from 'ngx-toastr';
   encapsulation: ViewEncapsulation.None
 })
 export class AddDeviceComponent implements OnInit {
-  @Input() datasource: any
+  @Input() datasource: any;
+  urlCopied: boolean = false;
+  iconName: string = 'copy';
   rtmpUrl: string;
   private options: GlobalConfig;
   @Output() save = new EventEmitter();
@@ -28,12 +30,14 @@ export class AddDeviceComponent implements OnInit {
   }
 
   constructRtmpUrl(): string {
-    const username = this.datasource.userName.SelectedItem?.value || 'user';
-    const rtmpUrl = `rtmp://drake.in:1935/${this.datasource.appName}/${username}`;
-    this.rtmpUrl = rtmpUrl
+    const devicename = this.datasource.deviceName.SelectedItem?.value ? `/${this.datasource.deviceName.SelectedItem.value}` : '';
+    const pin = this.datasource.pin ? `/${this.datasource.pin}` : '';
+    const rtmpUrl = `rtmp://drake.in:1935/fall${devicename}${pin}`;
+    this.rtmpUrl = rtmpUrl;
     return rtmpUrl;
   }
-  copyCode(inputTextValue) {
+
+  copyUrl(inputTextValue) {
     const selectBox = document.createElement('textarea');
     selectBox.style.position = 'fixed';
     selectBox.value = inputTextValue;
@@ -42,6 +46,11 @@ export class AddDeviceComponent implements OnInit {
     selectBox.select();
     document.execCommand('copy');
     document.body.removeChild(selectBox);
-    this.toastr.success('', 'Copied sucessfully', { toastClass: 'toast ngx-toastr', closeButton: true });
+    this.urlCopied = true;
+    this.iconName = 'check';
+    setTimeout(() => {
+      this.urlCopied = false;
+      this.iconName = 'copy';
+    }, 3000);
   }
 }

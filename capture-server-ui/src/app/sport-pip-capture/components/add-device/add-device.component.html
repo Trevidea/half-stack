@@ -3,9 +3,14 @@
 </div>
 <div class="modal-body" tabindex="0" ngbAutofocus>
     <h2 class="modal-title" id="myModalLabel1">Add device to event</h2>
-    <div class="url-box">{{constructRtmpUrl()}}
-        <button class="btn btn-outline-primary" (click)="copyCode(rtmpUrl)" rippleEffect>Copy!</button>
+    <div class="url-box">
+        {{constructRtmpUrl()}}
+        <button type="button" class="btn btn-flat-primary" (click)="copyUrl(rtmpUrl)">
+            <span [ngClass]="urlCopied ? 'icon-check' : 'icon-copy'" class="ficon feather mr-25"></span>
+            {{ urlCopied ? 'Copied' : 'Copy' }}
+        </button>
     </div>
+
     <form #AddStreamkeyForm="ngForm">
 
         <div class="form-group">
