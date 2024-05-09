@@ -1,5 +1,7 @@
 import { DatePipe } from "@angular/common";
+import { NgbDate } from "@ng-bootstrap/ng-bootstrap";
 import { Collection, Range } from "app/blocks/collection";
+import { UI } from "app/blocks/ui-utils";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
 
 export class LogRangeView implements Views.Datasource {
@@ -26,15 +28,39 @@ export class LogRangeView implements Views.Datasource {
     this._categories = v;
   }
 
-  private _users: Range<string>;
-  public get users(): Range<string> {
-    if (!this.users) {
-      this._users = new Range<string>();
-    }
-    return this._users;
+  private _category: string;
+  public get category(): string {
+    return this._category;
   }
-  public set users(v: Range<string>) {
-    this._users = v;
+  public set category(v: string) {
+    this._category = v;
+  }
+
+  private _user: string;
+  public get user(): string {
+    return this._user;
+  }
+  public set user(v: string) {
+    this._user = v;
+  }
+
+  private _dateRangeFrom: NgbDate;
+  public get dateRangeFrom(): NgbDate {
+    // if(!this._dateRangeFrom){
+    //   this._dateRangeFrom
+    // }
+    return this._dateRangeFrom;
+  }
+  public set dateRangeFrom(v: NgbDate) {
+    this._dateRangeFrom = v;
+  }
+
+  private _dateRangeTo: NgbDate;
+  public get dateRangeTo(): NgbDate {
+    return this._dateRangeTo;
+  }
+  public set dateRangeTo(v: NgbDate) {
+    this._dateRangeTo = v;
   }
 }
 
@@ -98,10 +124,3 @@ export class DateFormate {
     return this.datePipe.transform(date, format) || "";
   }
 }
-/*
-  category: string,
-  subject: string,
-  user: string,
-  action: string,
-  timestamp: string,
-*/

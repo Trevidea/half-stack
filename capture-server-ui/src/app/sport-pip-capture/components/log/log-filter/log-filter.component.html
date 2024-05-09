@@ -17,7 +17,12 @@
   <div class="col-md-6 col-lg-2 col-12">
     <label>Category</label>
     <div class="form-group">
-      <ng-select>
+      <ng-select
+        name="user"
+        [(ngModel)]="datasource.category"
+        [ngModelOptions]="{ standalone: true }"
+        (ngModelChange)="filter.emit(true)"
+      >
         <ng-option *ngFor="let item of categories" [value]="item">{{
           item
         }}</ng-option>
@@ -27,7 +32,12 @@
   <div class="col-md-6 col-lg-2 col-12">
     <label>User</label>
     <div class="form-group">
-      <ng-select>
+      <ng-select
+        name="user"
+        [(ngModel)]="datasource.user"
+        [ngModelOptions]="{ standalone: true }"
+        (ngModelChange)="filter.emit(true)"
+      >
         <ng-option
           *ngFor="let item of users"
           [value]="item"
@@ -57,6 +67,9 @@
         placeholder="MM-DD-YYYY"
         name="fromDate"
         #fromDate="ngbDatepicker"
+        name="dateRangeFrom"
+        [(ngModel)]="datasource.dateRangeFrom"
+        (ngModelChange)="filter.emit(true)"
       />
       <div class="input-group-append">
         <button
@@ -78,6 +91,9 @@
         placeholder="MM-DD-YYYY"
         name="toDate"
         #toDate="ngbDatepicker"
+        name="dateRangeFrom"
+        [(ngModel)]="datasource.dateRangeTo"
+        (ngModelChange)="filter.emit(true)"
       />
       <div class="input-group-append">
         <button
@@ -87,5 +103,20 @@
         ></button>
       </div>
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 d-flex align-items-center justify-content-end">
+    <a
+      *ngIf="
+        this.datasource.user ||
+        this.datasource.category ||
+        this.datasource.dateRangeFrom ||
+        this.datasource.dateRangeTo
+      "
+      (click)="filter.emit(false)"
+      style="text-decoration: underline; color: #216093"
+      >Clear Filter</a
+    >
   </div>
 </div>

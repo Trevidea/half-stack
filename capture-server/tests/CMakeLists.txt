@@ -1,10 +1,9 @@
 set(TEST_BIN "unit-tests")
 set(TEST_SRC 
     test1.cpp
-    test2.cpp
-    test3.cpp
-    # test4.cpp
-    # "sqlhelpertests.cpp"
+    # test2.cpp
+    "sqlhelpertests.cpp"
+    # "sqlhelpertests1.cpp"
     # "sqldatabasetests.cpp"
     )
 set(TEST_INC

@@ -58,7 +58,7 @@ export const logData = [
     subject: "Delete  Event",
     user: "Coach John",
     action: "A deleted event named ‘Riverhawks vs Huskers’",
-    timestamp: "2024-05-03 10:14:48.554",
+    timestamp: "2024-05-03 23:14:48.554",
     details: [
       {
         time: "10:10 pm",
@@ -89,7 +89,36 @@ export const logData = [
     subject: "Device Connection",
     user: "Shane Smith",
     action: "Device name iPad15 connected with the server on 12:12:00",
-    timestamp: "2024-05-05 09:14:48.554",
+    timestamp: "2024-05-08 09:14:48.554",
+    details: [
+      {
+        time: "11:00 pm",
+        activity: "Connection for event named McQuaid vs Fairport started",
+      },
+      {
+        time: "11:02 pm",
+        activity: "Device named iPad15 send request to join with the server",
+      },
+      {
+        time: "11:05 pm",
+        activity: "Notification appeared",
+      },
+      {
+        time: "11:06 pm",
+        activity: "Accepted the request of joining the device",
+      },
+      {
+        time: "11:10 pm",
+        activity: "Device named iPad15  connected with the server",
+      },
+    ],
+  },
+  {
+    category: "Notification",
+    subject: "Device Connection",
+    user: "Shane Smith",
+    action: "Device name iPad15 connected with the server on 12:12:00",
+    timestamp: "2024-05-10 09:14:48.554",
     details: [
       {
         time: "11:00 pm",

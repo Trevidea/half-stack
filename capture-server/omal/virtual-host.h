@@ -8,6 +8,7 @@
 #include "watcher.h"
 #include "network-quality-assessment.h"
 #include <json/json.h>
+#include "virtual-app.h"
 
 class OMALFactory;
 
@@ -21,7 +22,7 @@ public:
     std::map<std::string, std::string> getVODDumps();
 
     Json::Value deepFindOrCreate();
-    Json::Value createApp(const std::string &app);
+    VirtualApp createApp(const std::string &app, Json::Value &result, bool findOnly = false);
 
     // Destructor declaration
     ~VirtualHost();

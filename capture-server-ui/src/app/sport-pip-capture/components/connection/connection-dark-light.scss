@@ -117,6 +117,8 @@
     }
     .mc-dropdown__panel {
       background-color: black !important;
+      border-top-left-radius: 4px !important;
+      border-top-right-radius: 4px !important;
     }
     .box-without-img {
       background-color: $card-cu-bg-color !important;
@@ -211,6 +213,8 @@
   .mc-dropdown__panel {
     border-width: 0px !important;
     background-color: rgba(21, 23, 25, 1) !important;
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
   }
   .mc-dropdown-item:hover {
     background-color: rgba(33, 96, 147, 0.2) !important;
@@ -239,6 +243,8 @@
 .mc-dropdown__panel {
   padding: 0.5em !important;
   border-width: 0px !important;
+  border-top-left-radius: 4px !important;
+  border-top-right-radius: 4px !important;
 }
 .mc-dropdown-item {
   font-family: "Outfit" !important;

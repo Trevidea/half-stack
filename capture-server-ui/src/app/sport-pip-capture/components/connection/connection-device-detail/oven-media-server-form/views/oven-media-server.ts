@@ -3,7 +3,7 @@ import { Views } from "app/sport-pip-capture/models/capture-interface";
 export class OvenMediaServerView implements Views.Datasource {
   id: number;
 
-  private _name: string;
+  private _name: string = "Rakesh";
   public get name(): string {
     return this._name;
   }

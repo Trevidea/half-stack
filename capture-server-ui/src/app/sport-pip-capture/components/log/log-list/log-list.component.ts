@@ -1,5 +1,12 @@
 import { DatePipe } from "@angular/common";
-import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
 
@@ -16,6 +23,7 @@ export class LogListComponent implements OnInit {
   @Input() users: any;
   @Input() categories: any;
   @Input() logKeys: any;
+  @Output() filterChild = new EventEmitter<boolean>();
   arrowDirection: number[] = [];
   currentSortColumn: string | null = null;
   isAscending: boolean = true;
@@ -87,5 +95,8 @@ export class LogListComponent implements OnInit {
     const date = new Date(dateString);
     const format = "dd MMMM yyyy 'at' h:mm a";
     return this.datePipe.transform(date, format) || "";
+  }
+  filter(e) {
+    this.filterChild.emit(e);
   }
 }
