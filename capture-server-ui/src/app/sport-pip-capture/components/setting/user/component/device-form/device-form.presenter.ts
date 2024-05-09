@@ -68,5 +68,5 @@ export class DeviceFormPresenter implements OnInit {
     });
   }
 
-  onclose() {}
+  onclose() { }
 }

@@ -10,7 +10,7 @@ import { GlobalConfig, ToastrService } from 'ngx-toastr';
 })
 export class AddDeviceComponent implements OnInit {
   @Input() datasource: any
-  private toastRef: any;
+  rtmpUrl: string;
   private options: GlobalConfig;
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter();
@@ -27,7 +27,21 @@ export class AddDeviceComponent implements OnInit {
     });
   }
 
-  // onsave() {
-  //   this.activeModal.close('Accept click')
-  // }
+  constructRtmpUrl(): string {
+    const username = this.datasource.userName.SelectedItem?.value || 'user';
+    const rtmpUrl = `rtmp://drake.in:1935/${this.datasource.appName}/${username}`;
+    this.rtmpUrl = rtmpUrl
+    return rtmpUrl;
+  }
+  copyCode(inputTextValue) {
+    const selectBox = document.createElement('textarea');
+    selectBox.style.position = 'fixed';
+    selectBox.value = inputTextValue;
+    document.body.appendChild(selectBox);
+    selectBox.focus();
+    selectBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selectBox);
+    this.toastr.success('', 'Copied sucessfully', { toastClass: 'toast ngx-toastr', closeButton: true });
+  }
 }
