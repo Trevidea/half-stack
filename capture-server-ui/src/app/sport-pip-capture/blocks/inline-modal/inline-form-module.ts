@@ -19,4 +19,4 @@ import { NgSelectModule } from "@ng-select/ng-select";
   ],
   exports: [InlineModalComponent],
 })
-export class InlineFormeModule {}
+export class InlineFormeModule { }

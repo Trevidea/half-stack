@@ -8,6 +8,7 @@ import {
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { GlobalConfig, ToastrService } from "ngx-toastr";
 import { AddDeviceView } from "./view/add-device";
+import { TypesPresenter } from "app/sport-pip-capture/blocks/types/types.presenter";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
 import { Transformer } from "app/blocks/transformer";
 import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
@@ -18,7 +19,7 @@ import { Router } from "@angular/router";
 import { UserProfileData } from "app/sport-pip-capture/models/user-profile";
 import { SelectItemView } from "app/blocks/collection-item";
 import { DeviceData } from "app/sport-pip-capture/models/device";
-import { TypesPresenter } from "app/sport-pip-capture/blocks/types/types.presenter";
+import { DevicesBuilder } from "./builder/device";
 
 @Component({
   selector: "app-add-device-presenter",
@@ -47,7 +48,7 @@ export class AddDevicePresenter implements OnInit {
     this.ds = new AddDeviceView();
     this.options = this.toastr.toastrConfig;
     this.actions = new PresenterAction(
-      "",
+      null,
       this.ds,
       this.modelServiceService.saveEventDevice,
       AddDeviceBuilder,
@@ -74,12 +75,20 @@ export class AddDevicePresenter implements OnInit {
     );
 
     Transformer.ComposeCollectionViewAsync(
-      this.modelServiceService.deviceJson(),
+      this.modelServiceService.deviceList(),
       this.ds.deviceName,
       (deviceItem: DeviceData) => {
         return new SelectItemView(deviceItem.id, deviceItem.name);
       }
     );
+
+    this.ds.deviceName.onItemSelected((e: { selectedItem: SelectItemView }) => {
+      Transformer.ComposeObjectAsync(
+        this.modelServiceService.deviceById(e.selectedItem.key),
+        this.ds,
+        DevicesBuilder
+      );
+    });
   }
 
   ngOnInit(): void {

@@ -49,7 +49,6 @@ export class EventPreviewPresenter implements OnInit {
       }
     );
 
-    //  Transformer._ComposeLiveObjectAsync(this.socketService._onPreviewEvent(), this.ds, EventPreviewBuilder);
   }
 
   onClosePreview() {

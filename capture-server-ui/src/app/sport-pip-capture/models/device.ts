@@ -11,7 +11,6 @@ export class DeviceData extends DataBase<Data.Device> {
         this._model.type = v;
     }
 
-
     private _name: string;
     public get name(): string {
         return this._model.name;
@@ -20,7 +19,6 @@ export class DeviceData extends DataBase<Data.Device> {
         this._model.name = v;
     }
 
-
     private _code: string;
     public get code(): string {
         return this._model.code;
@@ -28,6 +26,15 @@ export class DeviceData extends DataBase<Data.Device> {
     public set code(v: string) {
         this._model.code = v;
     }
+
+    private _pin: string;
+    public get pin(): string {
+        return this._model.pin;
+    }
+    public set pin(v: string) {
+        this._model.pin = v;
+    }
+
 
 
 }
