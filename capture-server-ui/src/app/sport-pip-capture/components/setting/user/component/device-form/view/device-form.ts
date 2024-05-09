@@ -23,15 +23,6 @@ export class DeviceFormView implements Views.Datasource {
 
 
 
-    // private _type: Collection<string>;
-    // public get type(): Collection<string> {
-    //     if (!this._type) {
-    //         this._type = new Collection<string>();
-    //     }
-    //     return this._type;
-    // }
-
-
     private _type: Collection<string>;
     public get type(): Collection<string> {
         if (!this._type) {

@@ -13,11 +13,11 @@
             <ng-select name="device" [(ngModel)]="datasource.type.SelectedItem">
                 <ng-option *ngFor="let item of datasource.type" [value]="item">{{ item }}</ng-option>
                 <ng-template ng-footer-tmp class="p-2">
-                    <button (click)="datasource.type.AddingNewItem(type)" class="addTypeBtn btn btn-sm btn-success"
-                        rippleEffect>
+                    <button type="button" (click)="datasource.type.AddingNewItem(newtype)"
+                        class="addTypeBtn btn btn-sm btn-success" rippleEffect>
                         + Add Device Type
                     </button>
-                    <inline-form-modal #type modalTitle="Add Device Type"></inline-form-modal>
+                    <inline-form-modal #newtype modalTitle="Add Device Type"></inline-form-modal>
                 </ng-template>
             </ng-select>
         </div>
