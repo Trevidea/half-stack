@@ -4,102 +4,280 @@
     (click)="activeModal.dismiss('Cross click')"
   ></i>
 </div> -->
-<div class="modal-body" tabindex="0" ngbAutofocus>
-  <h2 class="modal-title" id="myModalLabel1">Oven Media Server</h2>
-  <div class="form-group">
-    <label>Name</label>
-    <input
-      type="text"
-      class="form-control"
-      required
-      placeholder="McQuaid vs Fairport"
-    />
+<form #OmForm="ngForm">
+  <div class="modal-body" tabindex="0" ngbAutofocus>
+    <h2 class="modal-title" id="myModalLabel1">Oven Media Server</h2>
+    <div class="form-group">
+      <label>Name<span class="text-danger">*</span></label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        placeholder="McQuaid vs Fairport"
+        [(ngModel)]="datasource.name"
+        name="name"
+        #ngmName="ngModel"
+      />
+      <app-validation-alert controlName="Name" [control]="ngmName">
+      </app-validation-alert>
+    </div>
+    <div class="form-group">
+      <label>RTMP Server <span class="text-danger">*</span></label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        placeholder="rtmp://192,168,0,1,1:"
+        [(ngModel)]="datasource.rtmpServer"
+        name="rtmpServer"
+        #ngmRtmpServer="ngModel"
+      />
+      <app-validation-alert
+        controlName="RTMP Server address"
+        [control]="ngmRtmpServer"
+      >
+      </app-validation-alert>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label>Bit Rate<span class="text-danger">*</span></label>
+          <input
+            type="number"
+            class="form-control"
+            required
+            placeholder="128000"
+            [(ngModel)]="datasource.bitRate"
+            name="bitRate"
+            #ngmBitRate="ngModel"
+          />
+          <app-validation-alert
+            controlName="Bit Rate"
+            [patternmassage]="'Only numerical value is allowed e.g.. 010101'"
+            [control]="ngmBitRate"
+          >
+          </app-validation-alert>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="form-group">
+          <label>Sample Rate<span class="text-danger">*</span></label>
+          <input
+            type="number"
+            class="form-control"
+            required
+            placeholder="48000"
+            [(ngModel)]="datasource.sampleRate"
+            name="sampleRate"
+            #ngmSampleRate="ngModel"
+          />
+          <app-validation-alert
+            controlName="Sample Rate"
+            [patternmassage]="'Only numerical value is allowed e.g.. 010101'"
+            [control]="ngmSampleRate"
+          >
+          </app-validation-alert>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label>Key frame interval<span class="text-danger">*</span></label>
+          <input
+            type="number"
+            class="form-control"
+            required
+            placeholder="6"
+            [(ngModel)]="datasource.keyFrameInterval"
+            name="keyFrameInterval"
+            #ngmKeyFrameInterval="ngModel"
+          />
+          <app-validation-alert
+            controlName="Key Frame Interval"
+            [patternmassage]="'Only numerical value is allowed e.g.. 010101'"
+            [control]="ngmKeyFrameInterval"
+          >
+          </app-validation-alert>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label>Frame Rate<span class="text-danger">*</span></label>
+          <input
+            type="number"
+            class="form-control"
+            required
+            placeholder="30"
+            [(ngModel)]="datasource.frameRate"
+            name="frameRate"
+            #ngmFrameRate="ngModel"
+          />
+          <app-validation-alert
+            controlName="Frame Rate"
+            [patternmassage]="'Only numerical value is allowed e.g.. 010101'"
+            [control]="ngmFrameRate"
+          >
+          </app-validation-alert>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label>Status Code<span class="text-danger">*</span></label>
+          <input
+            type="number"
+            class="form-control"
+            required
+            placeholder="6"
+            [(ngModel)]="datasource.statusCode"
+            name="statusCode"
+            #ngmStatusCode="ngModel"
+          />
+          <app-validation-alert
+            controlName="Status Code"
+            [patternmassage]="'Only numerical value is allowed e.g.. 010101'"
+            [control]="ngmStatusCode"
+          >
+          </app-validation-alert>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label>Part Hold Back<span class="text-danger">*</span></label>
+          <input
+            type="number"
+            class="form-control"
+            required
+            placeholder="1.5"
+            [(ngModel)]="datasource.partHoldBack"
+            name="partHoldBack"
+            #ngmPartHoldBack="ngModel"
+          />
+          <app-validation-alert
+            controlName="Part Hold Back"
+            [patternmassage]="'Only numerical value is allowed e.g.. 010101'"
+            [control]="ngmPartHoldBack"
+          >
+          </app-validation-alert>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="form-group">
+          <label>Segment Count<span class="text-danger">*</span></label>
+          <input
+            type="number"
+            class="form-control"
+            required
+            placeholder="10"
+            [(ngModel)]="datasource.segmentCount"
+            name="segmentCount"
+            #ngmSegmentCount="ngModel"
+          />
+          <app-validation-alert
+            controlName="Segment Count"
+            [patternmassage]="'Only numerical value is allowed e.g.. 010101'"
+            [control]="ngmSegmentCount"
+          >
+          </app-validation-alert>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="form-group">
+          <label>Segment Duration<span class="text-danger">*</span></label>
+          <input
+            type="number"
+            class="form-control"
+            required
+            placeholder="6"
+            [(ngModel)]="datasource.segmentDuration"
+            name="segmentDuration"
+            #ngmSegmentDuration="ngModel"
+          />
+          <app-validation-alert
+            controlName="Segment Duration"
+            [patternmassage]="'Only numerical value is allowed e.g.. 010101'"
+            [control]="ngmSegmentDuration"
+          >
+          </app-validation-alert>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label>Stream Worker Count<span class="text-danger">*</span></label>
+          <input
+            type="number"
+            class="form-control"
+            required
+            placeholder="8"
+            [(ngModel)]="datasource.streamWorkerCount"
+            name="streamWorkerCount"
+            #ngmStreamWorkerCountn="ngModel"
+          />
+          <app-validation-alert
+            controlName="Stream Worker Count"
+            [patternmassage]="'Only numerical value is allowed e.g.. 010101'"
+            [control]="ngmStreamWorkerCountn"
+          >
+          </app-validation-alert>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="form-group">
+          <label>Sent bytes<span class="text-danger">*</span></label>
+          <input
+            type="number"
+            class="form-control"
+            required
+            placeholder="6"
+            [(ngModel)]="datasource.sentbytes"
+            name="sentbytes"
+            #ngmSentbytes="ngModel"
+          />
+          <app-validation-alert
+            controlName="Sent bytes"
+            [patternmassage]="'Only numerical value is allowed e.g.. 010101'"
+            [control]="ngmSentbytes"
+          >
+          </app-validation-alert>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label>RTMP Server</label>
-    <input
-      type="text"
-      class="form-control"
-      required
-      placeholder="rtmp://192,168,0,1,1:"
-    />
+  <div class="modal-footer">
+    <button
+      class="btn btn-outline-secondary"
+      (click)="activeModal.dismiss('Cross click')"
+    >
+      Cancel
+    </button>
+    <button
+      *ngIf="!OmForm.valid"
+      class="btn btn-warning"
+      [swal]="SweetAlertError"
+      rippleEffect
+      [disabled]="!OmForm.valid"
+      (click)="formValidation(OmForm)"
+    >
+      Save
+    </button>
+    <button
+      *ngIf="OmForm.valid"
+      class="btn btn-warning"
+      (click)="modalService.dismissAll()"
+    >
+      Save
+    </button>
   </div>
-
-  <div class="row">
-    <div class="col-6">
-      <div class="form-group">
-        <label>Bit Rate</label>
-        <input type="text" class="form-control" required placeholder="128000" />
-      </div>
-    </div>
-
-    <div class="col-6">
-      <div class="form-group">
-        <label>Sample Rate</label>
-        <input type="text" class="form-control" required placeholder="48000" />
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="form-group">
-        <label>Key frame interval</label>
-        <input type="text" class="form-control" required placeholder="6" />
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="form-group">
-        <label>Frame Rate</label>
-        <input type="text" class="form-control" required placeholder="30" />
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="form-group">
-        <label>Status Code</label>
-        <input type="text" class="form-control" required placeholder="6" />
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="form-group">
-        <label>Part Hold Back</label>
-        <input type="text" class="form-control" required placeholder="1.5" />
-      </div>
-    </div>
-
-    <div class="col-6">
-      <div class="form-group">
-        <label>Segment Count</label>
-        <input type="text" class="form-control" required placeholder="10" />
-      </div>
-    </div>
-
-    <div class="col-6">
-      <div class="form-group">
-        <label>Segment Duration</label>
-        <input type="text" class="form-control" required placeholder="6" />
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="form-group">
-        <label>Stream Worker Count</label>
-        <input type="text" class="form-control" required placeholder="8" />
-      </div>
-    </div>
-
-    <div class="col-6">
-      <div class="form-group">
-        <label>Sent bytes</label>
-        <input type="text" class="form-control" required placeholder="6" />
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal-footer">
-  <button
-    class="btn btn-outline-secondary"
-    (click)="activeModal.dismiss('Cross click')"
-  >
-    Cancel
-  </button>
-  <button class="btn btn-warning" (click)="activeModal.dismiss('Cross click')">
-    Save
-  </button>
-</div>
+</form>
+<swal
+  #SweetAlertError
+  title="Good job 😹!"
+  text="Something went wrong 😍 Try Again 😜!"
+  [swalOptions]="{ confirmButtonClass: 'btn btn-primary' }"
+  icon="error"
+  (confirm)="onConfirm()"
+>
+</swal>

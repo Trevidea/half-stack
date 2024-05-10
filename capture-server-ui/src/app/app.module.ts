@@ -36,8 +36,9 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { RouterModule, Routes } from "@angular/router";
 import { TimerService } from "./sport-pip-capture/components/connection/timer.service";
 import { Timer } from "./sport-pip-capture/components/connection/timer";
-import { CaptureDashboardComponent } from './capture-dashboard/capture-dashboard.component';
-import { DashboardHeaderComponent } from './capture-dashboard/dashboard-header/dashboard-header.component';
+import { CaptureDashboardComponent } from "./capture-dashboard/capture-dashboard.component";
+import { DashboardHeaderComponent } from "./capture-dashboard/dashboard-header/dashboard-header.component";
+import { InlineFormeModule } from "./sport-pip-capture/blocks/inline-modal/inline-form-module";
 
 const appRoutes: Routes = [
   {
@@ -169,7 +170,7 @@ const appRoutes: Routes = [
     SportPipCaptureModule,
     ExampleModule,
     SettingModule,
-
+    InlineFormeModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -181,4 +182,4 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

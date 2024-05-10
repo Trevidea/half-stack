@@ -3,7 +3,14 @@
 </div>
 <div class="modal-body" tabindex="0" ngbAutofocus>
     <h2 class="modal-title" id="myModalLabel1">Add device to event</h2>
-    <h4 class=" appname mb-2">{{datasource.appName}}</h4>
+    <div class="url-box">
+        {{constructRtmpUrl()}}
+        <button type="button" class="btn btn-flat-primary" (click)="copyUrl(rtmpUrl)">
+            <span [ngClass]="urlCopied ? 'icon-check' : 'icon-copy'" class="ficon feather mr-25"></span>
+            {{ urlCopied ? 'Copied' : 'Copy' }}
+        </button>
+    </div>
+
     <form #AddStreamkeyForm="ngForm">
 
         <div class="form-group">
@@ -14,14 +21,6 @@
             <app-validation-alert controlName="Device Name" [control]="ngmdeviceName">
             </app-validation-alert>
         </div>
-        <!-- <div class="form-group">
-            <label>Device Name </label>
-            <input type="text" class="form-control" name="dname" required
-                [(ngModel)]="datasource.deviceName.SelectedItem" #ngmdeviceName="ngModel" />
-            <app-validation-alert controlName="Device Name" [control]="ngmdeviceName">
-            </app-validation-alert>
-        </div> -->
-
         <div class="form-group">
             <label>PIN</label>
             <input type="text" class="form-control" pattern="[0-9]*" minlength="6" maxlength="6" required name="pin"

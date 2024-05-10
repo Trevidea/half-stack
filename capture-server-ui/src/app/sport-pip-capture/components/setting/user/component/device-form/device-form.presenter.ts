@@ -10,11 +10,11 @@ import { Views } from "app/sport-pip-capture/models/capture-interface";
 import { Transformer } from "app/blocks/transformer";
 import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 import { MetaTypeBuilder } from "app/sport-pip-capture/blocks/meta-type.builder";
-import { TypesPresenter } from "app/sport-pip-capture/blocks/types/types.presenter";
 import { PresenterAction } from "app/blocks/actions";
 import { DeviceBuilder } from "../device/builder/device";
 import { DeviceFormBuilder } from "./builder/device-form";
 import { Router } from "@angular/router";
+import { TypesPresenter } from "app/sport-pip-capture/blocks/types/types.presenter";
 
 @Component({
   selector: "app-device-form-presenter",
@@ -68,5 +68,5 @@ export class DeviceFormPresenter implements OnInit {
     });
   }
 
-  onclose() {}
+  onclose() { }
 }

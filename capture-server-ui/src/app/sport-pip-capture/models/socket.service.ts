@@ -30,6 +30,7 @@ export class SocketService {
     });
 
     this.socket.on("event-preview", (message: string) => {
+      // console.log(message)
       this.eventPreviewSubject.next(message);
     });
     this.socket.on("event-terminal", (message: string) => {
@@ -68,9 +69,10 @@ export class SocketService {
   // _onPreviewEvent(): Observable<Data.ConnectionPreview> {
   //   return this.onEventPreview().pipe(
   //     map((data) => {
-  //       const eventObject = JSON.parse(data);
-  //       const previewEventData: Data.ConnectionPreview = eventObject.result[0]?.[0]
-  //       console.log(previewEventData)
+  //       console.log(data)
+  //       // const eventObject = JSON.parse(data);
+  //       // const previewEventData: Data.ConnectionPreview = eventObject.result[0]?.[0]
+  //       // console.log(previewEventData)
   //       // return new ConnectionPreviewData(previewEventData)
   //       return null
   //     })

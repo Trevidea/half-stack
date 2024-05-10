@@ -28,14 +28,15 @@ import { CorePipesModule } from "@core/pipes/pipes.module";
 import { CoreSidebarModule } from "@core/components";
 import { Ng2FlatpickrModule } from "ng2-flatpickr";
 import { UserComponent } from "./user/user.component";
-import { RegisteredUserComponent } from './user/component/registered-user/registered-user.component';
-import { BlockedUserComponent } from './user/component/blocked-user/blocked-user.component';
-import { DeviceComponent } from './user/component/device/device.component';
+import { RegisteredUserComponent } from "./user/component/registered-user/registered-user.component";
+import { BlockedUserComponent } from "./user/component/blocked-user/blocked-user.component";
+import { DeviceComponent } from "./user/component/device/device.component";
 import { RegisteredUserPresenter } from "./user/component/registered-user/registered-user.presenterts";
 import { BlockedUserPresenter } from "./user/component/blocked-user/blocked-user.presenter";
 import { DevicePresenter } from "./user/component/device/devicepresenter";
-import { DeviceFormComponent } from './user/component/device-form/device-form.component';
+import { DeviceFormComponent } from "./user/component/device-form/device-form.component";
 import { DeviceFormPresenter } from "./user/component/device-form/device-form.presenter";
+import { InlineFormeModule } from "app/sport-pip-capture/blocks/inline-modal/inline-form-module";
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import { DeviceFormPresenter } from "./user/component/device-form/device-form.pr
     BlockedUserPresenter,
     DevicePresenter,
     DeviceFormComponent,
-    DeviceFormPresenter
+    DeviceFormPresenter,
   ],
   imports: [
     CommonModule,
@@ -77,7 +78,8 @@ import { DeviceFormPresenter } from "./user/component/device-form/device-form.pr
     NgSelectModule,
     CorePipesModule,
     CoreSidebarModule,
-    Ng2FlatpickrModule
-  ]
+    Ng2FlatpickrModule,
+    InlineFormeModule,
+  ],
 })
-export class SettingModule { }
+export class SettingModule {}

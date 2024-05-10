@@ -7,17 +7,27 @@ export namespace UI {
       const month: number = date.month;
       const year: number = date.year;
       const day: number = date.day;
-      return `${("0000" + year).slice(-4)}-${("00" + month).slice(-2)}-${("00" + day).slice(-2)}`
+      return `${("0000" + year).slice(-4)}-${("00" + month).slice(-2)}-${(
+        "00" + day
+      ).slice(-2)}`;
     }
     static disabledDate(stringDate: any) {
       var date = new Date(stringDate);
-      return (((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '-' + date.getFullYear());
+      return (
+        (date.getMonth() > 8
+          ? date.getMonth() + 1
+          : "0" + (date.getMonth() + 1)) +
+        "-" +
+        (date.getDate() > 9 ? date.getDate() : "0" + date.getDate()) +
+        "-" +
+        date.getFullYear()
+      );
     }
     static viewDateFormat(date: string): NgbDate {
       try {
-        const month: number = +(date.slice(5, 7));
-        const year: number = +(date.slice(0, 4));
-        const day: number = +(date.slice(8, 10));
+        const month: number = +date.slice(5, 7);
+        const year: number = +date.slice(0, 4);
+        const day: number = +date.slice(8, 10);
         return new NgbDate(year, month, day);
       } catch (error) {
         console.log("Bad date format", error);
@@ -30,18 +40,21 @@ export namespace UI {
         const year: number = date.year;
         const day: number = date.day;
         switch (format) {
-          case "mm-dd-yyyy":
-            {
-              return `${("00" + month).slice(-2)}-${("00" + day).slice(-2)}-${("0000" + year).slice(-4)}`
-            }
-          case "dd-mm-yyyy":
-            {
-              return `${("00" + day).slice(-2)}-${("00" + month).slice(-2)}-${("0000" + year).slice(-4)}`
-            }
-          default:
-            {
-              return `${("0000" + year).slice(-4)}-${("00" + month).slice(-2)}-${("00" + day).slice(-2)}`
-            }
+          case "mm-dd-yyyy": {
+            return `${("00" + month).slice(-2)}-${("00" + day).slice(-2)}-${(
+              "0000" + year
+            ).slice(-4)}`;
+          }
+          case "dd-mm-yyyy": {
+            return `${("00" + day).slice(-2)}-${("00" + month).slice(-2)}-${(
+              "0000" + year
+            ).slice(-4)}`;
+          }
+          default: {
+            return `${("0000" + year).slice(-4)}-${("00" + month).slice(-2)}-${(
+              "00" + day
+            ).slice(-2)}`;
+          }
         }
       } catch (error) {
         console.log("Bad date format", error);
@@ -50,13 +63,16 @@ export namespace UI {
     }
     static dateToStringToday(format: string): string {
       const today = new Date();
-      return this.dateToString(new NgbDate(today.getFullYear(), today.getMonth() + 1, today.getDate()), format);
+      return this.dateToString(
+        new NgbDate(today.getFullYear(), today.getMonth() + 1, today.getDate()),
+        format
+      );
     }
     static stringToDate(date: string): NgbDate {
       try {
-        const month: number = +(date.slice(0, 2));
-        const day: number = +(date.slice(3, 5));
-        const year: number = +(date.slice(6, 10));
+        const month: number = +date.slice(0, 2);
+        const day: number = +date.slice(3, 5);
+        const year: number = +date.slice(6, 10);
         return new NgbDate(year, month, day);
       } catch (error) {
         console.log("Bad date format", error);
@@ -65,17 +81,24 @@ export namespace UI {
     }
     static stringToDateToday(): NgbDate {
       const today = new Date();
-      return new NgbDate(today.getFullYear(), today.getMonth() + 1, today.getDate());
+      return new NgbDate(
+        today.getFullYear(),
+        today.getMonth() + 1,
+        today.getDate()
+      );
     }
 
     static apiDateToday(type?: string): string {
-      return UI.DateHelper.apiDateFormat(DateHelper.stringToDateToday())
+      return UI.DateHelper.apiDateFormat(DateHelper.stringToDateToday());
     }
     static viewDateToday(): NgbDate {
       const today = new Date();
-      return new NgbDate(today.getFullYear(), today.getMonth() + 1, today.getDate());
+      return new NgbDate(
+        today.getFullYear(),
+        today.getMonth() + 1,
+        today.getDate()
+      );
     }
-
   }
 
   export class StringHelper {
@@ -108,10 +131,9 @@ export namespace UI {
 
   export class JsonHelper {
     static JsonToString(json: any): string {
-      if (typeof json === 'string' || json instanceof String) {
+      if (typeof json === "string" || json instanceof String) {
         return json as string;
-      }
-      else {
+      } else {
         try {
           return JSON.parse(json);
         } catch (error) {
@@ -123,12 +145,12 @@ export namespace UI {
   }
   export class UsdFormat {
     private static currencyPipe: CurrencyPipe;
-  
+
     static formatNumberToUSD(value: number): string {
       if (!this.currencyPipe) {
-        this.currencyPipe = new CurrencyPipe('en-US');
+        this.currencyPipe = new CurrencyPipe("en-US");
       }
-      return this.currencyPipe.transform(value, 'USD', 'symbol', '1.2-2');
+      return this.currencyPipe.transform(value, "USD", "symbol", "1.2-2");
     }
   }
 }

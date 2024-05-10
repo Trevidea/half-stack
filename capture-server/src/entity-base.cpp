@@ -11,12 +11,14 @@
 EntityBase::EntityBase(const Model &model) : m_model{model}
 {
 }
+
 /// @brief
 /// @param entity
 EntityBase::EntityBase(const std::string &entity) : m_entity{entity}
 {
 }
-/// @brief
+
+/// @brief 
 void EntityBase::report()
 {
     char schemaUrl[128] = {0};
@@ -35,6 +37,7 @@ void EntityBase::report()
                                   this->postTemplate(req, rsp);
                               });
 }
+
 /// @brief
 /// @param funcName
 /// @param params
@@ -46,15 +49,18 @@ Json::Value EntityBase::function(const std::string &funcName, const std::string 
     spdlog::debug("Function..{}", functionQry);
     return this->executeSqlJson(functionQry);
 }
+
 EntityBase::~EntityBase()
 {
 }
+
 /// @brief
 /// @return
 std::string EntityBase::entity()
 {
     return m_entity;
 }
+
 /// @brief
 /// @param sql
 /// @return
@@ -66,6 +72,7 @@ std::string EntityBase::executeSqlStr(const std::string &sql)
     auto &&js = connection.result().root();
     return fastWriter.write(js);
 }
+
 /// @brief
 /// @param sql
 /// @return
@@ -85,6 +92,7 @@ PGResult EntityBase::executeSqlModel(const std::string &sql)
     connection.execute(sql);
     return connection.data();
 }
+
 /// @brief
 /// @param request
 /// @param response
@@ -99,6 +107,7 @@ void EntityBase::list(const Request &request, Response &response)
     response.setData(result);
     response.complete();
 }
+
 /// @brief
 /// @param request
 /// @param response
@@ -123,6 +132,7 @@ void EntityBase::find(const Request &request, Response &response)
     response.setData(result);
     response.complete();
 }
+
 /// @brief
 /// @param request
 /// @param response
@@ -189,6 +199,7 @@ Json::Value EntityBase::create(const Request &request, Response &response)
     response.complete();
     return parsedJson;
 }
+
 /// @brief
 /// @param request
 /// @param response
@@ -203,6 +214,7 @@ Json::Value EntityBase::update(const Request &request, Response &response)
     response.complete();
     return parsedJson;
 }
+
 /// @brief
 /// @param request
 /// @param response
@@ -228,6 +240,9 @@ void EntityBase::schema(const Request &request, Response &response)
     response.setData(result);
     response.complete();
 }
+
+/// @brief 
+/// @return 
 Json::Value EntityBase::schemaJson()
 {
     const auto sql = SqlHelper::SchemaSql(this->entity());
@@ -273,6 +288,10 @@ Json::Value EntityBase::schemaJson()
     }
     return columns;
 }
+
+/// @brief 
+/// @param request 
+/// @param response 
 void EntityBase::postTemplate(const Request &request, Response &response)
 {
     Json::FastWriter fastWriter;
@@ -286,6 +305,7 @@ void EntityBase::merge()
 {
     m_model.merge(m_setModel);
 }
+
 void EntityBase::save()
 {
     this->merge();
@@ -326,11 +346,15 @@ void EntityBase::LogPrinter::setPrintSqlOn()
 {
     DBManager::instance().s_printResults = true;
 }
+
 EntityBase::LogPrinter::~LogPrinter()
 {
     DBManager::instance().s_printResults = false;
 }
 
+/// @brief 
+/// @param req 
+/// @param rsp 
 void EntityBase::sync(const Request &req, Response &rsp)
 {
     auto &factory = Rest::ClientFactory::getInstance();

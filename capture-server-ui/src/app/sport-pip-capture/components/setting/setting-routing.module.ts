@@ -14,7 +14,7 @@ import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   {
-    path: 'settings', component: SettingComponent,
+    path: '', component: SettingComponent,
     children: [
       { path: '', component: AccountPresenter },
       { path: 'file', component: FilePresenter },
