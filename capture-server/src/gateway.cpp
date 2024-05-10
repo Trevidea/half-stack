@@ -1,7 +1,5 @@
 #include "gateway.h"
-#include "employee.h"
 #include "config.h"
-#include "holiday.h"
 #include "spdlog/spdlog.h"
 #include "metatype.h"
 #include "event.h"
@@ -23,9 +21,7 @@ Gateway::Gateway()
 void Gateway::init()
 {
     spdlog::trace("Registering handlers..");
-    this->m_entities.push_back(new Employee());
     this->m_entities.push_back(new Config());
-    this->m_entities.push_back(new Holiday());
     this->m_entities.push_back(new Omal());
     this->m_entities.push_back(new MetaType());
     this->m_entities.push_back(new Event());

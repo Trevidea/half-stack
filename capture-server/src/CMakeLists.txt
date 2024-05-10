@@ -2,14 +2,13 @@ set(HALF_STACK_SRC
     half-stack-exceptions.cpp
     filesysutils.cpp
     handler.cpp
-    holiday.cpp
     config.cpp
     entity-base.cpp
     response.cpp
     request.cpp
-    employee.cpp
     gateway.cpp
     event.cpp
+    event-manager.cpp
     on-demand-event.cpp
     omal.cpp
     user-profile.cpp
