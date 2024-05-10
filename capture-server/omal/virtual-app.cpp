@@ -119,7 +119,7 @@ std::vector<std::string> VirtualApp::getStreamsList()
 
 Json::Value VirtualApp::getStreamInfo(const std::string &streamKey)
 {
-    std::vector<const std::string> list;
+    std::vector<std::string> list;
 
     char ep[128] = {'\0'};
     const std::string baseUrl = DBManager::instance().getEnv("OM_URL", "http://drake.in:8081/v1");
