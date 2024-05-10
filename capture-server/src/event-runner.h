@@ -3,6 +3,7 @@
 
 #include "countdown.h"
 #include "worker-loop.h"
+#include "event.h"
 
 class EventRunner
 {
@@ -12,6 +13,8 @@ private:
     Countdown m_start, m_end;
 public:
     EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration);
+    EventRunner(const Event &event);
+    
     void stop();
     ~EventRunner();
 

@@ -21,7 +21,7 @@ public:
 
 private:
     void openPreview(const Request &req, Response &rsp);
-    std::vector<const std::string> fetchStreamsList(const std::string &eventId);
+    std::vector<std::string> fetchStreamsList(const std::string &eventId);
     Json::Value fetchStreamInfo(const std::string &eventId, const std::string &streamKey);
 };
 

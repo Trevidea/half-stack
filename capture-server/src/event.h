@@ -3,12 +3,10 @@
 
 #include <iostream>
 #include "entity-base.h"
-#include "event-runner.h"
 #include <chrono>
 #include "datetimeutils.h"
 #include <map>
 #include <ctime>
-#include "event-device.h"
 
 class Event : public EntityBase
 {
@@ -29,13 +27,16 @@ public:
     std::string type() const { return m_model.get<std::string>("type"); }
 
 public:
-    void openPreview(const Request &req, Response &rsp);
-    void closePreview(const Request &req, Response &rsp);
-    void handleAddDevice(const Request &req, Response &rsp);
     void validateEventId(int eventId); // Declaration of validateEventId function
     
-private:
-    void closeAllPreviews();
+    inline dtu_date getDTUDate() const
+    {
+        return getDTUDateFromSql(this->dtEvent());
+    }
+    inline dtu_time getDTUTime() const
+    {
+        return getDTUTimeFromSql(this->tmEvent());
+    }
     inline long minutesToStart() const
     {
         int mins = 0;
@@ -49,18 +50,8 @@ private:
         spdlog::trace("Date of event: {}, and now it is {}. Time to start in mins {}", getDateStringFromTimePoint(tpEvent), getDateStringFromTimePoint(now), minutes.count());
         return minutes.count();
     }
-    inline dtu_date getDTUDate() const
-    {
-        return getDTUDateFromSql(this->dtEvent());
-    }
-    inline dtu_time getDTUTime() const
-    {
-        return getDTUTimeFromSql(this->tmEvent());
-    }
-
 private:
-    std::map<int, EventRunner *> m_runners;
-    // std::map<int, StreamingDevice> m_devices;
+
 };
 
 #endif // EVENT_H
