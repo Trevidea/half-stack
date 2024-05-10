@@ -100,6 +100,7 @@ void EventManager::closePreview(const Request &req, Response &rsp)
     }
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
+
 EventManager::~EventManager(){}
 
 

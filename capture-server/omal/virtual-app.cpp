@@ -95,9 +95,9 @@ int VirtualApp::deepCreate(const std::string &name, char *msg)
     return result;
 }
 
-std::vector<const std::string> VirtualApp::getStreamsList()
+std::vector<std::string> VirtualApp::getStreamsList()
 {
-    std::vector<const std::string> list;
+    std::vector<std::string> list;
 
     char ep[128] = {'\0'};
     const std::string baseUrl = DBManager::instance().getEnv("OM_URL", "http://drake.in:8081/v1");
