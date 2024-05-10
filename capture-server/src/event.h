@@ -34,8 +34,6 @@ public:
     void handleAddDevice(const Request &req, Response &rsp);
     void validateEventId(int eventId); // Declaration of validateEventId function
     
-private:
-    void closeAllPreviews();
     inline long minutesToStart() const
     {
         int mins = 0;
@@ -59,8 +57,11 @@ private:
     }
 
 private:
-    std::map<int, EventRunner *> m_runners;
-    // std::map<int, StreamingDevice> m_devices;
+
+    
+
+private:
+
 };
 
 #endif // EVENT_H

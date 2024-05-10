@@ -12,6 +12,7 @@ namespace fs = std::filesystem;
 VirtualApp::VirtualApp(const std::string &name, const std::string &vhost) : m_name(name), m_vhost{vhost}
 {
 }
+
 Json::Value VirtualApp::deepFindOrCreate()
 {
     Json::Value jsResult = Json::objectValue;
@@ -68,6 +69,7 @@ int VirtualApp::deepFind(const std::string &name)
     else
         return result;
 }
+
 int VirtualApp::deepCreate(const std::string &name, char *msg)
 {
     char ep[128] = {'\0'};
@@ -114,6 +116,7 @@ std::vector<const std::string> VirtualApp::getStreamsList()
     }
     return list;
 }
+
 Json::Value VirtualApp::getStreamInfo(const std::string &streamKey)
 {
     std::vector<const std::string> list;

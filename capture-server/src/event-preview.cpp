@@ -187,3 +187,5 @@ void EventPreview::setActiveDevices(const std::vector<EventDevice> &activeDevice
         m_model["activeDevices"].append(jsonDevice);
     }
 }
+
+EventPreview::~EventPreview(){}

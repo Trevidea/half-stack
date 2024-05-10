@@ -180,3 +180,5 @@ void LiveEvent::setConnectionDetails(const std::vector<ConnectionDetail>& connec
     }
     m_model["connectionDetails"] = details;
 }
+
+LiveEvent::~LiveEvent(){}

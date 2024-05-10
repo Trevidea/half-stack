@@ -226,3 +226,5 @@ Omal::~Omal()
         }
     }
 }
+
+Omal::~Omal(){}

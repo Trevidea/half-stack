@@ -41,3 +41,5 @@ void OnDemandEvent::report()
                                   this->remove(req, rsp);
                               });
 }
+
+OnDemandEvent::~OnDemandEvent(){}
