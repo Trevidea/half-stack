@@ -19,7 +19,7 @@ void EventDevice::report()
                                   this->find(req, rsp);
                               });
 
-    Gateway::instance().route("POST", "/api/event-devices", // To request INSERT
+    Gateway::instance().route("POST", "/api/event-device", // To request INSERT
                               [this](const Request &req, Response &rsp)
                               {
                                   this->create(req, rsp);

@@ -200,15 +200,12 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
         }
         else
         {
-            // throw invalid url exception
             throw ExInvalidUrlException(strUrl);
         }
     }
     else
     {
-        // throw invalid url exception
         throw ExInvalidUrlException(strUrl);
-        spdlog::trace("No match found");
     }
 
     rsp.setRawData(jsonResponse);
