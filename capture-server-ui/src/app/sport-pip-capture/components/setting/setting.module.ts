@@ -37,6 +37,7 @@ import { DevicePresenter } from "./user/component/device/devicepresenter";
 import { DeviceFormComponent } from "./user/component/device-form/device-form.component";
 import { DeviceFormPresenter } from "./user/component/device-form/device-form.presenter";
 import { InlineFormeModule } from "app/sport-pip-capture/blocks/inline-modal/inline-form-module";
+import { ValidationModule } from "../validation-alert/validation.module";
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { InlineFormeModule } from "app/sport-pip-capture/blocks/inline-modal/inl
     CoreSidebarModule,
     Ng2FlatpickrModule,
     InlineFormeModule,
+    ValidationModule,
   ],
 })
-export class SettingModule {}
+export class SettingModule { }
