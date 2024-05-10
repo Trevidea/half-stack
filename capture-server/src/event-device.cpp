@@ -115,5 +115,3 @@ void EventDevice::setPin(const std::string &value)
 {
     m_model.set("pin", value);
 }
-
-EventDevice::~EventDevice(){}

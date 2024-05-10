@@ -223,5 +223,3 @@ Omal::~Omal()
         }
     }
 }
-
-Omal::~Omal(){}
