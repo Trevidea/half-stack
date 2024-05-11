@@ -358,6 +358,8 @@ export class DataFactoryService {
               obj.subject = this.getRandomSubject();
               obj.user = this.getRandomUser();
               obj.action = this.getRandomAction();
+              obj.lapse = Number(obj.lapse);
+              obj.tid = Number(obj.tid);
               return obj;
             });
           parsedData.forEach((obj) => {
