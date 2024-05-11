@@ -344,7 +344,7 @@ export class DataFactoryService {
       return this.jsonLogData$;
     }
   }
-  getJSONData(): Observable<any[]> {
+  getJSONData(): Observable<Data.Log[]> {
     return this._httpClient
       .get("assets/logs.txt", { responseType: "text" })
       .pipe(
