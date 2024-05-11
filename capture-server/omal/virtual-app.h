@@ -19,7 +19,7 @@ public:
     friend class VirtualHost;
     // Destructor declaration
     ~VirtualApp();
-    std::vector<const std::string> getStreamsList();
+    std::vector<std::string> getStreamsList();
     Json::Value getStreamInfo(const std::string &streamKey);
 
 private:

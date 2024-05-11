@@ -35,7 +35,7 @@ export class CreateOnDemandEventComponent implements OnInit {
   model: NgbDateStruct;
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter();
-  constructor(private modelService: NgbModal, private router: Router) {}
+  constructor(private modelService: NgbModal, private router: Router) { }
 
   ngOnInit(): void {
     console.log(this.datasource.time);
@@ -49,10 +49,11 @@ export class CreateOnDemandEventComponent implements OnInit {
     this.cancel.emit();
   }
 
-  onSaveCancelClick() {
-    console.log("clicked cancle");
-  }
-  onSaveYesClick() {
+ 
+  onSave(id: number) {
+    if (id) {
+      console.log("id of event ", id)
+    }
     console.log("clicked save");
     this.save.emit();
   }

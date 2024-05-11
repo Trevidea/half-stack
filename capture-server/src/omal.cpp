@@ -76,7 +76,7 @@ void Omal::report()
                               [this](const Request &req, Response &rsp)
                               {
                                   const auto eventId = req.getQueryValue("event-id");
-                                  const std::vector<const std::string> list = this->fetchStreamsList(eventId);
+                                  const std::vector<std::string> list = this->fetchStreamsList(eventId);
                                   Json::Value resp = Json::arrayValue;
                                   for (auto &&stream : list)
                                   {
@@ -101,7 +101,7 @@ void Omal::report()
                                   handleControlServerRequest(req, rsp);
                               });
 }
-std::vector<const std::string> Omal::fetchStreamsList(const std::string &eventId)
+std::vector<std::string> Omal::fetchStreamsList(const std::string &eventId)
 {
     auto vhost = OMALFactory::getInstance().create("spip");
     Json::Value result = Json::objectValue;
@@ -200,15 +200,12 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
         }
         else
         {
-            // throw invalid url exception
             throw ExInvalidUrlException(strUrl);
         }
     }
     else
     {
-        // throw invalid url exception
         throw ExInvalidUrlException(strUrl);
-        spdlog::trace("No match found");
     }
 
     rsp.setRawData(jsonResponse);

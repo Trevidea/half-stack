@@ -12,6 +12,7 @@ namespace fs = std::filesystem;
 VirtualApp::VirtualApp(const std::string &name, const std::string &vhost) : m_name(name), m_vhost{vhost}
 {
 }
+
 Json::Value VirtualApp::deepFindOrCreate()
 {
     Json::Value jsResult = Json::objectValue;
@@ -68,6 +69,7 @@ int VirtualApp::deepFind(const std::string &name)
     else
         return result;
 }
+
 int VirtualApp::deepCreate(const std::string &name, char *msg)
 {
     char ep[128] = {'\0'};
@@ -93,9 +95,9 @@ int VirtualApp::deepCreate(const std::string &name, char *msg)
     return result;
 }
 
-std::vector<const std::string> VirtualApp::getStreamsList()
+std::vector<std::string> VirtualApp::getStreamsList()
 {
-    std::vector<const std::string> list;
+    std::vector<std::string> list;
 
     char ep[128] = {'\0'};
     const std::string baseUrl = DBManager::instance().getEnv("OM_URL", "http://drake.in:8081/v1");
@@ -114,9 +116,10 @@ std::vector<const std::string> VirtualApp::getStreamsList()
     }
     return list;
 }
+
 Json::Value VirtualApp::getStreamInfo(const std::string &streamKey)
 {
-    std::vector<const std::string> list;
+    std::vector<std::string> list;
 
     char ep[128] = {'\0'};
     const std::string baseUrl = DBManager::instance().getEnv("OM_URL", "http://drake.in:8081/v1");
