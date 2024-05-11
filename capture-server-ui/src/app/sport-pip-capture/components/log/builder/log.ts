@@ -10,6 +10,10 @@ export class EventRangeBuilder extends AbstractBuilder<Data.Log, LogView> {
     v.timestamp = m.timestamp;
     v.user = m.user;
     v.details = m.details;
+    v.lapse = m.lapse;
+    v.level = m.level;
+    v.message = m.message;
+    v.tid = m.tid;
   }
   decompose(v: LogView): Data.Log {
     return;
@@ -18,7 +22,7 @@ export class EventRangeBuilder extends AbstractBuilder<Data.Log, LogView> {
     return new LogView();
   }
 }
-
+["Event", "Connection"];
 export const logData = [
   {
     category: "Event",

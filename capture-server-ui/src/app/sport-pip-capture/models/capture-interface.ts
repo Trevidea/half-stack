@@ -13,6 +13,10 @@ export namespace Data {
     action: string;
     timestamp: string;
     details: any[];
+    lapse: string;
+    level: string;
+    message: string;
+    tid: string;
   }
   export interface RelayStream extends Base {
     eventName: string;
@@ -159,7 +163,7 @@ export namespace Data {
     type: string;
     name: string;
     code: string;
-    pin:string
+    pin: string;
   }
 
   export interface Connection extends Base {
@@ -392,7 +396,7 @@ export namespace Data {
     year: number;
     venue: Venue;
     time: number;
-    type : string;
+    type: string;
     activeDevice: ActiveDevice[];
   }
   export interface ActiveDevice {

@@ -12,6 +12,9 @@ import { EventRangeBuilder } from "../builder/log";
 import { Data } from "app/sport-pip-capture/models/capture-interface";
 import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 import { UI } from "app/blocks/ui-utils";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-log-presenter",
@@ -34,7 +37,8 @@ export class LogListPresentert implements OnInit {
   logKeys: string[] = [];
   constructor(
     private dataService: DataFactoryService,
-    private modelServiceService: ModelServiceService
+    private modelServiceService: ModelServiceService,
+    private http: HttpClient
   ) {
     this.ds = new LogRangeView();
   }

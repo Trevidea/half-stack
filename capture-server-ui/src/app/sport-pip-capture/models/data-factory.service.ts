@@ -20,12 +20,15 @@ import { logData } from "../components/log/builder/log";
 export class DataFactoryService {
   private _spModelUrl: string = environment.spModelUrl;
   logData: any;
+
+  jsonLogData$: Observable<any>;
   constructor(private _httpClient: HttpClient) {
     this.SaveUserProfileJson = this.SaveUserProfileJson.bind(this);
     this.SaveDistributionList = this.SaveDistributionList.bind(this);
     this.SaveOnDemandFormJson = this.SaveOnDemandFormJson.bind(this);
     this.SaveMetaType = this.SaveMetaType.bind(this);
     this.logData = of(logData);
+    this.jsonLogData$ = this.getJSONData();
   }
 
   create(type: string, entity: any): Observable<any> {
@@ -320,7 +323,8 @@ export class DataFactoryService {
 
   Logs(filter?: any): Observable<Data.Log[]> {
     if (filter) {
-      return this.logData.pipe(
+      // return this.logData.pipe(
+      return this.jsonLogData$.pipe(
         map((logData: any) => {
           return logData.filter((entry: any) => {
             const entryDate = new Date(entry.timestamp);
@@ -337,7 +341,65 @@ export class DataFactoryService {
         })
       );
     } else {
-      return this.logData;
+      return this.jsonLogData$;
     }
+  }
+  getJSONData(): Observable<any[]> {
+    return this._httpClient
+      .get("assets/logs.txt", { responseType: "text" })
+      .pipe(
+        map((response) => {
+          const parsedData = response
+            .split("\n")
+            .filter(Boolean)
+            .map((line) => {
+              const obj = JSON.parse(line);
+              obj.category = this.getRandomCategory();
+              obj.subject = this.getRandomSubject();
+              obj.user = this.getRandomUser();
+              obj.action = this.getRandomAction();
+              return obj;
+            });
+          parsedData.forEach((obj) => {
+            if (!obj.details) {
+              obj.details = [];
+            }
+            obj.details.push({
+              time: "11:10 pm",
+              activity: "Additional random activity",
+            });
+          });
+          return parsedData;
+        })
+      );
+  }
+
+  getRandomCategory(): string {
+    const categories = ["Event", "Connection", "Notification"];
+    return categories[Math.floor(Math.random() * categories.length)];
+  }
+  getRandomSubject(): string {
+    const subject = [
+      "Create Event",
+      "Delete  Event",
+      "Pin",
+      "Device Connection",
+    ];
+    return subject[Math.floor(Math.random() * subject.length)];
+  }
+
+  getRandomUser(): string {
+    const user = ["Coach Steven", "Coach John", "Gavin Gohar", "Shane Smith"];
+    return user[Math.floor(Math.random() * user.length)];
+  }
+
+  getRandomAction(): string {
+    const action = [
+      "A created event named as McQuaid vs Fairport",
+      "A deleted event named ‘Riverhawks vs Huskers’",
+      "Created PIN for an event named Bluelock vs Team Red ",
+      "Device name iPad15 connected with the server on 12:12:00",
+    ];
+    return action[Math.floor(Math.random() * action.length)];
   }
 }
