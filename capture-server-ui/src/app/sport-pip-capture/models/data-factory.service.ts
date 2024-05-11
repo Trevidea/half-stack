@@ -28,7 +28,7 @@ export class DataFactoryService {
     this.SaveOnDemandFormJson = this.SaveOnDemandFormJson.bind(this);
     this.SaveMetaType = this.SaveMetaType.bind(this);
     this.logData = of(logData);
-    this.jsonLogData$ = this.getJSONData();
+    this.jsonLogData$ = this.GetJSONData();
   }
 
   create(type: string, entity: any): Observable<any> {
@@ -344,7 +344,7 @@ export class DataFactoryService {
       return this.jsonLogData$;
     }
   }
-  getJSONData(): Observable<Data.Log[]> {
+  GetJSONData(): Observable<Data.Log[]> {
     return this._httpClient
       .get("assets/logs.txt", { responseType: "text" })
       .pipe(
