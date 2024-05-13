@@ -67,7 +67,7 @@ void Omal::report()
                                   auto strResponse = Gateway::instance().formatResponse({{result}});
                                   rsp.setData(strResponse);
                               });
-    Gateway::instance().route("GET", "/api/omal/get-all-apps", 
+    Gateway::instance().route("GET", "/api/omal/apps", 
                               [this](const Request &req, Response &rsp)
                               {
                                   std::string vhost = req.getQueryValue("vhost");
