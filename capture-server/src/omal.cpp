@@ -34,7 +34,6 @@ void Omal::report()
                                   auto strResponse = Gateway::instance().formatResponse({{result}});
                                   rsp.setData(strResponse);
                               });
-    // Implement the route for GET /api/omal/virtual-hosts
     Gateway::instance().route("GET", "/api/omal/virtual-hosts",
                               [this](const Request &req, Response &rsp)
                               {
