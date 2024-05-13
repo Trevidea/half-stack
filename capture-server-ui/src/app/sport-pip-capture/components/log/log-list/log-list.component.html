@@ -54,13 +54,24 @@
           >
             <td *ngFor="let key of logKeys" class="text-nowrap">
               <div class="media" *ngIf="key !== 'details'">
-                <img
-                  src="assets/images/avatars/{{ i + 1 }}.png"
-                  class="rounded mr-1"
-                  height="25"
-                  alt="team"
-                  *ngIf="key == 'user'"
-                />
+                <span *ngIf="i < 12">
+                  <img
+                    src="assets/images/avatars/{{ i + 1 }}.png"
+                    class="rounded mr-1"
+                    height="25"
+                    alt="team"
+                    *ngIf="key == 'user'"
+                  />
+                </span>
+                <span *ngIf="i >= 12">
+                  <img
+                    src="assets/images/pip-image/icon_4.png"
+                    class="rounded mr-1"
+                    height="25"
+                    alt="team"
+                    *ngIf="key == 'user'"
+                  />
+                </span>
                 <!-- {{ key == "timestamp" ? formatDate(item[key]) : item[key] }} -->
                 {{ item[key] }}
               </div>

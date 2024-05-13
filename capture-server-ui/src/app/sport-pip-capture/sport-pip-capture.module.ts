@@ -111,6 +111,7 @@ import { RelayStreamPresenter } from "./components/connection/connection-device-
 import { ConnectionDeviceDetailPresenter } from "./components/connection/connection-device-detail/connection-device-detail.presenter";
 import { NotificationDisplayComponent } from "./components/notification-display/notification-display.component";
 import { InlineFormeModule } from "./blocks/inline-modal/inline-form-module";
+import { ValidationModule } from "./components/validation-alert/validation.module";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -155,7 +156,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EventPresenter,
     EventComponent,
     CreateOnDemandEventPresenter,
-    ValidationAlertComponent,
+    // ValidationAlertComponent,
     MetaTypeComponent,
     TypesPresenter,
     TypesComponent,
@@ -238,6 +239,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
     ToastrModule.forRoot(),
     InlineFormeModule,
+    ValidationModule
   ],
 })
 export class SportPipCaptureModule {}

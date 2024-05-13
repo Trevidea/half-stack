@@ -114,6 +114,38 @@ export class LogView implements Views.Datasource {
   public set details(v: any[]) {
     this._details = v;
   }
+
+  private _lapse: string;
+  public get lapse(): string {
+    return this._lapse;
+  }
+  public set lapse(v: string) {
+    this._lapse = v;
+  }
+
+  private _level: string;
+  public get level(): string {
+    return this._level;
+  }
+  public set level(v: string) {
+    this._level = v;
+  }
+
+  private _message: string;
+  public get message(): string {
+    return this._message;
+  }
+  public set message(v: string) {
+    this._message = v;
+  }
+
+  private _tid: string;
+  public get tid(): string {
+    return this._tid;
+  }
+  public set tid(v: string) {
+    this._tid = v;
+  }
 }
 export class DateFormate {
   static datePipe = new DatePipe("en-US");

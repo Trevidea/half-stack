@@ -349,7 +349,11 @@ export class ModelServiceService {
     const url = `${environment.spModelUrl}/event/close-preview`;
     return this._httpClient.post<any>(url, data);
   }
-
+  // /api/event/close-all-previews
+  closeAllPreview(): Observable<any> {
+    const url = `${environment.spModelUrl}/event/close-preview`;
+    return this._httpClient.get<any>(url);
+  }
   userJson(): Observable<Data.UserProfile[]> {
     return this._data("user-profiles", UserProfileData);
   }

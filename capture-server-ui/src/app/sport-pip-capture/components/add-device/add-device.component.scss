@@ -10,15 +10,7 @@ label {
   font-size: 14px;
 }
 
-.dark-layout {
-  .toast-title {
-    color: #fdfdfd !important;
-  }
 
-  label {
-    color: #fff;
-  }
-}
 
 .url-box {
   display: flex;
@@ -26,15 +18,9 @@ label {
   justify-content: space-between;
   padding: 0 1rem;
   border-radius: 4px;
+  margin: 14px 0px;
   background-color: #F3F3F5;
 }
-// width: Fixed (476px)px;
-// height: Hug (30px)px;
-// padding: 6px 8px 6px 8px;
-// gap: 0px;
-// border-radius: 4px 0px 0px 0px;
-// justify: space-between;
-// opacity: 0px;
 
 .btn-flat-primary:hover:not(.disabled):not(:disabled) {
   background-color: transparent !important;
@@ -44,4 +30,20 @@ label {
 .btn-flat-primary.active,
 .btn-flat-primary:focus {
   background-color: transparent !important;
+}
+
+.dark-layout {
+  .url-box {
+    background-color: #313131;
+    color: #FDFDFD;
+  }
+
+
+  .toast-title {
+    color: #fdfdfd !important;
+  }
+
+  label {
+    color: #fff;
+  }
 }
