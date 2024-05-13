@@ -5,6 +5,7 @@
 #include "event-device.h"
 #include <vector>
 #include "virtual-host.h"
+#include "virtual-app.h"
 
 Omal::Omal() : EntityBase("omal")
 {
@@ -65,6 +66,22 @@ void Omal::report()
                                   vh.createApp(ss.str(), result);
                                   auto strResponse = Gateway::instance().formatResponse({{result}});
                                   rsp.setData(strResponse);
+                              });
+    Gateway::instance().route("GET", "/api/omal/get-all-apps", 
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  std::string vhost = req.getQueryValue("vhost");
+                                  std::vector<std::string> appList = VirtualApp::getAll(vhost);
+
+                                  // Format the response
+                                  Json::Value jsonResponse;
+                                  jsonResponse["applications"] = Json::arrayValue;
+                                  for (const auto &app : appList)
+                                  {
+                                      jsonResponse["applications"].append(app);
+                                  }
+
+                                  rsp.setData(Json::FastWriter().write(jsonResponse));
                               });
     Gateway::instance().route("GET", "/api/omal/vod-dumps", // To request LIST
                               [this](const Request &req, Response &rsp)

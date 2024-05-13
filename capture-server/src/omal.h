@@ -20,6 +20,8 @@ public:
     void assessNetworkQuality(const Request &req, Response &rsp);
     void handleControlServerRequest(const Request &req, Response &rsp);
 
+    void handleGetAllApps(const Request &req, Response &rsp);
+
     ~Omal();
 
 private:

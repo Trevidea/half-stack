@@ -22,7 +22,7 @@ public:
     std::vector<std::string> getStreamsList();
     Json::Value getStreamInfo(const std::string &streamKey);
 
-    std::vector<std::string> getAll(const std::string &vhost);
+    static std::vector<std::string> getAll(const std::string &vhost);
 
 private:
     VirtualApp(const std::string &name, const std::string &vhost);
