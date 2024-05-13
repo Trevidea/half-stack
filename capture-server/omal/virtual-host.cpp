@@ -140,4 +140,39 @@ std::map<std::string, std::string> VirtualHost::getVODDumps()
     return dumps;
 }
 
+std::vector<std::string> VirtualHost::getAll() {
+    std::vector<std::string> allVirtualHosts;
+
+    try {
+        // Construct the endpoint URL for retrieving virtual hosts
+        const std::string baseUrl = DBManager::instance().getEnv("OM_URL", "http://drake.in:8081/v1");
+        const std::string endpointUrl = baseUrl + "/vhosts";
+
+        // Create a REST client instance
+        auto rest = Rest::ClientFactory::getInstance().create(endpointUrl);
+
+        // Make a GET request to retrieve virtual hosts
+        std::string pass, fail;
+        int result = rest.get(pass, fail, "drake", "drake_ome");
+        if (result != 0)
+            throw ExOMResourceAccessException(endpointUrl);
+
+        // Parse the response JSON
+        Json::Value jsResult;
+        Json::Reader().parse(pass, jsResult);
+        Json::Value jsVHostArray = jsResult["response"];
+
+        // Extract virtual host names from the JSON response
+        for (const auto& item : jsVHostArray) {
+            std::string virtualHostName = item.asString();
+            allVirtualHosts.push_back(virtualHostName);
+        }
+    } catch (const std::exception &e) {
+        spdlog::error("Error getting all virtual hosts: {}", e.what());
+    }
+
+    return allVirtualHosts;
+}
+
+
 VirtualHost::~VirtualHost() {}

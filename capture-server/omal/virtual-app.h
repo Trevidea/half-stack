@@ -22,6 +22,8 @@ public:
     std::vector<std::string> getStreamsList();
     Json::Value getStreamInfo(const std::string &streamKey);
 
+    static std::vector<std::string> getAll(const std::string &vhost);
+
 private:
     VirtualApp(const std::string &name, const std::string &vhost);
     int deepFind(const std::string &name);

@@ -135,4 +135,29 @@ Json::Value VirtualApp::getStreamInfo(const std::string &streamKey)
     Json::Value jsStreamInfo = jsResult["response"];
     return std::move(jsStreamInfo);
 }
+
+std::vector<std::string> VirtualApp::getAll(const std::string &vhost)
+{
+    std::vector<std::string> appList;
+
+    char ep[128] = {'\0'};
+    const std::string baseUrl = DBManager::instance().getEnv("OM_URL", "http://drake.in:8081/v1");
+    snprintf(ep, 128, "%s/vhosts/%s/apps", baseUrl.c_str(), vhost.c_str());
+    auto rest = Rest::ClientFactory::getInstance().create(ep);
+    std::string pass, fail;
+    int result = rest.get(pass, fail, "drake", "drake_ome");
+    if (result != 0)
+        throw ExOMResourceAccessException(ep);
+
+    Json::Value jsResult;
+    Json::Reader().parse(pass, jsResult);
+    Json::Value jsAppArray = jsResult["response"];
+    for (const auto &app : jsAppArray)
+    {
+        appList.push_back(app.asString());
+    }
+
+    return appList;
+}
+
 VirtualApp::~VirtualApp() {}

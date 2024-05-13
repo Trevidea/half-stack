@@ -5,6 +5,9 @@
 #include "watcher.h"
 #include "request.h"
 #include "response.h"
+#include "virtual-host.h"
+#include "virtual-app.h"
+#include "omal-factory.h"
     
 class Omal : public EntityBase
 {
@@ -16,6 +19,8 @@ public:
     void report();
     void assessNetworkQuality(const Request &req, Response &rsp);
     void handleControlServerRequest(const Request &req, Response &rsp);
+
+    void handleGetAllApps(const Request &req, Response &rsp);
 
     ~Omal();
 

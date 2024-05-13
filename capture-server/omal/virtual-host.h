@@ -24,6 +24,9 @@ public:
     Json::Value deepFindOrCreate();
     VirtualApp createApp(const std::string &app, Json::Value &result, bool findOnly = false);
 
+    std::vector<std::string> getAll();
+    VirtualHost() = default;
+
     // Destructor declaration
     ~VirtualHost();
 
