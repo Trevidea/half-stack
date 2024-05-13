@@ -38,6 +38,13 @@ import { DeviceFormComponent } from "./user/component/device-form/device-form.co
 import { DeviceFormPresenter } from "./user/component/device-form/device-form.presenter";
 import { InlineFormeModule } from "app/sport-pip-capture/blocks/inline-modal/inline-form-module";
 import { ValidationModule } from "../validation-alert/validation.module";
+import { MediaServerComponent } from './media-server/media-server.component';
+import { ServerConfigurationComponent } from './media-server/components/server-configuration/server-configuration.component';
+import { VirtualHostComponent } from './media-server/components/virtual-host/virtual-host.component';
+import { ApplicationComponent } from './media-server/components/application/application.component';
+import { ApplicationFormComponent } from './media-server/components/application/application-form/application-form.component';
+import { ServerConfigFormComponent } from './media-server/components/server-configuration/server-config-form/server-config-form.component';
+import { VirtualHostFormComponent } from './media-server/components/virtual-host/virtual-host-form/virtual-host-form.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +73,13 @@ import { ValidationModule } from "../validation-alert/validation.module";
     DevicePresenter,
     DeviceFormComponent,
     DeviceFormPresenter,
+    MediaServerComponent,
+    ServerConfigurationComponent,
+    VirtualHostComponent,
+    ApplicationComponent,
+    ApplicationFormComponent,
+    ServerConfigFormComponent,
+    VirtualHostFormComponent,
   ],
   imports: [
     CommonModule,

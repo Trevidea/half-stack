@@ -10,18 +10,20 @@ import { SharingPresenter } from './sharing/sharing.presenter';
 import { FilePresenter } from './files/files.presenter';
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './user/user.component';
+import { MediaServerComponent } from './media-server/media-server.component';
 
 
 const routes: Routes = [
   {
-    path: '', component: SettingComponent,
+    path: ':settings', component: SettingComponent,
     children: [
-      { path: '', component: AccountPresenter },
+      { path: 'account', component: AccountPresenter },
       { path: 'file', component: FilePresenter },
       { path: 'user', component: UserComponent },
       { path: 'sharing', component: SharingPresenter },
       { path: 'preferences', component: PreferencesComponent },
-      { path: 'licenese', component: LiceneseComponent }
+      { path: 'licenese', component: LiceneseComponent },
+      {path:'mediaserver',component:MediaServerComponent}
 
     ]
   },
