@@ -10,6 +10,7 @@ OMALFactory &OMALFactory::getInstance()
     static OMALFactory instance;
     return instance;
 }
+
 VirtualHost &OMALFactory::create(const std::string &name)
 {
     auto it = virtualHostMap.find(name);

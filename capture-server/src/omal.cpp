@@ -1,11 +1,10 @@
 #include "omal.h"
 #include "gateway.h"
-#include "omal-factory.h"
-#include "virtual-host.h"
 #include <functional>
 #include <regex>
 #include "event-device.h"
 #include <vector>
+#include "virtual-host.h"
 
 Omal::Omal() : EntityBase("omal")
 {
@@ -34,6 +33,24 @@ void Omal::report()
 
                                   auto strResponse = Gateway::instance().formatResponse({{result}});
                                   rsp.setData(strResponse);
+                              });
+    // Implement the route for GET /api/omal/virtual-hosts
+    Gateway::instance().route("GET", "/api/omal/virtual-hosts",
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  // Call getAll() function from VirtualHost class
+                                  VirtualHost vh;
+                                  std::vector<std::string> virtualHosts = vh.getAll();
+
+                                  // Convert the result to JSON
+                                  Json::Value jsonResponse(Json::arrayValue);
+                                  for (const auto &host : virtualHosts)
+                                  {
+                                      jsonResponse.append(host);
+                                  }
+
+                                  // Set the JSON response
+                                  rsp.setData(Json::FastWriter().write(jsonResponse));
                               });
     Gateway::instance().route("POST", "/api/omal/create-app",
                               [this](const Request &req, Response &rsp)
@@ -93,7 +110,6 @@ void Omal::report()
 
                                   const auto info = this->fetchStreamInfo(eventId, streamKey);
                               });
-
     // Implement route for Control Server
     Gateway::instance().route("POST", "/api/omal/control-server",
                               [this](const Request &req, Response &rsp)

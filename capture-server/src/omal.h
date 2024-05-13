@@ -5,6 +5,9 @@
 #include "watcher.h"
 #include "request.h"
 #include "response.h"
+#include "virtual-host.h"
+#include "virtual-app.h"
+#include "omal-factory.h"
     
 class Omal : public EntityBase
 {
