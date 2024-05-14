@@ -366,6 +366,12 @@ export class ModelServiceService {
     return this._data("connections", PreviousEventsConnectionData);
   }
 
+  getVirtualHost(): Observable<any> {
+    const url = `${environment.spModelUrl}/omal/virtual-hosts`;
+    return this._httpClient.get<any>(url);
+
+  }
+
   MetaTypeByKey(key: string): Observable<Data.MetaType> {
     return this._selectQueryOne("meta-type", `'${key}'`, "key", MetaTypeData);
   }
