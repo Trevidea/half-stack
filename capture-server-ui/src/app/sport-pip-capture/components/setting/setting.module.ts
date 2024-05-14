@@ -45,6 +45,10 @@ import { ApplicationComponent } from './media-server/components/application/appl
 import { ApplicationFormComponent } from './media-server/components/application/application-form/application-form.component';
 import { ServerConfigFormComponent } from './media-server/components/server-configuration/server-config-form/server-config-form.component';
 import { VirtualHostFormComponent } from './media-server/components/virtual-host/virtual-host-form/virtual-host-form.component';
+import { ModuleConfigurationComponent } from './media-server/components/module-configuration/module-configuration.component';
+import { PortBindingConfigComponent } from './media-server/components/port-binding-config/port-binding-config.component';
+import { ModuleConfigFormComponent } from './media-server/components/module-configuration/module-config-form/module-config-form.component';
+import { PortBindingFormComponent } from './media-server/components/port-binding-config/port-binding-form/port-binding-form.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +84,10 @@ import { VirtualHostFormComponent } from './media-server/components/virtual-host
     ApplicationFormComponent,
     ServerConfigFormComponent,
     VirtualHostFormComponent,
+    ModuleConfigurationComponent,
+    PortBindingConfigComponent,
+    ModuleConfigFormComponent,
+    PortBindingFormComponent,
   ],
   imports: [
     CommonModule,
