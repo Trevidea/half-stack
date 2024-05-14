@@ -48,5 +48,7 @@
 
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Save click')">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Save click')">Cancel</button>
+    <button type="button" class="btn btn-warning" (click)="activeModal.dismiss('Cross click')"
+        rippleEffect>Save</button>
 </div>
