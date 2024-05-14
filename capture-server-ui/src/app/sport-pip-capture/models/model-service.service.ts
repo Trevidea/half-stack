@@ -31,6 +31,7 @@ export class ModelServiceService {
 
   create(type: string, entity: any): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}`;
+    console.log(url)
     return this._adapter.modulateOne(type, entity).pipe(
       mergeMap((modata) => {
         return this._httpClient.post<any>(url, modata);
@@ -64,6 +65,7 @@ export class ModelServiceService {
 
   update(type: string, entity: any, id: number) {
     const url = `${this.modelsServerUrl}/${type}`;
+    console.log(url)
     return this._adapter.modulateOne(type, entity).pipe(
       mergeMap((modata) => {
         return this._httpClient.put<any>(url, modata);
@@ -246,6 +248,7 @@ export class ModelServiceService {
 
   private apiUrl = `${environment.spModelUrl}/on-demand-event`;
   _saveOnDemandEvent(data: any): Observable<any> {
+    console.log(data)
     return this._httpClient.post<any>(this.apiUrl, data);
   }
 
