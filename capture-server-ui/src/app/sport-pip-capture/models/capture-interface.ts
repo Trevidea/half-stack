@@ -18,6 +18,7 @@ export namespace Data {
     message: string;
     tid: string;
   }
+
   export interface RelayStream extends Base {
     eventName: string;
     eventId: number;
