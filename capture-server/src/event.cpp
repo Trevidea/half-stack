@@ -81,4 +81,3 @@ void Event::validateEventId(int eventId)
         throw;
     }
 }
-

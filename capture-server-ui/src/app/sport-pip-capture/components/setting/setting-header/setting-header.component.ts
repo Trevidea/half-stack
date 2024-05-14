@@ -16,7 +16,7 @@ export class SettingHeaderComponent implements OnInit {
     const param = this.route.snapshot.params['settings'];
 
     if (param == 'settings') {
-      this.router.navigate(['settings'])
+      this.router.navigate(['settings/account'])
     }
 
   }

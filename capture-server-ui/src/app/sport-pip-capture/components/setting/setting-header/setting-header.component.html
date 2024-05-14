@@ -4,10 +4,11 @@
       <div class="form-group-compose text-center compose-btn">
         <div class="sidebar-menu-list">
           <div class="list-group list-group-messages">
-            <div routerLink="/settings" [ngClass]="{ 'active': isActive('/settings') }">
+
+            <div routerLink="/settings/account" routerLinkActive="active">
               <div class="d-flex p-1 tab" data-tab="account" id="btnLeft">
                 <i class="bi bi-person mr-1" style="font-size: 15px"></i>
-                <h6 class="text-center" style="font-size: 15px">Account</h6>
+                <h6 class="text-center" style="font-size: 15px">Media Server</h6>
               </div>
             </div>
             <div routerLink="user" routerLinkActive="active">
@@ -32,6 +33,12 @@
               <div class="d-flex p-1 tab">
                 <i class="bi bi-sliders2-vertical mr-1" style="font-size: 15px"></i>
                 <h6 style="font-size: 15px">Preferences</h6>
+              </div>
+            </div>
+            <div routerLink="/settings/mediaserver" routerLinkActive="active">
+              <div class="d-flex p-1 tab" data-tab="account" id="btnLeft">
+                <i class="bi bi-person mr-1" style="font-size: 15px"></i>
+                <h6 class="text-center" style="font-size: 15px">Media Server</h6>
               </div>
             </div>
             <div routerLink="/settings/licenese" routerLinkActive="active" class="mt-1">
