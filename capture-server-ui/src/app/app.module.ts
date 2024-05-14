@@ -39,7 +39,6 @@ import { Timer } from "./sport-pip-capture/components/connection/timer";
 import { CaptureDashboardComponent } from "./capture-dashboard/capture-dashboard.component";
 import { DashboardHeaderComponent } from "./capture-dashboard/dashboard-header/dashboard-header.component";
 import { InlineFormeModule } from "./sport-pip-capture/blocks/inline-modal/inline-form-module";
-import { LoggerModule, NGXLogger, NgxLoggerLevel } from "ngx-logger";
 import { LoggingInterceptor } from "./sport-pip-capture/logging-Interceptor/logging-interceptor";
 
 const appRoutes: Routes = [
@@ -173,11 +172,6 @@ const appRoutes: Routes = [
     ExampleModule,
     SettingModule,
     InlineFormeModule,
-    LoggerModule.forRoot({
-      serverLoggingUrl: "/api",
-      level: NgxLoggerLevel.DEBUG,
-      serverLogLevel: NgxLoggerLevel.INFO,
-    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

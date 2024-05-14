@@ -20,7 +20,6 @@ import { UserProfileData } from "app/sport-pip-capture/models/user-profile";
 import { SelectItemView } from "app/blocks/collection-item";
 import { DeviceData } from "app/sport-pip-capture/models/device";
 import { DevicesBuilder } from "./builder/device";
-import { NGXLogger, NgxLoggerLevel } from "ngx-logger";
 
 @Component({
   selector: "app-add-device-presenter",
