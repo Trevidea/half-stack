@@ -40,9 +40,7 @@ export class AdapterService {
       if (pos >= 0) {
         forResource = forResource.split("-").join("");
       }
-      console.log(forResource);
       const tmpl = this.read(`${forResource}/template`);
-      console.log(tmpl);
       return tmpl.pipe(
         map((t) => {
           let templObj: { [field: string]: number } = {};
@@ -50,10 +48,7 @@ export class AdapterService {
             templObj[elem.field] = elem.type;
           }
           this.templateMap[forResource] = templObj;
-          console.log(
-            " this.templateMap[forResource]",
-            this.templateMap[forResource]
-          );
+
           return templObj;
         })
       );
@@ -63,7 +58,6 @@ export class AdapterService {
     ngObj: { field: string; value: any },
     resource: string
   ): Observable<{ field: string; type: number; value: any }[]> {
-    console.log(ngObj, resource);
     return this.getTemplateMap(resource).pipe(
       map((template) => {
         let cppObj: { field: string; type: number; value: any }[] = [];
@@ -76,7 +70,6 @@ export class AdapterService {
             value: ngObj[key],
           };
           cppObj.push(obj);
-          console.log(obj);
         }
         return cppObj;
       })
@@ -95,12 +88,10 @@ export class AdapterService {
     );
   }
   modulateOne(type: string, data: any): Observable<any> {
-    console.log("Table", type);
     const pos = type.indexOf("-");
     if (pos >= 0) {
       type = type.split("-").join("_");
     }
-    console.log(data);
     return this.ngToCpp(data, type).pipe(
       map((cols) => {
         return {
