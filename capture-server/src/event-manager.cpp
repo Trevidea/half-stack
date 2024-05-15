@@ -104,141 +104,14 @@ void EventManager::closePreview(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
 
-std::string EventManager::getEventPreviewData()
-{
-    // Construct the query to fetch event devices
-    std::string query = "SELECT * FROM event_devices;";
-    std::string data = ""; // Since no additional data is needed
-    
-    // Create a Request object with the constructed query and data
-    Request request(query, data);
+// void EventManager::publishEventPreview()
+// {
+//     Publisher::instance().publish("event-preview", this->getEventPreviewData());
+// }
 
-    // Now, you can use the Request object to fetch data from the event devices table
-    Response response;
-    EventDevice eventDevice;
-    eventDevice.list(request, response);
-
-    // Get the JSON data from the response
-    std::string jsonData = response.data();
-
-    // Parse the JSON data
-    Json::Value parsedJson;
-    Json::Reader reader;
-    reader.parse(jsonData, parsedJson);
-
-    // Assuming you have an EventPreview object named ep
-    EventPreview ep;
-
-    // Extract and populate data from the JSON to the EventPreview object
-    for (const auto &deviceJson : parsedJson["data"])
-    {
-        EventDevice device;
-        device.setDeviceId(deviceJson["device_id"].asInt());
-        device.setDeviceType(deviceJson["device_type"].asString());
-        device.setName(deviceJson["name"].asString());
-        device.setStatus(deviceJson["status"].asString());
-        device.setLocation(deviceJson["location"].asString());
-        device.setNetwork(deviceJson["network"].asString());
-        ep.activeDevices().push_back(device);
-    }
-
-    // Populate other EventPreview properties as needed
-    ep.setCityAddress("Ludhiana");
-    ep.setDtEvent("2024-05-01");
-    ep.activeDevices().push_back(EventDevice());
-    {
-        auto &device = ep.activeDevices().back();
-        device.setDeviceId(1);
-        device.setDeviceType("iPad");
-        device.setLocation("North-End");
-    }
-    ep.setDetailType("ondemand");
-    ep.setStreetAddress("Indoor Stadium, Pakhowal road");
-    ep.setDtEvent("2024-04-15");
-    ep.setEventType("ondemand");
-    ep.setLevel("University");
-    ep.setProgram("Men");
-    ep.setSport("Football");
-    ep.setStatus("Upcoming");
-    ep.setTime(1830);
-    ep.setTitle("Mumbai Indians vs Kolkatta Knightriders");
-    ep.setVenueLocation("Ludhiana");
-    ep.setYear(2024);
-
-    // Convert the populated EventPreview object to a JSON string
-    std::string eventPreviewJson = ep.toResponse();
-
-    return eventPreviewJson;
-}
-
-std::string EventManager::getLiveEventData()
-{
-    LiveEvent le;
-    le.setSport("Football");  
-    le.setLevel("University");
-    le.setProgram("Men");
-    le.setYear(2024);
-    le.setDtEvent("2024-04-15");
-    le.setTime(1402);
-    le.setVenueLocation("Delhi");
-    le.setDetailType("Scheduled Event");
-    le.setDetailStreetAddress("Sector 32");
-    le.setDetailCityAddress("Delhi");
-    le.setTitle("Manchester vs Barcelona");
-    le.setStatus("Upcoming");
-
-    ConnectionDetail connectionDetail;
-    connectionDetail.setId(1);
-    connectionDetail.setName("Coach S.");
-    connectionDetail.setRole("Subscriber");
-    connectionDetail.setLocation("Press Box");
-    connectionDetail.setDevice("iPad15");
-    connectionDetail.setNetwork("Penfield-532");
-    connectionDetail.setQuality(QualityEnum::Good);
-    connectionDetail.setIpAddress("192.168.1.1");
-    connectionDetail.setTransmitStatus(TransmitEnum::Streaming);
-    connectionDetail.setFilesReceived(10);
-    connectionDetail.setRetries(3);
-
-    ConnectionDetail connectionDetail1;
-    connectionDetail1.setId(2);
-    connectionDetail1.setName("Coach J.");
-    connectionDetail1.setRole("Publisher");
-    connectionDetail1.setLocation("Sideline");
-    connectionDetail1.setDevice("iPad22");
-    connectionDetail1.setNetwork("Penfield-532");
-    connectionDetail1.setQuality(QualityEnum::Poor);
-    connectionDetail1.setIpAddress("192.168.1.2");
-    connectionDetail1.setTransmitStatus(TransmitEnum::Receiving);
-    connectionDetail1.setFilesReceived(5);
-    connectionDetail1.setRetries(2);
-
-    ConnectionDetail connectionDetail2;
-    connectionDetail2.setId(3);
-    connectionDetail2.setName("Coach M.");
-    connectionDetail2.setRole("Subscriber");
-    connectionDetail2.setLocation("Press Box");
-    connectionDetail2.setDevice("Camcorder");
-    connectionDetail2.setNetwork("Penfield-532");
-    connectionDetail2.setQuality(QualityEnum::Poor);
-    connectionDetail2.setIpAddress("192.168.1.3");
-    connectionDetail2.setTransmitStatus(TransmitEnum::Streaming);
-    connectionDetail2.setFilesReceived(5);
-    connectionDetail2.setRetries(2);
-
-    le.setConnectionDetails({connectionDetail, connectionDetail1, connectionDetail2});
-
-    return le.toResponse();
-}
-
-void EventManager::publishEventPreview()
-{
-    Publisher::instance().publish("event-preview", this->getEventPreviewData());
-}
-
-void EventManager::publishLiveEvent()
-{
-    Publisher::instance().publish("live-event", this->getLiveEventData());
-}
+// void EventManager::publishLiveEvent()
+// {
+//     Publisher::instance().publish("live-event", this->getLiveEventData());
+// }
 
 EventManager::~EventManager() {}

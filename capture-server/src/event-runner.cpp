@@ -7,22 +7,144 @@
 #include "event-manager.h"
 #include "worker-loop.h"
 
-// EventRunner::EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration) : mp_eventPreviewPublisher{new WorkerLoop(2, [this]()
-//                                                                                                                                                                                      { Publisher::instance().publish("event-preview", this->getEventPreviewData()); })},
-//                                                                                                                                              mp_liveEventPublisher{new WorkerLoop(2, [this]()
-//                                                                                                                                                                                   { Publisher::instance().publish("live-event", this->getLiveEventData()); })},
-//                                                                                                                                              m_start{year, month, day, hour, min, sec, std::bind(&EventRunner::eventStarted, this)},
-//                                                                                                                                              m_end{m_start, duration, std::bind(&EventRunner::eventEnded, this)}
-// {
-//     this->mp_eventPreviewPublisher->start();
-// }
+std::string EventRunner::getEventPreviewData()
+{
+    EventPreview ep;
+
+    ep.setCityAddress("Ludhiana");
+    ep.setDtEvent("2024-05-01");
+    ep.activeDevices().push_back(EventDevice());
+    {
+        auto &device = ep.activeDevices().back();
+        device.setDeviceId(1);
+        device.setDeviceType("iPad");
+        device.setLocation("North-End");
+    }
+    ep.setDetailType("ondemand");
+    ep.setStreetAddress("Indoor Stadium, Pakhowal road");
+    ep.setDtEvent("2024-04-15");
+    ep.setEventType("ondemand");
+    ep.setLevel("University");
+    ep.setProgram("Men");
+    ep.setSport("Football");
+    ep.setStatus("Upcoming");
+    ep.setTime(1830);
+    ep.setTitle("Mumbai Indians vs Kolkatta Knightriders");
+    ep.setVenueLocation("Ludhiana");
+    ep.setYear(2024);
+
+    EventDevice eventDevice;
+    std::vector<EventDevice> activeDevices = eventDevice.list<EventDevice>();
+
+    // // Set active devices
+    // std::vector<EventDevice> activeDevices;
+
+    // // First set of active devices
+    // {
+    //     EventDevice device;
+    //     device.setDeviceId(1);
+    //     device.setDeviceType("iPad");
+    //     device.setName("Coach P.");
+    //     device.setStatus("Active");
+    //     device.setLocation("North-End");
+    //     device.setNetwork("Penfield-532");
+    //     activeDevices.push_back(device);
+    // }
+
+    // // Second set of active devices
+    // {
+    //     EventDevice device;
+    //     device.setDeviceId(2);
+    //     device.setDeviceType("Camcorder");
+    //     device.setName("Coach K.");
+    //     device.setStatus("Inactive");
+    //     device.setLocation("Press Box");
+    //     device.setNetwork("Penfield-532");
+    //     activeDevices.push_back(device);
+    // }
+
+    // // Third set of active devices
+    // {
+    //     EventDevice device;
+    //     device.setDeviceId(3);
+    //     device.setDeviceType("Smartphone");
+    //     device.setName("Coach Q.");
+    //     device.setStatus("Active");
+    //     device.setLocation("South-End");
+    //     device.setNetwork("Penfield-532");
+    //     activeDevices.push_back(device);
+    // }
+
+    // Set active devices in the event preview
+    ep.setActiveDevices(activeDevices);
+
+    return ep.toResponse();
+}
+
+std::string EventRunner::getLiveEventData()
+{
+    LiveEvent le;
+    le.setSport("Football");
+    le.setLevel("University");
+    le.setProgram("Men");
+    le.setYear(2024);
+    le.setDtEvent("2024-04-15");
+    le.setTime(1402);
+    le.setVenueLocation("Delhi");
+    le.setDetailType("Scheduled Event");
+    le.setDetailStreetAddress("Sector 32");
+    le.setDetailCityAddress("Delhi");
+    le.setTitle("Manchester vs Barcelona");
+    le.setStatus("Upcoming");
+
+    ConnectionDetail connectionDetail;
+    connectionDetail.setId(1);
+    connectionDetail.setName("Coach S.");
+    connectionDetail.setRole("Subscriber");
+    connectionDetail.setLocation("Press Box");
+    connectionDetail.setDevice("iPad15");
+    connectionDetail.setNetwork("Penfield-532");
+    connectionDetail.setQuality(QualityEnum::Good);
+    connectionDetail.setIpAddress("192.168.1.1");
+    connectionDetail.setTransmitStatus(TransmitEnum::Streaming);
+    connectionDetail.setFilesReceived(10);
+    connectionDetail.setRetries(3);
+
+    ConnectionDetail connectionDetail1;
+    connectionDetail1.setId(2);
+    connectionDetail1.setName("Coach J.");
+    connectionDetail1.setRole("Publisher");
+    connectionDetail1.setLocation("Sideline");
+    connectionDetail1.setDevice("iPad22");
+    connectionDetail1.setNetwork("Penfield-532");
+    connectionDetail1.setQuality(QualityEnum::Poor);
+    connectionDetail1.setIpAddress("192.168.1.2");
+    connectionDetail1.setTransmitStatus(TransmitEnum::Receiving);
+    connectionDetail1.setFilesReceived(5);
+    connectionDetail1.setRetries(2);
+
+    ConnectionDetail connectionDetail2;
+    connectionDetail2.setId(3);
+    connectionDetail2.setName("Coach M.");
+    connectionDetail2.setRole("Subscriber");
+    connectionDetail2.setLocation("Press Box");
+    connectionDetail2.setDevice("Camcorder");
+    connectionDetail2.setNetwork("Penfield-532");
+    connectionDetail2.setQuality(QualityEnum::Poor);
+    connectionDetail2.setIpAddress("192.168.1.3");
+    connectionDetail2.setTransmitStatus(TransmitEnum::Streaming);
+    connectionDetail2.setFilesReceived(5);
+    connectionDetail2.setRetries(2);
+
+    le.setConnectionDetails({connectionDetail, connectionDetail1, connectionDetail2});
+
+    return le.toResponse();
+}
 
 EventRunner::EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration) : mp_eventPreviewPublisher{new WorkerLoop(2, [this]()
-                                                                                                                                                                                     {EventManager eventManager;
-                                                                                                                                                                                        Publisher::instance().publish("event-preview", eventManager.getEventPreviewData()); })},
+                                                                                                                                                                                     { Publisher::instance().publish("event-preview", this->getEventPreviewData()); })},
                                                                                                                                              mp_liveEventPublisher{new WorkerLoop(2, [this]()
-                                                                                                                                                                                  {EventManager eventManager;
-                                                                                                                                                                                        Publisher::instance().publish("live-event", eventManager.getLiveEventData()); })},
+                                                                                                                                                                                  { Publisher::instance().publish("live-event", this->getLiveEventData()); })},
                                                                                                                                              m_start{year, month, day, hour, min, sec, std::bind(&EventRunner::eventStarted, this)},
                                                                                                                                              m_end{m_start, duration, std::bind(&EventRunner::eventEnded, this)}
 {
