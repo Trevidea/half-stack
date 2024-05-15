@@ -1,13 +1,8 @@
 <div class="connection-device-detail">
   <div class="d-flex mb-1">
     <div class="flex-grow-1">
-      <button
-        type="button"
-        class="btn btn-icon back-button"
-        (click)="back()"
-        style="background-color: #fff"
-        rippleEffect
-      >
+      <button type="button" class="btn btn-icon back-button" (click)="back()" style="background-color: #fff"
+        rippleEffect>
         <i class="feather" data-feather="arrow-left" style="fill: black"></i>
       </button>
     </div>
@@ -17,12 +12,8 @@
       </button>
     </div>
     <div>
-      <button
-        type="button"
-        class="btn btn-warning mr-1"
-        (click)="datasource.relayStream.AddingNewItem(relayStream)"
-        rippleEffect
-      >
+      <button type="button" class="btn btn-warning mr-1" (click)="datasource.relayStream.AddingNewItem(relayStream)"
+        rippleEffect>
         Relay Stream
         <!-- (click)="modalOpen('relay-stream')" -->
       </button>
@@ -37,43 +28,29 @@
   </div>
   <div class="row match-height" style="margin-right: 0; margin-left: 0">
     <div class="col-xl-9" style="padding-right: 0; padding-left: 0">
-      <app-video-streaming
-        [liveStreamVideoPath]="url"
-        style="margin-bottom: 0.7rem"
-      ></app-video-streaming>
+      <app-video-streaming [liveStreamVideoPath]="url" style="margin-bottom: 0.7rem"></app-video-streaming>
+
+
       <div class="card">
-        <div
-          class="row p-1 m-0 d-xl-none streaming-card-bg-color"
-          style="border-radius: 0.428rem"
-        >
+        <app-streaming-info></app-streaming-info>
+      </div>
+      <div class="card">
+        <div class="row p-1 m-0 d-xl-none streaming-card-bg-color" style="border-radius: 0.428rem">
           <div class="col-12">
             <div class="form-group ml-auto float-right">
-              <button
-                type="button"
-                class="btn btn-warning"
-                (click)="datasource.mediaSetting.AddingNewItem(mediaSetting)"
-                rippleEffect
-              >
+              <button type="button" class="btn btn-warning"
+                (click)="datasource.mediaSetting.AddingNewItem(mediaSetting)" rippleEffect>
                 Edit Media settings
               </button>
               <!-- (click)="modalOpen('mediaSetting')" -->
-              <inline-form-modal
-                #mediaSetting
-                modalTitle=""
-              ></inline-form-modal>
+              <inline-form-modal #mediaSetting modalTitle=""></inline-form-modal>
             </div>
           </div>
           <div class="col-2 col-md-3">
             <div>
               <div class="d-flex align-items-center">
-                <i
-                  class="bi bi-arrow-up-right"
-                  style="font-size: 20px; color: rgba(245, 163, 10, 1)"
-                ></i>
-                <h4
-                  class="align-items-center light-text"
-                  style="margin-left: 0.2em"
-                >
+                <i class="bi bi-arrow-up-right" style="font-size: 20px; color: rgba(245, 163, 10, 1)"></i>
+                <h4 class="align-items-center light-text" style="margin-left: 0.2em">
                   Streaming
                 </h4>
               </div>
@@ -85,10 +62,7 @@
           <div class="col-2 col-md-3">
             <div>
               <div class="d-flex align-items-center">
-                <i
-                  class="bi bi-camera-video"
-                  style="font-size: 20px; color: rgba(245, 163, 10, 1)"
-                ></i>
+                <i class="bi bi-camera-video" style="font-size: 20px; color: rgba(245, 163, 10, 1)"></i>
                 <h4 class="light-text" style="margin-left: 0.2em">Camcorder</h4>
               </div>
               <p class="dark-white-text" style="font-size: 0.95rem">
@@ -176,6 +150,8 @@
             </div>
           </div>
         </div>
+
+
         <div class="table-responsive h-100">
           <table class="table table-default">
             <tr style="text-transform: uppercase">
@@ -214,19 +190,12 @@
       </div>
     </div>
     <div class="col-xl-3" style="padding-right: 0">
-      <div
-        class="card p-1 d-xs-none d-sm-none d-md-none d-lg-none d-xl-block streaming-card-bg-color"
-      >
+      <div class="card p-1 d-xs-none d-sm-none d-md-none d-lg-none d-xl-block streaming-card-bg-color">
         <div>
           <div class="d-flex align-content-center">
-            <i
-              class="bi bi-arrow-up-right align-items-center"
-              style="font-size: 20px; color: rgba(245, 163, 10, 1)"
-            ></i>
-            <h4
-              class="align-items-center light-text"
-              style="margin-left: 0.2em"
-            >
+            <i class="bi bi-arrow-up-right align-items-center"
+              style="font-size: 20px; color: rgba(245, 163, 10, 1)"></i>
+            <h4 class="align-items-center light-text" style="margin-left: 0.2em">
               Streaming
             </h4>
           </div>
@@ -234,10 +203,7 @@
         </div>
         <div>
           <div class="d-flex align-items-center">
-            <i
-              class="bi bi-camera-video"
-              style="font-size: 20px; color: rgba(245, 163, 10, 1)"
-            ></i>
+            <i class="bi bi-camera-video" style="font-size: 20px; color: rgba(245, 163, 10, 1)"></i>
             <h4 class="light-text" style="margin-left: 0.2em">Camcorder</h4>
           </div>
           <p class="dark-white-text">Device Type</p>
@@ -304,16 +270,9 @@
           </div>
           <p class="dark-white-text">Segment Count</p>
         </div>
-        <div
-          class="card-footer"
-          style="margin-top: 100%; border-top: 1px solid transparent"
-        >
-          <button
-            type="button"
-            class="btn btn-warning btn-block"
-            (click)="datasource.mediaSetting.AddingNewItem(mediaSetting)"
-            rippleEffect
-          >
+        <div class="card-footer" style="margin-top: 100%; border-top: 1px solid transparent">
+          <button type="button" class="btn btn-warning btn-block"
+            (click)="datasource.mediaSetting.AddingNewItem(mediaSetting)" rippleEffect>
             Edit Media settings
           </button>
           <!-- (click)="modalOpen('mediaSetting')" -->

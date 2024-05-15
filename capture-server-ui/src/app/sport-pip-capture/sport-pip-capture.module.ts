@@ -112,6 +112,7 @@ import { ConnectionDeviceDetailPresenter } from "./components/connection/connect
 import { NotificationDisplayComponent } from "./components/notification-display/notification-display.component";
 import { InlineFormeModule } from "./blocks/inline-modal/inline-form-module";
 import { ValidationModule } from "./components/validation-alert/validation.module";
+import { StreamingInfoComponent } from "./components/connection/connection-device-detail/streaming-info/streaming-info.component";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -204,6 +205,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RelayStreamPresenter,
     ConnectionDeviceDetailPresenter,
     NotificationDisplayComponent,
+    StreamingInfoComponent
   ],
   providers: [
     {
