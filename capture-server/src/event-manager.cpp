@@ -104,45 +104,10 @@ void EventManager::closePreview(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
 
-std::string EventManager::getEventPreviewData()
+std::string EventRunner::getEventPreviewData()
 {
-    // Construct the query to fetch event devices
-    std::string query = "SELECT * FROM event_devices;";
-    std::string data = ""; // Since no additional data is needed
-    
-    // Create a Request object with the constructed query and data
-    Request request(query, data);
-
-    // Now, you can use the Request object to fetch data from the event devices table
-    Response response;
-    EventDevice eventDevice;
-    eventDevice.list(request, response);
-
-    // Get the JSON data from the response
-    std::string jsonData = response.data();
-
-    // Parse the JSON data
-    Json::Value parsedJson;
-    Json::Reader reader;
-    reader.parse(jsonData, parsedJson);
-
-    // Assuming you have an EventPreview object named ep
     EventPreview ep;
 
-    // Extract and populate data from the JSON to the EventPreview object
-    for (const auto &deviceJson : parsedJson["data"])
-    {
-        EventDevice device;
-        device.setDeviceId(deviceJson["device_id"].asInt());
-        device.setDeviceType(deviceJson["device_type"].asString());
-        device.setName(deviceJson["name"].asString());
-        device.setStatus(deviceJson["status"].asString());
-        device.setLocation(deviceJson["location"].asString());
-        device.setNetwork(deviceJson["network"].asString());
-        ep.activeDevices().push_back(device);
-    }
-
-    // Populate other EventPreview properties as needed
     ep.setCityAddress("Ludhiana");
     ep.setDtEvent("2024-05-01");
     ep.activeDevices().push_back(EventDevice());
@@ -165,16 +130,58 @@ std::string EventManager::getEventPreviewData()
     ep.setVenueLocation("Ludhiana");
     ep.setYear(2024);
 
-    // Convert the populated EventPreview object to a JSON string
-    std::string eventPreviewJson = ep.toResponse();
+    EventDevice eventDevice;
+    std::vector<EventDevice> activeDevices = eventDevice.list<EventDevice>();
 
-    return eventPreviewJson;
+    // // Set active devices
+    // std::vector<EventDevice> activeDevices;
+
+    // // First set of active devices
+    // {
+    //     EventDevice device;
+    //     device.setDeviceId(1);
+    //     device.setDeviceType("iPad");
+    //     device.setName("Coach P.");
+    //     device.setStatus("Active");
+    //     device.setLocation("North-End");
+    //     device.setNetwork("Penfield-532");
+    //     activeDevices.push_back(device);
+    // }
+
+    // // Second set of active devices
+    // {
+    //     EventDevice device;
+    //     device.setDeviceId(2);
+    //     device.setDeviceType("Camcorder");
+    //     device.setName("Coach K.");
+    //     device.setStatus("Inactive");
+    //     device.setLocation("Press Box");
+    //     device.setNetwork("Penfield-532");
+    //     activeDevices.push_back(device);
+    // }
+
+    // // Third set of active devices
+    // {
+    //     EventDevice device;
+    //     device.setDeviceId(3);
+    //     device.setDeviceType("Smartphone");
+    //     device.setName("Coach Q.");
+    //     device.setStatus("Active");
+    //     device.setLocation("South-End");
+    //     device.setNetwork("Penfield-532");
+    //     activeDevices.push_back(device);
+    // }
+
+    // Set active devices in the event preview
+    ep.setActiveDevices(activeDevices);
+
+    return ep.toResponse();
 }
 
-std::string EventManager::getLiveEventData()
+std::string EventRunner::getLiveEventData()
 {
     LiveEvent le;
-    le.setSport("Football");  
+    le.setSport("Football");
     le.setLevel("University");
     le.setProgram("Men");
     le.setYear(2024);
@@ -231,14 +238,14 @@ std::string EventManager::getLiveEventData()
     return le.toResponse();
 }
 
-void EventManager::publishEventPreview()
-{
-    Publisher::instance().publish("event-preview", this->getEventPreviewData());
-}
+// void EventManager::publishEventPreview()
+// {
+//     Publisher::instance().publish("event-preview", this->getEventPreviewData());
+// }
 
-void EventManager::publishLiveEvent()
-{
-    Publisher::instance().publish("live-event", this->getLiveEventData());
-}
+// void EventManager::publishLiveEvent()
+// {
+//     Publisher::instance().publish("live-event", this->getLiveEventData());
+// }
 
 EventManager::~EventManager() {}

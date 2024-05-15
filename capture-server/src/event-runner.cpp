@@ -7,22 +7,10 @@
 #include "event-manager.h"
 #include "worker-loop.h"
 
-// EventRunner::EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration) : mp_eventPreviewPublisher{new WorkerLoop(2, [this]()
-//                                                                                                                                                                                      { Publisher::instance().publish("event-preview", this->getEventPreviewData()); })},
-//                                                                                                                                              mp_liveEventPublisher{new WorkerLoop(2, [this]()
-//                                                                                                                                                                                   { Publisher::instance().publish("live-event", this->getLiveEventData()); })},
-//                                                                                                                                              m_start{year, month, day, hour, min, sec, std::bind(&EventRunner::eventStarted, this)},
-//                                                                                                                                              m_end{m_start, duration, std::bind(&EventRunner::eventEnded, this)}
-// {
-//     this->mp_eventPreviewPublisher->start();
-// }
-
 EventRunner::EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration) : mp_eventPreviewPublisher{new WorkerLoop(2, [this]()
-                                                                                                                                                                                     {EventManager eventManager;
-                                                                                                                                                                                        Publisher::instance().publish("event-preview", eventManager.getEventPreviewData()); })},
+                                                                                                                                                                                     { Publisher::instance().publish("event-preview", this->getEventPreviewData()); })},
                                                                                                                                              mp_liveEventPublisher{new WorkerLoop(2, [this]()
-                                                                                                                                                                                  {EventManager eventManager;
-                                                                                                                                                                                        Publisher::instance().publish("live-event", eventManager.getLiveEventData()); })},
+                                                                                                                                                                                  { Publisher::instance().publish("live-event", this->getLiveEventData()); })},
                                                                                                                                              m_start{year, month, day, hour, min, sec, std::bind(&EventRunner::eventStarted, this)},
                                                                                                                                              m_end{m_start, duration, std::bind(&EventRunner::eventEnded, this)}
 {
