@@ -13,7 +13,9 @@ export class ApplicationComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  delete(){
+    
+  }
   modalOpenMd() {
     this.modalService.open(ApplicationFormComponent, {
       centered: true,

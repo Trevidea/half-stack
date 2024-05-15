@@ -113,6 +113,7 @@ import { NotificationDisplayComponent } from "./components/notification-display/
 import { InlineFormeModule } from "./blocks/inline-modal/inline-form-module";
 import { ValidationModule } from "./components/validation-alert/validation.module";
 import { StreamingInfoComponent } from "./components/connection/connection-device-detail/streaming-info/streaming-info.component";
+import { StreamingInfoDetailsComponent } from "./components/connection/connection-device-detail/streaming-info/streaming-info-details/streaming-info-details.component";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -205,7 +206,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RelayStreamPresenter,
     ConnectionDeviceDetailPresenter,
     NotificationDisplayComponent,
-    StreamingInfoComponent
+    StreamingInfoComponent,
+    StreamingInfoDetailsComponent
   ],
   providers: [
     {
@@ -244,4 +246,4 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ValidationModule
   ],
 })
-export class SportPipCaptureModule {}
+export class SportPipCaptureModule { }

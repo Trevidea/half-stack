@@ -1,14 +1,20 @@
 .media-server {
-    .card{
+    .card {
         margin-bottom: 0;
     }
+
+    .width100 {
+        width: 100%;
+    }
+
     .card-header {
         font-weight: 500;
         border-bottom: 1px solid #C3C3C3;
         font-size: 16px;
         padding: 5px 14px;
         background-color: #F3F4F5;
-        h5{
+
+        h5 {
             font-size: 16px;
         }
     }
@@ -24,6 +30,21 @@
         h6 {
             font-size: 12px;
         }
-
     }
+
+}
+
+.custum-col {
+    display: flex;
+    align-items: start;
+    width: 100%;
+}
+
+.main-line {
+    height: 50px;
+    width: 30px;
+    border-end-start-radius: 6px;
+    margin-right: 14px;
+    border-left: 1px solid #C3C3C3;
+    border-bottom: 1px solid #C3C3C3;
 }
