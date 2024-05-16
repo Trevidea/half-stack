@@ -127,18 +127,41 @@ std::string EventManager::getEventPreviewData(int eventId)
 
     EventPreview ep;
 
-    // Populate event details from the retrieved event
-    ep.setSport(event.sport());
-    ep.setLevel(event.level());
-    ep.setProgram(event.program());
-    ep.setYear(event.year());
-    ep.setDtEvent(event.dtEvent());
-    ep.setTime(event.tmEvent());
-    ep.setVenueLocation(event.venue());
-    ep.setTitle(event.title());
-    ep.setStatus(event.status());
-    ep.setCityAddress(event.detail());
-    ep.setEventType(event.type());
+    // // Populate event details from the retrieved event
+    // ep.setSport(event.sport());
+    // ep.setLevel(event.level());
+    // ep.setProgram(event.program());
+    // ep.setYear(event.year());
+    // ep.setDtEvent(event.dtEvent());
+    // ep.setTime(event.tmEvent());
+    // ep.setVenueLocation(event.venue());
+    // ep.setTitle(event.title());
+    // ep.setStatus(event.status());
+    // ep.setCityAddress(event.detail());
+    // ep.setEventType(event.type());
+
+    ep.setCityAddress("Ludhiana");
+    ep.setDtEvent("2024-05-01");
+    ep.activeDevices().push_back(EventDevice());
+    {
+        auto &device = ep.activeDevices().back();
+        device.setDeviceId(1);
+        device.setDeviceType("iPad");
+        device.setLocation("North-End");
+    }
+    ep.setDetailType("ondemand");
+    ep.setStreetAddress("Indoor Stadium, Pakhowal road");
+    ep.setDtEvent("2024-04-15");
+    ep.setEventType("ondemand");
+    ep.setLevel("University");
+    ep.setProgram("Men");
+    ep.setSport("Football");
+    ep.setStatus("Upcoming");
+    ep.setTime(1830);
+    ep.setTitle("Mumbai Indians vs Kolkatta Knightriders");
+    ep.setVenueLocation("Ludhiana");
+    ep.setYear(2024);
+
 
     EventDevice eventDevice;
     std::vector<EventDevice> activeDevices = eventDevice.list<EventDevice>();
