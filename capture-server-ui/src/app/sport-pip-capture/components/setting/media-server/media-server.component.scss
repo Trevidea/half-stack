@@ -58,3 +58,23 @@
     border: 6px solid transparent;
     border-left-color: #C3C3C3;
 }
+
+.dark-layout {
+    .card {
+        border: 1px solid #474747;
+    }
+
+    .card-header {
+        border-bottom: none;
+        background-color: #2E2E2E;
+    }
+
+    .main-line {
+        border-left: 1px solid #474747;
+        border-bottom: 1px solid #474747;
+    }
+
+    .main-line::after {
+        border-left-color: #474747;
+    }
+}
