@@ -82,7 +82,7 @@ void EventManager::openPreview(const Request &req, Response &rsp)
 
         this->m_runners.emplace(eventId, new EventRunner(
                                              dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1,
-                                             [this, eventId]()
+                                             [this]()
                                              { return this->getEventPreviewData(); },
                                              [this]()
                                              { return this->getLiveEventData(); }));
@@ -114,26 +114,6 @@ std::string EventManager::getEventPreviewData()
 {
 
     EventPreview ep;
-    // Event eventInstance;
-
-    // eventInstance.validateEventId(eventId);
-
-    // const auto event = Event::byId<Event>(eventId); 
-
-    // // Set event details in EventPreview object
-    // ep.setCityAddress("");   // Set as needed
-    // ep.setStreetAddress(""); // Set as needed
-    // ep.setDtEvent(event.dtEvent());
-    // ep.setLevel(event.level());
-    // ep.setProgram(event.program());
-    // ep.setSport(event.sport());
-    // ep.setStatus(event.status());
-    // ep.setTime(event.tmEvent());
-    // ep.setTitle(event.title());
-    // ep.setEventType(event.type());
-    // ep.setVenueLocation(event.venue());
-    // ep.setYear(event.year());
-    // ep.setDetailType(""); // Set as needed
 
     ep.setCityAddress("Ludhiana");
     ep.setDtEvent("2024-05-01");
