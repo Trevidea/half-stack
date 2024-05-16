@@ -10,7 +10,6 @@
 #include <ctime>
 #include "event.h"
 
-
 class EventManager : public EntityBase
 {
 public:
@@ -22,7 +21,7 @@ public:
     void openPreview(const Request &req, Response &rsp);
     void closePreview(const Request &req, Response &rsp);
 
-    std::string getEventPreviewData();
+    std::string getEventPreviewData(int eventId);
     std::string getLiveEventData();
     
 private:
