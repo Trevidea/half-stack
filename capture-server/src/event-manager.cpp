@@ -83,7 +83,7 @@ void EventManager::openPreview(const Request &req, Response &rsp)
         this->m_runners.emplace(eventId, new EventRunner(
                                              dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1,
                                              [this, eventId]()
-                                             { return this->getEventPreviewData(eventId); },
+                                             { return this->getEventPreviewData(); },
                                              [this]()
                                              { return this->getLiveEventData(); }));
     }
@@ -110,52 +110,52 @@ void EventManager::closePreview(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
 
-std::string EventManager::getEventPreviewData(int eventId)
+std::string EventManager::getEventPreviewData()
 {
 
     EventPreview ep;
-    Event eventInstance;
+    // Event eventInstance;
 
-    eventInstance.validateEventId(eventId);
+    // eventInstance.validateEventId(eventId);
 
-    const auto event = Event::byId<Event>(eventId);
+    // const auto event = Event::byId<Event>(eventId); 
 
-    // Set event details in EventPreview object
-    ep.setCityAddress("");   // Set as needed
-    ep.setStreetAddress(""); // Set as needed
-    ep.setDtEvent(event.dtEvent());
-    ep.setLevel(event.level());
-    ep.setProgram(event.program());
-    ep.setSport(event.sport());
-    ep.setStatus(event.status());
-    ep.setTime(event.tmEvent());
-    ep.setTitle(event.title());
-    ep.setEventType(event.type());
-    ep.setVenueLocation(event.venue());
-    ep.setYear(event.year());
-    ep.setDetailType(""); // Set as needed
+    // // Set event details in EventPreview object
+    // ep.setCityAddress("");   // Set as needed
+    // ep.setStreetAddress(""); // Set as needed
+    // ep.setDtEvent(event.dtEvent());
+    // ep.setLevel(event.level());
+    // ep.setProgram(event.program());
+    // ep.setSport(event.sport());
+    // ep.setStatus(event.status());
+    // ep.setTime(event.tmEvent());
+    // ep.setTitle(event.title());
+    // ep.setEventType(event.type());
+    // ep.setVenueLocation(event.venue());
+    // ep.setYear(event.year());
+    // ep.setDetailType(""); // Set as needed
 
-    // ep.setCityAddress("Ludhiana");
-    // ep.setDtEvent("2024-05-01");
-    // ep.activeDevices().push_back(EventDevice());
-    // {
-    //     auto &device = ep.activeDevices().back();
-    //     device.setDeviceId(1);
-    //     device.setDeviceType("iPad");
-    //     device.setLocation("North-End");
-    // }
-    // ep.setDetailType("ondemand");
-    // ep.setStreetAddress("Indoor Stadium, Pakhowal road");
-    // ep.setDtEvent("2024-04-15");
-    // ep.setEventType("ondemand");
-    // ep.setLevel("University");
-    // ep.setProgram("Men");
-    // ep.setSport("Football");
-    // ep.setStatus("Upcoming");
-    // ep.setTime(1830);
-    // ep.setTitle("Mumbai Indians vs Kolkatta Knightriders");
-    // ep.setVenueLocation("Ludhiana");
-    // ep.setYear(2024);
+    ep.setCityAddress("Ludhiana");
+    ep.setDtEvent("2024-05-01");
+    ep.activeDevices().push_back(EventDevice());
+    {
+        auto &device = ep.activeDevices().back();
+        device.setDeviceId(1);
+        device.setDeviceType("iPad");
+        device.setLocation("North-End");
+    }
+    ep.setDetailType("ondemand");
+    ep.setStreetAddress("Indoor Stadium, Pakhowal road");
+    ep.setDtEvent("2024-04-15");
+    ep.setEventType("ondemand");
+    ep.setLevel("University");
+    ep.setProgram("Men");
+    ep.setSport("Football");
+    ep.setStatus("Upcoming");
+    ep.setTime(1830);
+    ep.setTitle("Mumbai Indians vs Kolkatta Knightriders");
+    ep.setVenueLocation("Ludhiana");
+    ep.setYear(2024);
 
     EventDevice eventDevice;
     std::vector<EventDevice> activeDevices = eventDevice.list<EventDevice>();
