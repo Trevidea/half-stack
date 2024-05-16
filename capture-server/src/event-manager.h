@@ -26,12 +26,11 @@ public:
     std::string getLiveEventData();
     
 private:
-
     void closeAllPreviews(const Request &req, Response &rsp);
 
 private:
     std::map<int, EventRunner *> m_runners;
-    // std::map<int, std::unique_ptr<EventRunner>> m_runners;
+    
 };
 
 #endif // EVENTMANAGER_H

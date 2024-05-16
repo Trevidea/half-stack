@@ -15,7 +15,7 @@ private:
 public:
     // EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration);
 
-    EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration, 
+    EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration,
                 std::function<std::string()> previewDataFunc, std::function<std::string()> liveDataFunc);
 
     void stop();
