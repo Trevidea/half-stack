@@ -30,6 +30,7 @@ private:
 
 private:
     std::map<int, EventRunner *> m_runners;
+    // std::map<int, std::unique_ptr<EventRunner>> m_runners;
 };
 
 #endif // EVENTMANAGER_H
