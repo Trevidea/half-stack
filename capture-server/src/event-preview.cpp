@@ -179,11 +179,10 @@ void EventPreview::setActiveDevices(const std::vector<EventDevice> &activeDevice
     {
         Json::Value jsonDevice;
         jsonDevice["deviceId"] = device.deviceId();
-        jsonDevice["deviceType"] = device.deviceType();
-        jsonDevice["name"] = device.name();
-        jsonDevice["status"] = device.status();
+        jsonDevice["eventId"] = device.eventId();
         jsonDevice["location"] = device.location();
-        jsonDevice["network"] = device.network();
+        jsonDevice["pin"] = device.pin();
+        jsonDevice["userId"] = device.userId();
         m_model["activeDevices"].append(jsonDevice);
     }
 }
