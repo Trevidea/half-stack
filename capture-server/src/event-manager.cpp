@@ -79,7 +79,13 @@ void EventManager::openPreview(const Request &req, Response &rsp)
 
         Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
         spdlog::trace("Creating a new runner for event id {}", eventId);
-        this->m_runners.emplace(eventId, new EventRunner(dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1,[this](){ return this->getEventPreviewData(); },[this](){ return this->getLiveEventData(); }));
+
+        this->m_runners.emplace(eventId, new EventRunner(
+                                             dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1,
+                                             [this]()
+                                             { return this->getEventPreviewData(); },
+                                             [this]()
+                                             { return this->getLiveEventData(); }));
     }
     const std::string strRsp = Gateway::instance().formatResponse({{response}});
     spdlog::trace("setting response: {}", strRsp);
@@ -106,6 +112,7 @@ void EventManager::closePreview(const Request &req, Response &rsp)
 
 std::string EventManager::getEventPreviewData()
 {
+
     EventPreview ep;
 
     ep.setCityAddress("Ludhiana");
