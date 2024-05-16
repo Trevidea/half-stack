@@ -1,9 +1,10 @@
+// event-runner.h
 #ifndef EVENT_RUNNER_H
 #define EVENT_RUNNER_H
 
 #include "countdown.h"
 #include "worker-loop.h"
-#include "event.h"
+#include <functional>
 
 class EventRunner
 {
@@ -13,8 +14,6 @@ private:
     Countdown m_start, m_end;
 
 public:
-    // EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration);
-
     EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration,
                 std::function<std::string()> previewDataFunc, std::function<std::string()> liveDataFunc);
 
@@ -24,12 +23,9 @@ public:
 private:
     void eventStarted();
     void eventEnded();
-    // std::string getEventPreviewData();
-    // std::string getLiveEventData();
     std::function<std::string()> m_previewDataFunc;
     std::function<std::string()> m_liveDataFunc;
     bool m_eventStarted = false;
-    bool m_previewStarted = false;
     bool m_stopped = false;
 };
 

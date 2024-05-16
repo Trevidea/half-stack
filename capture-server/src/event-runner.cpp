@@ -1,4 +1,5 @@
-#include <event-runner.h>
+// event-runner.cpp
+#include "event-runner.h"
 #include <spdlog/spdlog.h>
 #include "publisher.h"
 #include "event-preview.h"
@@ -18,13 +19,15 @@
 // }
 
 EventRunner::EventRunner(const int year, const int month, const int day, const int hour, const int min, const int sec, const int duration, std::function<std::string()> previewDataFunc, std::function<std::string()> liveDataFunc)
-                                                                                                                                                : m_previewDataFunc(previewDataFunc), m_liveDataFunc(liveDataFunc),
-                                                                                                                                                  mp_eventPreviewPublisher{new WorkerLoop(2, [this]()
-                                                                                                                                                                                          { Publisher::instance().publish("event-preview", this->m_previewDataFunc()); })},
-                                                                                                                                                  mp_liveEventPublisher{new WorkerLoop(2, [this]()
-                                                                                                                                                                                           { Publisher::instance().publish("live-event", this->m_liveDataFunc()); })},
-                                                                                                                                                  m_start{year, month, day, hour, min, sec, std::bind(&EventRunner::eventStarted, this)},
-                                                                                                                                                  m_end{m_start, duration, std::bind(&EventRunner::eventEnded, this)}
+                                                                                                                                            : m_previewDataFunc(previewDataFunc), m_liveDataFunc(liveDataFunc),
+                                                                                                                                            mp_eventPreviewPublisher(new WorkerLoop(2, [this]() {
+                                                                                                                                                Publisher::instance().publish("event-preview", this->m_previewDataFunc());
+                                                                                                                                            })),
+                                                                                                                                            mp_liveEventPublisher(new WorkerLoop(2, [this]() {
+                                                                                                                                                Publisher::instance().publish("live-event", this->m_liveDataFunc());
+                                                                                                                                            })),
+                                                                                                                                            m_start(year, month, day, hour, min, sec, std::bind(&EventRunner::eventStarted, this)),
+                                                                                                                                            m_end(m_start, duration, std::bind(&EventRunner::eventEnded, this))
 {
     this->mp_eventPreviewPublisher->start();
 }
