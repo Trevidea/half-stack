@@ -79,11 +79,18 @@ void EventManager::openPreview(const Request &req, Response &rsp)
 
         Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
         spdlog::trace("Creating a new runner for event id {}", eventId);
+
+        // Call getEventPreviewData and getLiveEventData to retrieve data
+        std::string previewData = this->getEventPreviewData(eventId);
+        std::string liveEventData = this->getLiveEventData();
+
+        // Create a new EventRunner instance with retrieved data
         this->m_runners.emplace(eventId, new EventRunner(
-                                             dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1, [this, eventId]()
-                                             { return this->getEventPreviewData(eventId); },
-                                             [this]()
-                                             { return this->getLiveEventData(); }));
+                                             dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1,
+                                             [previewData]()
+                                             { return previewData; },
+                                             [liveEventData]()
+                                             { return liveEventData; }));
     }
     const std::string strRsp = Gateway::instance().formatResponse({{response}});
     spdlog::trace("setting response: {}", strRsp);
