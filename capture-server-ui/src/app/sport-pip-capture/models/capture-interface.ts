@@ -209,10 +209,10 @@ export namespace Data {
     network: string;
   }
 
-  export enum NetWorkQuality {}
-  export enum Type {}
+  export enum NetWorkQuality { }
+  export enum Type { }
 
-  export enum Priority {}
+  export enum Priority { }
 
   export enum DataType {
     Type1 = "type1",
@@ -259,7 +259,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role {}
+  export interface Role { }
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -268,13 +268,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings {}
+  export interface DisplaySettings { }
 
-  export interface CustomizationSettings {}
+  export interface CustomizationSettings { }
 
-  export interface NotificationSettings {}
+  export interface NotificationSettings { }
 
-  export interface VideoResolutionSettings {}
+  export interface VideoResolutionSettings { }
   export enum DataStatus {
     Status1 = "status1",
     Status2 = "status2",
@@ -319,7 +319,7 @@ export namespace Data {
     role: Role;
     address: string;
   }
-  export interface Role {}
+  export interface Role { }
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;
@@ -328,13 +328,13 @@ export namespace Data {
     videoResolution: VideoResolutionSettings;
   }
 
-  export interface DisplaySettings {}
+  export interface DisplaySettings { }
 
-  export interface CustomizationSettings {}
+  export interface CustomizationSettings { }
 
-  export interface NotificationSettings {}
+  export interface NotificationSettings { }
 
-  export interface VideoResolutionSettings {}
+  export interface VideoResolutionSettings { }
 
   export interface Team extends Base {
     id: number;
@@ -366,9 +366,7 @@ export namespace Data {
     name: string;
     logo: string;
   }
-  // export interface PastConnection extends Base {
-  //   connection: PreviousEventsConnection[];
-  // }
+
   export interface MetaType extends Base {
     name: string;
     key: string;
@@ -408,6 +406,20 @@ export namespace Data {
     status: string;
     network: string;
   }
+
+  export interface StreamingInfo {
+    bitRate: string;
+    frameRate: string;
+    keyFrameInterval: string;
+    sampleRate: number;
+    statusCode: number;
+    height: number;
+    width: number;
+    frameType: string;
+    data: string;
+    outputStreamName: string;
+  }
+
 }
 
 export namespace Views {
