@@ -10,6 +10,7 @@
 #include <ctime>
 #include "event.h"
 
+
 class EventManager : public EntityBase
 {
 public:
@@ -29,7 +30,6 @@ private:
 
 private:
     std::map<int, EventRunner *> m_runners;
-    
 };
 
 #endif // EVENTMANAGER_H
