@@ -17,6 +17,7 @@ import { LogSummaryComponent } from "./components/log/log-summary/log-summary.co
 import { LogListPresentert } from "./components/log/log-list/log-list.presenter";
 import { LogComponent } from "./components/log/log.component";
 import { ConnectionDeviceDetailPresenter } from "./components/connection/connection-device-detail/connection-device-detail.presenter";
+import { StreamingInfoDetailsComponent } from "./components/connection/connection-device-detail/streaming-info/streaming-info-details/streaming-info-details.component";
 
 const routes: Routes = [
   {
@@ -68,6 +69,7 @@ const routes: Routes = [
   { path: "event", component: EventPresenter },
   { path: "past-event-view", component: PastEventViewPresenter },
   { path: "event/event-preview/:id", component: EventPreviewPresenter },
+  { path: 'connection/stream-info', component: StreamingInfoDetailsComponent }
 ];
 
 @NgModule({
@@ -75,4 +77,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [DatatablesService],
 })
-export class SportPipCaptureRoutingModule {}
+export class SportPipCaptureRoutingModule { }

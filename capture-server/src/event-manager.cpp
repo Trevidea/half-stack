@@ -34,10 +34,8 @@ void EventManager::report()
                               });
 }
 
-void EventManager::closeAllPreviews(const Request &req, Response &rsp)
-{
-    for (auto &&runner : this->m_runners)
-    {
+void EventManager::closeAllPreviews(const Request &req, Response &rsp) {
+    for (auto &&runner : this->m_runners) {
         runner.second->stop();
         delete runner.second;
     }
@@ -47,8 +45,7 @@ void EventManager::closeAllPreviews(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{jsResult}}));
 }
 
-void EventManager::openPreview(const Request &req, Response &rsp)
-{
+void EventManager::openPreview(const Request &req, Response &rsp) {
     Json::Value request = req.json();
     const int eventId = request.get("eventId", -1).asInt();
     spdlog::trace("Open preview request for: {}", eventId);
@@ -57,21 +54,18 @@ void EventManager::openPreview(const Request &req, Response &rsp)
     response["status"] = "success";
     const auto event = Event::byId<Event>(eventId);
 
-    if (!event.notSet())
-    {
+    if (!event.notSet()) {
         const auto dt = event.getDTUDate();
         const auto tm = event.getDTUTime();
         spdlog::trace("Event {}, date: {}, month: {}, year: {}, hours: {}, mins: {}",
                       event.title(), dt.date, dt.month, dt.year, tm.hours, tm.minutes);
         auto minsToStart = event.minutesToStart();
-        if (minsToStart > 60)
-        {
+        if (minsToStart > 60) {
             throw ExInvalidPreviewDurationException(event.title(), minsToStart);
         }
 
         const auto &kvPair = this->m_runners.find(eventId);
-        if (kvPair != this->m_runners.end())
-        {
+        if (kvPair != this->m_runners.end()) {
             spdlog::trace("Runner already exists for event {}. Stopping runner - just in case", eventId);
             kvPair->second->stop();
             this->m_runners.erase(kvPair);
@@ -79,15 +73,19 @@ void EventManager::openPreview(const Request &req, Response &rsp)
 
         Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
         spdlog::trace("Creating a new runner for event id {}", eventId);
-        this->m_runners.emplace(eventId, new EventRunner(dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1));
+
+        this->m_runners.emplace(eventId, new EventRunner(
+            dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1,
+            [this]() { return this->getEventPreviewData(); },
+            [this]() { return this->getLiveEventData(); }
+        ));
     }
     const std::string strRsp = Gateway::instance().formatResponse({{response}});
     spdlog::trace("setting response: {}", strRsp);
     rsp.setData(strRsp);
 }
 
-void EventManager::closePreview(const Request &req, Response &rsp)
-{
+void EventManager::closePreview(const Request &req, Response &rsp) {
     Json::Value request = req.json();
     const int eventId = request.get("eventId", -1).asInt();
     spdlog::trace("Close preview request for: {}", eventId);
@@ -95,8 +93,7 @@ void EventManager::closePreview(const Request &req, Response &rsp)
     Json::Value response = Json::objectValue;
     response["status"] = "success";
     const auto &kvPair = this->m_runners.find(eventId);
-    if (kvPair != this->m_runners.end())
-    {
+    if (kvPair != this->m_runners.end()) {
         spdlog::trace("Runner found for event {}. closing preview!", eventId);
         kvPair->second->stop();
         this->m_runners.erase(kvPair);
@@ -104,45 +101,9 @@ void EventManager::closePreview(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
 
-std::string EventManager::getEventPreviewData()
-{
-    // Construct the query to fetch event devices
-    std::string query = "SELECT * FROM event_devices;";
-    std::string data = ""; // Since no additional data is needed
-    
-    // Create a Request object with the constructed query and data
-    Request request(query, data);
-
-    // Now, you can use the Request object to fetch data from the event devices table
-    Response response;
-    EventDevice eventDevice;
-    eventDevice.list(request, response);
-
-    // Get the JSON data from the response
-    std::string jsonData = response.data();
-
-    // Parse the JSON data
-    Json::Value parsedJson;
-    Json::Reader reader;
-    reader.parse(jsonData, parsedJson);
-
-    // Assuming you have an EventPreview object named ep
+std::string EventManager::getEventPreviewData() {
     EventPreview ep;
 
-    // Extract and populate data from the JSON to the EventPreview object
-    for (const auto &deviceJson : parsedJson["data"])
-    {
-        EventDevice device;
-        device.setDeviceId(deviceJson["device_id"].asInt());
-        device.setDeviceType(deviceJson["device_type"].asString());
-        device.setName(deviceJson["name"].asString());
-        device.setStatus(deviceJson["status"].asString());
-        device.setLocation(deviceJson["location"].asString());
-        device.setNetwork(deviceJson["network"].asString());
-        ep.activeDevices().push_back(device);
-    }
-
-    // Populate other EventPreview properties as needed
     ep.setCityAddress("Ludhiana");
     ep.setDtEvent("2024-05-01");
     ep.activeDevices().push_back(EventDevice());
@@ -165,16 +126,17 @@ std::string EventManager::getEventPreviewData()
     ep.setVenueLocation("Ludhiana");
     ep.setYear(2024);
 
-    // Convert the populated EventPreview object to a JSON string
-    std::string eventPreviewJson = ep.toResponse();
+    EventDevice eventDevice;
+    std::vector<EventDevice> activeDevices = eventDevice.list<EventDevice>();
 
-    return eventPreviewJson;
+    ep.setActiveDevices(activeDevices);
+
+    return ep.toResponse();
 }
 
-std::string EventManager::getLiveEventData()
-{
+std::string EventManager::getLiveEventData() {
     LiveEvent le;
-    le.setSport("Football");  
+    le.setSport("Football");
     le.setLevel("University");
     le.setProgram("Men");
     le.setYear(2024);
@@ -229,16 +191,6 @@ std::string EventManager::getLiveEventData()
     le.setConnectionDetails({connectionDetail, connectionDetail1, connectionDetail2});
 
     return le.toResponse();
-}
-
-void EventManager::publishEventPreview()
-{
-    Publisher::instance().publish("event-preview", this->getEventPreviewData());
-}
-
-void EventManager::publishLiveEvent()
-{
-    Publisher::instance().publish("live-event", this->getLiveEventData());
 }
 
 EventManager::~EventManager() {}

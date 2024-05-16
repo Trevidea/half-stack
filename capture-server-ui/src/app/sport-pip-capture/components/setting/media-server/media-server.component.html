@@ -1,21 +1,28 @@
-<div class="card media-server">
-  <div class="row p-1">
+<div class="card">
+  <div class="row p-1 media-server">
     <div class="col-12 mb-2">
       <h2>Media Server</h2>
     </div>
-    <div class="col-12">
+    <div class="col-12 mb-1">
       <app-server-configuration></app-server-configuration>
     </div>
-    <div class="col-12">
-      <app-virtual-host></app-virtual-host>
+    <div class="col-12 mb-1 ">
+      <div class="custum-col ">
+        <div class="main-line"></div>
+        <app-virtual-host class="width100"></app-virtual-host>
+      </div>
     </div>
-    <div class="col-12">
-      <app-application></app-application>
+    <div class="col-12 mb-1">
+      <div class="custum-col ">
+        <div class="main-line"></div>
+        <app-application class="width100"></app-application>
+      </div>
+
     </div>
-    <div class="col-12">
+    <div class="col-12 mb-1">
       <app-module-configuration></app-module-configuration>
     </div>
-    <div class="col-12">
+    <div class="col-12 mb-1">
       <app-port-binding-config></app-port-binding-config>
     </div>
   </div>

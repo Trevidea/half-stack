@@ -13,6 +13,7 @@
 #include "event-device.h"
 #include "device.h"
 #include "event-connection.h"
+#include "event-manager.h"
 
 Gateway::Gateway()
 {
@@ -30,11 +31,13 @@ void Gateway::init()
     this->m_entities.push_back(new EventDevice());
     this->m_entities.push_back(new Device());
     this->m_entities.push_back(new EventConnection());
+    this->m_entities.push_back(new EventManager());
     for (auto &&e : this->m_entities)
     {
         e->report();
     }
 }
+
 std::string Gateway::flatten(std::string method, const std::string path)
 {
     return method.append(path);
@@ -99,6 +102,7 @@ std::string Gateway::formatResponse(const std::vector<std::vector<Json::Value>> 
                   { root["result"].append(val); });
     return Json::FastWriter().write(root);
 }
+
 std::string Gateway::formatResponse(const std::vector<std::map<std::string, std::string>> &data)
 {
     Json::Value root; // = Json::objectValue;
@@ -120,4 +124,5 @@ std::string Gateway::formatResponse(const std::vector<std::map<std::string, std:
                   { root["result"].append(val); });
     return Json::FastWriter().write(root);
 }
+
 Gateway::~Gateway(){};
