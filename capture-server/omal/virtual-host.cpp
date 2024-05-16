@@ -14,6 +14,7 @@ VirtualHost::VirtualHost(const std::string &name, const omal::vhost &vhost) : m_
                                                                               m_dumpsBaseLocation{DUMPS_BASE_LOCATION}
 {
 }
+
 Json::Value VirtualHost::deepFindOrCreate()
 {
     Json::Value jsResult = Json::objectValue;
