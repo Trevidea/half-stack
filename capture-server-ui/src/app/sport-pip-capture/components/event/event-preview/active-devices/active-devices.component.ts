@@ -13,6 +13,7 @@ import { UI } from 'app/sport-pip-capture/components/event/event-utility/event-u
 })
 export class ActiveDevicesComponent implements OnInit {
   @Input() eventId: any;
+  @Input() datasource: any;
   dropdownItems: UI.DropDownMenuItem[] = [
     { label: 'Block', icon: 'slash', type: 'feather', action: () => { } },
     { label: 'Remove', icon: 'trash', type: 'feather', action: () => { } },

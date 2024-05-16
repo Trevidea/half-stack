@@ -10,16 +10,31 @@ export class AddDeviceView implements Views.Datasource {
     public set id(v: number) {
         this._id = v;
     }
-   
-    
-    private _appName : string;
-    public get appName() : string {
+
+
+    private _appName: string;
+    public get appName(): string {
         return this._appName;
     }
-    public set appName(v : string) {
+    public set appName(v: string) {
         this._appName = v;
     }
-    
+
+
+
+    private _appNamesCollection: Collection<string>;
+    public get appNamesCollection(): Collection<string> {
+        if (!this._appNamesCollection) {
+            this._appNamesCollection = new Collection<string>()
+        }
+        return this._appNamesCollection;
+    }
+    public set appNamesCollection(v: Collection<string>) {
+        this._appNamesCollection = v;
+    }
+
+
+
     private _userName: Collection<SelectItemView>;
     public get userName(): Collection<SelectItemView> {
         if (!this._userName) {
@@ -63,16 +78,16 @@ export class AddDeviceView implements Views.Datasource {
     public set location(v: Collection<string>) {
         this._location = v;
     }
- 
 
-    
-    private _eventId : number;
-    public get eventId() : number {
+
+
+    private _eventId: number;
+    public get eventId(): number {
         return this._eventId;
     }
-    public set eventId(v : number) {
+    public set eventId(v: number) {
         this._eventId = v;
     }
-    
+
 
 }
