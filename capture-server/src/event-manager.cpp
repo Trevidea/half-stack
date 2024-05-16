@@ -79,7 +79,11 @@ void EventManager::openPreview(const Request &req, Response &rsp)
 
         Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
         spdlog::trace("Creating a new runner for event id {}", eventId);
-        this->m_runners.emplace(eventId, new EventRunner(dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1,[this](){ return this->getEventPreviewData(); },[this](){ return this->getLiveEventData(); }));
+        this->m_runners.emplace(eventId, new EventRunner(
+                                             dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1, [this, eventId]()
+                                             { return this->getEventPreviewData(eventId); },
+                                             [this]()
+                                             { return this->getLiveEventData(); }));
     }
     const std::string strRsp = Gateway::instance().formatResponse({{response}});
     spdlog::trace("setting response: {}", strRsp);
@@ -104,31 +108,30 @@ void EventManager::closePreview(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
 
-std::string EventManager::getEventPreviewData()
+std::string EventManager::getEventPreviewData(int eventId)
 {
+    const auto event = Event::byId<Event>(eventId);
+
+    if (event.notSet())
+    {
+        // Handle the case where the event is not found
+        return "Event not found";
+    }
+
     EventPreview ep;
 
-    ep.setCityAddress("Ludhiana");
-    ep.setDtEvent("2024-05-01");
-    ep.activeDevices().push_back(EventDevice());
-    {
-        auto &device = ep.activeDevices().back();
-        device.setDeviceId(1);
-        device.setDeviceType("iPad");
-        device.setLocation("North-End");
-    }
-    ep.setDetailType("ondemand");
-    ep.setStreetAddress("Indoor Stadium, Pakhowal road");
-    ep.setDtEvent("2024-04-15");
-    ep.setEventType("ondemand");
-    ep.setLevel("University");
-    ep.setProgram("Men");
-    ep.setSport("Football");
-    ep.setStatus("Upcoming");
-    ep.setTime(1830);
-    ep.setTitle("Mumbai Indians vs Kolkatta Knightriders");
-    ep.setVenueLocation("Ludhiana");
-    ep.setYear(2024);
+    // Populate event details from the retrieved event
+    ep.setSport(event.sport());
+    ep.setLevel(event.level());
+    ep.setProgram(event.program());
+    ep.setYear(event.year());
+    ep.setDtEvent(event.dtEvent());
+    ep.setTime(event.tmEvent());
+    ep.setVenueLocation(event.venue());
+    ep.setTitle(event.title());
+    ep.setStatus(event.status());
+    ep.setCityAddress(event.detail());
+    ep.setEventType(event.type());
 
     EventDevice eventDevice;
     std::vector<EventDevice> activeDevices = eventDevice.list<EventDevice>();
