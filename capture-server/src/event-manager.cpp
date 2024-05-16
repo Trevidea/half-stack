@@ -79,18 +79,7 @@ void EventManager::openPreview(const Request &req, Response &rsp)
 
         Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
         spdlog::trace("Creating a new runner for event id {}", eventId);
-
-        // Call getEventPreviewData and getLiveEventData to retrieve data
-        std::string previewData = this->getEventPreviewData(eventId);
-        std::string liveEventData = this->getLiveEventData();
-
-        // Create a new EventRunner instance with retrieved data
-        this->m_runners.emplace(eventId, new EventRunner(
-                                             dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1,
-                                             [previewData]()
-                                             { return previewData; },
-                                             [liveEventData]()
-                                             { return liveEventData; }));
+        this->m_runners.emplace(eventId, new EventRunner(dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1,[this](){ return this->getEventPreviewData(); },[this](){ return this->getLiveEventData(); }));
     }
     const std::string strRsp = Gateway::instance().formatResponse({{response}});
     spdlog::trace("setting response: {}", strRsp);
@@ -115,30 +104,9 @@ void EventManager::closePreview(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
 
-std::string EventManager::getEventPreviewData(int eventId)
+std::string EventManager::getEventPreviewData()
 {
-    const auto event = Event::byId<Event>(eventId);
-
-    if (event.notSet())
-    {
-        // Handle the case where the event is not found
-        return "Event not found";
-    }
-
     EventPreview ep;
-
-    // // Populate event details from the retrieved event
-    // ep.setSport(event.sport());
-    // ep.setLevel(event.level());
-    // ep.setProgram(event.program());
-    // ep.setYear(event.year());
-    // ep.setDtEvent(event.dtEvent());
-    // ep.setTime(event.tmEvent());
-    // ep.setVenueLocation(event.venue());
-    // ep.setTitle(event.title());
-    // ep.setStatus(event.status());
-    // ep.setCityAddress(event.detail());
-    // ep.setEventType(event.type());
 
     ep.setCityAddress("Ludhiana");
     ep.setDtEvent("2024-05-01");
@@ -161,7 +129,6 @@ std::string EventManager::getEventPreviewData(int eventId)
     ep.setTitle("Mumbai Indians vs Kolkatta Knightriders");
     ep.setVenueLocation("Ludhiana");
     ep.setYear(2024);
-
 
     EventDevice eventDevice;
     std::vector<EventDevice> activeDevices = eventDevice.list<EventDevice>();

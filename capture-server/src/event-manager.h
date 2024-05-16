@@ -21,7 +21,7 @@ public:
     void openPreview(const Request &req, Response &rsp);
     void closePreview(const Request &req, Response &rsp);
 
-    std::string getEventPreviewData(int eventId);
+    std::string getEventPreviewData();
     std::string getLiveEventData();
     
 private:
