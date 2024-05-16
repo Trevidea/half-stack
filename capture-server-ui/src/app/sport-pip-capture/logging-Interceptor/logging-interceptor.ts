@@ -73,10 +73,9 @@ export class LoggingInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       tap((event) => {
         if (event instanceof HttpResponse) {
-          // console.log("request.method::::", event.body["Absolute URI"]);
-          LogEvent.createEvent(event);
-        } else {
-          console.log();
+          console.log("request.method::::", event.body["Absolute URI"]);
+          console.log(event);
+          // LogEvent.createEvent(event);
         }
       })
     );

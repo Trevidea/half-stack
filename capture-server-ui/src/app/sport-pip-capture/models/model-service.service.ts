@@ -1,6 +1,6 @@
 import { environment } from "environments/environment";
 import { AdapterService } from "./adapter.service";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable, forkJoin, of } from "rxjs";
 import { first, map, mergeMap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
@@ -33,6 +33,7 @@ export class ModelServiceService {
     const url = `${this.modelsServerUrl}/${type}`;
     return this._adapter.modulateOne(type, entity).pipe(
       mergeMap((modata) => {
+        console.log(modata);
         return this._httpClient.post<any>(url, modata);
       })
     );
@@ -158,7 +159,7 @@ export class ModelServiceService {
     return this._adapter.demodulate(resource, this.readOne(resource, id)).pipe(
       map((models) =>
         models.map((model: any) => {
-          console.log(model)
+          console.log(model);
           return model as I;
         })
       )
@@ -246,7 +247,13 @@ export class ModelServiceService {
 
   private apiUrl = `${environment.spModelUrl}/on-demand-event`;
   _saveOnDemandEvent(data: any): Observable<any> {
-    return this._httpClient.post<any>(this.apiUrl, data);
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+    });
+    const options = {
+      headers: headers,
+    };
+    return this._httpClient.post<any>(this.apiUrl, data, options);
   }
 
   saveEventDevice(data: Data.EventDevice): Observable<Data.EventDevice> {
@@ -369,7 +376,6 @@ export class ModelServiceService {
   getVirtualHost(): Observable<any> {
     const url = `${environment.spModelUrl}/omal/virtual-hosts`;
     return this._httpClient.get<any>(url);
-
   }
 
   MetaTypeByKey(key: string): Observable<Data.MetaType> {
