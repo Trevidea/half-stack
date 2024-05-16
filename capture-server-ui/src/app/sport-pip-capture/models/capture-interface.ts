@@ -407,7 +407,7 @@ export namespace Data {
     network: string;
   }
 
-  export interface StreamingInfo {
+  export interface StreamingInfo extends Base {
     bitRate: string;
     frameRate: string;
     keyFrameInterval: string;

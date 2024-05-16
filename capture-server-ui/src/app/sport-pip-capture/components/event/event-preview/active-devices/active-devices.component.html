@@ -3,7 +3,7 @@
     <button type="button" class="btn btn-warning mt-0" (click)="openAddDeviceModal()" rippleEffect>Add device to
         event</button>
 </div>
-<div class="card-body p-0">
+<div class="card-body p-0 activeDevice">
     <div class="table-responsive">
         <table class="table" style="min-width: max-content;">
             <thead>
@@ -18,15 +18,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of datasource.activeDevices;">
+                <tr *ngFor="let item of datasource?.activeDevices;">
                     <!-- <td>
                         <app-menu-button [dropdownItems]="dropdownItems"></app-menu-button>
                     </td> -->
                     <td></td>
-                    <td>{{item.deviceId}}</td>
+                    <td>{{item?.deviceId}}</td>
                     <td></td>
                     <td></td>
-                    <td>{{item.location}}</td>
+                    <td>{{item?.location}}</td>
                     <td></td>
                     <td><button type="button" class="btn btn-icon btn-danger" rippleEffect>
                             <span [data-feather]="'inbox'"></span></button>
