@@ -34,8 +34,10 @@ void EventManager::report()
                               });
 }
 
-void EventManager::closeAllPreviews(const Request &req, Response &rsp) {
-    for (auto &&runner : this->m_runners) {
+void EventManager::closeAllPreviews(const Request &req, Response &rsp)
+{
+    for (auto &&runner : this->m_runners)
+    {
         runner.second->stop();
         delete runner.second;
     }
@@ -45,7 +47,8 @@ void EventManager::closeAllPreviews(const Request &req, Response &rsp) {
     rsp.setData(Gateway::instance().formatResponse({{jsResult}}));
 }
 
-void EventManager::openPreview(const Request &req, Response &rsp) {
+void EventManager::openPreview(const Request &req, Response &rsp)
+{
     Json::Value request = req.json();
     const int eventId = request.get("eventId", -1).asInt();
     spdlog::trace("Open preview request for: {}", eventId);
@@ -54,18 +57,21 @@ void EventManager::openPreview(const Request &req, Response &rsp) {
     response["status"] = "success";
     const auto event = Event::byId<Event>(eventId);
 
-    if (!event.notSet()) {
+    if (!event.notSet())
+    {
         const auto dt = event.getDTUDate();
         const auto tm = event.getDTUTime();
         spdlog::trace("Event {}, date: {}, month: {}, year: {}, hours: {}, mins: {}",
                       event.title(), dt.date, dt.month, dt.year, tm.hours, tm.minutes);
         auto minsToStart = event.minutesToStart();
-        if (minsToStart > 60) {
+        if (minsToStart > 60)
+        {
             throw ExInvalidPreviewDurationException(event.title(), minsToStart);
         }
 
         const auto &kvPair = this->m_runners.find(eventId);
-        if (kvPair != this->m_runners.end()) {
+        if (kvPair != this->m_runners.end())
+        {
             spdlog::trace("Runner already exists for event {}. Stopping runner - just in case", eventId);
             kvPair->second->stop();
             this->m_runners.erase(kvPair);
@@ -75,17 +81,19 @@ void EventManager::openPreview(const Request &req, Response &rsp) {
         spdlog::trace("Creating a new runner for event id {}", eventId);
 
         this->m_runners.emplace(eventId, new EventRunner(
-            dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1,
-            [this]() { return this->getEventPreviewData(); },
-            [this]() { return this->getLiveEventData(); }
-        ));
+                                             dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1,
+                                             [this, eventId]()
+                                             { return this->getEventPreviewData(eventId); },
+                                             [this]()
+                                             { return this->getLiveEventData(); }));
     }
     const std::string strRsp = Gateway::instance().formatResponse({{response}});
     spdlog::trace("setting response: {}", strRsp);
     rsp.setData(strRsp);
 }
 
-void EventManager::closePreview(const Request &req, Response &rsp) {
+void EventManager::closePreview(const Request &req, Response &rsp)
+{
     Json::Value request = req.json();
     const int eventId = request.get("eventId", -1).asInt();
     spdlog::trace("Close preview request for: {}", eventId);
@@ -93,7 +101,8 @@ void EventManager::closePreview(const Request &req, Response &rsp) {
     Json::Value response = Json::objectValue;
     response["status"] = "success";
     const auto &kvPair = this->m_runners.find(eventId);
-    if (kvPair != this->m_runners.end()) {
+    if (kvPair != this->m_runners.end())
+    {
         spdlog::trace("Runner found for event {}. closing preview!", eventId);
         kvPair->second->stop();
         this->m_runners.erase(kvPair);
@@ -101,30 +110,52 @@ void EventManager::closePreview(const Request &req, Response &rsp) {
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
 
-std::string EventManager::getEventPreviewData() {
-    EventPreview ep;
+std::string EventManager::getEventPreviewData(int eventId)
+{
 
-    ep.setCityAddress("Ludhiana");
-    ep.setDtEvent("2024-05-01");
-    ep.activeDevices().push_back(EventDevice());
-    {
-        auto &device = ep.activeDevices().back();
-        device.setDeviceId(1);
-        device.setDeviceType("iPad");
-        device.setLocation("North-End");
-    }
-    ep.setDetailType("ondemand");
-    ep.setStreetAddress("Indoor Stadium, Pakhowal road");
-    ep.setDtEvent("2024-04-15");
-    ep.setEventType("ondemand");
-    ep.setLevel("University");
-    ep.setProgram("Men");
-    ep.setSport("Football");
-    ep.setStatus("Upcoming");
-    ep.setTime(1830);
-    ep.setTitle("Mumbai Indians vs Kolkatta Knightriders");
-    ep.setVenueLocation("Ludhiana");
-    ep.setYear(2024);
+    EventPreview ep;
+    Event eventInstance;
+
+    eventInstance.validateEventId(eventId);
+
+    const auto event = Event::byId<Event>(eventId);
+
+    // Set event details in EventPreview object
+    ep.setCityAddress("");   // Set as needed
+    ep.setStreetAddress(""); // Set as needed
+    ep.setDtEvent(event.dtEvent());
+    ep.setLevel(event.level());
+    ep.setProgram(event.program());
+    ep.setSport(event.sport());
+    ep.setStatus(event.status());
+    ep.setTime(event.tmEvent());
+    ep.setTitle(event.title());
+    ep.setEventType(event.type());
+    ep.setVenueLocation(event.venue());
+    ep.setYear(event.year());
+    ep.setDetailType(""); // Set as needed
+
+    // ep.setCityAddress("Ludhiana");
+    // ep.setDtEvent("2024-05-01");
+    // ep.activeDevices().push_back(EventDevice());
+    // {
+    //     auto &device = ep.activeDevices().back();
+    //     device.setDeviceId(1);
+    //     device.setDeviceType("iPad");
+    //     device.setLocation("North-End");
+    // }
+    // ep.setDetailType("ondemand");
+    // ep.setStreetAddress("Indoor Stadium, Pakhowal road");
+    // ep.setDtEvent("2024-04-15");
+    // ep.setEventType("ondemand");
+    // ep.setLevel("University");
+    // ep.setProgram("Men");
+    // ep.setSport("Football");
+    // ep.setStatus("Upcoming");
+    // ep.setTime(1830);
+    // ep.setTitle("Mumbai Indians vs Kolkatta Knightriders");
+    // ep.setVenueLocation("Ludhiana");
+    // ep.setYear(2024);
 
     EventDevice eventDevice;
     std::vector<EventDevice> activeDevices = eventDevice.list<EventDevice>();
@@ -134,7 +165,8 @@ std::string EventManager::getEventPreviewData() {
     return ep.toResponse();
 }
 
-std::string EventManager::getLiveEventData() {
+std::string EventManager::getLiveEventData()
+{
     LiveEvent le;
     le.setSport("Football");
     le.setLevel("University");
