@@ -46,6 +46,7 @@ void EventManager::closeAllPreviews(const Request &req, Response &rsp)
     jsResult["Result"] = "Success";
     rsp.setData(Gateway::instance().formatResponse({{jsResult}}));
 }
+
 void EventManager::publishPreviewData()
 {
     for (auto &&kvRunner : this->m_runners)
@@ -53,6 +54,7 @@ void EventManager::publishPreviewData()
         Publisher::instance().publish("event-preview", this->getEventPreviewData(kvRunner.first));
     }
 }
+
 void EventManager::publishLiveData()
 {
     for (auto &&kvRunner : this->m_runners)
@@ -60,6 +62,7 @@ void EventManager::publishLiveData()
         Publisher::instance().publish("live-event", this->getLiveEventData(kvRunner.first));
     }
 }
+
 void EventManager::openPreview(const Request &req, Response &rsp)
 {
     Json::Value request = req.json();
@@ -127,28 +130,23 @@ void EventManager::closePreview(const Request &req, Response &rsp)
 std::string EventManager::getEventPreviewData(const int eventId)
 {
     EventPreview ep;
-
-    ep.setCityAddress("Ludhiana");
-    ep.setDtEvent("2024-05-01");
-    ep.activeDevices().push_back(EventDevice());
+    const auto event = Event::byId<Event>(eventId);
+    if(event.notSet())
     {
-        auto &device = ep.activeDevices().back();
-        device.setDeviceId(1);
-        device.setDeviceType("iPad");
-        device.setLocation("North-End");
+        return "";
     }
-    ep.setDetailType("ondemand");
-    ep.setStreetAddress("Indoor Stadium, Pakhowal road");
-    ep.setDtEvent("2024-04-15");
-    ep.setEventType("ondemand");
-    ep.setLevel("University");
-    ep.setProgram("Men");
-    ep.setSport("Football");
-    ep.setStatus("Upcoming");
-    ep.setTime(1830);
-    ep.setTitle("Mumbai Indians vs Kolkatta Knightriders");
-    ep.setVenueLocation("Ludhiana");
-    ep.setYear(2024);
+
+    ep.setTitle(event.title());
+    ep.setDtEvent(event.dtEvent());
+    ep.setTime(event.tmEvent());
+    ep.setSport(event.sport());
+    ep.setLevel(event.level());
+    ep.setProgram(event.program());
+    ep.setStatus(event.status());
+    ep.setStreetAddress(event.getStreetAddress());
+    ep.setCityAddress(event.getCityAddress());
+    ep.setVenueLocation(event.venue());
+    ep.setYear(event.year());
 
     EventDevice eventDevice;
     std::vector<EventDevice> activeDevices = eventDevice.list<EventDevice>();

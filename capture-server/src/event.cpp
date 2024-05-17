@@ -81,3 +81,23 @@ void Event::validateEventId(int eventId)
         throw;
     }
 }
+
+Json::Value Event::parseDetail() const
+{
+    Json::Value detailJson;
+    Json::Reader reader;
+    reader.parse(this->detail(), detailJson);
+    return detailJson;
+}
+
+std::string Event::getStreetAddress() const
+{
+    Json::Value detailJson = this->parseDetail();
+    return detailJson.get("streetAddress", "").asString();
+}
+
+std::string Event::getCityAddress() const
+{
+    Json::Value detailJson = this->parseDetail();
+    return detailJson.get("cityAddress", "").asString();
+}

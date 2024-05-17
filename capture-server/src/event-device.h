@@ -45,6 +45,9 @@ public:
     std::string pin() const;
     void setPin(const std::string &value);
 
+    // // Modified list function to filter devices by eventId
+    // std::vector<EventDevice> list(int eventId);
+
     // Method to check if the combination exists
     bool combinationExists(int eventId, int userId, const std::string &pin);
 

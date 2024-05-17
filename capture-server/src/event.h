@@ -7,6 +7,7 @@
 #include "datetimeutils.h"
 #include <map>
 #include <ctime>
+#include "event-device.h"
 
 class Event : public EntityBase
 {
@@ -50,7 +51,15 @@ public:
         spdlog::trace("Date of event: {}, and now it is {}. Time to start in mins {}", getDateStringFromTimePoint(tpEvent), getDateStringFromTimePoint(now), minutes.count());
         return minutes.count();
     }
+
+    std::vector<EventDevice> getActiveDevices() const;
+
+    std::string getCityAddress() const;
+    std::string getStreetAddress() const;
+
 private:
+
+    Json::Value parseDetail() const;
 
 };
 
