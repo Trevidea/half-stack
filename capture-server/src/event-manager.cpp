@@ -46,7 +46,20 @@ void EventManager::closeAllPreviews(const Request &req, Response &rsp)
     jsResult["Result"] = "Success";
     rsp.setData(Gateway::instance().formatResponse({{jsResult}}));
 }
-
+void EventManager::publishPreviewData()
+{
+    for (auto &&kvRunner : this->m_runners)
+    {
+        Publisher::instance().publish("event-preview", this->getEventPreviewData(kvRunner.first));
+    }
+}
+void EventManager::publishLiveData()
+{
+    for (auto &&kvRunner : this->m_runners)
+    {
+        Publisher::instance().publish("live-event", this->getLiveEventData(kvRunner.first));
+    }
+}
 void EventManager::openPreview(const Request &req, Response &rsp)
 {
     Json::Value request = req.json();
@@ -68,6 +81,10 @@ void EventManager::openPreview(const Request &req, Response &rsp)
         {
             throw ExInvalidPreviewDurationException(event.title(), minsToStart);
         }
+        else if (minsToStart < -1)
+        {
+            // throw an exception saying the event has already passed
+        }
 
         const auto &kvPair = this->m_runners.find(eventId);
         if (kvPair != this->m_runners.end())
@@ -79,7 +96,10 @@ void EventManager::openPreview(const Request &req, Response &rsp)
 
         Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
         spdlog::trace("Creating a new runner for event id {}", eventId);
-        this->m_runners.emplace(eventId, new EventRunner(dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1,[this](){ return this->getEventPreviewData(); },[this](){ return this->getLiveEventData(); }));
+        this->m_runners.emplace(eventId,
+                                new EventRunner({{dt.year, dt.month, dt.date}, {tm.hours, tm.minutes, tm.seconds}, 1},
+                                                std::bind(&EventManager::publishPreviewData, this),
+                                                std::bind(&EventManager::publishLiveData, this)));
     }
     const std::string strRsp = Gateway::instance().formatResponse({{response}});
     spdlog::trace("setting response: {}", strRsp);
@@ -104,7 +124,7 @@ void EventManager::closePreview(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
 
-std::string EventManager::getEventPreviewData()
+std::string EventManager::getEventPreviewData(const int eventId)
 {
     EventPreview ep;
 
@@ -138,7 +158,7 @@ std::string EventManager::getEventPreviewData()
     return ep.toResponse();
 }
 
-std::string EventManager::getLiveEventData()
+std::string EventManager::getLiveEventData(const int eventId)
 {
     LiveEvent le;
     le.setSport("Football");

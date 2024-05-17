@@ -1,5 +1,6 @@
-//countdown.cpp
+// countdown.cpp
 #include "countdown.h"
+#include <spdlog/spdlog.h>
 void Countdown::worker(std::chrono::time_point<std::chrono::system_clock> tp)
 {
     std::unique_lock lk(this->mtx);
@@ -9,9 +10,13 @@ void Countdown::worker(std::chrono::time_point<std::chrono::system_clock> tp)
 
     lk.unlock();
     cv.notify_one();
-    
-    if(!this->m_abort)
+
+    if (!this->m_abort)
+    {
+        spdlog::trace("setting countdown complete to true..");
+        this->complete = true;
         this->m_end();
+    }
 }
 
 Countdown::Countdown(const int year,
@@ -46,14 +51,18 @@ Countdown::Countdown(const Countdown &start, const int forTime,
 }
 void Countdown::abort()
 {
+    this->complete = true;
     std::unique_lock<std::mutex> lck(mtx);
     this->m_abort = true;
     cv.notify_all();
 }
 Countdown::~Countdown()
 {
-    if(this->mp_thread && this->mp_thread->joinable())
+    if (!this->complete && this->mp_thread && this->mp_thread->joinable())
+    {
+        spdlog::trace("joining countdown thread..");
         this->mp_thread->join();
+    }
     delete this->mp_thread;
     this->mp_thread = nullptr;
 }

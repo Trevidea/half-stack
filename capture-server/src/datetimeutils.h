@@ -14,7 +14,12 @@ struct dtu_time
 {
     int hours, minutes, seconds;
 };
-
+struct dtu_span
+{
+    dtu_date dt;
+    dtu_time tm;
+    int duration;
+};
 /// @brief formats the given rawtime into a string representing the date
 /// @param rawtime 
 /// @return string representing the formatted date in the format 'YYY-Mmm-DD'

@@ -21,7 +21,7 @@ public:
     ~VirtualApp();
     std::vector<std::string> getStreamsList();
     Json::Value getStreamInfo(const std::string &streamKey);
-
+    void startDump(const std::string &streamName, const std::string &streamId, const std::string &outPath, Json::Value &result);
     static std::vector<std::string> getAll(const std::string &vhost);
 
 private:
