@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 import { DragulaService } from "ng2-dragula";
 
 @Component({
@@ -16,8 +17,9 @@ export class ConnectionListComponent implements OnInit {
   constructor(
     public modalService: NgbModal,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private _modaleService: ModelServiceService
+  ) { }
 
   ngOnInit(): void {
     const param = this.route.snapshot.queryParamMap;
@@ -41,4 +43,17 @@ export class ConnectionListComponent implements OnInit {
       });
     }
   }
+
+  startRecording() {
+    const data = {
+      "app-name": "YourAppName",
+      "stream-name": "YourStreamName",
+      "stream-id": "YourStreamID",
+      "out-path": "YourOutputPath"
+    }
+    this._modaleService.startRecording(data).subscribe((result) => {
+      console.log(result)
+    });
+  }
+
 }

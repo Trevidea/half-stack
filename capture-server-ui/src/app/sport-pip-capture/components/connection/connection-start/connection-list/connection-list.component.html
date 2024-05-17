@@ -23,51 +23,31 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          [ngClass]="
+        <tr [ngClass]="
             item.role == 'Publisher' ? 'cursor-pointer' : 'cursor-none'
-          "
-          class="text-nowrap"
-          *ngFor="let item of datasource.connectionDetails"
-        >
+          " class="text-nowrap" *ngFor="let item of datasource.connectionDetails">
           <th>
             <span [mcDropdownTriggerFor]="appDropdownWithNested">
-              <i
-                data-feather="more-vertical"
-                class="text-secondary cursor-pointer"
-              ></i>
+              <i data-feather="more-vertical" class="text-secondary cursor-pointer"></i>
             </span>
             <mc-dropdown #appDropdownWithNested="mcDropdown">
-              <button
-                mc-dropdown-item
-                (click)="viewStream()"
-                *ngIf="item.role == 'Publisher'"
-              >
+              <button mc-dropdown-item (click)="startRecording()" *ngIf="item.role == 'Publisher'">
+                <i data-feather="video" class="mr-50 mb-25"></i> Start Recording
+              </button>
+              <button mc-dropdown-item (click)="viewStream()" *ngIf="item.role == 'Publisher'">
                 <i data-feather="eye" class="mr-50 mb-25"></i> View Stream
               </button>
               <button mc-dropdown-item (click)="pause(item)">
-                <i
-                  *ngIf="item.transmitStatus !== 'Paused'"
-                  data-feather="pause"
-                  class="mr-50 mb-25"
-                ></i>
-                <i
-                  *ngIf="item.transmitStatus == 'Paused'"
-                  data-feather="play"
-                  class="mr-50 mb-25"
-                ></i>
+                <i *ngIf="item.transmitStatus !== 'Paused'" data-feather="pause" class="mr-50 mb-25"></i>
+                <i *ngIf="item.transmitStatus == 'Paused'" data-feather="play" class="mr-50 mb-25"></i>
                 {{ item.transmitStatus == "Paused" ? "Resume" : "Pause" }}
               </button>
               <button mc-dropdown-item>
                 <i data-feather="star" class="mr-50 mb-25"></i>
                 Remove as Primary Device
               </button>
-              <button
-                *ngIf="item.role == 'Publisher'"
-                mc-dropdown-item
-                [mcDropdownTriggerFor]="appDropdownNested"
-                (click)="streaming()"
-              >
+              <button *ngIf="item.role == 'Publisher'" mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested"
+                (click)="streaming()">
                 <i data-feather="loader" class="mr-50 mb-25"></i> Relay
               </button>
               <span class="danger-dropdown">
@@ -76,19 +56,12 @@
                     <i data-feather="slash" class="mr-50 mb-25"></i>
                   </span>
                   <span style="color: red"> Block </span>
-                  <ng-template
-                    #modalblock
-                    let-modal
-                    style="width: 100px; height: 100px"
-                  >
-                    <app-connection-alert
-                      [title]="'Block User'"
-                      [description]="
+                  <ng-template #modalblock let-modal style="width: 100px; height: 100px">
+                    <app-connection-alert [title]="'Block User'" [description]="
                         'Are you sure you want to block user  <br>' +
                         item.user +
                         '?'
-                      "
-                    ></app-connection-alert>
+                      "></app-connection-alert>
                   </ng-template>
                 </button>
               </span>
@@ -133,13 +106,10 @@
             {{ item.network }}
           </td>
           <td (click)="detail(item)">
-            <div
-              class="badge badge-pill"
-              [ngClass]="{
+            <div class="badge badge-pill" [ngClass]="{
                 'badge-light-danger': item.quality === 0,
                 'badge-light-success': item.quality === 2
-              }"
-            >
+              }">
               {{ item.quality }}
             </div>
           </td>
@@ -150,22 +120,10 @@
           <td (click)="detail(item)">
             <div class="d-flex">
               <span>
-                <i
-                  *ngIf="item.transmitStatus === 'Streaming'"
-                  class="bi bi-arrow-up-right text-warning"
-                ></i>
-                <i
-                  *ngIf="item.transmitStatus === 'Receiving'"
-                  class="bi bi-arrow-down-left text-primary"
-                ></i>
-                <i
-                  *ngIf="item.transmitStatus === 'Paused'"
-                  class="bi bi-pause text-dark"
-                ></i>
-                <i
-                  *ngIf="item.transmitStatus === 'Blocked'"
-                  class="bi bi-slash-circle text-danger"
-                ></i>
+                <i *ngIf="item.transmitStatus === 'Streaming'" class="bi bi-arrow-up-right text-warning"></i>
+                <i *ngIf="item.transmitStatus === 'Receiving'" class="bi bi-arrow-down-left text-primary"></i>
+                <i *ngIf="item.transmitStatus === 'Paused'" class="bi bi-pause text-dark"></i>
+                <i *ngIf="item.transmitStatus === 'Blocked'" class="bi bi-slash-circle text-danger"></i>
               </span>
               <span style="margin-left: 0.5em">
                 {{ item.transmitStatus }}
