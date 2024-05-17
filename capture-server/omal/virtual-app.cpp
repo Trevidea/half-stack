@@ -164,8 +164,29 @@ void VirtualApp::startDump(const std::string &streamName, const std::string &str
     snprintf(ep, 128, "%s/vhosts/%s/apps/%s/streams/%s:startHlsDump",
              baseUrl.c_str(), this->m_vhost.c_str(), this->m_name.c_str(), streamName.c_str());
     auto rest = Rest::ClientFactory::getInstance().create(ep);
-    std::string pass, fail, data;
-    //TODO: set data to start dump recipe
+    std::string pass, fail;
+
+    const std::string data = this->recipeStartDump(streamName, streamId, outPath);
+
+    int intResult = rest.post(data, pass, fail, "drake", "drake_ome");
+    if (intResult != 0)
+        throw ExOMResourceAccessException(ep);
+    Json::Value jsResult = Json::objectValue;
+    Json::Reader().parse(pass, jsResult);
+    result["result"] = jsResult["response"];
+}
+
+void VirtualApp::stopDump(const std::string &streamName, const std::string &streamId, Json::Value &result)
+{
+    char ep[128] = {'\0'};
+    const std::string baseUrl = DBManager::instance().getEnv("OM_URL", "http://drake.in:8081/v1");
+    snprintf(ep, 128, "%s/vhosts/%s/apps/%s/streams/%s:stopHlsDump",
+             baseUrl.c_str(), this->m_vhost.c_str(), this->m_name.c_str(), streamName.c_str());
+    auto rest = Rest::ClientFactory::getInstance().create(ep);
+    std::string pass, fail;
+    
+    const std::string data = this->recipeStopDump(streamName, streamId);
+
     int intResult = rest.post(data, pass, fail, "drake", "drake_ome");
     if (intResult != 0)
         throw ExOMResourceAccessException(ep);

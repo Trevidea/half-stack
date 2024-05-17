@@ -133,6 +133,19 @@ void Omal::report()
                                   handleControlServerRequest(req, rsp);
                               });
     // Implement route for Control Server
+    Gateway::instance().route("POST", "/api/omal/stop-dump",
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  const auto data = req.json();
+                                  std::string appName = data["app-name"].asString();
+                                  std::string streamName = data["stream-name"].asString();
+                                  std::string streamId = data["stream-id"].asString();
+                                  auto &vh = OMALFactory::getInstance().create("spip");
+                                  Json::Value result = Json::objectValue;
+                                  auto va = vh.createApp(appName, result);
+                                  va.stopDump(streamName, streamId, result);
+                                  rsp.setData(Gateway::instance().formatResponse({{result}}));
+                              });
     Gateway::instance().route("POST", "/api/omal/start-dump",
                               [this](const Request &req, Response &rsp)
                               {

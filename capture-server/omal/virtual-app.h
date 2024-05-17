@@ -22,12 +22,57 @@ public:
     std::vector<std::string> getStreamsList();
     Json::Value getStreamInfo(const std::string &streamKey);
     void startDump(const std::string &streamName, const std::string &streamId, const std::string &outPath, Json::Value &result);
+    void stopDump(const std::string &streamName, const std::string &streamId, Json::Value &result);
     static std::vector<std::string> getAll(const std::string &vhost);
 
 private:
     VirtualApp(const std::string &name, const std::string &vhost);
     int deepFind(const std::string &name);
     int deepCreate(const std::string &name, char *msg = nullptr);
+
+    inline std::string recipeStartDump(const std::string &stream, const std::string &dump_id, const std::string &out_path) const
+    {
+        std::string recipe = R"V0G0N(
+            {
+                "outputStreamName": "<<stream>>",
+                "id": "<<dump_id>>",
+                "outputPath": "<<out_path>>",
+            }
+    
+            )V0G0N";
+        std::string param1 = "<<stream>>";
+        size_t pos1 = recipe.find(param1);
+        recipe.replace(pos1, param1.size(), stream);
+
+        std::string param2 = "<<dump_id>>";
+        size_t pos2 = recipe.find(param2);
+        recipe.replace(pos2, param2.size(), dump_id);
+
+        std::string param3 = "<<out_path>>";
+        size_t pos3 = recipe.find(param3);
+        recipe.replace(pos3, param3.size(), out_path);
+
+        return recipe;
+    }
+    inline std::string recipeStopDump(const std::string &stream, const std::string &dump_id) const
+    {
+        std::string recipe = R"V0G0N(
+            {
+            "outputStreamName": "<<stream>>",
+            "id": "<<dump_id>>"
+            }
+    
+            )V0G0N";
+        std::string param1 = "<<stream>>";
+        size_t pos1 = recipe.find(param1);
+        recipe.replace(pos1, param1.size(), stream);
+
+        std::string param2 = "<<dump_id>>";
+        size_t pos2 = recipe.find(param2);
+        recipe.replace(pos2, param2.size(), dump_id);
+
+        return recipe;
+    }
     inline std::string recipeVApp(const std::string &name) const
     {
         std::string recipe = R"V0G0N(
