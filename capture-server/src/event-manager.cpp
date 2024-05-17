@@ -130,6 +130,7 @@ void EventManager::closePreview(const Request &req, Response &rsp)
 
 std::string EventManager::getEventPreviewData(const int eventId)
 {
+    spdlog::info("Getting event preview data for event ID: {}", eventId);
     EventPreview ep;
     const auto event = Event::byId<Event>(eventId);
     if(event.notSet())
