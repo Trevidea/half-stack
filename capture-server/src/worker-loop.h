@@ -13,7 +13,7 @@ private:
     bool m_stopCalled = false;
     bool m_started = false;
 public:
-    WorkerLoop(const int interval, std::function<void()> &&work);
+    WorkerLoop(const int interval, std::function<void()> &work);
     void start();
     void stop();
     ~WorkerLoop();

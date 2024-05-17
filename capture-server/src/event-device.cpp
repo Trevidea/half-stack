@@ -11,7 +11,7 @@ void EventDevice::report()
                               [this](const Request &req, Response &rsp)
                               {
                                   this->list(req, rsp);
-                              });
+                              });                       
 
     Gateway::instance().route("GET", "/api/event-devices", // To request INSERT
                               [this](const Request &req, Response &rsp)

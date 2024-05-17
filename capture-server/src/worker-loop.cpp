@@ -1,7 +1,8 @@
 #include "worker-loop.h"
 #include <chrono>
+#include <spdlog/spdlog.h>
 
-WorkerLoop::WorkerLoop(const int interval, std::function<void()> &&work)
+WorkerLoop::WorkerLoop(const int interval, std::function<void()> &work)
     : m_interval{interval}, m_work{work}, mp_thread{nullptr}, m_stopCalled{false}
 {
 }
@@ -26,6 +27,7 @@ void WorkerLoop::stop()
     {
         if (this->mp_thread && this->mp_thread->joinable())
         {
+            spdlog::trace("joining workerloop thred..");
             this->mp_thread->join();
         }
         delete this->mp_thread;

@@ -47,6 +47,23 @@ void EventManager::closeAllPreviews(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{jsResult}}));
 }
 
+void EventManager::publishPreviewData()
+{
+    for (auto &&kvRunner : this->m_runners)
+    {
+        spdlog::info("Processing runner for event ID: {}", kvRunner.first);
+        Publisher::instance().publish("event-preview", this->getEventPreviewData(kvRunner.first));
+    }
+}
+
+void EventManager::publishLiveData()
+{
+    for (auto &&kvRunner : this->m_runners)
+    {
+        Publisher::instance().publish("live-event", this->getLiveEventData(kvRunner.first));
+    }
+}
+
 void EventManager::openPreview(const Request &req, Response &rsp)
 {
     Json::Value request = req.json();
@@ -68,6 +85,10 @@ void EventManager::openPreview(const Request &req, Response &rsp)
         {
             throw ExInvalidPreviewDurationException(event.title(), minsToStart);
         }
+        else if (minsToStart < -1)
+        {
+            // throw an exception saying the event has already passed
+        }
 
         const auto &kvPair = this->m_runners.find(eventId);
         if (kvPair != this->m_runners.end())
@@ -79,7 +100,10 @@ void EventManager::openPreview(const Request &req, Response &rsp)
 
         Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
         spdlog::trace("Creating a new runner for event id {}", eventId);
-        this->m_runners.emplace(eventId, new EventRunner(dt.year, dt.month, dt.date, tm.hours, tm.minutes, tm.seconds, 1,[this](){ return this->getEventPreviewData(); },[this](){ return this->getLiveEventData(); }));
+        this->m_runners.emplace(eventId,
+                                new EventRunner({{dt.year, dt.month, dt.date}, {tm.hours, tm.minutes, tm.seconds}, 1},
+                                                std::bind(&EventManager::publishPreviewData, this),
+                                                std::bind(&EventManager::publishLiveData, this)));
     }
     const std::string strRsp = Gateway::instance().formatResponse({{response}});
     spdlog::trace("setting response: {}", strRsp);
@@ -104,31 +128,30 @@ void EventManager::closePreview(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
 
-std::string EventManager::getEventPreviewData()
+std::string EventManager::getEventPreviewData(const int eventId)
 {
+    spdlog::info("Getting event preview data for event ID: {}", eventId);
     EventPreview ep;
-
-    ep.setCityAddress("Ludhiana");
-    ep.setDtEvent("2024-05-01");
-    ep.activeDevices().push_back(EventDevice());
+    const auto event = Event::byId<Event>(eventId);
+    if(event.notSet())
     {
-        auto &device = ep.activeDevices().back();
-        device.setDeviceId(1);
-        device.setDeviceType("iPad");
-        device.setLocation("North-End");
+        spdlog::warn("Event not found for ID: {}", eventId);
+        return "";
     }
-    ep.setDetailType("ondemand");
-    ep.setStreetAddress("Indoor Stadium, Pakhowal road");
-    ep.setDtEvent("2024-04-15");
-    ep.setEventType("ondemand");
-    ep.setLevel("University");
-    ep.setProgram("Men");
-    ep.setSport("Football");
-    ep.setStatus("Upcoming");
-    ep.setTime(1830);
-    ep.setTitle("Mumbai Indians vs Kolkatta Knightriders");
-    ep.setVenueLocation("Ludhiana");
-    ep.setYear(2024);
+
+    ep.setTitle(event.title());
+    ep.setDtEvent(event.dtEvent());
+    ep.setTime(event.tmEvent());
+    ep.setSport(event.sport());
+    ep.setLevel(event.level());
+    ep.setProgram(event.program());
+    ep.setStatus(event.status());
+    ep.setStreetAddress(event.getStreetAddress());
+    ep.setCityAddress(event.getCityAddress());
+    ep.setVenueLocation(event.venue());
+    ep.setYear(event.year());
+    ep.setDetailType(event.getType());
+    ep.setEventType(event.type());
 
     EventDevice eventDevice;
     std::vector<EventDevice> activeDevices = eventDevice.list<EventDevice>();
@@ -138,7 +161,7 @@ std::string EventManager::getEventPreviewData()
     return ep.toResponse();
 }
 
-std::string EventManager::getLiveEventData()
+std::string EventManager::getLiveEventData(const int eventId)
 {
     LiveEvent le;
     le.setSport("Football");
