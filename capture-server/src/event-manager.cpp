@@ -51,6 +51,7 @@ void EventManager::publishPreviewData()
 {
     for (auto &&kvRunner : this->m_runners)
     {
+        spdlog::info("Processing runner for event ID: {}", kvRunner.first);
         Publisher::instance().publish("event-preview", this->getEventPreviewData(kvRunner.first));
     }
 }
@@ -133,6 +134,7 @@ std::string EventManager::getEventPreviewData(const int eventId)
     const auto event = Event::byId<Event>(eventId);
     if(event.notSet())
     {
+        spdlog::warn("Event not found for ID: {}", eventId);
         return "";
     }
 
