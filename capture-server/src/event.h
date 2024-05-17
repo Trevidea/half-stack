@@ -52,10 +52,11 @@ public:
         return minutes.count();
     }
 
-    std::vector<EventDevice> getActiveDevices() const;
+    // std::vector<EventDevice> getActiveDevices() const;
 
     std::string getCityAddress() const;
     std::string getStreetAddress() const;
+    std::string getType() const;
 
 private:
 

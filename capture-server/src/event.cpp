@@ -90,6 +90,12 @@ Json::Value Event::parseDetail() const
     return detailJson;
 }
 
+std::string Event::getType() const
+{
+    Json::Value detailJson = this->parseDetail();
+    return detailJson.get("type", "").asString();
+}
+
 std::string Event::getStreetAddress() const
 {
     Json::Value detailJson = this->parseDetail();
