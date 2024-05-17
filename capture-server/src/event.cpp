@@ -86,9 +86,14 @@ Json::Value Event::parseDetail() const
 {
     Json::Value detailJson;
     Json::Reader reader;
-    reader.parse(this->detail(), detailJson);
+    bool parsingSuccessful = reader.parse(this->detail(), detailJson);
+    if (!parsingSuccessful) {
+        spdlog::error("Failed to parse event detail JSON: {}", reader.getFormattedErrorMessages());
+        // You can handle the error here, e.g., return a default JSON value or throw an exception
+    }
     return detailJson;
 }
+
 
 std::string Event::getType() const
 {
