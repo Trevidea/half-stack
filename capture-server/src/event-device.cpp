@@ -6,12 +6,12 @@ EventDevice::EventDevice() : EntityBase("event_device") {}
 void EventDevice::report()
 {
     EntityBase::report();
-    
+
     Gateway::instance().route("GET", "/api/event-devices", // To request INSERT
                               [this](const Request &req, Response &rsp)
                               {
                                   this->list(req, rsp);
-                              });                       
+                              });
 
     Gateway::instance().route("GET", "/api/event-devices", // To request INSERT
                               [this](const Request &req, Response &rsp)
@@ -114,4 +114,12 @@ std::string EventDevice::pin() const
 void EventDevice::setPin(const std::string &value)
 {
     m_model.set("pin", value);
+}
+std::string EventDevice::streamId() const
+{
+    return this->m_model.get<std::string>("stream_id");
+}
+void EventDevice::setStreamId(const std::string &value)
+{
+    m_model.set("stream_id", value);
 }

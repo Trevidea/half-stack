@@ -154,7 +154,9 @@ std::string EventManager::getEventPreviewData(const int eventId)
     ep.setEventType(event.type());
 
     EventDevice eventDevice;
-    std::vector<EventDevice> activeDevices = eventDevice.list<EventDevice>();
+    char query[128] = { '\0' };
+    snprintf(query, 128, "event_id=%d", eventId);
+    std::vector<EventDevice> activeDevices = eventDevice.find<EventDevice>(query);
 
     ep.setActiveDevices(activeDevices);
 

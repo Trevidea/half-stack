@@ -35,10 +35,12 @@ void EventRunner::eventStarted()
     spdlog::trace("Event started..");
     Publisher::instance().publish("event-terminal", "{'terminal':'start'}");
     this->mp_liveEventPublisher->start();
+    //start dump
 }
 
 void EventRunner::eventEnded()
 {
+    //stop dump
     this->mp_liveEventPublisher->stop();
     spdlog::trace("Event ended..");
     Publisher::instance().publish("event-terminal", "{'terminal':'stop'}");
