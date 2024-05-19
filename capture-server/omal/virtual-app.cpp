@@ -195,4 +195,5 @@ void VirtualApp::stopDump(const std::string &streamName, const std::string &stre
     Json::Reader().parse(pass, jsResult);
     result["result"] = jsResult["response"];
 }
+
 VirtualApp::~VirtualApp() {}
