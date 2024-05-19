@@ -36,14 +36,14 @@ void EventDevice::setUserId(int value)
     m_model.set("user_id", value);
 }
 
-std::string EventDevice::name() const
+std::string EventDevice::streamName() const
 {
-    return this->m_model.get<std::string>("name");
+    return this->m_model.get<std::string>("stream_name");
 }
 
-void EventDevice::setName(const std::string &value)
+void EventDevice::setStreamName(const std::string &value)
 {
-    m_model.set("name", value);
+    m_model.set("stream_name", value);
 }
 
 int EventDevice::deviceId() const

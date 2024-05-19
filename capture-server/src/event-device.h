@@ -21,8 +21,8 @@ public:
     int userId() const;
     void setUserId(int value);
 
-    std::string name() const;
-    void setName(const std::string &value);
+    std::string streamName() const;
+    void setStreamName(const std::string &value);
 
     int deviceId() const;
     void setDeviceId(int value);
