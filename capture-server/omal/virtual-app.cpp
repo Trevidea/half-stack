@@ -157,6 +157,7 @@ std::vector<std::string> VirtualApp::getAll(const std::string &vhost)
 
     return appList;
 }
+
 void VirtualApp::startDump(const std::string &streamName, const std::string &streamId, const std::string &outPath, Json::Value &result)
 {
     char ep[128] = {'\0'};
