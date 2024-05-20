@@ -160,7 +160,11 @@ std::string EventManager::getEventPreviewData(const int eventId)
 
     ep.setActiveDevices(activeDevices);
 
-    return ep.toResponse();
+    std::string jsonData = ep.toResponse();
+
+    spdlog::info("Event preview JSON data: {}", jsonData);
+
+    return jsonData;
 }
 
 std::string EventManager::getLiveEventData(const int eventId)
