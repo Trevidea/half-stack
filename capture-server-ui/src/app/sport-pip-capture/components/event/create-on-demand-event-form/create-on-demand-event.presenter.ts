@@ -159,7 +159,6 @@ export class CreateOnDemandEventPresenter implements OnInit {
       (response) => {},
       (error) => {
         console.error("Error saving data:", error);
-        // Handle error
       }
     );
   }

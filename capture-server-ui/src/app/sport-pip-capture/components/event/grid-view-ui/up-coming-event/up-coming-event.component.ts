@@ -99,7 +99,11 @@ export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   deleteEvent() {
-    this.Modelservice.delete('event', this.eventId);
+    this.Modelservice.delete('event', this.eventId).subscribe(
+      (data) => {
+        console.log("data", data);
+      }
+    );
   }
 
 
