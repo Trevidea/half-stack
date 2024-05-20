@@ -54,13 +54,13 @@ public:
 
     // std::vector<EventDevice> getActiveDevices() const;
 
-    std::string getCityAddress() const;
-    std::string getStreetAddress() const;
-    std::string getType() const;
+    // std::string getCityAddress() const;
+    // std::string getStreetAddress() const;
+    // std::string getType() const;
 
 private:
 
-    Json::Value parseDetail() const;
+    // Json::Value parseDetail() const;
 
 };
 
