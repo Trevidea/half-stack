@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeviceFormPresenter } from '../device-form/device-form.presenter';
+import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 
 @Component({
   selector: 'app-device',
@@ -12,7 +13,7 @@ export class DeviceComponent implements OnInit {
   @Input() datasource: any;
   @Output() onAddDevice = new EventEmitter();
 
-  constructor(private ngbModel: NgbModal) { }
+  constructor(private ngbModel: NgbModal, private modelservice: ModelServiceService) { }
 
   ngOnInit(): void {
   }
@@ -33,4 +34,10 @@ export class DeviceComponent implements OnInit {
     })
   }
 
+  deleteSelected(id: number) {
+    this.modelservice.delete('devices', id).subscribe((data) => {
+      console.log(data)
+      this.onAddDevice.emit();
+    })
+  }
 }

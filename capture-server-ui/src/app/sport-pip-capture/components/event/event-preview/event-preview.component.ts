@@ -12,6 +12,7 @@ import { GlobalConfig, ToastrService } from 'ngx-toastr';
 export class EventPreviewComponent implements OnInit {
   @Input() datasource: any;
   @Input() eventId: any;
+
   private countdownInterval: any;
   @Output() closePreview = new EventEmitter()
   constructor(public dateTimeservice: DateTimeService, private modalService: NgbModal,
@@ -19,7 +20,7 @@ export class EventPreviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    console.log(this.datasource)
   }
   calculateUpcomingCountdown(item: any): string {
     const now = new Date();

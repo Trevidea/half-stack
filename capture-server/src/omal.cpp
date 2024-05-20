@@ -67,7 +67,7 @@ void Omal::report()
                                   auto strResponse = Gateway::instance().formatResponse({{result}});
                                   rsp.setData(strResponse);
                               });
-    Gateway::instance().route("GET", "/api/omal/apps", 
+    Gateway::instance().route("GET", "/api/omal/apps",
                               [this](const Request &req, Response &rsp)
                               {
                                   std::string vhost = req.getQueryValue("vhost");
@@ -132,7 +132,36 @@ void Omal::report()
                               {
                                   handleControlServerRequest(req, rsp);
                               });
+    // Implement route for Control Server
+    Gateway::instance().route("POST", "/api/omal/stop-dump",
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  const auto data = req.json();
+                                  std::string appName = data["app-name"].asString();
+                                  std::string streamName = data["stream-name"].asString();
+                                  std::string streamId = data["stream-id"].asString();
+                                  auto &vh = OMALFactory::getInstance().create("spip");
+                                  Json::Value result = Json::objectValue;
+                                  auto va = vh.createApp(appName, result);
+                                  va.stopDump(streamName, streamId, result);
+                                  rsp.setData(Gateway::instance().formatResponse({{result}}));
+                              });
+    Gateway::instance().route("POST", "/api/omal/start-dump",
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  const auto data = req.json();
+                                  std::string appName = data["app-name"].asString();
+                                  std::string streamName = data["stream-name"].asString();
+                                  std::string streamId = data["stream-id"].asString();
+                                  std::string outPath = data["out-path"].asString();
+                                  auto &vh = OMALFactory::getInstance().create("spip");
+                                  Json::Value result = Json::objectValue;
+                                  auto va = vh.createApp(appName, result);
+                                  va.startDump(streamName, streamId, outPath, result);
+                                  rsp.setData(Gateway::instance().formatResponse({{result}}));
+                              });
 }
+
 std::vector<std::string> Omal::fetchStreamsList(const std::string &eventId)
 {
     auto vhost = OMALFactory::getInstance().create("spip");
@@ -209,7 +238,7 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     Json::Value omRequest = req.json();
 
     const std::string strUrl = omRequest["request"]["url"].asString();
-    std::regex urlPattern(R"(rtmp://[^/]+/([^/]+)/([^/]+)/([^/]+)/)");
+    std::regex urlPattern(R"(rtmp://([^/]+)/([^/]+)/([^/]+)/([^/]+)/)");
 
     std::smatch matches; // Used to store the results of the match
 
@@ -217,9 +246,10 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     {
         if (matches.size() == 4)
         {
-            const std::string eventId = matches[1].str();
-            const std::string userId = matches[2].str();
-            const std::string pin = matches[3].str();
+            const std::string endPoint = matches[1].str();
+            const std::string eventId = matches[2].str();
+            const std::string userId = matches[3].str();
+            const std::string pin = matches[4].str();
 
             spdlog::trace("eventId: {}, userId: {}, pin: {}", eventId, userId, pin);
 
@@ -228,7 +258,18 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
             snprintf(query, 128, "user_id=%s&event_id=%s&pin='%s'",
                      userId.c_str(), eventId.c_str(), pin.c_str());
             const auto result = ed.find<EventDevice>(query);
-            jsonResponse["allowed"] = (result.size() > 0);
+            bool allowed = (result.size() > 0);
+            jsonResponse["allowed"] = allowed;
+            if (allowed)
+            {
+                char newUrl[128] = {'\0'};
+                snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "spip", ed.streamName().c_str());
+                jsonResponse["new_url"] = newUrl;
+            }
+            else
+            {
+                spdlog::warn("The incoming stream {} was rejected.", strUrl);
+            }
         }
         else
         {

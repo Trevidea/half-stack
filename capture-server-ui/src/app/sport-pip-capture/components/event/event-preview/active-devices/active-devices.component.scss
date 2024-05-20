@@ -4,7 +4,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     .btn-warning {
         background-color: rgba(245, 163, 10, 1) !important;
     }
+}
+
+.activeDevice {
+    .btn-danger {
+        color: #DE2E21 !important;
+        background-color: #DE2E211A !important;
+        border: none;
+    }
+
 }

@@ -21,8 +21,8 @@ public:
     int userId() const;
     void setUserId(int value);
 
-    std::string name() const;
-    void setName(const std::string &value);
+    std::string streamName() const;
+    void setStreamName(const std::string &value);
 
     int deviceId() const;
     void setDeviceId(int value);
@@ -44,6 +44,12 @@ public:
 
     std::string pin() const;
     void setPin(const std::string &value);
+
+    std::string streamId() const;
+    void setStreamId(const std::string &value);
+
+    // // Modified list function to filter devices by eventId
+    // std::vector<EventDevice> list(int eventId);
 
     // Method to check if the combination exists
     bool combinationExists(int eventId, int userId, const std::string &pin);

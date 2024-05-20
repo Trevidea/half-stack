@@ -16,6 +16,7 @@ private:
     std::mutex mtx;
     std::condition_variable cv;
     bool m_abort = false;
+    bool complete = false;
 private:
     std::function<void()> m_end;
     void worker(std::chrono::time_point<std::chrono::system_clock> tp);

@@ -32,14 +32,16 @@ export class EventPreviewPresenter implements OnInit {
     this.socketService.onEventPreview().subscribe(
       (data) => {
 
-        console.log("data without json ", data)
+        // console.log("data without json ", data)
         this.previewData = JSON.parse(data);
+        // console.log("data without json ", this.previewData)
       },
       (error) => {
         console.error('Error occurred:', error);
       }
     );
-
+    // Transformer._ComposeLiveObjectAsync(this.socketService._onPreviewEvent(), this.ds, EventPreviewBuilder);
+    console.log(this.ds)
     this.modelServiceService.openPreview({ eventId: this.eventId }).subscribe(
       (data: any) => {
         console.log("data", data)
