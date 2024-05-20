@@ -7,7 +7,7 @@
       <div class="col-12 mb-2">
         <div class="form-group">
           <label>Event Name <span class="validationIcon">*</span></label>
-          <input type="text" id="Event-Name" class="form-control" name="ename" placeholder="Enter Event Name"
+          <input type="text" id="Event-Name" class="form-control" name="title" placeholder="Enter Event Name"
             [(ngModel)]="datasource.title" required #ngmEventName="ngModel" />
         </div>
         <app-validation-alert controlName="Event Name" [control]="ngmEventName">
@@ -28,11 +28,11 @@
       <div class="col-md-6 col-sm-12 mb-2">
         <div class="form-group">
           <label>Event Time<span class="validationIcon">*</span></label>
-          <input type="time" class="form-control" name="time" [value]="_formatTime(datasource.time)"
-            (input)="datasource.time = formatTime($event.target.value)" required />
+          <input type="time" class="form-control" name="time" [(ngModel)]="datasource.time" #ngmTime="ngModel"
+            required />
         </div>
-        <!-- <app-validation-alert controlName="Time" [control]="ngmTime">
-        </app-validation-alert> -->
+        <app-validation-alert controlName="Time" [control]="ngmTime">
+        </app-validation-alert>
       </div>
 
       <div class="col-12 mb-2">
@@ -47,14 +47,14 @@
       <div class="col-md-6 mb-2">
         <div class="form-group">
           <label>Street Address</label>
-          <input type="text" id="Event-Name" class="form-control" name="streetAddress"
-            placeholder="Enter Street Address" [(ngModel)]="datasource.detail.cityAddress" />
+          <input type="text" id="Event-Name" class="form-control" name="cityAddress" placeholder="Enter Street Address"
+            [(ngModel)]="datasource.detail.cityAddress" />
         </div>
       </div>
       <div class="col-md-6 mb-2">
         <div class="form-group">
           <label>City Address</label>
-          <input type="text" id="Event-Name" class="form-control" name="loction" placeholder="Enter City Address"
+          <input type="text" id="Event-Name" class="form-control" name="streetAdress" placeholder="Enter City Address"
             [(ngModel)]="datasource.detail.streetAdress" />
         </div>
       </div>
@@ -131,4 +131,3 @@
     </div>
   </div>
 </form>
-

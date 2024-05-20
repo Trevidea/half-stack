@@ -17,11 +17,20 @@ export class EventBuilder extends AbstractBuilder<
     v.levels.SelectedItem = m.level;
     v.programs.SelectedItem = m.program;
     v.sports.SelectedItem = m.sport;
-    v.time = m.tm_event;
+    v.time = this.formatTimeNumToStr(m.tm_event);
     v.venue.location = m?.venue?.location;
   }
 
+  formatTimeNumToStr(time: number): string {
+    const hours = Math.floor(time / 100);
+    const minutes = time % 100;
+    const formattedHours = hours < 10 ? '0' + hours : hours.toString();
+    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
+    return formattedHours + ':' + formattedMinutes;
+  }
+
   decompose(v: OnDemandEventFormView): Data.Event {
+    const time = this.formatTime(v.time)
     return {
       id: v.id,
       title: v.title,
@@ -35,13 +44,19 @@ export class EventBuilder extends AbstractBuilder<
       program: v.programs.SelectedItem,
       sport: v.sports.SelectedItem,
       year: 2024,
-      tm_event: v.time,
+      tm_event: time,
       venue: {
         location: v.venue.location,
       },
       status: "upcoming",
       type: "on-demand",
     };
+  }
+  formatTime(time: any): number {
+    if (!time) return 0;
+    const [hours, minutes] = time.split(':');
+    let formattedTime = hours + minutes;
+    return parseInt(formattedTime);
   }
 
   view(): OnDemandEventFormView {
