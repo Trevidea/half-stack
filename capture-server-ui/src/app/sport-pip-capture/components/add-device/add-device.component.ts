@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalConfig, ToastrService } from 'ngx-toastr';
-
+import ShortUniqueId from 'short-unique-id';
 @Component({
   selector: 'app-add-device',
   templateUrl: './add-device.component.html',
@@ -16,11 +16,16 @@ export class AddDeviceComponent implements OnInit {
   private options: GlobalConfig;
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter();
+  uniqueId: string;
+  uidWithTimestamp: string;
+  parsedTimestamp: string;
+  uidVersion: string;
   constructor(public activeModal: NgbActiveModal, private toastr: ToastrService) {
     this.options = this.toastr.toastrConfig;
   }
 
   ngOnInit(): void {
+
   }
   toastrSuccess() {
     this.toastr.success('', 'Device Added!', {

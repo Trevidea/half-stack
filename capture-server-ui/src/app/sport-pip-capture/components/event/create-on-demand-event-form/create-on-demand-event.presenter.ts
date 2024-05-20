@@ -90,7 +90,7 @@ export class CreateOnDemandEventPresenter implements OnInit {
         this.modelServiceService.eventJson(this.eventId),
         this.ds,
         EventBuilder
-      ).then(() => {});
+      ).then(() => { });
     }
 
     this.ds.sports.onAddingNewItem(async (e: { modal: Views.ModalHost }) => {
@@ -156,7 +156,7 @@ export class CreateOnDemandEventPresenter implements OnInit {
       ],
     };
     this.modelServiceService._saveOnDemandEvent(requestData).subscribe(
-      (response) => {},
+      (response) => { },
       (error) => {
         console.error("Error saving data:", error);
       }
