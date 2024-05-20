@@ -238,7 +238,7 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     Json::Value omRequest = req.json();
 
     const std::string strUrl = omRequest["request"]["url"].asString();
-    std::regex urlPattern(R"(rtmp://[^/]+/([^/]+)/([^/]+)/([^/]+)/)");
+    std::regex urlPattern(R"(rtmp://([^/]+)/([^/]+)/([^/]+)/([^/]+)/)");
 
     std::smatch matches; // Used to store the results of the match
 
@@ -246,9 +246,10 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     {
         if (matches.size() == 4)
         {
-            const std::string eventId = matches[1].str();
-            const std::string userId = matches[2].str();
-            const std::string pin = matches[3].str();
+            const std::string endPoint = matches[1].str();
+            const std::string eventId = matches[2].str();
+            const std::string userId = matches[3].str();
+            const std::string pin = matches[4].str();
 
             spdlog::trace("eventId: {}, userId: {}, pin: {}", eventId, userId, pin);
 
@@ -257,7 +258,18 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
             snprintf(query, 128, "user_id=%s&event_id=%s&pin='%s'",
                      userId.c_str(), eventId.c_str(), pin.c_str());
             const auto result = ed.find<EventDevice>(query);
-            jsonResponse["allowed"] = (result.size() > 0);
+            bool allowed = (result.size() > 0);
+            jsonResponse["allowed"] = allowed;
+            if (allowed)
+            {
+                char newUrl[128] = {'\0'};
+                snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "spip", ed.streamName().c_str());
+                jsonResponse["new_url"] = newUrl;
+            }
+            else
+            {
+                spdlog::warn("The incoming stream {} was rejected.", strUrl);
+            }
         }
         else
         {
