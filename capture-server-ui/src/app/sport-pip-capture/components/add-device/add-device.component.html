@@ -14,7 +14,7 @@
     <form #AddStreamkeyForm="ngForm">
         <div class="form-group">
             <label>Application</label>
-            <ng-select name="appname" [(ngModel)]="datasource.appNamesCollection.SelectedItem" required
+            <ng-select name="appname" [(ngModel)]="datasource.appNamesCollection.SelectedItem" 
                 #ngmappname="ngModel">
                 <ng-option *ngFor="let item of datasource.appNamesCollection" [value]="item">{{ item }}</ng-option>
             </ng-select>
