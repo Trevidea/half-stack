@@ -51,13 +51,13 @@
             type="time"
             class="form-control"
             name="time"
-            [value]="_formatTime(datasource.time)"
-            (input)="datasource.time = formatTime($event.target.value)"
+            [(ngModel)]="datasource.time"
+            #ngmTime="ngModel"
             required
           />
         </div>
-        <!-- <app-validation-alert controlName="Time" [control]="ngmTime">
-        </app-validation-alert> -->
+        <app-validation-alert controlName="Time" [control]="ngmTime">
+        </app-validation-alert>
       </div>
 
       <div class="col-12 mb-2">
@@ -87,7 +87,7 @@
             type="text"
             id="Event-Name"
             class="form-control"
-            name="streetAddress"
+            name="cityAddress"
             placeholder="Enter Street Address"
             [(ngModel)]="datasource.detail.cityAddress"
           />
@@ -100,7 +100,7 @@
             type="text"
             id="Event-Name"
             class="form-control"
-            name="location"
+            name="streetAdress"
             placeholder="Enter City Address"
             [(ngModel)]="datasource.detail.streetAdress"
           />

@@ -52,7 +52,6 @@ export class CreateOnDemandEventComponent
   }
 
   ngOnInit(): void {
-    console.log(this.datasource.id);
     this.route.queryParams.subscribe((params) => {
       this.datasource.id = params["id"];
       console.log("ID:", this.datasource.id);
