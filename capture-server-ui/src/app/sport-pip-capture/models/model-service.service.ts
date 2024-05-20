@@ -1,14 +1,12 @@
 import { environment } from "environments/environment";
 import { AdapterService } from "./adapter.service";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { Observable, forkJoin, of } from "rxjs";
+import { Observable, of } from "rxjs";
 import { first, map, mergeMap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { Data } from "./capture-interface";
 import { EventData } from "./event";
-import { LiveEventDetailData } from "./live-event-detail";
 import { MetaTypeData } from "./meta-type";
-import { error, warn } from "console";
 import { UserProfileData } from "./user-profile";
 import { DeviceData } from "./device";
 import { PreviousEventsConnectionData } from "./previous-events-connection";
@@ -31,10 +29,8 @@ export class ModelServiceService {
 
   create(type: string, entity: any): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}`;
-    console.log(url);
     return this._adapter.modulateOne(type, entity).pipe(
       mergeMap((modata) => {
-        console.log(modata);
         return this._httpClient.post<any>(url, modata);
       })
     );
@@ -66,7 +62,6 @@ export class ModelServiceService {
 
   update(type: string, entity: any, id: number) {
     const url = `${this.modelsServerUrl}/${type}`;
-    console.log(url);
     return this._adapter.modulateOne(type, entity).pipe(
       mergeMap((modata) => {
         return this._httpClient.put<any>(url, modata);
@@ -161,7 +156,6 @@ export class ModelServiceService {
     return this._adapter.demodulate(resource, this.readOne(resource, id)).pipe(
       map((models) =>
         models.map((model: any) => {
-          console.log(model);
           return model as I;
         })
       )
@@ -238,7 +232,6 @@ export class ModelServiceService {
       return this.create("event", data);
     }
   }
-
   saveMetaType(data: Data.MetaType): Observable<Data.MetaType> {
     if (data.id) {
       return this.update(`meta-type?key=${data.id}`, data, data.id);
@@ -246,19 +239,15 @@ export class ModelServiceService {
       return this.create("event", data);
     }
   }
-
   private apiUrl = `${environment.spModelUrl}/on-demand-event`;
   _saveOnDemandEvent(data: any): Observable<any> {
-    console.log(data);
     return this._httpClient.post<any>(this.apiUrl, data);
   }
 
   saveEventDevice(data: Data.EventDevice): Observable<Data.EventDevice> {
-    console.log(data);
     return this.create("event-device", data);
   }
   saveDevice(data: Data.Device): Observable<Data.Device> {
-    console.log(data);
     return this.create("devices", data);
   }
 

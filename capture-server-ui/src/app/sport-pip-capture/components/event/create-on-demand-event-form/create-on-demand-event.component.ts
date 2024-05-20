@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
   Output,
+  ViewChild,
   ViewEncapsulation,
 } from "@angular/core";
 import {
@@ -18,7 +19,10 @@ import {
 } from "app/blocks/ngb-date-converter";
 import Swal from "sweetalert2";
 import { ConnectionAlertComponent } from "../../connection/connection-alert/connection-alert.component";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { NgForm } from "@angular/forms";
+import { DeepDiffService } from "app/blocks/deep-diff.service";
+import { FormChangeDetector } from "app/blocks/form-change-detector.mixin";
 @Component({
   selector: "app-create-on-demand-event",
   templateUrl: "./create-on-demand-event.component.html",
@@ -29,17 +33,31 @@ import { Router } from "@angular/router";
     { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
   ],
 })
-export class CreateOnDemandEventComponent implements OnInit {
+export class CreateOnDemandEventComponent
+  extends FormChangeDetector
+  implements OnInit
+{
+  @ViewChild("OnDemandForm", { static: true }) OnDemandForm: NgForm;
   @Input() datasource: any;
-
   model: NgbDateStruct;
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter();
-  constructor(private modelService: NgbModal, private router: Router) { }
+  constructor(
+    private modelService: NgbModal,
+    private router: Router,
+    deepDiffService: DeepDiffService,
+    private route: ActivatedRoute
+  ) {
+    super(deepDiffService);
+  }
 
   ngOnInit(): void {
-    console.log(this.datasource.time);
-
+    console.log(this.datasource.id);
+    this.route.queryParams.subscribe((params) => {
+      this.datasource.id = params["id"];
+      console.log("ID:", this.datasource.id);
+    });
+    this.initializeForm(this.OnDemandForm, this.datasource, this.datasource.id);
   }
   onCancelClick() {
     Swal.close();
@@ -49,10 +67,9 @@ export class CreateOnDemandEventComponent implements OnInit {
     this.cancel.emit();
   }
 
- 
   onSave(id: number) {
     if (id) {
-      console.log("id of event ", id)
+      console.log("id of event ", id);
     }
     console.log("clicked save");
     this.save.emit();
@@ -60,7 +77,7 @@ export class CreateOnDemandEventComponent implements OnInit {
 
   formatTime(time: any): number {
     if (!time) return 0;
-    const [hours, minutes] = time.split(':');
+    const [hours, minutes] = time.split(":");
     let formattedTime = hours + minutes;
     return parseInt(formattedTime);
   }
@@ -87,8 +104,8 @@ export class CreateOnDemandEventComponent implements OnInit {
   _formatTime(time: number): string {
     const hours = Math.floor(time / 100);
     const minutes = time % 100;
-    const formattedHours = hours < 10 ? '0' + hours : hours.toString();
-    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
-    return formattedHours + ':' + formattedMinutes;
+    const formattedHours = hours < 10 ? "0" + hours : hours.toString();
+    const formattedMinutes = minutes < 10 ? "0" + minutes : minutes.toString();
+    return formattedHours + ":" + formattedMinutes;
   }
 }
