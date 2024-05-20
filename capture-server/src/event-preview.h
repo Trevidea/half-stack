@@ -62,6 +62,8 @@ public:
     void setActiveDevices(const std::vector<EventDevice>& activeDevices);
 
 private:
+
+    Json::Value m_model;
     std::vector<EventDevice> m_activeDevice;
 };
 
