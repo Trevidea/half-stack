@@ -153,7 +153,8 @@ std::string EventManager::getEventPreviewData(const int eventId)
     EventDevice eventDevice;
     char query[128] = { '\0' };
     snprintf(query, 128, "event_id=%d", eventId);
-    std::vector<EventDevice> activeDevices = eventDevice.find<EventDevice>(query);
+    // std::vector<EventDevice> activeDevices = eventDevice.find<EventDevice>(query);
+    std::vector<EventDevice> activeDevices = eventDevice.list<EventDevice>();
 
     ep.setActiveDevices(activeDevices);
 

@@ -17,18 +17,10 @@ std::string Base::toString()
     return Json::FastWriter().write(this->m_model);
 }
 
-// std::string Base::toResponse()
-// {
-//     return Gateway::instance().formatResponse({{this->m_model}});
-// }
-
 std::string Base::toResponse()
 {
-    Json::FastWriter writer;
-    std::string jsonString = writer.write(m_model);
-    return Gateway::instance().formatResponse({{jsonString}});
+    return Gateway::instance().formatResponse({{this->m_model}});
 }
-
 
 Base::~Base()
 {
