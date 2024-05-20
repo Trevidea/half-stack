@@ -38,7 +38,13 @@ export class FormChangeDetector implements AfterViewInit {
 
   initializeForm(form: NgForm, initialValues: any, id?: number) {
     this.form = form;
-    console.log(initialValues);
-    this.initialFormValues = JSON.parse(JSON.stringify(initialValues));
+    if (id !== undefined) {
+      // Merge the id into initial values if provided
+      this.initialFormValues = { ...initialValues, id };
+    } else {
+      this.initialFormValues = JSON.parse(JSON.stringify(initialValues));
+    }
+    // Set the form values
+    form.setValue(this.initialFormValues);
   }
 }
