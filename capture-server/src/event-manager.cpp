@@ -140,18 +140,18 @@ std::string EventManager::getEventPreviewData(const int eventId)
     }
 
     ep.setTitle(event.title());
-    ep.setDtEvent(event.dtEvent());
-    ep.setTime(event.tmEvent());
-    ep.setSport(event.sport());
-    ep.setLevel(event.level());
-    ep.setProgram(event.program());
-    ep.setStatus(event.status());
-    // ep.setStreetAddress(event.getStreetAddress());
-    // ep.setCityAddress(event.getCityAddress());
-    ep.setVenueLocation(event.venue());
-    ep.setYear(event.year());
-    // ep.setDetailType(event.getType());
-    ep.setEventType(event.type());
+    // ep.setDtEvent(event.dtEvent());
+    // ep.setTime(event.tmEvent());
+    // ep.setSport(event.sport());
+    // ep.setLevel(event.level());
+    // ep.setProgram(event.program());
+    // ep.setStatus(event.status());
+    // // ep.setStreetAddress(event.getStreetAddress());
+    // // ep.setCityAddress(event.getCityAddress());
+    // ep.setVenueLocation(event.venue());
+    // ep.setYear(event.year());
+    // // ep.setDetailType(event.getType());
+    // ep.setEventType(event.type());
 
     EventDevice eventDevice;
     char query[128] = { '\0' };
