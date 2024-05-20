@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalConfig, ToastrService } from 'ngx-toastr';
-import ShortUniqueId from 'short-unique-id';
+import { v4 as uuidv4 } from 'uuid';
 @Component({
   selector: 'app-add-device',
   templateUrl: './add-device.component.html',
@@ -16,16 +16,13 @@ export class AddDeviceComponent implements OnInit {
   private options: GlobalConfig;
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter();
-  uniqueId: string;
-  uidWithTimestamp: string;
-  parsedTimestamp: string;
-  uidVersion: string;
+
   constructor(public activeModal: NgbActiveModal, private toastr: ToastrService) {
     this.options = this.toastr.toastrConfig;
   }
 
   ngOnInit(): void {
-
+    this.datasource.streamId = this.generateShortUUID(12);
   }
   toastrSuccess() {
     this.toastr.success('', 'Device Added!', {
@@ -33,6 +30,7 @@ export class AddDeviceComponent implements OnInit {
       closeButton: true
     });
   }
+
 
   constructRtmpUrl(): string {
     const devicename =
@@ -60,4 +58,19 @@ export class AddDeviceComponent implements OnInit {
       this.iconName = 'copy';
     }, 3000);
   }
+
+
+  private generateShortUUID = (length: number) => {
+    return uuidv4().replace(/-/g, '').substring(0, length);
+  };
+
+  updateStreamName(): string {
+    const devicename = this.datasource.deviceName.SelectedItem?.value?.trim().replace(/\s+/g, '').toLowerCase() ?? '';
+    const username = this.datasource.userName.SelectedItem?.value?.trim().replace(/\s+/g, '').toLowerCase() ?? '';
+    const eventId = this.datasource.eventId;
+    this.datasource.streamName = `${username}_${devicename}_${eventId}`;
+    return this.datasource.streamName;
+  }
+
+
 }
