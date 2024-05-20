@@ -82,33 +82,3 @@ void Event::validateEventId(int eventId)
     }
 }
 
-// Json::Value Event::parseDetail() const
-// {
-//     Json::Value detailJson;
-//     Json::Reader reader;
-//     bool parsingSuccessful = reader.parse(this->detail(), detailJson);
-//     if (!parsingSuccessful) {
-//         spdlog::error("Failed to parse event detail JSON: {}", reader.getFormattedErrorMessages());
-//         // You can handle the error here, e.g., return a default JSON value or throw an exception
-//     }
-//     return detailJson;
-// }
-
-
-// std::string Event::getType() const
-// {
-//     Json::Value detailJson = this->parseDetail();
-//     return detailJson.get("type", "").asString();
-// }
-
-// std::string Event::getStreetAddress() const
-// {
-//     Json::Value detailJson = this->parseDetail();
-//     return detailJson.get("streetAddress", "").asString();
-// }
-
-// std::string Event::getCityAddress() const
-// {
-//     Json::Value detailJson = this->parseDetail();
-//     return detailJson.get("cityAddress", "").asString();
-// }
