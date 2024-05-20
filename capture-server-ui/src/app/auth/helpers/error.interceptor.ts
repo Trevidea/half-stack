@@ -1,11 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor,
+  HttpResponse,
+  HttpErrorResponse,
+} from "@angular/common/http";
+import { Observable, throwError } from "rxjs";
+import { catchError, tap } from "rxjs/operators";
 
-import { AuthenticationService } from 'app/auth/service';
-import { ErrorModalService } from 'app/sport-pip-capture/blocks/error-model-service/error-modal.service';
+import { AuthenticationService } from "app/auth/service";
+import { ErrorModalService } from "app/sport-pip-capture/blocks/error-model-service/error-modal.service";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -13,31 +20,41 @@ export class ErrorInterceptor implements HttpInterceptor {
    * @param {Router} _router
    * @param {AuthenticationService} _authenticationService
    */
-  constructor(private _router: Router, private _authenticationService: AuthenticationService, private modalService: ErrorModalService) { }
+  constructor(
+    private _router: Router,
+    private _authenticationService: AuthenticationService,
+    private modalService: ErrorModalService
+  ) {}
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      tap(event => {
+      tap((event) => {
         if (event instanceof HttpResponse) {
-          // successful response with error property 
-          if (event.body['Gateway Response']?.error) {
-            const massage = event.body['Gateway Response']?.error
+          // successful response with error property
+          if (event.body["Gateway Response"]?.error) {
+            const massage = event.body["Gateway Response"]?.error;
             this.modalService.openErrorModal(massage);
           }
         }
       }),
       catchError((error: HttpErrorResponse) => {
-        console.log("Error Occurred ",error)
         if ([401, 403].indexOf(error.status) !== -1) {
-          this._router.navigate(['/pages/miscellaneous/not-authorized']);
-        };
+          this._router.navigate(["/pages/miscellaneous/not-authorized"]);
+        }
 
         if (error.status === 0) {
           // Handle network error
-          this.modalService.openErrorModal("Network error occurred. Please check your internet connection and try again.");
+          // this.modalService.openErrorModal(
+          //   "Network error occurred. Please check your internet connection and try again."
+          // );
         } else if (error.error instanceof ErrorEvent) {
           // Handling  client-side error
-          this.modalService.openErrorModal("An error occurred on the client side. Please try again later.");
+          // this.modalService.openErrorModal(
+          //   "An error occurred on the client side. Please try again later."
+          // );
         } else {
           // Handlindling server-side error
           let errorMessage = "An error occurred while processing your request.";
@@ -47,7 +64,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.modalService.openErrorModal(errorMessage);
         }
         return throwError(error);
-      }),
+      })
       // catchError(err => {
       //   console.log(err)
       //   if ([401, 403].indexOf(err.status) !== -1) {
