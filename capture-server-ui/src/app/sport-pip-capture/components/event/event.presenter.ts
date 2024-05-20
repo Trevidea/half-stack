@@ -16,7 +16,6 @@ import { TabStateService } from "./event-utility/nav";
   styleUrls: ["./event.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
-//
 export class EventPresenter implements OnInit {
   query: Data.FilterParams = {
     sport: null,
@@ -31,7 +30,6 @@ export class EventPresenter implements OnInit {
     private tabStateService: TabStateService
   ) {
     this.ds = new EventRange();
-    
   }
 
   ngOnInit(): void {
@@ -49,7 +47,6 @@ export class EventPresenter implements OnInit {
     setTimeout(() => {
       this.query = filter;
       this.filteredData = this.filterEvents(this.ds.event, this.query);
-      // console.log(this.query)
     }, 0);
   }
 
@@ -68,4 +65,10 @@ export class EventPresenter implements OnInit {
       return true;
     });
   }
+
+  onDeleteEvent() {
+    this.query.status = this.tabStateService.getActiveTab();
+    this.onFilter(this.query);
+  }
+  
 }

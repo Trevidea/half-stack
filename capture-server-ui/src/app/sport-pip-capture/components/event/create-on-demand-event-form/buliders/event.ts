@@ -73,12 +73,7 @@ export class VenueBuilder extends AbstractBuilder<
   }
   decompose(v: OnDemandEventFormView): Data.Event {
     return;
-    // const ve = []
-    // ve.push(v.venue[0].location)
-    // return {
-    //     id: v.id,
-    //     // venue: ve as []
-    // }
+    
   }
   view(): OnDemandEventFormView {
     return new OnDemandEventFormView();
