@@ -8,7 +8,6 @@
 #include <map>
 #include <ctime>
 #include "event-device.h"
-#include <json/json.h>
 
 class Event : public EntityBase
 {
@@ -22,15 +21,41 @@ public:
     int year() const { return m_model.get<int>("year"); }
     std::string dtEvent() const { return m_model.get<std::string>("dt_event"); }
     int tmEvent() const { return m_model.get<int>("tm_event"); }
-    std::string venue() const { return m_model.get<std::string>("venue"); }
-    std::string detail() const { return m_model.get<std::string>("detail"); }
+    Json::Value venue() const { return parseJsonField("venue"); }
+    Json::Value detail() const { return parseJsonField("detail"); }
     std::string title() const { return m_model.get<std::string>("title"); }
     std::string status() const { return m_model.get<std::string>("status"); }
     std::string type() const { return m_model.get<std::string>("type"); }
 
+    // Methods to access nested fields in venue
+    std::string venueLocation() const
+    {
+        Json::Value venueJson = venue();
+        return venueJson.isMember("location") ? venueJson["location"].asString() : "";
+    }
+
+    // Methods to access nested fields in detail
+    std::string detailType() const
+    {
+        Json::Value detailJson = detail();
+        return detailJson.isMember("type") ? detailJson["type"].asString() : "";
+    }
+
+    std::string detailStreetAddress() const
+    {
+        Json::Value detailJson = detail();
+        return detailJson.isMember("streetAddress") ? detailJson["streetAddress"].asString() : "";
+    }
+
+    std::string detailCityAddress() const
+    {
+        Json::Value detailJson = detail();
+        return detailJson.isMember("cityAddress") ? detailJson["cityAddress"].asString() : "";
+    }
+
 public:
     void validateEventId(int eventId); // Declaration of validateEventId function
-    
+
     inline dtu_date getDTUDate() const
     {
         return getDTUDateFromSql(this->dtEvent());
@@ -54,7 +79,22 @@ public:
     }
 
 private:
+    Json::Value parseJsonField(const std::string &fieldName) const
+    {
+        Json::Value root;
+        Json::CharReaderBuilder builder;
+        std::string errs;
+        const std::string rawJson = m_model.get<std::string>(fieldName);
 
+        std::istringstream ss(rawJson);
+        if (!Json::parseFromStream(builder, ss, &root, &errs))
+        {
+            // Handle error (e.g., log the error, throw an exception, etc.)
+            std::cerr << "Failed to parse JSON for field " << fieldName << ": " << errs << std::endl;
+        }
+
+        return root;
+    }
 };
 
 #endif // EVENT_H
