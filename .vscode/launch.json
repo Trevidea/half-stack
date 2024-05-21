@@ -2,8 +2,27 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "C/C++ Runner: Debug Session",
+      "name": "(lldb) Launch",
       "type": "cppdbg",
+      "request": "launch",
+      "program": "/Users/shreyapathak/git/half-stack/capture-server/build/api/capture-server",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    },
+    {
+      "name": "(lldb) Attach",
+      "type": "cppdbg",
+      "request": "attach",
+      "program": "/Users/shreyapathak/git/half-stack/capture-server/build/api/capture-server",
+      "MIMode": "lldb"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,

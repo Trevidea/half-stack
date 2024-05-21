@@ -396,6 +396,19 @@ export class ModelServiceService {
     return this._httpClient.get<any>(url);
   }
 
+  getVirtualHost(): Observable<any> {
+    const url = `${environment.spModelUrl}/omal/virtual-hosts`;
+    return this._httpClient.get<any>(url);
+  }
+  getApplications(): Observable<any> {
+    const url = `http://drake.in:1437/api/omal/apps?vhost=spip`;
+    return this._httpClient.get<any>(url);
+  }
+  createApp(data: { "app-name": string }): Observable<any> {
+    const url = `${environment.spModelUrl}/omal/create-app`;
+    return this._httpClient.post(url, data);
+  }
+
   userJson(): Observable<Data.UserProfile[]> {
     return this._data("user-profiles", UserProfileData);
   }
@@ -408,10 +421,10 @@ export class ModelServiceService {
     return this._data("connections", PreviousEventsConnectionData);
   }
 
-  getVirtualHost(): Observable<any> {
-    const url = `${environment.spModelUrl}/omal/virtual-hosts`;
-    return this._httpClient.get<any>(url);
-  }
+  // getVirtualHost(): Observable<any> {
+  //   const url = `${environment.spModelUrl}/omal/virtual-hosts`;
+  //   return this._httpClient.get<any>(url);
+  // }
 
   MetaTypeByKey(key: string): Observable<Data.MetaType> {
     return this._selectQueryOne("meta-type", `'${key}'`, "key", MetaTypeData);
@@ -433,21 +446,5 @@ export class ModelServiceService {
       .subscribe((res) => {
         console.log(res);
       });
-  }
-
-  private dataSubject = new BehaviorSubject<any>(null);
-
-  setData(data: any) {
-    this.dataSubject.next(data);
-    this.processData(data);
-  }
-
-  getData() {
-    return this.dataSubject.value;
-  }
-  private processData(data: any) {
-    // Do something with the data
-    console.log("Processing data:", data);
-    // Add any additional processing logic here
   }
 }

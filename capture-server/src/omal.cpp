@@ -58,10 +58,10 @@ void Omal::report()
                                   auto &vh = OMALFactory::getInstance().create("spip");
 
                                   const auto &jsReq = req.json();
-                                  int eventId = jsReq["eventId"].asInt();
+                                  std::string appName = jsReq["app-name"].asString();
 
                                   std::stringstream ss;
-                                  ss << eventId;
+                                  ss << appName;
                                   Json::Value result = Json::objectValue;
                                   vh.createApp(ss.str(), result);
                                   auto strResponse = Gateway::instance().formatResponse({{result}});
@@ -97,11 +97,14 @@ void Omal::report()
                               {
                                   this->assessNetworkQuality(req, rsp);
                               });
-    Gateway::instance().route("GET", "/api/omal/app", // To request LIST
+    Gateway::instance().route("DELETE", "/api/omal/app", // To request LIST
                               [this](const Request &req, Response &rsp)
                               {
+                                  std::string appName = req.json()["app-name"].asString();
                                   Json::Value response = Json::objectValue;
-                                  response["app"] = "spip";
+                                  auto &om = OMALFactory::getInstance().create("spip");
+                                  om.deleteApp(appName, response);
+                                  
                                   const auto &strResponse = Gateway::instance().formatResponse({{response}});
                                   rsp.setData(strResponse);
                               });

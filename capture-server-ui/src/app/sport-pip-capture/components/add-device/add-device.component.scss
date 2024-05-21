@@ -22,6 +22,15 @@ label {
   background-color: #F3F3F5;
 }
 
+.highlighted-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 1rem;
+  border-radius: 4px;
+  background-color: #F3F3F5;
+}
+
 .btn-flat-primary:hover:not(.disabled):not(:disabled) {
   background-color: transparent !important;
 }
@@ -38,6 +47,10 @@ label {
     color: #FDFDFD;
   }
 
+  .highlighted-box {
+    background-color: #313131;
+    color: #FDFDFD;
+  }
 
   .toast-title {
     color: #fdfdfd !important;

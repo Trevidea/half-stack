@@ -65,7 +65,7 @@ export class CreateOnDemandEventComponent implements OnInit {
   }
 
   onSave(id: number) {
-    this.modelServiceService.setData(this.oldData);
+    // this.modelServiceService.setData(this.oldData);
     this.save.emit();
   }
 

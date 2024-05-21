@@ -68,7 +68,7 @@ export class AddDevicePresenter implements OnInit {
       (userItem: UserProfileData) => {
         return new SelectItemView(
           userItem.id,
-          userItem.firstname + "" + userItem.lastname
+          userItem.firstname + " " + userItem.lastname
         );
       }
     );

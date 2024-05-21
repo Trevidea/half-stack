@@ -157,6 +157,8 @@ export namespace Data {
     pin: string;
     event_id: number;
     location: string;
+    stream_name: string;
+    stream_id: string;
   }
 
   export interface Device extends Base {
@@ -420,8 +422,10 @@ export namespace Data {
     outputStreamName: string;
   }
 
+  export interface Application extends Base {
+    app_name: string
+  }
 }
-
 export namespace Views {
   export interface Datasource {
     id: number;

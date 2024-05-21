@@ -11,7 +11,6 @@ export class AddDeviceView implements Views.Datasource {
         this._id = v;
     }
 
-
     private _appName: string;
     public get appName(): string {
         return this._appName;
@@ -19,8 +18,6 @@ export class AddDeviceView implements Views.Datasource {
     public set appName(v: string) {
         this._appName = v;
     }
-
-
 
     private _appNamesCollection: Collection<string>;
     public get appNamesCollection(): Collection<string> {
@@ -33,8 +30,6 @@ export class AddDeviceView implements Views.Datasource {
         this._appNamesCollection = v;
     }
 
-
-
     private _userName: Collection<SelectItemView>;
     public get userName(): Collection<SelectItemView> {
         if (!this._userName) {
@@ -45,7 +40,6 @@ export class AddDeviceView implements Views.Datasource {
     public set userName(v: Collection<SelectItemView>) {
         this._userName = v;
     }
-
 
     private _deviceName: Collection<SelectItemView>;
     public get deviceName(): Collection<SelectItemView> {
@@ -58,7 +52,6 @@ export class AddDeviceView implements Views.Datasource {
         this._deviceName = v;
     }
 
-
     private _pin: string;
     public get pin(): string {
         return this._pin;
@@ -66,7 +59,6 @@ export class AddDeviceView implements Views.Datasource {
     public set pin(v: string) {
         this._pin = v;
     }
-
 
     private _location: Collection<string>;
     public get location(): Collection<string> {
@@ -79,8 +71,6 @@ export class AddDeviceView implements Views.Datasource {
         this._location = v;
     }
 
-
-
     private _eventId: number;
     public get eventId(): number {
         return this._eventId;
@@ -89,5 +79,24 @@ export class AddDeviceView implements Views.Datasource {
         this._eventId = v;
     }
 
+    
+    private _streamName : string;
+    public get streamName() : string {
+        return this._streamName;
+    }
+    public set streamName(v : string) {
+        this._streamName = v;
+    }
+
+    
+    private _streamId : string;
+    public get streamId() : string {
+        return this._streamId;
+    }
+    public set streamId(v : string) {
+        this._streamId = v;
+    }
+    
+    
 
 }

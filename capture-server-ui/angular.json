@@ -128,6 +128,25 @@
                   "maximumWarning": "1mb"
                 }
               ]
+            },
+            "man": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.man.ts"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "15mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "1mb"
+                }
+              ]
             }
           },
           "defaultConfiguration": ""
@@ -147,6 +166,9 @@
             },
             "rak": {
               "browserTarget": "vuexy:build:rak"
+            },
+            "man": {
+              "browserTarget": "vuexy:build:man"
             }
           }
         },

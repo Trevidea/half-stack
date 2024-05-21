@@ -23,6 +23,7 @@ public:
 
     Json::Value deepFindOrCreate();
     VirtualApp createApp(const std::string &app, Json::Value &result, bool findOnly = false);
+    int deleteApp(const std::string &app, Json::Value &result);
 
     std::vector<std::string> getAll();
     VirtualHost() = default;
