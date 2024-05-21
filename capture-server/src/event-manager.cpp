@@ -132,6 +132,9 @@ void EventManager::closePreview(const Request &req, Response &rsp)
 std::string EventManager::getEventPreviewData(const int eventId)
 {
     spdlog::info("Getting event preview data for event ID: {}", eventId);
+    Json::Value model(Json::objectValue); // Create a Json::Value object
+    EventPreview ep(model);
+
     const auto event = Event::byId<Event>(eventId);
     if (event.notSet())
     {
@@ -139,10 +142,17 @@ std::string EventManager::getEventPreviewData(const int eventId)
         return "";
     }
 
-    Json::Value model; // Assuming this is the JSON model to be passed to EventPreview
-    EventPreview ep(model);
+    // Log each value before setting it
+    spdlog::info("Event title: {}", event.title());
+    spdlog::info("Event date: {}", event.dtEvent());
+    spdlog::info("Event time: {}", event.tmEvent());
+    spdlog::info("Event sport: {}", event.sport());
+    spdlog::info("Event level: {}", event.level());
+    spdlog::info("Event program: {}", event.program());
+    spdlog::info("Event status: {}", event.status());
+    spdlog::info("Event year: {}", event.year());
+    spdlog::info("Event type: {}", event.type());
 
-    // Set event details in JSON format
     ep.setTitle(event.title());
     ep.setDtEvent(event.dtEvent());
     ep.setTime(event.tmEvent());
@@ -153,15 +163,6 @@ std::string EventManager::getEventPreviewData(const int eventId)
     ep.setYear(event.year());
     ep.setEventType(event.type());
 
-    // Set venue details
-    Json::Value venue = event.venue();
-    ep.setVenueLocation(venue["location"].asString());
-
-    // Set detailed information
-    Json::Value detail = event.detail();
-    ep.setCityAddress(detail["cityAddress"].asString());
-    ep.setStreetAddress(detail["streetAddress"].asString());
-    ep.setDetailType(detail["type"].asString());
 
     EventDevice eventDevice;
     char query[128] = {'\0'};
@@ -170,6 +171,7 @@ std::string EventManager::getEventPreviewData(const int eventId)
 
     ep.setActiveDevices(activeDevices);
 
+    // Convert EventPreview to JSON string
     std::string jsonString = ep.toResponse();
     return jsonString;
 }
