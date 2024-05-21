@@ -10,13 +10,22 @@ export class ApplicationView implements Views.Datasource {
         this._id = v;
     }
 
-    
-    private _appName : string;
-    public get appName() : string {
+
+    private _appName: string;
+    public get appName(): string {
         return this._appName;
     }
-    public set appName(v : string) {
+    public set appName(v: string) {
         this._appName = v;
     }
-    
+
+
+    private _applicationName: string[];
+    public get applicationName(): string[] {
+        return this._applicationName;
+    }
+    public set applicationName(v: string[]) {
+        this._applicationName = v;
+    }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 import { ApplicationView } from '../view/application';
@@ -10,7 +10,7 @@ import { ApplicationView } from '../view/application';
 })
 export class ApplicationFormComponent implements OnInit {
   datasource: ApplicationView;
-
+  @Output()onAddNewApp = new EventEmitter();
   constructor(public activeModal: NgbActiveModal, private modelServiceService: ModelServiceService) {
     this.datasource = new ApplicationView()
   }
@@ -20,12 +20,12 @@ export class ApplicationFormComponent implements OnInit {
 
   onSave() {
     console.log(this.datasource.appName)
-    this.modelServiceService.createApp({app_name: this.datasource.appName}).subscribe(
-      (data)=>{
+    this.modelServiceService.createApp({ 'app-name': this.datasource.appName }).subscribe(
+      (data) => {
         console.log(data);
       },
-      (error)=>{
-       console.log(error)
+      (error) => {
+        console.log(error)
       }
     )
   }

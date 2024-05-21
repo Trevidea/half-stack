@@ -362,8 +362,11 @@ export class ModelServiceService {
     const url = `${environment.spModelUrl}/omal/virtual-hosts`;
     return this._httpClient.get<any>(url);
   }
-
-  createApp(data: { app_name: string }): Observable<any> {
+  getApplications(): Observable<any> {
+    const url = `http://drake.in:1437/api/omal/apps?vhost=spip`;
+    return this._httpClient.get<any>(url);
+  }
+  createApp(data: {'app-name': string }): Observable<any> {
     const url = `${environment.spModelUrl}/omal/create-app`
     return this._httpClient.post(url, data)
   }
