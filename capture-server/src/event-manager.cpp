@@ -131,7 +131,9 @@ void EventManager::closePreview(const Request &req, Response &rsp)
 std::string EventManager::getEventPreviewData(const int eventId)
 {
     spdlog::info("Getting event preview data for event ID: {}", eventId);
-    EventPreview ep;
+    Json::Value model(Json::objectValue); // Create a Json::Value object
+    EventPreview ep(model);
+    
     const auto event = Event::byId<Event>(eventId);
     if (event.notSet())
     {
@@ -148,6 +150,11 @@ std::string EventManager::getEventPreviewData(const int eventId)
     ep.setStatus(event.status());
     ep.setYear(event.year());
     ep.setEventType(event.type());
+    
+    ep.setCityAddress(event.detail()["cityAddress"].asString());
+    ep.setStreetAddress(event.detail()["streetAddress"].asString());
+    ep.setDetailType(event.detail()["type"].asString());
+    ep.setVenueLocation(event.venue()["location"].asString());
     
 
     EventDevice eventDevice;
