@@ -163,18 +163,6 @@ std::string EventManager::getEventPreviewData(const int eventId)
     ep.setYear(event.year());
     ep.setEventType(event.type());
 
-    Json::Value eventDetail = event.detail();
-    spdlog::info("Event detail: {}", eventDetail.toStyledString());
-    
-    ep.setCityAddress(eventDetail["cityAddress"].asString());
-    ep.setStreetAddress(eventDetail["streetAddress"].asString());
-    ep.setDetailType(eventDetail["type"].asString());
-
-    Json::Value eventVenue = event.venue();
-    spdlog::info("Event venue: {}", eventVenue.toStyledString());
-
-    ep.setVenueLocation(eventVenue["location"].asString());
-    
 
     EventDevice eventDevice;
     char query[128] = {'\0'};
