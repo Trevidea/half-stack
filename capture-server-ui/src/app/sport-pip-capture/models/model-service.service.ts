@@ -400,13 +400,26 @@ export class ModelServiceService {
     const url = `${environment.spModelUrl}/omal/virtual-hosts`;
     return this._httpClient.get<any>(url);
   }
+
   getApplications(): Observable<any> {
     const url = `http://drake.in:1437/api/omal/apps?vhost=spip`;
-    return this._httpClient.get<any>(url);
+    return this._httpClient.get<any>(url).pipe(
+      map(response => response['Gateway Response']['applications'])
+    );
   }
-  createApp(data: { "app-name": string }): Observable<any> {
-    const url = `${environment.spModelUrl}/omal/create-app`;
-    return this._httpClient.post(url, data);
+
+  createApp(data: { 'app-name': string }): Observable<any> {
+    const url = `${environment.spModelUrl}/omal/create-app`
+    return this._httpClient.post(url, data)
+  }
+
+  deleteApp(data: { 'app-name': string }): Observable<any> {
+    const url = `http://drake.in:1437/api/omal/app`;
+    const httpOptions = {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
+      body: data,
+    };
+    return this._httpClient.delete<any>(url, httpOptions)
   }
 
   userJson(): Observable<Data.UserProfile[]> {
