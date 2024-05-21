@@ -58,7 +58,7 @@ void Omal::report()
                                   auto &vh = OMALFactory::getInstance().create("spip");
 
                                   const auto &jsReq = req.json();
-                                  int appName = jsReq["app-name"].asInt();
+                                  std::string appName = jsReq["app-name"].asString();
 
                                   std::stringstream ss;
                                   ss << appName;
