@@ -9,6 +9,7 @@
 #include "event-preview.h"
 #include "live-event.h"
 #include "event-device.h"
+#include <spdlog/spdlog.h>
 
 EventManager::EventManager() : EntityBase("event")
 {
