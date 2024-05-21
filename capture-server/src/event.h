@@ -8,7 +8,6 @@
 #include <map>
 #include <ctime>
 #include "event-device.h"
-#include <json/json.h>
 
 class Event : public EntityBase
 {

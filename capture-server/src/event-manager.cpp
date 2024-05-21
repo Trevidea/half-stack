@@ -146,9 +146,9 @@ std::string EventManager::getEventPreviewData(const int eventId)
     ep.setLevel(event.level());
     ep.setProgram(event.program());
     ep.setStatus(event.status());
-    ep.setVenueLocation(event.venueLocation());
     ep.setYear(event.year());
     ep.setEventType(event.type());
+    ep.setVenueLocation(event.venueLocation());
     ep.setStreetAddress(event.detailStreetAddress());
     ep.setCityAddress(event.detailCityAddress());
     ep.setDetailType(event.detailType());
