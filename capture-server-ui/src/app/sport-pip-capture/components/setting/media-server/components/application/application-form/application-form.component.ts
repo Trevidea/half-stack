@@ -10,7 +10,7 @@ import { ApplicationView } from '../view/application';
 })
 export class ApplicationFormComponent implements OnInit {
   datasource: ApplicationView;
-  @Output()onAddNewApp = new EventEmitter();
+  @Output() onAddNewApp = new EventEmitter();
   constructor(public activeModal: NgbActiveModal, private modelServiceService: ModelServiceService) {
     this.datasource = new ApplicationView()
   }
@@ -23,6 +23,8 @@ export class ApplicationFormComponent implements OnInit {
     this.modelServiceService.createApp({ 'app-name': this.datasource.appName }).subscribe(
       (data) => {
         console.log(data);
+        this.onAddNewApp.emit(true);
+        this.activeModal.close('Save click')
       },
       (error) => {
         console.log(error)

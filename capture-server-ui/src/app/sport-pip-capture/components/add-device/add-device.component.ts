@@ -33,14 +33,25 @@ export class AddDeviceComponent implements OnInit {
 
 
   constructRtmpUrl(): string {
-    const devicename =
-      this.datasource.deviceName.SelectedItem?.value ?
-        `/${this.datasource.deviceName.SelectedItem.value.trim().replace(/\s+/g, '-').toLowerCase()}` : '';
+    const deviceName = this.datasource.deviceName.SelectedItem?.value?.trim().replace(/\s+/g, '-').toLowerCase() ?? '';
     const pin = this.datasource.pin ? `/${this.datasource.pin}` : '';
-    const rtmpUrl = `rtmp://drake.in:1935/${this.datasource.appName}${devicename}${pin}`;
+    const appName = this.datasource.appNamesCollection?.SelectedItem?.trim().replace(/\s+/g, '-').toLowerCase() ?? '';
+
+    let rtmpUrl = 'rtmp://drake.in:1935/';
+
+    if (appName) {
+      rtmpUrl += `${appName}/`;
+    }
+
+    if (deviceName) {
+      rtmpUrl += `${deviceName}${pin}`;
+    }
+
     this.rtmpUrl = rtmpUrl;
     return rtmpUrl;
   }
+
+
 
   copyUrl(inputTextValue) {
     const selectBox = document.createElement('textarea');

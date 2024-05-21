@@ -9,6 +9,7 @@
 #include "event-preview.h"
 #include "live-event.h"
 #include "event-device.h"
+#include <spdlog/spdlog.h>
 
 EventManager::EventManager() : EntityBase("event")
 {
@@ -131,13 +132,26 @@ void EventManager::closePreview(const Request &req, Response &rsp)
 std::string EventManager::getEventPreviewData(const int eventId)
 {
     spdlog::info("Getting event preview data for event ID: {}", eventId);
-    EventPreview ep;
+    Json::Value model(Json::objectValue); // Create a Json::Value object
+    EventPreview ep(model);
+
     const auto event = Event::byId<Event>(eventId);
     if (event.notSet())
     {
         spdlog::warn("Event not found for ID: {}", eventId);
         return "";
     }
+
+    // Log each value before setting it
+    spdlog::info("Event title: {}", event.title());
+    spdlog::info("Event date: {}", event.dtEvent());
+    spdlog::info("Event time: {}", event.tmEvent());
+    spdlog::info("Event sport: {}", event.sport());
+    spdlog::info("Event level: {}", event.level());
+    spdlog::info("Event program: {}", event.program());
+    spdlog::info("Event status: {}", event.status());
+    spdlog::info("Event year: {}", event.year());
+    spdlog::info("Event type: {}", event.type());
 
     ep.setTitle(event.title());
     ep.setDtEvent(event.dtEvent());
@@ -148,7 +162,7 @@ std::string EventManager::getEventPreviewData(const int eventId)
     ep.setStatus(event.status());
     ep.setYear(event.year());
     ep.setEventType(event.type());
-    
+
 
     EventDevice eventDevice;
     char query[128] = {'\0'};

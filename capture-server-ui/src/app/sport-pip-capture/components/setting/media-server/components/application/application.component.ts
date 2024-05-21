@@ -17,29 +17,45 @@ export class ApplicationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.modelServiceService.getApplications().subscribe(
-      response => {
-        // this.applications = response.applications;
-        console.log(response['Gateway Response']['applications'])
-        this.datasource.applicationName = response['Gateway Response']['applications']
-        console.log(this.datasource)
-      },
-      error => {
-        console.error('Error fetching applications:', error);
-      }
-    );
+    this.fetchingapplications()
   }
 
-  delete() {
+  onDelete(app: string) {
+    this.modelServiceService.deleteApp({'app-name': app}).subscribe(
+      (data) => {
+        console.log(data)
+        this.fetchingapplications()
+      }
+    )
   }
 
 
   modalOpenMd() {
-    const viewRef = this.modalService.open(ApplicationFormComponent, {
+    const modalRef = this.modalService.open(ApplicationFormComponent, {
       centered: true,
       size: "lg",
       backdrop: "static",
       keyboard: false,
     });
+    modalRef.shown.subscribe(o => {
+      const inst: ApplicationFormComponent = modalRef.componentInstance;
+      inst.onAddNewApp.subscribe(res => {
+        console.log(res)
+        if (res) {
+          this.fetchingapplications()
+        }
+      });
+    })
+  }
+
+  fetchingapplications() {
+    this.modelServiceService.getApplications().subscribe(
+      response => {
+        this.datasource.applicationName = response
+      },
+      error => {
+        console.error('Error fetching applications:', error);
+      }
+    );
   }
 }

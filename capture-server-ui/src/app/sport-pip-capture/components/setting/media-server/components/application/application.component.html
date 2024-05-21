@@ -14,9 +14,10 @@
             <div class="col custum-column" *ngFor="let item of datasource.applicationName">
                 <div>
                     <h6>Application Name </h6>
-                    <h5>{{item}}</h5>
+                    <h5 *ngIf="item">{{item}}</h5>
+                    <h5 *ngIf="item == null">&lt;not set&gt;</h5>
                     <hr style="margin-top:1px; margin-bottom: 1px;">
-                    <a class="delete" (click)="delete()"> Delete</a>
+                    <a class="delete" (click)="onDelete(item)"> Delete</a>
                 </div>
             </div>
         </div>
