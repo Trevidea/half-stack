@@ -14,8 +14,7 @@
     <form #AddStreamkeyForm="ngForm">
         <div class="form-group">
             <label>Application</label>
-            <ng-select name="appname" [(ngModel)]="datasource.appNamesCollection.SelectedItem" 
-                #ngmappname="ngModel">
+            <ng-select name="appname" [(ngModel)]="datasource.appNamesCollection.SelectedItem" #ngmappname="ngModel">
                 <ng-option *ngFor="let item of datasource.appNamesCollection" [value]="item">{{ item }}</ng-option>
             </ng-select>
             <!-- <app-validation-alert controlName="Application Name" [control]="ngmappname">
@@ -71,7 +70,10 @@
         </div>
         <div class="form-group">
             <label>Stream Id</label>
-            <input type="text" class="form-control" name="streamId" [value]="datasource.streamId" readonly />
+            <div class="highlighted-box">
+                {{datasource.streamId}}
+            </div>
+            <!-- <input type="text" class="form-control" name="streamId" [value]="datasource.streamId" readonly /> -->
         </div>
     </form>
 </div>
