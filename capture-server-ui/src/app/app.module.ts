@@ -39,7 +39,6 @@ import { Timer } from "./sport-pip-capture/components/connection/timer";
 import { CaptureDashboardComponent } from "./capture-dashboard/capture-dashboard.component";
 import { DashboardHeaderComponent } from "./capture-dashboard/dashboard-header/dashboard-header.component";
 import { InlineFormeModule } from "./sport-pip-capture/blocks/inline-modal/inline-form-module";
-import { LoggingInterceptor } from "./sport-pip-capture/logging-Interceptor/logging-interceptor";
 
 const appRoutes: Routes = [
   {
@@ -176,7 +175,6 @@ const appRoutes: Routes = [
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
     // ! IMPORTANT: Provider used to create fake backend, comment while using real API
     fakeBackendProvider,
     TimerService,

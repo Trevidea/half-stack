@@ -21,9 +21,6 @@ import Swal from "sweetalert2";
 import { ConnectionAlertComponent } from "../../connection/connection-alert/connection-alert.component";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
-import { DeepDiffService } from "app/blocks/deep-diff.service";
-import { FormChangeDetector } from "app/blocks/form-change-detector.mixin";
-import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 import { map } from "rxjs/operators";
 @Component({
   selector: "app-create-on-demand-event",
@@ -44,16 +41,9 @@ export class CreateOnDemandEventComponent implements OnInit {
   constructor(
     private modelService: NgbModal,
     private router: Router,
-    public deepDiffService: DeepDiffService,
     private route: ActivatedRoute
   ) {}
-  oldData: any;
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.datasource.id = params["id"];
-      console.log("ID:", this.datasource.id);
-    });
-  }
+  ngOnInit(): void {}
   onCancelClick() {
     Swal.close();
   }

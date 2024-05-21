@@ -10,10 +10,7 @@ import { MetaTypeData } from "./meta-type";
 import { UserProfileData } from "./user-profile";
 import { DeviceData } from "./device";
 import { PreviousEventsConnectionData } from "./previous-events-connection";
-import { FormChangeDetector } from "app/blocks/form-change-detector.mixin";
-import { DeepDiffService } from "app/blocks/deep-diff.service";
-import { AuthenticationService } from "app/auth/service";
-
+import { LogService } from "./log.service";
 @Injectable({
   providedIn: "root",
 })
@@ -22,7 +19,8 @@ export class ModelServiceService {
   private logUrl: string = environment.logUrl;
   constructor(
     private _httpClient: HttpClient,
-    private _adapter: AdapterService
+    private _adapter: AdapterService,
+    private logService: LogService
   ) {
     this.saveEvent = this.saveEvent.bind(this);
     this.saveDevice = this.saveDevice.bind(this);
@@ -233,9 +231,14 @@ export class ModelServiceService {
     if (data.id) {
       return this.update("event", data, data.id).pipe(
         map((x) => {
-          const chnagedData = this.flattenObject(data);
+          const chnagedData = this.logService.flattenObject(data);
           console.log(chnagedData);
-          this.logPut("update-log", {
+          const newChanges = this.logService.getChangeLog(
+            this.model,
+            chnagedData
+          );
+          console.log("new Changes", newChanges);
+          this.logService.logPut("update-log", {
             eventId: data.id,
             // actitviy: this.changedFormValue,
           });
@@ -266,14 +269,15 @@ export class ModelServiceService {
             ],
             details: [],
           };
-          const chnagedData = this.flattenObject(data);
+          const chnagedData = this.logService.flattenObject(data);
           console.log(chnagedData);
-          this.logPost("new-log", logData);
+          this.logService.logPost("new-log", logData);
           return x;
         })
       );
     }
   }
+
   saveMetaType(data: Data.MetaType): Observable<Data.MetaType> {
     if (data.id) {
       return this.update(`meta-type?key=${data.id}`, data, data.id);
@@ -306,7 +310,7 @@ export class ModelServiceService {
     return this._selectOne("event", id, EventData).pipe(
       map((x: any) => {
         console.log("XX::", x);
-        const flattenedData = this.flattenObject(x._model);
+        const flattenedData = this.logService.flattenObject(x._model);
         this.model = flattenedData;
         console.log("flattenedData:::", flattenedData);
         return x;
@@ -314,22 +318,6 @@ export class ModelServiceService {
     );
   }
 
-  private flattenObject(obj: any, res: any = {}): any {
-    for (let key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        if (
-          typeof obj[key] === "object" &&
-          !Array.isArray(obj[key]) &&
-          obj[key] !== null
-        ) {
-          this.flattenObject(obj[key], res);
-        } else {
-          res[key] = obj[key];
-        }
-      }
-    }
-    return res;
-  }
   // hostConnectionDeviceDetailJson(
   //   id: number
   // ): Observable<Data.HostConnectionDeviceDetail> {
@@ -431,23 +419,23 @@ export class ModelServiceService {
 
   getApplications(): Observable<any> {
     const url = `http://drake.in:1437/api/omal/apps?vhost=spip`;
-    return this._httpClient.get<any>(url).pipe(
-      map(response => response['Gateway Response']['applications'])
-    );
+    return this._httpClient
+      .get<any>(url)
+      .pipe(map((response) => response["Gateway Response"]["applications"]));
   }
 
-  createApp(data: { 'app-name': string }): Observable<any> {
-    const url = `${environment.spModelUrl}/omal/create-app`
-    return this._httpClient.post(url, data)
+  createApp(data: { "app-name": string }): Observable<any> {
+    const url = `${environment.spModelUrl}/omal/create-app`;
+    return this._httpClient.post(url, data);
   }
 
-  deleteApp(data: { 'app-name': string }): Observable<any> {
+  deleteApp(data: { "app-name": string }): Observable<any> {
     const url = `http://drake.in:1437/api/omal/app`;
     const httpOptions = {
       headers: new HttpHeaders({ "Content-Type": "application/json" }),
       body: data,
     };
-    return this._httpClient.delete<any>(url, httpOptions)
+    return this._httpClient.delete<any>(url, httpOptions);
   }
 
   userJson(): Observable<Data.UserProfile[]> {
@@ -474,18 +462,6 @@ export class ModelServiceService {
   MetaTypeJson(): Observable<Data.MetaType[]> {
     return this._data("meta-types", MetaTypeData);
   }
-  logPost(extention: string, data: any) {
-    this._httpClient
-      .post(this.logUrl + `${extention}`, data)
-      .subscribe((res) => {
-        console.log(res);
-      });
-  }
-  logPut(extention: string, data: any) {
-    this._httpClient
-      .put(this.logUrl + `${extention}`, data)
-      .subscribe((res) => {
-        console.log(res);
-      });
-  }
+
+  ///////////////////////////////////////////////////////////////////////////////
 }
