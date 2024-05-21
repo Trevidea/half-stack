@@ -7,7 +7,6 @@ export class AddDeviceBuilder extends AbstractBuilder<Data.EventDevice, AddDevic
 
     }
     decompose(v: AddDeviceView): Data.EventDevice {
-        console.log(v)
         return {
             id: v.id,
             user_id: v.userName.SelectedItem.key,
@@ -17,6 +16,7 @@ export class AddDeviceBuilder extends AbstractBuilder<Data.EventDevice, AddDevic
             location: v.location.SelectedItem,
             stream_name: v.streamName,
             stream_id: v.streamId
+            
         }
     }
     view(): AddDeviceView {

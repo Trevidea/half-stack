@@ -26,6 +26,7 @@ export class AddDeviceView implements Views.Datasource {
         }
         return this._appNamesCollection;
     }
+    
     public set appNamesCollection(v: Collection<string>) {
         this._appNamesCollection = v;
     }

@@ -110,10 +110,15 @@ export class AddDevicePresenter implements OnInit {
       }
     });
 
-    this.modelServiceService.fetechApplicationDetail().subscribe((data) => {
-      const appValue = data["Gateway Response"]["result"][0][0]["app"];
-      this.ds.appName = appValue;
+    // this.modelServiceService.fetechApplicationDetail().subscribe((data) => {
+    //   const appValue = data["Gateway Response"]["result"][0][0]["app"];
+    //   this.ds.appName = appValue;
+    // });
+
+    this.modelServiceService.getApplications().subscribe((data) => {
+      this.ds.appNamesCollection = data;
     });
+
   }
 
   toastrSuccess() {
