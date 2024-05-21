@@ -1,21 +1,18 @@
-import {
-  AfterViewInit,
-  ViewChild,
-  ElementRef,
-  Injectable,
-} from "@angular/core";
+import { AfterViewInit, Injectable } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { DeepDiffService } from "./deep-diff.service";
-@Injectable({
-  providedIn: "root",
-})
+import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
+@Injectable({ providedIn: "root" })
 export class FormChangeDetector implements AfterViewInit {
   form: NgForm;
   changesDetected = false;
-  changedFields: { [key: string]: { oldValue: any; newValue: any } } = {};
+  changedFields: { [key: string]: { oldValue: any; newValue: any } };
   initialFormValues: any;
 
-  constructor(private deepDiffService: DeepDiffService) {}
+  constructor(
+    public deepDiffService: DeepDiffService,
+    public modelServiceService: ModelServiceService
+  ) {}
 
   ngAfterViewInit() {
     if (this.form) {
@@ -32,19 +29,24 @@ export class FormChangeDetector implements AfterViewInit {
     );
     this.changesDetected = Object.keys(this.changedFields).length > 0;
     if (this.changesDetected) {
-      console.log("Changes detected in form:", this.changedFields);
+      // console.log("this.changedFields::::", this.changedFields);
+      // this.modelServiceService.handleChangedFields(this.changedFields);
+      return this.changedFields;
     }
   }
 
-  initializeForm(form: NgForm, initialValues: any, id?: number) {
+  initializeForm(form: NgForm, initialValues: any, eventId?: number) {
     this.form = form;
-    if (id !== undefined) {
-      // Merge the id into initial values if provided
-      this.initialFormValues = { ...initialValues, id };
+    const timestamp = new Date()
+      .toISOString()
+      .replace("T", " ")
+      .replace("Z", "");
+    if (eventId !== undefined) {
+      this.initialFormValues = { ...initialValues, eventId };
     } else {
       this.initialFormValues = JSON.parse(JSON.stringify(initialValues));
     }
-    // Set the form values
+
     form.setValue(this.initialFormValues);
   }
 }

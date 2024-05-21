@@ -23,6 +23,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import { DeepDiffService } from "app/blocks/deep-diff.service";
 import { FormChangeDetector } from "app/blocks/form-change-detector.mixin";
+import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
+import { map } from "rxjs/operators";
 @Component({
   selector: "app-create-on-demand-event",
   templateUrl: "./create-on-demand-event.component.html",
@@ -33,10 +35,7 @@ import { FormChangeDetector } from "app/blocks/form-change-detector.mixin";
     { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
   ],
 })
-export class CreateOnDemandEventComponent
-  extends FormChangeDetector
-  implements OnInit
-{
+export class CreateOnDemandEventComponent implements OnInit {
   @ViewChild("OnDemandForm", { static: true }) OnDemandForm: NgForm;
   @Input() datasource: any;
   model: NgbDateStruct;
@@ -45,18 +44,17 @@ export class CreateOnDemandEventComponent
   constructor(
     private modelService: NgbModal,
     private router: Router,
-    deepDiffService: DeepDiffService,
-    private route: ActivatedRoute
-  ) {
-    super(deepDiffService);
-  }
-
+    public deepDiffService: DeepDiffService,
+    private route: ActivatedRoute,
+    public modelServiceService: ModelServiceService
+  ) {}
+  oldData: any;
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.datasource.id = params["id"];
       console.log("ID:", this.datasource.id);
     });
-    this.initializeForm(this.OnDemandForm, this.datasource, this.datasource.id);
+    this.oldData = this.datasource;
   }
   onCancelClick() {
     Swal.close();
@@ -67,10 +65,7 @@ export class CreateOnDemandEventComponent
   }
 
   onSave(id: number) {
-    if (id) {
-      console.log("id of event ", id);
-    }
-    console.log("clicked save");
+    // this.modelServiceService.setData(this.oldData);
     this.save.emit();
   }
 

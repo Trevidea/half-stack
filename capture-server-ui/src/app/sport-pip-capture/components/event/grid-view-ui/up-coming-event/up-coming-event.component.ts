@@ -1,18 +1,28 @@
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
-import { DateTimeService } from '../../event-utility/date-time.service';
-import { UI } from '../../event-utility/event-ui-interface';
-import { Router } from '@angular/router';
-import { SocketService } from 'app/sport-pip-capture/models/socket.service';
-import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  ViewEncapsulation,
+} from "@angular/core";
+import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
+import { DateTimeService } from "../../event-utility/date-time.service";
+import { UI } from "../../event-utility/event-ui-interface";
+import { Router } from "@angular/router";
+import { SocketService } from "app/sport-pip-capture/models/socket.service";
+import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 @Component({
-  selector: 'app-up-coming-event',
-  templateUrl: './up-coming-event.component.html',
-  styleUrls: ['./up-coming-event.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: "app-up-coming-event",
+  templateUrl: "./up-coming-event.component.html",
+  styleUrls: ["./up-coming-event.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() datasource;
+  @Input() datasource: any;
   startIndex: number;
   openDetailmodel: boolean;
   public selectBasic: any[] = [];
@@ -21,19 +31,30 @@ export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
   eventId: number;
 
   dropdownItems: UI.DropDownMenuItem[] = [
-    { label: 'Edit Event', icon: 'edit', type: 'feather', action: () => this.editOnDemandEvent() },
-    { label: 'Share Event', icon: 'share', type: 'feather', action: () => { } },
-    { label: 'Remove Event', icon: 'trash', type: 'feather', action: () => this.deleteEvent() },
-  ]
+    {
+      label: "Edit Event",
+      icon: "edit",
+      type: "feather",
+      action: () => this.editOnDemandEvent(),
+    },
+    { label: "Share Event", icon: "share", type: "feather", action: () => {} },
+    {
+      label: "Remove Event",
+      icon: "trash",
+      type: "feather",
+      action: () => this.deleteEvent(),
+    },
+  ];
 
-  constructor(private _coreSidebarService: CoreSidebarService,
+  constructor(
+    private _coreSidebarService: CoreSidebarService,
     private dateTimeservice: DateTimeService,
     private router: Router,
     private Modelservice: ModelServiceService,
-  ) { }
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.datasource && changes.datasource.currentValue) {
@@ -48,35 +69,33 @@ export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   openDetailView(key: string, index: number) {
-    this.startIndex = index
-    this.openDetailmodel = true
+    this.startIndex = index;
+    this.openDetailmodel = true;
     this._coreSidebarService.getSidebarRegistry(key).toggleOpen();
   }
 
   OnClosedDetail(data: any) {
-    this.openDetailmodel = false
+    this.openDetailmodel = false;
   }
 
   formatDateTime(dateTimeString: string, time: number): string {
     const dateOptions: Intl.DateTimeFormatOptions = {
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric',
+      weekday: "long",
+      month: "long",
+      day: "numeric",
     };
     const timeHours = Math.floor(time / 100);
     const timeMinutes = time % 100;
-    const amPm = timeHours >= 12 ? 'pm' : 'am';
+    const amPm = timeHours >= 12 ? "pm" : "am";
     const formattedHours = timeHours % 12 || 12;
-    const formattedMinutes = timeMinutes < 10 ? '0' + timeMinutes : timeMinutes;
+    const formattedMinutes = timeMinutes < 10 ? "0" + timeMinutes : timeMinutes;
     const date = new Date(dateTimeString);
-    const formattedDate = date.toLocaleDateString('en-US', dateOptions);
+    const formattedDate = date.toLocaleDateString("en-US", dateOptions);
     return `${formattedDate}, ${formattedHours}:${formattedMinutes} ${amPm}`;
   }
 
-
   navigateToEventPreview(eventId: number) {
-    this.router.navigate([`/event/event-preview/${eventId}`], {
-    });
+    this.router.navigate([`/event/event-preview/${eventId}`], {});
   }
 
   ngOnDestroy(): void {
@@ -86,26 +105,19 @@ export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   clickedmenu(id: number) {
-    console.log("pare", id)
+    console.log("pare", id);
     this.eventId = id;
   }
 
   editOnDemandEvent() {
-    this.router.navigate(['/on-demand-event'],
-      {
-        queryParams: { id: this.eventId },
-      }
-    )
+    this.router.navigate(["/on-demand-event"], {
+      queryParams: { id: this.eventId },
+    });
   }
 
   deleteEvent() {
-    this.Modelservice.delete('event', this.eventId).subscribe(
-      (data) => {
-        console.log("data", data);
-      }
-    );
+    this.Modelservice.delete("event", this.eventId).subscribe((data) => {
+      console.log("data", data);
+    });
   }
-
-
 }
-

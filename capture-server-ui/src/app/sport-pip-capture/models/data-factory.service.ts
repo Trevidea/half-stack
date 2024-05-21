@@ -2,23 +2,19 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "environments/environment";
 import { Observable, of } from "rxjs";
-import { map, mergeMap } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { Data } from "./capture-interface";
-import { ConnectionData } from "./connection";
-// import { DeviceData } from "./device";
-import { UserProfileData } from "./user-profile";
-import { EventData } from "./event";
 import { DistributionData } from "./distribution";
-import { PreviousEventsConnectionData } from "./previous-events-connection";
 import { MetaTypeData } from "./meta-type";
 import { FileIndexData } from "./file-index";
-import { ConnectionPreviewData } from "./connection-preview";
 import { logData } from "../components/log/builder/log";
+import { UserProfileData } from "./user-profile";
 @Injectable({
   providedIn: "root",
 })
 export class DataFactoryService {
   private _spModelUrl: string = environment.spModelUrl;
+  private logUrl: string = environment.logUrl;
   logData: any;
 
   jsonLogData$: Observable<any>;
@@ -320,11 +316,9 @@ export class DataFactoryService {
   // eventPreviewJson(): Observable<Data.ConnectionPreview[]> {
   //   return this._data("event-preview", ConnectionPreviewData);
   // }
-
   Logs(filter?: any): Observable<Data.Log[]> {
     if (filter) {
-      // return this.logData.pipe(
-      return this.jsonLogData$.pipe(
+      this._httpClient.get(this.logUrl + "logs").pipe(
         map((logData: any) => {
           return logData.filter((entry: any) => {
             const entryDate = new Date(entry.timestamp);
@@ -341,9 +335,36 @@ export class DataFactoryService {
         })
       );
     } else {
-      return this.jsonLogData$;
+      return this._httpClient.get(this.logUrl + "logs").pipe(
+        map((logData: any) => {
+          return logData;
+        })
+      );
     }
   }
+  // Logs(filter?: any): Observable<Data.Log[]> {
+  //   if (filter) {
+  //     // return this.logData.pipe(
+  //     return this.jsonLogData$.pipe(
+  //       map((logData: any) => {
+  //         return logData.filter((entry: any) => {
+  //           const entryDate = new Date(entry.timestamp);
+  //           const fromDate = new Date(filter.startDate);
+  //           const toDate = new Date(filter.endDate);
+  //           toDate.setDate(toDate.getDate() + 1);
+  //           return (
+  //             (filter.category == null || entry.category === filter.category) &&
+  //             (filter.user == null || entry.user === filter.user) &&
+  //             (filter.startDate == "01-01-2000" || entryDate >= fromDate) &&
+  //             (filter.endDate == "01-01-2000" || entryDate <= toDate)
+  //           );
+  //         });
+  //       })
+  //     );
+  //   } else {
+  //     return this.jsonLogData$;
+  //   }
+  // }
   GetJSONData(): Observable<Data.Log[]> {
     return this._httpClient
       .get("assets/logs.txt", { responseType: "text" })
