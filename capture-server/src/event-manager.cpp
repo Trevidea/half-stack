@@ -157,7 +157,9 @@ std::string EventManager::getEventPreviewData(const int eventId)
 
     ep.setActiveDevices(activeDevices);
 
-    return ep.toResponse();
+    // Convert EventPreview to JSON string
+    std::string jsonString = ep.toResponse();
+    return jsonString;
 }
 
 std::string EventManager::getLiveEventData(const int eventId)
