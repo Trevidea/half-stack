@@ -148,10 +148,7 @@ std::string EventManager::getEventPreviewData(const int eventId)
     ep.setStatus(event.status());
     ep.setYear(event.year());
     ep.setEventType(event.type());
-    ep.setVenueLocation(event.venueLocation());
-    ep.setStreetAddress(event.detailStreetAddress());
-    ep.setCityAddress(event.detailCityAddress());
-    ep.setDetailType(event.detailType());
+    
 
     EventDevice eventDevice;
     char query[128] = {'\0'};

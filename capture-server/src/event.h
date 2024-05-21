@@ -26,32 +26,7 @@ public:
     std::string title() const { return m_model.get<std::string>("title"); }
     std::string status() const { return m_model.get<std::string>("status"); }
     std::string type() const { return m_model.get<std::string>("type"); }
-
-    // Methods to access nested fields in venue
-    std::string venueLocation() const
-    {
-        Json::Value venueJson = venue();
-        return venueJson.isMember("location") ? venueJson["location"].asString() : "";
-    }
-
-    // Methods to access nested fields in detail
-    std::string detailType() const
-    {
-        Json::Value detailJson = detail();
-        return detailJson.isMember("type") ? detailJson["type"].asString() : "";
-    }
-
-    std::string detailStreetAddress() const
-    {
-        Json::Value detailJson = detail();
-        return detailJson.isMember("streetAddress") ? detailJson["streetAddress"].asString() : "";
-    }
-
-    std::string detailCityAddress() const
-    {
-        Json::Value detailJson = detail();
-        return detailJson.isMember("cityAddress") ? detailJson["cityAddress"].asString() : "";
-    }
+    
 
 public:
     void validateEventId(int eventId); // Declaration of validateEventId function
