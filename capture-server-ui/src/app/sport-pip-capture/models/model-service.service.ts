@@ -233,6 +233,8 @@ export class ModelServiceService {
     if (data.id) {
       return this.update("event", data, data.id).pipe(
         map((x) => {
+          const chnagedData = this.flattenObject(data);
+          console.log(chnagedData);
           this.logPut("update-log", {
             eventId: data.id,
             // actitviy: this.changedFormValue,
@@ -264,6 +266,8 @@ export class ModelServiceService {
             ],
             details: [],
           };
+          const chnagedData = this.flattenObject(data);
+          console.log(chnagedData);
           this.logPost("new-log", logData);
           return x;
         })
@@ -297,9 +301,34 @@ export class ModelServiceService {
     const url = `${environment.spModelUrl}/omal/app`;
     return this._httpClient.get(url);
   }
-
+  model: any;
   eventJson(id: number): Observable<Data.Event> {
-    return this._selectOne("event", id, EventData);
+    return this._selectOne("event", id, EventData).pipe(
+      map((x: any) => {
+        console.log("XX::", x);
+        const flattenedData = this.flattenObject(x._model);
+        this.model = flattenedData;
+        console.log("flattenedData:::", flattenedData);
+        return x;
+      })
+    );
+  }
+
+  private flattenObject(obj: any, res: any = {}): any {
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        if (
+          typeof obj[key] === "object" &&
+          !Array.isArray(obj[key]) &&
+          obj[key] !== null
+        ) {
+          this.flattenObject(obj[key], res);
+        } else {
+          res[key] = obj[key];
+        }
+      }
+    }
+    return res;
   }
   // hostConnectionDeviceDetailJson(
   //   id: number
@@ -346,7 +375,6 @@ export class ModelServiceService {
         },
       ],
     };
-
     return of(staticData);
   }
 

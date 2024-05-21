@@ -45,8 +45,7 @@ export class CreateOnDemandEventComponent implements OnInit {
     private modelService: NgbModal,
     private router: Router,
     public deepDiffService: DeepDiffService,
-    private route: ActivatedRoute,
-    public modelServiceService: ModelServiceService
+    private route: ActivatedRoute
   ) {}
   oldData: any;
   ngOnInit(): void {
@@ -54,7 +53,6 @@ export class CreateOnDemandEventComponent implements OnInit {
       this.datasource.id = params["id"];
       console.log("ID:", this.datasource.id);
     });
-    this.oldData = this.datasource;
   }
   onCancelClick() {
     Swal.close();
@@ -65,7 +63,6 @@ export class CreateOnDemandEventComponent implements OnInit {
   }
 
   onSave(id: number) {
-    // this.modelServiceService.setData(this.oldData);
     this.save.emit();
   }
 
