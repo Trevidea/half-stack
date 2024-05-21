@@ -132,7 +132,6 @@ void EventManager::closePreview(const Request &req, Response &rsp)
 std::string EventManager::getEventPreviewData(const int eventId)
 {
     spdlog::info("Getting event preview data for event ID: {}", eventId);
-
     const auto event = Event::byId<Event>(eventId);
     if (event.notSet())
     {
@@ -171,7 +170,8 @@ std::string EventManager::getEventPreviewData(const int eventId)
 
     ep.setActiveDevices(activeDevices);
 
-    return ep.toResponse();
+    std::string jsonString = ep.toResponse();
+    return jsonString;
 }
 
 std::string EventManager::getLiveEventData(const int eventId)
