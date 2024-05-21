@@ -422,8 +422,10 @@ export namespace Data {
     outputStreamName: string;
   }
 
+  export interface Application extends Base {
+    app_name: string
+  }
 }
-
 export namespace Views {
   export interface Datasource {
     id: number;
