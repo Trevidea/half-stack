@@ -129,6 +129,7 @@ int VirtualHost::deleteApp(const std::string &app, Json::Value &result)
         throw ExOMResourceAccessException(ep);
     Json::Value jsResult = Json::objectValue;
     Json::Reader().parse(pass, jsResult);
+    result["result"] = jsResult;
     for (auto &&item : jsResult)
     {
         if (item["message"] == "OK")
