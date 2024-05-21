@@ -344,19 +344,28 @@ export class ModelServiceService {
     return this._httpClient.post<any>(url, data);
   }
 
- //
   startRecording(data: any): Observable<any> {
     const url = `${environment.spModelUrl}/api/omal/start-dump`
     return this._httpClient.post(url, data)
   }
 
-  storStream(data:any):Observable<any>{
+  storStream(data: any): Observable<any> {
     const url = `${environment.spModelUrl}/api/omal/stop-dump`
     return this._httpClient.post(url, data)
   }
   closeAllPreview(): Observable<any> {
     const url = `${environment.spModelUrl}/event/close-preview`;
     return this._httpClient.get<any>(url);
+  }
+
+  getVirtualHost(): Observable<any> {
+    const url = `${environment.spModelUrl}/omal/virtual-hosts`;
+    return this._httpClient.get<any>(url);
+  }
+
+  createApp(data: { app_name: string }): Observable<any> {
+    const url = `${environment.spModelUrl}/omal/create-app`
+    return this._httpClient.post(url, data)
   }
 
   userJson(): Observable<Data.UserProfile[]> {
@@ -370,12 +379,6 @@ export class ModelServiceService {
   PreviousConnection(): Observable<Data.PreviousEventsConnection[]> {
     return this._data("connections", PreviousEventsConnectionData);
   }
-
-  getVirtualHost(): Observable<any> {
-    const url = `${environment.spModelUrl}/omal/virtual-hosts`;
-    return this._httpClient.get<any>(url);
-  }
-
 
 
   MetaTypeByKey(key: string): Observable<Data.MetaType> {
