@@ -116,7 +116,30 @@ VirtualApp VirtualHost::createApp(const std::string &app, Json::Value &result, b
     }
     return std::move(vapp);
 }
-
+int VirtualHost::deleteApp(const std::string &app, Json::Value &result)
+{
+    char ep[128] = {'\0'};
+    const std::string baseUrl = DBManager::instance().getEnv("OM_URL", "http://drake.in:8081/v1");
+    snprintf(ep, 128, "%s/vhosts/%s/apps/%s", baseUrl.c_str(), this->m_name.c_str(), app.c_str());
+    auto rest = Rest::ClientFactory::getInstance().create(ep);
+    std::string pass, fail;
+    std::string data = "";
+    int intResult = rest.del(data, pass, fail, "drake", "drake_ome");
+    if (intResult != 0)
+        throw ExOMResourceAccessException(ep);
+    Json::Value jsResult = Json::objectValue;
+    Json::Reader().parse(pass, jsResult);
+    for (auto &&item : jsResult)
+    {
+        if (item["message"] == "OK")
+        {
+            intResult = 0;
+            break;
+        }
+        intResult = -1;
+    }
+    return intResult;
+}
 std::map<std::string, std::string> VirtualHost::getVODDumps()
 {
     std::map<std::string, std::string> dumps;
