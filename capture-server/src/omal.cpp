@@ -58,10 +58,10 @@ void Omal::report()
                                   auto &vh = OMALFactory::getInstance().create("spip");
 
                                   const auto &jsReq = req.json();
-                                  int eventId = jsReq["eventId"].asInt();
+                                  int appName = jsReq["app-name"].asInt();
 
                                   std::stringstream ss;
-                                  ss << eventId;
+                                  ss << appName;
                                   Json::Value result = Json::objectValue;
                                   vh.createApp(ss.str(), result);
                                   auto strResponse = Gateway::instance().formatResponse({{result}});
