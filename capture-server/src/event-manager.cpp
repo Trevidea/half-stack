@@ -133,13 +133,24 @@ std::string EventManager::getEventPreviewData(const int eventId)
     spdlog::info("Getting event preview data for event ID: {}", eventId);
     Json::Value model(Json::objectValue); // Create a Json::Value object
     EventPreview ep(model);
-    
+
     const auto event = Event::byId<Event>(eventId);
     if (event.notSet())
     {
         spdlog::warn("Event not found for ID: {}", eventId);
         return "";
     }
+
+    // Log each value before setting it
+    spdlog::info("Event title: {}", event.title());
+    spdlog::info("Event date: {}", event.dtEvent());
+    spdlog::info("Event time: {}", event.tmEvent());
+    spdlog::info("Event sport: {}", event.sport());
+    spdlog::info("Event level: {}", event.level());
+    spdlog::info("Event program: {}", event.program());
+    spdlog::info("Event status: {}", event.status());
+    spdlog::info("Event year: {}", event.year());
+    spdlog::info("Event type: {}", event.type());
 
     ep.setTitle(event.title());
     ep.setDtEvent(event.dtEvent());
@@ -150,11 +161,18 @@ std::string EventManager::getEventPreviewData(const int eventId)
     ep.setStatus(event.status());
     ep.setYear(event.year());
     ep.setEventType(event.type());
+
+    Json::Value eventDetail = event.detail();
+    spdlog::info("Event detail: {}", eventDetail.toStyledString());
     
-    ep.setCityAddress(event.detail()["cityAddress"].asString());
-    ep.setStreetAddress(event.detail()["streetAddress"].asString());
-    ep.setDetailType(event.detail()["type"].asString());
-    ep.setVenueLocation(event.venue()["location"].asString());
+    ep.setCityAddress(eventDetail["cityAddress"].asString());
+    ep.setStreetAddress(eventDetail["streetAddress"].asString());
+    ep.setDetailType(eventDetail["type"].asString());
+
+    Json::Value eventVenue = event.venue();
+    spdlog::info("Event venue: {}", eventVenue.toStyledString());
+
+    ep.setVenueLocation(eventVenue["location"].asString());
     
 
     EventDevice eventDevice;
