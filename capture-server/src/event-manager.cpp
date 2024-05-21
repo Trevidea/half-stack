@@ -133,7 +133,7 @@ std::string EventManager::getEventPreviewData(const int eventId)
     spdlog::info("Getting event preview data for event ID: {}", eventId);
     EventPreview ep;
     const auto event = Event::byId<Event>(eventId);
-    if(event.notSet())
+    if (event.notSet())
     {
         spdlog::warn("Event not found for ID: {}", eventId);
         return "";
@@ -146,15 +146,12 @@ std::string EventManager::getEventPreviewData(const int eventId)
     ep.setLevel(event.level());
     ep.setProgram(event.program());
     ep.setStatus(event.status());
-    ep.setStreetAddress(event.getStreetAddress());
-    ep.setCityAddress(event.getCityAddress());
     ep.setVenueLocation(event.venue());
     ep.setYear(event.year());
-    ep.setDetailType(event.getType());
-    ep.setEventType(event.type());
+    ep.setDetailType(event.detail());
 
     EventDevice eventDevice;
-    char query[128] = { '\0' };
+    char query[128] = {'\0'};
     snprintf(query, 128, "event_id=%d", eventId);
     std::vector<EventDevice> activeDevices = eventDevice.find<EventDevice>(query);
 

@@ -35,11 +35,9 @@ export class DeviceComponent implements OnInit {
   }
 
   deleteSelected(id: number) {
-    this.modelservice.delete('device', id).subscribe((data) => {
+    this.modelservice.delete('devices', id).subscribe((data) => {
       console.log(data)
+      this.onAddDevice.emit();
     })
-
-
-
   }
 }

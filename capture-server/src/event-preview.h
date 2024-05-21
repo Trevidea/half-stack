@@ -62,6 +62,7 @@ public:
     void setActiveDevices(const std::vector<EventDevice>& activeDevices);
 
 private:
+
     std::vector<EventDevice> m_activeDevice;
 };
 

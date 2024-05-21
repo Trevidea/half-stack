@@ -13,16 +13,16 @@ export class OnDemandEventFormView implements Views.Datasource {
     public set id(v: number) {
         this._id = v;
     }
-    
-    
-    private _eventId :number;
-    public get eventId() :number {
+
+
+    private _eventId: number;
+    public get eventId(): number {
         return this._eventId;
     }
-    public set eventId(v :number) {
+    public set eventId(v: number) {
         this._eventId = v;
     }
-    
+
 
     private _owner_id: number;
     public get owner_id(): number {
@@ -93,18 +93,18 @@ export class OnDemandEventFormView implements Views.Datasource {
     }
 
 
-     
-     private _dtEvent : string;
-     public get dtEvent() : string {
+
+    private _dtEvent: string;
+    public get dtEvent(): string {
         if (!this._dtEvent) {
             this._dtEvent = UI.DateHelper.apiDateToday()
         }
         return this._dtEvent;
-     }
-     public set dtEvent(v : string) {
+    }
+    public set dtEvent(v: string) {
         this._dtEvent = v;
-     }
-     
+    }
+
 
 
     private _status: string;
@@ -138,15 +138,13 @@ export class OnDemandEventFormView implements Views.Datasource {
         this._venue = v;
     }
 
-    private _time: number;
-    public get time(): number {
-
+    private _time: string;
+    public get time(): string {
         return this._time;
     }
-    public set time(v: number) {
+    public set time(v: string) {
         this._time = v;
     }
-
 
 
 
