@@ -1,7 +1,7 @@
 import { environment } from "environments/environment";
 import { AdapterService } from "./adapter.service";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { Observable, of } from "rxjs";
+import { BehaviorSubject, Observable, of } from "rxjs";
 import { first, map, mergeMap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { Data } from "./capture-interface";
@@ -10,15 +10,16 @@ import { MetaTypeData } from "./meta-type";
 import { UserProfileData } from "./user-profile";
 import { DeviceData } from "./device";
 import { PreviousEventsConnectionData } from "./previous-events-connection";
-import { HostConnectionDeviceDetailData } from "./connection-device-detail";
-import { url } from "inspector";
+import { FormChangeDetector } from "app/blocks/form-change-detector.mixin";
+import { DeepDiffService } from "app/blocks/deep-diff.service";
+import { AuthenticationService } from "app/auth/service";
 
 @Injectable({
   providedIn: "root",
 })
 export class ModelServiceService {
   public modelsServerUrl: string = environment.spModelUrl;
-
+  private logUrl: string = environment.logUrl;
   constructor(
     private _httpClient: HttpClient,
     private _adapter: AdapterService
@@ -49,6 +50,7 @@ export class ModelServiceService {
 
   readOne(type: string, id: number): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}?id=${id}`;
+
     return this._httpClient.get<any>(url);
   }
 
@@ -227,10 +229,45 @@ export class ModelServiceService {
   }
 
   saveEvent(data: Data.Event): Observable<Data.Event> {
+    console.log("NEW DATA::", data);
     if (data.id) {
-      return this.update("event", data, data.id);
+      return this.update("event", data, data.id).pipe(
+        map((x) => {
+          this.logPut("update-log", {
+            eventId: data.id,
+            // actitviy: this.changedFormValue,
+          });
+          return x;
+        })
+      );
     } else {
-      return this.create("event", data);
+      return this.create("event", data).pipe(
+        map((x) => {
+          console.log(x["Gateway Response"]["result"][0][0].value);
+          const timestamp = new Date()
+            .toISOString()
+            .replace("T", " ")
+            .replace("Z", "");
+          const user = JSON.parse(localStorage.getItem("currentUser"));
+          const logData = {
+            eventId: x["Gateway Response"]["result"][0][0].value,
+            category: "Event",
+            subject: "Created Event",
+            user: user.firstName + " " + user.lastName,
+            action: `Created Event Name as ${data.title} `,
+            timestamp: timestamp,
+            activity: [
+              {
+                time: "09:00 am",
+                activity: `Create an on-demand event named as ${data.title}`,
+              },
+            ],
+            details: [],
+          };
+          this.logPost("new-log", logData);
+          return x;
+        })
+      );
     }
   }
   saveMetaType(data: Data.MetaType): Observable<Data.MetaType> {
@@ -344,14 +381,15 @@ export class ModelServiceService {
     return this._httpClient.post<any>(url, data);
   }
 
+  //
   startRecording(data: any): Observable<any> {
-    const url = `${environment.spModelUrl}/api/omal/start-dump`
-    return this._httpClient.post(url, data)
+    const url = `${environment.spModelUrl}/api/omal/start-dump`;
+    return this._httpClient.post(url, data);
   }
 
   storStream(data: any): Observable<any> {
-    const url = `${environment.spModelUrl}/api/omal/stop-dump`
-    return this._httpClient.post(url, data)
+    const url = `${environment.spModelUrl}/api/omal/stop-dump`;
+    return this._httpClient.post(url, data);
   }
   closeAllPreview(): Observable<any> {
     const url = `${environment.spModelUrl}/event/close-preview`;
@@ -366,9 +404,9 @@ export class ModelServiceService {
     const url = `http://drake.in:1437/api/omal/apps?vhost=spip`;
     return this._httpClient.get<any>(url);
   }
-  createApp(data: {'app-name': string }): Observable<any> {
-    const url = `${environment.spModelUrl}/omal/create-app`
-    return this._httpClient.post(url, data)
+  createApp(data: { "app-name": string }): Observable<any> {
+    const url = `${environment.spModelUrl}/omal/create-app`;
+    return this._httpClient.post(url, data);
   }
 
   userJson(): Observable<Data.UserProfile[]> {
@@ -383,6 +421,10 @@ export class ModelServiceService {
     return this._data("connections", PreviousEventsConnectionData);
   }
 
+  // getVirtualHost(): Observable<any> {
+  //   const url = `${environment.spModelUrl}/omal/virtual-hosts`;
+  //   return this._httpClient.get<any>(url);
+  // }
 
   MetaTypeByKey(key: string): Observable<Data.MetaType> {
     return this._selectQueryOne("meta-type", `'${key}'`, "key", MetaTypeData);
@@ -390,5 +432,19 @@ export class ModelServiceService {
 
   MetaTypeJson(): Observable<Data.MetaType[]> {
     return this._data("meta-types", MetaTypeData);
+  }
+  logPost(extention: string, data: any) {
+    this._httpClient
+      .post(this.logUrl + `${extention}`, data)
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+  logPut(extention: string, data: any) {
+    this._httpClient
+      .put(this.logUrl + `${extention}`, data)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 }
