@@ -57,7 +57,7 @@ export namespace UI {
           }
         }
       } catch (error) {
-        console.log("Bad date format", error);
+        // console.log("Bad date format", error);
         return "01-01-2000";
       }
     }
