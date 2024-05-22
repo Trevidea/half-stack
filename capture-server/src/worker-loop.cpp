@@ -2,7 +2,7 @@
 #include <chrono>
 #include <spdlog/spdlog.h>
 
-WorkerLoop::WorkerLoop(const int interval, std::function<void()> &work)
+WorkerLoop::WorkerLoop(const int interval, std::function<void()> &&work)
     : m_interval{interval}, m_work{work}, mp_thread{nullptr}, m_stopCalled{false}
 {
 }

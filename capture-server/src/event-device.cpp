@@ -123,3 +123,12 @@ void EventDevice::setStreamId(const std::string &value)
 {
     m_model.set("stream_id", value);
 }
+
+std::string EventDevice::ipAdd() const
+{
+    return this->m_model.get<std::string>("ip_add");
+}
+void EventDevice::setIpAdd(const std::string &value)
+{
+    m_model.set("ip_add", value);
+}

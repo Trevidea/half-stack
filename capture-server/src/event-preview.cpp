@@ -111,7 +111,7 @@ void EventPreview::setVenueLocation(const std::string &value)
 {
     m_model["venue"]["location"] = value;
 }
-
+ 
 int EventPreview::year() const
 {
     return m_model["year"].asInt();
@@ -164,25 +164,23 @@ const std::vector<EventDevice> &EventPreview::activeDevices() const
 
 void EventPreview::setActiveDevices(const std::vector<EventDevice> &activeDevices)
 {
+    // Clear the existing active devices in the model
+    m_model["activeDevices"] = Json::arrayValue;
     // Check if the provided vector is empty
     if (activeDevices.empty())
     {
         // Throw an exception indicating that no active devices were provided
-        throw ExEntityNotSet();
+        spdlog::warn("No active devices for the event exist..");
     }
-
-    // Clear the existing active devices in the model
-    m_model["activeDevices"] = Json::arrayValue;
-
-    // Populate the model with the new active devices
-    for (const auto &device : activeDevices)
-    {
-        Json::Value jsonDevice;
-        jsonDevice["deviceId"] = device.deviceId();
-        jsonDevice["eventId"] = device.eventId();
-        jsonDevice["location"] = device.location();
-        jsonDevice["pin"] = device.pin();
-        jsonDevice["userId"] = device.userId();
-        m_model["activeDevices"].append(jsonDevice);
-    }
+    else
+        for (const auto &device : activeDevices)
+        {
+            Json::Value jsonDevice;
+            jsonDevice["deviceId"] = device.deviceId();
+            jsonDevice["eventId"] = device.eventId();
+            jsonDevice["location"] = device.location();
+            jsonDevice["pin"] = device.pin();
+            jsonDevice["userId"] = device.userId();
+            m_model["activeDevices"].append(jsonDevice);
+        }
 }

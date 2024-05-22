@@ -6,4 +6,5 @@ export const environment = {
   spFSUrl: "https://strapi.sp-fullstack.site/api",
   spHLSUrl: "https://dumps.sp-halfstack.site",
   spRelayUrl: "http://localhost:3030",
+  logUrl: "http://localhost:8283/api/",
 };
