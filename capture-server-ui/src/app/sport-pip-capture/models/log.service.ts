@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "environments/environment";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -23,7 +24,7 @@ export class LogService {
         console.log(res);
       });
   }
-  getChangeLog(obj1: any, obj2: any): any[] {
+  getChangeLog(obj1: any, obj2: any): any {
     const changes: any[] = [];
     const timestamp = new Date().toISOString();
     for (let key in obj2) {
@@ -36,7 +37,7 @@ export class LogService {
     }
     return changes;
   }
-  public flattenObject(obj: any, res: any = {}): any {
+  public flattenObject(obj: any, res: any = {}): Observable<any> {
     for (let key in obj) {
       if (obj.hasOwnProperty(key)) {
         if (

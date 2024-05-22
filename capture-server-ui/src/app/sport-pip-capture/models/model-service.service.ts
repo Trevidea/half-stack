@@ -240,6 +240,7 @@ export class ModelServiceService {
           console.log("new Changes", newChanges);
           this.logService.logPut("update-log", {
             eventId: data.id,
+            details: newChanges,
             // actitviy: this.changedFormValue,
           });
           return x;
@@ -261,16 +262,16 @@ export class ModelServiceService {
             user: user.firstName + " " + user.lastName,
             action: `Created Event Name as ${data.title} `,
             timestamp: timestamp,
-            activity: [
+            details: [
               {
                 time: "09:00 am",
                 activity: `Create an on-demand event named as ${data.title}`,
               },
             ],
-            details: [],
+            activity: [],
           };
           const chnagedData = this.logService.flattenObject(data);
-          console.log(chnagedData);
+          console.log("create::", chnagedData);
           this.logService.logPost("new-log", logData);
           return x;
         })
