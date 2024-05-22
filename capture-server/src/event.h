@@ -24,11 +24,15 @@ public:
     std::string title() const { return m_model.get<std::string>("title"); }
     std::string status() const { return m_model.get<std::string>("status"); }
     std::string type() const { return m_model.get<std::string>("type"); }
-    std::string venueLocation() const;
-    std::string detailType() const;
-    std::string streetAddress() const;
-    std::string cityAddress() const;
 
+    std::string venueLocation() const;
+    void setVenueLocation(const std::string &value);
+    std::string detailType() const;
+    void setDetailType(const std::string &value);
+    std::string streetAddress() const;
+    void setStreetAddress(const std::string &value);
+    std::string cityAddress() const;
+    void setCityAddress(const std::string &value);
 
 public:
     void validateEventId(int eventId); // Declaration of validateEventId function

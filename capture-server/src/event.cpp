@@ -84,20 +84,40 @@ void Event::validateEventId(int eventId)
 
 std::string Event::venueLocation() const
 {
-    return m_model.get<std::string>("venue_location");
+    return m_model.get<Json::Value>("venue")["location"].asString();
+}
+
+void Event::setVenueLocation(const std::string &value)
+{
+    m_model.get<Json::Value>("venue")["location"] = value;
 }
 
 std::string Event::detailType() const
 {
-    return m_model.get<std::string>("detail_type");
+    return m_model.get<Json::Value>("detail")["type"].asString();
+}
+
+void Event::setDetailType(const std::string &value)
+{
+    m_model.get<Json::Value>("detail")["type"] = value;
 }
 
 std::string Event::streetAddress() const
 {
-    return m_model.get<std::string>("detail_street_address");
+    return m_model.get<Json::Value>("detail")["streetAddress"].asString();
+}
+
+void Event::setStreetAddress(const std::string &value)
+{
+    m_model.get<Json::Value>("detail")["streetAddress"] = value;
 }
 
 std::string Event::cityAddress() const
 {
-    return m_model.get<std::string>("detail_city_address");
+    return m_model.get<Json::Value>("detail")["cityAddress"].asString();
+}
+
+void Event::setCityAddress(const std::string &value)
+{
+    m_model.get<Json::Value>("detail")["cityAddress"] = value;
 }
