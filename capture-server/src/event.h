@@ -24,18 +24,10 @@ public:
     std::string title() const { return m_model.get<std::string>("title"); }
     std::string status() const { return m_model.get<std::string>("status"); }
     std::string type() const { return m_model.get<std::string>("type"); }
-
     std::string venueLocation() const;
-    void setVenueLocation(const std::string &value);
-
     std::string detailType() const;
-    void setDetailType(const std::string &value);
-
     std::string streetAddress() const;
-    void setStreetAddress(const std::string &value);
-
     std::string cityAddress() const;
-    void setCityAddress(const std::string &value);
 
 
 public:
