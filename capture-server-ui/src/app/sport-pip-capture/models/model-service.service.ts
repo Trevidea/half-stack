@@ -227,17 +227,14 @@ export class ModelServiceService {
   }
 
   saveEvent(data: Data.Event): Observable<Data.Event> {
-    console.log("NEW DATA::", data);
     if (data.id) {
       return this.update("event", data, data.id).pipe(
         map((x) => {
           const chnagedData = this.logService.flattenObject(data);
-          console.log(chnagedData);
           const newChanges = this.logService.getChangeLog(
             this.model,
             chnagedData
           );
-          console.log("new Changes", newChanges);
           this.logService.logPut("update-log", {
             eventId: data.id,
             details: newChanges,
@@ -249,7 +246,6 @@ export class ModelServiceService {
     } else {
       return this.create("event", data).pipe(
         map((x) => {
-          console.log(x["Gateway Response"]["result"][0][0].value);
           const timestamp = new Date()
             .toISOString()
             .replace("T", " ")
@@ -271,7 +267,6 @@ export class ModelServiceService {
             activity: [],
           };
           const chnagedData = this.logService.flattenObject(data);
-          console.log("create::", chnagedData);
           this.logService.logPost("new-log", logData);
           return x;
         })
@@ -310,10 +305,8 @@ export class ModelServiceService {
   eventJson(id: number): Observable<Data.Event> {
     return this._selectOne("event", id, EventData).pipe(
       map((x: any) => {
-        console.log("XX::", x);
         const flattenedData = this.logService.flattenObject(x._model);
         this.model = flattenedData;
-        console.log("flattenedData:::", flattenedData);
         return x;
       })
     );

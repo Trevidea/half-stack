@@ -39,7 +39,7 @@ class LOGSERVICE {
   static async NewLog(req: Request, res: Response) {
     const formattedTimestamp = new Date()
       .toISOString()
-      .replace('T', ' ')
+      .replace('T', '')
       .replace('Z', '')
       .slice(0, 23);
 

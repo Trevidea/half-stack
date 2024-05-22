@@ -32,6 +32,7 @@ export class LogDetailComponent implements OnInit {
       console.log(detailIndex);
       this.index = +detailIndex;
     }
+    console.log(this.datasource);
   }
   closeLog() {
     this._coreSidebarService.getSidebarRegistry(`log-detail`).toggleOpen();
