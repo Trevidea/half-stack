@@ -21,12 +21,22 @@ public:
     int year() const { return m_model.get<int>("year"); }
     std::string dtEvent() const { return m_model.get<std::string>("dt_event"); }
     int tmEvent() const { return m_model.get<int>("tm_event"); }
-    Json::Value venue() const { return parseJsonField("venue"); }
-    Json::Value detail() const { return parseJsonField("detail"); }
     std::string title() const { return m_model.get<std::string>("title"); }
     std::string status() const { return m_model.get<std::string>("status"); }
     std::string type() const { return m_model.get<std::string>("type"); }
-    
+
+    std::string venueLocation() const;
+    void setVenueLocation(const std::string &value);
+
+    std::string detailType() const;
+    void setDetailType(const std::string &value);
+
+    std::string streetAddress() const;
+    void setStreetAddress(const std::string &value);
+
+    std::string cityAddress() const;
+    void setCityAddress(const std::string &value);
+
 
 public:
     void validateEventId(int eventId); // Declaration of validateEventId function
@@ -54,22 +64,6 @@ public:
     }
 
 private:
-    Json::Value parseJsonField(const std::string &fieldName) const
-    {
-        Json::Value root;
-        Json::CharReaderBuilder builder;
-        std::string errs;
-        const std::string rawJson = m_model.get<std::string>(fieldName);
-
-        std::istringstream ss(rawJson);
-        if (!Json::parseFromStream(builder, ss, &root, &errs))
-        {
-            // Handle error (e.g., log the error, throw an exception, etc.)
-            std::cerr << "Failed to parse JSON for field " << fieldName << ": " << errs << std::endl;
-        }
-
-        return root;
-    }
 };
 
 #endif // EVENT_H

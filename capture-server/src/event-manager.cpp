@@ -162,6 +162,10 @@ std::string EventManager::getEventPreviewData(const int eventId)
     ep.setStatus(event.status());
     ep.setYear(event.year());
     ep.setEventType(event.type());
+    ep.setVenueLocation(event.venueLocation());
+    ep.setDetailType(event.detailType());
+    ep.setStreetAddress(event.streetAddress());
+    ep.setCityAddress(event.cityAddress());
 
 
     EventDevice eventDevice;
@@ -171,10 +175,11 @@ std::string EventManager::getEventPreviewData(const int eventId)
 
     ep.setActiveDevices(activeDevices);
 
-    // Convert EventPreview to JSON string
-    std::string jsonString = ep.toResponse();
-    return jsonString;
-}
+    // // Convert EventPreview to JSON string
+    // std::string jsonString = ep.toResponse();
+    // return jsonString;
+    return ep.toResponse();
+} 
 
 std::string EventManager::getLiveEventData(const int eventId)
 {
