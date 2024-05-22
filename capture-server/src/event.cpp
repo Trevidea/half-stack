@@ -82,3 +82,22 @@ void Event::validateEventId(int eventId)
     }
 }
 
+std::string Event::venueLocation() const
+{
+    return m_model.get<std::string>("venue_location");
+}
+
+std::string Event::detailType() const
+{
+    return m_model.get<std::string>("detail_type");
+}
+
+std::string Event::streetAddress() const
+{
+    return m_model.get<std::string>("detail_street_address");
+}
+
+std::string Event::cityAddress() const
+{
+    return m_model.get<std::string>("detail_city_address");
+}

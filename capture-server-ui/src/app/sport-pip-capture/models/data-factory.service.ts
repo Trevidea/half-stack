@@ -318,8 +318,9 @@ export class DataFactoryService {
   // }
   Logs(filter?: any): Observable<Data.Log[]> {
     if (filter) {
-      this._httpClient.get(this.logUrl + "logs").pipe(
+      return this._httpClient.get(this.logUrl + "logs").pipe(
         map((logData: any) => {
+          console.log(logData);
           return logData.filter((entry: any) => {
             const entryDate = new Date(entry.timestamp);
             const fromDate = new Date(filter.startDate);
@@ -328,8 +329,10 @@ export class DataFactoryService {
             return (
               (filter.category == null || entry.category === filter.category) &&
               (filter.user == null || entry.user === filter.user) &&
-              (filter.startDate == "01-01-2000" || entryDate >= fromDate) &&
-              (filter.endDate == "01-01-2000" || entryDate <= toDate)
+              (filter.startDate == "01-01-2000" ||
+                null ||
+                entryDate >= fromDate) &&
+              (filter.endDate == "01-01-2000" || null || entryDate <= toDate)
             );
           });
         })
@@ -337,11 +340,13 @@ export class DataFactoryService {
     } else {
       return this._httpClient.get(this.logUrl + "logs").pipe(
         map((logData: any) => {
+          console.log(logData);
           return logData;
         })
       );
     }
   }
+
   // Logs(filter?: any): Observable<Data.Log[]> {
   //   if (filter) {
   //     // return this.logData.pipe(
@@ -362,6 +367,7 @@ export class DataFactoryService {
   //       })
   //     );
   //   } else {
+  //     console.log(this.jsonLogData$);
   //     return this.jsonLogData$;
   //   }
   // }

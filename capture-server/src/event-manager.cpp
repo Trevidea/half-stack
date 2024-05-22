@@ -101,10 +101,7 @@ void EventManager::openPreview(const Request &req, Response &rsp)
 
         Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
         spdlog::trace("Creating a new runner for event id {}", eventId);
-        this->m_runners.emplace(eventId,
-                                new EventRunner({{dt.year, dt.month, dt.date}, {tm.hours, tm.minutes, tm.seconds}, 1},
-                                                std::bind(&EventManager::publishPreviewData, this),
-                                                std::bind(&EventManager::publishLiveData, this)));
+        this->m_runners.emplace(eventId, new EventRunner(event));
     }
     const std::string strRsp = Gateway::instance().formatResponse({{response}});
     spdlog::trace("setting response: {}", strRsp);
@@ -162,6 +159,10 @@ std::string EventManager::getEventPreviewData(const int eventId)
     ep.setStatus(event.status());
     ep.setYear(event.year());
     ep.setEventType(event.type());
+    ep.setVenueLocation(event.venueLocation());
+    ep.setDetailType(event.detailType());
+    ep.setStreetAddress(event.streetAddress());
+    ep.setCityAddress(event.cityAddress());
 
 
     EventDevice eventDevice;
@@ -171,10 +172,11 @@ std::string EventManager::getEventPreviewData(const int eventId)
 
     ep.setActiveDevices(activeDevices);
 
-    // Convert EventPreview to JSON string
-    std::string jsonString = ep.toResponse();
-    return jsonString;
-}
+    // // Convert EventPreview to JSON string
+    // std::string jsonString = ep.toResponse();
+    // return jsonString;
+    return ep.toResponse();
+} 
 
 std::string EventManager::getLiveEventData(const int eventId)
 {

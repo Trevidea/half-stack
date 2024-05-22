@@ -142,15 +142,15 @@ void EventPreview::setEventType(const std::string &value)
     m_model["type"] = value;
 }
 
-// std::string EventPreview::countdown() const
-// {
-//     return m_model["countdown"].asString();
-// }
+std::string EventPreview::countdown() const
+{
+    return m_model["countdown"].asString();
+}
 
-// void EventPreview::setCountdown(const std::string &value)
-// {
-//     m_model["countdown"] = value;
-// }
+void EventPreview::setCountdown(const std::string &value)
+{
+    m_model["countdown"] = value;
+}
 
 std::vector<EventDevice> &EventPreview::activeDevices()
 {
