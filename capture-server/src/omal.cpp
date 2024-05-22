@@ -231,6 +231,11 @@ X-OME-Signature: f871jd991jj1929jsjd91pqa0amm1
   }
 }
 */
+void Omal::saveEventDeviceIPAdd(EventDevice &ed, const std::string &ipAdd)
+{
+    ed.setIpAdd(ipAdd);
+    ed.update();
+}
 void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 {
     Json::Value jsonResponse;
@@ -268,6 +273,10 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
                 char newUrl[128] = {'\0'};
                 snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "spip", ed.streamName().c_str());
                 jsonResponse["new_url"] = newUrl;
+                for (auto &&elem : result)
+                {
+                    saveEventDeviceIPAdd(const_cast<EventDevice&>(elem), omRequest["client"]["address"].asString());
+                }
             }
             else
             {

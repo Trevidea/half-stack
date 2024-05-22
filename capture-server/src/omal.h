@@ -8,6 +8,7 @@
 #include "virtual-host.h"
 #include "virtual-app.h"
 #include "omal-factory.h"
+#include "event-device.h"
     
 class Omal : public EntityBase
 {
@@ -28,6 +29,7 @@ private:
     void openPreview(const Request &req, Response &rsp);
     std::vector<std::string> fetchStreamsList(const std::string &eventId);
     Json::Value fetchStreamInfo(const std::string &eventId, const std::string &streamKey);
+    void saveEventDeviceIPAdd(EventDevice &ed, const std::string &ipAdd);
 };
 
 #endif // OMAL_H
