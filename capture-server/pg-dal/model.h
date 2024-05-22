@@ -20,11 +20,6 @@ public:
     {
         return m_result[field].as<T>();
     }
-    template<>
-    Json::Value get(const std::string &field) const
-    {
-        return m_result[field];
-    }
 
     template<typename T>
     void set(const std::string &field, T val)

@@ -82,42 +82,42 @@ void Event::validateEventId(int eventId)
     }
 }
 
-std::string Event::venueLocation() const
-{
-    return m_model.get<Json::Value>("venue")["location"].asString();
-}
+// std::string Event::venueLocation() const
+// {
+//     return m_model.get<Json::Value>("venue")["location"].asString();
+// }
 
-void Event::setVenueLocation(const std::string &value)
-{
-    m_model.get<Json::Value>("venue")["location"] = value;
-}
+// void Event::setVenueLocation(const std::string &value)
+// {
+//     m_model.get<Json::Value>("venue")["location"] = value;
+// }
 
-std::string Event::detailType() const
-{
-    return m_model.get<Json::Value>("detail")["type"].asString();
-}
+// std::string Event::detailType() const
+// {
+//     return m_model.get<Json::Value>("detail")["type"].asString();
+// }
 
-void Event::setDetailType(const std::string &value)
-{
-    m_model.get<Json::Value>("detail")["type"] = value;
-}
+// void Event::setDetailType(const std::string &value)
+// {
+//     m_model.get<Json::Value>("detail")["type"] = value;
+// }
 
-std::string Event::streetAddress() const
-{
-    return m_model.get<Json::Value>("detail")["streetAddress"].asString();
-}
+// std::string Event::streetAddress() const
+// {
+//     return m_model.get<Json::Value>("detail")["streetAddress"].asString();
+// }
 
-void Event::setStreetAddress(const std::string &value)
-{
-    m_model.get<Json::Value>("detail")["streetAddress"] = value;
-}
+// void Event::setStreetAddress(const std::string &value)
+// {
+//     m_model.get<Json::Value>("detail")["streetAddress"] = value;
+// }
 
-std::string Event::cityAddress() const
-{
-    return m_model.get<Json::Value>("detail")["cityAddress"].asString();
-}
+// std::string Event::cityAddress() const
+// {
+//     return m_model.get<Json::Value>("detail")["cityAddress"].asString();
+// }
 
-void Event::setCityAddress(const std::string &value)
-{
-    m_model.get<Json::Value>("detail")["cityAddress"] = value;
-}
+// void Event::setCityAddress(const std::string &value)
+// {
+//     m_model.get<Json::Value>("detail")["cityAddress"] = value;
+// }

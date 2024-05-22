@@ -19,6 +19,8 @@ public:
     void report();
     void assessNetworkQuality(const Request &req, Response &rsp);
     void handleControlServerRequest(const Request &req, Response &rsp);
+    void handleIncomingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl);
+    void handleOutgoingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl);
 
     void handleGetAllApps(const Request &req, Response &rsp);
 
