@@ -281,16 +281,16 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
 
             spdlog::trace("eventId: {}, userId: {}, pin: {}", eventId, deviceId, pin);
 
-            EventDevice ed;
-            char query[128] = {'\0'};
-            snprintf(query, 128, "device_id=%s&event_id=%d&pin='%s'",
-                     deviceId.c_str(), 188, pin.c_str());
-            const auto result = ed.find<EventDevice>(query);
-            bool allowed = (result.size() > 0);
-            if (allowed)
-            {
-                const std::string streamName = result.front().streamName();
-                // char newUrl[128] = {'\0'};
+            // EventDevice ed;
+            // char query[128] = {'\0'};
+            // snprintf(query, 128, "device_id=%s&event_id=%d&pin='%s'",
+            //          deviceId.c_str(), 188, pin.c_str());
+            // const auto result = ed.find<EventDevice>(query);
+            // bool allowed = isStreamAllowed("shreyaapp", pin);
+            // if (allowed)
+            // {
+            //     const std::string streamName = result.front().streamName();
+            //     // char newUrl[128] = {'\0'};
                 // snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "shreyaapp", pin.c_str());
                 std::string newUrl = "rtmp://" + endPoint + "/shreyaapp/" + pin;
                 jsonResponse["new_url"] = newUrl;
@@ -300,21 +300,24 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
                 //     saveEventDeviceIPAdd(const_cast<EventDevice&>(elem), omRequest["client"]["address"].asString());
                 // }
             }
-            else
-            {
-                spdlog::warn("The incoming stream {} was rejected.", strUrl);
-            }
+            // else
+            // {
+            //     spdlog::warn("The incoming stream {} was rejected.", strUrl);
+            //     // Optionally, you can add more details to the response for logging or debugging purposes
+            //     jsonResponse["error"] = "Stream is not allowed";
+            //     jsonResponse["allowed"] = false;
+            // }
         }
         else
         {
             throw ExInvalidUrlException(strUrl);
         }
     }
-    else
-    {
-        throw ExInvalidUrlException(strUrl);
-    }
-}
+    // else
+    // {
+    //     throw ExInvalidUrlException(strUrl);
+    // }
+// }
 
 void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl)
 {
