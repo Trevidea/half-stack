@@ -40,10 +40,9 @@ void EventRunner::publishPreviewData()
 
     ep.setActiveDevices(this->m_activeDevices);
 
-    // // Convert EventPreview to JSON string
-    // std::string jsonString = ep.toResponse();
-    // return jsonString;
-    // return ep.toResponse();
+    std::string previewData = ep.toResponse();
+    spdlog::info("Processing runner for event ID: {}", previewData);
+    Publisher::instance().publish("event-preview", previewData);
 }
 void EventRunner::publishLiveData()
 {

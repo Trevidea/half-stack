@@ -52,8 +52,7 @@ void EventManager::publishPreviewData()
 {
     for (auto &&kvRunner : this->m_runners)
     {
-        spdlog::info("Processing runner for event ID: {}", kvRunner.first);
-        Publisher::instance().publish("event-preview", this->getEventPreviewData(kvRunner.first));
+        
     }
 }
 
