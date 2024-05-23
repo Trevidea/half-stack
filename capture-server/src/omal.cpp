@@ -241,7 +241,7 @@ void Omal::saveEventDeviceIPAdd(EventDevice &ed, const std::string &ipAdd)
 void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 {
     Json::Value jsonResponse;
-    jsonResponse["allowed"] = true;
+    jsonResponse["allowed"] = false;
 
     spdlog::trace("Incoming Control Server request:\n{}", req.data());
 
@@ -291,7 +291,7 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
             {
                 const std::string streamName = result.front().streamName();
                 char newUrl[128] = {'\0'};
-                snprintf(newUrl, 128, "rtmp://%s/%s/%d", endPoint.c_str(), "shreyaapp", 11);
+                snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "shreyaapp", streamName.c_str());
                 jsonResponse["new_url"] = newUrl;
                 jsonResponse["allowed"] = true;
                 // for (auto &&elem : result)
