@@ -7,6 +7,7 @@
 #include "virtual-host.h"
 #include "virtual-app.h"
 
+
 Omal::Omal() : EntityBase("omal")
 {
     // Watch VOD dump folders when Omal object is created
@@ -276,15 +277,15 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
         {
             const std::string endPoint = matches[1].str();
             const std::string eventId = matches[2].str();
-            const std::string userId = matches[3].str();
+            const std::string deviceId = matches[3].str();
             const std::string pin = matches[4].str();
 
-            spdlog::trace("eventId: {}, userId: {}, pin: {}", eventId, userId, pin);
+            spdlog::trace("eventId: {}, userId: {}, pin: {}", eventId, deviceId, pin);
 
             EventDevice ed;
             char query[128] = {'\0'};
-            snprintf(query, 128, "user_id=%s&event_id=%s&pin='%s'",
-                     userId.c_str(), eventId.c_str(), pin.c_str());
+            snprintf(query, 128, "device_id=%s&event_id=%d&pin='%s'",
+                     deviceId.c_str(), 188, pin.c_str());
             const auto result = ed.find<EventDevice>(query);
             bool allowed = (result.size() > 0);
             jsonResponse["allowed"] = allowed;
