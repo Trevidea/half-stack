@@ -266,88 +266,55 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl)
 {
     std::regex urlPattern(R"(rtmp://([^/]+)/([^/]+)/([^/]+)/([^/]+))");
-    std::smatch matches;
+    spdlog::trace("control-server incoming");
+    std::smatch matches; // Used to store the results of the match
 
     if (std::regex_search(strUrl, matches, urlPattern))
     {
-        if (matches.size() == 5)
+        spdlog::trace("control-server incoming url pattern matched: {}", matches.size());
+        if (matches.size() == 5) // Change to 5, as there are 5 capturing groups
         {
             const std::string endPoint = matches[1].str();
-            const std::string appName = matches[2].str();
-            const std::string streamKey = matches[4].str(); // Assuming stream key is the last part of the URL
+            const std::string eventId = matches[2].str();
+            const std::string deviceId = matches[3].str();
+            const std::string pin = matches[4].str();
 
-            // Assuming 'shreyaapp' is the fixed application name
-            std::string newUrl = "rtmp://" + endPoint + "/" + appName + "/" + streamKey;
-            jsonResponse["new_url"] = newUrl;
-            jsonResponse["allowed"] = true;
+            spdlog::trace("eventId: {}, userId: {}, pin: {}", eventId, deviceId, pin);
+
+            EventDevice ed;
+            char query[128] = {'\0'};
+            snprintf(query, 128, "device_id=%s&event_id=%d&pin='%s'",
+                     deviceId.c_str(), 188, pin.c_str());
+            const auto result = ed.find<EventDevice>(query);
+            bool allowed = (result.size() > 0);
+            if (allowed)
+            {
+                const std::string streamName = result.front().streamName();
+                // char newUrl[128] = {'\0'};
+                // snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "shreyaapp", pin.c_str());
+                std::string newUrl = "rtmp://" + endPoint + "/shreyaapp/" + pin;
+                jsonResponse["new_url"] = newUrl;
+                jsonResponse["allowed"] = true;
+                // for (auto &&elem : result)
+                // {
+                //     saveEventDeviceIPAdd(const_cast<EventDevice&>(elem), omRequest["client"]["address"].asString());
+                // }
+            }
+            else
+            {
+                spdlog::warn("The incoming stream {} was rejected.", strUrl);
+            }
         }
         else
         {
-            spdlog::warn("Invalid URL format: {}", strUrl);
-            // Optionally, you can add more details to the response for logging or debugging purposes
-            jsonResponse["error"] = "Invalid URL format";
-            jsonResponse["allowed"] = false;
+            throw ExInvalidUrlException(strUrl);
         }
     }
     else
     {
-        spdlog::warn("Invalid URL format: {}", strUrl);
-        jsonResponse["error"] = "Invalid URL format";
-        jsonResponse["allowed"] = false;
+        throw ExInvalidUrlException(strUrl);
     }
 }
-// void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl)
-// {
-//     std::regex urlPattern(R"(rtmp://([^/]+)/([^/]+)/([^/]+)/([^/]+))");
-//     spdlog::trace("control-server incoming");
-//     std::smatch matches; // Used to store the results of the match
-
-//     if (std::regex_search(strUrl, matches, urlPattern))
-//     {
-//         spdlog::trace("control-server incoming url pattern matched: {}", matches.size());
-//         if (matches.size() == 5) // Change to 5, as there are 5 capturing groups
-//         {
-//             const std::string endPoint = matches[1].str();
-//             const std::string eventId = matches[2].str();
-//             const std::string deviceId = matches[3].str();
-//             const std::string pin = matches[4].str();
-
-//             spdlog::trace("eventId: {}, userId: {}, pin: {}", eventId, deviceId, pin);
-
-//             EventDevice ed;
-//             char query[128] = {'\0'};
-//             snprintf(query, 128, "device_id=%s&event_id=%d&pin='%s'",
-//                      deviceId.c_str(), 188, pin.c_str());
-//             const auto result = ed.find<EventDevice>(query);
-//             bool allowed = (result.size() > 0);
-//             if (allowed)
-//             {
-//                 const std::string streamName = result.front().streamName();
-//                 // char newUrl[128] = {'\0'};
-//                 // snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "shreyaapp", pin.c_str());
-//                 std::string newUrl = "rtmp://" + endPoint + "/shreyaapp/" + pin;
-//                 jsonResponse["new_url"] = newUrl;
-//                 jsonResponse["allowed"] = true;
-//                 // for (auto &&elem : result)
-//                 // {
-//                 //     saveEventDeviceIPAdd(const_cast<EventDevice&>(elem), omRequest["client"]["address"].asString());
-//                 // }
-//             }
-//             else
-//             {
-//                 spdlog::warn("The incoming stream {} was rejected.", strUrl);
-//             }
-//         }
-//         else
-//         {
-//             throw ExInvalidUrlException(strUrl);
-//         }
-//     }
-//     else
-//     {
-//         throw ExInvalidUrlException(strUrl);
-//     }
-// }
 
 void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl)
 {
@@ -380,6 +347,7 @@ void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json
         {
             throw ExInvalidUrlException(strUrl);
         }
+
     }
     else
     {
