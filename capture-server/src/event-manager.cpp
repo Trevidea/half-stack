@@ -94,14 +94,14 @@ void EventManager::openPreview(const Request &req, Response &rsp)
         const auto &kvPair = this->m_runners.find(eventId);
         if (kvPair != this->m_runners.end())
         {
-            spdlog::trace("Runner already exists for event {}. Stopping runner - just in case", eventId);
+            spdlog::warn("Runner already exists for event {}. Stopping runner - just in case", eventId);
             kvPair->second->stop();
             this->m_runners.erase(kvPair);
         }
 
         Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
         spdlog::trace("Creating a new runner for event id {}", eventId);
-        this->m_runners.emplace(eventId, new EventRunner(event));
+        this->m_runners.emplace(eventId, new EventRunner(std::move(event)));
     }
     const std::string strRsp = Gateway::instance().formatResponse({{response}});
     spdlog::trace("setting response: {}", strRsp);
@@ -128,54 +128,6 @@ void EventManager::closePreview(const Request &req, Response &rsp)
 
 std::string EventManager::getEventPreviewData(const int eventId)
 {
-    spdlog::info("Getting event preview data for event ID: {}", eventId);
-    Json::Value model(Json::objectValue); // Create a Json::Value object
-    EventPreview ep(model);
-
-    const auto event = Event::byId<Event>(eventId);
-    if (event.notSet())
-    {
-        spdlog::warn("Event not found for ID: {}", eventId);
-        return "";
-    }
-
-    // Log each value before setting it
-    spdlog::info("Event title: {}", event.title());
-    spdlog::info("Event date: {}", event.dtEvent());
-    spdlog::info("Event time: {}", event.tmEvent());
-    spdlog::info("Event sport: {}", event.sport());
-    spdlog::info("Event level: {}", event.level());
-    spdlog::info("Event program: {}", event.program());
-    spdlog::info("Event status: {}", event.status());
-    spdlog::info("Event year: {}", event.year());
-    spdlog::info("Event type: {}", event.type());
-
-    ep.setTitle(event.title());
-    ep.setDtEvent(event.dtEvent());
-    ep.setTime(event.tmEvent());
-    ep.setSport(event.sport());
-    ep.setLevel(event.level());
-    ep.setProgram(event.program());
-    ep.setStatus(event.status());
-    ep.setYear(event.year());
-    ep.setEventType(event.type());
-    // ep.setVenueLocation(event.venueLocation());
-    // ep.setDetailType(event.detailType());
-    // ep.setStreetAddress(event.streetAddress());
-    // ep.setCityAddress(event.cityAddress());
-
-
-    EventDevice eventDevice;
-    char query[128] = {'\0'};
-    snprintf(query, 128, "event_id=%d", eventId);
-    std::vector<EventDevice> activeDevices = eventDevice.find<EventDevice>(query);
-
-    ep.setActiveDevices(activeDevices);
-
-    // // Convert EventPreview to JSON string
-    // std::string jsonString = ep.toResponse();
-    // return jsonString;
-    return ep.toResponse();
 } 
 
 std::string EventManager::getLiveEventData(const int eventId)

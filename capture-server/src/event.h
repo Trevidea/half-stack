@@ -18,6 +18,7 @@ public:
     std::string sport() const { return m_model.get<std::string>("sport"); }
     std::string level() const { return m_model.get<std::string>("level"); }
     std::string program() const { return m_model.get<std::string>("program"); }
+    int duration() const { return 1; }
     int year() const { return m_model.get<int>("year"); }
     std::string dtEvent() const { return m_model.get<std::string>("dt_event"); }
     int tmEvent() const { return m_model.get<int>("tm_event"); }
