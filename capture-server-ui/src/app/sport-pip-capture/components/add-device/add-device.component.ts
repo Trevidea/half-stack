@@ -36,9 +36,9 @@ export class AddDeviceComponent implements OnInit {
   }
 
   constructRtmpUrl(): string {
-    const deviceName = this.datasource.deviceName.SelectedItem?.value?.trim().replace(/\s+/g, '-').toLowerCase() ?? '';
+    const deviceName = this.datasource.deviceName.SelectedItem?.value?.trim().replace(/\s+/g, '').toLowerCase() ?? '';
     const pin = this.datasource.pin ? `/${this.datasource.pin}` : '';
-    const appName = this.datasource.appNamesCollection?.SelectedItem?.trim().replace(/\s+/g, '-').toLowerCase() ?? '';
+    const appName = this.datasource.appNamesCollection?.SelectedItem?.trim().replace(/\s+/g, '').toLowerCase() ?? '';
     const type = this.datasource.type.SelectedItem;
     let rtmpUrl = 'rtmp://drake.in:1935/';
     let player = 'https://drake.in:3334/'
