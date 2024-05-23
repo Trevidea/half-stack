@@ -92,32 +92,32 @@ void Event::setVenueLocation(const std::string &value)
     m_model.set(value, "venue","location");
 }
 
-// std::string Event::detailType() const
-// {
-//     return m_model.get<Json::Value>("detail")["type"].asString();
-// }
+std::string Event::detailType() const
+{
+    return m_model.get<std::string>("detail", "type");
+}
 
-// void Event::setDetailType(const std::string &value)
-// {
-//     m_model.get<Json::Value>("detail")["type"] = value;
-// }
+void Event::setDetailType(const std::string &value)
+{
+    m_model.set(value, "detail", "type");
+}
 
-// std::string Event::streetAddress() const
-// {
-//     return m_model.get<Json::Value>("detail")["streetAddress"].asString();
-// }
+std::string Event::streetAddress() const
+{
+    return m_model.get<std::string>("detail", "streetAddress");
+}
 
-// void Event::setStreetAddress(const std::string &value)
-// {
-//     m_model.get<Json::Value>("detail")["streetAddress"] = value;
-// }
+void Event::setStreetAddress(const std::string &value)
+{
+    m_model.set(value, "detail", "streetAddress");
+}
 
-// std::string Event::cityAddress() const
-// {
-//     return m_model.get<Json::Value>("detail")["cityAddress"].asString();
-// }
+std::string Event::cityAddress() const
+{
+    return m_model.get<std::string>("detail", "cityAddress");
+}
 
-// void Event::setCityAddress(const std::string &value)
-// {
-//     m_model.get<Json::Value>("detail")["cityAddress"] = value;
-// }
+void Event::setCityAddress(const std::string &value)
+{
+    m_model.set(value, "detail", "cityAddress");
+}

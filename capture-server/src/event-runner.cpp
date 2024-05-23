@@ -24,9 +24,9 @@ void EventRunner::publishPreviewData()
     ep.setYear(this->m_event.year());
     ep.setEventType(this->m_event.type());
     ep.setVenueLocation(this->m_event.venueLocation());
-    // ep.setDetailType(event.detailType());
-    // ep.setStreetAddress(event.streetAddress());
-    // ep.setCityAddress(event.cityAddress());
+    ep.setDetailType(this->m_event.detailType());
+    ep.setStreetAddress(this->m_event.streetAddress());
+    ep.setCityAddress(this->m_event.cityAddress());
 
     if (EventRunner::s_deviceCountDirty.get())
     {

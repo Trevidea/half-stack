@@ -25,7 +25,7 @@ public:
     std::string title() const { return m_model.get<std::string>("title"); }
     std::string status() const { return m_model.get<std::string>("status"); }
     std::string type() const { return m_model.get<std::string>("type"); }
-    int duration() const { return m_model.get<int>("duration"); }
+    // int duration() const { return m_model.get<int>("duration"); }
 
 
     std::string venueLocation() const;
