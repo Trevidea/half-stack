@@ -82,15 +82,15 @@ void Event::validateEventId(int eventId)
     }
 }
 
-// std::string Event::venueLocation() const
-// {
-//     return m_model.get<Json::Value>("venue")["location"].asString();
-// }
+std::string Event::venueLocation() const
+{
+    return m_model.get<std::string>("venue", "location");
+}
 
-// void Event::setVenueLocation(const std::string &value)
-// {
-//     m_model.get<Json::Value>("venue")["location"] = value;
-// }
+void Event::setVenueLocation(const std::string &value)
+{
+    m_model.set(value, "venue","location");
+}
 
 // std::string Event::detailType() const
 // {
