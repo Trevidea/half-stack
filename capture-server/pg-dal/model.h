@@ -36,7 +36,7 @@ public:
     {
         Json::Value obj = Json::objectValue;
         this->m_result[field] = obj;
-        Model(this->m_result[field]).set(args..., val);
+        Model(this->m_result[field]).set(val, args...);
     }
 
     void merge(Model &model);

@@ -89,7 +89,7 @@ std::string Event::venueLocation() const
 
 void Event::setVenueLocation(const std::string &value)
 {
-    m_model.set("venue","location", value);
+    m_model.set(value, "venue","location");
 }
 
 // std::string Event::detailType() const
