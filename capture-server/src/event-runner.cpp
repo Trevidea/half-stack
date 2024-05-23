@@ -6,7 +6,9 @@
 #include "gateway.h"
 #include "event-manager.h"
 #include "worker-loop.h"
+
 ThreadSafeBool EventRunner::s_deviceCountDirty{true};
+
 void EventRunner::publishPreviewData()
 {
     spdlog::trace("Venue: {}", this->m_event.venueLocation());
@@ -14,19 +16,19 @@ void EventRunner::publishPreviewData()
     Json::Value model(Json::objectValue); // Create a Json::Value object
     EventPreview ep(model);
 
-    ep.setTitle(this->m_event.title());
-    ep.setDtEvent(this->m_event.dtEvent());
-    ep.setTime(this->m_event.tmEvent());
     ep.setSport(this->m_event.sport());
     ep.setLevel(this->m_event.level());
     ep.setProgram(this->m_event.program());
-    ep.setStatus(this->m_event.status());
     ep.setYear(this->m_event.year());
-    ep.setEventType(this->m_event.type());
+    ep.setDtEvent(this->m_event.dtEvent());
+    ep.setTime(this->m_event.tmEvent());
     ep.setVenueLocation(this->m_event.venueLocation());
     ep.setDetailType(this->m_event.detailType());
     ep.setStreetAddress(this->m_event.streetAddress());
     ep.setCityAddress(this->m_event.cityAddress());
+    ep.setTitle(this->m_event.title());
+    ep.setStatus(this->m_event.status());
+    ep.setEventType(this->m_event.type());
 
     if (EventRunner::s_deviceCountDirty.get())
     {
@@ -44,22 +46,37 @@ void EventRunner::publishPreviewData()
     spdlog::info("Processing runner for event ID: {}", previewData);
     Publisher::instance().publish("event-preview", previewData);
 }
+
 void EventRunner::publishLiveData()
 {
-
+    
     LiveEvent le;
-    le.setSport("Football");
-    le.setLevel("University");
-    le.setProgram("Men");
-    le.setYear(2024);
-    le.setDtEvent("2024-04-15");
-    le.setTime(1402);
-    le.setVenueLocation("Delhi");
-    le.setDetailType("Scheduled Event");
-    le.setDetailStreetAddress("Sector 32");
-    le.setDetailCityAddress("Delhi");
-    le.setTitle("Manchester vs Barcelona");
-    le.setStatus("Upcoming");
+
+    le.setSport(this->m_event.sport());
+    le.setLevel(this->m_event.level());
+    le.setProgram(this->m_event.program());
+    le.setYear(this->m_event.year());
+    le.setDtEvent(this->m_event.dtEvent());
+    le.setTime(this->m_event.tmEvent());
+    le.setVenueLocation(this->m_event.venueLocation());
+    le.setDetailType(this->m_event.detailType());
+    le.setDetailStreetAddress(this->m_event.streetAddress());
+    le.setDetailCityAddress(this->m_event.cityAddress());
+    le.setTitle(this->m_event.title());
+    le.setStatus(this->m_event.status());
+    le.setType(this->m_event.type());
+    // le.setSport("Football");
+    // le.setLevel("University");
+    // le.setProgram("Men");
+    // le.setYear(2024);
+    // le.setDtEvent("2024-04-15");
+    // le.setTime(1402);
+    // le.setVenueLocation("Delhi");
+    // le.setDetailType("Scheduled Event");
+    // le.setDetailStreetAddress("Sector 32");
+    // le.setDetailCityAddress("Delhi");
+    // le.setTitle("Manchester vs Barcelona");
+    // le.setStatus("Upcoming");
 
     ConnectionDetail connectionDetail;
     connectionDetail.setId(1);
