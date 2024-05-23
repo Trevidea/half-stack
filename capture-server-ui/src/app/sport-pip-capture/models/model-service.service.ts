@@ -456,7 +456,6 @@ export class ModelServiceService {
   MetaTypeJson(): Observable<Data.MetaType[]> {
     return this._data("meta-types", MetaTypeData);
   }
-  
   logPost(extention: string, data: any) {
     this._httpClient
       .post(this.logUrl + `${extention}`, data)
@@ -464,7 +463,6 @@ export class ModelServiceService {
         console.log(res);
       });
   }
-
   logPut(extention: string, data: any) {
     this._httpClient
       .put(this.logUrl + `${extention}`, data)
