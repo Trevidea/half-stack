@@ -41,7 +41,7 @@ export class AddDeviceComponent implements OnInit {
     const appName = this.datasource.appNamesCollection?.SelectedItem?.trim().replace(/\s+/g, '-').toLowerCase() ?? '';
     const type = this.datasource.type.SelectedItem;
     let rtmpUrl = 'rtmp://drake.in:1935/';
-    let player = 'https://drake.in.com:3334/'
+    let player = 'https://drake.in:3334/'
     let streamingUrl = '';
 
     if (type === 'Player') {
