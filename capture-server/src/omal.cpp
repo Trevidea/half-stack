@@ -231,11 +231,13 @@ X-OME-Signature: f871jd991jj1929jsjd91pqa0amm1
   }
 }
 */
+
 void Omal::saveEventDeviceIPAdd(EventDevice &ed, const std::string &ipAdd)
 {
     ed.setIpAdd(ipAdd);
     ed.update();
 }
+
 void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 {
     Json::Value jsonResponse;

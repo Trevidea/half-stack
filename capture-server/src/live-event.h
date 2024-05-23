@@ -42,6 +42,7 @@ public:
     void setCountdown(const std::string& countdown);
     std::vector<ConnectionDetail> connectionDetails();
     void setConnectionDetails(const std::vector<ConnectionDetail>& connectionDetails);
+    // void setActiveDevices(const std::vector<EventDevice> &activeDevices);
 };
 
 #endif // LIVE_EVENT_HPP
