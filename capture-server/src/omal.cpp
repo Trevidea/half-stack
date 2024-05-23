@@ -265,8 +265,9 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 
 void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl)
 {
-    std::regex urlPattern(R"(rtmp://([^/]+)/([^/]+)/([^/]+)/([^/]+))");
     spdlog::trace("control-server incoming");
+
+    std::regex urlPattern(R"(rtmp://([^/]+)/([^/]+)/([^/]+)/([^/]+))");
     std::smatch matches; // Used to store the results of the match
 
     if (std::regex_search(strUrl, matches, urlPattern))
@@ -290,9 +291,8 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
             if (allowed)
             {
                 const std::string streamName = result.front().streamName();
-                // char newUrl[128] = {'\0'};
-                // snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "shreyaapp", pin.c_str());
-                std::string newUrl = "rtmp://" + endPoint + "/shreyaapp/" + pin;
+                char newUrl[128] = {'\0'};
+                snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "shreyaapp", pin.c_str());
                 jsonResponse["new_url"] = newUrl;
                 jsonResponse["allowed"] = true;
                 // for (auto &&elem : result)
@@ -347,7 +347,6 @@ void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json
         {
             throw ExInvalidUrlException(strUrl);
         }
-
     }
     else
     {

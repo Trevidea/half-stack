@@ -52,7 +52,7 @@ private:
                         }
                     },
                     "admissionWebhooks": {
-                        "controlServerUrl": "http://192.168.1.50:1437/api/control-server",
+                        "controlServerUrl": "http://192.168.1.50:1437/api/omal/control-server",
                         "enables": {
                             "providers": "rtmp,webrtc,srt",
                             "publishers": "webrtc,llhls"
