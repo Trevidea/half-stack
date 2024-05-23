@@ -241,7 +241,7 @@ void Omal::saveEventDeviceIPAdd(EventDevice &ed, const std::string &ipAdd)
 void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 {
     Json::Value jsonResponse;
-    jsonResponse["allowed"] = false;
+    jsonResponse["allowed"] = true;
 
     spdlog::trace("Incoming Control Server request:\n{}", req.data());
 
