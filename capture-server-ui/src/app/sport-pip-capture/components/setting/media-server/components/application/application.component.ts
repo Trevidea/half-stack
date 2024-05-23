@@ -52,6 +52,7 @@ export class ApplicationComponent implements OnInit {
     this.modelServiceService.getApplications().subscribe(
       response => {
         this.datasource.applicationName = response
+        console.log()
       },
       error => {
         console.error('Error fetching applications:', error);

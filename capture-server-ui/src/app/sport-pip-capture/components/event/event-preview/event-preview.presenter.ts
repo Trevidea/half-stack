@@ -34,7 +34,7 @@ export class EventPreviewPresenter implements OnInit {
 
         // console.log("data without json ", data)
         this.previewData = JSON.parse(data);
-        // console.log("data without json ", this.previewData)
+        console.log("data without json ", this.previewData)
       },
       (error) => {
         console.error('Error occurred:', error);

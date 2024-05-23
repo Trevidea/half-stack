@@ -41,13 +41,13 @@ export class AddDeviceComponent implements OnInit {
     const appName = this.datasource.appNamesCollection?.SelectedItem?.trim().replace(/\s+/g, '-').toLowerCase() ?? '';
     const type = this.datasource.type.SelectedItem;
     let rtmpUrl = 'rtmp://drake.in:1935/';
-    let player = 'https://half-stack.com:3334/'
+    let player = 'https://drake.in.com:3334/'
     let streamingUrl = '';
 
     if (type === 'Player') {
-      streamingUrl = 'https://half-stack.com:3334/';
+      streamingUrl = player;
     } else if (type === 'Streaming') {
-      streamingUrl = 'rtmp://half-stack.com:1935/';
+      streamingUrl = rtmpUrl;
     }
 
     if (appName) {
