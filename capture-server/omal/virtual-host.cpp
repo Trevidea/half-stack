@@ -123,22 +123,17 @@ int VirtualHost::deleteApp(const std::string &app, Json::Value &result)
     snprintf(ep, 128, "%s/vhosts/%s/apps/%s", baseUrl.c_str(), this->m_name.c_str(), app.c_str());
     auto rest = Rest::ClientFactory::getInstance().create(ep);
     std::string pass, fail;
-    std::string data = "";
+    std::string data = "{}";
     int intResult = rest.del(data, pass, fail, "drake", "drake_ome");
     if (intResult != 0)
         throw ExOMResourceAccessException(ep);
     Json::Value jsResult = Json::objectValue;
     Json::Reader().parse(pass, jsResult);
     result["result"] = jsResult;
-    for (auto &&item : jsResult)
-    {
-        if (item["message"] == "OK")
-        {
-            intResult = 0;
-            break;
-        }
+    if (jsResult["message"].asString() == "OK")
+        intResult = 0;
+    else
         intResult = -1;
-    }
     return intResult;
 }
 std::map<std::string, std::string> VirtualHost::getVODDumps()
@@ -165,10 +160,12 @@ std::map<std::string, std::string> VirtualHost::getVODDumps()
     return dumps;
 }
 
-std::vector<std::string> VirtualHost::getAll() {
+std::vector<std::string> VirtualHost::getAll()
+{
     std::vector<std::string> allVirtualHosts;
 
-    try {
+    try
+    {
         // Construct the endpoint URL for retrieving virtual hosts
         const std::string baseUrl = DBManager::instance().getEnv("OM_URL", "http://drake.in:8081/v1");
         const std::string endpointUrl = baseUrl + "/vhosts";
@@ -188,16 +185,18 @@ std::vector<std::string> VirtualHost::getAll() {
         Json::Value jsVHostArray = jsResult["response"];
 
         // Extract virtual host names from the JSON response
-        for (const auto& item : jsVHostArray) {
+        for (const auto &item : jsVHostArray)
+        {
             std::string virtualHostName = item.asString();
             allVirtualHosts.push_back(virtualHostName);
         }
-    } catch (const std::exception &e) {
+    }
+    catch (const std::exception &e)
+    {
         spdlog::error("Error getting all virtual hosts: {}", e.what());
     }
 
     return allVirtualHosts;
 }
-
 
 VirtualHost::~VirtualHost() {}
