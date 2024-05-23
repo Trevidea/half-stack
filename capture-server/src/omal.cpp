@@ -290,8 +290,9 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
             if (allowed)
             {
                 const std::string streamName = result.front().streamName();
-                char newUrl[128] = {'\0'};
-                snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "shreyaapp", pin.c_str());
+                // char newUrl[128] = {'\0'};
+                // snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "shreyaapp", pin.c_str());
+                std::string newUrl = "rtmp://" + endPoint + "/shreyaapp/" + pin;
                 jsonResponse["new_url"] = newUrl;
                 jsonResponse["allowed"] = true;
                 // for (auto &&elem : result)
