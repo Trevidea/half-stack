@@ -20,6 +20,7 @@ import { UserProfileData } from "app/sport-pip-capture/models/user-profile";
 import { SelectItemView } from "app/blocks/collection-item";
 import { DeviceData } from "app/sport-pip-capture/models/device";
 import { DevicesBuilder } from "./builder/device";
+import { ArrayBuilder } from "app/sport-pip-capture/blocks/array.builder";
 
 @Component({
   selector: "app-add-device-presenter",
@@ -92,10 +93,16 @@ export class AddDevicePresenter implements OnInit {
 
   ngOnInit(): void {
     this.ds.eventId = this.eventId;
+
     Transformer.ComposeObjectAsync(
       this.modelServiceService.MetaTypeByKey("LOCATION"),
       this.ds.location,
       MetaTypeBuilder
+    );
+    Transformer.ComposeObject(
+      this.modelServiceService.type(),
+      this.ds.type,
+      ArrayBuilder
     );
     this.ds.location.onAddingNewItem(async (e: { modal: Views.ModalHost }) => {
       e.modal.component = TypesPresenter;

@@ -12,7 +12,7 @@ export class AddDeviceComponent implements OnInit {
   @Input() datasource: any;
   urlCopied: boolean = false;
   iconName: string = 'copy';
-  rtmpUrl: string;
+  streamingUrl: string;
   private options: GlobalConfig;
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter();
@@ -31,24 +31,35 @@ export class AddDeviceComponent implements OnInit {
     });
   }
 
+  onTypeSelect() {
+
+  }
 
   constructRtmpUrl(): string {
     const deviceName = this.datasource.deviceName.SelectedItem?.value?.trim().replace(/\s+/g, '-').toLowerCase() ?? '';
     const pin = this.datasource.pin ? `/${this.datasource.pin}` : '';
     const appName = this.datasource.appNamesCollection?.SelectedItem?.trim().replace(/\s+/g, '-').toLowerCase() ?? '';
-
+    const type = this.datasource.type.SelectedItem;
     let rtmpUrl = 'rtmp://drake.in:1935/';
+    let player = 'https://half-stack.com:3334/'
+    let streamingUrl = '';
+
+    if (type === 'Player') {
+      streamingUrl = 'https://half-stack.com:3334/';
+    } else if (type === 'Streaming') {
+      streamingUrl = 'rtmp://half-stack.com:1935/';
+    }
 
     if (appName) {
-      rtmpUrl += `${appName}/`;
+      streamingUrl += `${appName}/`;
     }
 
     if (deviceName) {
-      rtmpUrl += `${deviceName}${pin}`;
+      streamingUrl += `${deviceName}${pin}`;
     }
 
-    this.rtmpUrl = rtmpUrl;
-    return rtmpUrl;
+    this.streamingUrl = streamingUrl;
+    return streamingUrl;
   }
 
 

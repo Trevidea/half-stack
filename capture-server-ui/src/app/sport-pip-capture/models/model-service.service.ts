@@ -277,7 +277,7 @@ export class ModelServiceService {
       return this.create("event", data);
     }
   }
-  private apiUrl = `${environment.spModelUrl}/on-demand-event`;
+  private apiUrl = `http://drake.in:1437/api/on-demand-event`;
   _saveOnDemandEvent(data: any): Observable<any> {
     return this._httpClient.post<any>(this.apiUrl, data);
   }
@@ -459,5 +459,10 @@ export class ModelServiceService {
       .subscribe((res) => {
         console.log(res);
       });
+  }
+
+  // For dome only 
+  type() {
+    return ["Streaming", "Player"];
   }
 }

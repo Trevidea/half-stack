@@ -89,7 +89,11 @@ export namespace Data {
     type: string;
     // owner_id?: number; //this is user ID
   }
-
+  export interface Detail {
+    cityAddress: string;
+    streetAdress: string;
+    type: string;
+  }
   export interface OnDemandEvent extends Base {
     event_id: number;
     owner_id: number;

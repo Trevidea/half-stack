@@ -68,24 +68,7 @@ export class EventData extends DataBase<Data.Event>{
    public set status(v : string) {
     this._model.status = v;
    }
-  
-   
-//    private _event : Data.Event[];
-//    public get event() : Data.Event[] {
-
-//     return this._model.event;
-//    }
-//    public set event(v : Data.Event[]) {
-//     this._model.event = v;
-//    }
- 
-//   public get dayHalve() : string {
-//     return this._model.dayHalve;
-//   }
-//   public set dayHalve(v : string) {
-//     this._model.dayHalve = v;
-//   }
-  
+     
   public get tm_event() : number {
     return this._model.tm_event;
   }

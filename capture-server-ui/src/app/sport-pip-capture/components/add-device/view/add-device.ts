@@ -26,7 +26,7 @@ export class AddDeviceView implements Views.Datasource {
         }
         return this._appNamesCollection;
     }
-    
+
     public set appNamesCollection(v: Collection<string>) {
         this._appNamesCollection = v;
     }
@@ -80,24 +80,35 @@ export class AddDeviceView implements Views.Datasource {
         this._eventId = v;
     }
 
-    
-    private _streamName : string;
-    public get streamName() : string {
+
+    private _streamName: string;
+    public get streamName(): string {
         return this._streamName;
     }
-    public set streamName(v : string) {
+    public set streamName(v: string) {
         this._streamName = v;
     }
 
-    
-    private _streamId : string;
-    public get streamId() : string {
+
+    private _streamId: string;
+    public get streamId(): string {
         return this._streamId;
     }
-    public set streamId(v : string) {
+    public set streamId(v: string) {
         this._streamId = v;
     }
-    
-    
+
+
+    private _type: Collection<string>;
+    public get type(): Collection<string> {
+        if (!this._type) {
+            return this._type = new Collection<string>();
+        }
+        return this._type;
+
+    }
+    public set type(v: Collection<string>) {
+        this._type = v;
+    }
 
 }
