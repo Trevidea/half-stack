@@ -14,7 +14,7 @@ public:
     }
 
     void setType(const std::string &value) {
-        m_model.set("type", value);
+        m_model.set(value, "type");
     }
 
     std::string name() const {
@@ -22,7 +22,7 @@ public:
     }
 
     void setName(const std::string &value) {
-        m_model.set("name", value);
+        m_model.set(value, "name");
     }
 
     std::string code() const {
@@ -30,7 +30,7 @@ public:
     }
 
     void setCode(const std::string &value) {
-        m_model.set("code", value);
+        m_model.set(value, "code");
     }
 
     ~Device();

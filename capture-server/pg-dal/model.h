@@ -26,24 +26,25 @@ public:
         return Model(m_result[field]).get<T>(args...);
     }
 
-    template <typename T>
-    void set(const std::string &field, T val)
-    {
-        this->m_result[field] = val;
-    }
-
     // template <typename T>
-    // void set(T val, const std::string &field)
+    // void set(const std::string &field, T val)
     // {
     //     this->m_result[field] = val;
     // }
-    // template <typename T, typename... Args>
-    // void set(T val, const std::string &field, Args... args)
-    // {
-    //     Json::Value obj = Json::objectValue;
-    //     this->m_result[field] = obj;
-    //     Model(this->m_result[field]).set(args..., val);
-    // }
+
+    template <typename T>
+    void set(T val, const std::string &&field)
+    {
+        this->m_result[field] = val;
+    }
+    template <typename T, typename... Args>
+    void set(T val, const std::string &&field, Args... args)
+    {
+        Json::Value obj = Json::objectValue;
+        this->m_result[field] = obj;
+        Model(this->m_result[field]).set(args..., val);
+    }
+
     void merge(Model &model);
     Json::Value populate(Json::Value &templ) const;
     std::string toString() const
