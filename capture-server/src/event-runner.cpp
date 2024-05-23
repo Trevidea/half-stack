@@ -46,6 +46,65 @@ void EventRunner::publishPreviewData()
 }
 void EventRunner::publishLiveData()
 {
+
+    LiveEvent le;
+    le.setSport("Football");
+    le.setLevel("University");
+    le.setProgram("Men");
+    le.setYear(2024);
+    le.setDtEvent("2024-04-15");
+    le.setTime(1402);
+    le.setVenueLocation("Delhi");
+    le.setDetailType("Scheduled Event");
+    le.setDetailStreetAddress("Sector 32");
+    le.setDetailCityAddress("Delhi");
+    le.setTitle("Manchester vs Barcelona");
+    le.setStatus("Upcoming");
+
+    ConnectionDetail connectionDetail;
+    connectionDetail.setId(1);
+    connectionDetail.setName("Coach S.");
+    connectionDetail.setRole("Subscriber");
+    connectionDetail.setLocation("Press Box");
+    connectionDetail.setDevice("iPad15");
+    connectionDetail.setNetwork("Penfield-532");
+    connectionDetail.setQuality(QualityEnum::Good);
+    connectionDetail.setIpAddress("192.168.1.1");
+    connectionDetail.setTransmitStatus(TransmitEnum::Streaming);
+    connectionDetail.setFilesReceived(10);
+    connectionDetail.setRetries(3);
+
+    ConnectionDetail connectionDetail1;
+    connectionDetail1.setId(2);
+    connectionDetail1.setName("Coach J.");
+    connectionDetail1.setRole("Publisher");
+    connectionDetail1.setLocation("Sideline");
+    connectionDetail1.setDevice("iPad22");
+    connectionDetail1.setNetwork("Penfield-532");
+    connectionDetail1.setQuality(QualityEnum::Poor);
+    connectionDetail1.setIpAddress("192.168.1.2");
+    connectionDetail1.setTransmitStatus(TransmitEnum::Receiving);
+    connectionDetail1.setFilesReceived(5);
+    connectionDetail1.setRetries(2);
+
+    ConnectionDetail connectionDetail2;
+    connectionDetail2.setId(3);
+    connectionDetail2.setName("Coach M.");
+    connectionDetail2.setRole("Subscriber");
+    connectionDetail2.setLocation("Press Box");
+    connectionDetail2.setDevice("Camcorder");
+    connectionDetail2.setNetwork("Penfield-532");
+    connectionDetail2.setQuality(QualityEnum::Poor);
+    connectionDetail2.setIpAddress("192.168.1.3");
+    connectionDetail2.setTransmitStatus(TransmitEnum::Streaming);
+    connectionDetail2.setFilesReceived(5);
+    connectionDetail2.setRetries(2);
+
+    le.setConnectionDetails({connectionDetail, connectionDetail1, connectionDetail2});
+
+    std::string liveData = le.toResponse();
+
+    Publisher::instance().publish("live-event", liveData);
 }
 
 EventRunner::EventRunner(const Event &&event)
