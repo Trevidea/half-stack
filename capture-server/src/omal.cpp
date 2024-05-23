@@ -258,7 +258,7 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     }
     else if (direction == "outgoing")
     {
-        handleOutgoingControlServerRequest(omRequest, jsonResponse, strUrl);
+        // handleOutgoingControlServerRequest(omRequest, jsonResponse, strUrl);
     }
 
     rsp.setRawData(jsonResponse);
@@ -282,23 +282,24 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
 
             spdlog::trace("eventId: {}, userId: {}, pin: {}", eventId, deviceId, pin);
 
-            EventDevice ed;
-            char query[128] = {'\0'};
-            snprintf(query, 128, "device_id=%s&event_id=%d&pin='%s'",
-                     deviceId.c_str(), 188, pin.c_str());
-            const auto result = ed.find<EventDevice>(query);
-            bool allowed = (result.size() > 0);
-            jsonResponse["allowed"] = allowed;
-            if (allowed)
-            {
-                const std::string streamName = result.front().streamName();
+            // EventDevice ed;
+            // char query[128] = {'\0'};
+            // snprintf(query, 128, "device_id=%s&event_id=%d&pin='%s'",
+            //          deviceId.c_str(), 188, pin.c_str());
+            // const auto result = ed.find<EventDevice>(query);
+            // bool allowed = (result.size() > 0);
+            jsonResponse["allowed"] = true;
+            // if (allowed)
+            // {
+            //     const std::string streamName = result.front().streamName();
                 char newUrl[128] = {'\0'};
-                snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "shreyaapp", streamName.c_str());
+                snprintf(newUrl, sizeof(newUrl), "rtmp://%s/%s/%s", endPoint.c_str(), "shreyaapp", "johndoe_cccc_188");
                 jsonResponse["new_url"] = newUrl;
                 // for (auto &&elem : result)
                 // {
                 //     saveEventDeviceIPAdd(const_cast<EventDevice&>(elem), omRequest["client"]["address"].asString());
                 // }
+                spdlog::info("Hardcoded response: allowing stream with new URL: {}", newUrl);
             }
             else
             {
@@ -310,49 +311,45 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
             throw ExInvalidUrlException(strUrl);
         }
     }
-    else
-    {
-        throw ExInvalidUrlException(strUrl);
-    }
-}
 
-void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl)
-{
-    std::regex urlPattern(R"(rtmp://([^/]+)/([^/]+)/([^/]+)/([^/]+))");
-    spdlog::trace("control-server outgoing");
 
-    std::smatch matches; // Used to store the results of the match
+// void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl)
+// {
+//     std::regex urlPattern(R"(rtmp://([^/]+)/([^/]+)/([^/]+)/([^/]+))");
+//     spdlog::trace("control-server outgoing");
 
-    if (std::regex_search(strUrl, matches, urlPattern))
-    {
-        spdlog::trace("control-server incoming url pattern matched: {}", matches.size());
-        if (matches.size() == 5)
-        {
-            const std::string host = matches[1].str();
-            const std::string port = "3334"; // Assuming port for HTTPS is 3334
-            const std::string eventId = matches[2].str();
-            const std::string userId = matches[3].str();
-            const std::string pin = matches[4].str();
+//     std::smatch matches; // Used to store the results of the match
 
-            spdlog::trace("host: {}, port: {}, eventId: {}, userId: {}, pin: {}", host, port, eventId, userId, pin);
+//     if (std::regex_search(strUrl, matches, urlPattern))
+//     {
+//         spdlog::trace("control-server incoming url pattern matched: {}", matches.size());
+//         if (matches.size() == 5)
+//         {
+//             const std::string host = matches[1].str();
+//             const std::string port = "3334"; // Assuming port for HTTPS is 3334
+//             const std::string eventId = matches[2].str();
+//             const std::string userId = matches[3].str();
+//             const std::string pin = matches[4].str();
 
-            // Construct HTTPS link for the player
-            std::string playerLink = "https://" + host + ":" + port + "/" + "shreyaapp" + "/" + userId + "/" + pin;
+//             spdlog::trace("host: {}, port: {}, eventId: {}, userId: {}, pin: {}", host, port, eventId, userId, pin);
 
-            // Set the player link in the JSON response
-            jsonResponse["player_link"] = playerLink;
-            jsonResponse["allowed"] = true; // Assuming all outgoing requests are allowed
-        }
-        else
-        {
-            throw ExInvalidUrlException(strUrl);
-        }
-    }
-    else
-    {
-        throw ExInvalidUrlException(strUrl);
-    }
-}
+//             // Construct HTTPS link for the player
+//             std::string playerLink = "https://" + host + ":" + port + "/" + "shreyaapp" + "/" + userId + "/" + pin;
+
+//             // Set the player link in the JSON response
+//             jsonResponse["player_link"] = playerLink;
+//             jsonResponse["allowed"] = true; // Assuming all outgoing requests are allowed
+//         }
+//         else
+//         {
+//             throw ExInvalidUrlException(strUrl);
+//         }
+//     }
+//     else
+//     {
+//         throw ExInvalidUrlException(strUrl);
+//     }
+// }
 
 Omal::~Omal()
 {
