@@ -250,7 +250,7 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
     const std::string strUrl = omRequest["request"]["url"].asString();
     // std::regex urlPattern(R"(rtmp://([^/]+)/([^/]+)/([^/]+)/([^/]+)/)");
     const std::string direction = omRequest["request"]["direction"].asString();
-
+    spdlog::trace("control-server request direction: {}", direction);
     if (direction == "incoming")
     {
         handleIncomingControlServerRequest(omRequest, jsonResponse, strUrl);
@@ -266,11 +266,12 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
 void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl)
 {
     std::regex urlPattern(R"(rtmp://([^/]+)/([^/]+)/([^/]+)/([^/]+))");
-
+    spdlog::trace("control-server incoming");
     std::smatch matches; // Used to store the results of the match
 
     if (std::regex_search(strUrl, matches, urlPattern))
     {
+        spdlog::trace("control-server incoming url pattern matched: {}", matches.size());
         if (matches.size() == 5) // Change to 5, as there are 5 capturing groups
         {
             const std::string endPoint = matches[1].str();
@@ -290,7 +291,7 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
             if (allowed)
             {
                 char newUrl[128] = {'\0'};
-                snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "spip", ed.streamName().c_str());
+                snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "shreyaapp", ed.streamName().c_str());
                 jsonResponse["new_url"] = newUrl;
                 // for (auto &&elem : result)
                 // {
@@ -316,11 +317,13 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
 void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl)
 {
     std::regex urlPattern(R"(rtmp://([^/]+)/([^/]+)/([^/]+)/([^/]+))");
+    spdlog::trace("control-server outgoing");
 
     std::smatch matches; // Used to store the results of the match
 
     if (std::regex_search(strUrl, matches, urlPattern))
     {
+        spdlog::trace("control-server incoming url pattern matched: {}", matches.size());
         if (matches.size() == 5)
         {
             const std::string host = matches[1].str();
@@ -332,7 +335,7 @@ void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json
             spdlog::trace("host: {}, port: {}, eventId: {}, userId: {}, pin: {}", host, port, eventId, userId, pin);
 
             // Construct HTTPS link for the player
-            std::string playerLink = "https://" + host + ":" + port + "/" + eventId + "/" + userId + "/" + pin;
+            std::string playerLink = "https://" + host + ":" + port + "/" + "shreyaapp" + "/" + userId + "/" + pin;
 
             // Set the player link in the JSON response
             jsonResponse["player_link"] = playerLink;
