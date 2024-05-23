@@ -72,46 +72,46 @@ void EventPreview::setTitle(const std::string &value)
     m_model["title"] = value;
 }
 
-// std::string EventPreview::cityAddress() const
-// {
-//     return m_model["detail"]["cityAddress"].asString();
-// }
+std::string EventPreview::cityAddress() const
+{
+    return m_model["detail"]["cityAddress"].asString();
+}
 
-// void EventPreview::setCityAddress(const std::string &value)
-// {
-//     m_model["detail"]["cityAddress"] = value;
-// }
+void EventPreview::setCityAddress(const std::string &value)
+{
+    m_model["detail"]["cityAddress"] = value;
+}
 
-// std::string EventPreview::streetAddress() const
-// {
-//     return m_model["detail"]["streetAddress"].asString();
-// }
+std::string EventPreview::streetAddress() const
+{
+    return m_model["detail"]["streetAddress"].asString();
+}
 
-// void EventPreview::setStreetAddress(const std::string &value)
-// {
-//     m_model["detail"]["streetAddress"] = value;
-// }
+void EventPreview::setStreetAddress(const std::string &value)
+{
+    m_model["detail"]["streetAddress"] = value;
+}
 
-// std::string EventPreview::detailType() const
-// {
-//     return m_model["detail"]["type"].asString();
-// }
+std::string EventPreview::detailType() const
+{
+    return m_model["detail"]["type"].asString();
+}
 
-// void EventPreview::setDetailType(const std::string &value)
-// {
-//     m_model["detail"]["type"] = value;
-// }
+void EventPreview::setDetailType(const std::string &value)
+{
+    m_model["detail"]["type"] = value;
+}
 
-// std::string EventPreview::venueLocation() const
-// {
-//     return m_model["venue"]["location"].asString();
-// }
+std::string EventPreview::venueLocation() const
+{
+    return m_model["venue"]["location"].asString();
+}
 
-// void EventPreview::setVenueLocation(const std::string &value)
-// {
-//     m_model["venue"]["location"] = value;
-// }
-
+void EventPreview::setVenueLocation(const std::string &value)
+{
+    m_model["venue"]["location"] = value;
+}
+ 
 int EventPreview::year() const
 {
     return m_model["year"].asInt();
@@ -142,15 +142,15 @@ void EventPreview::setEventType(const std::string &value)
     m_model["type"] = value;
 }
 
-// std::string EventPreview::countdown() const
-// {
-//     return m_model["countdown"].asString();
-// }
+std::string EventPreview::countdown() const
+{
+    return m_model["countdown"].asString();
+}
 
-// void EventPreview::setCountdown(const std::string &value)
-// {
-//     m_model["countdown"] = value;
-// }
+void EventPreview::setCountdown(const std::string &value)
+{
+    m_model["countdown"] = value;
+}
 
 std::vector<EventDevice> &EventPreview::activeDevices()
 {
@@ -164,25 +164,23 @@ const std::vector<EventDevice> &EventPreview::activeDevices() const
 
 void EventPreview::setActiveDevices(const std::vector<EventDevice> &activeDevices)
 {
+    // Clear the existing active devices in the model
+    m_model["activeDevices"] = Json::arrayValue;
     // Check if the provided vector is empty
     if (activeDevices.empty())
     {
         // Throw an exception indicating that no active devices were provided
-        throw ExEntityNotSet();
+        spdlog::warn("No active devices for the event exist..");
     }
-
-    // Clear the existing active devices in the model
-    m_model["activeDevices"] = Json::arrayValue;
-
-    // Populate the model with the new active devices
-    for (const auto &device : activeDevices)
-    {
-        Json::Value jsonDevice;
-        jsonDevice["deviceId"] = device.deviceId();
-        jsonDevice["eventId"] = device.eventId();
-        jsonDevice["location"] = device.location();
-        jsonDevice["pin"] = device.pin();
-        jsonDevice["userId"] = device.userId();
-        m_model["activeDevices"].append(jsonDevice);
-    }
+    else
+        for (const auto &device : activeDevices)
+        {
+            Json::Value jsonDevice;
+            jsonDevice["deviceId"] = device.deviceId();
+            jsonDevice["eventId"] = device.eventId();
+            jsonDevice["location"] = device.location();
+            jsonDevice["pin"] = device.pin();
+            jsonDevice["userId"] = device.userId();
+            m_model["activeDevices"].append(jsonDevice);
+        }
 }

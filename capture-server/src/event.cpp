@@ -82,3 +82,42 @@ void Event::validateEventId(int eventId)
     }
 }
 
+std::string Event::venueLocation() const
+{
+    return m_model.get<std::string>("venue", "location");
+}
+
+void Event::setVenueLocation(const std::string &value)
+{
+    m_model.set(value, "venue","location");
+}
+
+std::string Event::detailType() const
+{
+    return m_model.get<std::string>("detail", "type");
+}
+
+void Event::setDetailType(const std::string &value)
+{
+    m_model.set(value, "detail", "type");
+}
+
+std::string Event::streetAddress() const
+{
+    return m_model.get<std::string>("detail", "streetAddress");
+}
+
+void Event::setStreetAddress(const std::string &value)
+{
+    m_model.set(value, "detail", "streetAddress");
+}
+
+std::string Event::cityAddress() const
+{
+    return m_model.get<std::string>("detail", "cityAddress");
+}
+
+void Event::setCityAddress(const std::string &value)
+{
+    m_model.set(value, "detail", "cityAddress");
+}

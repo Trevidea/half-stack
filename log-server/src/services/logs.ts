@@ -39,7 +39,7 @@ class LOGSERVICE {
   static async NewLog(req: Request, res: Response) {
     const formattedTimestamp = new Date()
       .toISOString()
-      .replace('T', ' ')
+      .replace('T', '')
       .replace('Z', '')
       .slice(0, 23);
 
@@ -134,18 +134,45 @@ class LOGSERVICE {
     });
   }
   static UpdateLog(req: Request, res: Response) {
-    console.log(req.body);
+    const { eventId, details } = req.body;
+
     db.serialize(() => {
-      db.run(
-        'UPDATE logs SET activity = ? WHERE id = ?',
-        [req.params.name, req.params.id],
-        (err) => {
+      // Step 1: Retrieve the existing details
+      db.get(
+        'SELECT details FROM logs WHERE event_id = ?',
+        [eventId],
+        (err: any, row: any) => {
           if (err) {
-            res.send('Error encountered while updating');
+            res.status(500).send('Error retrieving existing details');
             return console.error(err.message);
           }
-          res.send('Entry updated successfully');
-          console.log('Entry updated successfully');
+
+          let existingDetails = [];
+          if (row && row.details) {
+            try {
+              existingDetails = JSON.parse(row.details);
+            } catch (parseError: any) {
+              res.status(500).send('Error parsing existing details');
+              return console.error(parseError.message);
+            }
+          }
+
+          // Step 2: Append the new details
+          existingDetails.push(...details);
+
+          // Step 3: Update the details column in the database
+          db.run(
+            'UPDATE logs SET details = ? WHERE event_id = ?',
+            [JSON.stringify(existingDetails), eventId],
+            (updateErr) => {
+              if (updateErr) {
+                res.status(500).send('Error encountered while updating');
+                return console.error(updateErr.message);
+              }
+              res.send('Entry updated successfully');
+              console.log('Entry updated successfully');
+            },
+          );
         },
       );
     });

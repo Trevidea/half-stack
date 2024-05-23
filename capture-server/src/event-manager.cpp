@@ -48,22 +48,6 @@ void EventManager::closeAllPreviews(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{jsResult}}));
 }
 
-void EventManager::publishPreviewData()
-{
-    for (auto &&kvRunner : this->m_runners)
-    {
-        spdlog::info("Processing runner for event ID: {}", kvRunner.first);
-        Publisher::instance().publish("event-preview", this->getEventPreviewData(kvRunner.first));
-    }
-}
-
-void EventManager::publishLiveData()
-{
-    for (auto &&kvRunner : this->m_runners)
-    {
-        Publisher::instance().publish("live-event", this->getLiveEventData(kvRunner.first));
-    }
-}
 
 void EventManager::openPreview(const Request &req, Response &rsp)
 {
@@ -94,17 +78,14 @@ void EventManager::openPreview(const Request &req, Response &rsp)
         const auto &kvPair = this->m_runners.find(eventId);
         if (kvPair != this->m_runners.end())
         {
-            spdlog::trace("Runner already exists for event {}. Stopping runner - just in case", eventId);
+            spdlog::warn("Runner already exists for event {}. Stopping runner - just in case", eventId);
             kvPair->second->stop();
             this->m_runners.erase(kvPair);
         }
 
         Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));
         spdlog::trace("Creating a new runner for event id {}", eventId);
-        this->m_runners.emplace(eventId,
-                                new EventRunner({{dt.year, dt.month, dt.date}, {tm.hours, tm.minutes, tm.seconds}, 1},
-                                                std::bind(&EventManager::publishPreviewData, this),
-                                                std::bind(&EventManager::publishLiveData, this)));
+        this->m_runners.emplace(eventId, new EventRunner(std::move(event)));
     }
     const std::string strRsp = Gateway::instance().formatResponse({{response}});
     spdlog::trace("setting response: {}", strRsp);
@@ -129,111 +110,5 @@ void EventManager::closePreview(const Request &req, Response &rsp)
     rsp.setData(Gateway::instance().formatResponse({{response}}));
 }
 
-std::string EventManager::getEventPreviewData(const int eventId)
-{
-    spdlog::info("Getting event preview data for event ID: {}", eventId);
-    Json::Value model(Json::objectValue); // Create a Json::Value object
-    EventPreview ep(model);
-
-    const auto event = Event::byId<Event>(eventId);
-    if (event.notSet())
-    {
-        spdlog::warn("Event not found for ID: {}", eventId);
-        return "";
-    }
-
-    // Log each value before setting it
-    spdlog::info("Event title: {}", event.title());
-    spdlog::info("Event date: {}", event.dtEvent());
-    spdlog::info("Event time: {}", event.tmEvent());
-    spdlog::info("Event sport: {}", event.sport());
-    spdlog::info("Event level: {}", event.level());
-    spdlog::info("Event program: {}", event.program());
-    spdlog::info("Event status: {}", event.status());
-    spdlog::info("Event year: {}", event.year());
-    spdlog::info("Event type: {}", event.type());
-
-    ep.setTitle(event.title());
-    ep.setDtEvent(event.dtEvent());
-    ep.setTime(event.tmEvent());
-    ep.setSport(event.sport());
-    ep.setLevel(event.level());
-    ep.setProgram(event.program());
-    ep.setStatus(event.status());
-    ep.setYear(event.year());
-    ep.setEventType(event.type());
-
-
-    EventDevice eventDevice;
-    char query[128] = {'\0'};
-    snprintf(query, 128, "event_id=%d", eventId);
-    std::vector<EventDevice> activeDevices = eventDevice.find<EventDevice>(query);
-
-    ep.setActiveDevices(activeDevices);
-
-    // Convert EventPreview to JSON string
-    std::string jsonString = ep.toResponse();
-    return jsonString;
-}
-
-std::string EventManager::getLiveEventData(const int eventId)
-{
-    LiveEvent le;
-    le.setSport("Football");
-    le.setLevel("University");
-    le.setProgram("Men");
-    le.setYear(2024);
-    le.setDtEvent("2024-04-15");
-    le.setTime(1402);
-    le.setVenueLocation("Delhi");
-    le.setDetailType("Scheduled Event");
-    le.setDetailStreetAddress("Sector 32");
-    le.setDetailCityAddress("Delhi");
-    le.setTitle("Manchester vs Barcelona");
-    le.setStatus("Upcoming");
-
-    ConnectionDetail connectionDetail;
-    connectionDetail.setId(1);
-    connectionDetail.setName("Coach S.");
-    connectionDetail.setRole("Subscriber");
-    connectionDetail.setLocation("Press Box");
-    connectionDetail.setDevice("iPad15");
-    connectionDetail.setNetwork("Penfield-532");
-    connectionDetail.setQuality(QualityEnum::Good);
-    connectionDetail.setIpAddress("192.168.1.1");
-    connectionDetail.setTransmitStatus(TransmitEnum::Streaming);
-    connectionDetail.setFilesReceived(10);
-    connectionDetail.setRetries(3);
-
-    ConnectionDetail connectionDetail1;
-    connectionDetail1.setId(2);
-    connectionDetail1.setName("Coach J.");
-    connectionDetail1.setRole("Publisher");
-    connectionDetail1.setLocation("Sideline");
-    connectionDetail1.setDevice("iPad22");
-    connectionDetail1.setNetwork("Penfield-532");
-    connectionDetail1.setQuality(QualityEnum::Poor);
-    connectionDetail1.setIpAddress("192.168.1.2");
-    connectionDetail1.setTransmitStatus(TransmitEnum::Receiving);
-    connectionDetail1.setFilesReceived(5);
-    connectionDetail1.setRetries(2);
-
-    ConnectionDetail connectionDetail2;
-    connectionDetail2.setId(3);
-    connectionDetail2.setName("Coach M.");
-    connectionDetail2.setRole("Subscriber");
-    connectionDetail2.setLocation("Press Box");
-    connectionDetail2.setDevice("Camcorder");
-    connectionDetail2.setNetwork("Penfield-532");
-    connectionDetail2.setQuality(QualityEnum::Poor);
-    connectionDetail2.setIpAddress("192.168.1.3");
-    connectionDetail2.setTransmitStatus(TransmitEnum::Streaming);
-    connectionDetail2.setFilesReceived(5);
-    connectionDetail2.setRetries(2);
-
-    le.setConnectionDetails({connectionDetail, connectionDetail1, connectionDetail2});
-
-    return le.toResponse();
-}
 
 EventManager::~EventManager() {}
