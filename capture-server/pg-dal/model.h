@@ -26,12 +26,6 @@ public:
         return Model(m_result[field]).get<T>(args...);
     }
 
-    // template <typename T>
-    // void set(const std::string &field, T val)
-    // {
-    //     this->m_result[field] = val;
-    // }
-
     template <typename T>
     void set(T val, const std::string &&field)
     {

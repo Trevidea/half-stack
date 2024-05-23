@@ -1,5 +1,6 @@
 // event-device.cpp
 #include "event-device.h"
+#include "event-runner.h"
 
 EventDevice::EventDevice() : EntityBase("event_device") {}
 
@@ -23,6 +24,7 @@ void EventDevice::report()
                               [this](const Request &req, Response &rsp)
                               {
                                   this->create(req, rsp);
+                                  EventRunner::s_deviceCountDirty = true;
                               });
 }
 

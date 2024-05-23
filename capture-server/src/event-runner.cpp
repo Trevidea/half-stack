@@ -6,7 +6,7 @@
 #include "gateway.h"
 #include "event-manager.h"
 #include "worker-loop.h"
-
+ThreadSafeBool EventRunner::s_deviceCountDirty{true};
 void EventRunner::publishPreviewData()
 {
     spdlog::trace("Venue: {}", this->m_event.venueLocation());
@@ -28,13 +28,17 @@ void EventRunner::publishPreviewData()
     // ep.setStreetAddress(event.streetAddress());
     // ep.setCityAddress(event.cityAddress());
 
+    if (EventRunner::s_deviceCountDirty.get())
+    {
+        EventRunner::s_deviceCountDirty = false;
 
-    EventDevice eventDevice;
-    char query[128] = {'\0'};
-    snprintf(query, 128, "event_id=%d", this->m_event.id());
-    std::vector<EventDevice> activeDevices = eventDevice.find<EventDevice>(query);
+        EventDevice eventDevice;
+        char query[128] = {'\0'};
+        snprintf(query, 128, "event_id=%d", this->m_event.id());
+        this->m_activeDevices = eventDevice.find<EventDevice>(query);
+    }
 
-    ep.setActiveDevices(activeDevices);
+    ep.setActiveDevices(this->m_activeDevices);
 
     // // Convert EventPreview to JSON string
     // std::string jsonString = ep.toResponse();
@@ -45,13 +49,12 @@ void EventRunner::publishLiveData()
 {
 }
 
-
 EventRunner::EventRunner(const Event &&event)
     : mp_eventPreviewPublisher{new WorkerLoop(2, std::bind(&EventRunner::publishPreviewData, this))},
       mp_liveEventPublisher{new WorkerLoop(2, std::bind(&EventRunner::publishLiveData, this))},
       m_start{event.getDTUDate().year, event.getDTUDate().month, event.getDTUDate().date, event.getDTUTime().hours, event.getDTUTime().minutes, event.getDTUTime().seconds, std::bind(&EventRunner::eventStarted, this)},
       m_end{m_start, event.duration(), std::bind(&EventRunner::eventEnded, this)},
-      m_event{ event }
+      m_event{event}
 {
     this->mp_eventPreviewPublisher->start();
 }

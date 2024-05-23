@@ -4,6 +4,8 @@
 #include "countdown.h"
 #include "worker-loop.h"
 #include "event.h"
+#include "thread-safe-bool.h"
+#include "event-device.h"
 
 class EventRunner
 {
@@ -27,6 +29,9 @@ private:
     bool m_eventStarted = false;
     bool m_previewStarted = false;
     bool m_stopped = false;
+public:
+    static ThreadSafeBool s_deviceCountDirty;
+    std::vector<EventDevice> m_activeDevices;
 };
 
 #endif // EVENT_RUNNER_H
