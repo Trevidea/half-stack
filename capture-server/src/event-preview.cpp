@@ -92,16 +92,6 @@ void EventPreview::setStreetAddress(const std::string &value)
     m_model["detail"]["streetAddress"] = value;
 }
 
-std::string EventPreview::detailType() const
-{
-    return m_model["detail"]["type"].asString();
-}
-
-void EventPreview::setDetailType(const std::string &value)
-{
-    m_model["detail"]["type"] = value;
-}
-
 std::string EventPreview::venueLocation() const
 {
     return m_model["venue"]["location"].asString();
@@ -176,11 +166,11 @@ void EventPreview::setActiveDevices(const std::vector<EventDevice> &activeDevice
         for (const auto &device : activeDevices)
         {
             Json::Value jsonDevice;
+            jsonDevice["streamName"] = device.streamName();
             jsonDevice["deviceId"] = device.deviceId();
-            jsonDevice["eventId"] = device.eventId();
+            jsonDevice["status"] = device.status();
             jsonDevice["location"] = device.location();
-            jsonDevice["pin"] = device.pin();
-            jsonDevice["userId"] = device.userId();
+            jsonDevice["network"] = device.network();
             m_model["activeDevices"].append(jsonDevice);
         }
 }

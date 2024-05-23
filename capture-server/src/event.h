@@ -30,8 +30,6 @@ public:
 
     std::string venueLocation() const;
     void setVenueLocation(const std::string &value);
-    std::string detailType() const;
-    void setDetailType(const std::string &value);
     std::string streetAddress() const;
     void setStreetAddress(const std::string &value);
     std::string cityAddress() const;

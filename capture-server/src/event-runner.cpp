@@ -23,7 +23,6 @@ void EventRunner::publishPreviewData()
     ep.setDtEvent(this->m_event.dtEvent());
     ep.setTime(this->m_event.tmEvent());
     ep.setVenueLocation(this->m_event.venueLocation());
-    ep.setDetailType(this->m_event.detailType());
     ep.setStreetAddress(this->m_event.streetAddress());
     ep.setCityAddress(this->m_event.cityAddress());
     ep.setTitle(this->m_event.title());
@@ -59,7 +58,6 @@ void EventRunner::publishLiveData()
     le.setDtEvent(this->m_event.dtEvent());
     le.setTime(this->m_event.tmEvent());
     le.setVenueLocation(this->m_event.venueLocation());
-    le.setDetailType(this->m_event.detailType());
     le.setDetailStreetAddress(this->m_event.streetAddress());
     le.setDetailCityAddress(this->m_event.cityAddress());
     le.setTitle(this->m_event.title());

@@ -92,16 +92,6 @@ void Event::setVenueLocation(const std::string &value)
     m_model.set(value, "venue","location");
 }
 
-std::string Event::detailType() const
-{
-    return m_model.get<std::string>("detail", "type");
-}
-
-void Event::setDetailType(const std::string &value)
-{
-    m_model.set(value, "detail", "type");
-}
-
 std::string Event::streetAddress() const
 {
     return m_model.get<std::string>("detail", "streetAddress");
