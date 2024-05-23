@@ -52,7 +52,7 @@ private:
                         }
                     },
                     "admissionWebhooks": {
-                        "controlServerUrl": "https://5448ac20-91d3-4d4f-ac16-66ed79090dff.mock.pstmn.io/api/control-server",
+                        "controlServerUrl": "http://drake.in:1437/api/control-server",
                         "enables": {
                             "providers": "rtmp,webrtc,srt",
                             "publishers": "webrtc,llhls"

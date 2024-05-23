@@ -292,10 +292,10 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
                 char newUrl[128] = {'\0'};
                 snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "spip", ed.streamName().c_str());
                 jsonResponse["new_url"] = newUrl;
-                for (auto &&elem : result)
-                {
-                    saveEventDeviceIPAdd(const_cast<EventDevice&>(elem), omRequest["client"]["address"].asString());
-                }
+                // for (auto &&elem : result)
+                // {
+                //     saveEventDeviceIPAdd(const_cast<EventDevice&>(elem), omRequest["client"]["address"].asString());
+                // }
             }
             else
             {
