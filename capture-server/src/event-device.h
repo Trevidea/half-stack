@@ -50,6 +50,9 @@ public:
 
     std::string ipAdd() const;
     void setIpAdd(const std::string &value);
+    
+    std::string appName() const;
+    void setAppName(const std::string &value);
     // // Modified list function to filter devices by eventId
     // std::vector<EventDevice> list(int eventId);
 

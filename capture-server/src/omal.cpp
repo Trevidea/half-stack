@@ -276,23 +276,22 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
         if (matches.size() == 5) // Change to 5, as there are 5 capturing groups
         {
             const std::string endPoint = matches[1].str();
-            const std::string eventId = matches[2].str();
+            const std::string appName = matches[2].str();
             const std::string deviceId = matches[3].str();
             const std::string pin = matches[4].str();
 
-            spdlog::trace("eventId: {}, userId: {}, pin: {}", eventId, deviceId, pin);
+            spdlog::trace("appName: {}, deviceId: {}, pin: {}", appName, deviceId, pin);
 
-            EventDevice ed;
             char query[128] = {'\0'};
-            snprintf(query, 128, "device_id=%s&event_id=%d&pin='%s'",
-                     deviceId.c_str(), 188, pin.c_str());
-            const auto result = ed.find<EventDevice>(query);
+            snprintf(query, 128, "device_id=%s&pin='%s'&app_name='%s'",
+                     deviceId.c_str(), pin.c_str(), appName.c_str());
+            const auto result = EventDevice::find<EventDevice>(query);
             bool allowed = (result.size() > 0);
             if (allowed)
             {
                 const std::string streamName = result.front().streamName();
                 char newUrl[128] = {'\0'};
-                snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), "shreyaapp", pin.c_str());
+                snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), appName.c_str(), pin.c_str());
                 jsonResponse["new_url"] = newUrl;
                 jsonResponse["allowed"] = true;
                 // for (auto &&elem : result)

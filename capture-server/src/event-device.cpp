@@ -134,3 +134,12 @@ void EventDevice::setIpAdd(const std::string &value)
 {
     m_model.set(value, "ip_add");
 }
+
+std::string EventDevice::appName() const
+{
+    return this->m_model.get<std::string>("app_name");
+}
+void EventDevice::setAppName(const std::string &value)
+{
+    m_model.set(value, "app_name");
+}
