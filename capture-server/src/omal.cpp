@@ -318,7 +318,7 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
 
 void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl)
 {
-    std::regex urlPattern(R"(https://([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+))");
+    std::regex urlPattern(R"(https://([^/]+)/([^/]+)/([^/]+)/([^/]+))");
     spdlog::trace("control-server outgoing");
 
     std::smatch matches; // Used to store the results of the match
@@ -326,18 +326,17 @@ void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json
     if (std::regex_search(strUrl, matches, urlPattern))
     {
         spdlog::trace("control-server incoming url pattern matched: {}", matches.size());
-        if (matches.size() == 6)
+        if (matches.size() == 5)
         {
             const std::string endPoint = matches[1].str();
             const std::string appName = matches[2].str();
             const std::string deviceId = matches[3].str();
             const std::string pin = matches[4].str();
-            const std::string filename = matches[5].str();
 
-            spdlog::trace("host: {}, port: {}, eventId: {}, userId: {}, pin: {}", endPoint, appName, deviceId, pin, filename);
+            spdlog::trace("host: {}, port: {}, eventId: {}, userId: {}, pin: {}", endPoint, appName, deviceId, pin);
 
             // Construct HTTPS link for the player
-            std::string playerLink = "https://" + endPoint + "/" + appName + "/" + pin + "/" + filename;
+            std::string playerLink = "https://" + endPoint + "/" + appName + "/" + pin + "/custom.m3u8";
 
             // Set the player link in the JSON response
             jsonResponse["new_url"] = playerLink;
