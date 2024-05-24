@@ -14,8 +14,6 @@ export class AddDeviceComponent implements OnInit {
   urlCopied: boolean = false;
   iconName: string = 'copy';
   streamingUrl: string;
-  private rtmpUrl: string = environment.rtmpUrl;
-  private player: string = environment.playerUrl;
   private options: GlobalConfig;
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter();
@@ -43,8 +41,8 @@ export class AddDeviceComponent implements OnInit {
     const pin = this.datasource.pin ? `/${this.datasource.pin}` : '';
     const appName = this.datasource.appNamesCollection?.SelectedItem?.trim().replace(/\s+/g, '').toLowerCase() ?? '';
     const type = this.datasource.type.SelectedItem;
-    let rtmpUrl = `${this.rtmpUrl}/`;
-    let player = `${this.player}/`
+    let rtmpUrl = `${environment.rtmpUrl}/`;
+    let player = `${environment.playerUrl}/`
     let streamingUrl = '';
 
     if (type === 'Player') {
