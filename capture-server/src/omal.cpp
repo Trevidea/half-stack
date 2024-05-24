@@ -6,6 +6,7 @@
 #include <vector>
 #include "virtual-host.h"
 #include "virtual-app.h"
+#include "stringutils.h"
 
 Omal::Omal() : EntityBase("omal")
 {
@@ -318,7 +319,7 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
 
 void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl)
 {
-    std::regex urlPattern(R"(https://([^/]+)/([^/]+)/([^/]+)/([^/]+))");
+    std::regex urlPattern(R"(https://([^/]+)/([^/]+)/([^/]+)/?([^/]+))");
     spdlog::trace("control-server outgoing");
 
     std::smatch matches; // Used to store the results of the match
@@ -332,11 +333,14 @@ void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json
             const std::string appName = matches[2].str();
             const std::string deviceId = matches[3].str();
             const std::string pin = matches[4].str();
+            std::vector<std::string> query;
+            su_split('=', query, pin);
 
-            spdlog::trace("host: {}, port: {}, eventId: {}, userId: {}, pin: {}", endPoint, appName, deviceId, pin);
+
+            spdlog::trace("host: {}, port: {}, eventId: {}, userId: {}, pin: {}", endPoint, appName, deviceId, pin[1]);
 
             // Construct HTTPS link for the player
-            std::string playerLink = "https://" + endPoint + "/" + appName + "/" + pin + "/" + "llhls.m3u8";
+            std::string playerLink = "https://" + endPoint + "/" + appName + "/" + pin[1] + "/llhls.m3u8";
             // std::string playerLink = "https://drake.in:3334/shreyaapp/stream1/llhls.m3u8";
 
             // Set the player link in the JSON response
