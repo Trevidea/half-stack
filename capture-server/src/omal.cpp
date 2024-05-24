@@ -318,7 +318,7 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
 
 void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl)
 {
-    std::regex urlPattern(R"(rtmp://([^/]+)/([^/]+)/([^/]+)/([^/]+))");
+    std::regex urlPattern(R"(https://([^/]+)/([^/]+)/([^/]+)/([^/]+))");
     spdlog::trace("control-server outgoing");
 
     std::smatch matches; // Used to store the results of the match
@@ -328,19 +328,18 @@ void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json
         spdlog::trace("control-server incoming url pattern matched: {}", matches.size());
         if (matches.size() == 5)
         {
-            const std::string host = matches[1].str();
-            const std::string port = "3334"; // Assuming port for HTTPS is 3334
-            const std::string eventId = matches[2].str();
-            const std::string userId = matches[3].str();
+            const std::string endPoint = matches[1].str();
+            const std::string appName = matches[2].str();
+            const std::string deviceId = matches[3].str();
             const std::string pin = matches[4].str();
 
-            spdlog::trace("host: {}, port: {}, eventId: {}, userId: {}, pin: {}", host, port, eventId, userId, pin);
+            spdlog::trace("host: {}, port: {}, eventId: {}, userId: {}, pin: {}", endPoint, appName, deviceId, pin);
 
             // Construct HTTPS link for the player
-            std::string playerLink = "https://" + host + ":" + port + "/" + "shreyaapp" + "/" + userId + "/" + pin;
+            std::string playerLink = "https://" + endPoint + "/" + appName + "/" + pin;
 
             // Set the player link in the JSON response
-            jsonResponse["player_link"] = playerLink;
+            jsonResponse["new_url"] = playerLink;
             jsonResponse["allowed"] = true; // Assuming all outgoing requests are allowed
         }
         else
