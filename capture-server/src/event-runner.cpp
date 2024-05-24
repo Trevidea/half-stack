@@ -6,6 +6,9 @@
 #include "gateway.h"
 #include "event-manager.h"
 #include "worker-loop.h"
+#include "omal-factory.h"
+#include "virtual-host.h"
+#include "virtual-app.h"
 
 ThreadSafeBool EventRunner::s_deviceCountDirty{true};
 
@@ -48,7 +51,7 @@ void EventRunner::publishPreviewData()
 
 void EventRunner::publishLiveData()
 {
-    
+
     LiveEvent le;
 
     le.setSport(this->m_event.sport());
@@ -150,12 +153,32 @@ void EventRunner::eventStarted()
     spdlog::trace("Event started..");
     Publisher::instance().publish("event-terminal", "{'terminal':'start'}");
     this->mp_liveEventPublisher->start();
-    // start dump
+    for (auto &&eventDevice : this->m_activeDevices)
+    {
+        std::string appName = eventDevice.appName();
+        std::string streamName = eventDevice.streamName();
+        std::string streamId = eventDevice.streamId();
+        std::string outPath = "/tmp/ovenmediaengine/vod_dumps/" + eventDevice.streamName();
+        auto &vh = OMALFactory::getInstance().create("spip");
+        Json::Value result = Json::objectValue;
+        auto va = vh.createApp(appName, result);
+        va.startDump(streamName, streamId, outPath, result);
+    }
 }
 
 void EventRunner::eventEnded()
 {
-    // stop dump
+    for (auto &&eventDevice : this->m_activeDevices)
+    {
+        std::string appName = eventDevice.appName();
+        std::string streamName = eventDevice.streamName();
+        std::string streamId = eventDevice.streamId();
+        std::string outPath = "/tmp/ovenmediaengine/vod_dumps/" + eventDevice.streamName();
+        auto &vh = OMALFactory::getInstance().create("spip");
+        Json::Value result = Json::objectValue;
+        auto va = vh.createApp(appName, result);
+        va.stopDump(streamName, streamId, result);
+    }
     this->mp_liveEventPublisher->stop();
     spdlog::trace("Event ended..");
     Publisher::instance().publish("event-terminal", "{'terminal':'stop'}");
