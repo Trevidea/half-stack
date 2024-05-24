@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from 'environments/environment';
 import { GlobalConfig, ToastrService } from 'ngx-toastr';
 import { v4 as uuidv4 } from 'uuid';
 @Component({
@@ -40,8 +41,8 @@ export class AddDeviceComponent implements OnInit {
     const pin = this.datasource.pin ? `/${this.datasource.pin}` : '';
     const appName = this.datasource.appNamesCollection?.SelectedItem?.trim().replace(/\s+/g, '').toLowerCase() ?? '';
     const type = this.datasource.type.SelectedItem;
-    let rtmpUrl = 'rtmp://drake.in:1935/';
-    let player = 'https://drake.in:3334/'
+    let rtmpUrl = `${environment.rtmpUrl}/`;
+    let player = `${environment.playerUrl}/`
     let streamingUrl = '';
 
     if (type === 'Player') {

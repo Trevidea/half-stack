@@ -10,6 +10,9 @@ export const environment = {
   spFSUrl: "http://drake.in:1337/api",
   spHLSUrl: "http://drake.in:59919",
   logUrl: "http://localhost:8283/api/",
+  rtmpUrl: "rtmp://drake.in:1935",
+  playerUrl: "https://drake.in:3334"
+
 };
 
 /*

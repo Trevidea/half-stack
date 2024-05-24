@@ -11,7 +11,7 @@ export class EventBuilder extends AbstractBuilder<
     v.id = m.id;
     v.title = m.title;
     v.detail.cityAddress = m?.detail?.cityAddress;
-    v.detail.streetAdress = m?.detail?.streetAdress;
+    v.detail.streetAdress = m?.detail?.streetAddress;
     v.detail.type = m?.detail?.type;
     v.dtEvent = m.dt_event;
     v.levels.SelectedItem = m.level;
@@ -36,8 +36,8 @@ export class EventBuilder extends AbstractBuilder<
       title: v.title,
       detail: {
         cityAddress: v.detail.cityAddress,
-        streetAdress: v.detail.streetAdress,
-        type: v.detail.type,
+        streetAddress: v.detail.streetAdress,
+        type: v.detail.type
       },
       dt_event: v.dtEvent,
       level: v.levels.SelectedItem,
@@ -73,7 +73,7 @@ export class VenueBuilder extends AbstractBuilder<
   }
   decompose(v: OnDemandEventFormView): Data.Event {
     return;
-    
+
   }
   view(): OnDemandEventFormView {
     return new OnDemandEventFormView();

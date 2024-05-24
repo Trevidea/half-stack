@@ -7,4 +7,6 @@ export const environment = {
   spFSUrl: "https://strapi.sp-fullstack.site/api",
   spHLSUrl: "https://dumps.sp-halfstack.site",
   logUrl: "http://localhost:8283/api/",
+  rtmpUrl: "rtmp://drake.in:1935",
+  playerUrl: "https://drake.in:3334"
 };
