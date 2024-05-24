@@ -106,17 +106,17 @@ export class AppComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
-    // this.socketService.onEventTerminal().subscribe((data: string) => {
-    //   const message: { terminal: string } = JSON.parse(data);
-    //   console.log("message socket ::", message);
-    //   if (message.terminal == "start") {
-    //     this.modalOpenMd();
-    //   } else if (message.terminal == "stop") {
-    //     this.socketService.disconnectFromRelayService();
-    //     this.endmodalOpenMd();
-    //   } else {
-    //   }
-    // });
+    this.socketService.onEventTerminal().subscribe((data: string) => {
+      const message: { terminal: string } = JSON.parse(data);
+      console.log("message socket ::", message);
+      if (message.terminal == "start") {
+        this.modalOpenMd();
+      } else if (message.terminal == "stop") {
+        this.socketService.disconnectFromRelayService();
+        this.endmodalOpenMd();
+      } else {
+      }
+    });
     // this.socketService.onEventTerminal().subscribe((data: string) => {
     //   console.log("app.component.ts: data", data);
     //   try {

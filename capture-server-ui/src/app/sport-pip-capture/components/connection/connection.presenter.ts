@@ -31,6 +31,6 @@ export class ConnectionPresenter implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.eventStarted = params["eventStarted"];
     });
-    Transformer.ComposeCollectionAsync(this.modelService.PreviousConnection(), this.ds.PreviousConnections, PreviousConnectionBuilder)
+    // Transformer.ComposeCollectionAsync(this.modelService.PreviousConnection(), this.ds.PreviousConnections, PreviousConnectionBuilder)
   }
 }

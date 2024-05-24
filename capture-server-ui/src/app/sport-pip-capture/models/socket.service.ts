@@ -34,6 +34,7 @@ export class SocketService {
       this.eventPreviewSubject.next(message);
     });
     this.socket.on("event-terminal", (message: string) => {
+      console.log(message)
       this.eventTerminalSubject.next(message);
     });
   }
