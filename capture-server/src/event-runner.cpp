@@ -156,7 +156,7 @@ void EventRunner::eventStarted()
     for (auto &&eventDevice : this->m_activeDevices)
     {
         std::string appName = eventDevice.appName();
-        std::string streamName = eventDevice.streamName();
+        std::string streamName = eventDevice.pin();
         std::string streamId = eventDevice.streamId();
         std::string outPath = "/tmp/ovenmediaengine/vod_dumps/" + eventDevice.streamName();
         auto &vh = OMALFactory::getInstance().create("spip");
@@ -171,7 +171,7 @@ void EventRunner::eventEnded()
     for (auto &&eventDevice : this->m_activeDevices)
     {
         std::string appName = eventDevice.appName();
-        std::string streamName = eventDevice.streamName();
+        std::string streamName = eventDevice.pin();
         std::string streamId = eventDevice.streamId();
         std::string outPath = "/tmp/ovenmediaengine/vod_dumps/" + eventDevice.streamName();
         auto &vh = OMALFactory::getInstance().create("spip");
