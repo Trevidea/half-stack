@@ -149,21 +149,37 @@ void EventRunner::stop()
 void EventRunner::eventStarted()
 {
     this->m_eventStarted = true;
+
+    spdlog::trace("Event state set to started");
+
     this->mp_eventPreviewPublisher->stop();
+
+    spdlog::trace("Event preview publisher stopped");
+
     spdlog::trace("Event started..");
     Publisher::instance().publish("event-terminal", "{'terminal':'start'}");
     this->mp_liveEventPublisher->start();
+    spdlog::trace("Live event publisher started");
     for (auto &&eventDevice : this->m_activeDevices)
     {
         std::string appName = eventDevice.appName();
         std::string streamName = eventDevice.pin();
         std::string streamId = eventDevice.streamId();
         std::string outPath = "/tmp/ovenmediaengine/vod_dumps/" + eventDevice.streamName();
+
+        spdlog::trace("Processing event device with appName: {}, streamName: {}, streamId: {}, outPath: {}",
+                      appName, streamName, streamId, outPath);
+
         auto &vh = OMALFactory::getInstance().create("spip");
         Json::Value result = Json::objectValue;
+
+        spdlog::trace("Creating app with appName: {}", appName);
         auto va = vh.createApp(appName, result);
+
+        spdlog::trace("Starting dump with streamName: {}, streamId: {}, outPath: {}", streamName, streamId, outPath);
         va.startDump(streamName, streamId, outPath, result);
     }
+    spdlog::trace("Exited eventStarted function");
 }
 
 void EventRunner::eventEnded()
