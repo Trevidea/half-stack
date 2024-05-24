@@ -17,7 +17,7 @@ public:
 
     void setId(int value)
     {
-        m_model.set(value, "id");
+        this->set(value, "id");
     }
 
     int userId() const
@@ -27,7 +27,7 @@ public:
 
     void setUserId(int value)
     {
-        m_model.set(value, "user_id");
+        this->set(value, "user_id");
     }
 
     std::string networkQuality() const
@@ -37,7 +37,7 @@ public:
 
     void setNetworkQuality(const std::string &value)
     {
-        m_model.set(value, "network_quality");
+        this->set(value, "network_quality");
     }
 
     std::string ipAddress() const
@@ -47,7 +47,7 @@ public:
 
     void setIpAddress(const std::string &value)
     {
-        m_model.set(value, "ip_add");
+        this->set(value, "ip_add");
     }
 
     bool isDisabled() const
@@ -57,7 +57,7 @@ public:
 
     void setIsDisabled(bool value)
     {
-        m_model.set(value, "is_disabled");
+        this->set(value, "is_disabled");
     }
 
     std::string type() const
@@ -67,7 +67,7 @@ public:
 
     void setType(const std::string &value)
     {
-        m_model.set(value, "type");
+        this->set(value, "type");
     }
 
     std::string dateTimeConnected() const
@@ -77,7 +77,7 @@ public:
 
     void setDateTimeConnected(const std::string &value)
     {
-        m_model.set(value, "dtt_connected");
+        this->set(value, "dtt_connected");
     }
 
     std::string priority() const
@@ -87,7 +87,7 @@ public:
 
     void setPriority(const std::string &value)
     {
-        m_model.set(value, "priority");
+        this->set(value, "priority");
     }
 
     std::string location() const
@@ -97,7 +97,7 @@ public:
 
     void setLocation(const std::string &value)
     {
-        m_model.set(value, "location");
+        this->set(value, "location");
     }
 
     int eventId() const
@@ -107,7 +107,7 @@ public:
 
     void setEventId(int value)
     {
-        m_model.set(value, "event_id");
+        this->set(value, "event_id");
     }
 
     void getDetails(const Request &request, Response &response);

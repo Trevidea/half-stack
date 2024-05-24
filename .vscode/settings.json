@@ -130,7 +130,9 @@
     "pqxx": "cpp",
     "*.js": "cpp",
     "any": "cpp",
-    "__memory": "cpp"
+    "__memory": "cpp",
+    "format": "cpp",
+    "result": "cpp"
   },
   "cmake.sourceDirectory": "/Users/shreyapathak/git/half-stack/capture-server/build/_deps/libpqxx-src/src"
 }

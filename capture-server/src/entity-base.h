@@ -239,9 +239,9 @@ public:
     }
 
     template <typename T>
-    void set(const std::string &prop, T val)
+    void set(T val, const std::string &prop)
     {
-        this->m_setModel.set(val, prop);
+        this->m_setModel.set(val, std::move(prop));
     }
     void merge();
     void save();
