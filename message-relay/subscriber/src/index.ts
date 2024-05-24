@@ -22,16 +22,11 @@ async function run() {
   console.log('Subscriber connected to port 4001');
 
   for await (const [topic, msg] of sock) {
-    const topicStr = topic.toString();
-    const msgStr = msg.toString();
-    const jsonMessage = JSON.stringify({ topic: topicStr, message: msgStr });
-    
     console.log('Topic:', topic.toString(), 'message:', msg.toString());
     io.on('connection', () => {
-      io.emit(topicStr, jsonMessage);
+      io.emit(topic.toString(), msg.toString());
     });
   }
 }
-
 
 run();
