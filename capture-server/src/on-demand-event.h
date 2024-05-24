@@ -5,8 +5,8 @@
 #include "request.h"
 #include "response.h"
 #include "json/json.h"
-#include "event.h"   // Include Event header for using Event class
-#include "gateway.h" // Include Gateway header for using Gateway class
+#include "event.h"
+#include "gateway.h"
 #include "event.h"
 #include "user-profile.h"
 
