@@ -326,7 +326,7 @@ void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json
 
     if (std::regex_search(strUrl, matches, urlPattern))
     {
-        spdlog::trace("control-server incoming url pattern matched: {}", matches.size());
+        spdlog::trace("control-server outgoing url pattern matched: {}", matches.size());
         if (matches.size() == 5)
         {
             const std::string endPoint = matches[1].str();
@@ -337,10 +337,10 @@ void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json
             su_split('=', query, pin);
 
 
-            spdlog::trace("host: {}, port: {}, eventId: {}, userId: {}, pin: {}", endPoint, appName, deviceId, pin[1]);
+            spdlog::trace("host: {}, port: {}, eventId: {}, userId: {}, pin: {}", endPoint, appName, deviceId, query[1]);
 
             // Construct HTTPS link for the player
-            std::string playerLink = "https://" + endPoint + "/" + appName + "/" + pin[1] + "/llhls.m3u8";
+            std::string playerLink = "https://" + endPoint + "/" + appName + "/" + query[1] + "/llhls.m3u8";
             // std::string playerLink = "https://drake.in:3334/shreyaapp/stream1/llhls.m3u8";
 
             // Set the player link in the JSON response
