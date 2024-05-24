@@ -71,8 +71,6 @@ export class OnDemandEventFormView implements Views.Datasource {
         this._programs = v;
     }
 
-
-
     private _levels: Collection<string>;
     public get levels(): Collection<string> {
         if (!this._levels) {
@@ -92,8 +90,6 @@ export class OnDemandEventFormView implements Views.Datasource {
         this._year = v;
     }
 
-
-
     private _dtEvent: string;
     public get dtEvent(): string {
         if (!this._dtEvent) {
@@ -104,8 +100,6 @@ export class OnDemandEventFormView implements Views.Datasource {
     public set dtEvent(v: string) {
         this._dtEvent = v;
     }
-
-
 
     private _status: string;
     public get status(): string {
@@ -145,9 +139,6 @@ export class OnDemandEventFormView implements Views.Datasource {
     public set time(v: string) {
         this._time = v;
     }
-
-
-
 }
 
 export class VenueView {

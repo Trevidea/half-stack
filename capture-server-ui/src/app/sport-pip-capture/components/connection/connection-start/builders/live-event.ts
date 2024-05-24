@@ -10,7 +10,7 @@ export class LiveEventBuilder extends AbstractBuilder<
   compose(m: Data.LiveEventConnectionDetail, v: liveEventDetail) {
     v.title = m.title;
     v.detail.cityAddress = m?.detail?.cityAddress;
-    v.detail.streetAdress = m?.detail?.streetAdress;
+    v.detail.streetAdress = m?.detail?.streetAddress;
     v.detail.type = m?.detail?.type;
     v.id = m.id;
     v.dtEvent = m.dtEvent;

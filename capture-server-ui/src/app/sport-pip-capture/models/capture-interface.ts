@@ -89,11 +89,13 @@ export namespace Data {
     type: string;
     // owner_id?: number; //this is user ID
   }
+
   export interface Detail {
     cityAddress: string;
-    streetAdress: string;
+    streetAddress: string;
     type: string;
   }
+
   export interface OnDemandEvent extends Base {
     event_id: number;
     owner_id: number;
@@ -109,11 +111,11 @@ export namespace Data {
     location: string;
   }
 
-  export interface Detail {
-    cityAddress: string;
-    streetAdress: string;
-    type: string;
-  }
+  // export interface Detail {
+  //   cityAddress: string;
+  //   streetAddress: string;
+  //   type: string;
+  // }
 
   export interface EventNetWork extends Base {
     id: number;
@@ -163,6 +165,7 @@ export namespace Data {
     location: string;
     stream_name: string;
     stream_id: string;
+    app_name:string
   }
 
   export interface Device extends Base {

@@ -14,7 +14,7 @@ import { RelayStreamPresenter } from "./relay-stream/relay-stream.presenter";
 export class ConnectionDeviceDetailComponent implements OnInit {
   @Input() datasource: any;
   // url = "assets/videos/2/output.m3u8";
-  url = `https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8`;
+  url = `https://drake.in:3334/shreyaapp/11/llhls.m3u8?pin=stream1`;
   constructor(
     private router: Router,
     private route: ActivatedRoute,

@@ -281,7 +281,7 @@ export class ModelServiceService {
       return this.create("event", data);
     }
   }
-  private apiUrl = `http://drake.in:1437/api/on-demand-event`;
+  private apiUrl = `${environment.spModelUrl}/on-demand-event`;
   _saveOnDemandEvent(data: any): Observable<any> {
     return this._httpClient.post<any>(this.apiUrl, data);
   }
@@ -412,7 +412,7 @@ export class ModelServiceService {
   }
 
   getApplications(): Observable<any> {
-    const url = `http://drake.in:1437/api/omal/apps?vhost=spip`;
+    const url = `${environment.spModelUrl}/omal/apps?vhost=spip`;
     return this._httpClient
       .get<any>(url)
       .pipe(map((response) => response["Gateway Response"]["applications"]));
@@ -424,7 +424,7 @@ export class ModelServiceService {
   }
 
   deleteApp(data: { "app-name": string }): Observable<any> {
-    const url = `http://drake.in:1437/api/omal/app`;
+    const url = `${environment.spModelUrl}/omal/app`;
     const httpOptions = {
       headers: new HttpHeaders({ "Content-Type": "application/json" }),
       body: data,

@@ -31,10 +31,7 @@ export class EventPreviewPresenter implements OnInit {
   ngOnInit(): void {
     this.socketService.onEventPreview().subscribe(
       (data) => {
-
-        // console.log("data without json ", data)
         this.previewData = JSON.parse(data);
-        console.log("data without json ", this.previewData)
       },
       (error) => {
         console.error('Error occurred:', error);
