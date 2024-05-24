@@ -260,6 +260,7 @@ void Omal::handleControlServerRequest(const Request &req, Response &rsp)
         handleOutgoingControlServerRequest(omRequest, jsonResponse, strUrl);
     }
 
+    spdlog::trace("control-server response: {}", Json::FastWriter().write(jsonResponse));
     rsp.setRawData(jsonResponse);
 }
 
