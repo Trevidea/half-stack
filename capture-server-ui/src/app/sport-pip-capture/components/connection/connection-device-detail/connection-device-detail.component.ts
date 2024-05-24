@@ -12,14 +12,14 @@ import { RelayStreamPresenter } from "./relay-stream/relay-stream.presenter";
   styleUrls: ["./connection-device-detail.component.scss"],
 })
 export class ConnectionDeviceDetailComponent implements OnInit {
-  @Input() datasource: any;
-  // url = "assets/videos/2/output.m3u8";
-  url = `https://drake.in:3334/shreyaapp/11/llhls.m3u8?pin=stream1`;
+  @Input() datasource: any
+  // private player: string = environment.playerUrl;
+  url = `${environment.playerUrl}/shreyaapp/11/llhls.m3u8?pin=stream1`;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private modelService: NgbModal
-  ) {}
+  ) { }
   listOrGrid: string;
   ngOnInit(): void {
     const param = this.route.snapshot.queryParamMap;
