@@ -59,6 +59,9 @@ private:
                         },
                         "timeout": 3000
                     }
+                    "crossDomains": [
+                        "*"
+                    ]
                 }
             ]
             )V0G0N";

@@ -35,7 +35,7 @@ int EventDevice::userId() const
 
 void EventDevice::setUserId(int value)
 {
-    m_model.set(value, "user_id");
+    this->set(value, "user_id");
 }
 
 std::string EventDevice::streamName() const
@@ -45,7 +45,7 @@ std::string EventDevice::streamName() const
 
 void EventDevice::setStreamName(const std::string &value)
 {
-    m_model.set(value, "stream_name");
+    this->set(value, "stream_name");
 }
 
 int EventDevice::deviceId() const
@@ -55,7 +55,7 @@ int EventDevice::deviceId() const
 
 void EventDevice::setDeviceId(int value)
 {
-    m_model.set(value, "device_id");
+    this->set(value, "device_id");
 }
 
 std::string EventDevice::deviceType() const
@@ -65,7 +65,7 @@ std::string EventDevice::deviceType() const
 
 void EventDevice::setDeviceType(const std::string &value)
 {
-    m_model.set(value, "deviceType");
+    this->set(value, "deviceType");
 }
 
 std::string EventDevice::status() const
@@ -75,7 +75,7 @@ std::string EventDevice::status() const
 
 void EventDevice::setStatus(const std::string &value)
 {
-    m_model.set(value, "status");
+    this->set(value, "status");
 }
 
 std::string EventDevice::location() const
@@ -85,7 +85,7 @@ std::string EventDevice::location() const
 
 void EventDevice::setLocation(const std::string &value)
 {
-    m_model.set(value, "location");
+    this->set(value, "location");
 }
 
 std::string EventDevice::network() const
@@ -95,7 +95,7 @@ std::string EventDevice::network() const
 
 void EventDevice::setNetwork(const std::string &value)
 {
-    m_model.set(value, "network");
+    this->set(value, "network");
 }
 
 int EventDevice::eventId() const
@@ -105,7 +105,7 @@ int EventDevice::eventId() const
 
 void EventDevice::setEventId(int value)
 {
-    m_model.set(value, "event_id");
+    this->set(value, "event_id");
 }
 
 std::string EventDevice::pin() const
@@ -115,7 +115,7 @@ std::string EventDevice::pin() const
 
 void EventDevice::setPin(const std::string &value)
 {
-    m_model.set(value, "pin");
+    this->set(value, "pin");
 }
 std::string EventDevice::streamId() const
 {
@@ -123,7 +123,7 @@ std::string EventDevice::streamId() const
 }
 void EventDevice::setStreamId(const std::string &value)
 {
-    m_model.set(value, "stream_id");
+    this->set(value, "stream_id");
 }
 
 std::string EventDevice::ipAdd() const
@@ -132,7 +132,7 @@ std::string EventDevice::ipAdd() const
 }
 void EventDevice::setIpAdd(const std::string &value)
 {
-    m_model.set(value, "ip_add");
+    this->set(value, "ip_add");
 }
 
 std::string EventDevice::appName() const
@@ -141,5 +141,5 @@ std::string EventDevice::appName() const
 }
 void EventDevice::setAppName(const std::string &value)
 {
-    m_model.set(value, "app_name");
+    this->set(value, "app_name");
 }

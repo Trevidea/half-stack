@@ -235,7 +235,8 @@ X-OME-Signature: f871jd991jj1929jsjd91pqa0amm1
 
 void Omal::saveEventDeviceIPAdd(EventDevice &ed, const std::string &ipAdd)
 {
-    ed.setIpAdd(ipAdd);
+    ed.set(ipAdd, "ip_add");
+    
     ed.update();
 }
 
@@ -296,10 +297,10 @@ void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json
                 snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), appName.c_str(), pin.c_str());
                 jsonResponse["new_url"] = newUrl;
                 jsonResponse["allowed"] = true;
-                // for (auto &&elem : result)
-                // {
-                //     saveEventDeviceIPAdd(const_cast<EventDevice&>(elem), omRequest["client"]["address"].asString());
-                // }
+                for (auto &&elem : result)
+                {
+                    saveEventDeviceIPAdd(const_cast<EventDevice&>(elem), omRequest["client"]["address"].asString());
+                }
             }
             else
             {
