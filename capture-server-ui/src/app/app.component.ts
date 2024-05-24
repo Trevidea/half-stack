@@ -110,6 +110,7 @@ export class AppComponent implements OnInit, OnDestroy {
       const message: { terminal: string } = JSON.parse(data);
       console.log("message socket ::", message);
       if (message.terminal == "start") {
+        console.log("message socket ::", message.terminal);
         this.modalOpenMd();
       } else if (message.terminal == "stop") {
         this.socketService.disconnectFromRelayService();
