@@ -107,16 +107,29 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     this.socketService.onEventTerminal().subscribe((data: string) => {
-      const message: { terminal: string } = JSON.parse(data);
-      console.log("message socket ::", message);
-      if (message.terminal == "start") {
-        console.log("message socket ::", message.terminal);
-        this.modalOpenMd();
-      } else if (message.terminal == "stop") {
-        this.socketService.disconnectFromRelayService();
-        this.endmodalOpenMd();
-      } else {
+      let message: any;
+
+      try {
+        // Replace single quotes with double quotes to ensure valid JSON
+        const correctedData = data.replace(/'/g, '"');
+        message = JSON.parse(correctedData);  // Parse the JSON string into an object
+      } catch (error) {
+        console.error("JSON Parsing Error:", error, "Data:", data);
+        return;  // Exit if JSON is invalid
       }
+
+      console.log("message socket ::", message);
+
+
+      console.log("message socket ::", message);
+      // if (message.terminal == "start") {
+      //   console.log("message socket ::", message.terminal);
+      //   this.modalOpenMd();
+      // } else if (message.terminal == "stop") {
+      //   this.socketService.disconnectFromRelayService();
+      //   this.endmodalOpenMd();
+      // } else {
+      // }
     });
     // this.socketService.onEventTerminal().subscribe((data: string) => {
     //   console.log("app.component.ts: data", data);
