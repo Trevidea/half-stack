@@ -14,7 +14,7 @@ import { RelayStreamPresenter } from "./relay-stream/relay-stream.presenter";
 export class ConnectionDeviceDetailComponent implements OnInit {
   @Input() datasource: any
   // private player: string = environment.playerUrl;
-  url = `${environment.playerUrl}/shreyaapp/11/llhls.m3u8?pin=stream1`;
+  url = `${environment.playerUrl}/shreyaapp/11/llhls.m3u8?pin=345021`;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
