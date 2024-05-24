@@ -3,8 +3,6 @@
 #include "gateway.h"
 #include "json/json.h"
 
-// Define a global vector to store on-demand events
-std::vector<Event> onDemandEvents;
 
 OnDemandEvent::OnDemandEvent() : EntityBase("ondemandevent") {}
 

@@ -26,6 +26,7 @@ void Gateway::init()
     this->m_entities.push_back(new Omal());
     this->m_entities.push_back(new MetaType());
     this->m_entities.push_back(new Event());
+    this->m_entities.push_back(new OnDemandEvent());
     this->m_entities.push_back(new UserProfile());
     this->m_entities.push_back(new EventPreview());
     this->m_entities.push_back(new EventDevice());
