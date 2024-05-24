@@ -36,7 +36,7 @@ private:
             {
                 "outputStreamName": "<<stream>>",
                 "id": "<<dump_id>>",
-                "outputPath": "<<out_path>>",
+                "outputPath": "<<out_path>>"
             }
     
             )V0G0N";
