@@ -58,7 +58,7 @@ private:
                             "publishers": "webrtc,llhls"
                         },
                         "timeout": 3000
-                    }
+                    },
                     "crossDomains": [
                         "*"
                     ]
