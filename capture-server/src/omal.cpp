@@ -236,7 +236,7 @@ X-OME-Signature: f871jd991jj1929jsjd91pqa0amm1
 void Omal::saveEventDeviceIPAdd(EventDevice &ed, const std::string &ipAdd)
 {
     ed.set(ipAdd, "ip_add");
-    
+    ed.set(ed.retries()+1, "retries");
     ed.update();
 }
 
