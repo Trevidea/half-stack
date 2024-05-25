@@ -82,15 +82,13 @@ void EventRunner::publishLiveData()
     if (EventRunner::s_deviceCountDirty.get())
     {
         EventRunner::s_deviceCountDirty = false;
-
-        EventDevice eventDevice;
-        char query[128] = {'\0'};
-        snprintf(query, 128, "event_id=%d", this->m_event.id());
-        this->m_activeDevices = eventDevice.find<EventDevice>(query);
+        auto activeDevices = EventDevice().activeDevices(this->m_event.id());
+        
     }
 
     for (auto &&eventDevice : this->m_activeDevices)
     {
+        
         ConnectionDetail connectionDetail;
         connectionDetail.setId(1);
         connectionDetail.setName("Coach S.");
