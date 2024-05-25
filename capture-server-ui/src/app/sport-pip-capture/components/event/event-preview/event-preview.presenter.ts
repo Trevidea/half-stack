@@ -5,6 +5,7 @@ import { EventPreview, RangeEventPreviewView } from "./views/event-preview";
 import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 import { Transformer } from "app/blocks/transformer";
 import { EventPreviewBuilder } from "./builders/event-preview";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-event-preview-presenter",
@@ -51,18 +52,47 @@ export class EventPreviewPresenter implements OnInit {
   }
 
   onClosePreview() {
-    this.modelServiceService.closePreview({ eventId: this.eventId }).subscribe(
-      (data: any) => {
-        console.log("data", data)
-      },
-      (error: any) => {
-        console.log(error)
+    Swal.fire({
+      title: 'Close Preview',
+      text: "Are you sure you want to close the preview?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#7367F0',
+      cancelButtonColor: '#E42728',
+      confirmButtonText: 'Yes, Sure',
+      customClass: {
+        confirmButton: 'btn btn-danger',
+        cancelButton: 'btn btn-outline-secondary ml-1'
       }
-    );
+    }).then((result) => { // Changed to arrow function
+      if (result.value) {
+        this._closePreview(); // Corrected function call
+      }
+    });
   }
 
 
-
+  _closePreview() {
+    this.modelServiceService.closePreview({ eventId: this.eventId }).subscribe(
+      (data: any) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Preview Closed',
+          text: 'Preview of this event is closed by Garry',
+          showConfirmButton: false,
+          showCancelButton: true,
+          cancelButtonText: 'Ok',
+          customClass: {
+            cancelButton: 'btn btn-outline-secondary'
+          }
+        });
+        console.log("data", data);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
 
 }
 

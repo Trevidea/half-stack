@@ -287,6 +287,7 @@ export class ModelServiceService {
   }
 
   saveEventDevice(data: Data.EventDevice): Observable<Data.EventDevice> {
+    console.log(data)
     return this.create("event-device", data);
   }
   saveDevice(data: Data.Device): Observable<Data.Device> {

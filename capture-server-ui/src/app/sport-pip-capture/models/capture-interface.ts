@@ -165,7 +165,8 @@ export namespace Data {
     location: string;
     stream_name: string;
     stream_id: string;
-    app_name:string
+    app_name:string;
+    direction:number
   }
 
   export interface Device extends Base {
