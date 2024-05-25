@@ -80,7 +80,7 @@ Json::Value EntityBase::executeSqlJson(const std::string &sql)
 {
     auto &&connection = DBManager::instance().getConnection();
     connection.execute(sql);
-    spdlog::trace(Json::FastWriter().write(connection.result().root()));
+    spdlog::trace("Event_Active_Device:{}",Json::FastWriter().write(connection.result().root()));
     return connection.result().root();
 }
 
