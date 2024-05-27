@@ -171,6 +171,7 @@ void LiveEvent::setConnectionDetails(const std::vector<ConnectionDetail>& connec
         connectionDetail["role"] = detail.role();
         connectionDetail["location"] = detail.location();
         connectionDetail["device"] = detail.device();
+        connectionDetail["deviceType"] = detail.deviceType();
         connectionDetail["network"] = detail.network();
         connectionDetail["quality"] = static_cast<int>(detail.quality());
         connectionDetail["ipAddress"] = detail.ipAddress();

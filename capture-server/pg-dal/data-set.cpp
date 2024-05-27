@@ -1,4 +1,5 @@
 #include "data-set.h"
+#include <spdlog/spdlog.h>
 
 DataSet::DataSet(const Json::Value& jsonData) : json(jsonData) {}
 
@@ -25,5 +26,6 @@ std::string DataSet::Iterator::getValue(const std::string& fieldName)  {
 }
 
 DataSet::Iterator DataSet::iterator() const {
+    spdlog::trace("DataSet::json: {}", Json::FastWriter().write(json));
     return Iterator(json["result"]);
 }
