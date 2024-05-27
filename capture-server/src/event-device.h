@@ -50,14 +50,24 @@ public:
 
     std::string ipAdd() const;
     void setIpAdd(const std::string &value);
-    
+
     std::string appName() const;
     void setAppName(const std::string &value);
-    // // Modified list function to filter devices by eventId
-    // std::vector<EventDevice> list(int eventId);
+
+    int retries() const;
+    void setRetries(int value);
+
+    int direction() const;
+    void setDirection(int value);
 
     // Method to check if the combination exists
     bool combinationExists(int eventId, int userId, const std::string &pin);
+    Model activeDevices(const int eventId)
+    {
+        char query[128] = {'\0'};
+        snprintf(query, 128, "event_id=%d", eventId);
+        return std::move(this->view("vw_event_device", query));
+    }
 
 private:
 };

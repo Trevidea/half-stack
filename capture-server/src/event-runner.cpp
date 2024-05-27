@@ -79,46 +79,31 @@ void EventRunner::publishLiveData()
     // le.setTitle("Manchester vs Barcelona");
     // le.setStatus("Upcoming");
 
-    ConnectionDetail connectionDetail;
-    connectionDetail.setId(1);
-    connectionDetail.setName("Coach S.");
-    connectionDetail.setRole("Subscriber");
-    connectionDetail.setLocation("Press Box");
-    connectionDetail.setDevice("iPad15");
-    connectionDetail.setNetwork("Penfield-532");
-    connectionDetail.setQuality(QualityEnum::Good);
-    connectionDetail.setIpAddress("192.168.1.1");
-    connectionDetail.setTransmitStatus(TransmitEnum::Streaming);
-    connectionDetail.setFilesReceived(10);
-    connectionDetail.setRetries(3);
+    if (EventRunner::s_deviceCountDirty.get())
+    {
+        EventRunner::s_deviceCountDirty = false;
+        auto activeDevices = EventDevice().activeDevices(this->m_event.id());
+        
+    }
 
-    ConnectionDetail connectionDetail1;
-    connectionDetail1.setId(2);
-    connectionDetail1.setName("Coach J.");
-    connectionDetail1.setRole("Publisher");
-    connectionDetail1.setLocation("Sideline");
-    connectionDetail1.setDevice("iPad22");
-    connectionDetail1.setNetwork("Penfield-532");
-    connectionDetail1.setQuality(QualityEnum::Poor);
-    connectionDetail1.setIpAddress("192.168.1.2");
-    connectionDetail1.setTransmitStatus(TransmitEnum::Receiving);
-    connectionDetail1.setFilesReceived(5);
-    connectionDetail1.setRetries(2);
+    for (auto &&eventDevice : this->m_activeDevices)
+    {
+        
+        ConnectionDetail connectionDetail;
+        connectionDetail.setId(1);
+        connectionDetail.setName("Coach S.");
+        connectionDetail.setRole("Subscriber");
+        connectionDetail.setLocation("Press Box");
+        connectionDetail.setDevice("iPad15");
+        connectionDetail.setNetwork("Penfield-532");
+        connectionDetail.setQuality(QualityEnum::Good);
+        connectionDetail.setIpAddress("192.168.1.1");
+        connectionDetail.setTransmitStatus(TransmitEnum::Streaming);
+        connectionDetail.setFilesReceived(10);
+        connectionDetail.setRetries(3);
 
-    ConnectionDetail connectionDetail2;
-    connectionDetail2.setId(3);
-    connectionDetail2.setName("Coach M.");
-    connectionDetail2.setRole("Subscriber");
-    connectionDetail2.setLocation("Press Box");
-    connectionDetail2.setDevice("Camcorder");
-    connectionDetail2.setNetwork("Penfield-532");
-    connectionDetail2.setQuality(QualityEnum::Poor);
-    connectionDetail2.setIpAddress("192.168.1.3");
-    connectionDetail2.setTransmitStatus(TransmitEnum::Streaming);
-    connectionDetail2.setFilesReceived(5);
-    connectionDetail2.setRetries(2);
-
-    le.setConnectionDetails({connectionDetail, connectionDetail1, connectionDetail2});
+        le.setConnectionDetails({connectionDetail});
+    }
 
     std::string liveData = le.toResponse();
 
@@ -133,6 +118,7 @@ EventRunner::EventRunner(const Event &&event)
       m_event{event}
 {
     this->mp_eventPreviewPublisher->start();
+    this->m_event.updateStatus(Event::EVENT_STATUS::ON_GOING);
 }
 void EventRunner::stop()
 {
@@ -163,9 +149,10 @@ void EventRunner::eventStarted()
     for (auto &&eventDevice : this->m_activeDevices)
     {
         std::string appName = eventDevice.appName();
-        std::string streamName = eventDevice.pin();
+        std::string streamName = eventDevice.streamName();
         std::string streamId = eventDevice.streamId();
-        std::string outPath = "/tmp/ovenmediaengine/vod_dumps/" + eventDevice.streamName();
+        //TODO::REPLACE THE BELOW PATH WITH /opt/ovenmediaengine/bin/dumps
+        std::string outPath = "/opt/ovenmediaengine/bin/dumps/" + streamName;
 
         spdlog::trace("Processing event device with appName: {}, streamName: {}, streamId: {}, outPath: {}",
                       appName, streamName, streamId, outPath);
@@ -187,9 +174,9 @@ void EventRunner::eventEnded()
     for (auto &&eventDevice : this->m_activeDevices)
     {
         std::string appName = eventDevice.appName();
-        std::string streamName = eventDevice.pin();
+        std::string streamName = eventDevice.streamName();
         std::string streamId = eventDevice.streamId();
-        std::string outPath = "/tmp/ovenmediaengine/vod_dumps/" + eventDevice.streamName();
+        std::string outPath = "/opt/ovenmediaengine/bin/dumps/" + streamName;
         auto &vh = OMALFactory::getInstance().create("spip");
         Json::Value result = Json::objectValue;
         auto va = vh.createApp(appName, result);
@@ -198,6 +185,7 @@ void EventRunner::eventEnded()
     this->mp_liveEventPublisher->stop();
     spdlog::trace("Event ended..");
     Publisher::instance().publish("event-terminal", "{'terminal':'stop'}");
+    this->m_event.updateStatus(Event::EVENT_STATUS::PAST);
 }
 
 EventRunner::~EventRunner()

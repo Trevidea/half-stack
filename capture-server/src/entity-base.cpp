@@ -18,7 +18,7 @@ EntityBase::EntityBase(const std::string &entity) : m_entity{entity}
 {
 }
 
-/// @brief 
+/// @brief
 void EntityBase::report()
 {
     char schemaUrl[128] = {0};
@@ -80,6 +80,7 @@ Json::Value EntityBase::executeSqlJson(const std::string &sql)
 {
     auto &&connection = DBManager::instance().getConnection();
     connection.execute(sql);
+    spdlog::trace("Event_Active_Device:{}",Json::FastWriter().write(connection.result().root()));
     return connection.result().root();
 }
 
@@ -188,6 +189,39 @@ void EntityBase::view(const Request &request, Response &response, const std::str
 /// @brief
 /// @param request
 /// @param response
+/// @param view
+Model EntityBase::view(const std::string &view, const std::string &queryString)
+{
+    const std::string jsonString = SqlHelper::JsonStub(view);
+
+    std::vector<query> queries;
+    std::vector<std::string> qstrs;
+    su_split('&', qstrs, queryString);
+    for (auto &&q : qstrs)
+    {
+        queries.push_back(query(q));
+    }
+
+    Json::Value parsedJson;
+    Json::Reader reader;
+    reader.parse(jsonString, parsedJson);
+    for (auto &&qry : queries)
+    {
+        auto &js = parsedJson["criteria"];
+        Json::Value crt = Json::objectValue;
+        crt["field"] = qry.m_operand1;
+        crt["value"] = qry.m_operand2;
+        crt["op"] = qry.m_operator;
+        js.append(crt);
+    }
+
+    const auto sql = SqlHelper::ScriptSelect(parsedJson);
+    return std::move(Model(this->executeSqlJson(sql)));
+}
+
+/// @brief
+/// @param request
+/// @param response
 /// @return
 Json::Value EntityBase::create(const Request &request, Response &response)
 {
@@ -241,8 +275,8 @@ void EntityBase::schema(const Request &request, Response &response)
     response.complete();
 }
 
-/// @brief 
-/// @return 
+/// @brief
+/// @return
 Json::Value EntityBase::schemaJson()
 {
     const auto sql = SqlHelper::SchemaSql(this->entity());
@@ -289,9 +323,9 @@ Json::Value EntityBase::schemaJson()
     return columns;
 }
 
-/// @brief 
-/// @param request 
-/// @param response 
+/// @brief
+/// @param request
+/// @param response
 void EntityBase::postTemplate(const Request &request, Response &response)
 {
     Json::FastWriter fastWriter;
@@ -352,9 +386,9 @@ EntityBase::LogPrinter::~LogPrinter()
     DBManager::instance().s_printResults = false;
 }
 
-/// @brief 
-/// @param req 
-/// @param rsp 
+/// @brief
+/// @param req
+/// @param rsp
 void EntityBase::sync(const Request &req, Response &rsp)
 {
     auto &factory = Rest::ClientFactory::getInstance();
@@ -370,7 +404,7 @@ void EntityBase::sync(const Request &req, Response &rsp)
 
     Client client = factory.create(jsUrl.asString());
     client.get([this, &rsp, &reader, &deleteSql](const std::string &response)
-                    {
+               {
                     
                    /*A.***Event data from the Full Stack - STRAPI****/
                    Json::Value responseJson;
@@ -446,14 +480,14 @@ void EntityBase::sync(const Request &req, Response &rsp)
                    rsp.setData(Json::FastWriter().write(jsResult)); 
                    rsp.complete(); },
 
-                    [&rsp](const std::string &s)
-                    {
-                        Json::Value jsErr = Json::objectValue;
-                        jsErr["error"] = s;
-                        spdlog::error("failure..{}", s);
-                        rsp.setData(Gateway::instance().formatResponse({{jsErr}}));
-                        rsp.complete();
-                    });
+               [&rsp](const std::string &s)
+               {
+                   Json::Value jsErr = Json::objectValue;
+                   jsErr["error"] = s;
+                   spdlog::error("failure..{}", s);
+                   rsp.setData(Gateway::instance().formatResponse({{jsErr}}));
+                   rsp.complete();
+               });
 }
 
 bool EntityBase::notSet() const

@@ -143,3 +143,26 @@ void EventDevice::setAppName(const std::string &value)
 {
     this->set(value, "app_name");
 }
+
+int EventDevice::retries() const
+{
+    return this->m_model.get<int>("retries");
+}
+
+void EventDevice::setRetries(int value)
+{
+    this->set(value, "retires");
+}
+
+int EventDevice::direction() const
+{
+    return this->m_model.get<int>("direction");
+}
+
+void EventDevice::setDirection(int value)
+{
+    this->set(value, "direction");
+}
+
+
+
