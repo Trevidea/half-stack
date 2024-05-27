@@ -38,8 +38,8 @@ public:
     int direction();
     void setDirection(int direction);
 
-    int pin();
-    void setPin(int pin);
+    std::string pin();
+    void setPin(const std::string& pin);
 
     int deviceId();
     void setDeviceId(int deviceId);

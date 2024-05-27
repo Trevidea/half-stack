@@ -30,8 +30,8 @@ void ConnectionDetail::setRetries(int retries) { m_model["retries"] = retries; }
 int ConnectionDetail::direction() { return m_model["direction"].asInt(); }
 void ConnectionDetail::setDirection(int direction) { m_model["direction"] = direction; }
 
-int ConnectionDetail::pin() { return m_model["pin"].asInt(); }
-void ConnectionDetail::setPin(int pin) { m_model["pin"] = pin; }
+std::string ConnectionDetail::pin() { return m_model["pin"].asString(); }
+void ConnectionDetail::setPin(const std::string &pin) { m_model["pin"] = pin; }
 
 int ConnectionDetail::deviceId() { return m_model["device_id"].asInt(); }
 void ConnectionDetail::setDeviceId(int deviceId) { m_model["device_id"] = deviceId; }

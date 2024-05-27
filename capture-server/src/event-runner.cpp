@@ -95,7 +95,7 @@ void EventRunner::publishLiveData()
                 connectionDetail.setFilesReceived(it.getValue("filesrecieved").asInt());
                 connectionDetail.setRetries(it.getValue("retries").asInt());
                 connectionDetail.setDirection(it.getValue("direction").asInt());
-                connectionDetail.setPin(it.getValue("pin").asInt());
+                connectionDetail.setPin(it.getValue("pin").asString());
                 connectionDetail.setAppName(it.getValue("app_name").asString());
                 connectionDetail.setDeviceId(it.getValue("device_id").asInt());
 
