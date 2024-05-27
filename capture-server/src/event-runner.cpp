@@ -87,11 +87,11 @@ void EventRunner::publishLiveData()
         spdlog::trace("Calling EventDevice().activeDevices with event id: {}", this->m_event.id());
         auto activeDevices = EventDevice().activeDevices(this->m_event.id());
         auto it = activeDevices.iterator();
-        while (it.hasNext())
-        {
-            auto entry = it.next();
-            spdlog::trace("data-set for active devices, Name: {}, event_id: {}", entry["name"].asString(), entry["event_id"].asInt());
-        }
+        // while (it.hasNext())
+        // {
+        //     auto entry = it.next();
+        //     spdlog::trace("data-set for active devices, Name: {}, event_id: {}", entry["name"].asString(), entry["event_id"].asInt());
+        // }
     }
 
     for (auto &&eventDevice : this->m_activeDevices)
