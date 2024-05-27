@@ -32,7 +32,7 @@
             <button type="button" class="btn btn-warning" rippleEffect *ngIf="currentEvent?._status==='ongoing'">
                 JOIN</button>
             <button type="button" class="btn btn-warning" rippleEffect *ngIf="currentEvent?._status==='upcoming'"
-                routerLink="/event/event-preview">PREVIEW</button>
+                routerLink="/event/event-preview/{{currentEvent.id}}">PREVIEW</button>
             <div class="d-flex justify-content-end align-items-center pagination-btn ml-auto" style="margin-top: 7px;">
                 <button type="button" class="mr-1 btn btn-icon btn-secondary" [disabled]="currentIndex === 0"
                     (click)="previousEvent()">

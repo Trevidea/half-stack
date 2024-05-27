@@ -1,24 +1,31 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { SocketService } from "app/sport-pip-capture/models/socket.service";
-import { EventPreview, RangeEventPreviewView } from "./views/event-preview";
+import { ActiveDeviceView, EventPreview, RangeEventPreviewView } from "./views/event-preview";
 import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 import { Transformer } from "app/blocks/transformer";
 import { EventPreviewBuilder } from "./builders/event-preview";
+import { Subscription } from "rxjs";
 import Swal from "sweetalert2";
 
 @Component({
   selector: "app-event-preview-presenter",
-  template: `<app-event-preview  [datasource]='previewData' (closePreview)='onClosePreview()' [eventId]="eventId"></app-event-preview>`,
+  template: `<app-event-preview  [datasource]='ds' (closePreview)='onClosePreview()' [eventId]="eventId"></app-event-preview>`,
   styleUrls: ["./event-preview.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
-export class EventPreviewPresenter implements OnInit {
-  previewData!: any;
+export class EventPreviewPresenter implements OnInit, OnDestroy {
   ds!: EventPreview;
   eventId: number
+
+
+  messages: any[] = [];
+  private socketSubscription: Subscription;
+  status: string;
+
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private socketService: SocketService,
     private modelServiceService: ModelServiceService,
   ) {
@@ -30,15 +37,46 @@ export class EventPreviewPresenter implements OnInit {
   }
 
   ngOnInit(): void {
-    this.socketService.onEventPreview().subscribe(
-      (result) => {
-        let data = JSON.parse(result);
-        this.previewData = data?.result[0]?.[0]
-      },
-      (error) => {
-        console.error('Error occurred:', error);
-      }
-    );
+    //TODO:SOCKET.IO.ERROR
+    // this.socketService.onEventPreview().subscribe(
+    //   (data) => {
+    //     this.previewData = JSON.parse(data);
+    //   },
+    //   (error) => {
+    //     console.error('Error occurred:', error);
+    //   }
+    // );
+
+    this.socketSubscription = this.socketService.onTopicMessage('event-preview').subscribe((message) => {
+      const data: any = JSON.parse(message["data"]);
+      const previewData: any = data.result[0][0];
+      console.log(previewData)
+      this.ds.title = previewData["title"];
+      this.ds.level = previewData["level"];
+      this.ds.dtEvent = previewData["dtEvent"];
+      this.ds.program = previewData["program"];
+      this.ds.sport = previewData["sport"];
+      this.ds.status = previewData["status"];
+      this.ds.time = previewData["time"];
+      this.ds.type = previewData["type"];
+      this.ds.venue = previewData["venue"];
+      this.ds.detail = previewData["detail"];
+      this.ds.previewActiveDevice.Clear();
+      previewData["activeDevices"].forEach(element => {
+        var activeDevice: ActiveDeviceView = new ActiveDeviceView();
+        activeDevice.deviceId = element["deviceId"];
+        activeDevice.deviceType = element["type"];
+        activeDevice.location = element["location"];
+        activeDevice.network = element["network"];
+        activeDevice.user = element["userId"];
+        this.ds.previewActiveDevice.Add(activeDevice);
+      });
+      this.status = '';
+    }, () => {
+      this.status = 'Connection lost. Reconnecting...';
+    });
+
+
     // Transformer._ComposeLiveObjectAsync(this.socketService._onPreviewEvent(), this.ds, EventPreviewBuilder);
     console.log(this.ds)
     this.modelServiceService.openPreview({ eventId: this.eventId }).subscribe(
@@ -65,9 +103,9 @@ export class EventPreviewPresenter implements OnInit {
         confirmButton: 'btn btn-danger',
         cancelButton: 'btn btn-outline-secondary ml-1'
       }
-    }).then((result) => { // Changed to arrow function
+    }).then((result) => {
       if (result.value) {
-        this._closePreview(); // Corrected function call
+        this._closePreview();
       }
     });
   }
@@ -86,8 +124,14 @@ export class EventPreviewPresenter implements OnInit {
           customClass: {
             cancelButton: 'btn btn-outline-secondary'
           }
-        });
-        console.log("data", data);
+        }).then(
+          (result) => {
+            if (result.isDismissed) {
+              this.router.navigate(['/event'])
+            }
+          }
+
+        )
       },
       (error: any) => {
         console.log(error);
@@ -95,5 +139,11 @@ export class EventPreviewPresenter implements OnInit {
     );
   }
 
+  ngOnDestroy(): void {
+    if (this.socketSubscription) {
+      console.log("Socket unsubscribed..")
+      this.socketSubscription.unsubscribe();
+    }
+  }
 }
 
