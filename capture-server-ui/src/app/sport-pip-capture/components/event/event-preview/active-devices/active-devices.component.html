@@ -21,10 +21,10 @@
                 <tr *ngFor="let item of datasource;">
                     <td></td>
                     <td>{{item?.deviceId}}</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{item?.type}}</td>
+                    <td>{{item?.status}}</td>
                     <td>{{item?.location}}</td>
-                    <td></td>
+                    <td>{{item?.network}}</td>
                     <td><button type="button" class="btn btn-icon btn-danger" rippleEffect>
                             <span [data-feather]="'trash-2'"></span></button>
                     </td>
