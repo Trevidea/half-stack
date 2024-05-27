@@ -7,21 +7,22 @@
 #include "virtual-host.h"
 #include "virtual-app.h"
 #include "stringutils.h"
+#include "omal-control-server.h"
 
 Omal::Omal() : EntityBase("omal")
 {
-    // Watch VOD dump folders when Omal object is created
-    std::string vodDumpDir = "/tmp/ovenmediaengine/vod_dumps"; // Update this with the actual directory path
-    auto vodDumpCallback = [this](const std::string &filename)
-    {
-        // Handle the VOD dump file change here
-        // You can implement logic to respond to file changes, such as updating the list of VOD dumps
-        std::cout << "VOD dump file changed: " << filename << std::endl;
-    };
+    // // Watch VOD dump folders when Omal object is created
+    // std::string vodDumpDir = "/tmp/ovenmediaengine/vod_dumps"; // Update this with the actual directory path
+    // auto vodDumpCallback = [this](const std::string &filename)
+    // {
+    //     // Handle the VOD dump file change here
+    //     // You can implement logic to respond to file changes, such as updating the list of VOD dumps
+    //     std::cout << "VOD dump file changed: " << filename << std::endl;
+    // };
 
-    // Create a Watcher instance to watch the VOD dump directory
-    m_vodDumpWatcher = std::make_unique<Watcher>(vodDumpDir, vodDumpCallback);
-    m_vodDumpWatcher->start(); // Start watching the directory
+    // // Create a Watcher instance to watch the VOD dump directory
+    // m_vodDumpWatcher = std::make_unique<Watcher>(vodDumpDir, vodDumpCallback);
+    // m_vodDumpWatcher->start(); // Start watching the directory
 }
 
 void Omal::report()
@@ -134,7 +135,7 @@ void Omal::report()
     Gateway::instance().route("POST", "/api/omal/control-server",
                               [this](const Request &req, Response &rsp)
                               {
-                                  handleControlServerRequest(req, rsp);
+                                ControlServer::handleControlServerRequest(req, rsp);
                               });
     // Implement route for Control Server
     Gateway::instance().route("POST", "/api/omal/stop-dump",
@@ -208,156 +209,7 @@ void Omal::assessNetworkQuality(const Request &req, Response &rsp)
     rsp.setData(Json::FastWriter().write(jsonResults));
 }
 
-/*
-POST /configured/target/url/ HTTP/1.1
-Content-Length: 325
-Content-Type: application/json
-Accept: application/json
-X-OME-Signature: f871jd991jj1929jsjd91pqa0amm1
-{
-  "client":
-  {
-    "address": "211.233.58.86",
-    "port": 29291,
-    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
-  },
-  "request":
-  {
-    "direction": "incoming | outgoing",
-    "protocol": "webrtc | rtmp | srt | llhls | thumbnail",
-    "status": "opening | closing",
-    "url": "scheme://host[:port]/app/stream/file?query=value&query2=value2",
-    "new_url": "scheme://host[:port]/app/new_stream/file?query=value&query2=value2",
-    "time": ""2021-05-12T13:45:00.000Z"
-  }
-}
-*/
 
-void Omal::saveEventDeviceIPAdd(EventDevice &ed, const std::string &ipAdd)
-{
-    ed.set(ipAdd, "ip_add");
-    
-    ed.update();
-}
-
-void Omal::handleControlServerRequest(const Request &req, Response &rsp)
-{
-    Json::Value jsonResponse;
-    jsonResponse["allowed"] = true;
-
-    spdlog::trace("Incoming Control Server request:\n{}", req.data());
-
-    Json::Value omRequest = req.json();
-
-    const std::string strUrl = omRequest["request"]["url"].asString();
-    // std::regex urlPattern(R"(rtmp://([^/]+)/([^/]+)/([^/]+)/([^/]+)/)");
-    const std::string direction = omRequest["request"]["direction"].asString();
-    spdlog::trace("control-server request direction: {}", direction);
-    if (direction == "incoming")
-    {
-        handleIncomingControlServerRequest(omRequest, jsonResponse, strUrl);
-    }
-    else if (direction == "outgoing")
-    {
-        handleOutgoingControlServerRequest(omRequest, jsonResponse, strUrl);
-    }
-
-    spdlog::trace("control-server response: {}", Json::FastWriter().write(jsonResponse));
-    rsp.setRawData(jsonResponse);
-}
-
-void Omal::handleIncomingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl)
-{
-    spdlog::trace("control-server incoming");
-
-    std::regex urlPattern(R"(rtmp://([^/]+)/([^/]+)/([^/]+)/([^/]+))");
-    std::smatch matches; // Used to store the results of the match
-
-    if (std::regex_search(strUrl, matches, urlPattern))
-    {
-        spdlog::trace("control-server incoming url pattern matched: {}", matches.size());
-        if (matches.size() == 5) // Change to 5, as there are 5 capturing groups
-        {
-            const std::string endPoint = matches[1].str();
-            const std::string appName = matches[2].str();
-            const std::string deviceId = matches[3].str();
-            const std::string pin = matches[4].str();
-
-            spdlog::trace("appName: {}, deviceId: {}, pin: {}", appName, deviceId, pin);
-
-            char query[128] = {'\0'};
-            snprintf(query, 128, "device_id=%s&pin='%s'&app_name='%s'",
-                     deviceId.c_str(), pin.c_str(), appName.c_str());
-            const auto result = EventDevice::find<EventDevice>(query);
-            bool allowed = (result.size() > 0);
-            if (allowed)
-            {
-                const std::string streamName = result.front().streamName();
-                char newUrl[128] = {'\0'};
-                snprintf(newUrl, 128, "rtmp://%s/%s/%s", endPoint.c_str(), appName.c_str(), pin.c_str());
-                jsonResponse["new_url"] = newUrl;
-                jsonResponse["allowed"] = true;
-                for (auto &&elem : result)
-                {
-                    saveEventDeviceIPAdd(const_cast<EventDevice&>(elem), omRequest["client"]["address"].asString());
-                }
-            }
-            else
-            {
-                spdlog::warn("The incoming stream {} was rejected.", strUrl);
-            }
-        }
-        else
-        {
-            throw ExInvalidUrlException(strUrl);
-        }
-    }
-    else
-    {
-        throw ExInvalidUrlException(strUrl);
-    }
-}
-
-void Omal::handleOutgoingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl)
-{
-    std::regex urlPattern(R"(https://([^/]+)/([^/]+)/([^/]+)/?([^/]+))");
-    spdlog::trace("control-server outgoing");
-
-    std::smatch matches; // Used to store the results of the match
-
-    if (std::regex_search(strUrl, matches, urlPattern))
-    {
-        spdlog::trace("control-server outgoing url pattern matched: {}", matches.size());
-        if (matches.size() == 5)
-        {
-            const std::string endPoint = matches[1].str();
-            const std::string appName = matches[2].str();
-            const std::string deviceId = matches[3].str();
-            const std::string pin = matches[4].str();
-            std::vector<std::string> query;
-            su_split('=', query, pin);
-
-
-            spdlog::trace("host: {}, port: {}, eventId: {}, userId: {}, pin: {}", endPoint, appName, deviceId, query[1]);
-
-            // Construct HTTPS link for the player
-            std::string playerLink = "https://" + endPoint + "/" + appName + "/" + query[1] + "/llhls.m3u8";
-            // std::string playerLink = "https://drake.in:3334/shreyaapp/stream1/llhls.m3u8";
-
-            // Set the player link in the JSON response
-            jsonResponse["new_url"] = playerLink;
-            jsonResponse["allowed"] = true; // Assuming all outgoing requests are allowed
-        }
-        else
-        {
-            throw ExInvalidUrlException(strUrl);
-        }
-    }
-    else
-    {
-        throw ExInvalidUrlException(strUrl);
-    }
-}
 
 Omal::~Omal()
 {

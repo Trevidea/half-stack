@@ -19,10 +19,6 @@ public:
     Omal();
     void report();
     void assessNetworkQuality(const Request &req, Response &rsp);
-    void handleControlServerRequest(const Request &req, Response &rsp);
-    void handleIncomingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl);
-    void handleOutgoingControlServerRequest(const Json::Value &omRequest, Json::Value &jsonResponse, const std::string &strUrl);
-
     void handleGetAllApps(const Request &req, Response &rsp);
 
     ~Omal();
@@ -31,7 +27,6 @@ private:
     void openPreview(const Request &req, Response &rsp);
     std::vector<std::string> fetchStreamsList(const std::string &eventId);
     Json::Value fetchStreamInfo(const std::string &eventId, const std::string &streamKey);
-    void saveEventDeviceIPAdd(EventDevice &ed, const std::string &ipAdd);
 };
 
 #endif // OMAL_H

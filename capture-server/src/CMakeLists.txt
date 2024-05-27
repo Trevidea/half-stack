@@ -11,6 +11,7 @@ set(HALF_STACK_SRC
     event-manager.cpp
     on-demand-event.cpp
     omal.cpp
+    omal-control-server.cpp
     user-profile.cpp
     base.cpp
     event-preview.cpp

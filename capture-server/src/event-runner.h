@@ -24,7 +24,7 @@ private:
     WorkerLoop *mp_eventPreviewPublisher;
     WorkerLoop *mp_liveEventPublisher;
     Countdown m_start, m_end;
-    const Event m_event;
+    Event m_event;
 
     bool m_eventStarted = false;
     bool m_previewStarted = false;

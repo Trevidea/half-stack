@@ -12,6 +12,11 @@
 class Event : public EntityBase
 {
 public:
+    enum EVENT_STATUS{
+        ON_GOING,
+        UP_COMING,
+        PAST
+    };
     void report() override;
     Event();
 
@@ -36,6 +41,7 @@ public:
     void setCityAddress(const std::string &value);
 
 public:
+    void updateStatus(const Event::EVENT_STATUS status);
     void validateEventId(int eventId); // Declaration of validateEventId function
 
     inline dtu_date getDTUDate() const

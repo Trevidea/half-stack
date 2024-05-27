@@ -111,3 +111,20 @@ void Event::setCityAddress(const std::string &value)
 {
     m_model.set(value, "detail", "cityAddress");
 }
+
+void Event::updateStatus(const Event::EVENT_STATUS status)
+{
+    switch (status)
+    {
+    case Event::EVENT_STATUS::ON_GOING:
+    this->set("on-going", "status");
+        break;
+    case Event::EVENT_STATUS::PAST:
+    this->set("past", "status");
+        break;
+    default:
+    this->set("upcoming", "status");
+        break;
+    }
+    this->update();
+}

@@ -81,6 +81,7 @@ void EventManager::openPreview(const Request &req, Response &rsp)
             spdlog::warn("Runner already exists for event {}. Stopping runner - just in case", eventId);
             kvPair->second->stop();
             this->m_runners.erase(kvPair);
+            EventRunner::s_deviceCountDirty = true;
         }
 
         Publisher::instance().publish("event-terminal", Json::FastWriter().write(response));

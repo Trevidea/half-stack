@@ -133,6 +133,7 @@ EventRunner::EventRunner(const Event &&event)
       m_event{event}
 {
     this->mp_eventPreviewPublisher->start();
+    this->m_event.updateStatus(Event::EVENT_STATUS::ON_GOING);
 }
 void EventRunner::stop()
 {
@@ -163,9 +164,10 @@ void EventRunner::eventStarted()
     for (auto &&eventDevice : this->m_activeDevices)
     {
         std::string appName = eventDevice.appName();
-        std::string streamName = eventDevice.pin();
+        std::string streamName = eventDevice.streamName();
         std::string streamId = eventDevice.streamId();
-        std::string outPath = "/tmp/ovenmediaengine/vod_dumps/" + eventDevice.streamName();
+        //TODO::REPLACE THE BELOW PATH WITH /opt/ovenmediaengine/bin/dumps
+        std::string outPath = "/opt/ovenmediaengine/bin/dumps/" + streamName;
 
         spdlog::trace("Processing event device with appName: {}, streamName: {}, streamId: {}, outPath: {}",
                       appName, streamName, streamId, outPath);
@@ -187,9 +189,9 @@ void EventRunner::eventEnded()
     for (auto &&eventDevice : this->m_activeDevices)
     {
         std::string appName = eventDevice.appName();
-        std::string streamName = eventDevice.pin();
+        std::string streamName = eventDevice.streamName();
         std::string streamId = eventDevice.streamId();
-        std::string outPath = "/tmp/ovenmediaengine/vod_dumps/" + eventDevice.streamName();
+        std::string outPath = "/opt/ovenmediaengine/bin/dumps/" + streamName;
         auto &vh = OMALFactory::getInstance().create("spip");
         Json::Value result = Json::objectValue;
         auto va = vh.createApp(appName, result);
@@ -198,6 +200,7 @@ void EventRunner::eventEnded()
     this->mp_liveEventPublisher->stop();
     spdlog::trace("Event ended..");
     Publisher::instance().publish("event-terminal", "{'terminal':'stop'}");
+    this->m_event.updateStatus(Event::EVENT_STATUS::PAST);
 }
 
 EventRunner::~EventRunner()

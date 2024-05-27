@@ -18,7 +18,7 @@ void Client::get(std::function<void(const std::string &)> &&success, std::functi
             } else {
                 const std::string err = "HTTP request failed";
                 failure(err);
-                return pplx::task<utility::string_t>();
+                return response.extract_string();
             } })
         .then([&success](utility::string_t body)
               { success(body); });
@@ -37,7 +37,7 @@ int Client::get(std::string &success, std::string &failure, int timeout)
             } else {
                 const std::string err = "HTTP request failed";
                 failure = err;
-                return pplx::task<utility::string_t>();
+                return response.extract_string();
             } })
         .then([&success, &result](utility::string_t body)
               { 
@@ -65,7 +65,7 @@ int Client::get(std::string &success, std::string &failure, std::string username
             } else {
                 const std::string err = "HTTP request failed";
                 failure = err;
-                return pplx::task<utility::string_t>();
+                return response.extract_string();
             } })
         .then([&success, &result](utility::string_t body)
               { 
@@ -96,7 +96,7 @@ int Client::post(const std::string &data, std::string &success, std::string &fai
             } else {
                 const std::string err = "HTTP request failed";
                 failure = err;
-                return pplx::task<utility::string_t>();
+                return response.extract_string();
             } })
         .then([&success, &result](utility::string_t body)
               { 
@@ -128,7 +128,7 @@ int Client::del(const std::string &data, std::string &success, std::string &fail
             } else {
                 const std::string err = "HTTP request failed";
                 failure = err;
-                return pplx::task<utility::string_t>();
+                return response.extract_string();
             } })
         .then([&success, &result](utility::string_t body)
               { 
