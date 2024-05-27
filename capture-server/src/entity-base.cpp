@@ -80,7 +80,6 @@ Json::Value EntityBase::executeSqlJson(const std::string &sql)
 {
     auto &&connection = DBManager::instance().getConnection();
     connection.execute(sql);
-    spdlog::trace("Event_Active_Device:{}", Json::FastWriter().write(connection.result().root()));
     return connection.result().root();
 }
 
@@ -190,7 +189,7 @@ void EntityBase::view(const Request &request, Response &response, const std::str
 /// @param request
 /// @param response
 /// @param view
-Model EntityBase::view(const std::string &view, const std::string &queryString)
+DataSet EntityBase::view(const std::string &view, const std::string &queryString)
 {
     const std::string jsonString = SqlHelper::JsonStub(view);
 
@@ -216,7 +215,7 @@ Model EntityBase::view(const std::string &view, const std::string &queryString)
     }
 
     const auto sql = SqlHelper::ScriptSelect(parsedJson);
-    return std::move(Model(this->executeSqlJson(sql)));
+    return std::move(DataSet(this->executeSqlJson(sql)));
 }
 
 /// @brief

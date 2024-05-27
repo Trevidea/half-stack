@@ -8,6 +8,7 @@ set(PG_DAL_SRC
   db-exceptions.cpp
   db-manager.cpp
   transaction.cpp
+  data-set.cpp
 )
 
 add_library(pg-dal STATIC ${PG_DAL_SRC}

@@ -8,6 +8,7 @@
 #include "json/json.h"
 #include "sqlhelper.h"
 #include "gateway.h"
+#include "data-set.h"
 
 class EventDevice : public EntityBase
 {
@@ -62,11 +63,12 @@ public:
 
     // Method to check if the combination exists
     bool combinationExists(int eventId, int userId, const std::string &pin);
-    Model activeDevices(const int eventId)
+    DataSet activeDevices(const int eventId)
     {
         char query[128] = {'\0'};
         snprintf(query, 128, "event_id=%d", eventId);
         return std::move(this->view("vw_event_device", query));
+        
     }
 
 private:

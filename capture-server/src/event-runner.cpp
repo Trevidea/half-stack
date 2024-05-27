@@ -86,13 +86,17 @@ void EventRunner::publishLiveData()
         EventRunner::s_deviceCountDirty = false;
         spdlog::trace("Calling EventDevice().activeDevices with event id: {}", this->m_event.id());
         auto activeDevices = EventDevice().activeDevices(this->m_event.id());
-        
-        
+        auto it = activeDevices.iterator();
+        while (it.hasNext())
+        {
+            auto entry = it.next();
+            spdlog::trace("data-set for active devices, Name: {}, event_id: {}", entry["name"].asString(), entry["event_id"].asInt());
+        }
     }
 
     for (auto &&eventDevice : this->m_activeDevices)
     {
-        
+
         ConnectionDetail connectionDetail;
         connectionDetail.setId(1);
         connectionDetail.setName("Coach S.");
@@ -155,7 +159,7 @@ void EventRunner::eventStarted()
         std::string appName = eventDevice.appName();
         std::string streamName = eventDevice.streamName();
         std::string streamId = eventDevice.streamId();
-        //TODO::REPLACE THE BELOW PATH WITH /opt/ovenmediaengine/bin/dumps
+        // TODO::REPLACE THE BELOW PATH WITH /opt/ovenmediaengine/bin/dumps
         std::string outPath = "/opt/ovenmediaengine/bin/dumps/" + streamName;
 
         spdlog::trace("Processing event device with appName: {}, streamName: {}, streamId: {}, outPath: {}",

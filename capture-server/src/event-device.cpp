@@ -164,5 +164,29 @@ void EventDevice::setDirection(int value)
     this->set(value, "direction");
 }
 
+// std::vector<EventDevice> activeDevices(const int eventId) {
+//     char query[128] = {'\0'};
+//     snprintf(query, 128, "event_id=%d", eventId);
+
+//     // Fetch data from the database or wherever your view method retrieves it
+//     Model model = this->view("vw_event_device", query);
+
+//     std::vector<EventDevice> eventDevices;
+
+//     // Iterate over the rows of the Model and construct EventDevice objects
+//     for (int i = 0; i < model.size(); ++i) {
+//         // Extract data for an EventDevice from the Model row
+//         int userId = model.getInt(i, "user_id");
+//         std::string streamName = model.getString(i, "stream_name");
+//         // Extract other properties similarly
+
+//         // Create an EventDevice object and add it to the vector
+//         EventDevice eventDevice(userId, streamName, /* other properties */);
+//         eventDevices.push_back(eventDevice);
+//     }
+
+//     return eventDevices;
+// }
+
 
 
