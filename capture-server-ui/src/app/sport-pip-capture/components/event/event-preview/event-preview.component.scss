@@ -81,7 +81,7 @@
     background: initial;
     background-color: transparent !important;
     font-size: 1.0625em;
-    color: #82868b !important; 
+    color: #82868b !important;
 }
 
 .swal2-styled.swal2-confirm {
@@ -91,6 +91,11 @@
     background-color: #DE2E21;
     color: #fff;
     font-size: 1.0625em;
+}
+
+.swal2-icon.swal2-warning {
+    border-color: #DE2E21;
+    color: #DE2E21;
 }
 
 .swal2-styled {
