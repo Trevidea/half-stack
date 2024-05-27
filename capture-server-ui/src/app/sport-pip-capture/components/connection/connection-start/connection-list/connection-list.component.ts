@@ -37,7 +37,7 @@ export class ConnectionListComponent implements OnInit {
     const id = item.id;
     const isOpen = item.role;
     if (isOpen == "Publisher") {
-      this.router.navigate([`/connection/connection-device-detail/${{ id }}`], {
+      this.router.navigate([`/connection/connection-device-detail`], {
         queryParams: { listOrGrid: `list` },
       });
     }

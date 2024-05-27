@@ -42,15 +42,11 @@ const routes: Routes = [
         component: ConnectionStartPresenter,
         data: { animation: "toasts" },
       },
-      // {
-      //   path: "connection-device-detail/:id",
-      //   component: ConnectionDeviceDetailComponent,
-      // },
-      {
-        path: "connection-device-detail/:id",
-        component: ConnectionDeviceDetailPresenter,
-      },
     ],
+  },
+  {
+    path: "connection-device-detail",
+    component: ConnectionDeviceDetailPresenter,
   },
   {
     path: "connection/event-preview",

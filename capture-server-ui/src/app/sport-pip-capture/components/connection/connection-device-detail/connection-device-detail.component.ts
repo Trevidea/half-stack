@@ -13,21 +13,24 @@ import { RelayStreamPresenter } from "./relay-stream/relay-stream.presenter";
 })
 export class ConnectionDeviceDetailComponent implements OnInit {
   @Input() datasource: any
-  // private player: string = environment.playerUrl;
-  url = `${environment.playerUrl}/shreyaapp/11/llhls.m3u8?pin=345021`;
+  // url = `${environment.playerUrl}/shreyaapp/11/llhls.m3u8?pin=stream1`;
+  url: string;
+  deviceDetails: any
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private modelService: NgbModal
-  ) { }
+  ) {
+    this.route.queryParams.subscribe(params => {
+      const devicedetail = JSON.parse(params['devicedetail']);
+      this.deviceDetails = devicedetail
+      console.log(devicedetail);
+    });
+  }
   listOrGrid: string;
   ngOnInit(): void {
-    const param = this.route.snapshot.queryParamMap;
-    if (param.get("listOrGrid")) {
-      const listOrGrid = param.get("listOrGrid");
-      console.log(listOrGrid);
-      this.listOrGrid = listOrGrid;
-    }
+    this.url = `${environment.playerUrl}/${this.deviceDetails._appName}/${this.deviceDetails._deviceId}/llhls.m3u8?pin=${this.deviceDetails._pin}`;
+    console.log(this.url);
   }
 
   back() {

@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalConfig, ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { SocketService } from 'app/sport-pip-capture/models/socket.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-preview',
@@ -17,15 +18,16 @@ export class EventPreviewComponent implements OnInit {
 
   private countdownInterval: any;
   @Output() closePreview = new EventEmitter()
-  
 
-  constructor(public dateTimeservice: DateTimeService, private modalService: NgbModal
+
+  constructor(public dateTimeservice: DateTimeService, private modalService: NgbModal, private router: Router
   ) { }
 
 
   ngOnInit(): void {
     console.log(this.datasource)
   }
+
   calculateUpcomingCountdown(item: any): string {
     const now = new Date();
     const eventDateTime = new Date(item?.dtEvent);
@@ -50,5 +52,5 @@ export class EventPreviewComponent implements OnInit {
     return num < 10 ? `0${num}` : `${num}`;
   }
 
-
+  
 }

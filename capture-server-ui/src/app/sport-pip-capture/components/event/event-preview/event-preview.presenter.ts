@@ -64,11 +64,14 @@ export class EventPreviewPresenter implements OnInit, OnDestroy {
       this.ds.previewActiveDevice.Clear();
       previewData["activeDevices"].forEach(element => {
         var activeDevice: ActiveDeviceView = new ActiveDeviceView();
-        activeDevice.deviceId = element["deviceId"];
+        activeDevice.deviceId = element["device_id"];
         activeDevice.deviceType = element["type"];
         activeDevice.location = element["location"];
         activeDevice.network = element["network"];
         activeDevice.user = element["userId"];
+        activeDevice.appName=element['app_name'];
+        activeDevice.pin=element["pin"];
+        activeDevice.direction=element["direction"];
         this.ds.previewActiveDevice.Add(activeDevice);
       });
       this.status = '';
