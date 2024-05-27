@@ -99,8 +99,6 @@ void EventRunner::publishLiveData()
                 connectionDetail.setAppName(it.getValue("app_name").asString());
                 connectionDetail.setDeviceId(it.getValue("device_id").asInt());
 
-                spdlog::trace("data-set for active devices, Name: {}, event_id: {}", entry["name"].asString(), entry["event_id"].asInt());
-
                 le.setConnectionDetails({connectionDetail});
             }
         }
