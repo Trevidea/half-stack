@@ -16,12 +16,12 @@ std::string ConnectionDetail::deviceType() { return m_model["deviceType"].asStri
 void ConnectionDetail::setDeviceType(const std::string &device) { m_model["deviceType"] = device; }
 std::string ConnectionDetail::network() { return m_model["network"].asString(); }
 void ConnectionDetail::setNetwork(const std::string &network) { m_model["network"] = network; }
-QualityEnum ConnectionDetail::quality() { return static_cast<QualityEnum>(m_model["quality"].asInt()); }
-void ConnectionDetail::setQuality(QualityEnum quality) { m_model["quality"] = static_cast<int>(quality); }
+std::string ConnectionDetail::quality() { return m_model["quality"].asString(); }
+void ConnectionDetail::setQuality(const std::string &quality) { m_model["quality"] = quality; }
 std::string ConnectionDetail::ipAddress() { return m_model["ipAddress"].asString(); }
 void ConnectionDetail::setIpAddress(const std::string &ipAddress) { m_model["ipAddress"] = ipAddress; }
-TransmitEnum ConnectionDetail::transmitStatus() { return static_cast<TransmitEnum>(m_model["transmitStatus"].asInt()); }
-void ConnectionDetail::setTransmitStatus(TransmitEnum transmitStatus) { m_model["transmitStatus"] = static_cast<int>(transmitStatus); }
+std::string ConnectionDetail::transmitStatus() { return m_model["transmitStatus"].asString(); }
+void ConnectionDetail::setTransmitStatus(const std::string &transmitStatus) { m_model["transmitStatus"] = transmitStatus; }
 int ConnectionDetail::filesReceived() { return m_model["filesReceived"].asInt(); }
 void ConnectionDetail::setFilesReceived(int filesReceived) { m_model["filesReceived"] = filesReceived; }
 int ConnectionDetail::retries() { return m_model["retries"].asInt(); }

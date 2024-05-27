@@ -70,12 +70,10 @@ void EventRunner::publishLiveData()
 
     spdlog::trace("Checking if s_deviceCountDirty is true");
     // if (EventRunner::s_deviceCountDirty.get())
-    {
         // EventRunner::s_deviceCountDirty = false;
         spdlog::trace("Calling EventDevice().activeDevices with event id: {}", this->m_event.id());
         DataSet activeDevices = EventDevice().activeDevices(this->m_event.id());
         auto it = activeDevices.iterator();
-        std::vector<ConnectionDetail> connectionDetails;
         while (it.hasNext())
         {
             auto entry = it.next();
@@ -91,9 +89,9 @@ void EventRunner::publishLiveData()
                 connectionDetail.setDevice(it.getValue("device").asString());
                 connectionDetail.setDeviceType(it.getValue("deviceType").asString());
                 connectionDetail.setNetwork(it.getValue("network").asString());
-                connectionDetail.setQuality(static_cast<QualityEnum>(entry["quality"].asInt()));
+                connectionDetail.setQuality(it.getValue("quality").asString());
                 connectionDetail.setIpAddress(it.getValue("ip_add").asString());
-                connectionDetail.setTransmitStatus(static_cast<TransmitEnum>(entry["transmitstatus"].asInt()));
+                connectionDetail.setTransmitStatus(it.getValue("transmitstatus").asString());
                 connectionDetail.setFilesReceived(it.getValue("filesrecieved").asInt());
                 connectionDetail.setRetries(it.getValue("retries").asInt());
                 connectionDetail.setDirection(it.getValue("direction").asInt());
@@ -103,12 +101,9 @@ void EventRunner::publishLiveData()
 
                 spdlog::trace("data-set for active devices, Name: {}, event_id: {}", entry["name"].asString(), entry["event_id"].asInt());
 
-                connectionDetails.push_back(connectionDetail);
+                le.setConnectionDetails({connectionDetail});
             }
         }
-
-        le.setConnectionDetails({connectionDetails});
-    }
 
     std::string liveData = le.toResponse();
 

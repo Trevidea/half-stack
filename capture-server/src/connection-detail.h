@@ -4,17 +4,6 @@
 #include <string>
 #include "base.h"
 
-enum class QualityEnum {
-    Good,
-    Average,
-    Poor
-};
-
-enum class TransmitEnum {
-    Receiving,
-    Streaming
-};
-
 class ConnectionDetail: public Base {
 private:
 
@@ -35,12 +24,12 @@ public:
     void setDeviceType(const std::string& device);
     std::string network();
     void setNetwork(const std::string& network);
-    QualityEnum quality();
-    void setQuality(QualityEnum quality);
+    std::string quality();
+    void setQuality(const std::string& quality);
     std::string ipAddress();
     void setIpAddress(const std::string& ipAddress);
-    TransmitEnum transmitStatus();
-    void setTransmitStatus(TransmitEnum transmitStatus);
+    std::string transmitStatus();
+    void setTransmitStatus(const std::string& transmitStatus);
     int filesReceived();
     void setFilesReceived(int filesReceived);
     int retries();
