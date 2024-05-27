@@ -105,8 +105,6 @@ namespace ControlServer
                 const std::string pin = matches[4].str();
                 std::vector<std::string> querystring;
                 su_split('=', querystring, pin);
-                if (querystring[0] != "pin")
-                    return;
 
                 spdlog::trace("host: {}, port: {}, eventId: {}, userId: {}, pin: {}", endPoint, appName, deviceId, querystring[1]);
 

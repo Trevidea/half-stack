@@ -157,11 +157,6 @@ std::vector<ConnectionDetail> LiveEvent::connectionDetails()
 }
 
 void LiveEvent::setConnectionDetails(const std::vector<ConnectionDetail>& connectionDetails) {
-
-    if (connectionDetails.empty())
-    {
-        throw ExEntityNotSet();
-    }
     
     Json::Value details(Json::arrayValue);
     for (auto detail : connectionDetails) {
@@ -173,11 +168,14 @@ void LiveEvent::setConnectionDetails(const std::vector<ConnectionDetail>& connec
         connectionDetail["device"] = detail.device();
         connectionDetail["deviceType"] = detail.deviceType();
         connectionDetail["network"] = detail.network();
-        connectionDetail["quality"] = static_cast<int>(detail.quality());
+        connectionDetail["quality"] = detail.quality();
         connectionDetail["ipAddress"] = detail.ipAddress();
-        connectionDetail["transmitStatus"] = static_cast<int>(detail.transmitStatus());
+        connectionDetail["transmitStatus"] = detail.transmitStatus();
         connectionDetail["filesReceived"] = detail.filesReceived();
-        connectionDetail["retries"] = detail.retries();
+        connectionDetail["device_id"] = detail.deviceId();
+        connectionDetail["pin"] = detail.pin();
+        connectionDetail["app_name"] = detail.appName();
+        connectionDetail["direction"] = detail.direction();
         details.append(connectionDetail);
     }
     m_model["connectionDetails"] = details;

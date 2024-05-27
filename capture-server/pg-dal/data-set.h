@@ -18,10 +18,10 @@ public:
 
         Json::Value next() ;
 
-        std::string getValue(const std::string& fieldName) ;
+        Json::Value getValue(const std::string& fieldName) ;
 
     private:
-        const Json::Value& result;
+        const Json::Value result;
         size_t index = 0;
     };
 

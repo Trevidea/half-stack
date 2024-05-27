@@ -67,67 +67,42 @@ void EventRunner::publishLiveData()
     le.setTitle(this->m_event.title());
     le.setStatus(this->m_event.status());
     le.setType(this->m_event.type());
-    // le.setSport("Football");
-    // le.setLevel("University");
-    // le.setProgram("Men");
-    // le.setYear(2024);
-    // le.setDtEvent("2024-04-15");
-    // le.setTime(1402);
-    // le.setVenueLocation("Delhi");
-    // le.setDetailType("Scheduled Event");
-    // le.setDetailStreetAddress("Sector 32");
-    // le.setDetailCityAddress("Delhi");
-    // le.setTitle("Manchester vs Barcelona");
-    // le.setStatus("Upcoming");
 
     spdlog::trace("Checking if s_deviceCountDirty is true");
     // if (EventRunner::s_deviceCountDirty.get())
+    // EventRunner::s_deviceCountDirty = false;
+    spdlog::trace("Calling EventDevice().activeDevices with event id: {}", this->m_event.id());
+    DataSet activeDevices = EventDevice().activeDevices(this->m_event.id());
+    std::vector<ConnectionDetail> connectionDetails;
+    auto it = activeDevices.iterator();
+    while (it.hasNext())
     {
-        // EventRunner::s_deviceCountDirty = false;
-        spdlog::trace("Calling EventDevice().activeDevices with event id: {}", this->m_event.id());
-        auto activeDevices = EventDevice().activeDevices(this->m_event.id());
-        auto it = activeDevices.iterator();
-        while (it.hasNext())
+        auto entry = it.next();
+
+        if (!entry.isNull())
         {
-            auto entry = it.next();
+            std::string dat1 = Json::FastWriter().write(entry);
             ConnectionDetail connectionDetail;
-            connectionDetail.setId(entry["id"].asInt());
-            connectionDetail.setName(entry["name"].asString());
-            connectionDetail.setRole(entry["role"].asString());
-            connectionDetail.setLocation(entry["location"].asString());
-            connectionDetail.setDevice(entry["device"].asString());
-            connectionDetail.setDeviceType(entry["deviceType"].asString());
-            connectionDetail.setNetwork(entry["network"].asString());
-            connectionDetail.setQuality(static_cast<QualityEnum>(entry["quality"].asInt()));
-            connectionDetail.setIpAddress(entry["ipaddress"].asString());
-            connectionDetail.setTransmitStatus(static_cast<TransmitEnum>(entry["transmitstatus"].asInt()));
-            connectionDetail.setFilesReceived(entry["filesrecieved"].asInt());
-            connectionDetail.setRetries(entry["retires"].asInt());
-
-            spdlog::trace("data-set for active devices, Name: {}, event_id: {}", entry["name"].asString(), entry["event_id"].asInt());
-
-            le.setConnectionDetails({connectionDetail});
+            connectionDetail.setId(it.getValue("id").asInt());
+            connectionDetail.setName(it.getValue("name").asString());
+            connectionDetail.setRole(it.getValue("role").asString());
+            connectionDetail.setLocation(it.getValue("location").asString());
+            connectionDetail.setDevice(it.getValue("device").asString());
+            connectionDetail.setDeviceType(it.getValue("deviceType").asString());
+            connectionDetail.setNetwork(it.getValue("network").asString());
+            connectionDetail.setQuality(it.getValue("quality").asString());
+            connectionDetail.setIpAddress(it.getValue("ip_add").asString());
+            connectionDetail.setTransmitStatus(it.getValue("transmitstatus").asString());
+            connectionDetail.setFilesReceived(it.getValue("filesrecieved").asInt());
+            connectionDetail.setRetries(it.getValue("retries").asInt());
+            connectionDetail.setDirection(it.getValue("direction").asInt());
+            connectionDetail.setPin(it.getValue("pin").asString());
+            connectionDetail.setAppName(it.getValue("app_name").asString());
+            connectionDetail.setDeviceId(it.getValue("device_id").asInt());
+            connectionDetails.push_back(connectionDetail);
         }
     }
-
-    // for (auto &&eventDevice : this->m_activeDevices)
-    // {
-
-    //     ConnectionDetail connectionDetail;
-    //     connectionDetail.setId(1);
-    //     connectionDetail.setName("Coach S.");
-    //     connectionDetail.setRole("Subscriber");
-    //     connectionDetail.setLocation("Press Box");
-    //     connectionDetail.setDevice("iPad15");
-    //     connectionDetail.setNetwork("Penfield-532");
-    //     connectionDetail.setQuality(QualityEnum::Good);
-    //     connectionDetail.setIpAddress("192.168.1.1");
-    //     connectionDetail.setTransmitStatus(TransmitEnum::Streaming);
-    //     connectionDetail.setFilesReceived(10);
-    //     connectionDetail.setRetries(3);
-
-    //     le.setConnectionDetails({connectionDetail});
-    // }
+    le.setConnectionDetails(connectionDetails);
 
     std::string liveData = le.toResponse();
 
