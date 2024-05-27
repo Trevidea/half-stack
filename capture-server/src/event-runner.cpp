@@ -79,25 +79,30 @@ void EventRunner::publishLiveData()
         while (it.hasNext())
         {
             auto entry = it.next();
-            ConnectionDetail connectionDetail;
-            connectionDetail.setId(entry["id"].asInt());
-            connectionDetail.setName(entry["name"].asString());
-            connectionDetail.setRole(entry["role"].asString());
-            connectionDetail.setLocation(entry["location"].asString());
-            connectionDetail.setDevice(entry["device"].asString());
-            connectionDetail.setDeviceType(entry["deviceType"].asString());
-            connectionDetail.setNetwork(entry["network"].asString());
-            connectionDetail.setQuality(static_cast<QualityEnum>(entry["quality"].asInt()));
-            connectionDetail.setIpAddress(entry["ipaddress"].asString());
-            connectionDetail.setTransmitStatus(static_cast<TransmitEnum>(entry["transmitstatus"].asInt()));
-            connectionDetail.setFilesReceived(entry["filesrecieved"].asInt());
-            connectionDetail.setRetries(entry["retires"].asInt());
 
-            spdlog::trace("data-set for active devices, Name: {}, event_id: {}", entry["name"].asString(), entry["event_id"].asInt());
+            if (!entry.isNull())
+            {
+                std::string dat1 = Json::FastWriter().write(entry);
+                ConnectionDetail connectionDetail;
+                connectionDetail.setId(it.getValue("id").asInt());
+                connectionDetail.setName(it.getValue("name").asString());
+                connectionDetail.setRole(it.getValue("role").asString());
+                // connectionDetail.setLocation(entry["location"].asString());
+                // connectionDetail.setDevice(entry["device"].asString());
+                // connectionDetail.setDeviceType(entry["deviceType"].asString());
+                // connectionDetail.setNetwork(entry["network"].asString());
+                // connectionDetail.setQuality(static_cast<QualityEnum>(entry["quality"].asInt()));
+                // connectionDetail.setIpAddress(entry["ipaddress"].asString());
+                // connectionDetail.setTransmitStatus(static_cast<TransmitEnum>(entry["transmitstatus"].asInt()));
+                // connectionDetail.setFilesReceived(entry["filesrecieved"].asInt());
+                // connectionDetail.setRetries(entry["retires"].asInt());
 
-            connectionDetails.push_back(connectionDetail);
+                // spdlog::trace("data-set for active devices, Name: {}, event_id: {}", entry["name"].asString(), entry["event_id"].asInt());
+
+                connectionDetails.push_back(connectionDetail);
+            }
         }
-        
+
         le.setConnectionDetails({connectionDetails});
     }
 
