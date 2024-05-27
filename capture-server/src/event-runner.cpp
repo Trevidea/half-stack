@@ -51,6 +51,7 @@ void EventRunner::publishPreviewData()
 
 void EventRunner::publishLiveData()
 {
+    spdlog::trace("Entering publishLiveData()");
 
     LiveEvent le;
 
@@ -79,10 +80,13 @@ void EventRunner::publishLiveData()
     // le.setTitle("Manchester vs Barcelona");
     // le.setStatus("Upcoming");
 
+    spdlog::trace("Checking if s_deviceCountDirty is true");
     if (EventRunner::s_deviceCountDirty.get())
     {
         EventRunner::s_deviceCountDirty = false;
+        spdlog::trace("Calling EventDevice().activeDevices with event id: {}", this->m_event.id());
         auto activeDevices = EventDevice().activeDevices(this->m_event.id());
+        
         
     }
 
