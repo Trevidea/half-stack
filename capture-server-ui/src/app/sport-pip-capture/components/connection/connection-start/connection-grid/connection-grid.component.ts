@@ -9,7 +9,6 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
   encapsulation: ViewEncapsulation.None,
 })
 export class ConnectionGridComponent implements OnInit {
-  @Input() eventConnection: any;
   @Input() listOrGrid: string;
   @Input() datasource: any;
   constructor(

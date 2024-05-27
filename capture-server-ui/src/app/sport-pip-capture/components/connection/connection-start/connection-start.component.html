@@ -4,9 +4,9 @@
   <app-connectio-grid-list-header (messageListOrGrid)="listGrid($event)"
     (pubSubAll)="onPubSubAll($event)"></app-connectio-grid-list-header>
 
-  <app-connection-grid *ngIf="listOrGrid == 'grid'" [eventConnection]="eventConnection" [datasource]="datasource"
+  <app-connection-grid *ngIf="listOrGrid == 'grid'"  [datasource]="datasource"
     [listOrGrid]="listOrGrid" [datasource]="datasource"></app-connection-grid>
 
-  <app-connection-list *ngIf="listOrGrid == 'list'" [eventConnection]="eventConnection" [datasource]="datasource"
+  <app-connection-list *ngIf="listOrGrid == 'list'" [datasource]="datasource"
     [listOrGrid]="listOrGrid"></app-connection-list>
 </div>

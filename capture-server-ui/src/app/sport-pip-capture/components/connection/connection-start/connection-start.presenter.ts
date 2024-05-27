@@ -1,12 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { Transformer } from "app/blocks/transformer";
-import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
-import { liveEventDetail } from "./views/live-event";
-import { LiveEventBuilder } from "./builders/live-event";
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
+import { ConnectionDetailsView, liveEventDetail } from "./views/live-event";
 import { SocketService } from "app/sport-pip-capture/models/socket.service";
-import { Data } from "app/sport-pip-capture/models/capture-interface";
-import { LiveEventDetailData } from "app/sport-pip-capture/models/live-event-detail";
+import { Subscription } from "rxjs";
+
 @Component({
   selector: "app-connection-start-presenter",
   template: `<app-connection-start
@@ -16,12 +12,12 @@ import { LiveEventDetailData } from "app/sport-pip-capture/models/live-event-det
   styleUrls: ["./connection-start.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
-export class ConnectionStartPresenter implements OnInit {
+
+export class ConnectionStartPresenter implements OnInit, OnDestroy {
   ds!: liveEventDetail;
   socketDs!: liveEventDetail;
-  liveEventData: any[] = [];
+  private socketSubscription: Subscription;
   constructor(
-    private dataFactory: DataFactoryService,
     private socketService: SocketService
   ) {
     this.ds = new liveEventDetail();
@@ -36,6 +32,39 @@ export class ConnectionStartPresenter implements OnInit {
     //   LiveEventBuilder
     // );
     this.ds = this.socketDs;
+    this.socketSubscription = this.socketService.onTopicMessage('live-event').subscribe((message) => {
+      const data: any = JSON.parse(message["data"]);
+      const liveEventData: any = data.result[0][0];
+      console.log(liveEventData)
+      this.ds.title = liveEventData["title"];
+      this.ds.level = liveEventData["level"];
+      this.ds.dtEvent = liveEventData["dtEvent"];
+      this.ds.program = liveEventData["program"];
+      this.ds.sport = liveEventData["sport"];
+      this.ds.status = liveEventData["status"];
+      this.ds.time = liveEventData["time"];
+      this.ds.type = liveEventData["type"];
+      this.ds.venue = liveEventData["venue"];
+      this.ds.detail = liveEventData["detail"];
+      this.ds.connectionDetails.Clear()
+      liveEventData["connectionDetails"]?.forEach(element => {
+        var connectionDetails: ConnectionDetailsView = new ConnectionDetailsView();
+        connectionDetails.device = element["device"];
+        connectionDetails.ipAddress = element["ipAddress"];
+        connectionDetails.role = element["role"];
+        connectionDetails.name = element["name"];
+        connectionDetails.quality = element["quality"];
+        connectionDetails.received = element["filesReceived"];
+        connectionDetails.retries = element["retries"];
+        connectionDetails.location = element["location"];
+        connectionDetails.network = element["network"];
+        connectionDetails.transmitStatus = element["transmitStatus"];
+        connectionDetails.id = element["id"];
+        this.ds.connectionDetails.Add(connectionDetails);
+      });
+
+    });
+
   }
   ListType(e: any) {
     this.ds = this.socketDs;
@@ -62,5 +91,12 @@ export class ConnectionStartPresenter implements OnInit {
     };
     this.ds = liveEventDetail as any;
     return this.ds;
+  }
+
+  ngOnDestroy(): void {
+    if (this.socketSubscription) {
+      console.log("Socket unsubscribed..")
+      this.socketSubscription.unsubscribe();
+    }
   }
 }

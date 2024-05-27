@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { SocketService } from "app/sport-pip-capture/models/socket.service";
 import { ActiveDeviceView, EventPreview, RangeEventPreviewView } from "./views/event-preview";
 import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 import { Transformer } from "app/blocks/transformer";
 import { EventPreviewBuilder } from "./builders/event-preview";
 import { Subscription } from "rxjs";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-event-preview-presenter",
@@ -24,6 +25,7 @@ export class EventPreviewPresenter implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private socketService: SocketService,
     private modelServiceService: ModelServiceService,
   ) {
@@ -87,25 +89,61 @@ export class EventPreviewPresenter implements OnInit, OnDestroy {
     );
 
   }
+
+  onClosePreview() {
+    Swal.fire({
+      title: 'Close Preview',
+      text: "Are you sure you want to close the preview?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#7367F0',
+      cancelButtonColor: '#E42728',
+      confirmButtonText: 'Yes, Sure',
+      customClass: {
+        confirmButton: 'btn btn-danger',
+        cancelButton: 'btn btn-outline-secondary ml-1'
+      }
+    }).then((result) => {
+      if (result.value) {
+        this._closePreview();
+      }
+    });
+  }
+
+
+  _closePreview() {
+    this.modelServiceService.closePreview({ eventId: this.eventId }).subscribe(
+      (data: any) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Preview Closed',
+          text: 'Preview of this event is closed by Garry',
+          showConfirmButton: false,
+          showCancelButton: true,
+          cancelButtonText: 'Ok',
+          customClass: {
+            cancelButton: 'btn btn-outline-secondary'
+          }
+        }).then(
+          (result) => {
+            if (result.isDismissed) {
+              this.router.navigate(['/event'])
+            }
+          }
+
+        )
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
   ngOnDestroy(): void {
     if (this.socketSubscription) {
       console.log("Socket unsubscribed..")
       this.socketSubscription.unsubscribe();
     }
   }
-  onClosePreview() {
-    this.modelServiceService.closePreview({ eventId: this.eventId }).subscribe(
-      (data: any) => {
-        console.log("data", data)
-      },
-      (error: any) => {
-        console.log(error)
-      }
-    );
-  }
-
-
-
-
 }
 

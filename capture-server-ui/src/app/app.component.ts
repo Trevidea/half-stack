@@ -106,6 +106,7 @@ export class AppComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
+    
     // this.socketService.onEventTerminal().subscribe((data: string) => {
     //   let message:{"terminal":string};
 

@@ -1,3 +1,5 @@
+@import '@core/scss/angular/libs/sweet-alerts.component.scss';
+
 .preview-container {
 
     .back-button {
@@ -17,7 +19,8 @@
     .time-countdown-box {
         font-size: 16px;
         width: 100%;
-        padding-right:10px ;
+        padding-right: 10px;
+
         .time-box {
             border-radius: 12px;
             background-color: #21609333;
@@ -66,11 +69,46 @@
     .list-group-item {
         position: relative;
         display: block;
-        padding: 0.75rem  0rem 0.75rem  2rem ;
+        padding: 0.75rem 0rem 0.75rem 2rem;
         background-color: transparent;
         border-top: 0.5px solid var(#E7E7E7);
 
     }
+}
+
+.swal2-styled.swal2-cancel {
+    border-radius: .25em;
+    background: initial;
+    background-color: transparent !important;
+    font-size: 1.0625em;
+    color: #82868b !important;
+}
+
+.swal2-styled.swal2-confirm {
+    border: 0 !important;
+    border-radius: .25em;
+    background: initial;
+    background-color: #DE2E21;
+    color: #fff;
+    font-size: 1.0625em;
+}
+
+.swal2-icon.swal2-warning {
+    border-color: #DE2E21;
+    color: #DE2E21;
+}
+
+.swal2-styled {
+    margin: .3125em;
+    padding: .625em 2em;
+    box-shadow: none !important;
+    font-weight: 500;
+}
+
+
+.btn-outline-secondary {
+    border-color: #C3C3C3 !important;
+    color: #82868b;
 }
 
 

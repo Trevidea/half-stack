@@ -11,7 +11,6 @@ import { DragulaService } from "ng2-dragula";
   encapsulation: ViewEncapsulation.None,
 })
 export class ConnectionListComponent implements OnInit {
-  @Input() eventConnection: any;
   @Input() datasource: any;
   @Input() listOrGrid: string;
   constructor(

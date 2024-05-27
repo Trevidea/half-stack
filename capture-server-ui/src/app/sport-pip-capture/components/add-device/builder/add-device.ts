@@ -7,6 +7,12 @@ export class AddDeviceBuilder extends AbstractBuilder<Data.EventDevice, AddDevic
 
     }
     decompose(v: AddDeviceView): Data.EventDevice {
+        let _direction: number;
+        if (v.type.SelectedItem === 'Streaming') {
+            _direction = 1
+        } else if (v.type.SelectedItem === 'Player') {
+            _direction = 0
+        }
         return {
             id: v.id,
             user_id: v.userName.SelectedItem.key,
@@ -16,7 +22,8 @@ export class AddDeviceBuilder extends AbstractBuilder<Data.EventDevice, AddDevic
             location: v.location.SelectedItem,
             stream_name: v.streamName,
             stream_id: v.streamId,
-            app_name: v.appNamesCollection.SelectedItem
+            app_name: v.appNamesCollection.SelectedItem,
+            direction: _direction
         }
     }
     view(): AddDeviceView {
