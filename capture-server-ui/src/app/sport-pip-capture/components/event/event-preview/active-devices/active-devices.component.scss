@@ -17,4 +17,8 @@
         border: none;
     }
 
+    .btn-danger.active ,.btn-danger:active ,.btn-danger:focus {
+        background-color: #DE2E211A !important;
+    }
+
 }
