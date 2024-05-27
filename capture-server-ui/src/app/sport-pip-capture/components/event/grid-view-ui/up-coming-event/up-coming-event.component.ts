@@ -2,10 +2,12 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
+  Output,
   SimpleChanges,
   ViewEncapsulation,
 } from "@angular/core";
@@ -23,6 +25,7 @@ import { ModelServiceService } from "app/sport-pip-capture/models/model-service.
 })
 export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
   @Input() datasource: any;
+  @Output() onDeleteEvent = new EventEmitter()
   startIndex: number;
   openDetailmodel: boolean;
   public selectBasic: any[] = [];
@@ -37,7 +40,7 @@ export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
       type: "feather",
       action: () => this.editOnDemandEvent(),
     },
-    { label: "Share Event", icon: "share", type: "feather", action: () => {} },
+    { label: "Share Event", icon: "share", type: "feather", action: () => { } },
     {
       label: "Remove Event",
       icon: "trash",
@@ -52,9 +55,9 @@ export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
     private router: Router,
     private Modelservice: ModelServiceService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.datasource && changes.datasource.currentValue) {
@@ -118,6 +121,8 @@ export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
   deleteEvent() {
     this.Modelservice.delete("event", this.eventId).subscribe((data) => {
       console.log("data", data);
+      this.onDeleteEvent.emit()
+
     });
   }
 }

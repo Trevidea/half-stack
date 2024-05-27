@@ -21,6 +21,7 @@ export class ApplicationComponent implements OnInit {
   }
 
   onDelete(app: string) {
+   
     this.modelServiceService.deleteApp({'app-name': app}).subscribe(
       (data) => {
         console.log(data)

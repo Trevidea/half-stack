@@ -34,14 +34,14 @@ export class ConnectionListComponent implements OnInit {
     });
   }
   detail(item: any) {
-    const id = item.id;
-    const isOpen = item.role;
-    if (isOpen == "Publisher") {
-      this.router.navigate([`/connection/connection-device-detail`], {
-        queryParams: { listOrGrid: `list` },
+    if (item.direction === 1) {
+      console.log("sreaming device")
+      this.router.navigate(['/connection-device-detail'], {
+        queryParams: { devicedetail: JSON.stringify(item) }
       });
     }
   }
+
 
   startRecording() {
     const data = {

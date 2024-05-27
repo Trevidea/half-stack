@@ -18,7 +18,7 @@
         <a ngbNavLink>Ongoing Events</a>
         <ng-template ngbNavContent>
           <app-on-going-event [datasource]="datasource | slice : startIndex : endIndex "
-            *ngIf="gridView"></app-on-going-event>
+            (onDeleteEvent)="deleteEvent.emit()" *ngIf="gridView"></app-on-going-event>
           <app-ongoing-event-list *ngIf="!gridView"
             [datasource]="datasource | slice : startIndex : endIndex"></app-ongoing-event-list>
         </ng-template>
@@ -27,7 +27,7 @@
       <li ngbNavItem="upcoming" style="margin-top: 5px;">
         <a ngbNavLink>Upcoming Events</a>
         <ng-template ngbNavContent>
-          <app-up-coming-event [datasource]="datasource | slice : startIndex : endIndex" 
+          <app-up-coming-event [datasource]="datasource | slice : startIndex : endIndex"
             *ngIf="gridView"></app-up-coming-event>
           <app-upcoming-events-list *ngIf="!gridView"
             [datasource]="datasource | slice : startIndex : endIndex"></app-upcoming-events-list>
@@ -73,7 +73,7 @@
   </div>
   <div class="card-footer bg-transparent p-1">
     <app-event-pagination [totalItems]="datasource" [pageSize]="pageSize" [startIndex]="startIndex"
-     [endIndex]="endIndex" (pageSizeChange)="updatePageSize($event)"
+      [endIndex]="endIndex" (pageSizeChange)="updatePageSize($event)"
       (pageChange)="onPageChange($event)"></app-event-pagination>
   </div>
 </div>

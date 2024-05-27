@@ -195,14 +195,6 @@ export class ActiveDeviceView {
     this._deviceType = v;
   }
 
-  private _deviceId: string;
-  public get deviceId(): string {
-    return this._deviceId;
-  }
-  public set deviceId(v: string) {
-    this._deviceId = v;
-  }
-
   private _location: string;
   public get location(): string {
     return this._location;
@@ -219,33 +211,49 @@ export class ActiveDeviceView {
     this._user = v;
   }
 
-  
-  private _appName : string;
-  public get appName() : string {
+
+  private _appName: string;
+  public get appName(): string {
     return this._appName;
   }
-  public set appName(v : string) {
+  public set appName(v: string) {
     this._appName = v;
   }
 
-  
-  private _pin : string;
-  public get pin() : string {
+
+  private _pin: string;
+  public get pin(): string {
     return this._pin;
   }
-  public set pin(v : string) {
+  public set pin(v: string) {
     this._pin = v;
   }
-  
-  
-  private _direction : number;
-  public get direction() : number {
+
+
+  private _direction: number;
+  public get direction(): number {
     return this._direction;
   }
-  public set direction(v : number) {
+  public set direction(v: number) {
     this._direction = v;
   }
+
+  private _deviceId: number;
+  public get deviceId(): number {
+    return this._deviceId;
+  }
+  public set deviceId(v: number) {
+    this._deviceId = v;
+  }
+   
   
+  private _activeDeviceId : number;
+  public get activeDeviceId() : number {
+    return this._activeDeviceId;
+  }
+  public set activeDeviceId(v : number) {
+    this._activeDeviceId = v;
+  }
   
 }
 

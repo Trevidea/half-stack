@@ -263,6 +263,42 @@ export class ConnectionDetailsView implements Views.Datasource {
         this._role = v;
     }
 
+    
+    private _appName : string;
+    public get appName() : string {
+        return this._appName;
+    }
+    public set appName(v : string) {
+        this._appName = v;
+    }
+
+     private _pin : string;
+  public get pin() : string {
+    return this._pin;
+  }
+  public set pin(v : string) {
+    this._pin = v;
+  }
+  
+  
+  private _direction : number;
+  public get direction() : number {
+    return this._direction;
+  }
+  public set direction(v : number) {
+    this._direction = v;
+  }
+    
+
+  
+  private _activeDeviceId : number;
+  public get activeDeviceId() : number {
+    return this._activeDeviceId;
+  }
+  public set activeDeviceId(v : number) {
+    this._activeDeviceId = v;
+  }
+  
 }
 
 

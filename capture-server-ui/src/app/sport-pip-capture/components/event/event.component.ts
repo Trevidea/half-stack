@@ -20,6 +20,8 @@ export class EventComponent implements OnInit {
   @Input() datasource: any
   @Output() filter = new EventEmitter<Data.FilterParams>();
   @Output() onTabChange = new EventEmitter()
+  @Output() deleteEvent = new EventEmitter()
+  
   gridView: boolean = true
   activeTabId: string;
   pageSize: number;
