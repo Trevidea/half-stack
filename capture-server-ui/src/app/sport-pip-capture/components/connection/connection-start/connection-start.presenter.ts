@@ -13,7 +13,7 @@ import { Subscription } from "rxjs";
   encapsulation: ViewEncapsulation.None,
 })
 
-export class ConnectionStartPresenter implements OnInit, OnDestroy {
+export class ConnectionStartPresenter implements OnInit {
   ds!: liveEventDetail;
   socketDs!: liveEventDetail;
   private socketSubscription: Subscription;
@@ -33,6 +33,7 @@ export class ConnectionStartPresenter implements OnInit, OnDestroy {
     // );
     this.ds = this.socketDs;
     this.socketSubscription = this.socketService.onTopicMessage('live-event').subscribe((message) => {
+      console.log("live data ", message)
       const data: any = JSON.parse(message["data"]);
       const liveEventData: any = data.result[0][0];
       console.log(liveEventData)
@@ -93,10 +94,10 @@ export class ConnectionStartPresenter implements OnInit, OnDestroy {
     return this.ds;
   }
 
-  ngOnDestroy(): void {
-    if (this.socketSubscription) {
-      console.log("Socket unsubscribed..")
-      this.socketSubscription.unsubscribe();
-    }
-  }
+  // ngOnDestroy(): void {
+  //   if (this.socketSubscription) {
+  //     console.log("Socket unsubscribed..")
+  //     this.socketSubscription.unsubscribe();
+  //   }
+  // }
 }

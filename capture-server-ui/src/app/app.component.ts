@@ -106,31 +106,29 @@ export class AppComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
-    
-    // this.socketService.onEventTerminal().subscribe((data: string) => {
-    //   let message:{"terminal":string};
+    this.socketService.onTopicMessage('event-terminal').subscribe((data: { topic: string, data: string }) => {
+      let message: { terminal: string };
 
-    //   try {
-    //     const correctedData = data.replace(/'/g, '"');
-    //     message = JSON.parse(correctedData); 
-    //   } catch (error) {
-    //     console.error("JSON Parsing Error:", error, "Data:", data);
-    //     return;  // Exit if JSON is invalid
-    //   }
+      try {
+        const correctedData = data.data.replace(/'/g, '"');
+        const parsedData = JSON.parse(correctedData);
+        message = parsedData;
+      } catch (error) {
+        console.error("JSON Parsing Error:", error, "Data:", data);
+        return;
+      }
+      console.log("message socket ::", message);
+      if (message.terminal === "start") {
+        console.log("message socket ::", message.terminal);
+        this.modalOpenMd();
+      } else if (message.terminal === "stop") {
+        // this.socketService.disconnectFromRelayService();
+        this.endmodalOpenMd();
+      } else {
+      }
+    });
 
-    //   console.log("message socket ::", message);
 
-
-    //   console.log("message socket ::", message);
-    //   if (message.terminal == "start") {
-    //     console.log("message socket ::", message.terminal);
-    //     this.modalOpenMd();
-    //   } else if (message.terminal == "stop") {
-    //     this.socketService.disconnectFromRelayService();
-    //     this.endmodalOpenMd();
-    //   } else {
-    //   }
-    // });
     // this.socketService.onEventTerminal().subscribe((data: string) => {
     //   console.log("app.component.ts: data", data);
     //   try {

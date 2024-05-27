@@ -7,7 +7,7 @@ import { EventStartNotificationsComponent } from "../../event-notifications/even
 })
 export class DateTimeService {
   popupShown: boolean = false;
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal) { }
 
   padZero(num: number): string {
     return num < 10 ? `0${num}` : `${num}`;
@@ -31,10 +31,6 @@ export class DateTimeService {
         item.countdown = `Starts in ${this.padZero(days)} days, ${this.padZero(
           hours
         )}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
-        if (!this.popupShown && diff <= 1000) {
-          this.modalOpenSM();
-          this.popupShown = true;
-        }
       } else {
         item.countdown = "Started";
       }
@@ -62,14 +58,14 @@ export class DateTimeService {
     }
   }
 
-  modalOpenSM() {
-    this.modalService.open(EventStartNotificationsComponent, {
-      centered: true,
-      size: "md",
-      backdrop: "static", // Set the backdrop option here
-      keyboard: false,
-    });
-  }
+  // modalOpenSM() {
+  //   this.modalService.open(EventStartNotificationsComponent, {
+  //     centered: true,
+  //     size: "md",
+  //     backdrop: "static", // Set the backdrop option here
+  //     keyboard: false,
+  //   });
+  // }
 
   formatDateTime(dateTimeString: string, time: number): string {
     const dateOptions: Intl.DateTimeFormatOptions = {
@@ -120,7 +116,7 @@ export class DateTimeService {
   formatTime(timeNumber) {
     if (
       (isNaN(timeNumber) || timeNumber === null || timeNumber === undefined,
-      timeNumber === 0)
+        timeNumber === 0)
     ) {
       return "00:00";
     }
