@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 @Component({
   selector: "app-event-preview-presenter",
-  template: `<app-event-preview  [datasource]='previewData?.result[0]?.[0]' (closePreview)='onClosePreview()' [eventId]="eventId"></app-event-preview>`,
+  template: `<app-event-preview  [datasource]='previewData' (closePreview)='onClosePreview()' [eventId]="eventId"></app-event-preview>`,
   styleUrls: ["./event-preview.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
@@ -31,8 +31,9 @@ export class EventPreviewPresenter implements OnInit {
 
   ngOnInit(): void {
     this.socketService.onEventPreview().subscribe(
-      (data) => {
-        this.previewData = JSON.parse(data);
+      (result) => {
+        let data = JSON.parse(result);
+        this.previewData = data?.result[0]?.[0]
       },
       (error) => {
         console.error('Error occurred:', error);

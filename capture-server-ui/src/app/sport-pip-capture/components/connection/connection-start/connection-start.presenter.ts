@@ -34,7 +34,7 @@ export class ConnectionStartPresenter implements OnInit {
       this.socketDs,
       LiveEventBuilder
     );
-    this.ds = this.socketDs;
+      this.ds = this.socketDs;
   }
   ListType(e: any) {
     this.ds = this.socketDs;

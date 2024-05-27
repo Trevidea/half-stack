@@ -32,28 +32,26 @@ export class ConnectionStartComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private socketService: SocketService
   ) {
-  
+
   }
+
   connectiondetail: boolean = false;
+
   ngOnInit(): void {
+     console.log(this.datasource)
     this.header = header;
-    EventConnection$.subscribe(
-      (data) => {
-        this.eventConnection = data;
-      },
-      (error) => {
-        console.log("error:::", error);
-      }
-    );
   }
 
   ConnectionDetails(yes: boolean) {
     this.connectiondetail = yes;
   }
+
   closeDetail() {
     this.connectiondetail = false;
   }
-  viewStream() {}
+
+  viewStream() { }
+
   pause(item) {
     const index = this.eventConnection.findIndex((obj) => obj.id === item.id);
     if (
@@ -64,6 +62,7 @@ export class ConnectionStartComponent implements OnInit {
       // this.cdr.detectChanges();
     }
   }
+
   getAllPubOrSub(e) {
     this.allOrSubOrPub = e;
     EventConnection$.pipe(
@@ -79,15 +78,16 @@ export class ConnectionStartComponent implements OnInit {
       }
     );
   }
-  block(item) {}
-  streaming() {}
-  delete() {}
+
+  block(item) { }
+  streaming() { }
+  delete() { }
   modalOpenForm(modalForm) {
     this.modalService.open(modalForm, {
       centered: true,
     });
   }
-  addNewDevice() {}
+  addNewDevice() { }
   listOrGrid: string = "list";
   listGrid(e: string) {
     this.listOrGrid = e;

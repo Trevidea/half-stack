@@ -472,7 +472,7 @@ export class ModelServiceService {
       });
   }
 
-  // For dome only 
+
   type() {
     return ["Streaming", "Player"];
   }
