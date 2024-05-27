@@ -16,28 +16,32 @@ import { EventEndNotifictionsComponent } from '../event-notifications/event-end-
   encapsulation: ViewEncapsulation.None,
 
 })
-export class EventComponent implements OnInit{
+export class EventComponent implements OnInit {
   @Input() datasource: any
   @Output() filter = new EventEmitter<Data.FilterParams>();
   @Output() onTabChange = new EventEmitter()
   gridView: boolean = true
   activeTabId: string;
-  pageSize: number = 10
+  pageSize: number;
   startIndex: number = 0;
-  endIndex: number = this.pageSize;
+  endIndex: number;
 
   constructor(private router: Router, private tabStateService: TabStateService, private modalService: NgbModal) {
 
-   }
+  }
 
   ngOnInit(): void {
     this.tabStateService.activeTab$.subscribe(activeTab => {
       this.activeTabId = activeTab;
     });
+    this.tabStateService.selectedpageSize$.subscribe(pageSize => {
+      this.pageSize = pageSize;
+      this.endIndex = pageSize;
+    });
     this.onTabChange.emit();
   }
 
- 
+
   CreateOnDemandEvent() {
     this.router.navigate(['on-demand-event'])
   }
@@ -71,20 +75,14 @@ export class EventComponent implements OnInit{
     this.endIndex = event.endIndex;
   }
 
-
   updatePageSize(newPageSize: number) {
+    this.tabStateService.changePageSize(newPageSize)
     this.pageSize = newPageSize;
     this.startIndex = 0;
     this.endIndex = this.pageSize;
   }
-  // modalOpenSM() {
-  //   this.modalService.open(EventEndNotifictionsComponent, {
-  //     centered: true,
-  //     size: 'md'
-  //   });
-  // }
 
-  
+
 
 
 
