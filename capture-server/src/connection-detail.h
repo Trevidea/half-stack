@@ -31,6 +31,8 @@ public:
     void setLocation(const std::string& location);
     std::string device();
     void setDevice(const std::string& device);
+    std::string deviceType();
+    void setDeviceType(const std::string& device);
     std::string network();
     void setNetwork(const std::string& network);
     QualityEnum quality();
