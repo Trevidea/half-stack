@@ -45,6 +45,18 @@ public:
     void setFilesReceived(int filesReceived);
     int retries();
     void setRetries(int retries);
+
+    int direction();
+    void setDirection(int direction);
+
+    int pin();
+    void setPin(int pin);
+
+    int deviceId();
+    void setDeviceId(int deviceId);
+
+    std::string appName();
+    void setAppName(const std::string& appName);
 };
 
 #endif // CONNECTION_DETAIL_HPP

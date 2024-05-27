@@ -177,7 +177,10 @@ void LiveEvent::setConnectionDetails(const std::vector<ConnectionDetail>& connec
         connectionDetail["ipAddress"] = detail.ipAddress();
         connectionDetail["transmitStatus"] = static_cast<int>(detail.transmitStatus());
         connectionDetail["filesReceived"] = detail.filesReceived();
-        connectionDetail["retries"] = detail.retries();
+        connectionDetail["device_id"] = detail.deviceId();
+        connectionDetail["pin"] = detail.pin();
+        connectionDetail["app_name"] = detail.appName();
+        connectionDetail["direction"] = detail.direction();
         details.append(connectionDetail);
     }
     m_model["connectionDetails"] = details;

@@ -26,3 +26,15 @@ int ConnectionDetail::filesReceived() { return m_model["filesReceived"].asInt();
 void ConnectionDetail::setFilesReceived(int filesReceived) { m_model["filesReceived"] = filesReceived; }
 int ConnectionDetail::retries() { return m_model["retries"].asInt(); }
 void ConnectionDetail::setRetries(int retries) { m_model["retries"] = retries; }
+
+int ConnectionDetail::direction() { return m_model["direction"].asInt(); }
+void ConnectionDetail::setDirection(int direction) { m_model["direction"] = direction; }
+
+int ConnectionDetail::pin() { return m_model["pin"].asInt(); }
+void ConnectionDetail::setPin(int pin) { m_model["pin"] = pin; }
+
+int ConnectionDetail::deviceId() { return m_model["device_id"].asInt(); }
+void ConnectionDetail::setDeviceId(int deviceId) { m_model["device_id"] = deviceId; }
+
+std::string ConnectionDetail::appName() { return m_model["app_name"].asString(); }
+void ConnectionDetail::setAppName(const std::string &appName) { m_model["app_name"] = appName; }

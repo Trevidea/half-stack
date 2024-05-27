@@ -87,17 +87,21 @@ void EventRunner::publishLiveData()
                 connectionDetail.setId(it.getValue("id").asInt());
                 connectionDetail.setName(it.getValue("name").asString());
                 connectionDetail.setRole(it.getValue("role").asString());
-                // connectionDetail.setLocation(entry["location"].asString());
-                // connectionDetail.setDevice(entry["device"].asString());
-                // connectionDetail.setDeviceType(entry["deviceType"].asString());
-                // connectionDetail.setNetwork(entry["network"].asString());
-                // connectionDetail.setQuality(static_cast<QualityEnum>(entry["quality"].asInt()));
-                // connectionDetail.setIpAddress(entry["ipaddress"].asString());
-                // connectionDetail.setTransmitStatus(static_cast<TransmitEnum>(entry["transmitstatus"].asInt()));
-                // connectionDetail.setFilesReceived(entry["filesrecieved"].asInt());
-                // connectionDetail.setRetries(entry["retires"].asInt());
+                connectionDetail.setLocation(it.getValue("location").asString());
+                connectionDetail.setDevice(it.getValue("device").asString());
+                connectionDetail.setDeviceType(it.getValue("deviceType").asString());
+                connectionDetail.setNetwork(it.getValue("network").asString());
+                connectionDetail.setQuality(static_cast<QualityEnum>(entry["quality"].asInt()));
+                connectionDetail.setIpAddress(it.getValue("ip_add").asString());
+                connectionDetail.setTransmitStatus(static_cast<TransmitEnum>(entry["transmitstatus"].asInt()));
+                connectionDetail.setFilesReceived(it.getValue("filesrecieved").asInt());
+                connectionDetail.setRetries(it.getValue("retries").asInt());
+                connectionDetail.setDirection(it.getValue("direction").asInt());
+                connectionDetail.setPin(it.getValue("pin").asInt());
+                connectionDetail.setAppName(it.getValue("app_name").asString());
+                connectionDetail.setDeviceId(it.getValue("device_id").asInt());
 
-                // spdlog::trace("data-set for active devices, Name: {}, event_id: {}", entry["name"].asString(), entry["event_id"].asInt());
+                spdlog::trace("data-set for active devices, Name: {}, event_id: {}", entry["name"].asString(), entry["event_id"].asInt());
 
                 connectionDetails.push_back(connectionDetail);
             }
