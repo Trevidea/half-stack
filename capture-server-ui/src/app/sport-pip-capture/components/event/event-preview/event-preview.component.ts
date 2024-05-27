@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { DateTimeService } from '../event-utility/date-time.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalConfig, ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+import { SocketService } from 'app/sport-pip-capture/models/socket.service';
 
 @Component({
   selector: 'app-event-preview',
@@ -15,9 +17,11 @@ export class EventPreviewComponent implements OnInit {
 
   private countdownInterval: any;
   @Output() closePreview = new EventEmitter()
-  constructor(public dateTimeservice: DateTimeService, private modalService: NgbModal,
+  
 
+  constructor(public dateTimeservice: DateTimeService, private modalService: NgbModal
   ) { }
+
 
   ngOnInit(): void {
     console.log(this.datasource)

@@ -29,11 +29,12 @@ export class ConnectionStartPresenter implements OnInit {
   }
 
   ngOnInit(): void {
-    Transformer._ComposeLiveObjectAsync(
-      this.socketService._onLiveEvent(),
-      this.socketDs,
-      LiveEventBuilder
-    );
+    //TODO:SOCKET.IO.ERROR
+    // Transformer._ComposeLiveObjectAsync(
+    //   this.socketService._onLiveEvent(),
+    //   this.socketDs,
+    //   LiveEventBuilder
+    // );
     this.ds = this.socketDs;
   }
   ListType(e: any) {

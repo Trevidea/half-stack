@@ -55,6 +55,7 @@ namespace ControlServer
                 char query[128] = {'\0'};
                 snprintf(query, 128, "device_id=%s&pin='%s'&app_name='%s'",
                          deviceId.c_str(), pin.c_str(), appName.c_str());
+                
                 const auto result = EventDevice::find<EventDevice>(query);
                 bool allowed = (result.size() > 0);
                 if (allowed)
