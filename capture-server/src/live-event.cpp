@@ -1,6 +1,7 @@
 #include "live-event.h"
 #include "gateway.h"
 #include "base.h"
+#include "event-device.h"
 
 LiveEvent::LiveEvent() {}
 
