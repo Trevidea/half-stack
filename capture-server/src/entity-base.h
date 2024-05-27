@@ -11,6 +11,7 @@
 #include "pgresult.h"
 #include <tuple>
 #include "half-stack-exceptions.h"
+#include "data-set.h"
 
 class EntityBase : public Handler
 {
@@ -89,7 +90,7 @@ protected:
     void list(const Request &request, Response &response);
     void find(const Request &request, Response &response);
     void view(const Request &request, Response &response, const std::string &view);
-    Model  view(const std::string &view, const std::string &query);
+    DataSet  view(const std::string &view, const std::string &query);
     void function(const Request &request, Response &response, const std::string &func);
     Json::Value function(const std::string &funcName, const std::string &params);
     Json::Value create(const Request &request, Response &response);
