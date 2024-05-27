@@ -157,11 +157,6 @@ std::vector<ConnectionDetail> LiveEvent::connectionDetails()
 }
 
 void LiveEvent::setConnectionDetails(const std::vector<ConnectionDetail>& connectionDetails) {
-
-    if (connectionDetails.empty())
-    {
-        throw ExEntityNotSet();
-    }
     
     Json::Value details(Json::arrayValue);
     for (auto detail : connectionDetails) {
