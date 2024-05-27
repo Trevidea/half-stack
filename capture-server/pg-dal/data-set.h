@@ -28,7 +28,7 @@ public:
     Iterator iterator() const;
 
 private:
-    const Json::Value& json;
+    const Json::Value json;
 };
 
 #endif // DATASET_H
