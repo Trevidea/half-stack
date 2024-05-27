@@ -67,26 +67,15 @@ void EventRunner::publishLiveData()
     le.setTitle(this->m_event.title());
     le.setStatus(this->m_event.status());
     le.setType(this->m_event.type());
-    // le.setSport("Football");
-    // le.setLevel("University");
-    // le.setProgram("Men");
-    // le.setYear(2024);
-    // le.setDtEvent("2024-04-15");
-    // le.setTime(1402);
-    // le.setVenueLocation("Delhi");
-    // le.setDetailType("Scheduled Event");
-    // le.setDetailStreetAddress("Sector 32");
-    // le.setDetailCityAddress("Delhi");
-    // le.setTitle("Manchester vs Barcelona");
-    // le.setStatus("Upcoming");
 
     spdlog::trace("Checking if s_deviceCountDirty is true");
     // if (EventRunner::s_deviceCountDirty.get())
     {
         // EventRunner::s_deviceCountDirty = false;
         spdlog::trace("Calling EventDevice().activeDevices with event id: {}", this->m_event.id());
-        auto activeDevices = EventDevice().activeDevices(this->m_event.id());
+        DataSet activeDevices = EventDevice().activeDevices(this->m_event.id());
         auto it = activeDevices.iterator();
+        std::vector<ConnectionDetail> connectionDetails;
         while (it.hasNext())
         {
             auto entry = it.next();
@@ -106,28 +95,11 @@ void EventRunner::publishLiveData()
 
             spdlog::trace("data-set for active devices, Name: {}, event_id: {}", entry["name"].asString(), entry["event_id"].asInt());
 
-            le.setConnectionDetails({connectionDetail});
+            connectionDetails.push_back(connectionDetail);
         }
+        
+        le.setConnectionDetails({connectionDetails});
     }
-
-    // for (auto &&eventDevice : this->m_activeDevices)
-    // {
-
-    //     ConnectionDetail connectionDetail;
-    //     connectionDetail.setId(1);
-    //     connectionDetail.setName("Coach S.");
-    //     connectionDetail.setRole("Subscriber");
-    //     connectionDetail.setLocation("Press Box");
-    //     connectionDetail.setDevice("iPad15");
-    //     connectionDetail.setNetwork("Penfield-532");
-    //     connectionDetail.setQuality(QualityEnum::Good);
-    //     connectionDetail.setIpAddress("192.168.1.1");
-    //     connectionDetail.setTransmitStatus(TransmitEnum::Streaming);
-    //     connectionDetail.setFilesReceived(10);
-    //     connectionDetail.setRetries(3);
-
-    //     le.setConnectionDetails({connectionDetail});
-    // }
 
     std::string liveData = le.toResponse();
 
