@@ -42,6 +42,21 @@ void EventRunner::publishPreviewData()
         this->m_activeDevices = eventDevice.find<EventDevice>(query);
     }
 
+    // Set activeDevices
+    std::vector<ConnectionDetail> connectionDetails;
+    for (auto &&eventDevice : this->m_activeDevices)
+    {
+        ConnectionDetail connectionDetail;
+        connectionDetail.setId(eventDevice.deviceId());
+        connectionDetail.setName(eventDevice.name());
+        connectionDetail.setLocation(eventDevice.location());
+        connectionDetail.setDeviceType(eventDevice.deviceType());
+        connectionDetail.setNetwork(eventDevice.network());
+        connectionDetail.setDirection(eventDevice.direction());
+        connectionDetail.setPin(eventDevice.pin());
+        connectionDetail.setAppName(eventDevice.appName());
+        connectionDetails.push_back(connectionDetail);
+    }
     ep.setActiveDevices(this->m_activeDevices);
 
     std::string previewData = ep.toResponse();
