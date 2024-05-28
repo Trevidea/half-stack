@@ -32,42 +32,17 @@ void EventRunner::publishPreviewData()
     ep.setStatus(this->m_event.status());
     ep.setEventType(this->m_event.type());
 
-    // if (EventRunner::s_deviceCountDirty.get())
-    // {
-    //     EventRunner::s_deviceCountDirty = false;
-
-    //     EventDevice eventDevice;
-    //     char query[128] = {'\0'};
-    //     snprintf(query, 128, "event_id=%d", this->m_event.id());
-    //     this->m_activeDevices = eventDevice.find<EventDevice>(query);
-    // }
-
-    spdlog::trace("Calling EventDevice().activeDevices with event id: {}", this->m_event.id());
-    DataSet activeDevices = EventDevice().activeDevices(this->m_event.id());
-    DataSet::Iterator it = activeDevices.iterator();
-    std::vector<EventDevice> m_activeDevices;
-
-    while (it.hasNext())
+    if (EventRunner::s_deviceCountDirty.get())
     {
-        Json::Value entry = it.next();
-        if (!entry.isNull())
-        {
-            EventDevice device;
-            device.setDeviceId(it.getValue("device_id").asInt());
-            device.setDeviceType(it.getValue("deviceType").asString());
-            device.setLocation(it.getValue("location").asString());
-            device.setNetwork(it.getValue("network").asString());
-            device.setAppName(it.getValue("app_name").asString());
-            device.setPin(it.getValue("pin").asString());
-            device.setDirection(it.getValue("direction").asInt());
-            m_activeDevices.push_back(device);
-        }
+        EventRunner::s_deviceCountDirty = false;
+
+        EventDevice eventDevice;
+        char query[128] = {'\0'};
+        snprintf(query, 128, "event_id=%d", this->m_event.id());
+        this->m_activeDevices = eventDevice.find<EventDevice>(query);
     }
 
-    // Set m_activeDevices in EventPreview
-    ep.setActiveDevices(m_activeDevices);
-
-    spdlog::trace("Active devices count: {}", activeDevices.count());
+    ep.setActiveDevices(this->m_activeDevices);
 
     std::string previewData = ep.toResponse();
     spdlog::info("Processing runner for event ID: {}", previewData);
