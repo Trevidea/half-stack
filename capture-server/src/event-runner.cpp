@@ -42,8 +42,9 @@ void EventRunner::publishPreviewData()
     //     this->m_activeDevices = eventDevice.find<EventDevice>(query);
     // }
 
+    spdlog::trace("Calling EventDevice().activeDevices with event id: {}", this->m_event.id());
     DataSet activeDevices = EventDevice().activeDevices(this->m_event.id());
-    std::vector<EventDevice> devices;
+    std::vector<EventDevice> m_activeDevices;
     auto it = activeDevices.iterator();
     while (it.hasNext())
     {
@@ -59,12 +60,12 @@ void EventRunner::publishPreviewData()
             device.setAppName(it.getValue("app_name").asString());
             device.setPin(it.getValue("pin").asString());
             device.setDirection(it.getValue("direction").asInt());
-            devices.push_back(device);
+            m_activeDevices.push_back(device);
 
         }
     }
     
-    ep.setActiveDevices(devices);
+    ep.setActiveDevices(m_activeDevices);
 
     std::string previewData = ep.toResponse();
     spdlog::info("Processing runner for event ID: {}", previewData);
