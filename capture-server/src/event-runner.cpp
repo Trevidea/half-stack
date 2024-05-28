@@ -42,30 +42,7 @@ void EventRunner::publishPreviewData()
         this->m_activeDevices = eventDevice.find<EventDevice>(query);
     }
 
-    // Query active devices for preview data as well
-    DataSet activeDevicesPreview = EventDevice().activeDevices(this->m_event.id());
-    std::vector<EventDevice> activeDevices; // Vector to store EventDevice objects
-    auto it = activeDevicesPreview.iterator();
-    while (it.hasNext())
-    {
-        auto entry = it.next();
-
-        if (!entry.isNull())
-        {
-            // Convert ConnectionDetail objects to EventDevice objects
-            EventDevice eventDevice;
-            eventDevice.setDeviceId(it.getValue("device_id").asInt());
-            eventDevice.setName(it.getValue("name").asString());
-            eventDevice.setLocation(it.getValue("location").asString());
-            eventDevice.setDeviceType(it.getValue("deviceType").asString());
-            eventDevice.setNetwork(it.getValue("network").asString());
-            eventDevice.setDirection(it.getValue("direction").asInt());
-            eventDevice.setPin(it.getValue("pin").asString());
-            eventDevice.setAppName(it.getValue("app_name").asString());
-            activeDevices.push_back(eventDevice);
-        }
-    }
-    ep.setActiveDevices(activeDevices);
+    ep.setActiveDevices(this->m_activeDevices);
 
     std::string previewData = ep.toResponse();
     spdlog::info("Processing runner for event ID: {}", previewData);
