@@ -51,18 +51,16 @@ void EventRunner::publishPreviewData()
 
         if (!entry.isNull())
         {
-            std::string dat1 = Json::FastWriter().write(entry);
             EventDevice eventDevice;
-            eventDevice.setAppName(it.getValue("app_name").asString());
-            eventDevice.setDeviceId(it.getValue("device_id").asInt());
-            eventDevice.setDirection(it.getValue("direction").asInt());
-            eventDevice.setLocation(it.getValue("location").asString());
-            eventDevice.setName(it.getValue("name").asString());
-            eventDevice.setNetwork(it.getValue("network").asString());
-            eventDevice.setPin(it.getValue("pin").asString());
-            eventDevice.setStatus(it.getValue("status").asString());
-            eventDevice.setDeviceType(it.getValue("deviceType").asString());
-            eventDevice.setUserId(it.getValue("user_id").asInt());
+            if (entry.isMember("app_name")) eventDevice.setAppName(entry["app_name"].asString());
+            if (entry.isMember("device_id")) eventDevice.setDeviceId(entry["device_id"].asInt());
+            if (entry.isMember("direction")) eventDevice.setDirection(entry["direction"].asInt());
+            if (entry.isMember("location")) eventDevice.setLocation(entry["location"].asString());
+            if (entry.isMember("name")) eventDevice.setName(entry["name"].asString());
+            if (entry.isMember("network")) eventDevice.setNetwork(entry["network"].asString());
+            if (entry.isMember("pin")) eventDevice.setPin(entry["pin"].asString());
+            if (entry.isMember("deviceType")) eventDevice.setDeviceType(entry["deviceType"].asString());
+
             activeDevices.push_back(eventDevice);
         }
     }
