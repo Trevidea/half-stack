@@ -61,6 +61,9 @@ public:
     int direction() const;
     void setDirection(int value);
 
+    std::string name() const;
+    void setName(const std::string &value);
+
     // Method to check if the combination exists
     bool combinationExists(int eventId, int userId, const std::string &pin);
     DataSet activeDevices(const int eventId)

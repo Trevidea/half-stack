@@ -31,7 +31,7 @@ export class EventPreviewBuilder extends AbstractBuilder<Data.ConnectionPreview,
 }
 export class ActiveDeviceBuilder extends AbstractBuilder<Data.ActiveDevice, ActiveDeviceView> {
   compose(m: Data.ActiveDevice, v: ActiveDeviceView) {
-    m.deviceId = v.deviceId;
+    // m.deviceId = v.deviceId;
     m.deviceType = v.deviceType;
     m.location = v.location;
     m.network = v.network;

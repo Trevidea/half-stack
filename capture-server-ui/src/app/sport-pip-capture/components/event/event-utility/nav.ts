@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class TabStateService {
-  private activeTabSubject = new BehaviorSubject<string>('ongoing'); // Initial value 'ongoing'
+  private activeTabSubject = new BehaviorSubject<string>('on-going'); // Initial value 'ongoing'
   private selectPageSize = new BehaviorSubject<number>(10)
 
   activeTab$ = this.activeTabSubject.asObservable();

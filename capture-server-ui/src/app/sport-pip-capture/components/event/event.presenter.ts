@@ -12,6 +12,7 @@ import { TabStateService } from "./event-utility/nav";
     [datasource]="filteredData | appFilter : searchItem"
     (filter)="onFilter($event)"
     (onTabChange)="onTabChange()"
+    (deleteEvent)="onDeleteEvent()"
   ></app-event>`,
   styleUrls: ["./event.component.scss"],
   encapsulation: ViewEncapsulation.None,

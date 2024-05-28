@@ -11,8 +11,7 @@ export class EventRangeBuilder extends AbstractBuilder<Data.Event, EventView> {
         v.level = m.level;
         v.program = m.program;
         v.sport = m.sport;
-        v.status = this.getEventStatus(moment(`${m.dt_event} ${this.formatTime(m.tm_event)}`, "YYYY-MM-DD HH:mm"), m.id); // This line assigns the status
-        // v.status=m.status;
+        v.status = m.status;
         v.title = m.title;
         v.detail.cityAddress = m?.detail?.cityAddress;
         v.detail.streetAdress = m?.detail?.streetAddress;
@@ -37,11 +36,11 @@ export class EventRangeBuilder extends AbstractBuilder<Data.Event, EventView> {
 
     getEventStatus(eventDateTime: moment.Moment, eventId: any) {
         const currentTime = moment();
-        const twoHoursLater = moment(eventDateTime).add(2, 'hours');
+        const oneMinuteLater = moment(eventDateTime).add(1, 'minutes');
         if (eventDateTime.isAfter(currentTime)) {
             return 'upcoming';
-        } else if (twoHoursLater.isAfter(currentTime) && eventDateTime.isBefore(twoHoursLater)) {
-            return 'ongoing';
+        } else if (oneMinuteLater.isAfter(currentTime) && eventDateTime.isBefore(oneMinuteLater)) {
+            return 'on-going';
         } else {
             return 'past';
         }

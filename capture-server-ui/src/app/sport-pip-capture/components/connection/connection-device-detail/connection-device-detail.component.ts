@@ -29,7 +29,7 @@ export class ConnectionDeviceDetailComponent implements OnInit {
   }
   listOrGrid: string;
   ngOnInit(): void {
-    this.url = `${environment.playerUrl}/${this.deviceDetails._appName}/${this.deviceDetails._deviceId}/llhls.m3u8?pin=${this.deviceDetails._pin}`;
+    this.url = `${environment.playerUrl}/${this.deviceDetails._appName}/${this.deviceDetails._activeDeviceId}/llhls.m3u8?pin=${this.deviceDetails._pin}`;
     console.log(this.url);
   }
 

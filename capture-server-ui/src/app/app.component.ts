@@ -128,30 +128,6 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
 
-
-    // this.socketService.onEventTerminal().subscribe((data: string) => {
-    //   console.log("app.component.ts: data", data);
-    //   try {
-    //     // Remove the single quotes surrounding the JSON string
-    //     const jsonData = data.replace(/'/g, '"');
-    //     const message = JSON.parse(jsonData);
-    //     if (message && typeof message === 'object' && 'terminal' in message) {
-    //       if (message.terminal === "start") {
-    //         this.modalOpenMd('EventStartNotificationsComponent');
-    //       } else if (message.terminal === "stop") {
-    //         this.socketService.disconnectFromRelayService();
-    //         this.endmodalOpenMd();
-    //       } else {
-    //         // Handle other cases if needed
-    //       }
-    //     } else {
-    //       console.error("Invalid message format:", data);
-    //     }
-    //   } catch (error) {
-    //     console.error("Error parsing JSON:", error);
-    //   }
-    // });
-
     // Init wave effect (Ripple effect)
     Waves.init();
 
