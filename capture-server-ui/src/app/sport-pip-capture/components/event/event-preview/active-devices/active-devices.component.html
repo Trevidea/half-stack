@@ -21,7 +21,7 @@
                 <tr *ngFor="let item of datasource;" (click)="onclickRow(item)"
                     [ngClass]="{'cursor-pointer': item?.direction == 1}">
                     <td>{{item?.name}}</td>
-                    <td>{{item?.deviceId}}</td>
+                    <td>{{item?.activeDeviceId}}</td>
                     <td>{{item?.type}}</td>
                     <td>{{item?.status}}</td>
                     <td>{{item?.location}}</td>
