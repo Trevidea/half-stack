@@ -1,15 +1,15 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { environment } from "environments/environment";
-import { RelayStreamComponent } from "./relay-stream/relay-stream.component";
-import { OvenMediaServerFormComponent } from "./oven-media-server-form/oven-media-server-form.component";
 import { OvenMediaServerFormPresenter } from "./oven-media-server-form/oven-media-server-from.Presenter";
 import { RelayStreamPresenter } from "./relay-stream/relay-stream.presenter";
+import { Location } from '@angular/common';
 @Component({
   selector: "app-connection-device-detail",
   templateUrl: "./connection-device-detail.component.html",
   styleUrls: ["./connection-device-detail.component.scss"],
+  encapsulation:ViewEncapsulation.None
 })
 export class ConnectionDeviceDetailComponent implements OnInit {
   @Input() datasource: any
@@ -17,6 +17,7 @@ export class ConnectionDeviceDetailComponent implements OnInit {
   url: string;
   deviceDetails: any
   constructor(
+    private location: Location,
     private router: Router,
     private route: ActivatedRoute,
     private modelService: NgbModal
@@ -33,10 +34,8 @@ export class ConnectionDeviceDetailComponent implements OnInit {
     console.log(this.url);
   }
 
-  back() {
-    this.router.navigate(["connection"], {
-      queryParams: { listOrGrid: `${this.listOrGrid}` },
-    });
+  goBack() {
+    this.location.back();
   }
 
   modalOpen(modalblock: any) {
@@ -49,22 +48,6 @@ export class ConnectionDeviceDetailComponent implements OnInit {
       //  RelayStreamComponent;
     }
 
-    // const modeldata = this.modelService.open(modal, {
-    //   centered: true,
-    //   size: "md",
-    // });
-    // modeldata.componentInstance.eventId = this.datasource.eventId;
-    // this.ds.location.onAddingNewItem(async (e: { modal: Views.ModalHost }) => {
-    //   e.modal.component = TypesPresenter;
-    //   e.modal.properties["key"] = "LOCATION";
-    //   try {
-    //     const data = await e.modal.open();
-    //     if (data) {
-    //       Transformer.ComposeAndSelect(this.ds.location, data.newItem);
-    //     }
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // });
+  
   }
 }

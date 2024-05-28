@@ -2,3 +2,15 @@
 .table:not(.table-dark):not(.table-light) tfoot:not(.thead-dark) th {
   background-color: #fff;
 }
+
+.go-back {
+  background-color: #FDFDFD;
+  color: #000;
+}
+
+.dark-layout {
+  .go-back {
+    background-color: #0a0a0a !important;
+    color: #fff;
+  }
+}
