@@ -167,6 +167,7 @@ void EventPreview::setActiveDevices(const std::vector<EventDevice> &activeDevice
         {
             Json::Value jsonDevice;
             jsonDevice["device_id"] = device.deviceId();
+            jsonDevice["name"] = device.name();
             jsonDevice["deviceType"] = device.deviceType();
             jsonDevice["location"] = device.location();
             jsonDevice["network"] = device.network();
