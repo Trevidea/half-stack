@@ -52,10 +52,8 @@ void EventRunner::publishPreviewData()
         if(!entry.isNull())
         {
             EventDevice device;
-            device.setUserId(it.getValue("userId").asInt());
             device.setDeviceId(it.getValue("device_id").asInt());
             device.setDeviceType(it.getValue("deviceType").asString());
-            device.setStatus(it.getValue("status").asString());
             device.setLocation(it.getValue("location").asString());
             device.setNetwork(it.getValue("network").asString());
             device.setAppName(it.getValue("app_name").asString());
