@@ -32,17 +32,43 @@ void EventRunner::publishPreviewData()
     ep.setStatus(this->m_event.status());
     ep.setEventType(this->m_event.type());
 
-    if (EventRunner::s_deviceCountDirty.get())
+    // if (EventRunner::s_deviceCountDirty.get())
+    // {
+    //     EventRunner::s_deviceCountDirty = false;
+
+    //     EventDevice eventDevice;
+    //     char query[128] = {'\0'};
+    //     snprintf(query, 128, "event_id=%d", this->m_event.id());
+    //     this->m_activeDevices = eventDevice.find<EventDevice>(query);
+    // }
+    
+    spdlog::trace("Calling EventDevice().activeDevices with event id: {}", this->m_event.id());
+    DataSet dataSet = EventDevice().activeDevices(this->m_event.id());
+    std::vector<EventDevice> devices;
+    auto it = dataSet.iterator();
+    while (it.hasNext())
     {
-        EventRunner::s_deviceCountDirty = false;
+        auto entry = it.next();
 
-        EventDevice eventDevice;
-        char query[128] = {'\0'};
-        snprintf(query, 128, "event_id=%d", this->m_event.id());
-        this->m_activeDevices = eventDevice.find<EventDevice>(query);
+        if(!entry.isNull())
+        {
+            std::string dat2 = Json::FastWriter().write(entry);
+            EventDevice device;
+            device.setDeviceId(it.getValue("device_id").asInt());
+            device.setAppName(it.getValue("app_name").asString());
+            device.setDirection(it.getValue("direction").asInt());
+            device.setLocation(it.getValue("location").asString());
+            device.setName(it.getValue("name").asString());
+            device.setNetwork(it.getValue("network").asString());
+            device.setPin(it.getValue("pin").asString());
+            device.setDeviceType(it.getValue("type").asString());
+
+            devices.push_back(device);
+        }
     }
+    
 
-    ep.setActiveDevices(this->m_activeDevices);
+    ep.setActiveDevices(devices);
 
     std::string previewData = ep.toResponse();
     spdlog::info("Processing runner for event ID: {}", previewData);
