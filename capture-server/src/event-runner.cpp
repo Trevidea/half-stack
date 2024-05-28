@@ -43,13 +43,9 @@ void EventRunner::publishPreviewData()
     // }
 
     spdlog::trace("Calling EventDevice().activeDevices with event id: {}", this->m_event.id());
-    // Retrieve active devices
     DataSet activeDevices = EventDevice().activeDevices(this->m_event.id());
-    spdlog::trace("Active devices count: {}", activeDevices.count());
-
-    // Process active devices
-    std::vector<EventDevice> m_activeDevices;
     DataSet::Iterator it = activeDevices.iterator();
+    std::vector<EventDevice> m_activeDevices;
 
     while (it.hasNext())
     {
@@ -57,28 +53,22 @@ void EventRunner::publishPreviewData()
         if (!entry.isNull())
         {
             EventDevice device;
-            // Assuming the field names are correct, adjust accordingly if needed
-            device.setDeviceId(entry["device_id"].asInt());
-            device.setDeviceType(entry["deviceType"].asString());
-            device.setLocation(entry["location"].asString());
-            device.setNetwork(entry["network"].asString());
-            device.setAppName(entry["app_name"].asString());
-            device.setPin(entry["pin"].asString());
-            device.setDirection(entry["direction"].asInt());
+            device.setDeviceId(it.getValue("device_id").asInt());
+            device.setDeviceType(it.getValue("deviceType").asString());
+            device.setLocation(it.getValue("location").asString());
+            device.setNetwork(it.getValue("network").asString());
+            device.setAppName(it.getValue("app_name").asString());
+            device.setPin(it.getValue("pin").asString());
+            device.setDirection(it.getValue("direction").asInt());
             m_activeDevices.push_back(device);
         }
     }
 
-    // Log the retrieved and processed active devices
-    for (const auto &device : m_activeDevices)
-    {
-        spdlog::debug("Active Device: ID={}, Type={}, Location={}",
-                      device.deviceId(), device.deviceType(), device.location());
-    }
-
+    // Set m_activeDevices in EventPreview
     ep.setActiveDevices(m_activeDevices);
 
-    // Publish event preview data
+    spdlog::trace("Active devices count: {}", activeDevices.count());
+
     std::string previewData = ep.toResponse();
     spdlog::info("Processing runner for event ID: {}", previewData);
     Publisher::instance().publish("event-preview", previewData);
