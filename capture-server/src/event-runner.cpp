@@ -32,39 +32,17 @@ void EventRunner::publishPreviewData()
     ep.setStatus(this->m_event.status());
     ep.setEventType(this->m_event.type());
 
-    // if (EventRunner::s_deviceCountDirty.get())
-    // {
-    //     EventRunner::s_deviceCountDirty = false;
-
-    //     EventDevice eventDevice;
-    //     char query[128] = {'\0'};
-    //     snprintf(query, 128, "event_id=%d", this->m_event.id());
-    //     this->m_activeDevices = eventDevice.find<EventDevice>(query);
-    // }
-
-    DataSet activeDevicesData = EventDevice().activeDevices(this->m_event.id());
-    std::vector<EventDevice> activeDevices;
-    auto it = activeDevicesData.iterator();
-    while (it.hasNext())
+    if (EventRunner::s_deviceCountDirty.get())
     {
-        auto entry = it.next();
+        EventRunner::s_deviceCountDirty = false;
 
-        if (!entry.isNull())
-        {
-            std::string dat1 = Json::FastWriter().write(entry);
-            EventDevice eventDevice;
-            eventDevice.setAppName(it.getValue("app_name").asString());
-            eventDevice.setDeviceId(it.getValue("device_id").asInt());
-            eventDevice.setDirection(it.getValue("direction").asInt());
-            eventDevice.setLocation(it.getValue("location").asString());
-            eventDevice.setName(it.getValue("name").asString());
-            eventDevice.setNetwork(it.getValue("network").asString());
-            eventDevice.setPin(it.getValue("pin").asString());
-            eventDevice.setDeviceType(it.getValue("deviceType").asString());
-            activeDevices.push_back(eventDevice);
-        }
+        EventDevice eventDevice;
+        char query[128] = {'\0'};
+        snprintf(query, 128, "event_id=%d", this->m_event.id());
+        this->m_activeDevices = eventDevice.find<EventDevice>(query);
     }
-    ep.setActiveDevices(activeDevices);
+
+    ep.setActiveDevices(this->m_activeDevices);
 
     std::string previewData = ep.toResponse();
     spdlog::info("Processing runner for event ID: {}", previewData);
