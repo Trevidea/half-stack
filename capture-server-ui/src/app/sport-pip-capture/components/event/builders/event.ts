@@ -38,9 +38,9 @@ export class EventRangeBuilder extends AbstractBuilder<Data.Event, EventView> {
         const currentTime = moment();
         const oneMinuteLater = moment(eventDateTime).add(1, 'minutes');
         if (eventDateTime.isAfter(currentTime)) {
-            return 'upcoming';
+            return 'up-coming';
         } else if (oneMinuteLater.isAfter(currentTime) && eventDateTime.isBefore(oneMinuteLater)) {
-            return 'ongoing';
+            return 'on-going';
         } else {
             return 'past';
         }

@@ -14,7 +14,7 @@
     </div>
 
     <ul ngbNav #nav="ngbNav" class="nav-tabs" [(activeId)]="activeTabId" (navChange)="onNavChange($event)">
-      <li ngbNavItem="ongoing" style="margin-top: 5px;">
+      <li ngbNavItem="on-going" style="margin-top: 5px;">
         <a ngbNavLink>Ongoing Events</a>
         <ng-template ngbNavContent>
           <app-on-going-event [datasource]="datasource | slice : startIndex : endIndex "
