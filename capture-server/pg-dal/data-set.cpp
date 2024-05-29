@@ -1,5 +1,6 @@
 #include "data-set.h"
 #include <spdlog/spdlog.h>
+#include <json/json.h>
 
 DataSet::DataSet(const Json::Value &jsonData) : json(jsonData) {}
 
@@ -8,7 +9,8 @@ int DataSet::count() const
     return json["count"].asInt();
 }
 
-DataSet::Iterator::Iterator(const Json::Value &resultData) : result(resultData), index(0) {}
+DataSet::Iterator::Iterator(const Json::Value &resultData) 
+    : result(resultData.isArray() && resultData.size() > 0 && resultData[0].isArray() ? resultData[0] : resultData), index(0) {}
 
 bool DataSet::Iterator::hasNext() const
 {
@@ -21,15 +23,17 @@ Json::Value DataSet::Iterator::next()
     {
         return Json::nullValue;
     }
-    std::string dat1 = Json::FastWriter().write(result);
-    return result.get(static_cast<unsigned int>(index++), Json::Value::null);
+    return result[static_cast<unsigned int>(index++)];
 }
 
 Json::Value DataSet::Iterator::getValue(const std::string &fieldName)
 {
-    const Json::Value &entry = result.get(static_cast<unsigned int>(index-1), Json::Value::null);
-    if (entry.isNull())
+    if (index == 0 || index > result.size())
+    {
         return Json::nullValue;
+    }
+
+    const Json::Value &entry = result[static_cast<unsigned int>(index - 1)];
     for (const auto &obj : entry)
     {
         if (obj["field"].asString() == fieldName)
@@ -37,7 +41,7 @@ Json::Value DataSet::Iterator::getValue(const std::string &fieldName)
             return obj["value"];
         }
     }
-    // If field not found, return an empty string
+    // If field not found, return a null value
     return Json::nullValue;
 }
 
