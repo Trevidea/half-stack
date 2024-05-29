@@ -8,7 +8,7 @@ int DataSet::count() const
     return json["count"].asInt();
 }
 
-DataSet::Iterator::Iterator(const Json::Value &resultData) : result(resultData) {}
+DataSet::Iterator::Iterator(const Json::Value &resultData) : result(resultData), index(0) {}
 
 bool DataSet::Iterator::hasNext() const
 {
@@ -27,7 +27,7 @@ Json::Value DataSet::Iterator::next()
 
 Json::Value DataSet::Iterator::getValue(const std::string &fieldName)
 {
-    const Json::Value &entry = result.get(static_cast<unsigned int>(index), Json::Value::null);
+    const Json::Value &entry = result.get(static_cast<unsigned int>(index-1), Json::Value::null);
     if (entry.isNull())
         return Json::nullValue;
     for (const auto &obj : entry)

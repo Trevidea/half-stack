@@ -52,7 +52,8 @@ void EventRunner::publishPreviewData()
 
         if(!entry.isNull())
         {
-            std::string dat2 = Json::FastWriter().write(entry);
+            spdlog::trace("Processing entry in preview data: {}", entry.toStyledString());
+
             EventDevice device;
             device.setDeviceId(it.getValue("device_id").asInt());
             device.setAppName(it.getValue("app_name").asString());
@@ -107,6 +108,8 @@ void EventRunner::publishLiveData()
 
         if (!entry.isNull())
         {
+            spdlog::trace("Processing entry in live data: {}", entry.toStyledString());
+
             std::string dat1 = Json::FastWriter().write(entry);
             ConnectionDetail connectionDetail;
             connectionDetail.setId(it.getValue("id").asInt());

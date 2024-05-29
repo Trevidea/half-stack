@@ -36,7 +36,8 @@ private:
             {
                 "outputStreamName": "<<stream>>",
                 "id": "<<dump_id>>",
-                "outputPath": "<<out_path>>"
+                "outputPath": "<<out_path>>",
+                "playlist": ["llhls.m3u8"]
             }
     
             )V0G0N";
