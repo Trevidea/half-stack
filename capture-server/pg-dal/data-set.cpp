@@ -8,7 +8,7 @@ int DataSet::count() const
     return json["count"].asInt();
 }
 
-DataSet::Iterator::Iterator(const Json::Value &resultData) : result(resultData) {}
+DataSet::Iterator::Iterator(const Json::Value &resultData) : result(resultData), index(0) {}
 
 bool DataSet::Iterator::hasNext() const
 {
@@ -21,23 +21,20 @@ Json::Value DataSet::Iterator::next()
     {
         return Json::nullValue;
     }
-    std::string dat1 = Json::FastWriter().write(result);
-    return result.get(static_cast<unsigned int>(index++), Json::Value::null);
+    return result[static_cast<unsigned int>(index++)];
 }
 
-Json::Value DataSet::Iterator::getValue(const std::string &fieldName)
+Json::Value DataSet::Iterator::getValue(const std::string &fieldName) const
 {
-    const Json::Value &entry = result.get(static_cast<unsigned int>(index), Json::Value::null);
-    if (entry.isNull())
-        return Json::nullValue;
-    for (const auto &obj : entry)
+    if (index == 0 || index > result.size())
     {
-        if (obj["field"].asString() == fieldName)
-        {
-            return obj["value"];
-        }
+        return Json::nullValue;
     }
-    // If field not found, return an empty string
+    const Json::Value &entry = result[static_cast<unsigned int>(index - 1)];
+    if (entry.isObject() && entry.isMember(fieldName))
+    {
+        return entry[fieldName];
+    }
     return Json::nullValue;
 }
 

@@ -32,16 +32,6 @@ void EventRunner::publishPreviewData()
     ep.setStatus(this->m_event.status());
     ep.setEventType(this->m_event.type());
 
-    // if (EventRunner::s_deviceCountDirty.get())
-    // {
-    //     EventRunner::s_deviceCountDirty = false;
-
-    //     EventDevice eventDevice;
-    //     char query[128] = {'\0'};
-    //     snprintf(query, 128, "event_id=%d", this->m_event.id());
-    //     this->m_activeDevices = eventDevice.find<EventDevice>(query);
-    // }
-    
     spdlog::trace("Calling EventDevice().activeDevices with event id: {}", this->m_event.id());
     DataSet dataSet = EventDevice().activeDevices(this->m_event.id());
     std::vector<EventDevice> devices;
@@ -50,7 +40,7 @@ void EventRunner::publishPreviewData()
     {
         auto entry = it.next();
 
-        if(!entry.isNull())
+        if (!entry.isNull())
         {
             std::string dat2 = Json::FastWriter().write(entry);
             EventDevice device;
@@ -66,12 +56,11 @@ void EventRunner::publishPreviewData()
             devices.push_back(device);
         }
     }
-    
 
     ep.setActiveDevices(devices);
 
     std::string previewData = ep.toResponse();
-    spdlog::info("Processing runner for event ID: {}", previewData);
+    spdlog::info("Processing runner for event ID: {}", this->m_event.id());
     Publisher::instance().publish("event-preview", previewData);
 }
 
