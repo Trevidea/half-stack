@@ -52,7 +52,6 @@ void EventRunner::publishPreviewData()
 
         if(!entry.isNull())
         {
-            std::string dat2 = Json::FastWriter().write(entry);
             EventDevice device;
             device.setDeviceId(it.getValue("device_id").asInt());
             device.setAppName(it.getValue("app_name").asString());
