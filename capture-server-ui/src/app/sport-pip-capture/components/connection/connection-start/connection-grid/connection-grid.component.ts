@@ -15,7 +15,7 @@ export class ConnectionGridComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const param = this.route.snapshot.queryParamMap;
@@ -34,8 +34,8 @@ export class ConnectionGridComponent implements OnInit {
     const id = item.id;
     const isOpen = item.role;
     if (isOpen == "Publisher") {
-      this.router.navigate([`/connection/connection-device-detail/${{ id }}`], {
-        queryParams: { listOrGrid: `grid` },
+      this.router.navigate([`/connection-device-detail`],{
+        queryParams: { devicedetail: JSON.stringify(item) }
       });
     }
   }
