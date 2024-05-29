@@ -46,6 +46,9 @@ public:
 
     std::string appName();
     void setAppName(const std::string& appName);
+
+    int eventId();
+    void setEventId(int eventId);
 };
 
 #endif // CONNECTION_DETAIL_HPP

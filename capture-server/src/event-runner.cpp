@@ -128,6 +128,7 @@ void EventRunner::publishLiveData()
             connectionDetail.setPin(it.getValue("pin").asString());
             connectionDetail.setAppName(it.getValue("app_name").asString());
             connectionDetail.setDeviceId(it.getValue("device_id").asInt());
+            connectionDetail.setEventId(it.getValue("event_id").asInt());
             connectionDetails.push_back(connectionDetail);
         }
     }

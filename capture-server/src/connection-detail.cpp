@@ -38,3 +38,6 @@ void ConnectionDetail::setDeviceId(int deviceId) { m_model["device_id"] = device
 
 std::string ConnectionDetail::appName() { return m_model["app_name"].asString(); }
 void ConnectionDetail::setAppName(const std::string &appName) { m_model["app_name"] = appName; }
+
+int ConnectionDetail::eventId() { return m_model["event_id"].asInt(); }
+void ConnectionDetail::setEventId(int eventId) { m_model["event_id"] = eventId; }
