@@ -18,8 +18,8 @@ std::string ConnectionDetail::network() { return m_model["network"].asString(); 
 void ConnectionDetail::setNetwork(const std::string &network) { m_model["network"] = network; }
 std::string ConnectionDetail::quality() { return m_model["quality"].asString(); }
 void ConnectionDetail::setQuality(const std::string &quality) { m_model["quality"] = quality; }
-std::string ConnectionDetail::ipAddress() { return m_model["ipAddress"].asString(); }
-void ConnectionDetail::setIpAddress(const std::string &ipAddress) { m_model["ipAddress"] = ipAddress; }
+std::string ConnectionDetail::ipAddress() { return m_model["ipaddress"].asString(); }
+void ConnectionDetail::setIpAddress(const std::string &ipAddress) { m_model["ipaddress"] = ipAddress; }
 std::string ConnectionDetail::transmitStatus() { return m_model["transmitStatus"].asString(); }
 void ConnectionDetail::setTransmitStatus(const std::string &transmitStatus) { m_model["transmitStatus"] = transmitStatus; }
 int ConnectionDetail::filesReceived() { return m_model["filesReceived"].asInt(); }

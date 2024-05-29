@@ -62,7 +62,7 @@ void EventRunner::publishPreviewData()
             device.setName(it.getValue("name").asString());
             device.setNetwork(it.getValue("network").asString());
             device.setPin(it.getValue("pin").asString());
-            device.setDeviceType(it.getValue("type").asString());
+            device.setDeviceType(it.getValue("devicetype").asString());
 
             devices.push_back(device);
         }
@@ -120,7 +120,7 @@ void EventRunner::publishLiveData()
             connectionDetail.setDeviceType(it.getValue("devicetype").asString());
             connectionDetail.setNetwork(it.getValue("network").asString());
             connectionDetail.setQuality(it.getValue("quality").asString());
-            connectionDetail.setIpAddress(it.getValue("ip_add").asString());
+            connectionDetail.setIpAddress(it.getValue("ipaddress").asString());
             connectionDetail.setTransmitStatus(it.getValue("transmitstatus").asString());
             connectionDetail.setFilesReceived(it.getValue("filesrecieved").asInt());
             connectionDetail.setRetries(it.getValue("retries").asInt());
