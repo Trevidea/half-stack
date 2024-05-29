@@ -166,16 +166,18 @@ void LiveEvent::setConnectionDetails(const std::vector<ConnectionDetail>& connec
         connectionDetail["role"] = detail.role();
         connectionDetail["location"] = detail.location();
         connectionDetail["device"] = detail.device();
-        connectionDetail["deviceType"] = detail.deviceType();
+        connectionDetail["devicetype"] = detail.deviceType();
         connectionDetail["network"] = detail.network();
         connectionDetail["quality"] = detail.quality();
-        connectionDetail["ipAddress"] = detail.ipAddress();
+        connectionDetail["ipaddress"] = detail.ipAddress();
         connectionDetail["transmitStatus"] = detail.transmitStatus();
         connectionDetail["filesReceived"] = detail.filesReceived();
         connectionDetail["device_id"] = detail.deviceId();
         connectionDetail["pin"] = detail.pin();
         connectionDetail["app_name"] = detail.appName();
         connectionDetail["direction"] = detail.direction();
+        connectionDetail["event_id"] = detail.eventId();
+        connectionDetail["stream_name"] = detail.streamName();
         details.append(connectionDetail);
     }
     m_model["connectionDetails"] = details;

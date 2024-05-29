@@ -62,7 +62,7 @@ void EventRunner::publishPreviewData()
             device.setName(it.getValue("name").asString());
             device.setNetwork(it.getValue("network").asString());
             device.setPin(it.getValue("pin").asString());
-            device.setDeviceType(it.getValue("type").asString());
+            device.setDeviceType(it.getValue("devicetype").asString());
 
             devices.push_back(device);
         }
@@ -117,10 +117,10 @@ void EventRunner::publishLiveData()
             connectionDetail.setRole(it.getValue("role").asString());
             connectionDetail.setLocation(it.getValue("location").asString());
             connectionDetail.setDevice(it.getValue("device").asString());
-            connectionDetail.setDeviceType(it.getValue("deviceType").asString());
+            connectionDetail.setDeviceType(it.getValue("devicetype").asString());
             connectionDetail.setNetwork(it.getValue("network").asString());
             connectionDetail.setQuality(it.getValue("quality").asString());
-            connectionDetail.setIpAddress(it.getValue("ip_add").asString());
+            connectionDetail.setIpAddress(it.getValue("ipaddress").asString());
             connectionDetail.setTransmitStatus(it.getValue("transmitstatus").asString());
             connectionDetail.setFilesReceived(it.getValue("filesrecieved").asInt());
             connectionDetail.setRetries(it.getValue("retries").asInt());
@@ -128,6 +128,8 @@ void EventRunner::publishLiveData()
             connectionDetail.setPin(it.getValue("pin").asString());
             connectionDetail.setAppName(it.getValue("app_name").asString());
             connectionDetail.setDeviceId(it.getValue("device_id").asInt());
+            connectionDetail.setEventId(it.getValue("event_id").asInt());
+            connectionDetail.setStreamName(it.getValue("stream_name").asString());
             connectionDetails.push_back(connectionDetail);
         }
     }
