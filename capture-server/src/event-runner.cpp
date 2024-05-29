@@ -117,7 +117,7 @@ void EventRunner::publishLiveData()
             connectionDetail.setRole(it.getValue("role").asString());
             connectionDetail.setLocation(it.getValue("location").asString());
             connectionDetail.setDevice(it.getValue("device").asString());
-            connectionDetail.setDeviceType(it.getValue("deviceType").asString());
+            connectionDetail.setDeviceType(it.getValue("devicetype").asString());
             connectionDetail.setNetwork(it.getValue("network").asString());
             connectionDetail.setQuality(it.getValue("quality").asString());
             connectionDetail.setIpAddress(it.getValue("ip_add").asString());

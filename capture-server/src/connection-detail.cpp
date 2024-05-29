@@ -12,8 +12,8 @@ std::string ConnectionDetail::location() { return m_model["location"].asString()
 void ConnectionDetail::setLocation(const std::string &location) { m_model["location"] = location; }
 std::string ConnectionDetail::device() { return m_model["device"].asString(); }
 void ConnectionDetail::setDevice(const std::string &device) { m_model["device"] = device; }
-std::string ConnectionDetail::deviceType() { return m_model["deviceType"].asString(); }
-void ConnectionDetail::setDeviceType(const std::string &device) { m_model["deviceType"] = device; }
+std::string ConnectionDetail::deviceType() { return m_model["devicetype"].asString(); }
+void ConnectionDetail::setDeviceType(const std::string &device) { m_model["devicetype"] = device; }
 std::string ConnectionDetail::network() { return m_model["network"].asString(); }
 void ConnectionDetail::setNetwork(const std::string &network) { m_model["network"] = network; }
 std::string ConnectionDetail::quality() { return m_model["quality"].asString(); }
