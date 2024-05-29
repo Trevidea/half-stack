@@ -28,7 +28,7 @@
         <a ngbNavLink>Upcoming Events</a>
         <ng-template ngbNavContent>
           <app-up-coming-event [datasource]="datasource | slice : startIndex : endIndex"
-            *ngIf="gridView"></app-up-coming-event>
+            (onDeleteEvent)="deleteEvent.emit($event)" *ngIf="gridView"></app-up-coming-event>
           <app-upcoming-events-list *ngIf="!gridView"
             [datasource]="datasource | slice : startIndex : endIndex"></app-upcoming-events-list>
         </ng-template>
@@ -37,7 +37,8 @@
       <li ngbNavItem="past" style="margin-top: 5px;">
         <a ngbNavLink>Past Events</a>
         <ng-template ngbNavContent>
-          <app-past-event [datasource]="datasource | slice : startIndex : endIndex" *ngIf="gridView"></app-past-event>
+          <app-past-event [datasource]="datasource | slice : startIndex : endIndex" *ngIf="gridView"
+            (onDeleteEvent)="deleteEvent.emit($event)"></app-past-event>
           <app-past-events-list *ngIf="!gridView"
             [datasource]="datasource | slice : startIndex : endIndex"></app-past-events-list>
         </ng-template>

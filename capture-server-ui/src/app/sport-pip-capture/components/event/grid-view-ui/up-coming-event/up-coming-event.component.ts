@@ -25,7 +25,7 @@ import { ModelServiceService } from "app/sport-pip-capture/models/model-service.
 })
 export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
   @Input() datasource: any;
-  @Output() onDeleteEvent = new EventEmitter()
+  @Output() onDeleteEvent = new EventEmitter();
   startIndex: number;
   openDetailmodel: boolean;
   public selectBasic: any[] = [];
@@ -119,10 +119,6 @@ export class UpComingEventComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   deleteEvent() {
-    this.Modelservice.delete("event", this.eventId).subscribe((data) => {
-      console.log("data", data);
-      this.onDeleteEvent.emit()
-
-    });
+     this.onDeleteEvent.emit(this.eventId)
   }
 }

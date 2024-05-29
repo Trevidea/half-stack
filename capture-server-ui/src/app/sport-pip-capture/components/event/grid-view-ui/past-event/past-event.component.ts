@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { UI } from "../../event-utility/event-ui-interface";
 import { Router } from "@angular/router";
@@ -10,7 +10,8 @@ import { Router } from "@angular/router";
   encapsulation: ViewEncapsulation.None,
 })
 export class PastEventComponent implements OnInit {
-  @Input() datasource: any = [{}];
+  @Input() datasource: any;
+  @Output() onDeleteEvent = new EventEmitter();
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
   eventId: number;
@@ -23,7 +24,7 @@ export class PastEventComponent implements OnInit {
       type: "feather",
       action: () => { },
     },
-    { label: "Remove Event", icon: "trash", type: "feather", action: () => { } },
+    { label: "Remove Event", icon: "trash", type: "feather", action: () => this.deleteEvent() },
   ];
   constructor(private modalService: NgbModal, private router: Router) { }
 
@@ -59,5 +60,10 @@ export class PastEventComponent implements OnInit {
       queryParams: { id: this.eventId },
     });
   }
+
+  deleteEvent() {
+    this.onDeleteEvent.emit(this.eventId)
+  }
+
 
 }

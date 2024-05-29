@@ -19,8 +19,8 @@ import { EventEndNotifictionsComponent } from '../event-notifications/event-end-
 export class EventComponent implements OnInit {
   @Input() datasource: any
   @Output() filter = new EventEmitter<Data.FilterParams>();
-  @Output() onTabChange = new EventEmitter()
-  @Output() deleteEvent = new EventEmitter()
+  @Output() onTabChange = new EventEmitter();
+  @Output() deleteEvent = new EventEmitter();
   
   gridView: boolean = true
   activeTabId: string;

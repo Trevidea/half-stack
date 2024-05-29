@@ -27,7 +27,7 @@ export class OnGoingEventComponent implements OnInit, OnDestroy, OnChanges {
   private countdownInterval: any;
   dropdownItems: UI.DropDownMenuItem[] = [
     {
-      label: "Edit Event",
+      label: "Edit {t}",
       icon: "edit",
       type: "feather",
       action: () => this.editOnDemandEvent(),

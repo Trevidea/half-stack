@@ -12,7 +12,7 @@ import { TabStateService } from "./event-utility/nav";
     [datasource]="filteredData | appFilter : searchItem"
     (filter)="onFilter($event)"
     (onTabChange)="onTabChange()"
-    (deleteEvent)="onDeleteEvent()"
+    (deleteEvent)="onDeleteEvent($event)"
   ></app-event>`,
   styleUrls: ["./event.component.scss"],
   encapsulation: ViewEncapsulation.None,
@@ -34,6 +34,10 @@ export class EventPresenter implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadEventsList();
+  }
+
+  loadEventsList() {
     Transformer.ComposeCollectionAsync(
       this.service.eventList(),
       this.ds.event,
@@ -43,6 +47,7 @@ export class EventPresenter implements OnInit {
       this.filteredData = this.filterEvents(this.ds.event, this.query);
     });
   }
+
 
   onFilter(filter: Data.FilterParams) {
     setTimeout(() => {
@@ -67,9 +72,10 @@ export class EventPresenter implements OnInit {
     });
   }
 
-  onDeleteEvent() {
-    this.query.status = this.tabStateService.getActiveTab();
-    this.onFilter(this.query);
+  onDeleteEvent(eventId: number) {
+    this.service.delete("event", eventId).subscribe((data) => {
+      this.loadEventsList();
+    });
   }
-  
+
 }
