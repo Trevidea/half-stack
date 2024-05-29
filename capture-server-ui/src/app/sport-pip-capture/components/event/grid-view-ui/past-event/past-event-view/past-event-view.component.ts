@@ -10,7 +10,7 @@ import { PlyrComponent } from 'ngx-plyr';
 })
 export class PastEventViewComponent implements OnInit {
   // url = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";  /usr/share/ovenmediaengine/dumps/michaeljohnson_janicemob_262
-  url = `${environment.spHLSUrl}/default_app_stream5/2023_11_08/llhls.m3u8`;
+  url = `${environment.spHLSUrl}/sophiawilson_sonycam-corder_316/llhls.m3u8`;
   // url = "assets/videos/2/output.m3u8";
   
   constructor() { }

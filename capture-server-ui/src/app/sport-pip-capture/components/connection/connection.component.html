@@ -1,7 +1,7 @@
-<div class="card p-0" *ngIf="!eventStarted">
+<div class="card p-0" *ngIf="!isEventStarted">
   <app-previous-events-connection [datasource]="datasource"
     (startEvent)="isEventStarted($event)"></app-previous-events-connection>
 </div>
-<div *ngIf="eventStarted">
+<div *ngIf="isEventStarted">
   <router-outlet></router-outlet>
 </div>

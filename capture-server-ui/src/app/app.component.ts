@@ -29,6 +29,7 @@ import { SocketService } from "./sport-pip-capture/models/socket.service";
 import { EventStartNotificationsComponent } from "./sport-pip-capture/components/event-notifications/event-start-notifications/event-start-notifications.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EventEndNotifictionsComponent } from "./sport-pip-capture/components/event-notifications/event-end-notifictions/event-end-notifictions.component";
+import { EventRunnerService } from "./sport-pip-capture/components/event-runner/event-runner.service";
 
 @Component({
   selector: "app-root",
@@ -70,7 +71,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private _coreTranslationService: CoreTranslationService,
     private _translateService: TranslateService,
     private socketService: SocketService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private eventRunnerService: EventRunnerService
   ) {
     // Get the application main menu
     this.menu = menu;
@@ -119,9 +121,11 @@ export class AppComponent implements OnInit, OnDestroy {
       }
       console.log("message socket ::", message);
       if (message.terminal === "start") {
+        this.eventRunnerService.setEventStarted(true);
         console.log("message socket ::", message.terminal);
         this.modalOpenMd();
       } else if (message.terminal === "stop") {
+        this.eventRunnerService.setEventStarted(false);
         // this.socketService.disconnectFromRelayService();
         this.endmodalOpenMd();
       } else {
