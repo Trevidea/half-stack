@@ -41,3 +41,6 @@ void ConnectionDetail::setAppName(const std::string &appName) { m_model["app_nam
 
 int ConnectionDetail::eventId() { return m_model["event_id"].asInt(); }
 void ConnectionDetail::setEventId(int eventId) { m_model["event_id"] = eventId; }
+
+std::string ConnectionDetail::streamName() { return m_model["stream_name"].asString(); }
+void ConnectionDetail::setStreamName(const std::string &streamName) { m_model["stream_name"] = streamName; }

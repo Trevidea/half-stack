@@ -177,6 +177,7 @@ void LiveEvent::setConnectionDetails(const std::vector<ConnectionDetail>& connec
         connectionDetail["app_name"] = detail.appName();
         connectionDetail["direction"] = detail.direction();
         connectionDetail["event_id"] = detail.eventId();
+        connectionDetail["stream_name"] = detail.streamName();
         details.append(connectionDetail);
     }
     m_model["connectionDetails"] = details;
