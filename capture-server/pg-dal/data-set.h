@@ -16,13 +16,13 @@ public:
 
         bool hasNext() const;
 
-        Json::Value next();
+        Json::Value next() ;
 
-        Json::Value getValue(const std::string& fieldName) const;
+        Json::Value getValue(const std::string& fieldName) ;
 
     private:
         const Json::Value result;
-        size_t index;
+        size_t index = 0;
     };
 
     Iterator iterator() const;
