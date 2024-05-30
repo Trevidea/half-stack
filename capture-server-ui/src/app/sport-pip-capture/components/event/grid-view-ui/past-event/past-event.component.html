@@ -5,7 +5,7 @@
       <img class="right img-fluid" src="assets/images/pip-image/400-300/130-130/mcquaid.png" />
     </div>
     <div class="card-img-overlay p-0 d-flex flex-column" style="height: 100px;">
-      <div class="menu-container" style="padding: 7px;">
+      <div class="menu-container" style="padding: 7px;" (click)="onMenuclk(item.id)">
         <app-menu-button [dropdownItems]="dropdownItems"></app-menu-button>
       </div>
     </div>

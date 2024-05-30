@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { UI } from "../../event-utility/event-ui-interface";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-past-event",
@@ -9,23 +10,25 @@ import { UI } from "../../event-utility/event-ui-interface";
   encapsulation: ViewEncapsulation.None,
 })
 export class PastEventComponent implements OnInit {
-  @Input() datasource: any = [{}];
+  @Input() datasource: any;
+  @Output() onDeleteEvent = new EventEmitter();
   public selectBasic: any[] = [];
   public selectBasicLoading = false;
-
+  eventId: number;
   dropdownItems: UI.DropDownMenuItem[] = [
-    { label: "Share Event", icon: "share", type: "feather", action: () => {} },
+    { label: "Edit {t}", icon: "edit", type: "feather", action: () => this.editOnDemandEvent() },
+    { label: "Share Event", icon: "share", type: "feather", action: () => { } },
     {
       label: "Upload to server",
       icon: "upload-cloud",
       type: "feather",
-      action: () => {},
+      action: () => { },
     },
-    { label: "Remove Event", icon: "trash", type: "feather", action: () => {} },
+    { label: "Remove Event", icon: "trash", type: "feather", action: () => this.deleteEvent() },
   ];
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   eventShareModalOpen(eventShareModal) {
     this.modalService.open(eventShareModal, {
       centered: true,
@@ -47,4 +50,20 @@ export class PastEventComponent implements OnInit {
     const formattedDate = date.toLocaleDateString("en-US", dateOptions);
     return `${formattedDate}, ${formattedHours}:${formattedMinutes} ${amPm}`;
   }
+
+  onMenuclk(eventId: number) {
+    this.eventId = eventId
+  }
+
+  editOnDemandEvent() {
+    this.router.navigate(["/on-demand-event"], {
+      queryParams: { id: this.eventId },
+    });
+  }
+
+  deleteEvent() {
+    this.onDeleteEvent.emit(this.eventId)
+  }
+
+
 }

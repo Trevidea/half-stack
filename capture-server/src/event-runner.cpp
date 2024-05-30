@@ -98,6 +98,7 @@ void EventRunner::publishLiveData()
         // {
         //     spdlog::trace("Processing entry in live data: {}", entry.toStyledString());
 
+<<<<<<< HEAD
         //     std::string dat1 = Json::FastWriter().write(entry);
         //     ConnectionDetail connectionDetail;
         //     connectionDetail.setId(it.getValue("id").asInt());
@@ -118,6 +119,30 @@ void EventRunner::publishLiveData()
         //     connectionDetail.setDeviceId(it.getValue("device_id").asInt());
         //     connectionDetails.push_back(connectionDetail);
         // }
+=======
+            std::string dat1 = Json::FastWriter().write(entry);
+            ConnectionDetail connectionDetail;
+            connectionDetail.setId(it.getValue("id").asInt());
+            connectionDetail.setName(it.getValue("name").asString());
+            connectionDetail.setRole(it.getValue("role").asString());
+            connectionDetail.setLocation(it.getValue("location").asString());
+            connectionDetail.setDevice(it.getValue("device").asString());
+            connectionDetail.setDeviceType(it.getValue("devicetype").asString());
+            connectionDetail.setNetwork(it.getValue("network").asString());
+            connectionDetail.setQuality(it.getValue("quality").asString());
+            connectionDetail.setIpAddress(it.getValue("ipaddress").asString());
+            connectionDetail.setTransmitStatus(it.getValue("transmitstatus").asString());
+            connectionDetail.setFilesReceived(it.getValue("filesrecieved").asInt());
+            connectionDetail.setRetries(it.getValue("retries").asInt());
+            connectionDetail.setDirection(it.getValue("direction").asInt());
+            connectionDetail.setPin(it.getValue("pin").asString());
+            connectionDetail.setAppName(it.getValue("app_name").asString());
+            connectionDetail.setDeviceId(it.getValue("device_id").asInt());
+            connectionDetail.setEventId(it.getValue("event_id").asInt());
+            connectionDetail.setStreamName(it.getValue("stream_name").asString());
+            connectionDetails.push_back(connectionDetail);
+        }
+>>>>>>> 0e8295d5a100c2cc981f064b321df72407c53c3f
     }
     le.setConnectionDetails(connectionDetails);
 

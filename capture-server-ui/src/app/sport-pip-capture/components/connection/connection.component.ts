@@ -3,6 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { EventService } from "@core/services/event -start.service";
 import Swal from "sweetalert2";
 import { PreviousEventsConnection } from "./connection-data";
+import { EventRunnerService } from "../event-runner/event-runner.service";
 
 @Component({
   selector: "app-connection",
@@ -12,37 +13,22 @@ import { PreviousEventsConnection } from "./connection-data";
 })
 export class ConnectionComponent implements OnInit {
   @Input() datasource: any;
-  @Input() _isEventStarted;
-  eventStarted: boolean;
+  isEventStarted: boolean;
   previousEventsConnection: any;
   header: string[];
-  constructor(private router: Router, private event: EventService) {
-    this.eventStarted = this.event.getEventStatus();
+  
+  constructor(private router: Router, private eventRunnerService: EventRunnerService,) {
     this.previousEventsConnection = PreviousEventsConnection;
+    this.eventRunnerService.isEventStarted$.subscribe(
+      (res) => {
+        console.log(res);
+        this.isEventStarted = res;
+      }
+    );
   }
 
   ngOnInit(): void {
-    if (this._isEventStarted) {
-      this.isEventStarted(this._isEventStarted);
-    }
 
-    if (this.eventStarted === true) {
-      setTimeout(() => {
-        this.event.setEventStarted(false);
-        Swal.fire({
-          title: "Event Ended",
-          text: "this event ended",
-          icon: "success",
-          confirmButtonText: "OK",
-        });
-        this.eventStarted = false;
-        this.router.navigate(["connection"]);
-      }, 1 * 60 * 1000);
-    } else {
-      return;
-    }
   }
-  isEventStarted(e: boolean) {
-    this.eventStarted = e;
-  }
+
 }
