@@ -115,6 +115,7 @@ void EventRunner::publishLiveData()
             connectionDetail.setQuality(entry.getValue("quality").asString());
             connectionDetail.setRole(entry.getValue("role").asString());
             connectionDetail.setId(entry.getValue("id").asInt());
+            connectionDetail.setStreamName(entry.getValue("stream_name").asString());
             connectionDetails.push_back(connectionDetail);
         }
     }
