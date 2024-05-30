@@ -38,10 +38,9 @@ export class ConnectionStartPresenter implements OnInit {
     this.socketSubscription = this.socketService.onTopicMessage('live-event').subscribe((message) => {
       const data: any = JSON.parse(message["data"]);
       console.log(data)
-
       const liveEventData: any = data.result[0][0];
-      this.eventRunnerService.setStartedEventMetaData(liveEventData)
       console.log(liveEventData)
+      this.eventRunnerService.setstartedEventId(liveEventData["event_id"])
       this.ds.id = liveEventData["event_id"]
       this.ds.title = liveEventData["title"];
       this.ds.level = liveEventData["level"];
@@ -56,8 +55,9 @@ export class ConnectionStartPresenter implements OnInit {
       this.ds.connectionDetails.Clear()
       liveEventData["connectionDetails"]?.forEach(element => {
         var connectionDetails: ConnectionDetailsView = new ConnectionDetailsView();
+        connectionDetails.event_id = element["event_id"]
         connectionDetails.device = element["device"];
-        connectionDetails.ipAddress = element["ipAddress"];
+        connectionDetails.ipAddress = element["ip_add"];
         connectionDetails.role = element["role"];
         connectionDetails.name = element["name"];
         connectionDetails.quality = element["quality"];

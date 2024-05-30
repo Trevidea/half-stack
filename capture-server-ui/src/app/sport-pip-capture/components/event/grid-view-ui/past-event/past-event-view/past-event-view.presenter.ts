@@ -16,10 +16,11 @@ export class PastEventViewPresenter implements OnInit {
   ds!: PasEventView;
 
   constructor(private modelServiceService: ModelServiceService, private eventRunnerService: EventRunnerService) {
-    this.eventRunnerService.startedEventMetaData$.subscribe(
+   
+    this.eventRunnerService.startedEventId$.subscribe(
       (res) => {
         console.log(res);
-
+        this.eventId = res;
       }
     );
     this.ds = new PasEventView();
@@ -28,7 +29,7 @@ export class PastEventViewPresenter implements OnInit {
   ngOnInit(): void {
 
     Transformer.ComposeCollectionAsync(
-      this.modelServiceService.eventConnectionJsonById(310),
+      this.modelServiceService.eventConnectionJsonById(this.eventId),
       this.ds.connectionDetailsView,
       PastConnectionBuilder
     )

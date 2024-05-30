@@ -9,17 +9,35 @@ import { PlyrComponent } from 'ngx-plyr';
   encapsulation: ViewEncapsulation.None
 })
 export class PastEventViewComponent implements OnInit {
- @Input() datasource:any;
+  @Input() datasource: any;
+  StreamName: string | null = null;
 
-  url = `${environment.spHLSUrl}/sophiawilson_sonycam-corder_316/llhls.m3u8`;
+  url: string;
 
-  
-  constructor() { }
 
-  ngOnInit(): void {
+  constructor() {
   }
 
-  
+  ngOnInit(): void {
+
+    setTimeout(() => {
+      this.datasource?.connectionDetailsView?.forEach(item => {
+        if (item && item._direction === 1) {
+          this.StreamName = item._sreamName;
+          console.log('Stream Name Saved:', item, this.StreamName);
+
+          this.url = `${environment.spHLSUrl}/${this.StreamName}/llhls.m3u8`
+          console.log(this.url);
+        }
+      });
+    }, 1000)
+
+
+
+  }
+
+
+
 
 
 

@@ -7,7 +7,9 @@ import { BehaviorSubject } from 'rxjs';
 export class EventRunnerService {
   private isEventStarted = new BehaviorSubject<boolean>(false);
   private startedEventMetaData = new BehaviorSubject<any>(null);
+  private startedEventId = new BehaviorSubject<number>(null);
 
+  startedEventId$ = this.startedEventId.asObservable();
   isEventStarted$ = this.isEventStarted.asObservable();
   startedEventMetaData$ = this.startedEventMetaData.asObservable();
 
@@ -18,8 +20,14 @@ export class EventRunnerService {
   }
 
   setStartedEventMetaData(value: any) {
-    console.log(value)
+    // console.log(value)
+    this.startedEventId.next(value)
     this.startedEventMetaData.next(value)
   }
 
+  setstartedEventId(value: number) {
+    // console.log(value)
+    this.startedEventId.next(value)
+
+  }
 }
