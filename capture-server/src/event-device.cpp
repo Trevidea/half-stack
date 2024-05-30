@@ -57,6 +57,14 @@ void EventDevice::setDeviceId(int value)
 {
     this->set(value, "device_id");
 }
+std::string EventDevice::deviceName() const
+{
+    return this->m_model.get<std::string>("device");
+}
+void EventDevice::setDeviceName(const std::string &value)
+{
+    this->set(value, "device");
+}
 
 std::string EventDevice::deviceType() const
 {

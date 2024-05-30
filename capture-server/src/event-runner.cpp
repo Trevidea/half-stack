@@ -32,16 +32,6 @@ void EventRunner::publishPreviewData()
     ep.setStatus(this->m_event.status());
     ep.setEventType(this->m_event.type());
 
-    // if (EventRunner::s_deviceCountDirty.get())
-    // {
-    //     EventRunner::s_deviceCountDirty = false;
-
-    //     EventDevice eventDevice;
-    //     char query[128] = {'\0'};
-    //     snprintf(query, 128, "event_id=%d", this->m_event.id());
-    //     this->m_activeDevices = eventDevice.find<EventDevice>(query);
-    // }
-    
     spdlog::trace("Calling EventDevice().activeDevices with event id: {}", this->m_event.id());
     DataSet dataSet = EventDevice().activeDevices(this->m_event.id());
     std::vector<EventDevice> devices;
@@ -49,25 +39,23 @@ void EventRunner::publishPreviewData()
     while (it.hasNext())
     {
         auto entry = it.next();
-
-        if(!entry.isNull())
+        if (!entry.empty())
         {
-            spdlog::trace("Processing entry in preview data: {}", entry.toStyledString());
-
+            spdlog::trace("Getting data from DataSet::Iterator::Entry..devicename={}, type={}, direction={}", entry.getValue("device").asString(), entry.getValue("devicetype").asString(), entry.getValue("direction").asInt());
             EventDevice device;
-            device.setDeviceId(it.getValue("device_id").asInt());
-            device.setAppName(it.getValue("app_name").asString());
-            device.setDirection(it.getValue("direction").asInt());
-            device.setLocation(it.getValue("location").asString());
-            device.setName(it.getValue("name").asString());
-            device.setNetwork(it.getValue("network").asString());
-            device.setPin(it.getValue("pin").asString());
-            device.setDeviceType(it.getValue("type").asString());
-
+            device.setDeviceId(entry.getValue("device_id").asInt());
+            device.setDeviceName(entry.getValue("device").asString());
+            device.setAppName(entry.getValue("app_name").asString());
+            device.setDirection(entry.getValue("direction").asInt());
+            device.setLocation(entry.getValue("location").asString());
+            device.setName(entry.getValue("name").asString());
+            device.setNetwork(entry.getValue("network").asString());
+            device.setPin(entry.getValue("pin").asString());
+            device.setDeviceType(entry.getValue("devicetype").asString());
+            device.merge();
             devices.push_back(device);
         }
     }
-    
 
     ep.setActiveDevices(devices);
 
@@ -106,30 +94,30 @@ void EventRunner::publishLiveData()
     {
         auto entry = it.next();
 
-        if (!entry.isNull())
-        {
-            spdlog::trace("Processing entry in live data: {}", entry.toStyledString());
+        // if (!entry.isNull())
+        // {
+        //     spdlog::trace("Processing entry in live data: {}", entry.toStyledString());
 
-            std::string dat1 = Json::FastWriter().write(entry);
-            ConnectionDetail connectionDetail;
-            connectionDetail.setId(it.getValue("id").asInt());
-            connectionDetail.setName(it.getValue("name").asString());
-            connectionDetail.setRole(it.getValue("role").asString());
-            connectionDetail.setLocation(it.getValue("location").asString());
-            connectionDetail.setDevice(it.getValue("device").asString());
-            connectionDetail.setDeviceType(it.getValue("deviceType").asString());
-            connectionDetail.setNetwork(it.getValue("network").asString());
-            connectionDetail.setQuality(it.getValue("quality").asString());
-            connectionDetail.setIpAddress(it.getValue("ip_add").asString());
-            connectionDetail.setTransmitStatus(it.getValue("transmitstatus").asString());
-            connectionDetail.setFilesReceived(it.getValue("filesrecieved").asInt());
-            connectionDetail.setRetries(it.getValue("retries").asInt());
-            connectionDetail.setDirection(it.getValue("direction").asInt());
-            connectionDetail.setPin(it.getValue("pin").asString());
-            connectionDetail.setAppName(it.getValue("app_name").asString());
-            connectionDetail.setDeviceId(it.getValue("device_id").asInt());
-            connectionDetails.push_back(connectionDetail);
-        }
+        //     std::string dat1 = Json::FastWriter().write(entry);
+        //     ConnectionDetail connectionDetail;
+        //     connectionDetail.setId(it.getValue("id").asInt());
+        //     connectionDetail.setName(it.getValue("name").asString());
+        //     connectionDetail.setRole(it.getValue("role").asString());
+        //     connectionDetail.setLocation(it.getValue("location").asString());
+        //     connectionDetail.setDevice(it.getValue("device").asString());
+        //     connectionDetail.setDeviceType(it.getValue("deviceType").asString());
+        //     connectionDetail.setNetwork(it.getValue("network").asString());
+        //     connectionDetail.setQuality(it.getValue("quality").asString());
+        //     connectionDetail.setIpAddress(it.getValue("ip_add").asString());
+        //     connectionDetail.setTransmitStatus(it.getValue("transmitstatus").asString());
+        //     connectionDetail.setFilesReceived(it.getValue("filesrecieved").asInt());
+        //     connectionDetail.setRetries(it.getValue("retries").asInt());
+        //     connectionDetail.setDirection(it.getValue("direction").asInt());
+        //     connectionDetail.setPin(it.getValue("pin").asString());
+        //     connectionDetail.setAppName(it.getValue("app_name").asString());
+        //     connectionDetail.setDeviceId(it.getValue("device_id").asInt());
+        //     connectionDetails.push_back(connectionDetail);
+        // }
     }
     le.setConnectionDetails(connectionDetails);
 

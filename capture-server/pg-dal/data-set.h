@@ -16,10 +16,17 @@ public:
 
         bool hasNext() const;
 
-        Json::Value next() ;
 
-        Json::Value getValue(const std::string& fieldName) ;
-
+        class Entry {
+            public:
+                Entry(const Json::Value& entr);
+                Json::Value getValue(const std::string& fieldName) ;
+                inline bool empty() const { return entry.isNull(); }
+            private:
+                const Json::Value entry;
+            
+        };
+        Entry next() ;
     private:
         const Json::Value result;
         size_t index = 0;

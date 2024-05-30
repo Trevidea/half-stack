@@ -63,6 +63,9 @@ public:
 
     std::string name() const;
     void setName(const std::string &value);
+    
+    std::string deviceName() const;
+    void setDeviceName(const std::string &value);
 
     // Method to check if the combination exists
     bool combinationExists(int eventId, int userId, const std::string &pin);
@@ -71,7 +74,6 @@ public:
         char query[128] = {'\0'};
         snprintf(query, 128, "event_id=%d", eventId);
         return std::move(this->view("vw_event_device", query));
-        
     }
 
 private:
