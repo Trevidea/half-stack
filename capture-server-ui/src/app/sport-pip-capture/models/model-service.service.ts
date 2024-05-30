@@ -11,6 +11,7 @@ import { UserProfileData } from "./user-profile";
 import { DeviceData } from "./device";
 import { PreviousEventsConnectionData } from "./previous-events-connection";
 import { LogService } from "./log.service";
+import { PastConnectionDetailsData } from "./pastconnectionDetail";
 @Injectable({
   providedIn: "root",
 })
@@ -40,17 +41,12 @@ export class ModelServiceService {
     const url = `${this.modelsServerUrl}/${type}`;
     return this._httpClient.get<any>(url);
   }
-
-  readWithQuery(query: string): Observable<any> {
-    const url = `${this.modelsServerUrl}/${query}`;
-    return this._httpClient.get<any>(url);
-  }
-
+ 
   readOne(type: string, id: number): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}?id=${id}`;
-
     return this._httpClient.get<any>(url);
   }
+
 
   getEntitiesByDynamicQuery(
     type: string,
@@ -169,6 +165,7 @@ export class ModelServiceService {
   ): Observable<M[]> {
     return this._getList<I>(resource).pipe(
       map((data: I[]) => {
+        console.log(data)
         return data.map((datum: I) => new type(datum));
       })
     );
@@ -295,7 +292,7 @@ export class ModelServiceService {
   }
 
   eventList(): Observable<Data.Event[]> {
-    return this._data("event", EventData);
+    return this._data("events", EventData);
   }
 
   fetechApplicationDetail(): Observable<any> {
@@ -435,6 +432,10 @@ export class ModelServiceService {
 
   userJson(): Observable<Data.UserProfile[]> {
     return this._data("user-profiles", UserProfileData);
+  }
+
+  eventConnectionJsonById(id: number): Observable<Data.PastConnectionDetails[]> {
+    return this._data(`event-devices?event_id=${id}`, PastConnectionDetailsData);
   }
 
   deviceById(id: number): Observable<Data.Device> {

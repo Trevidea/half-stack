@@ -165,8 +165,8 @@ export namespace Data {
     location: string;
     stream_name: string;
     stream_id: string;
-    app_name:string;
-    direction:number
+    app_name: string;
+    direction: number
   }
 
   export interface Device extends Base {
@@ -218,7 +218,13 @@ export namespace Data {
     filesReceived: number;
     network: string;
   }
-
+  export interface PastConnectionDetails extends Base {
+    id: number;
+    stream_name: string;
+    stream_id: string;
+    event_id: number;
+    direction:number;
+  }
   export enum NetWorkQuality { }
   export enum Type { }
 

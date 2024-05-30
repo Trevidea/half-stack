@@ -51,6 +51,7 @@ export class EventPreviewPresenter implements OnInit, OnDestroy {
       const data: any = JSON.parse(message["data"]);
       const previewData: any = data.result[0][0];
       console.log(previewData)
+      
       this.ds.title = previewData["title"];
       this.ds.level = previewData["level"];
       this.ds.dtEvent = previewData["dtEvent"];
@@ -64,15 +65,16 @@ export class EventPreviewPresenter implements OnInit, OnDestroy {
       this.ds.previewActiveDevice.Clear();
       previewData["activeDevices"].forEach(element => {
         var activeDevice: ActiveDeviceView = new ActiveDeviceView();
+        activeDevice.name=element["name"]
         activeDevice.activeDeviceId = element["device_id"];
-        activeDevice.deviceType = element["type"];
+        activeDevice.deviceType = element["devicetype"];
         activeDevice.location = element["location"];
         activeDevice.network = element["network"];
         activeDevice.user = element["userId"];
         activeDevice.appName = element['app_name'];
         activeDevice.pin = element["pin"];
         activeDevice.direction = element["direction"];
-
+        activeDevice.status=element["status"]
 
         this.ds.previewActiveDevice.Add(activeDevice);
       });

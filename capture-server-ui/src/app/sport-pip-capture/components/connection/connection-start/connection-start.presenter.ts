@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { ConnectionDetailsView, liveEventDetail } from "./views/live-event";
 import { SocketService } from "app/sport-pip-capture/models/socket.service";
 import { Subscription } from "rxjs";
+import { EventRunnerService } from "../../event-runner/event-runner.service";
 
 @Component({
   selector: "app-connection-start-presenter",
@@ -18,7 +19,8 @@ export class ConnectionStartPresenter implements OnInit {
   socketDs!: liveEventDetail;
   private socketSubscription: Subscription;
   constructor(
-    private socketService: SocketService
+    private socketService: SocketService,
+    private eventRunnerService: EventRunnerService
   ) {
     this.ds = new liveEventDetail();
     this.socketDs = new liveEventDetail();
@@ -36,8 +38,11 @@ export class ConnectionStartPresenter implements OnInit {
     this.socketSubscription = this.socketService.onTopicMessage('live-event').subscribe((message) => {
       const data: any = JSON.parse(message["data"]);
       console.log(data)
+
       const liveEventData: any = data.result[0][0];
+      this.eventRunnerService.setStartedEventMetaData(liveEventData)
       console.log(liveEventData)
+      this.ds.id = liveEventData["event_id"]
       this.ds.title = liveEventData["title"];
       this.ds.level = liveEventData["level"];
       this.ds.dtEvent = liveEventData["dtEvent"];
@@ -65,7 +70,7 @@ export class ConnectionStartPresenter implements OnInit {
         connectionDetails.appName = element['app_name'];
         connectionDetails.pin = element["pin"];
         connectionDetails.direction = element["direction"];
-        connectionDetails.activeDeviceId =element["device_id"]
+        connectionDetails.activeDeviceId = element["device_id"]
         this.ds.connectionDetails.Add(connectionDetails);
       });
 
@@ -99,10 +104,12 @@ export class ConnectionStartPresenter implements OnInit {
     return this.ds;
   }
 
-  // ngOnDestroy(): void {
-  //   if (this.socketSubscription) {
-  //     console.log("Socket unsubscribed..")
-  //     this.socketSubscription.unsubscribe();
-  //   }
-  // }
+  ngOnDestroy(): void {
+
+    if (this.socketSubscription) {
+
+      console.log("Socket unsubscribed..", this.socketSubscription)
+      this.socketSubscription.unsubscribe();
+    }
+  }
 }

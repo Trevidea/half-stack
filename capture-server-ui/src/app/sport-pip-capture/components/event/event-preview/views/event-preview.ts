@@ -179,6 +179,24 @@ export class EventPreview implements Views.Datasource {
 
 export class ActiveDeviceView {
 
+  
+  private _name : string;
+  public get name() : string {
+    return this._name;
+  }
+  public set name(v : string) {
+    this._name = v;
+  }
+  
+  
+  private _status : string;
+  public get status() : string {
+    return this._status;
+  }
+  public set status(v : string) {
+    this._status = v;
+  }
+  
   private _network: string;
   public get network(): string {
     return this._network;
