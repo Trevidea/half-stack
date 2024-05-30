@@ -53,6 +53,7 @@ void EventRunner::publishPreviewData()
             device.setPin(entry.getValue("pin").asString());
             device.setEventId(entry.getValue("event_id").asInt());
             device.setDeviceType(entry.getValue("devicetype").asString());
+            device.setStatus(entry.getValue("status").asString());
             device.merge();
             devices.push_back(device);
         }

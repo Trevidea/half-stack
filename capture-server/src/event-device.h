@@ -77,6 +77,8 @@ public:
     }
 
 private:
+
+    void updateStatus();
 };
 
 #endif // EVENTDEVICE_H

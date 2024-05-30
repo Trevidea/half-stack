@@ -141,6 +141,7 @@ std::string EventDevice::ipAdd() const
 void EventDevice::setIpAdd(const std::string &value)
 {
     this->set(value, "ip_add");
+    this->updateStatus();
 }
 
 std::string EventDevice::appName() const
@@ -179,4 +180,16 @@ std::string EventDevice::name() const
 void EventDevice::setName(const std::string &value)
 {
     this->set(value, "name");
+}
+
+void EventDevice::updateStatus()
+{
+    if(!this->ipAdd().empty())
+    {
+        this->setStatus("active");
+    }
+    else
+    {
+        this->setStatus("inactive");
+    }
 }
