@@ -174,6 +174,9 @@ void EventPreview::setActiveDevices(const std::vector<EventDevice> &activeDevice
             jsonDevice["app_name"] = device.appName();
             jsonDevice["pin"] = device.pin();
             jsonDevice["direction"] = device.direction();
+            jsonDevice["event_id"] = device.eventId();
+            jsonDevice["status"] = device.status();
             m_model["activeDevices"].append(jsonDevice);
         }
+    spdlog::trace("Event-Preview data so far..{}", Json::FastWriter().write(m_model));
 }

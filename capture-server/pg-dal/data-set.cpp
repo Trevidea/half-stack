@@ -8,28 +8,26 @@ int DataSet::count() const
     return json["count"].asInt();
 }
 
-DataSet::Iterator::Iterator(const Json::Value &resultData) : result(resultData), index(0) {}
+DataSet::Iterator::Iterator(const Json::Value &resultData) : result(resultData), index{0} {}
+DataSet::Iterator::Entry::Entry(const Json::Value &entr) : entry(entr) {}
 
 bool DataSet::Iterator::hasNext() const
 {
     return index < result.size();
 }
 
-Json::Value DataSet::Iterator::next()
+DataSet::Iterator::Entry DataSet::Iterator::next()
 {
     if (!hasNext())
     {
-        return Json::nullValue;
+        return std::move(Entry(Json::nullValue));
     }
     std::string dat1 = Json::FastWriter().write(result);
-    return result.get(static_cast<unsigned int>(index++), Json::Value::null);
+    return std::move(Entry(result.get(static_cast<unsigned int>(index++), Json::Value::null)));
 }
 
-Json::Value DataSet::Iterator::getValue(const std::string &fieldName)
+Json::Value DataSet::Iterator::Entry::getValue(const std::string &fieldName)
 {
-    const Json::Value &entry = result.get(static_cast<unsigned int>(index-1), Json::Value::null);
-    if (entry.isNull())
-        return Json::nullValue;
     for (const auto &obj : entry)
     {
         if (obj["field"].asString() == fieldName)
@@ -37,7 +35,6 @@ Json::Value DataSet::Iterator::getValue(const std::string &fieldName)
             return obj["value"];
         }
     }
-    // If field not found, return an empty string
     return Json::nullValue;
 }
 
