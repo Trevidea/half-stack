@@ -44,3 +44,4 @@ void ConnectionDetail::setEventId(int eventId) { m_model["event_id"] = eventId; 
 
 std::string ConnectionDetail::streamName() { return m_model["stream_name"].asString(); }
 void ConnectionDetail::setStreamName(const std::string &streamName) { m_model["stream_name"] = streamName; }
+

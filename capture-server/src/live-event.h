@@ -43,6 +43,9 @@ public:
     std::vector<ConnectionDetail> connectionDetails();
     void setConnectionDetails(const std::vector<ConnectionDetail>& connectionDetails);
     // void setActiveDevices(const std::vector<EventDevice> &activeDevices);
+
+    int eventId();
+    void setEventId(int deviceId);
 };
 
 #endif // LIVE_EVENT_HPP

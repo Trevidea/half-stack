@@ -145,6 +145,9 @@ void LiveEvent::setCountdown(const std::string &countdown)
     m_model["countdown"] = countdown;
 }
 
+int LiveEvent::eventId() { return m_model["event_id"].asInt(); }
+void LiveEvent::setEventId(int eventId) { m_model["event_id"] = eventId; }
+
 std::vector<ConnectionDetail> LiveEvent::connectionDetails()
 {
     std::vector<ConnectionDetail> connectionDetails;

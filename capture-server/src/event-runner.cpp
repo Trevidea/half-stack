@@ -84,6 +84,8 @@ void EventRunner::publishLiveData()
     le.setTitle(this->m_event.title());
     le.setStatus(this->m_event.status());
     le.setType(this->m_event.type());
+    le.setEventId(this->m_event.id());
+    
 
     spdlog::trace("Checking if s_deviceCountDirty is true");
     // if (EventRunner::s_deviceCountDirty.get())
