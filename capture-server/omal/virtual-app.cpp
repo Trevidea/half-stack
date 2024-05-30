@@ -168,7 +168,7 @@ void VirtualApp::startDump(const std::string &streamName, const std::string &str
     std::string pass, fail;
 
     const std::string data = this->recipeStartDump(streamName, streamId, outPath);
-
+    spdlog::trace("Start dump request: {}", data);
     int intResult = rest.post(data, pass, fail, "drake", "drake_ome");
     if (intResult != 0)
         throw ExOMResourceAccessException(ep);
@@ -187,6 +187,7 @@ void VirtualApp::stopDump(const std::string &streamName, const std::string &stre
     std::string pass, fail;
     
     const std::string data = this->recipeStopDump(streamName, streamId);
+    spdlog::trace("Stop dump request: {}", data);
 
     int intResult = rest.post(data, pass, fail, "drake", "drake_ome");
     if (intResult != 0)
