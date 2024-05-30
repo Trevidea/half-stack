@@ -52,6 +52,8 @@ public:
 
     std::string streamName();
     void setStreamName(const std::string& streamName);
+
+    
 };
 
 #endif // CONNECTION_DETAIL_HPP

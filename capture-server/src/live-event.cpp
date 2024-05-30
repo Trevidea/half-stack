@@ -145,6 +145,9 @@ void LiveEvent::setCountdown(const std::string &countdown)
     m_model["countdown"] = countdown;
 }
 
+int LiveEvent::eventId() { return m_model["event_id"].asInt(); }
+void LiveEvent::setEventId(int eventId) { m_model["event_id"] = eventId; }
+
 std::vector<ConnectionDetail> LiveEvent::connectionDetails()
 {
     std::vector<ConnectionDetail> connectionDetails;
@@ -169,7 +172,7 @@ void LiveEvent::setConnectionDetails(const std::vector<ConnectionDetail>& connec
         connectionDetail["devicetype"] = detail.deviceType();
         connectionDetail["network"] = detail.network();
         connectionDetail["quality"] = detail.quality();
-        connectionDetail["ipaddress"] = detail.ipAddress();
+        connectionDetail["ip_add"] = detail.ipAddress();
         connectionDetail["transmitStatus"] = detail.transmitStatus();
         connectionDetail["filesReceived"] = detail.filesReceived();
         connectionDetail["device_id"] = detail.deviceId();

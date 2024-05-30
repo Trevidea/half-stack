@@ -84,6 +84,8 @@ void EventRunner::publishLiveData()
     le.setTitle(this->m_event.title());
     le.setStatus(this->m_event.status());
     le.setType(this->m_event.type());
+    le.setEventId(this->m_event.id());
+    
 
     spdlog::trace("Checking if s_deviceCountDirty is true");
     // if (EventRunner::s_deviceCountDirty.get())
@@ -112,7 +114,7 @@ void EventRunner::publishLiveData()
             connectionDetail.setRetries(entry.getValue("retries").asInt());
             connectionDetail.setFilesReceived(entry.getValue("filesrecieved").asInt());
             connectionDetail.setTransmitStatus(entry.getValue("transmitstatus").asString());
-            connectionDetail.setIpAddress(entry.getValue("ip_add").asString());
+            connectionDetail.setIpAddress(entry.getValue("ipaddress").asString());
             connectionDetail.setQuality(entry.getValue("quality").asString());
             connectionDetail.setRole(entry.getValue("role").asString());
             connectionDetail.setId(entry.getValue("id").asInt());
