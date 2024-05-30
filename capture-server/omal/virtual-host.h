@@ -51,14 +51,7 @@ private:
                             "keyPath": "/opt/ovenmediaengine/bin/origin_conf/privkey.pem"
                         }
                     },
-                    "admissionWebhooks": {
-                        "controlServerUrl": "http://192.168.1.50:1437/api/omal/control-server",
-                        "enables": {
-                            "providers": "rtmp,webrtc,srt",
-                            "publishers": "webrtc,llhls"
-                        },
-                        "timeout": 3000
-                    },
+                   
                     "crossDomains": [
                         "*"
                     ]
