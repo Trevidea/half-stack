@@ -169,7 +169,7 @@ void LiveEvent::setConnectionDetails(const std::vector<ConnectionDetail>& connec
         connectionDetail["devicetype"] = detail.deviceType();
         connectionDetail["network"] = detail.network();
         connectionDetail["quality"] = detail.quality();
-        connectionDetail["ipaddress"] = detail.ipAddress();
+        connectionDetail["ip_add"] = detail.ipAddress();
         connectionDetail["transmitStatus"] = detail.transmitStatus();
         connectionDetail["filesReceived"] = detail.filesReceived();
         connectionDetail["device_id"] = detail.deviceId();

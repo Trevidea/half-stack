@@ -112,7 +112,7 @@ void EventRunner::publishLiveData()
             connectionDetail.setRetries(entry.getValue("retries").asInt());
             connectionDetail.setFilesReceived(entry.getValue("filesrecieved").asInt());
             connectionDetail.setTransmitStatus(entry.getValue("transmitstatus").asString());
-            connectionDetail.setIpAddress(entry.getValue("ip_add").asString());
+            connectionDetail.setIpAddress(entry.getValue("ipaddress").asString());
             connectionDetail.setQuality(entry.getValue("quality").asString());
             connectionDetail.setRole(entry.getValue("role").asString());
             connectionDetail.setId(entry.getValue("id").asInt());
