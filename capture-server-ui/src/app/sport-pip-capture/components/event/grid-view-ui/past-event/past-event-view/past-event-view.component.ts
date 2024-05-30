@@ -19,7 +19,7 @@ export class PastEventViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    console.log(this.datasource)
     // setTimeout(() => {
     //   this.datasource?.connectionDetailsView?.forEach(item => {
     //     if (item && item._direction === 1) {

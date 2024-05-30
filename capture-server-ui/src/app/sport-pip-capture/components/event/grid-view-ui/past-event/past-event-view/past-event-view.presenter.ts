@@ -5,6 +5,7 @@ import { PasEventView } from "./view/past-event-view";
 import { PastEventBuilder } from "./builder/past-event";
 import { EventRunnerService } from "app/sport-pip-capture/components/event-runner/event-runner.service";
 import { PastConnectionBuilder } from "./builder/connection";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-past-event-view-presenter',
@@ -15,24 +16,29 @@ export class PastEventViewPresenter implements OnInit {
   eventId: number
   ds!: PasEventView;
 
-  constructor(private modelServiceService: ModelServiceService, private eventRunnerService: EventRunnerService) {
-   
+  constructor(private modelServiceService: ModelServiceService,
+    private route: ActivatedRoute,
+    private eventRunnerService: EventRunnerService) {
+
     this.eventRunnerService.startedEventId$.subscribe(
       (res) => {
-        console.log(res);
-        this.eventId = res;
+        if (res) {
+          this.eventId = res;
+        }
       }
     );
     this.ds = new PasEventView();
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      const id = params["eventId"]
+      if (id) {
+        this.eventId = params["eventId"];
+      }
+    });
 
-    Transformer.ComposeCollectionAsync(
-      this.modelServiceService.eventConnectionJsonById(this.eventId),
-      this.ds.connectionDetailsView,
-      PastConnectionBuilder
-    )
+
 
     if (this.eventId) {
       Transformer.ComposeObjectAsync(
@@ -40,8 +46,11 @@ export class PastEventViewPresenter implements OnInit {
         this.ds,
         PastEventBuilder
       );
-
-
+      Transformer.ComposeCollectionAsync(
+        this.modelServiceService.eventConnectionJsonById(this.eventId),
+        this.ds.connectionDetailsView,
+        PastConnectionBuilder
+      )
     }
   }
 }

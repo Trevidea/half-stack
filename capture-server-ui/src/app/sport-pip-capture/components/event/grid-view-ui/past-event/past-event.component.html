@@ -21,7 +21,7 @@
         </div>
         <div class="col-8 d-flex align-items-center card-btn-conatiner  justify-content-end">
           <div class="card-buttons">
-            <button type="button" class="btn btn-gradient-warning ml-auto btn-sm" routerLink="/past-event-view">
+            <button type="button" class="btn btn-gradient-warning ml-auto btn-sm" routerLink="/past-event-view"  [queryParams]="{eventId: item.id }">
               View
             </button>
           </div>
