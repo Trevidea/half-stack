@@ -166,7 +166,7 @@ void EventRunner::eventStarted()
     this->mp_liveEventPublisher->start();
     spdlog::trace("Live event publisher started");
     char qstr[128] = {'\0'};
-    snprintf(qstr, 128, "event_id=%d" = this->m_event.id());
+    snprintf(qstr, 128, "event_id=%d", this->m_event.id());
 
     auto devices = EntityBase::find<EventDevice>(qstr);
     for (auto &&eventDevice : devices)
@@ -195,7 +195,7 @@ void EventRunner::eventStarted()
 void EventRunner::eventEnded()
 {
     char qstr[128] = {'\0'};
-    snprintf(qstr, 128, "event_id=%d" = this->m_event.id());
+    snprintf(qstr, 128, "event_id=%d", this->m_event.id());
 
     auto devices = EntityBase::find<EventDevice>(qstr);
     for (auto &&eventDevice : devices)

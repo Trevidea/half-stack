@@ -122,6 +122,10 @@ namespace ControlServer
                              endPoint.c_str(), appName.c_str(), streamName.c_str());
                     jsonResponse["new_url"] = newUrl;
                     jsonResponse["allowed"] = true;
+                    for (auto &&elem : result)
+                    {
+                        saveEventDeviceIPAdd(const_cast<EventDevice &>(elem), omRequest["client"]["address"].asString());
+                    }
                 }
                 else
                 {
