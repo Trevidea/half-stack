@@ -85,7 +85,6 @@ void EventRunner::publishLiveData()
     le.setStatus(this->m_event.status());
     le.setType(this->m_event.type());
     le.setEventId(this->m_event.id());
-    
 
     spdlog::trace("Checking if s_deviceCountDirty is true");
     // if (EventRunner::s_deviceCountDirty.get())
@@ -166,7 +165,11 @@ void EventRunner::eventStarted()
     Publisher::instance().publish("event-terminal", "{'terminal':'start'}");
     this->mp_liveEventPublisher->start();
     spdlog::trace("Live event publisher started");
-    for (auto &&eventDevice : this->m_activeDevices)
+    char qstr[128] = {'\0'};
+    snprintf(qstr, 128, "event_id=%d" = this->m_event.id());
+
+    auto devices = EntityBase::find<EventDevice>(qstr);
+    for (auto &&eventDevice : devices)
     {
         std::string appName = eventDevice.appName();
         std::string streamName = eventDevice.streamName();
@@ -191,8 +194,12 @@ void EventRunner::eventStarted()
 
 void EventRunner::eventEnded()
 {
-    for (auto &&eventDevice : this->m_activeDevices)
-    {
+    char qstr[128] = {'\0'};
+    snprintf(qstr, 128, "event_id=%d" = this->m_event.id());
+
+    auto devices = EntityBase::find<EventDevice>(qstr);
+    for (auto &&eventDevice : devices)
+    {       
         std::string appName = eventDevice.appName();
         std::string streamName = eventDevice.streamName();
         std::string streamId = eventDevice.streamId();
