@@ -12,25 +12,25 @@ export class PastEventViewComponent implements OnInit {
   @Input() datasource: any;
   StreamName: string | null = null;
 
-  url: string = `${environment.spHLSUrl}/sophiawilson_sonycam-corder_316/llhls.m3u8`;
+  url: string
 
-
+  // = `${environment.spHLSUrl}/sophiawilson_sonycam-corder_310/llhls.m3u8`;
   constructor() {
   }
 
   ngOnInit(): void {
     console.log(this.datasource)
-    // setTimeout(() => {
-    //   this.datasource?.connectionDetailsView?.forEach(item => {
-    //     if (item && item._direction === 1) {
-    //       this.StreamName = item._sreamName;
-    //       console.log('Stream Name Saved:', item, this.StreamName);
+    setTimeout(() => {
+      this.datasource?.connectionDetailsView?.forEach(item => {
+        if (item && item._direction === 1) {
+          this.StreamName = item._sreamName;
+          console.log('Stream Name Saved:', item, this.StreamName);
 
-    //       this.url = `${environment.spHLSUrl}/${this.StreamName}/llhls.m3u8`
-    //       console.log(this.url);
-    //     }
-    //   });
-    // }, 1000)
+          this.url = `${environment.spHLSUrl}/${this.StreamName}/llhls.m3u8`
+          console.log(this.url);
+        }
+      });
+    }, 90)
 
 
 

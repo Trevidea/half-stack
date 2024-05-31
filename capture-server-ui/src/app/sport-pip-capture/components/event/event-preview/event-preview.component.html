@@ -7,7 +7,7 @@
         <div class="col-12" style="min-height:80vh;">
             <div class="card ">
                 <div class="row g-0">
-                    <div class="col-lg-4 col-md-12 col-12  highlight-box d-flex flex-column">
+                    <div class="col-lg-4 col-md-12 col-12  highlight-box d-flex flex-column" >
                         <div>
                             <div class="card-body pl-1 pr-1 pt-0 pb-0 d-flex flex-column">
                                 <div class="d-flex align-items-center p-1">
@@ -18,7 +18,7 @@
                                     <div class="time-box">
                                         <p class="small mb-0">Event Start in:</p>
                                         <h2 class="large">
-                                            01:20:03
+                                            {{datasource.countdown}}
                                         </h2>
                                     </div>
                                 </div>
@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="ml-1">
                                         <h4 class="mb-0">{{datasource?.title}}</h4>
-                                        <p class="small m-0">{{datasource?.type}}</p>
+                                        <p class="small m-0" >{{datasource?.type | eventTypeTransform}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -58,9 +58,10 @@
 
 
                     </div>
-                    <div class="col-lg-8 col-md-12 col-12 p-0" >
+                    <div class="col-lg-8 col-md-12 col-12 p-0">
 
-                        <app-active-devices [eventId]="eventId" [datasource]="datasource.previewActiveDevice"></app-active-devices>
+                        <app-active-devices [eventId]="eventId"
+                            [datasource]="datasource.previewActiveDevice"></app-active-devices>
 
                     </div>
                 </div>

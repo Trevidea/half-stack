@@ -38,8 +38,6 @@ export class PastEventViewPresenter implements OnInit {
       }
     });
 
-
-
     if (this.eventId) {
       Transformer.ComposeObjectAsync(
         this.modelServiceService.eventJson(this.eventId),
