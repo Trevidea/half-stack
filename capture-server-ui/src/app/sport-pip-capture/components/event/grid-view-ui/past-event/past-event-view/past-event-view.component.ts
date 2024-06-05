@@ -11,9 +11,7 @@ import { PlyrComponent } from 'ngx-plyr';
 export class PastEventViewComponent implements OnInit {
   @Input() datasource: any;
   StreamName: string | null = null;
-
-  url: string
-
+  url: string;
   // = `${environment.spHLSUrl}/sophiawilson_sonycam-corder_310/llhls.m3u8`;
   constructor() {
   }

@@ -24,6 +24,9 @@ RUN git clone --recursive https://github.com/Trevidea/half-stack.git /app
 # Set the working directory
 WORKDIR /app
 
+# Check the contents of the /app directory
+RUN ls -la /app
+
 # Build your project using cmake
 RUN cmake . && \
     make

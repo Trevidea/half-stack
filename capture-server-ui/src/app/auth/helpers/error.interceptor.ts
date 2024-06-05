@@ -35,6 +35,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (event instanceof HttpResponse) {
           // successful response with error property
           if (event.body["Gateway Response"]?.error) {
+            console.log( event.body)
             const massage = event.body["Gateway Response"]?.error;
             this.modalService.openErrorModal(massage);
           }
@@ -47,9 +48,9 @@ export class ErrorInterceptor implements HttpInterceptor {
 
         if (error.status === 0) {
           // Handle network error
-          // this.modalService.openErrorModal(
-          //   "Network error occurred. Please check your internet connection and try again."
-          // );
+          this.modalService.openErrorModal(
+            "Attention: Backend service currently unavailable. We are actively addressing the issue"
+          );
         } else if (error.error instanceof ErrorEvent) {
           // Handling  client-side error
           // this.modalService.openErrorModal(

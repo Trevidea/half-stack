@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  capture-server-ui:
+    build:
+      context: ./capture-server-ui
+      dockerfile: Dockerfile
+    image: capture-server-ui:latest
+    container_name: capture-server-ui-container
+    ports:
+      - "80:80"
+    volumes:
+      - ./capture-server-ui:/app
+
+  # postgres:
+  #   image: postgres:latest
+  #   environment:
+  #     POSTGRES_DB: your_postgres_database
+  #     POSTGRES_USER: your_postgres_user
+  #     POSTGRES_PASSWORD: your_postgres_password
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+
+  # capture-server:
+  #   build:
+  #     context: ./capture-server
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     PG_SRV: postgres
+  #     PG_DBS: your_postgres_database
+  #     PG_USR: your_postgres_user
+  #     PG_PWD: your_postgres_password
+  #   ports:
+  #     - "8080:8080" 
+  #   depends_on:
+  #     - postgres
+
+  llhls-server:
+    build:
+      context: ./llhls-server
+      dockerfile: Dockerfile
+    image: llhls-server:latest
+    container_name: llhls-server-container
+    ports:
+      - "59919:80"
+    volumes:
+      - ./llhls-server:/app
+  
+  html-log:
+    build:
+      context: ./html_log
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081" 

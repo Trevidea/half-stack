@@ -30,7 +30,7 @@ import { BasicCustomContextMenuComponent } from "./main/extensions/context-menu/
 import { SubMenuCustomContextMenuComponent } from "./main/extensions/context-menu/custom-context-menu/sub-menu-custom-context-menu/sub-menu-custom-context-menu.component";
 import { SportPipCaptureModule } from "./sport-pip-capture/sport-pip-capture.module";
 
-import { ExampleModule } from "./sport-pip/example/example.module";
+// import { ExampleModule } from "./sport-pip/example/example.module";
 import { SettingModule } from "./sport-pip-capture/components/setting/setting.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { RouterModule, Routes } from "@angular/router";
@@ -41,11 +41,11 @@ import { DashboardHeaderComponent } from "./capture-dashboard/dashboard-header/d
 import { InlineFormeModule } from "./sport-pip-capture/blocks/inline-modal/inline-form-module";
 
 const appRoutes: Routes = [
-  {
-    path: "example",
-    loadChildren: () =>
-      import("./sport-pip/example/example.module").then((m) => m.ExampleModule),
-  },
+  // {
+  //   path: "example",
+  //   loadChildren: () =>
+  //     import("./sport-pip/example/example.module").then((m) => m.ExampleModule),
+  // },
   {
     path: "sport-pip-capture",
     loadChildren: () =>
@@ -168,7 +168,7 @@ const appRoutes: Routes = [
     LayoutModule,
     ContentHeaderModule,
     SportPipCaptureModule,
-    ExampleModule,
+    // ExampleModule,
     SettingModule,
     InlineFormeModule,
   ],
