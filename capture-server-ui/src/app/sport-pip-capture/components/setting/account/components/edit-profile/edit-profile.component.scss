@@ -1,0 +1,63 @@
+@import "@core/scss/angular/libs/select.component.scss";
+
+.editprofile-details {
+    .card-header {
+        border-block-end: 1px solid #E7E7E7 !important;
+        padding: 16px;
+    }
+
+    .user-avatar {
+        inline-size: 120px;
+        block-size: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+
+    .media-body {
+        margin-top: 10px;
+    }
+}
+
+.link {
+    color: #216093 !important;
+
+}
+
+.text-end {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.append-is-invalid {
+    border-inline-start: 0;
+    border-radius: 0.357rem;
+    border-start-start-radius: 0;
+    border-bottom-left-radius: 0;
+    box-shadow: none;
+    border: 1px solid #DE2E21 !important;
+}
+
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+    border-color: #ea5455;
+    background-image: none !important;
+    background-repeat: no-repeat;
+}
+
+//.input-group-text .append-is-invalid {
+//     display: flex;
+//     align-items: center;
+//     padding: 0.438rem 1rem;
+//     margin-bottom: 0;
+//     font-size: 1rem;
+//     font-weight: 400;
+//     line-height: 1.45;
+//     color: #6e6b7b;
+//     text-align: center;
+//     white-space: nowrap;
+//     background-color: white;
+//     border: 1px solid #DE2E21 !important;
+//     border-radius: 0.357rem;
+// }

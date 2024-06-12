@@ -49,6 +49,7 @@ import { ModuleConfigurationComponent } from './media-server/components/module-c
 import { PortBindingConfigComponent } from './media-server/components/port-binding-config/port-binding-config.component';
 import { ModuleConfigFormComponent } from './media-server/components/module-configuration/module-config-form/module-config-form.component';
 import { PortBindingFormComponent } from './media-server/components/port-binding-config/port-binding-form/port-binding-form.component';
+import { EditProfileComponent } from './account/components/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { PortBindingFormComponent } from './media-server/components/port-binding
     PortBindingConfigComponent,
     ModuleConfigFormComponent,
     PortBindingFormComponent,
+    EditProfileComponent,
   ],
   imports: [
     CommonModule,

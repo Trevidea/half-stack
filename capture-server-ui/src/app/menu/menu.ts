@@ -57,7 +57,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.SPORTPIPCAPTURE.SETTINGS',
         type: 'item',
         icon: 'settings',
-        url: 'settings'
+        url: 'settings/account'
       },
       {
         id: 'metatypes',

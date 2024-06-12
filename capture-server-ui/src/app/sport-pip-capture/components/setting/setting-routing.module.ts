@@ -11,12 +11,19 @@ import { FilePresenter } from "./files/files.presenter";
 import { RouterModule, Routes } from "@angular/router";
 import { UserComponent } from "./user/user.component";
 import { MediaServerComponent } from "./media-server/media-server.component";
+import { EditProfileComponent } from "./account/components/edit-profile/edit-profile.component";
 
 const routes: Routes = [
   {
-    path: ":settings",
+    path: "settings",
     component: SettingComponent,
     children: [
+      {
+        path: "settings", redirectTo: 'settings/account',
+      },
+      {
+        path: 'account/edit-profile', component: EditProfileComponent
+      },
       { path: "account", component: AccountPresenter },
       { path: "file", component: FilePresenter },
       { path: "user", component: UserComponent },
@@ -24,12 +31,16 @@ const routes: Routes = [
       { path: "preferences", component: PreferencesComponent },
       { path: "licenese", component: LiceneseComponent },
       { path: "mediaserver", component: MediaServerComponent },
+      {
+        path: "**",
+        redirectTo: "/pages/miscellaneous/error", //Error 404 - Page not found
+      },
     ],
   },
 ];
-
+// /settings/account
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SettingRoutingModule {}
+export class SettingRoutingModule { }

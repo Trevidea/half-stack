@@ -1,19 +1,68 @@
-<div class="card">
-    <div class="row m-2">
-        <div class="col-12 mb-2">
+<div class="container-fluid profile-details">
+    <div class="card">
+        <div class="card-header">
             <h3>Profile Details</h3>
         </div>
-    
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-md-6 col-12  offset-lg-3 offset-md-3 ">
+                    <div class="media mt-2 d-flex justify-content-center align-items-center text-align-center">
+                        <img class="user-avatar users-avatar-shadow rounded-circle my-25 cursor-pointer"
+                            [src]="avatarImage" alt="User avatar">
+                        <div class="media-body ml-1 mt-175">
+                            <h4>Garry Kart</h4>
+                            <p>gary&#64;sp.com</p>
+                        </div>
+                    </div>
+                    <div class=" row profile-info">
+                        <div class="col-xl-6 col-12 mt-1">
+                            <label>Username</label>
+                            <div class="profile-value"> profile.username</div>
+                        </div>
+                        <div class="col-xl-6 col-12  mt-1">
+                            <label>Phone Number</label>
+                            <div class="profile-value">profile.phoneNumber</div>
+                        </div>
+                        <div class="col-xl-6 col-12  mt-1">
+                            <label>Role</label>
+                            <div class="profile-value"> profile.role </div>
+                        </div>
+                        <div class="col-xl-6 col-12  mt-1">
+                            <label>Address</label>
+                            <div class="profile-value">profile.address</div>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <button class="btn btn-warning" routerLink="/settings/account/edit-profile">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- <div class="card account">
+    <div class="card-header">
+        <h3>Profile Details</h3>
+    </div>
+    <div class="row m-2">
         <div class="col-md-12 mb-3">
             <div class="row">
-                <div class="col-md-12 float-left  " >
+                <div class="col-md-12 float-left  ">
                     <div class="media d-flex  justify-content-center align-items-center  text-align-center">
-                        <img class="user-avatar users-avatar-shadow rounded-circle my-25 cursor-pointer" [src]="avatarImage"
-                            height="150px" width="150px" alt="User avatar" />
+                        <img class="user-avatar users-avatar-shadow rounded-circle my-25 cursor-pointer"
+                            [src]="avatarImage" height="150px" width="150px" alt="User avatar" />
 
                         <div class="media-body ml-1 mt-175">
-                            <button (click)="file.click()" for="account-upload" class="btn  mb-75 mr-75 Change-image-button"
-                                rippleEffect>
+                            <button (click)="file.click()" for="account-upload"
+                                class="btn  mb-75 mr-75 Change-image-button" rippleEffect>
                                 Change Image
                             </button>
                             <input type="file" #file id="account-upload" hidden accept="image/*"
@@ -21,7 +70,7 @@
                             <button class="btn  btn-outline-secondary mb-75  remove-button" rippleEffect>Reset</button>
                             <p>Allowed JPG, GIF or PNG. Max size of 800kB</p>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -30,24 +79,29 @@
             <div class="form-group">
 
                 <label for="first-name">First Name</label>
-                <input class="form-control " placeholder="Enter First Name" type="text" [(ngModel)]="datasource.firstName" name="firstName">
+                <input class="form-control " placeholder="Enter First Name" type="text"
+                    [(ngModel)]="datasource.firstName" name="firstName">
             </div>
         </div>
         <div class="col-md-6 mb-3">
             <label for="">Last Name</label>
-            <input class="form-control " placeholder="Enter Last Name" type="text" [(ngModel)]="datasource.lastName" name="lastName">
+            <input class="form-control " placeholder="Enter Last Name" type="text" [(ngModel)]="datasource.lastName"
+                name="lastName">
         </div>
         <div class="col-md-6 mb-3">
             <label for="">Email </label>
-            <input class="form-control " placeholder="Enter Email" type="text" [(ngModel)]="datasource.email" name="email">
+            <input class="form-control " placeholder="Enter Email" type="text" [(ngModel)]="datasource.email"
+                name="email">
         </div>
         <div class="col-md-6 mb-3">
             <label for="">Phone Number</label>
-            <input class="form-control " placeholder="Enter Phone Number" type="text" [(ngModel)]="datasource.phoneNumber" name="phoneNumber">
+            <input class="form-control " placeholder="Enter Phone Number" type="text"
+                [(ngModel)]="datasource.phoneNumber" name="phoneNumber">
         </div>
         <div class="col-md-6 mb-3 ">
             <label for="">Date Of Birth</label>
-            <input class="form-control " placeholder="Enter Date Of Birth" type="text" [(ngModel)]="datasource.dateOfBirth" name="dateOfBirth">
+            <input class="form-control " placeholder="Enter Date Of Birth" type="text"
+                [(ngModel)]="datasource.dateOfBirth" name="dateOfBirth">
         </div>
         <div class="col-md-6 mb-3">
             <label for="">Role</label>
@@ -55,21 +109,24 @@
         </div>
         <div class="col-md-6 mb-3">
             <label for="">Gender</label>
-            <input class="form-control " placeholder="Enter Gender" type="text" [(ngModel)]="datasource.gender" name="gender">
+            <input class="form-control " placeholder="Enter Gender" type="text" [(ngModel)]="datasource.gender"
+                name="gender">
         </div>
         <div class="col-md-6 mb-3">
             <label for="">Address</label>
-            <input class="form-control " placeholder="Enter Address" type="text" [(ngModel)]="datasource.address" name="Address">
+            <input class="form-control " placeholder="Enter Address" type="text" [(ngModel)]="datasource.address"
+                name="Address">
         </div>
         <div class="col-md-12 mb-3">
             <div class="form-group">
                 <div class="float-right d-flex justify-content-between">
-                    <button type="button" class="btn btn-outline-secondary mr-1"  rippleEffect>Cancel</button>
-                    <button  type="submit" class="btn save-button " rippleEffect  (click)="save.emit()" >Save Changes</button>
-                  
+                    <button type="button" class="btn btn-outline-secondary mr-1" rippleEffect>Cancel</button>
+                    <button type="submit" class="btn save-button " rippleEffect (click)="save.emit()">Save
+                        Changes</button>
+
                 </div>
             </div>
         </div>
-        
+
     </div>
-</div>
+</div> -->
