@@ -11,7 +11,8 @@ export const environment = {
   spHLSUrl: "http://drake.in:59919",
   logUrl: "http://localhost:8283/api/",
   rtmpUrl: "rtmp://drake.in:1935",
-  playerUrl: "https://drake.in:3334"
+  playerUrl: "https://drake.in:3334",
+  keycloakUrl: 'https://keycloak.drake.in:5555',
 
 };
 
