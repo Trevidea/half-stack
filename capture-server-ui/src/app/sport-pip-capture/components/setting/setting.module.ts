@@ -50,6 +50,8 @@ import { PortBindingConfigComponent } from './media-server/components/port-bindi
 import { ModuleConfigFormComponent } from './media-server/components/module-configuration/module-config-form/module-config-form.component';
 import { PortBindingFormComponent } from './media-server/components/port-binding-config/port-binding-form/port-binding-form.component';
 import { EditProfileComponent } from './account/components/edit-profile/edit-profile.component';
+import { ChangePasswordPresenter } from "./account/components/change-password/change-password.presenter";
+import { ChangePasswordComponent } from "./account/components/change-password/change-password.component";
 
 @NgModule({
   declarations: [
@@ -90,6 +92,8 @@ import { EditProfileComponent } from './account/components/edit-profile/edit-pro
     ModuleConfigFormComponent,
     PortBindingFormComponent,
     EditProfileComponent,
+    ChangePasswordPresenter,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,

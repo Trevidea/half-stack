@@ -7,7 +7,8 @@
                     <button *ngIf="item.direction===0" type="button" class="btn btn-outline-secondary mr-1" rippleEffect
                         (click)="saveStreamName(item.sreamName)">View {{i+1}}</button>
                 </div> -->
-                <button class="uploadbut btn-gradient-warning mr-1" type="submit">Upload to server</button>
+                <button class="uploadbut btn-gradient-warning mr-1" type="submit" (click)="openAuthModel()">Upload to
+                    server</button>
                 <div ngbDropdown>
                     <button class="btn btn-sm btn-light menuitem-but float-right" id="menuDropdown" ngbDropdownToggle>
                         <i class="bi bi-three-dots-vertical" style="font-size: 1.5rem;"></i>
@@ -39,7 +40,7 @@
 
 
             <div class="mr-lg-1" *ngIf="url">
-                <app-video-streaming  [liveStreamVideoPath]="url" style="margin-bottom: 0.7rem"></app-video-streaming>
+                <app-video-streaming [liveStreamVideoPath]="url" style="margin-bottom: 0.7rem"></app-video-streaming>
             </div>
 
         </div>

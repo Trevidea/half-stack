@@ -12,7 +12,6 @@ export class PasEventView implements Views.Datasource {
         this._id = v;
     }
 
-
     private _eventId: number;
     public get eventId(): number {
         return this._eventId;
@@ -20,7 +19,6 @@ export class PasEventView implements Views.Datasource {
     public set eventId(v: number) {
         this._eventId = v;
     }
-
 
     private _owner_id: number;
     public get owner_id(): number {

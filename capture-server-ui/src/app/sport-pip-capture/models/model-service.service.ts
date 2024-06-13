@@ -26,12 +26,14 @@ export class ModelServiceService {
     this.saveEvent = this.saveEvent.bind(this);
     this.saveDevice = this.saveDevice.bind(this);
     this.saveEventDevice = this.saveEventDevice.bind(this);
+    this.eventUploadAuthentication=this.eventUploadAuthentication.bind(this)
   }
 
   create(type: string, entity: any): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}`;
     return this._adapter.modulateOne(type, entity).pipe(
       mergeMap((modata) => {
+        console.log(modata)
         return this._httpClient.post<any>(url, modata);
       })
     );
@@ -41,7 +43,7 @@ export class ModelServiceService {
     const url = `${this.modelsServerUrl}/${type}`;
     return this._httpClient.get<any>(url);
   }
- 
+
   readOne(type: string, id: number): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}?id=${id}`;
     return this._httpClient.get<any>(url);
@@ -223,6 +225,11 @@ export class ModelServiceService {
     );
   }
 
+  eventUploadAuthentication(data: Data.EventUploadAuth): Observable<Data.EventUploadAuth> {
+    console.log(data)
+    return this.create('event-upload-auth', data);
+
+  }
   saveEvent(data: Data.Event): Observable<Data.Event> {
     if (data.id) {
       return this.update("event", data, data.id).pipe(
@@ -290,6 +297,7 @@ export class ModelServiceService {
   saveDevice(data: Data.Device): Observable<Data.Device> {
     return this.create("devices", data);
   }
+
 
   eventList(): Observable<Data.Event[]> {
     return this._data("events", EventData);

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
-import { PlyrComponent } from 'ngx-plyr';
+import { EventUploadAuthenticationPresenter } from './event-upload-authentication/event-upload-authentication.presenter';
 
 @Component({
   selector: 'app-past-event-view',
@@ -13,7 +14,7 @@ export class PastEventViewComponent implements OnInit {
   StreamName: string | null = null;
   url: string;
   // = `${environment.spHLSUrl}/sophiawilson_sonycam-corder_310/llhls.m3u8`;
-  constructor() {
+  constructor(private ngbModle: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -30,15 +31,14 @@ export class PastEventViewComponent implements OnInit {
       });
     }, 90)
 
-
-
   }
 
+  openAuthModel() {
+    this.ngbModle.open(EventUploadAuthenticationPresenter, {
+      centered: true
 
-
-
-
-
+    })
+  }
 
 
 }

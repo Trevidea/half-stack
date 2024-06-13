@@ -223,7 +223,7 @@ export namespace Data {
     stream_name: string;
     stream_id: string;
     event_id: number;
-    direction:number;
+    direction: number;
   }
   export enum NetWorkQuality { }
   export enum Type { }
@@ -439,6 +439,13 @@ export namespace Data {
   export interface Application extends Base {
     app_name: string
   }
+
+  export interface EventUploadAuth extends Base {
+    username: string;
+    password: string;
+    server_identity: string;
+  }
+
 }
 export namespace Views {
   export interface Datasource {

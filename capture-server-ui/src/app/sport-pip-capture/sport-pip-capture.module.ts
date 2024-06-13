@@ -54,8 +54,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule } from "@angular/forms";
 import { ShareToPeopleComponent } from "./components/event/grid-view-ui/past-event/share-event/component/share-to-people/share-to-people.component";
 import { ShareToSocialComponent } from "./components/event/grid-view-ui/past-event/share-event/component/share-to-social/share-to-social.component";
-import { PastEventViewComponent } from "./components/event/grid-view-ui/past-event/past-event-view/past-event-view.component";
-import { PastEventViewPresenter } from "./components/event/grid-view-ui/past-event/past-event-view/past-event-view.presenter";
 import { ShareEventComponent } from "./components/event/grid-view-ui/past-event/share-event/share-event.component";
 import { OnGoingEventComponent } from "./components/event/grid-view-ui/on-going-event/on-going-event.component";
 import { UpComingEventComponent } from "./components/event/grid-view-ui/up-coming-event/up-coming-event.component";
@@ -114,6 +112,10 @@ import { InlineFormeModule } from "./blocks/inline-modal/inline-form-module";
 import { ValidationModule } from "./components/validation-alert/validation.module";
 import { StreamingInfoComponent } from "./components/connection/connection-device-detail/streaming-info/streaming-info.component";
 import { StreamingInfoDetailsComponent } from "./components/connection/connection-device-detail/streaming-info/streaming-info-details/streaming-info-details.component";
+import { PastEventViewComponent } from "./components/event/past-event-view/past-event-view.component";
+import { PastEventViewPresenter } from "./components/event/past-event-view/past-event-view.presenter";
+import { EventUploadAuthenticationComponent } from "./components/event/past-event-view/event-upload-authentication/event-upload-authentication.component";
+import { EventUploadAuthenticationPresenter } from "./components/event/past-event-view/event-upload-authentication/event-upload-authentication.presenter";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -158,13 +160,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EventPresenter,
     EventComponent,
     CreateOnDemandEventPresenter,
-    // ValidationAlertComponent,
     MetaTypeComponent,
     TypesPresenter,
     TypesComponent,
-    // FormHostDirective,
-    // FormHostComponent,
-    // InlineModalComponent,
     MetaTypePresenter,
     EventHeaderPresenter,
     EventPreviewComponent,
@@ -207,7 +205,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ConnectionDeviceDetailPresenter,
     NotificationDisplayComponent,
     StreamingInfoComponent,
-    StreamingInfoDetailsComponent
+    StreamingInfoDetailsComponent,
+    EventUploadAuthenticationComponent,
+    EventUploadAuthenticationPresenter
   ],
   providers: [
     {

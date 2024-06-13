@@ -1,0 +1,47 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"></h4>
+    <i class="bi bi-x-lg cursor-pointer" (click)="activeModal.dismiss('Cross click')"></i>
+</div>
+<div class="modal-body">
+    <h3 class="modal-title" id="modal-basic-title">Get Access</h3>
+    <p>To upload the event to server you need to verify by entering username and password</p>
+    <form #eventAuthForm="ngForm">
+        <div class="mb-1">
+            <label for="userName" class="form-label">Username</label>
+            <input type="text" class="form-control" id="userName" [(ngModel)]="datasource.userName"
+                #userNameRef="ngModel" name="username" placeholder="Enter Username" required>
+            <app-validation-alert controlName="Username" [control]="userNameRef">
+            </app-validation-alert>
+        </div>
+
+        <div class="mb-1">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group form-password-toggle">
+                <input [type]="basicPwdShow ? 'text' : 'password'" class="form-control" id="password"
+                    placeholder="Your Password" aria-describedby="password" [(ngModel)]="datasource.password" required
+                    name="password" #passwordRef="ngModel" />
+                <div class="input-group-append" (click)="basicPwdShow = !basicPwdShow">
+                    <span class="input-group-text cursor-pointer"><i class="feather" [ngClass]="{
+                    'icon-eye-off': basicPwdShow,
+                    'icon-eye': !basicPwdShow
+                  }"></i></span>
+                </div>
+            </div>
+            <app-validation-alert controlName="Password" [control]="passwordRef">
+            </app-validation-alert>
+        </div>
+        <div class="mb-1">
+            <label for="password" class="form-label">Server Identity</label>
+            <div class="w-100 readonlybox ">
+                {{datasource.serverIdentity}}
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark mr-2"
+        (cancel)="activeModal.dismiss('Cross click')">Cancel</button>
+    <button type="button" class="btn btn-warning" [disabled]="!eventAuthForm.valid"
+        (click)="save.emit()">Confirm</button>
+
+</div>
