@@ -6,9 +6,17 @@ import { map } from 'rxjs/operators';
 import { environment } from 'environments/environment';
 import { User, Role } from 'app/auth/models';
 import { ToastrService } from 'ngx-toastr';
+import { KeycloakService } from 'keycloak-angular';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+  private _isLoggedIn: boolean = false;
+  isLoggedIn(): boolean {
+    return this._isLoggedIn;
+  }
+  UserName: any;
+  role: any
   //public
   public currentUser: Observable<User>;
 
@@ -20,8 +28,10 @@ export class AuthenticationService {
    * @param {HttpClient} _http
    * @param {ToastrService} _toastrService
    */
-  constructor(private _http: HttpClient, private _toastrService: ToastrService) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+  constructor(private _http: HttpClient, private _toastrService: ToastrService,
+    private keycloakService: KeycloakService, private router: Router
+  ) {
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -65,8 +75,8 @@ export class AuthenticationService {
             setTimeout(() => {
               this._toastrService.success(
                 'You have successfully logged in as an ' +
-                  user.role +
-                  ' user to Vuexy. Now you can start to explore. Enjoy! 🎉',
+                user.role +
+                ' user to Vuexy. Now you can start to explore. Enjoy! 🎉',
                 '👋 Welcome, ' + user.firstName + '!',
                 { toastClass: 'toast ngx-toastr', closeButton: true }
               );
@@ -88,8 +98,25 @@ export class AuthenticationService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
-    // localStorage.removeItem('config');
+    if (this.keycloakService.isLoggedIn()) {
+      console.log("Logging out..")
+      this.keycloakService.updateToken(4).then(
+        isUpdated => {
+          console.log(isUpdated);
+          this.keycloakService.logout()
+            .then(() => this._isLoggedIn = false);
+        }
+      )
+
+    }
     // notify
     this.currentUserSubject.next(null);
+  }
+  async kcLogin() {
+    await this.keycloakService.login({
+      redirectUri: window.location.origin + this.router.routerState.snapshot.url
+    })
+    this._isLoggedIn = await this.keycloakService.isLoggedIn()
+    console.log(this._isLoggedIn)
   }
 }
