@@ -23,6 +23,8 @@ set(HALF_STACK_SRC
     connection-detail.cpp
     event-connection.cpp
     live-event.cpp
+    past-event.cpp
+    distribution-list.cpp
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
 target_include_directories(half-stack PUBLIC "./" rest-client zmq)
