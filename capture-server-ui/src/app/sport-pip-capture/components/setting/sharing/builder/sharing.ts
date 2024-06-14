@@ -28,7 +28,7 @@ export class EmailBuilder extends AbstractBuilder<Data.Emails, EmailView>{
     compose(m: Data.Emails, v: EmailView) {
        
         v.email = m.email;
-        v.name = m.name
+        // v.name = m.name
     }
     decompose(v: EmailView): Data.Emails {
         return

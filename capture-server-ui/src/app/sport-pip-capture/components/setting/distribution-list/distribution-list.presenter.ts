@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   EventEmitter,
   Input,
@@ -15,6 +14,7 @@ import { PresenterAction } from "app/blocks/actions";
 import { DistributionListBuilder } from "./builder/distribution-list";
 import { DistributionListView } from "./view/distribution-list";
 import { Transformer } from "app/blocks/transformer";
+import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 
 @Component({
   selector: "app-distribution-list-presenter",
@@ -32,13 +32,13 @@ export class DistributionListPresenter implements OnInit {
   actions!: Views.FormActions;
   @Output() onUpdate = new EventEmitter<any>();
   @Input() cardId: number;
-  constructor(private dataFactory: DataFactoryService, router: Router) {
+  constructor(private modelService: ModelServiceService, router: Router) {
     this.ds = new DistributionListView();
     console.log(this.ds);
     this.actions = new PresenterAction(
       "settings/sharing",
       this.ds,
-      dataFactory.SaveDistributionList,
+      modelService.saveDistributionList,
       DistributionListBuilder,
       router
     );
@@ -53,12 +53,14 @@ export class DistributionListPresenter implements OnInit {
   ngOnInit(): void {
     console.log(this.cardId);
     if (this.cardId) {
-      Transformer.ComposeObjectAsync(
-        this.dataFactory.DistributionJson(this.cardId),
-        this.ds,
-        DistributionListBuilder
-      );
+      // Transformer.ComposeObjectAsync(
+      //   this.dataFactory.DistributionJson(this.cardId),
+      //   this.ds,
+      //   DistributionListBuilder
+      // );
     }
     console.log(this.ds);
   }
+
+
 }

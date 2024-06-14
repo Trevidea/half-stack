@@ -3,7 +3,7 @@
     Create Distribution List
   </h3>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-  <span aria-hidden="true">&times;</span>
+    <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body m-2">
@@ -17,60 +17,24 @@
     <div class="col-12 mb-2 p-0">
       <div class="form-group">
         <label>Add People</label>
-        <ng-select #selectMultiLimited [items]="selectMulti" [multiple]="true" [(ngModel)]="this.datasource.emails"
-          name="People" placeholder="Select people">
-          <ng-template ng-label-tmp> </ng-template>
-
-          <ng-template ng-option-tmp let-item="item">
-            <div class="row d-flex pl-1">
-              <div class="mr-1 image-container">
-                <img src="../../../../../../../../assets/images/portrait/small/avatar-s-9.jpg" alt="Avatar"
-                  class="rounded-image" />
-              </div>
-              <div class="text-container">
-                <span class="ng-value-label">{{ item?.name }}</span>
-                <p>{{ item?.email }}</p>
-              </div>
-            </div>
-          </ng-template>
-        </ng-select>
-
+        <input [(ngModel)]="emailInput" (keydown.enter)="addEmail()" (keydown.backspace)="removeLastTag()"
+          class="form-control" placeholder="Add a tag..." />
       </div>
     </div>
-    
-    <div class="col-12 p-0">
-      <div *ngIf="this.datasource.emails && this.datasource.emails.length  !== 0">
-        <div class="added mb-2">
-          <ul>
-            <li *ngFor="let item of this.datasource.emails">
-              <div class="row">
-                <div class="col-12 d-flex justify-content-between item-container">
-                  <div class="d-flex">
-                    <div class="mr-1 image-container">
-                      <img src="../../../../../../../../assets/images/portrait/small/avatar-s-9.jpg" alt="Avatar"
-                        class="rounded-image" />
-                    </div>
-                    <div class="text-container">
-                      <span>{{ item.name }}</span>
-                      <p>{{ item.email }}</p>
-                    </div>
-                  </div>
-                  <div class="p-1 cursor-pointer">
-                    <span class="ng-value-icon" (click)="removeItem(item)" aria-hidden="true"><i
-                        class="bi bi-x"></i></span>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
+    <div class="chip-container" *ngIf="datasource.emails.length > 0">
+      <div class="chip" *ngFor="let email of datasource.emails">
+        <span>{{email}}</span>
+        <div class="remove-tag">
+          <span class="closebtn" (click)="removeTag(email)">&times;</span>
         </div>
       </div>
     </div>
 
     <div class="col-12 d-flex justify-content-end">
-      <button type="reset" (click)="activeModal.dismiss('Cross click')"rippleEffect
+      <button type="reset" (click)="activeModal.dismiss('Cross click')" rippleEffect
         class="btn btn-outline-secondary btn-sm mr-1">Cancel</button>
-      <button type="submit" rippleEffect class="btn btn-warning btn-sm" (click)="save.emit();activeModal.dismiss('Cross click')">Save</button>
+      <button type="submit" rippleEffect class="btn btn-warning btn-sm"
+        (click)="save.emit();activeModal.dismiss('Cross click')">Save</button>
     </div>
   </div>
 

@@ -26,7 +26,8 @@ export class ModelServiceService {
     this.saveEvent = this.saveEvent.bind(this);
     this.saveDevice = this.saveDevice.bind(this);
     this.saveEventDevice = this.saveEventDevice.bind(this);
-    this.eventUploadAuthentication=this.eventUploadAuthentication.bind(this)
+    this.eventUploadAuthentication = this.eventUploadAuthentication.bind(this);
+    this.saveDistributionList = this.saveDistributionList.bind(this);
   }
 
   create(type: string, entity: any): Observable<any> {
@@ -148,18 +149,18 @@ export class ModelServiceService {
     );
   }
 
-  private _get<I extends Data.Base>(
-    resource: string,
-    id: number
-  ): Observable<I> {
-    return this._adapter.demodulate(resource, this.readOne(resource, id)).pipe(
-      map((models) =>
-        models.map((model: any) => {
-          return model as I;
-        })
-      )
-    );
-  }
+  // private _get<I extends Data.Base>(
+  //   resource: string,
+  //   id: number
+  // ): Observable<I> {
+  //   return this._adapter.demodulate(resource, this.readOne(resource, id)).pipe(
+  //     map((models) =>
+  //       models.map((model: any) => {
+  //         return model as I;
+  //       })
+  //     )
+  //   );
+  // }
 
   private _data<M, I extends Data.Base>(
     resource: string,
@@ -173,15 +174,15 @@ export class ModelServiceService {
     );
   }
 
-  private _datum<M, I extends Data.Base>(
-    resource: string,
-    id: number,
-    type: new (I: Data.Base) => M
-  ): Observable<M> {
-    return this._get<I>(resource, id)
-      .pipe(first())
-      .pipe(map((datum: I) => new type(datum)));
-  }
+  // private _datum<M, I extends Data.Base>(
+  //   resource: string,
+  //   id: number,
+  //   type: new (I: Data.Base) => M
+  // ): Observable<M> {
+  //   return this._get<I>(resource, id)
+  //     .pipe(first())
+  //     .pipe(map((datum: I) => new type(datum)));
+  // }
 
   private _selectData<M, I extends Data.Base>(
     resource: string,
@@ -223,6 +224,17 @@ export class ModelServiceService {
     return this._selectQueryData(resource, key, keyType, type).pipe(
       map((data: M[]) => data[0])
     );
+  }
+
+  /**++++++++++++++++++++++++++++++++++++++++++++++++++ <> POST PUT ACTIONS <> ++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+  saveDistributionList(data: Data.Distribution): Observable<Data.Distribution> {
+    console.log(data)
+    if (data.id) {
+      return this.update("distribution", data, data.id);
+    } else {
+      return this.create("distribution", data);
+    }
   }
 
   eventUploadAuthentication(data: Data.EventUploadAuth): Observable<Data.EventUploadAuth> {
@@ -298,6 +310,41 @@ export class ModelServiceService {
     return this.create("devices", data);
   }
 
+  syncEvents(): Observable<any> {
+    const url = `${this.modelsServerUrl}/event/sync`;
+    const data = {
+      source: "https://strapi.sp-fullstack.site",
+      "delete-criteria": "type='scheduled'",
+    };
+    return this._httpClient.post<any>(url, data);
+  }
+
+  openPreview(data: { eventId: number }): Observable<any> {
+    const url = `${environment.spModelUrl}/event/open-preview`;
+    return this._httpClient.post<any>(url, data);
+  }
+
+  closePreview(data: { eventId: number }): Observable<any> {
+    const url = `${environment.spModelUrl}/event/close-preview`;
+    return this._httpClient.post<any>(url, data);
+  }
+
+  startRecording(data: any): Observable<any> {
+    const url = `${environment.spModelUrl}/api/omal/start-dump`;
+    return this._httpClient.post(url, data);
+  }
+
+  storStream(data: any): Observable<any> {
+    const url = `${environment.spModelUrl}/api/omal/stop-dump`;
+    return this._httpClient.post(url, data);
+  }
+
+  createApp(data: { "app-name": string }): Observable<any> {
+    const url = `${environment.spModelUrl}/omal/create-app`;
+    return this._httpClient.post(url, data);
+  }
+
+  /**++++++++++++++++++++++++++++++++++++++++++++++++++ </> POST PUT ACTIONS </> ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
   eventList(): Observable<Data.Event[]> {
     return this._data("events", EventData);
@@ -318,15 +365,7 @@ export class ModelServiceService {
     );
   }
 
-  // hostConnectionDeviceDetailJson(
-  //   id: number
-  // ): Observable<Data.HostConnectionDeviceDetail> {
-  //   return this._selectOne(
-  //     `host-connection-device-detail`,
-  //     id,
-  //     HostConnectionDeviceDetailData
-  //   );
-  // }
+
   hostConnectionDeviceDetailJson(
     id: number
   ): Observable<Data.HostConnectionDeviceDetail> {
@@ -378,35 +417,7 @@ export class ModelServiceService {
     return this._data(`event?status='${status}'&type='${type}'`, EventData);
   }
 
-  syncEvents(): Observable<any> {
-    const url = `${this.modelsServerUrl}/event/sync`;
-    const data = {
-      source: "https://strapi.sp-fullstack.site",
-      "delete-criteria": "type='scheduled'",
-    };
-    return this._httpClient.post<any>(url, data);
-  }
 
-  openPreview(data: { eventId: number }): Observable<any> {
-    const url = `${environment.spModelUrl}/event/open-preview`;
-    return this._httpClient.post<any>(url, data);
-  }
-
-  closePreview(data: { eventId: number }): Observable<any> {
-    const url = `${environment.spModelUrl}/event/close-preview`;
-    return this._httpClient.post<any>(url, data);
-  }
-
-  //
-  startRecording(data: any): Observable<any> {
-    const url = `${environment.spModelUrl}/api/omal/start-dump`;
-    return this._httpClient.post(url, data);
-  }
-
-  storStream(data: any): Observable<any> {
-    const url = `${environment.spModelUrl}/api/omal/stop-dump`;
-    return this._httpClient.post(url, data);
-  }
   closeAllPreview(): Observable<any> {
     const url = `${environment.spModelUrl}/event/close-preview`;
     return this._httpClient.get<any>(url);
@@ -424,10 +435,6 @@ export class ModelServiceService {
       .pipe(map((response) => response["Gateway Response"]["applications"]));
   }
 
-  createApp(data: { "app-name": string }): Observable<any> {
-    const url = `${environment.spModelUrl}/omal/create-app`;
-    return this._httpClient.post(url, data);
-  }
 
   deleteApp(data: { "app-name": string }): Observable<any> {
     const url = `${environment.spModelUrl}/omal/app`;
@@ -473,6 +480,7 @@ export class ModelServiceService {
         console.log(res);
       });
   }
+
   logPut(extention: string, data: any) {
     this._httpClient
       .put(this.logUrl + `${extention}`, data)

@@ -71,7 +71,6 @@ export namespace Data {
   }
 
   export interface Emails {
-    name: string;
     email: string;
   }
 

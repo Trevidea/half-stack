@@ -172,7 +172,8 @@ const appRoutes: Routes = [
     // ExampleModule,
     SettingModule,
     InlineFormeModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
