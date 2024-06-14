@@ -6,6 +6,7 @@
 #include <pqxx/pqxx>
 #include <sstream>
 #include "event-manager.h"
+#include "past-event.h"
 
 Event::Event() : EntityBase("event")
 {
@@ -45,41 +46,10 @@ void Event::report()
                               {
                                   this->remove(req, rsp);
                               });
-}
 
-void Event::validateEventId(int eventId)
-{
-    try
-    {
-        // Retrieve the event by its ID
-        auto event = EntityBase::byId<Event>(eventId);
-
-        // Check if the event is upcoming or live based on minutes to start
-        auto minsToStart = event.minutesToStart();
-        if (minsToStart >= 0)
-        {
-            // Event is upcoming or live
-            spdlog::trace("Event ID {} is upcoming or live.", eventId);
-        }
-        else
-        {
-            // Event is not upcoming or live
-            spdlog::error("Event ID {} does not correspond to an upcoming or live event.", eventId);
-            throw std::runtime_error("Event ID does not correspond to an upcoming or live event.");
-        }
-    }
-    catch (const ExModelNotFoundException &e)
-    {
-        // Handle the case where the event is not found
-        spdlog::error("Event ID {} not found.", eventId);
-        throw std::runtime_error("Event ID not found.");
-    }
-    catch (const std::exception &e)
-    {
-        // Handle other exceptions
-        spdlog::error("An error occurred while validating event ID {}: {}", eventId, e.what());
-        throw;
-    }
+    // Instantiate PastEvent and call its report method
+    PastEvent pastEvent;
+    pastEvent.report();
 }
 
 std::string Event::venueLocation() const

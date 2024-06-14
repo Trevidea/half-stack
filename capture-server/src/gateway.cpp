@@ -14,6 +14,8 @@
 #include "device.h"
 #include "event-connection.h"
 #include "event-manager.h"
+#include "past-event.h"
+#include "distribution-list.h"
 
 Gateway::Gateway()
 {
@@ -33,6 +35,8 @@ void Gateway::init()
     this->m_entities.push_back(new Device());
     this->m_entities.push_back(new EventConnection());
     this->m_entities.push_back(new EventManager());
+    this->m_entities.push_back(new PastEvent());
+    this->m_entities.push_back(new DistributionList());
     for (auto &&e : this->m_entities)
     {
         e->report();

@@ -42,7 +42,8 @@ public:
 
 public:
     void updateStatus(const Event::EVENT_STATUS status);
-    void validateEventId(int eventId); // Declaration of validateEventId function
+
+    std::vector<Json::Value> fetchPastEvents(); // Declaration of fetchPastEvents function
 
     inline dtu_date getDTUDate() const
     {
