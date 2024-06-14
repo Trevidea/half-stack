@@ -12,12 +12,7 @@ export class EditProfileComponent implements OnInit {
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter();
   public avatarImage: string;
-  public passwordVar;
-  public newPassward;
-  public confirmNewPassward;
-  public mergedPwdVrShow = false;
-  public mergedNewPwdVrShow = false;
-  public mergedConPwdShow = false
+
   constructor(private ngbModal: NgbModal) {
   }
 
@@ -37,9 +32,5 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  modalOpenVC(modalVC) {
-    this.ngbModal.open(modalVC, {
-      centered: true
-    });
-  }
+ 
 }

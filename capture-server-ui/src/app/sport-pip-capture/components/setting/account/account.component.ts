@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ChangePasswordPresenter } from './components/change-password/change-password.presenter';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -10,7 +12,8 @@ export class AccountComponent implements OnInit {
   @Output()   save = new EventEmitter();
   @Output()   cancel = new EventEmitter();
   public avatarImage: string;
-  constructor() {
+
+  constructor(private ngbModle: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -29,5 +32,9 @@ export class AccountComponent implements OnInit {
     }
   }
 
-
+  openChangePwdModle(){
+    this.ngbModle.open(ChangePasswordPresenter,{
+      centered:true
+    })
+  }
 }

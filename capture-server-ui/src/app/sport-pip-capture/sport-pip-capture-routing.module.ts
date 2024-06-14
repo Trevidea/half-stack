@@ -9,7 +9,6 @@ import { ConnectionDeviceDetailComponent } from "./components/connection/connect
 import { EventPresenter } from "./components/event/event.presenter";
 import { CreateOnDemandEventPresenter } from "./components/event/create-on-demand-event-form/create-on-demand-event.presenter";
 import { MetaTypePresenter } from "./components/meta-type/meta-type.presenter";
-import { PastEventViewPresenter } from "./components/event/grid-view-ui/past-event/past-event-view/past-event-view.presenter";
 import { DatatablesService } from "app/main/tables/datatables/datatables.service";
 import { ConnectionStartPresenter } from "./components/connection/connection-start/connection-start.presenter";
 import { EventPreviewPresenter } from "./components/event/event-preview/event-preview.presenter";
@@ -18,6 +17,7 @@ import { LogListPresentert } from "./components/log/log-list/log-list.presenter"
 import { LogComponent } from "./components/log/log.component";
 import { ConnectionDeviceDetailPresenter } from "./components/connection/connection-device-detail/connection-device-detail.presenter";
 import { StreamingInfoDetailsComponent } from "./components/connection/connection-device-detail/streaming-info/streaming-info-details/streaming-info-details.component";
+import { PastEventViewPresenter } from "./components/event/past-event-view/past-event-view.presenter";
 
 const routes: Routes = [
   {

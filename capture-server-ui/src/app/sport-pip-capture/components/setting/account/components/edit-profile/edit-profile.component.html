@@ -4,7 +4,7 @@
             <h3>Edit Profile</h3>
             <div>
                 <button type="button" class="btn btn-outline-secondary mr-1" rippleEffect>Discard Changes</button>
-                <button class="btn btn-warning">Edit</button>
+                <button class="btn btn-warning">Save</button>
             </div>
 
         </div>
@@ -27,13 +27,6 @@
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" class="form-control" id="username">
-                        </div>
-                        <div class="form-group">
-                            <div class="d-flex justify-content-between">
-                                <label for="password">Password</label>
-                                <a class="link" (click)="modalOpenVC(modalVC)">Change Password</a>
-                            </div>
-                            <input type="password" class="form-control" id="password">
                         </div>
                         <div class="form-group">
                             <label for="firstName">First Name</label>
@@ -72,77 +65,6 @@
 
 
 <ng-template #modalVC let-modal>
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
-        <i class="bi bi-x-lg cursor-pointer" (click)="activeModal.dismiss('Cross click')"></i>
-    </div>
-    <div class="modal-body" tabindex="0" ngbAutofocus>
-        <h2 class="modal-title" id="myModalLabel1">Change Password</h2>
 
-        <label for="password">Old/Current Password</label>
-        <div class="input-group input-group-merge form-password-toggle">
-            <input [type]="mergedPwdShow ? 'text' : 'password'" class="form-control"
-                [ngClass]="{'is-invalid': !passwordVarRef.valid && passwordVarRef.touched }" id="password"
-                name="passwordVar" [(ngModel)]="passwordVar" #passwordVarRef="ngModel" required />
-
-            <div class="input-group-append" (click)="mergedPwdShow = !mergedPwdShow"
-                [ngClass]="{'append-is-invalid': !passwordVarRef.valid && passwordVarRef.touched }">
-                <span class="input-group-text cursor-pointer"><i class="feather" [ngClass]="{
-                  'icon-eye-off': mergedPwdShow,
-                  'icon-eye': !mergedPwdShow}"></i>
-                </span>
-            </div>
-        </div>
-        <div class="w-100  text-end">
-            <app-validation-alert controlName="Current Password" [control]="passwordVarRef">
-            </app-validation-alert>
-            <a class="link ml-auto">Forgot Password</a>
-        </div>
-
-        <label for="newPassword" class="mt-1">New Password</label>
-        <div class="input-group input-group-merge form-password-toggle">
-            <input [type]="mergedNewPwdVrShow ? 'text' : 'password'" class="form-control" name="newpwd" id="newPassword"
-                [ngClass]="{'is-invalid': !newpasswordRef.valid && newpasswordRef.touched}" required
-                [(ngModel)]="newPassward" #newpasswordRef="ngModel" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-
-            <div class="input-group-append" (click)="mergedNewPwdVrShow = !mergedNewPwdVrShow"
-                [ngClass]="{'append-is-invalid': !newpasswordRef.valid && newpasswordRef.touched }">
-                <span class="input-group-text cursor-pointer"><i class="feather" [ngClass]="{
-                  'icon-eye-off': mergedNewPwdVrShow,
-                  'icon-eye': !mergedNewPwdVrShow}"></i>
-                </span>
-            </div>
-        </div>
-        <app-validation-alert controlName="New Password" patternmassage="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or
-        more characters." [control]="newpasswordRef">
-        </app-validation-alert>
-
-        <label for="confirmPassword" class="mt-1">Confirm New Password</label>
-        <div class="input-group input-group-merge form-password-toggle">
-            <input [type]="mergedConPwdShow ? 'text' : 'password'" class="form-control" id="confirmPassword"
-                #confirmPasswordRef="ngModel" required
-                [ngClass]="{'is-invalid': !confirmPasswordRef.valid && confirmPasswordRef.touched}"
-                [(ngModel)]="confirmNewPassward" pattern="{{newpasswordRef.value}}">
-
-            <div class="input-group-append" (click)="mergedConPwdShow = !mergedConPwdShow"
-                [ngClass]="{'append-is-invalid': !confirmPasswordRef.valid && confirmPasswordRef.touched }">
-                <span class="input-group-text cursor-pointer"><i class="feather" [ngClass]="{
-                  'icon-eye-off': mergedConPwdShow,
-                  'icon-eye': !mergedConPwdShow}"></i>
-                </span>
-            </div>
-        </div>
-        <app-validation-alert controlName="Confirm New Password"
-            patternmassage="Password & Confirm Password does not match." [control]="confirmPasswordRef">
-        </app-validation-alert>
-
-    </div>
-
-    <div class="modal-footer" style="border: none;">
-        <button type="button" class="btn btn-outline-secondary mr-1" rippleEffect>Cancel</button>
-        <button type="button" class="btn btn-warning" (click)="modal.close('Accept click')" rippleEffect>
-            Change Password
-        </button>
-    </div>
 
 </ng-template>
