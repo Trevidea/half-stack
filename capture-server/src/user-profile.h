@@ -23,6 +23,9 @@ public:
     std::string firstname() const { return m_model.get<std::string>("firstname"); }
     std::string lastname() const { return m_model.get<std::string>("lastname"); }
 
+    void getAccountInfo(const Request &req, Response &rsp);
+    void changePassword(const Request &req, Response &rsp);
+
     ~UserProfile();
 };
 #endif // USER_H
