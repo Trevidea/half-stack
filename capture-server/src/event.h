@@ -8,6 +8,7 @@
 #include <map>
 #include <ctime>
 #include "event-device.h"
+#include "past-event.h"
 
 class Event : public EntityBase
 {
@@ -43,7 +44,8 @@ public:
 public:
     void updateStatus(const Event::EVENT_STATUS status);
 
-    std::vector<Json::Value> fetchPastEvents(); // Declaration of fetchPastEvents function
+    static std::vector<Json::Value> fetchPastEvents();
+    std::string createEventMessage() const;
 
     inline dtu_date getDTUDate() const
     {
@@ -68,6 +70,8 @@ public:
     }
 
 private:
+        static bool isPastEvent(const std::string& dtEvent);
+
 };
 
 #endif // EVENT_H

@@ -1,3 +1,4 @@
+// past-event.h
 #ifndef PAST_EVENT_H
 #define PAST_EVENT_H
 
@@ -12,6 +13,8 @@ public:
     PastEvent();
     void report() override;
 
+private:
+    void listPastEvents(const Request &req, Response &rsp);
 };
 
 #endif // PAST_EVENT_H
