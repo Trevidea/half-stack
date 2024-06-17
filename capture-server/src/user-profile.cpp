@@ -234,8 +234,12 @@ void UserProfile::getUserDetails(const Request &req, Response &rsp)
             return;
         }
 
+        Json::Value gatewayResponse(Json::objectValue);
+        gatewayResponse["count"] = 1;
+        gatewayResponse["result"].append(userDetails);
+
         Json::FastWriter writer;
-        std::string userDetailsStr = writer.write(userDetails);
+        std::string userDetailsStr = writer.write(gatewayResponse);
 
         rsp.setData(userDetailsStr); // Use setData to set the response content
         rsp.setStatus(200);          // Set the status code to 200 OK
