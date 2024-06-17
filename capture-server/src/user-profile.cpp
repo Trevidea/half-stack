@@ -176,17 +176,32 @@ void UserProfile::getUserDetails(const Request &req, Response &rsp)
     {
         std::string username = req.getQueryValue("username");
 
-        Json::Value userDetails;
+        Json::Value userDetails(Json::objectValue);
         if (username == "johndoe")
         {
-            userDetails["username"] = "johndoe";
-            userDetails["firstName"] = "John";
-            userDetails["lastName"] = "Doe";
-            userDetails["email"] = "johndoe@example.com";
-            userDetails["phoneNumber"] = "123456789";
-            userDetails["role"] = "User";
-            userDetails["address"] = "123 Main Street, Anytown";
-            userDetails["profileImage"] = "path/to/johndoe/image.jpg";
+            userDetails["username"]["type"] = 1; // string
+            userDetails["username"]["value"] = "johndoe";
+            
+            userDetails["firstName"]["type"] = 1; // string
+            userDetails["firstName"]["value"] = "John";
+            
+            userDetails["lastName"]["type"] = 1; // string
+            userDetails["lastName"]["value"] = "Doe";
+            
+            userDetails["email"]["type"] = 1; // string
+            userDetails["email"]["value"] = "johndoe@example.com";
+            
+            userDetails["phoneNumber"]["type"] = 1; // string
+            userDetails["phoneNumber"]["value"] = "123456789";
+            
+            userDetails["role"]["type"] = 1; // string
+            userDetails["role"]["value"] = "User";
+            
+            userDetails["address"]["type"] = 1; // string
+            userDetails["address"]["value"] = "123 Main Street, Anytown";
+            
+            userDetails["profileImage"]["type"] = 1; // string
+            userDetails["profileImage"]["value"] = "path/to/johndoe/image.jpg";
         }
         else
         {
