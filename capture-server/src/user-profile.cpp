@@ -176,32 +176,56 @@ void UserProfile::getUserDetails(const Request &req, Response &rsp)
     {
         std::string username = req.getQueryValue("username");
 
-        Json::Value userDetails(Json::objectValue);
+        Json::Value userDetails(Json::arrayValue);
         if (username == "johndoe")
         {
-            userDetails["username"]["type"] = 1; // string
-            userDetails["username"]["value"] = "johndoe";
-            
-            userDetails["firstName"]["type"] = 1; // string
-            userDetails["firstName"]["value"] = "John";
-            
-            userDetails["lastName"]["type"] = 1; // string
-            userDetails["lastName"]["value"] = "Doe";
-            
-            userDetails["email"]["type"] = 1; // string
-            userDetails["email"]["value"] = "johndoe@example.com";
-            
-            userDetails["phoneNumber"]["type"] = 1; // string
-            userDetails["phoneNumber"]["value"] = "123456789";
-            
-            userDetails["role"]["type"] = 1; // string
-            userDetails["role"]["value"] = "User";
-            
-            userDetails["address"]["type"] = 1; // string
-            userDetails["address"]["value"] = "123 Main Street, Anytown";
-            
-            userDetails["profileImage"]["type"] = 1; // string
-            userDetails["profileImage"]["value"] = "path/to/johndoe/image.jpg";
+            Json::Value field1;
+            field1["field"] = "username";
+            field1["type"] = 1; // string
+            field1["value"] = "johndoe";
+            userDetails.append(field1);
+
+            Json::Value field2;
+            field2["field"] = "firstName";
+            field2["type"] = 1; // string
+            field2["value"] = "John";
+            userDetails.append(field2);
+
+            Json::Value field3;
+            field3["field"] = "lastName";
+            field3["type"] = 1; // string
+            field3["value"] = "Doe";
+            userDetails.append(field3);
+
+            Json::Value field4;
+            field4["field"] = "email";
+            field4["type"] = 1; // string
+            field4["value"] = "johndoe@example.com";
+            userDetails.append(field4);
+
+            Json::Value field5;
+            field5["field"] = "phoneNumber";
+            field5["type"] = 1; // string
+            field5["value"] = "123456789";
+            userDetails.append(field5);
+
+            Json::Value field6;
+            field6["field"] = "role";
+            field6["type"] = 1; // string
+            field6["value"] = "User";
+            userDetails.append(field6);
+
+            Json::Value field7;
+            field7["field"] = "address";
+            field7["type"] = 1; // string
+            field7["value"] = "123 Main Street, Anytown";
+            userDetails.append(field7);
+
+            Json::Value field8;
+            field8["field"] = "profileImage";
+            field8["type"] = 1; // string
+            field8["value"] = "path/to/johndoe/image.jpg";
+            userDetails.append(field8);
         }
         else
         {
