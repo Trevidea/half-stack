@@ -6,7 +6,7 @@
 
 DistributionList::DistributionList() : EntityBase("distributions")
 {
-}ṁ,ṇ
+}
 
 void DistributionList::report()
 {
