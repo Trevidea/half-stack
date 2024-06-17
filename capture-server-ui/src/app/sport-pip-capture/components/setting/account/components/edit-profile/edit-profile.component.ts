@@ -17,7 +17,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.avatarImage = '../.././../../../assets/images/avatars/1.png';
+    this.avatarImage = 'assets/images/portrait/small/avatar-s-11.jpg';
   }
   uploadImage(event: any) {
 
@@ -32,5 +32,5 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
- 
+
 }

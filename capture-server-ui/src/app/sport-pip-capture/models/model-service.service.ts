@@ -1,7 +1,7 @@
 import { environment } from "environments/environment";
 import { AdapterService } from "./adapter.service";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { BehaviorSubject, Observable, of } from "rxjs";
+import { BehaviorSubject, Observable, Observer, of } from "rxjs";
 import { first, map, mergeMap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { Data } from "./capture-interface";
@@ -12,6 +12,8 @@ import { DeviceData } from "./device";
 import { PreviousEventsConnectionData } from "./previous-events-connection";
 import { LogService } from "./log.service";
 import { PastConnectionDetailsData } from "./pastconnectionDetail";
+import { DistributionData } from "./distribution";
+import { LoggedInUserData } from "./user-logged-in";
 @Injectable({
   providedIn: "root",
 })
@@ -50,6 +52,10 @@ export class ModelServiceService {
     return this._httpClient.get<any>(url);
   }
 
+  readOneWithQuery(type: string, qurey: any): Observable<any> {
+    const url = `${this.modelsServerUrl}/${type}?${qurey}`;
+    return this._httpClient.get<any>(url);
+  }
 
   getEntitiesByDynamicQuery(
     type: string,
@@ -228,12 +234,13 @@ export class ModelServiceService {
 
   /**++++++++++++++++++++++++++++++++++++++++++++++++++ <> POST PUT ACTIONS <> ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+
   saveDistributionList(data: Data.Distribution): Observable<Data.Distribution> {
     console.log(data)
     if (data.id) {
-      return this.update("distribution", data, data.id);
+      return this.update("distributions", data, data.id);
     } else {
-      return this.create("distribution", data);
+      return this.create("distributions", data);
     }
   }
 
@@ -344,27 +351,37 @@ export class ModelServiceService {
     return this._httpClient.post(url, data);
   }
 
-  /**++++++++++++++++++++++++++++++++++++++++++++++++++ </> POST PUT ACTIONS </> ++++++++++++++++++++++++++++++++++++++++++++++++++*/
+  logPost(extention: string, data: any) {
+    this._httpClient
+      .post(this.logUrl + `${extention}`, data)
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+
+
+  logPut(extention: string, data: any) {
+    this._httpClient
+      .put(this.logUrl + `${extention}`, data)
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+
+  /**++++++++++++++++++++++++++++++++++++++++++++++++++ </> POST PUT ACTIONS Above </> ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
   eventList(): Observable<Data.Event[]> {
     return this._data("events", EventData);
   }
 
+  distributionsListJson(): Observable<Data.Distribution[]> {
+    return this._data("distributions", DistributionData);
+  }
   fetechApplicationDetail(): Observable<any> {
     const url = `${environment.spModelUrl}/omal/app`;
     return this._httpClient.get(url);
   }
   model: any;
-  eventJson(id: number): Observable<Data.Event> {
-    return this._selectOne("event", id, EventData).pipe(
-      map((x: any) => {
-        const flattenedData = this.logService.flattenObject(x._model);
-        this.model = flattenedData;
-        return x;
-      })
-    );
-  }
-
 
   hostConnectionDeviceDetailJson(
     id: number
@@ -435,6 +452,42 @@ export class ModelServiceService {
       .pipe(map((response) => response["Gateway Response"]["applications"]));
   }
 
+  LoggedInUserDetails(userName: string): Observable<Data.LoggedInUser[]> {
+    return this._data(`user/account?username=${userName}`, LoggedInUserData)
+  }
+
+  usersJson(): Observable<Data.UserProfile[]> {
+    return this._data("user-profiles", UserProfileData);
+  }
+
+  eventConnectionJsonById(id: number): Observable<Data.PastConnectionDetails[]> {
+    return this._data(`event-devices?event_id=${id}`, PastConnectionDetailsData);
+  }
+
+  PreviousConnection(): Observable<Data.PreviousEventsConnection[]> {
+    return this._data("connections", PreviousEventsConnectionData);
+  }
+
+  MetaTypeJson(): Observable<Data.MetaType[]> {
+    return this._data("meta-types", MetaTypeData);
+  }
+
+  deviceById(id: number): Observable<Data.Device> {
+    return this._selectOne("devices", id, DeviceData);
+  }
+  eventJson(id: number): Observable<Data.Event> {
+    return this._selectOne("event", id, EventData).pipe(
+      map((x: any) => {
+        const flattenedData = this.logService.flattenObject(x._model);
+        this.model = flattenedData;
+        return x;
+      })
+    );
+  }
+
+  MetaTypeByKey(key: string): Observable<Data.MetaType> {
+    return this._selectQueryOne("meta-type", `'${key}'`, "key", MetaTypeData);
+  }
 
   deleteApp(data: { "app-name": string }): Observable<any> {
     const url = `${environment.spModelUrl}/omal/app`;
@@ -443,50 +496,6 @@ export class ModelServiceService {
       body: data,
     };
     return this._httpClient.delete<any>(url, httpOptions);
-  }
-
-  userJson(): Observable<Data.UserProfile[]> {
-    return this._data("user-profiles", UserProfileData);
-  }
-
-  eventConnectionJsonById(id: number): Observable<Data.PastConnectionDetails[]> {
-    return this._data(`event-devices?event_id=${id}`, PastConnectionDetailsData);
-  }
-
-  deviceById(id: number): Observable<Data.Device> {
-    return this._selectOne("devices", id, DeviceData);
-  }
-
-  PreviousConnection(): Observable<Data.PreviousEventsConnection[]> {
-    return this._data("connections", PreviousEventsConnectionData);
-  }
-
-  // getVirtualHost(): Observable<any> {
-  //   const url = `${environment.spModelUrl}/omal/virtual-hosts`;
-  //   return this._httpClient.get<any>(url);
-  // }
-
-  MetaTypeByKey(key: string): Observable<Data.MetaType> {
-    return this._selectQueryOne("meta-type", `'${key}'`, "key", MetaTypeData);
-  }
-
-  MetaTypeJson(): Observable<Data.MetaType[]> {
-    return this._data("meta-types", MetaTypeData);
-  }
-  logPost(extention: string, data: any) {
-    this._httpClient
-      .post(this.logUrl + `${extention}`, data)
-      .subscribe((res) => {
-        console.log(res);
-      });
-  }
-
-  logPut(extention: string, data: any) {
-    this._httpClient
-      .put(this.logUrl + `${extention}`, data)
-      .subscribe((res) => {
-        console.log(res);
-      });
   }
 
 

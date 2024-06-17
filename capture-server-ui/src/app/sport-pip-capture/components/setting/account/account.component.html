@@ -10,26 +10,26 @@
                         <img class="user-avatar users-avatar-shadow rounded-circle my-25 cursor-pointer"
                             [src]="avatarImage" alt="User avatar">
                         <div class="media-body ml-1 mt-175">
-                            <h4>Garry Kart</h4>
-                            <p>gary&#64;sp.com</p>
+                            <h4>{{datasource?.firstName}} {{datasource?.lastName}}</h4>
+                            <p>{{datasource?.email}}</p>
                         </div>
                     </div>
                     <div class=" row profile-info">
                         <div class="col-xl-6 col-12 mt-1">
-                            <label>Username</label>
-                            <div class="profile-value"> profile.username</div>
+                            <label for="userName">Username</label>
+                            <div class="profile-value">{{datasource?.userName}}</div>
                         </div>
                         <div class="col-xl-6 col-12  mt-1">
                             <label>Phone Number</label>
-                            <div class="profile-value">profile.phoneNumber</div>
+                            <div class="profile-value">{{datasource?.phoneNumber}}</div>
                         </div>
                         <div class="col-xl-6 col-12  mt-1">
                             <label>Role</label>
-                            <div class="profile-value"> profile.role </div>
+                            <div class="profile-value"> {{datasource.role}}</div>
                         </div>
                         <div class="col-xl-6 col-12  mt-1">
                             <label>Address</label>
-                            <div class="profile-value">profile.address</div>
+                            <div class="profile-value">{{datasource.address}}</div>
                         </div>
                         <div class="col-12 mt-2">
                             <button class="btn btn-warning mr-2"

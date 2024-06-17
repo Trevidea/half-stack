@@ -193,9 +193,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     this._router.navigate(["/pages/authentication/login-v2"]);
   }
-  userProfile(key) {
-    this._coreSidebarService.getSidebarRegistry(key).toggleOpen();
-  }
+
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------

@@ -213,9 +213,9 @@ export class DataFactoryService {
   //   return this._data('users-profile', UserProfileData);
   // }
 
-  UserProfileJson(id: number): Observable<Data.UserProfile> {
-    return this._datum("user", id, UserProfileData);
-  }
+  // UserProfileJson(id: number): Observable<Data.UserProfile> {
+  //   return this._datum("user", id, UserProfileData);
+  // }
 
   FilesIndexJson(): Observable<Data.FileIndex[]> {
     return this._data("file-indexes", FileIndexData);

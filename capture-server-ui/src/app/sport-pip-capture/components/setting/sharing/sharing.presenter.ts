@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { SharingRangeView} from "./view/sharing";
+import { SharingRangeView } from "./view/sharing";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
 import { DataFactoryService } from "app/sport-pip-capture/models/data-factory.service";
 import { Router } from "@angular/router";
@@ -7,6 +7,7 @@ import { ShareBuilder } from "./builder/sharing";
 import { Transformer } from "app/blocks/transformer";
 import { DistributionListPresenter } from "../distribution-list/distribution-list.presenter";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ModelServiceService } from "app/sport-pip-capture/models/model-service.service";
 
 
 
@@ -19,13 +20,12 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 export class SharingPresenter implements OnInit {
   ds!: SharingRangeView;
   actions!: Views.FormActions;
-  constructor(private dataFactory: DataFactoryService ,  private modalService: NgbModal) {
+  constructor(private modelService: ModelServiceService, private modalService: NgbModal) {
     this.ds = new SharingRangeView()
-    }
-  ngOnInit(): void {
-     Transformer.ComposeCollectionAsync(this.dataFactory.DistributionsListJson(), this.ds.distribution , ShareBuilder);
-    
   }
- 
+  ngOnInit(): void {
+    Transformer.ComposeCollectionAsync(this.modelService.distributionsListJson(), this.ds.distribution, ShareBuilder);
+  }
+
 
 }

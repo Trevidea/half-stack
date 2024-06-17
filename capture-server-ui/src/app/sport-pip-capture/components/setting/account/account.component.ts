@@ -8,16 +8,16 @@ import { ChangePasswordPresenter } from './components/change-password/change-pas
   encapsulation: ViewEncapsulation.None,
 })
 export class AccountComponent implements OnInit {
-  @Input() datasource:any;
-  @Output()   save = new EventEmitter();
-  @Output()   cancel = new EventEmitter();
+  @Input() datasource: any;
+  @Output() save = new EventEmitter();
+  @Output() cancel = new EventEmitter();
   public avatarImage: string;
 
   constructor(private ngbModle: NgbModal) {
   }
 
   ngOnInit(): void {
-    this.avatarImage = '../.././../../../assets/images/avatars/1.png';
+    this.avatarImage = 'assets/images/portrait/small/avatar-s-11.jpg';
   }
   uploadImage(event: any) {
 
@@ -32,9 +32,9 @@ export class AccountComponent implements OnInit {
     }
   }
 
-  openChangePwdModle(){
-    this.ngbModle.open(ChangePasswordPresenter,{
-      centered:true
+  openChangePwdModle() {
+    this.ngbModle.open(ChangePasswordPresenter, {
+      centered: true
     })
   }
 }

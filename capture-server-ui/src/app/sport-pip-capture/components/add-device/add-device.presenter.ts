@@ -64,7 +64,7 @@ export class AddDevicePresenter implements OnInit {
     });
 
     Transformer.ComposeCollectionViewAsync(
-      this.modelServiceService.userJson(),
+      this.modelServiceService.usersJson(),
       this.ds.userName,
       (userItem: UserProfileData) => {
         return new SelectItemView(

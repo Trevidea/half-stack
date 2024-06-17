@@ -41,9 +41,9 @@ export namespace Data {
   }
   export interface HostConnectionQuality extends Base {
     deviceId: number;
-    startForm: string; ///timeFormate 1:49:00
-    end: string; /// timeFormate 4:16 pm
-    videoQuality: number; /// 0 or 1
+    startForm: string;
+    end: string; 
+    videoQuality: number; 
     duration: number | string;
   }
   export interface OvenMediaServer extends Base {
@@ -109,12 +109,6 @@ export namespace Data {
   export interface Venue {
     location: string;
   }
-
-  // export interface Detail {
-  //   cityAddress: string;
-  //   streetAddress: string;
-  //   type: string;
-  // }
 
   export interface EventNetWork extends Base {
     id: number;
@@ -271,7 +265,7 @@ export namespace Data {
     lastname: string;
     email: string;
     phone: string;
-    role: Role;
+    role: string;
     address: string;
   }
   export interface Role { }
@@ -325,16 +319,16 @@ export namespace Data {
     cost: number;
   }
 
-  export interface UserProfile extends Base {
+  export interface LoggedInUser extends Base {
     id: number;
-    firstname: string;
-    lastname: string;
+    username: string;
+    firstName: string;
+    lastName: string;
     email: string;
-    phone: string;
-    role: Role;
+    phoneNumber: string;
     address: string;
+    role: string;
   }
-  export interface Role { }
   export interface Preference extends Base {
     id: number;
     display: DisplaySettings;

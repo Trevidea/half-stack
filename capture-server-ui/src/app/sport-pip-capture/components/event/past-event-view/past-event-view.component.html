@@ -3,10 +3,10 @@
         <div class="container-fluid pr-0 ">
             <a [routerLink]="'/event'"> <i class="feather " data-feather="arrow-left" [size]="24"></i></a>
             <div class="d-flex justify-content-between align-items-center">
-                <!-- <div *ngFor="let item of  datasource.connectionDetailsView ; let i=index">
+                <div *ngFor="let item of  datasource.connectionDetailsView ; let i=index">
                     <button *ngIf="item.direction===0" type="button" class="btn btn-outline-secondary mr-1" rippleEffect
                         (click)="saveStreamName(item.sreamName)">View {{i+1}}</button>
-                </div> -->
+                </div>
                 <button class="uploadbut btn-gradient-warning mr-1" type="submit" (click)="openAuthModel()">Upload to
                     server</button>
                 <div ngbDropdown>

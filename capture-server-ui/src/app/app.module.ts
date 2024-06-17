@@ -61,6 +61,7 @@ const appRoutes: Routes = [
       import("./sport-pip-capture/components/setting/setting.module").then(
         (m) => m.SettingModule
       ),
+      canActivate: [AuthGuard]
   },
 
   {
@@ -69,6 +70,7 @@ const appRoutes: Routes = [
       import("./main/dashboard/dashboard.module").then(
         (m) => m.DashboardModule
       ),
+
   },
   {
     path: "apps",

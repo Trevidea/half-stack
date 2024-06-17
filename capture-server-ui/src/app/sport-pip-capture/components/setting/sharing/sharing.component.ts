@@ -17,16 +17,13 @@ import Swal from 'sweetalert2';
 export class SharingComponent implements OnInit {
   @Input() datasource: any;
  coachHomeSidebarData:any;
-  constructor(private _coreSidebarService: CoreSidebarService, private modalService: NgbModal, private dataFactory: DataFactoryService) {
-
-
+  constructor(private _coreSidebarService: CoreSidebarService, private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
+    console.log(this.datasource)
   }
-  loadRefreshData(){
-    Transformer.ComposeCollectionAsync(this.dataFactory.DistributionsListJson(), this.datasource.distribution, ShareBuilder);
-  }
+
   distributionDetail(data:any) {
     console.log(data,)
      this.coachHomeSidebarData =data;
@@ -44,7 +41,7 @@ export class SharingComponent implements OnInit {
       inst.onUpdate.subscribe(res => {
         console.log(res)
         if (res) {
-          this.loadRefreshData()
+          // this.loadRefreshData()
         }
       });
     })
@@ -63,7 +60,7 @@ export class SharingComponent implements OnInit {
       inst.onUpdate.subscribe(res => {
         console.log(res)
         if (res) {
-          this.loadRefreshData()
+          // this.loadRefreshData()
         }
       });
     })
@@ -82,13 +79,13 @@ export class SharingComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.dataFactory.DeleteDistributionJson(id);
+        // this.dataFactory.DeleteDistributionJson(id);
         Swal.fire(
           'Deleted!',
           'Your file has been deleted.',
           'success'
         )
-        this.loadRefreshData()
+        // this.loadRefreshData()
       }
     })
    
