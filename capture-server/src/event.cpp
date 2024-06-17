@@ -47,6 +47,16 @@ void Event::report()
                               {
                                   this->remove(req, rsp);
                               });
+    
+    Gateway::instance().route("POST", "/api/event/send", 
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  std::string eventMessage = this->createEventMessage();
+                                  // Send eventMessage to Capture Server
+                                  Publisher::instance().publish("capture-server-topic", eventMessage);
+                                  rsp.setData("Event details sent to Capture Server");
+                                  rsp.setStatus(200);
+                              });
 
     // Instantiate PastEvent and call its report method
     PastEvent pastEvent;
@@ -162,21 +172,22 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     return pastEvents;
 }
 
-std::string Event::createEventMessage() const {
-    std::stringstream ss;
-    ss << "Event Details:\n";
-    ss << "ID: " << m_model.get<int>("id") << "\n";
-    ss << "Sport: " << sport() << "\n";
-    ss << "Level: " << level() << "\n";
-    ss << "Program: " << program() << "\n";
-    ss << "Year: " << std::to_string(year()) << "\n";
-    ss << "Date: " << dtEvent() << "\n";
-    ss << "Time: " << std::to_string(tmEvent()) << "\n";
-    ss << "Title: " << title() << "\n";
-    ss << "Status: " << status() << "\n";
-    ss << "Type: " << type() << "\n";
-    ss << "Venue Location: " << venueLocation() << "\n";
-    ss << "Street Address: " << streetAddress() << "\n";
-    ss << "City Address: " << cityAddress() << "\n";
-    return ss.str();
+std::string Event::createEventMessage() const
+{
+    Json::Value eventMessage;
+    eventMessage["sport"] = this->sport();
+    eventMessage["level"] = this->level();
+    eventMessage["program"] = this->program();
+    eventMessage["year"] = this->year();
+    eventMessage["dt_event"] = this->dtEvent();
+    eventMessage["tm_event"] = this->tmEvent();
+    eventMessage["venue"]["location"] = this->venueLocation();
+    eventMessage["detail"]["cityAddress"] = this->cityAddress();
+    eventMessage["detail"]["streetAddress"] = this->streetAddress();
+    eventMessage["title"] = this->title();
+    eventMessage["status"] = this->status();
+    eventMessage["type"] = this->type();
+
+    Json::FastWriter writer;
+    return writer.write(eventMessage);
 }
