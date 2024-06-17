@@ -22,22 +22,42 @@ public:
     Event();
 
     std::string sport() const { return m_model.get<std::string>("sport"); }
+    void setSport(const std::string &value) { m_model.set(value, "sport"); }
+
     std::string level() const { return m_model.get<std::string>("level"); }
+    void setLevel(const std::string &value) { m_model.set(value, "level"); }
+
     std::string program() const { return m_model.get<std::string>("program"); }
+    void setProgram(const std::string &value) { m_model.set(value, "program"); }
+
     int duration() const { return 1; }
+
     int year() const { return m_model.get<int>("year"); }
+    void setYear(int value) { m_model.set(value, "year"); }
+
     std::string dtEvent() const { return m_model.get<std::string>("dt_event"); }
+    void setDtEvent(const std::string &value) { m_model.set(value, "dt_event"); }
+
     int tmEvent() const { return m_model.get<int>("tm_event"); }
+    void setTmEvent(int value) { m_model.set(value, "tm_event"); }
+
     std::string title() const { return m_model.get<std::string>("title"); }
+    void setTitle(const std::string &value) { m_model.set(value, "title"); }
+
     std::string status() const { return m_model.get<std::string>("status"); }
+    void setStatus(const std::string &value) { m_model.set(value, "status"); }
+
     std::string type() const { return m_model.get<std::string>("type"); }
+    void setType(const std::string &value) { m_model.set(value, "type"); }
     // int duration() const { return m_model.get<int>("duration"); }
 
 
     std::string venueLocation() const;
     void setVenueLocation(const std::string &value);
+    
     std::string streetAddress() const;
     void setStreetAddress(const std::string &value);
+    
     std::string cityAddress() const;
     void setCityAddress(const std::string &value);
 

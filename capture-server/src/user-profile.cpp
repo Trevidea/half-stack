@@ -47,6 +47,16 @@ void UserProfile::report()
                               {
                                   this->changePassword(req, rsp);
                               });
+    Gateway::instance().route("POST", "/api/user/account", // To post account info
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  this->postAccountInfo(req, rsp);
+                              });
+    Gateway::instance().route("GET", "/api/user/account", // To get user details by username
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  this->getUserDetails(req, rsp);
+                              });
 
 }
 
@@ -56,171 +66,144 @@ void UserProfile::getAccountInfo(const Request &req, Response &rsp)
     {
         Json::Value accountDetails(Json::arrayValue);
 
-        // Account 1
-        Json::Value account1(Json::arrayValue);
-        Json::Value username1;
-        username1["field"] = "username";
-        username1["type"] = 1; // string
-        username1["value"] = "garry";
-        account1.append(username1);
+        Json::Value account(Json::arrayValue);
+        Json::Value username;
+        username["field"] = "username";
+        username["type"] = 1; // string
+        username["value"] = "garry";
+        account.append(username);
 
-        Json::Value firstName1;
-        firstName1["field"] = "firstName";
-        firstName1["type"] = 1; // string
-        firstName1["value"] = "Garry";
-        account1.append(firstName1);
+        Json::Value firstName;
+        firstName["field"] = "firstName";
+        firstName["type"] = 1; // string
+        firstName["value"] = "Garry";
+        account.append(firstName);
 
-        Json::Value lastName1;
-        lastName1["field"] = "lastName";
-        lastName1["type"] = 1; // string
-        lastName1["value"] = "Kart";
-        account1.append(lastName1);
+        Json::Value lastName;
+        lastName["field"] = "lastName";
+        lastName["type"] = 1; // string
+        lastName["value"] = "Kart";
+        account.append(lastName);
 
-        Json::Value email1;
-        email1["field"] = "email";
-        email1["type"] = 1; // string
-        email1["value"] = "gary@sp.com";
-        account1.append(email1);
+        Json::Value email;
+        email["field"] = "email";
+        email["type"] = 1; // string
+        email["value"] = "gary@sp.com";
+        account.append(email);
 
-        Json::Value phoneNumber1;
-        phoneNumber1["field"] = "phoneNumber";
-        phoneNumber1["type"] = 1; // string
-        phoneNumber1["value"] = "089089090";
-        account1.append(phoneNumber1);
+        Json::Value phoneNumber;
+        phoneNumber["field"] = "phoneNumber";
+        phoneNumber["type"] = 1; // string
+        phoneNumber["value"] = "089089090";
+        account.append(phoneNumber);
 
-        Json::Value role1;
-        role1["field"] = "role";
-        role1["type"] = 1; // string
-        role1["value"] = "Coach";
-        account1.append(role1);
+        Json::Value role;
+        role["field"] = "role";
+        role["type"] = 1; // string
+        role["value"] = "Coach";
+        account.append(role);
 
-        Json::Value address1;
-        address1["field"] = "address";
-        address1["type"] = 1; // string
-        address1["value"] = "Union Street 123, Fairfort";
-        account1.append(address1);
+        Json::Value address;
+        address["field"] = "address";
+        address["type"] = 1; // string
+        address["value"] = "Union Street 123, Fairfort";
+        account.append(address);
 
-        Json::Value profileImage1;
-        profileImage1["field"] = "profileImage";
-        profileImage1["type"] = 1; // string
-        profileImage1["value"] = "path/to/profile/image.jpg";
-        account1.append(profileImage1);
+        Json::Value profileImage;
+        profileImage["field"] = "profileImage";
+        profileImage["type"] = 1; // string
+        profileImage["value"] = "path/to/profile/image.jpg";
+        account.append(profileImage);
 
-        accountDetails.append(account1);
-
-        // Account 2
-        Json::Value account2(Json::arrayValue);
-        Json::Value username2;
-        username2["field"] = "username";
-        username2["type"] = 1; // string
-        username2["value"] = "jane";
-        account2.append(username2);
-
-        Json::Value firstName2;
-        firstName2["field"] = "firstName";
-        firstName2["type"] = 1; // string
-        firstName2["value"] = "Jane";
-        account2.append(firstName2);
-
-        Json::Value lastName2;
-        lastName2["field"] = "lastName";
-        lastName2["type"] = 1; // string
-        lastName2["value"] = "Doe";
-        account2.append(lastName2);
-
-        Json::Value email2;
-        email2["field"] = "email";
-        email2["type"] = 1; // string
-        email2["value"] = "jane.doe@example.com";
-        account2.append(email2);
-
-        Json::Value phoneNumber2;
-        phoneNumber2["field"] = "phoneNumber";
-        phoneNumber2["type"] = 1; // string
-        phoneNumber2["value"] = "123456789";
-        account2.append(phoneNumber2);
-
-        Json::Value role2;
-        role2["field"] = "role";
-        role2["type"] = 1; // string
-        role2["value"] = "Manager";
-        account2.append(role2);
-
-        Json::Value address2;
-        address2["field"] = "address";
-        address2["type"] = 1; // string
-        address2["value"] = "Elm Street 456, Somewhere";
-        account2.append(address2);
-
-        Json::Value profileImage2;
-        profileImage2["field"] = "profileImage";
-        profileImage2["type"] = 1; // string
-        profileImage2["value"] = "path/to/profile/image2.jpg";
-        account2.append(profileImage2);
-
-        accountDetails.append(account2);
-
-        // Account 3
-        Json::Value account3(Json::arrayValue);
-        Json::Value username3;
-        username3["field"] = "username";
-        username3["type"] = 1; // string
-        username3["value"] = "john";
-        account3.append(username3);
-
-        Json::Value firstName3;
-        firstName3["field"] = "firstName";
-        firstName3["type"] = 1; // string
-        firstName3["value"] = "John";
-        account3.append(firstName3);
-
-        Json::Value lastName3;
-        lastName3["field"] = "lastName";
-        lastName3["type"] = 1; // string
-        lastName3["value"] = "Smith";
-        account3.append(lastName3);
-
-        Json::Value email3;
-        email3["field"] = "email";
-        email3["type"] = 1; // string
-        email3["value"] = "john.smith@example.com";
-        account3.append(email3);
-
-        Json::Value phoneNumber3;
-        phoneNumber3["field"] = "phoneNumber";
-        phoneNumber3["type"] = 1; // string
-        phoneNumber3["value"] = "987654321";
-        account3.append(phoneNumber3);
-
-        Json::Value role3;
-        role3["field"] = "role";
-        role3["type"] = 1; // string
-        role3["value"] = "Developer";
-        account3.append(role3);
-
-        Json::Value address3;
-        address3["field"] = "address";
-        address3["type"] = 1; // string
-        address3["value"] = "Maple Avenue 789, Anywhere";
-        account3.append(address3);
-
-        Json::Value profileImage3;
-        profileImage3["field"] = "profileImage";
-        profileImage3["type"] = 1; // string
-        profileImage3["value"] = "path/to/profile/image3.jpg";
-        account3.append(profileImage3);
-
-        accountDetails.append(account3);
+        accountDetails.append(account);
 
         Json::FastWriter writer;
         std::string accountDetailsStr = writer.write(accountDetails);
 
         rsp.setData(accountDetailsStr); // Use setData to set the response content
-        rsp.setStatus(200); // Set the status code to 200 OK
+        rsp.setStatus(200);             // Set the status code to 200 OK
     }
     catch (const std::exception &e)
     {
         spdlog::error("Failed to fetch account details: {}", e.what());
+        rsp.setData("Internal Server Error");
+        rsp.setStatus(500); // Set the status code to 500 Internal Server Error
+    }
+}
+
+void UserProfile::postAccountInfo(const Request &req, Response &rsp)
+{
+    try
+    {
+        // Parse the JSON request body
+        Json::Value body;
+        Json::Reader reader;
+        if (!reader.parse(req.data(), body))
+        {
+            rsp.setData("Invalid JSON");
+            rsp.setStatus(400);
+            return;
+        }
+
+        std::string username = body["username"].asString();
+        std::string email = body["email"].asString();
+        std::string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."; // Simulated token
+        int expires_in = 3600; // Simulated expiration time in seconds
+
+        Json::Value gatewayResponse;
+        gatewayResponse["user"]["username"] = username;
+        gatewayResponse["user"]["email"] = email;
+        gatewayResponse["token"] = token;
+        gatewayResponse["expires_in"] = expires_in;
+
+        Json::FastWriter writer;
+        std::string responseStr = writer.write(gatewayResponse);
+
+        rsp.setData(responseStr); // Use setData to set the response content
+        rsp.setStatus(200);       // Set the status code to 200 OK
+    }
+    catch (const std::exception &e)
+    {
+        spdlog::error("Failed to post account details: {}", e.what());
+        rsp.setData("Internal Server Error");
+        rsp.setStatus(500); // Set the status code to 500 Internal Server Error
+    }
+}
+
+void UserProfile::getUserDetails(const Request &req, Response &rsp)
+{
+    try
+    {
+        std::string username = req.getQueryValue("username");
+
+        Json::Value userDetails;
+        if (username == "johndoe")
+        {
+            userDetails["username"] = "johndoe";
+            userDetails["firstName"] = "John";
+            userDetails["lastName"] = "Doe";
+            userDetails["email"] = "johndoe@example.com";
+            userDetails["phoneNumber"] = "123456789";
+            userDetails["role"] = "User";
+            userDetails["address"] = "123 Main Street, Anytown";
+            userDetails["profileImage"] = "path/to/johndoe/image.jpg";
+        }
+        else
+        {
+            rsp.setData("User not found");
+            rsp.setStatus(404); // Set the status code to 404 Not Found
+            return;
+        }
+
+        Json::FastWriter writer;
+        std::string userDetailsStr = writer.write(userDetails);
+
+        rsp.setData(userDetailsStr); // Use setData to set the response content
+        rsp.setStatus(200);          // Set the status code to 200 OK
+    }
+    catch (const std::exception &e)
+    {
+        spdlog::error("Failed to fetch user details: {}", e.what());
         rsp.setData("Internal Server Error");
         rsp.setStatus(500); // Set the status code to 500 Internal Server Error
     }

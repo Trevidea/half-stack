@@ -113,7 +113,6 @@ bool Event::isPastEvent(const std::string& dtEvent) {
 std::vector<Json::Value> Event::fetchPastEvents() {
     // Hardcoded past event data
     Json::Value event1;
-    event1["id"] = 363;
     event1["sport"] = "Football";
     event1["level"] = "Varsity";
     event1["program"] = "Man";
@@ -128,7 +127,6 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event1["type"] = "on-demand";
 
     Json::Value event2;
-    event2["id"] = 364;
     event2["sport"] = "Basketball";
     event2["level"] = "Varsity";
     event2["program"] = "Women";
@@ -143,7 +141,6 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event2["type"] = "live";
 
     Json::Value event3;
-    event3["id"] = 365;
     event3["sport"] = "Tennis";
     event3["level"] = "Open";
     event3["program"] = "Mixed";
@@ -172,9 +169,9 @@ std::string Event::createEventMessage() const {
     ss << "Sport: " << sport() << "\n";
     ss << "Level: " << level() << "\n";
     ss << "Program: " << program() << "\n";
-    ss << "Year: " << year() << "\n";
+    ss << "Year: " << std::to_string(year()) << "\n";
     ss << "Date: " << dtEvent() << "\n";
-    ss << "Time: " << tmEvent() << "\n";
+    ss << "Time: " << std::to_string(tmEvent()) << "\n";
     ss << "Title: " << title() << "\n";
     ss << "Status: " << status() << "\n";
     ss << "Type: " << type() << "\n";

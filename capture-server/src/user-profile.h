@@ -25,6 +25,8 @@ public:
 
     void getAccountInfo(const Request &req, Response &rsp);
     void changePassword(const Request &req, Response &rsp);
+    void postAccountInfo(const Request &req, Response &rsp);
+    void getUserDetails(const Request &req, Response &rsp);
 
     ~UserProfile();
 };
