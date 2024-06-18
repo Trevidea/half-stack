@@ -3,11 +3,8 @@
         <div class="container-fluid pr-0 ">
             <a [routerLink]="'/event'"> <i class="feather " data-feather="arrow-left" [size]="24"></i></a>
             <div class="d-flex justify-content-between align-items-center">
-                <div *ngFor="let item of  datasource.connectionDetailsView ; let i=index">
-                    <button *ngIf="item.direction===0" type="button" class="btn btn-outline-secondary mr-1" rippleEffect
-                        (click)="saveStreamName(item.sreamName)">View {{i+1}}</button>
-                </div>
-                <button class="uploadbut btn-gradient-warning mr-1" type="submit" (click)="openAuthModel()">Upload to
+
+                <button class="uploadbut btn-gradient-warning mr-1" type="submit">Upload to
                     server</button>
                 <div ngbDropdown>
                     <button class="btn btn-sm btn-light menuitem-but float-right" id="menuDropdown" ngbDropdownToggle>
@@ -22,35 +19,116 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </nav>
+</div>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8 col-12">
+            <div class="card custom-card-border  video-ply">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h5 class="card-title mb-0">McQuaid vs Fairport</h5>
+                        <div class="badge badge-past-event on-demand-event">
+                            On-Demand Event
+                        </div>
+                    </div>
+                    <div *ngIf="url">
+                        <app-video-streaming [liveStreamVideoPath]="url"></app-video-streaming>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 co-12">
+            <div class="card custom-card-border">
+                <div class="card-body">
+                    <div *ngFor="let item of  datasource.connectionDetailsView ; let i=index">
+                        <button *ngIf="item.direction===1" type="button" class="btn btn-outline-secondary mr-1"
+                            rippleEffect (click)="saveStreamName(item.sreamName)">View {{i+1}}</button>
+                    </div>
+                    <div class="card mb-1 mt-1 info-card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0"> Event Details</h5>
+                        </div>
+                        <div class="card-body pl-1 ">
+                            <p class="card-text  mt-1  margin-bottom">
+                                <i class="bi bi-clock"></i>
+                                Saturday, Sept 15th, 2:00 pm, Varsity
+                            </p>
+                            <p class="card-text ">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                Fairport High School, 33 Union Street, Fairport
+                            </p>
+                        </div>
+                    </div>
 
+                    <div class="card mb-1 mt-1 info-card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Duration & Sharing</h5>
+                        </div>
+                        <div class="card-body pl-1 ">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="card-text margin-bottom mt-1">
+                                    Video Duration
+                                </p>
+                                <p class="card-text">
+                                    02:03:45
+                                </p>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="card-text margin-bottom">
+                                    Shared with
+                                </p>
+                                <p class="card-text">
+                                    +12 more
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card mb-3 mt-1 info-card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Duration & Sharing</h5>
+                        </div>
+                        <div class="card-body pl-1 ">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="card-text margin-bottom mt-1">
+                                    Video Duration
+                                </p>
+                                <p class="card-text">
+                                    02:03:45
+                                </p>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="card-text margin-bottom">
+                                    Shared with
+                                </p>
+                                <p class="card-text">
+                                    +12 more
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-    </nav>
-
+    </div>
 </div>
 
 <div class="card custom-card-border">
     <div class="row m-2">
-        <!-- content-header component -->
-        <div class="col-12 mt-1 mb-1">
-            <h4>{{datasource?.title}}</h4>
-        </div>
-        <div class="col-md-12 col-lg-8 mb-md-2 mb-2  p-0">
-
-
-            <div class="mr-lg-1" *ngIf="url">
-                <app-video-streaming [liveStreamVideoPath]="url" style="margin-bottom: 0.7rem"></app-video-streaming>
-            </div>
-
-        </div>
         <div class="col-lg-4 col-md-12   mb-2 p-0">
 
             <div class="row ">
                 <div class="col-md-12 mb-1">
-                    <div class="card event-card ">
+                    <div class="card  ">
                         <div class="card-header bg-transparent "
-                            style="border-bottom: 1px solid rgba(236, 236, 237, 1) ; padding: 8px;">
+                            style="border-bottom: 1px solid rgba(236, 236, 237, 1) ; ">
                             <h5> Event Details</h5>
                         </div>
                         <div class="card-body">
@@ -88,17 +166,7 @@
                                 </div>
 
                             </div>
-                            <div class="d-flex justify-content-between margin-bottom">
-                                <div>
-                                    <p class="card-text " style="margin-bottom: 5px;">
-                                        Video clips
-                                    </p>
-                                </div>
-                                <div>
-                                    250
-                                </div>
 
-                            </div>
                             <div class="d-flex justify-content-between ">
                                 <div>
                                     <p class="card-text " style="margin-bottom: 5px;">

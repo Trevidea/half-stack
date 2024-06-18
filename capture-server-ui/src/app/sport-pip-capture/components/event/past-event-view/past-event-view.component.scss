@@ -1,12 +1,29 @@
-@import '@core/scss/angular/libs/media-player.component.scss';
+// @import '@core/scss/angular/libs/media-player.component.scss';
+
+.video-ply {
+  .card-title {
+    font-weight: 400;
+    font-size: 24px;
+  }
+}
+
+.info-card {
+  .card-header {
+    font-weight: 400;
+    border-bottom: 1px solid var(--secondary-border-color);
+    padding: 8px 1rem;
+  }
+
+}
 
 .custom-card-border {
   border: 1px solid rgba(217, 217, 217, 1);
   border-radius: 6px;
+
 }
 
 .event-card {
-  border: 1px solid var(--secondary-border-color) !important;
+
   border-radius: 6px;
 }
 
@@ -49,6 +66,14 @@ a {
 }
 
 .dark-layout {
+  .info-card {
+    border: 1px solid #545454 !important;
+
+    .card-header {
+      border-bottom: 1px solid #545454 !important;
+    }
+  }
+
   a {
     color: #fff;
 

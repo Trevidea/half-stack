@@ -14,12 +14,15 @@ import { LogService } from "./log.service";
 import { PastConnectionDetailsData } from "./pastconnectionDetail";
 import { DistributionData } from "./distribution";
 import { LoggedInUserData } from "./user-logged-in";
+import { PastEventData } from "./past-event";
 @Injectable({
   providedIn: "root",
 })
 export class ModelServiceService {
   public modelsServerUrl: string = environment.spModelUrl;
   private logUrl: string = environment.logUrl;
+  model: any;
+
   constructor(
     private _httpClient: HttpClient,
     private _adapter: AdapterService,
@@ -131,12 +134,9 @@ export class ModelServiceService {
     key: string,
     keyType: string
   ): Observable<I[]> {
-    return this._adapter
-      .demodulate(
-        resource,
+    return this._adapter.demodulate(resource,
         this.getEntitiesByDynamicQuery(resource, key, keyType)
-      )
-      .pipe(
+      ).pipe(
         map((models) =>
           models.map((model: any) => {
             return model as I;
@@ -155,18 +155,6 @@ export class ModelServiceService {
     );
   }
 
-  // private _get<I extends Data.Base>(
-  //   resource: string,
-  //   id: number
-  // ): Observable<I> {
-  //   return this._adapter.demodulate(resource, this.readOne(resource, id)).pipe(
-  //     map((models) =>
-  //       models.map((model: any) => {
-  //         return model as I;
-  //       })
-  //     )
-  //   );
-  // }
 
   private _data<M, I extends Data.Base>(
     resource: string,
@@ -180,15 +168,6 @@ export class ModelServiceService {
     );
   }
 
-  // private _datum<M, I extends Data.Base>(
-  //   resource: string,
-  //   id: number,
-  //   type: new (I: Data.Base) => M
-  // ): Observable<M> {
-  //   return this._get<I>(resource, id)
-  //     .pipe(first())
-  //     .pipe(map((datum: I) => new type(datum)));
-  // }
 
   private _selectData<M, I extends Data.Base>(
     resource: string,
@@ -381,7 +360,6 @@ export class ModelServiceService {
     const url = `${environment.spModelUrl}/omal/app`;
     return this._httpClient.get(url);
   }
-  model: any;
 
   hostConnectionDeviceDetailJson(
     id: number
@@ -472,17 +450,16 @@ export class ModelServiceService {
     return this._data("meta-types", MetaTypeData);
   }
 
+  getSpecificPastEvent(id: number): Observable<Data.PastEvent> {
+    return this._selectOne('event', id, PastEventData)
+  }
+
   deviceById(id: number): Observable<Data.Device> {
     return this._selectOne("devices", id, DeviceData);
   }
+
   eventJson(id: number): Observable<Data.Event> {
-    return this._selectOne("event", id, EventData).pipe(
-      map((x: any) => {
-        const flattenedData = this.logService.flattenObject(x._model);
-        this.model = flattenedData;
-        return x;
-      })
-    );
+    return this._selectOne("past-event", id, EventData);
   }
 
   MetaTypeByKey(key: string): Observable<Data.MetaType> {

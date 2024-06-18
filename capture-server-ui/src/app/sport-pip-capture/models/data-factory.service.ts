@@ -19,7 +19,7 @@ export class DataFactoryService {
 
   jsonLogData$: Observable<any>;
   constructor(private _httpClient: HttpClient) {
-    this.SaveUserProfileJson = this.SaveUserProfileJson.bind(this);
+    // this.SaveUserProfileJson = this.SaveUserProfileJson.bind(this);
     this.SaveDistributionList = this.SaveDistributionList.bind(this);
     this.SaveOnDemandFormJson = this.SaveOnDemandFormJson.bind(this);
     this.SaveMetaType = this.SaveMetaType.bind(this);
@@ -277,11 +277,11 @@ export class DataFactoryService {
   dayHalves() {
     return ["AM", "PM"];
   }
-  SaveUserProfileJson(data: Data.UserProfile): Observable<Data.UserProfile> {
-    if (data.id) {
-      return this.update("user", data, data.id);
-    }
-  }
+  // SaveUserProfileJson(data: Data.UserProfile): Observable<Data.UserProfile> {
+  //   if (data.id) {
+  //     return this.update("user", data, data.id);
+  //   }
+  // }
 
   SaveOnDemandFormJson(data: Data.Event): Observable<Data.Event> {
     // console.log(data)

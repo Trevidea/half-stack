@@ -19,7 +19,6 @@ export class PastEventViewPresenter implements OnInit {
   constructor(private modelServiceService: ModelServiceService,
     private route: ActivatedRoute,
     private eventRunnerService: EventRunnerService) {
-
     this.eventRunnerService.startedEventId$.subscribe(
       (res) => {
         if (res) {

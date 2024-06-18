@@ -114,8 +114,6 @@ import { StreamingInfoComponent } from "./components/connection/connection-devic
 import { StreamingInfoDetailsComponent } from "./components/connection/connection-device-detail/streaming-info/streaming-info-details/streaming-info-details.component";
 import { PastEventViewComponent } from "./components/event/past-event-view/past-event-view.component";
 import { PastEventViewPresenter } from "./components/event/past-event-view/past-event-view.presenter";
-import { EventUploadAuthenticationComponent } from "./components/event/past-event-view/event-upload-authentication/event-upload-authentication.component";
-import { EventUploadAuthenticationPresenter } from "./components/event/past-event-view/event-upload-authentication/event-upload-authentication.presenter";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -205,9 +203,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ConnectionDeviceDetailPresenter,
     NotificationDisplayComponent,
     StreamingInfoComponent,
-    StreamingInfoDetailsComponent,
-    EventUploadAuthenticationComponent,
-    EventUploadAuthenticationPresenter
+    StreamingInfoDetailsComponent
   ],
   providers: [
     {
