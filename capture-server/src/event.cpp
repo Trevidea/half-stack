@@ -123,6 +123,7 @@ bool Event::isPastEvent(const std::string& dtEvent) {
 std::vector<Json::Value> Event::fetchPastEvents() {
     // Hardcoded past event data
     Json::Value event1;
+    event1["id"] = 1;
     event1["sport"] = "Football";
     event1["level"] = "Varsity";
     event1["program"] = "Man";
@@ -135,8 +136,24 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event1["title"] = "Real Madrid vs Manchester United";
     event1["status"] = "past";
     event1["type"] = "on-demand";
+    event1["video_duration"] = "90 minutes";
+    event1["shared_with"] = "Everyone";
+
+    Json::Value connectedDevice1;
+    connectedDevice1["id"] = 1;
+    connectedDevice1["sream_name"] = "Device1";
+    connectedDevice1["direction"] = 1;
+
+    Json::Value connectedDevice2;
+    connectedDevice2["id"] = 2;
+    connectedDevice2["sream_name"] = "Device2";
+    connectedDevice2["direction"] = 2;
+
+    event1["Connected_streaming_devices"].append(connectedDevice1);
+    event1["Connected_streaming_devices"].append(connectedDevice2);
 
     Json::Value event2;
+    event2["id"] = 2;
     event2["sport"] = "Basketball";
     event2["level"] = "Varsity";
     event2["program"] = "Women";
@@ -149,8 +166,18 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event2["title"] = "Lakers vs Warriors";
     event2["status"] = "past";
     event2["type"] = "live";
+    event2["video_duration"] = "120 minutes";
+    event2["shared_with"] = "Subscribers";
+
+    Json::Value connectedDevice3;
+    connectedDevice3["id"] = 3;
+    connectedDevice3["sream_name"] = "Device3";
+    connectedDevice3["direction"] = 1;
+
+    event2["Connected_streaming_devices"].append(connectedDevice3);
 
     Json::Value event3;
+    event3["id"] = 3;
     event3["sport"] = "Tennis";
     event3["level"] = "Open";
     event3["program"] = "Mixed";
@@ -163,6 +190,15 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event3["title"] = "US Open Final";
     event3["status"] = "past";
     event3["type"] = "tournament";
+    event3["video_duration"] = "180 minutes";
+    event3["shared_with"] = "Members";
+
+    Json::Value connectedDevice4;
+    connectedDevice4["id"] = 4;
+    connectedDevice4["sream_name"] = "Device4";
+    connectedDevice4["direction"] = 1;
+
+    event3["Connected_streaming_devices"].append(connectedDevice4);
 
     std::vector<Json::Value> pastEvents;
     pastEvents.push_back(event1);
