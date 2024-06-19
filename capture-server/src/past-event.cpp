@@ -143,37 +143,68 @@ void PastEvent::getEventById(const Request &req, Response &rsp)
     {
         if (e["id"].asInt() == eventId)
         {
-            Json::Value eventMessage(Json::objectValue);
-            eventMessage["id"] = e["id"];
-            eventMessage["title"] = e["title"];
-            eventMessage["sport"] = e["sport"];
-            eventMessage["level"] = e["level"];
-            eventMessage["program"] = e["program"];
-            eventMessage["year"] = e["year"];
-            eventMessage["dt_event"] = e["dt_event"];
-            eventMessage["tm_event"] = e["tm_event"];
-            eventMessage["venue"]["location"] = e["venue"]["location"];
-            eventMessage["detail"]["cityAddress"] = e["detail"]["cityAddress"];
-            eventMessage["detail"]["streetAddress"] = e["detail"]["streetAddress"];
-            eventMessage["status"] = e["status"];
-            eventMessage["type"] = e["type"];
-            eventMessage["video_duration"] = e["video_duration"];
-            eventMessage["shared_with"] = e["shared_with"];
+            Json::Value formattedEvent(Json::arrayValue);
 
+            auto appendField = [&formattedEvent](const std::string &field, int type, const Json::Value &value)
+            {
+                Json::Value fieldObject;
+                fieldObject["field"] = field;
+                fieldObject["type"] = type;
+                fieldObject["value"] = value;
+                formattedEvent.append(fieldObject);
+            };
+
+            appendField("id", 1, e["id"]);
+            appendField("title", 1, e["title"]);
+            appendField("sport", 1, e["sport"]);
+            appendField("level", 1, e["level"]);
+            appendField("program", 1, e["program"]);
+            appendField("year", 1, e["year"]);
+            appendField("dt_event", 1, e["dt_event"]);
+            appendField("tm_event", 1, e["tm_event"]);
+            appendField("venue_location", 1, e["venue"]["location"]);
+            appendField("cityAddress", 1, e["detail"]["cityAddress"]);
+            appendField("streetAddress", 1, e["detail"]["streetAddress"]);
+            appendField("status", 1, e["status"]);
+            appendField("type", 1, e["type"]);
+            appendField("video_duration", 1, e["video_duration"]);
+            appendField("shared_with", 1, e["shared_with"]);
+
+            // Handle connected devices separately
             Json::Value connectedDevices(Json::arrayValue);
             for (const auto &device : e["Connected_streaming_devices"])
             {
-                Json::Value deviceMessage(Json::objectValue);
-                deviceMessage["id"] = device["id"];
-                deviceMessage["sream_name"] = device["sream_name"];
-                deviceMessage["direction"] = device["direction"];
-                connectedDevices.append(deviceMessage);
-            }
-            eventMessage["Connected_streaming_devices"] = connectedDevices;
+                Json::Value deviceObject(Json::arrayValue);
+                Json::Value deviceField;
 
-            // Set the response data with the JSON result
-            rsp.setData(eventMessage.toStyledString());
-            rsp.setStatus(200); // OK
+                deviceField["field"] = "device_id";
+                deviceField["type"] = 1;
+                deviceField["value"] = device["id"];
+                deviceObject.append(deviceField);
+
+                deviceField["field"] = "stream_name";
+                deviceField["type"] = 1;
+                deviceField["value"] = device["sream_name"];
+                deviceObject.append(deviceField);
+
+                deviceField["field"] = "direction";
+                deviceField["type"] = 1;
+                deviceField["value"] = device["direction"];
+                deviceObject.append(deviceField);
+
+                connectedDevices.append(deviceObject);
+            }
+            appendField("Connected_streaming_devices", 1, connectedDevices);
+
+            Json::Value gatewayResponse;
+            gatewayResponse["count"] = 1;
+            gatewayResponse["result"].append(formattedEvent);
+
+            Json::FastWriter writer;
+            std::string responseStr = writer.write(gatewayResponse);
+
+            rsp.setData(responseStr); // Use setData to set the response content
+            rsp.setStatus(200);       // Set the status code to 200 OK
             return;
         }
     }
