@@ -10,8 +10,8 @@ export class EventBuilder extends AbstractBuilder<
   compose(m: Data.Event, v: OnDemandEventFormView) {
     v.id = m.id;
     v.title = m.title;
-    v.detail.cityAddress = m?.detail?.cityAddress;
-    v.detail.streetAdress = m?.detail?.streetAddress;
+    v.detail.cityAddress = m?.detail?.city_address;
+    v.detail.streetAdress = m?.detail?.street_address;
     v.detail.type = m?.detail?.type;
     v.dtEvent = m.dt_event;
     v.levels.SelectedItem = m.level;
@@ -35,8 +35,8 @@ export class EventBuilder extends AbstractBuilder<
       id: v.id,
       title: v.title,
       detail: {
-        cityAddress: v.detail.cityAddress,
-        streetAddress: v.detail.streetAdress,
+        city_address: v.detail.cityAddress,
+        street_address: v.detail.streetAdress,
         type: v.detail.type
       },
       dt_event: v.dtEvent,

@@ -78,6 +78,7 @@ export class AdapterService {
   demodulate(type: string, data: Observable<any>): Observable<any> {
     return data.pipe(map((blob) => blob["Gateway Response"].result)).pipe(
       map((arr: any[]) => {
+        console.log(arr)
         return arr.map((cppObj) => this.cppToNg(cppObj));
       })
     );

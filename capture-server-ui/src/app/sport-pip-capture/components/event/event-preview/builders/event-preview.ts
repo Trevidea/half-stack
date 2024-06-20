@@ -9,11 +9,11 @@ export class EventPreviewBuilder extends AbstractBuilder<Data.ConnectionPreview,
     v.title = m.title
     m.title = v.title;
     m.program = v.program;
-    //  Transformer.ComposeCollection(
-    //   m?.activeDevice,
-    //   v?.previewActiveDevice,
-    //   ActiveDeviceBuilder
-    // );
+     Transformer.ComposeCollection(
+      m?.activeDevice,
+      v?.previewActiveDevice,
+      ActiveDeviceBuilder
+    );
     m.level = v.level;
     m.status = v.status;
     m.dtEvent = v.dtEvent;

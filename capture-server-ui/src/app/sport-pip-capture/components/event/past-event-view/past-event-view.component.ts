@@ -21,21 +21,22 @@ export class PastEventViewComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.datasource)
     setTimeout(() => {
-      this.datasource?.connectionDetailsView?.forEach(item => {
-        if (item && item._direction === 1) {
-          this.streamName = item._streamName;
-          this.url = `${environment.spHLSUrl}/${this.streamName}/llhls.m3u8`
-        }
-      });
+      const defaultdevice = this.datasource?.connectionDetailsView[0]
+      this.url = `${environment.spHLSUrl}/${defaultdevice.streamName}/llhls.m3u8`
+      console.log(defaultdevice)
     }, 90)
 
   }
 
   setStreamName(streamName: string, index: number) {
-    this.streamName = streamName;
-    this.activeIndex = index;
-    this.url = `${environment.spHLSUrl}/${this.streamName}/llhls.m3u8`
-    console.log(this.url)
+    this.url = ''
+    setTimeout(() => {
+      this.streamName = streamName;
+      this.activeIndex = index;
+      this.url = `${environment.spHLSUrl}/${this.streamName}/llhls.m3u8`
+      console.log(this.url)
+    }, 30)
+
   }
 
 

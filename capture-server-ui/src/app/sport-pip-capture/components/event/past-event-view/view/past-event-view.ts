@@ -153,12 +153,12 @@ export class VenueView {
 
 class DetailsView {
 
-    private _streetAdress: string;
-    public get streetAdress(): string {
-        return this._streetAdress;
+    private _streetAddress: string;
+    public get streetAddress(): string {
+        return this._streetAddress;
     }
-    public set streetAdress(v: string) {
-        this._streetAdress = v;
+    public set streetAddress(v: string) {
+        this._streetAddress = v;
     }
 
 

@@ -160,28 +160,4 @@ export class Transformer {
   }
 
   // this is for just testing  becouse live event comming continuously
-  static _ComposeLiveObjectAsync<M, V, T extends AbstractBuilder<M, V>>(
-    data: Observable<M>,
-    view: V,
-    builder: new () => T
-  ): Promise<M> {
-    let promise: Promise<M> = new Promise<M>((resolve, reject) => {
-      let od: ObjectStrategy<M, V, T> = new ObjectStrategy(view, builder);
-      var modelData!: M;
-      data.subscribe(
-        (model: M) => {
-          modelData = model;
-          od.compose(modelData);
-        },
-        (err) => {
-          reject(err);
-        },
-        () => {
-          od.compose(modelData);
-          resolve(modelData);
-        }
-      );
-    });
-    return promise;
-  }
 }
