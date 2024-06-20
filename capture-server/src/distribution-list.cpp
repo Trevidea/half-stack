@@ -1,6 +1,5 @@
 #include "distribution-list.h"
 #include "gateway.h"
-#include <pqxx/pqxx>
 #include <sstream>
 #include "spdlog/spdlog.h"
 
