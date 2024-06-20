@@ -10,9 +10,11 @@ import { environment } from 'environments/environment';
 })
 export class PastEventViewComponent implements OnInit {
   @Input() datasource: any;
-  StreamName: string | null = null;
+
+  activeIndex: number = 0;
+  streamName: string | null = null;
   url: string;
-  // = `${environment.spHLSUrl}/sophiawilson_sonycam-corder_310/llhls.m3u8`;
+
   constructor() {
   }
 
@@ -21,18 +23,20 @@ export class PastEventViewComponent implements OnInit {
     setTimeout(() => {
       this.datasource?.connectionDetailsView?.forEach(item => {
         if (item && item._direction === 1) {
-          this.StreamName = item._sreamName;
-          console.log('Stream Name Saved:', item, this.StreamName);
-
-          this.url = `${environment.spHLSUrl}/${this.StreamName}/llhls.m3u8`
-          console.log(this.url);
+          this.streamName = item._streamName;
+          this.url = `${environment.spHLSUrl}/${this.streamName}/llhls.m3u8`
         }
       });
     }, 90)
 
   }
 
-
+  setStreamName(streamName: string, index: number) {
+    this.streamName = streamName;
+    this.activeIndex = index;
+    this.url = `${environment.spHLSUrl}/${this.streamName}/llhls.m3u8`
+    console.log(this.url)
+  }
 
 
 }

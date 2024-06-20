@@ -8,16 +8,19 @@ export class PastEventBuilder extends AbstractBuilder<
   PasEventView
 > {
   compose(m: Data.Event, v: PasEventView) {
+    console.log(m)
     v.id = m.id;
+    v.type = m.type;
     v.title = m.title;
     v.detail.cityAddress = m?.detail?.cityAddress;
     v.detail.streetAdress = m?.detail?.streetAddress;
     v.detail.type = m?.detail?.type;
     v.dtEvent = m.dt_event;
-    v.levels.SelectedItem = m.level;
-    v.programs.SelectedItem = m.program;
-    v.sports.SelectedItem = m.sport;
+    v.level = m.level;
+    v.program = m.program;
+    v.sport = m.sport;
     v.time = m.tm_event;
+    v.year = m.year
     v.venue.location = m?.venue?.location;
   }
 
