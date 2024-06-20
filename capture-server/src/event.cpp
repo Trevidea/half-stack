@@ -120,6 +120,7 @@ bool Event::isPastEvent(const std::string& dtEvent) {
     return difftime(now, event_time) > 0;
 }
 
+
 std::vector<Json::Value> Event::fetchPastEvents() {
     // Hardcoded past event data
     Json::Value event1;
@@ -132,7 +133,7 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event1["tm_event"] = 1845;
     event1["venue"]["location"] = "Madison Square Garden";
     event1["detail"]["cityAddress"] = "44, Pennsylvania";
-    event1["detail"]["streetAddress"] = "Georgia";
+    event1["detail"]["streetAddress"] = "Georgia"; 
     event1["title"] = "Real Madrid vs Manchester United";
     event1["status"] = "past";
     event1["type"] = "on-demand";
@@ -141,7 +142,7 @@ std::vector<Json::Value> Event::fetchPastEvents() {
 
     Json::Value connectedDevice1;
     connectedDevice1["id"] = 1;
-    connectedDevice1["sream_name"] = "Device1";
+    connectedDevice1["sream_name"] = "sophiawilson_stevecam_363";
     connectedDevice1["direction"] = 1;
 
     Json::Value connectedDevice2;
@@ -171,7 +172,7 @@ std::vector<Json::Value> Event::fetchPastEvents() {
 
     Json::Value connectedDevice3;
     connectedDevice3["id"] = 3;
-    connectedDevice3["sream_name"] = "Device3";
+    connectedDevice3["sream_name"] = "sophiawilson_stevecam_363";
     connectedDevice3["direction"] = 1;
 
     event2["Connected_streaming_devices"].append(connectedDevice3);
@@ -195,7 +196,7 @@ std::vector<Json::Value> Event::fetchPastEvents() {
 
     Json::Value connectedDevice4;
     connectedDevice4["id"] = 4;
-    connectedDevice4["sream_name"] = "Device4";
+    connectedDevice4["sream_name"] = "sophiawilson_stevecam_363";
     connectedDevice4["direction"] = 1;
 
     event3["Connected_streaming_devices"].append(connectedDevice4);

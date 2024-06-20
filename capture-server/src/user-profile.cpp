@@ -37,7 +37,7 @@ void UserProfile::report()
                                   this->remove(req, rsp);
                               });
 
-    Gateway::instance().route("GET", "/api/user/account", // To request account info
+    Gateway::instance().route("GET", "/api/user/account-info", // To request account info
                               [this](const Request &req, Response &rsp)
                               {
                                   this->getAccountInfo(req, rsp);
@@ -64,61 +64,32 @@ void UserProfile::getAccountInfo(const Request &req, Response &rsp)
 {
     try
     {
-        Json::Value accountDetails(Json::arrayValue);
-
         Json::Value account(Json::arrayValue);
-        Json::Value username;
-        username["field"] = "username";
-        username["type"] = 1; // string
-        username["value"] = "garry";
-        account.append(username);
+        
+        auto appendField = [&account](const std::string &field, int type, const std::string &value)
+        {
+            Json::Value fieldObject;
+            fieldObject["field"] = field;
+            fieldObject["type"] = type;
+            fieldObject["value"] = value;
+            account.append(fieldObject);
+        };
 
-        Json::Value firstName;
-        firstName["field"] = "firstName";
-        firstName["type"] = 1; // string
-        firstName["value"] = "Garry";
-        account.append(firstName);
+        appendField("username", 1, "garry");
+        appendField("firstName", 1, "Garry");
+        appendField("lastName", 1, "Kart");
+        appendField("email", 1, "gary@sp.com");
+        appendField("phoneNumber", 1, "089089090");
+        appendField("role", 1, "Coach");
+        appendField("address", 1, "Union Street 123, Fairfort");
+        appendField("profileImage", 1, "path/to/profile/image.jpg");
 
-        Json::Value lastName;
-        lastName["field"] = "lastName";
-        lastName["type"] = 1; // string
-        lastName["value"] = "Kart";
-        account.append(lastName);
-
-        Json::Value email;
-        email["field"] = "email";
-        email["type"] = 1; // string
-        email["value"] = "gary@sp.com";
-        account.append(email);
-
-        Json::Value phoneNumber;
-        phoneNumber["field"] = "phoneNumber";
-        phoneNumber["type"] = 1; // string
-        phoneNumber["value"] = "089089090";
-        account.append(phoneNumber);
-
-        Json::Value role;
-        role["field"] = "role";
-        role["type"] = 1; // string
-        role["value"] = "Coach";
-        account.append(role);
-
-        Json::Value address;
-        address["field"] = "address";
-        address["type"] = 1; // string
-        address["value"] = "Union Street 123, Fairfort";
-        account.append(address);
-
-        Json::Value profileImage;
-        profileImage["field"] = "profileImage";
-        profileImage["type"] = 1; // string
-        profileImage["value"] = "path/to/profile/image.jpg";
-        account.append(profileImage);
-
-        accountDetails.append(account);
+        Json::Value gatewayResponse;
+        gatewayResponse["count"] = 1;
+        gatewayResponse["result"].append(account);
 
         Json::FastWriter writer;
-        std::string accountDetailsStr = writer.write(accountDetails);
+        std::string accountDetailsStr = writer.write(gatewayResponse);
 
         rsp.setData(accountDetailsStr); // Use setData to set the response content
         rsp.setStatus(200);             // Set the status code to 200 OK
