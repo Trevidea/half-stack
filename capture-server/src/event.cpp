@@ -133,8 +133,8 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event1["dt_event"] = "2024-05-31";
     event1["tm_event"] = 1845;
     event1["venue"]["location"] = "Madison Square Garden";
-    event1["detail"]["cityAddress"] = "44, Pennsylvania";
-    event1["detail"]["streetAddress"] = "Georgia";
+    event1["cityAddress"] = "44, Pennsylvania";
+    event1["streetAddress"] = "Georgia";
     event1["status"] = "past";
     event1["type"] = "on-demand";
     event1["video_duration"] = "90 minutes";
@@ -163,8 +163,8 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event2["dt_event"] = "2023-12-15";
     event2["tm_event"] = 1930;
     event2["venue"]["location"] = "Staples Center";
-    event2["detail"]["cityAddress"] = "111, Figueroa Street";
-    event2["detail"]["streetAddress"] = "Los Angeles";
+    event2["cityAddress"] = "111, Figueroa Street";
+    event2["streetAddress"] = "Los Angeles";
     event2["status"] = "past";
     event2["type"] = "live";
     event2["video_duration"] = "120 minutes";
@@ -187,8 +187,8 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event3["dt_event"] = "2022-09-10";
     event3["tm_event"] = 1500;
     event3["venue"]["location"] = "Arthur Ashe Stadium";
-    event3["detail"]["cityAddress"] = "Flushing Meadows";
-    event3["detail"]["streetAddress"] = "New York";
+    event3["cityAddress"] = "Flushing Meadows";
+    event3["streetAddress"] = "New York";
     event3["status"] = "past";
     event3["type"] = "tournament";
     event3["video_duration"] = "180 minutes";
@@ -221,8 +221,8 @@ std::string Event::createEventMessage() const
     eventMessage["dt_event"] = this->dtEvent();
     eventMessage["tm_event"] = this->tmEvent();
     eventMessage["venue"]["location"] = this->venueLocation();
-    eventMessage["detail"]["cityAddress"] = this->cityAddress();
-    eventMessage["detail"]["streetAddress"] = this->streetAddress();
+    eventMessage["cityAddress"] = this->cityAddress();
+    eventMessage["streetAddress"] = this->streetAddress();
     eventMessage["status"] = this->status();
     eventMessage["type"] = this->type();
     // eventMessage["video_duration"] = this->videoDuration();
