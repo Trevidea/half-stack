@@ -125,6 +125,7 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     // Hardcoded past event data
     Json::Value event1;
     event1["id"] = 363;
+    event1["title"] = "Real Madrid vs Manchester United";
     event1["sport"] = "Football";
     event1["level"] = "Varsity";
     event1["program"] = "Man";
@@ -133,8 +134,7 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event1["tm_event"] = 1845;
     event1["venue"]["location"] = "Madison Square Garden";
     event1["detail"]["cityAddress"] = "44, Pennsylvania";
-    event1["detail"]["streetAddress"] = "Georgia"; 
-    event1["title"] = "Real Madrid vs Manchester United";
+    event1["detail"]["streetAddress"] = "Georgia";
     event1["status"] = "past";
     event1["type"] = "on-demand";
     event1["video_duration"] = "90 minutes";
@@ -142,19 +142,20 @@ std::vector<Json::Value> Event::fetchPastEvents() {
 
     Json::Value connectedDevice1;
     connectedDevice1["id"] = 1;
-    connectedDevice1["sream_name"] = "sophiawilson_stevecam_363";
+    connectedDevice1["stream_name"] = "sophiawilson_stevecam_363";
     connectedDevice1["direction"] = 1;
 
     Json::Value connectedDevice2;
     connectedDevice2["id"] = 2;
-    connectedDevice2["sream_name"] = "johndoe_stevecam_360";
+    connectedDevice2["stream_name"] = "johndoe_stevecam_360";
     connectedDevice2["direction"] = 2;
 
-    event1["Connected_streaming_devices"].append(connectedDevice1);
-    event1["Connected_streaming_devices"].append(connectedDevice2);
+    event1["connected_streaming_devices"].append(connectedDevice1);
+    event1["connected_streaming_devices"].append(connectedDevice2);
 
     Json::Value event2;
     event2["id"] = 2;
+    event2["title"] = "Lakers vs Warriors";
     event2["sport"] = "Basketball";
     event2["level"] = "Varsity";
     event2["program"] = "Women";
@@ -164,7 +165,6 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event2["venue"]["location"] = "Staples Center";
     event2["detail"]["cityAddress"] = "111, Figueroa Street";
     event2["detail"]["streetAddress"] = "Los Angeles";
-    event2["title"] = "Lakers vs Warriors";
     event2["status"] = "past";
     event2["type"] = "live";
     event2["video_duration"] = "120 minutes";
@@ -172,13 +172,14 @@ std::vector<Json::Value> Event::fetchPastEvents() {
 
     Json::Value connectedDevice3;
     connectedDevice3["id"] = 3;
-    connectedDevice3["sream_name"] = "sophiawilson_stevecam_363";
+    connectedDevice3["stream_name"] = "sophiawilson_stevecam_363";
     connectedDevice3["direction"] = 1;
 
-    event2["Connected_streaming_devices"].append(connectedDevice3);
+    event2["connected_streaming_devices"].append(connectedDevice3);
 
     Json::Value event3;
     event3["id"] = 3;
+    event3["title"] = "US Open Final";
     event3["sport"] = "Tennis";
     event3["level"] = "Open";
     event3["program"] = "Mixed";
@@ -188,7 +189,6 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event3["venue"]["location"] = "Arthur Ashe Stadium";
     event3["detail"]["cityAddress"] = "Flushing Meadows";
     event3["detail"]["streetAddress"] = "New York";
-    event3["title"] = "US Open Final";
     event3["status"] = "past";
     event3["type"] = "tournament";
     event3["video_duration"] = "180 minutes";
@@ -196,10 +196,10 @@ std::vector<Json::Value> Event::fetchPastEvents() {
 
     Json::Value connectedDevice4;
     connectedDevice4["id"] = 4;
-    connectedDevice4["sream_name"] = "sophiawilson_stevecam_363";
+    connectedDevice4["stream_name"] = "sophiawilson_stevecam_363";
     connectedDevice4["direction"] = 1;
 
-    event3["Connected_streaming_devices"].append(connectedDevice4);
+    event3["connected_streaming_devices"].append(connectedDevice4);
 
     std::vector<Json::Value> pastEvents;
     pastEvents.push_back(event1);
@@ -212,6 +212,8 @@ std::vector<Json::Value> Event::fetchPastEvents() {
 std::string Event::createEventMessage() const
 {
     Json::Value eventMessage;
+    eventMessage["id"] = this->id();
+    eventMessage["title"] = this->title();
     eventMessage["sport"] = this->sport();
     eventMessage["level"] = this->level();
     eventMessage["program"] = this->program();
@@ -221,9 +223,10 @@ std::string Event::createEventMessage() const
     eventMessage["venue"]["location"] = this->venueLocation();
     eventMessage["detail"]["cityAddress"] = this->cityAddress();
     eventMessage["detail"]["streetAddress"] = this->streetAddress();
-    eventMessage["title"] = this->title();
     eventMessage["status"] = this->status();
     eventMessage["type"] = this->type();
+    // eventMessage["video_duration"] = this->videoDuration();
+    // eventMessage["shared_with"] = this->sharedWith();
 
     Json::FastWriter writer;
     return writer.write(eventMessage);
