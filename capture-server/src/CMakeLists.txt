@@ -24,7 +24,7 @@ set(HALF_STACK_SRC
     event-connection.cpp
     live-event.cpp
     past-event.cpp
-    distribution-list.cpp
+    distributions.cpp
     log-handler.cpp
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})

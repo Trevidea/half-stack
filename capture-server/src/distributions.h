@@ -1,5 +1,5 @@
-#ifndef DISTRIBUTION_LIST_H
-#define DISTRIBUTION_LIST_H
+#ifndef DISTRIBUTIONS_H
+#define DISTRIBUTIONS_H
 
 #include "entity-base.h"
 #include "request.h"
@@ -14,4 +14,4 @@ public:
 
 };
 
-#endif // DISTRIBUTION_LIST_H
+#endif // DISTRIBUTIONS_H

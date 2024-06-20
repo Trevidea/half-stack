@@ -15,7 +15,7 @@
 #include "event-connection.h"
 #include "event-manager.h"
 #include "past-event.h"
-#include "distribution-list.h"
+#include "distributions.h"
 #include "log-handler.h"
 
 Gateway::Gateway()

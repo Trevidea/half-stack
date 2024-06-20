@@ -158,7 +158,7 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     Json::Value connectedDevice2;
     connectedDevice2["id"] = 2;
     connectedDevice2["stream_name"] = "johndoe_stevecam_360";
-    connectedDevice2["direction"] = 2;
+    connectedDevice2["direction"] = 1;
 
     event1["connected_streaming_devices"].append(connectedDevice1);
     event1["connected_streaming_devices"].append(connectedDevice2);
