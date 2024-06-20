@@ -73,9 +73,12 @@ void PastEvent::listPastEvents(const Request &req, Response &rsp)
             appendField("type", 1, event["type"]);
             appendField("video_duration", 1, event["video_duration"]);
             appendField("shared_with", 1, event["shared_with"]);
-            appendField("venue_location", 1, event["venue"]["location"]);
-            appendField("cityAddress", 1, event["detail"]["cityAddress"]);
-            appendField("streetAddress", 1, event["detail"]["streetAddress"]);
+
+            Json::Value venue = event["venue"];
+            appendField(venue["field"].asString(), venue["type"].asInt(), venue["value"]);
+
+            Json::Value detail = event["detail"];
+            appendField(detail["field"].asString(), detail["type"].asInt(), detail["value"]);
 
             // Handle connected devices separately
             Json::Value connectedDevices(Json::arrayValue);
@@ -162,13 +165,16 @@ void PastEvent::getEventById(const Request &req, Response &rsp)
             appendField("year", 1, e["year"]);
             appendField("dt_event", 1, e["dt_event"]);
             appendField("tm_event", 1, e["tm_event"]);
-            appendField("venue_location", 1, e["venue"]["location"]);
-            appendField("cityAddress", 1, e["detail"]["cityAddress"]);
-            appendField("streetAddress", 1, e["detail"]["streetAddress"]);
             appendField("status", 1, e["status"]);
             appendField("type", 1, e["type"]);
             appendField("video_duration", 1, e["video_duration"]);
             appendField("shared_with", 1, e["shared_with"]);
+
+            Json::Value venue = e["venue"];
+            appendField(venue["field"].asString(), venue["type"].asInt(), venue["value"]);
+
+            Json::Value detail = e["detail"];
+            appendField(detail["field"].asString(), detail["type"].asInt(), detail["value"]);
 
             // Handle connected devices separately
             Json::Value connectedDevices(Json::arrayValue);

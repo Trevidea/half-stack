@@ -132,9 +132,19 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event1["year"] = 2024;
     event1["dt_event"] = "2024-05-31";
     event1["tm_event"] = 1845;
-    event1["venue"]["location"] = "Madison Square Garden";
-    event1["cityAddress"] = "44, Pennsylvania";
-    event1["streetAddress"] = "Georgia";
+    Json::Value venue;
+    venue["field"] = "venue";
+    venue["type"] = 5;
+    venue["value"]["location"] = "Madison Square Garden";
+    event1["venue"] = venue;
+
+    Json::Value detail;
+    detail["field"] = "detail";
+    detail["type"] = 5;
+    detail["value"]["city_address"] = "44, Pennsylvania";
+    detail["value"]["street_address"] = "Georgia";
+    event1["detail"] = detail;
+
     event1["status"] = "past";
     event1["type"] = "on-demand";
     event1["video_duration"] = "90 minutes";
@@ -162,9 +172,20 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event2["year"] = 2023;
     event2["dt_event"] = "2023-12-15";
     event2["tm_event"] = 1930;
-    event2["venue"]["location"] = "Staples Center";
-    event2["cityAddress"] = "111, Figueroa Street";
-    event2["streetAddress"] = "Los Angeles";
+
+    Json::Value venue2;
+    venue2["field"] = "venue";
+    venue2["type"] = 5;
+    venue2["value"]["location"] = "Staples Center";
+    event2["venue"] = venue2;
+
+    Json::Value detail2;
+    detail2["field"] = "detail";
+    detail2["type"] = 5;
+    detail2["value"]["city_address"] = "111, Figueroa Street";
+    detail2["value"]["street_address"] = "Los Angeles";
+    event2["detail"] = detail2;
+
     event2["status"] = "past";
     event2["type"] = "live";
     event2["video_duration"] = "120 minutes";
@@ -186,9 +207,20 @@ std::vector<Json::Value> Event::fetchPastEvents() {
     event3["year"] = 2022;
     event3["dt_event"] = "2022-09-10";
     event3["tm_event"] = 1500;
-    event3["venue"]["location"] = "Arthur Ashe Stadium";
-    event3["cityAddress"] = "Flushing Meadows";
-    event3["streetAddress"] = "New York";
+
+    Json::Value venue3;
+    venue3["field"] = "venue";
+    venue3["type"] = 5;
+    venue3["value"]["location"] = "Arthur Ashe Stadium";
+    event3["venue"] = venue3;
+
+    Json::Value detail3;
+    detail3["field"] = "detail";
+    detail3["type"] = 5;
+    detail3["value"]["city_address"] = "Flushing Meadows";
+    detail3["value"]["street_address"] = "New York";
+    event3["detail"] = detail3;
+
     event3["status"] = "past";
     event3["type"] = "tournament";
     event3["video_duration"] = "180 minutes";
@@ -208,6 +240,7 @@ std::vector<Json::Value> Event::fetchPastEvents() {
 
     return pastEvents;
 }
+
 
 std::string Event::createEventMessage() const
 {
