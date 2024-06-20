@@ -79,7 +79,7 @@ void PastEvent::listPastEvents(const Request &req, Response &rsp)
 
             // Handle connected devices separately
             Json::Value connectedDevices(Json::arrayValue);
-            for (const auto &device : event["Connected_streaming_devices"])
+            for (const auto &device : event["connected_streaming_devices"])
             {
                 Json::Value deviceObject(Json::arrayValue);
                 Json::Value deviceField;
@@ -91,7 +91,7 @@ void PastEvent::listPastEvents(const Request &req, Response &rsp)
 
                 deviceField["field"] = "stream_name";
                 deviceField["type"] = 1;
-                deviceField["value"] = device["sream_name"];
+                deviceField["value"] = device["stream_name"];
                 deviceObject.append(deviceField);
 
                 deviceField["field"] = "direction";
@@ -101,7 +101,7 @@ void PastEvent::listPastEvents(const Request &req, Response &rsp)
 
                 connectedDevices.append(deviceObject);
             }
-            appendField("Connected_streaming_devices", 1, connectedDevices);
+            appendField("connected_streaming_devices", 1, connectedDevices);
 
             result.append(formattedEvent);
         }
@@ -172,7 +172,7 @@ void PastEvent::getEventById(const Request &req, Response &rsp)
 
             // Handle connected devices separately
             Json::Value connectedDevices(Json::arrayValue);
-            for (const auto &device : e["Connected_streaming_devices"])
+            for (const auto &device : e["connected_streaming_devices"])
             {
                 Json::Value deviceObject(Json::arrayValue);
                 Json::Value deviceField;
@@ -184,7 +184,7 @@ void PastEvent::getEventById(const Request &req, Response &rsp)
 
                 deviceField["field"] = "stream_name";
                 deviceField["type"] = 1;
-                deviceField["value"] = device["sream_name"];
+                deviceField["value"] = device["stream_name"];
                 deviceObject.append(deviceField);
 
                 deviceField["field"] = "direction";
@@ -194,7 +194,7 @@ void PastEvent::getEventById(const Request &req, Response &rsp)
 
                 connectedDevices.append(deviceObject);
             }
-            appendField("Connected_streaming_devices", 1, connectedDevices);
+            appendField("connected_streaming_devices", 1, connectedDevices);
 
             Json::Value gatewayResponse;
             gatewayResponse["count"] = 1;
