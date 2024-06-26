@@ -17,15 +17,44 @@
     <div class="col-12 mb-2 p-0">
       <div class="form-group">
         <label>Add People</label>
-        <input [(ngModel)]="emailInput" (keydown.enter)="addEmail()" (keydown.backspace)="removeLastTag()"
-          class="form-control" placeholder="Add a tag..." />
+        <ng-select #selectMultiLimited [items]="selectMulti" [closeOnSelect]="false" [multiple]="true"
+          [(ngModel)]="datasource.emails.SelectedItem" name="People" placeholder="Select people">
+          <ng-template ng-label-tmp></ng-template>
+          <ng-template ng-option-tmp let-item="item" let-i="index">
+            <div class="row d-flex pl-1" (click)="onRowClick(item)">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck{{i}}" [(ngModel)]="item.selected"
+                  (ngModelChange)="onCheckboxChange(item)" />
+                <label class="custom-control-label" for="customCheck{{i}}"></label>
+              </div>
+              <div class="mr-1 image-container">
+                <img src="../../../../../../../../assets/images/portrait/small/avatar-s-9.jpg" alt="Avatar"
+                  class="rounded-image" />
+              </div>
+              <div class="text-container">
+                <span class="ng-value-label">{{ item?.name }}</span>
+                <p>{{ item?.email }}</p>
+              </div>
+            </div>
+          </ng-template>
+        </ng-select>
+
       </div>
     </div>
     <div class="chip-container" *ngIf="datasource.emails.length > 0">
-      <div class="chip" *ngFor="let email of datasource.emails">
-        <span>{{email}}</span>
+      <div class="chip" *ngFor="let item of datasource.emails">
+        <div class="d-flex">
+          <div class="mr-1 image-container">
+            <img src="../../../../../../../../assets/images/portrait/small/avatar-s-9.jpg" alt="Avatar"
+              class="rounded-image" />
+          </div>
+          <div class="text-container">
+            <span>{{ item.name }}</span>
+            <p>{{ item.email }}</p>
+          </div>
+        </div>
         <div class="remove-tag">
-          <span class="closebtn" (click)="removeTag(email)">&times;</span>
+          <span class="closebtn" (click)="removeTag(item.id)">&times;</span>
         </div>
       </div>
     </div>

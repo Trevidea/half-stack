@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Views } from 'app/sport-pip-capture/models/capture-interface';
@@ -16,7 +16,8 @@ import Swal from 'sweetalert2';
 })
 export class SharingComponent implements OnInit {
   @Input() datasource: any;
- coachHomeSidebarData:any;
+  @Output() onRefresh: EventEmitter<any> = new EventEmitter();
+  coachHomeSidebarData: any;
   constructor(private _coreSidebarService: CoreSidebarService, private modalService: NgbModal) {
   }
 
@@ -24,13 +25,13 @@ export class SharingComponent implements OnInit {
     console.log(this.datasource)
   }
 
-  distributionDetail(data:any) {
+  distributionDetail(data: any) {
     console.log(data,)
-     this.coachHomeSidebarData =data;
+    this.coachHomeSidebarData = data;
     this._coreSidebarService.getSidebarRegistry('coach-home-sidebar').toggleOpen();
   }
 
-//open model 
+  //open model 
   _openModal() {
     const modalRef = this.modalService.open(DistributionListPresenter, {
       centered: true,
@@ -41,7 +42,7 @@ export class SharingComponent implements OnInit {
       inst.onUpdate.subscribe(res => {
         console.log(res)
         if (res) {
-          // this.loadRefreshData()
+          this.onRefresh.emit()
         }
       });
     })
@@ -60,14 +61,14 @@ export class SharingComponent implements OnInit {
       inst.onUpdate.subscribe(res => {
         console.log(res)
         if (res) {
-          // this.loadRefreshData()
+          this.onRefresh.emit()
         }
       });
     })
   }
 
   //delete Distribution  list
-  deleteDistribution(id:number){
+  deleteDistribution(id: number) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -75,20 +76,20 @@ export class SharingComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: 'rgba(33, 96, 147, 1)',
       cancelButtonColor: '#d33',
-    
+
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        // this.dataFactory.DeleteDistributionJson(id);
+        //  this.dataFactory.DeleteDistributionJson(id);
         Swal.fire(
           'Deleted!',
           'Your file has been deleted.',
           'success'
         )
-        // this.loadRefreshData()
+        this.onRefresh.emit()
       }
     })
-   
+
 
   }
 

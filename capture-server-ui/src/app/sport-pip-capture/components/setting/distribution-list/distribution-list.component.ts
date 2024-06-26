@@ -13,35 +13,46 @@ export class DistributionListComponent implements OnInit {
   @Output() cancel = new EventEmitter();
   @Output() sendDataToParentEvent = new EventEmitter<string>();
   private modalRef: NgbModalRef
-  emailInput: string = '';
+
+  selectMulti = [
+    { id: 1, name: 'Person 1', email: 'person1@example.com', selected: false },
+    { id: 2, name: 'Person 2', email: 'person2@example.com', selected: false },
+  ];
+
+
   constructor(public activeModal: NgbActiveModal) {
   }
 
+
   ngOnInit(): void {
+  }
+
+  onCheckboxChange(item) {
+    item.selected = !item.selected;
+    if (item.selected) {
+      if (!this.datasource.emails.find(emailItem => emailItem.id === item.id)) {
+        this.datasource.emails.push(item);
+      }
+    } else {
+      this.removeTag(item.id)
+    }
+  }
+
+  onRowClick(item) {
+    this.onCheckboxChange(item);
+  }
+  removeTag(itemId) {
+    this.datasource.emails = this.datasource.emails.filter(item => item.id !== itemId);
+    const item = this.selectMulti.find(item => item.id === itemId);
+    if (item) {
+      item.selected = false;
+    }
   }
 
   dismiss(): void {
     this.modalRef.dismiss(null);
   }
 
-  addEmail() {
-    if (this.emailInput.trim()) {
-      this.datasource.emails.push(this.emailInput.trim());
-      this.emailInput = '';
-    }
-  }
 
-  removeTag(tag: string) {
-    const index = this.datasource.emails.indexOf(tag);
-    if (index >= 0) {
-      this.datasource.emails.splice(index, 1);
-    }
-  }
-
-  removeLastTag() {
-    if (!this.emailInput && this.datasource.emails.length > 0) {
-      this.datasource.emails.pop();
-    }
-  }
 
 }
