@@ -11,12 +11,12 @@ export class ConnectionDetailsView implements Views.Datasource {
     this._id = v;
   }
 
-  private _sreamName: string;
-  public get sreamName(): string {
-    return this._sreamName;
+  private _streamName: string;
+  public get streamName(): string {
+    return this._streamName;
   }
-  public set sreamName(v: string) {
-    this._sreamName = v;
+  public set streamName(v: string) {
+    this._streamName= v;
   }
 
   private _direction: number;

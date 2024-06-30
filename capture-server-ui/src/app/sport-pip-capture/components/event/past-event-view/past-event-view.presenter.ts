@@ -19,6 +19,7 @@ export class PastEventViewPresenter implements OnInit {
   constructor(private modelServiceService: ModelServiceService,
     private route: ActivatedRoute,
     private eventRunnerService: EventRunnerService) {
+    this.ds = new PasEventView();
     this.eventRunnerService.startedEventId$.subscribe(
       (res) => {
         if (res) {
@@ -26,7 +27,7 @@ export class PastEventViewPresenter implements OnInit {
         }
       }
     );
-    this.ds = new PasEventView();
+
   }
 
   ngOnInit(): void {
@@ -39,15 +40,11 @@ export class PastEventViewPresenter implements OnInit {
 
     if (this.eventId) {
       Transformer.ComposeObjectAsync(
-        this.modelServiceService.eventJson(this.eventId),
+        this.modelServiceService.getSpecificPastEvent(this.eventId),
         this.ds,
         PastEventBuilder
       );
-      Transformer.ComposeCollectionAsync(
-        this.modelServiceService.eventConnectionJsonById(this.eventId),
-        this.ds.connectionDetailsView,
-        PastConnectionBuilder
-      )
+
     }
   }
 }

@@ -123,6 +123,7 @@ export class ModelServiceService {
     return this._adapter.demodulate(resource, this.readOne(resource, id)).pipe(
       map((models) =>
         models.map((model: any) => {
+          console.log(model)
           return model as I;
         })
       )
@@ -135,14 +136,14 @@ export class ModelServiceService {
     keyType: string
   ): Observable<I[]> {
     return this._adapter.demodulate(resource,
-        this.getEntitiesByDynamicQuery(resource, key, keyType)
-      ).pipe(
-        map((models) =>
-          models.map((model: any) => {
-            return model as I;
-          })
-        )
-      );
+      this.getEntitiesByDynamicQuery(resource, key, keyType)
+    ).pipe(
+      map((models) =>
+        models.map((model: any) => {
+          return model as I;
+        })
+      )
+    );
   }
 
   private _getList<I extends Data.Base>(resource: string): Observable<I[]> {
@@ -451,7 +452,7 @@ export class ModelServiceService {
   }
 
   getSpecificPastEvent(id: number): Observable<Data.PastEvent> {
-    return this._selectOne('event', id, PastEventData)
+    return this._selectOne('past-event/detail', id, PastEventData)
   }
 
   deviceById(id: number): Observable<Data.Device> {
@@ -459,7 +460,7 @@ export class ModelServiceService {
   }
 
   eventJson(id: number): Observable<Data.Event> {
-    return this._selectOne("past-event", id, EventData);
+    return this._selectOne("event", id, EventData);
   }
 
   MetaTypeByKey(key: string): Observable<Data.MetaType> {

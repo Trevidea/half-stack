@@ -10,29 +10,34 @@ import { environment } from 'environments/environment';
 })
 export class PastEventViewComponent implements OnInit {
   @Input() datasource: any;
-  StreamName: string | null = null;
+
+  activeIndex: number = 0;
+  streamName: string | null = null;
   url: string;
-  // = `${environment.spHLSUrl}/sophiawilson_sonycam-corder_310/llhls.m3u8`;
+
   constructor() {
   }
 
   ngOnInit(): void {
     console.log(this.datasource)
     setTimeout(() => {
-      this.datasource?.connectionDetailsView?.forEach(item => {
-        if (item && item._direction === 1) {
-          this.StreamName = item._sreamName;
-          console.log('Stream Name Saved:', item, this.StreamName);
-
-          this.url = `${environment.spHLSUrl}/${this.StreamName}/llhls.m3u8`
-          console.log(this.url);
-        }
-      });
+      const defaultdevice = this.datasource?.connectionDetailsView[0]
+      this.url = `${environment.spHLSUrl}/${defaultdevice.streamName}/llhls.m3u8`
+      console.log(defaultdevice)
     }, 90)
 
   }
 
+  setStreamName(streamName: string, index: number) {
+    this.url = ''
+    setTimeout(() => {
+      this.streamName = streamName;
+      this.activeIndex = index;
+      this.url = `${environment.spHLSUrl}/${this.streamName}/llhls.m3u8`
+      console.log(this.url)
+    }, 30)
 
+  }
 
 
 }

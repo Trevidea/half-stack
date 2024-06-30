@@ -64,8 +64,8 @@ export namespace Data {
   export interface CustomizationSettings { }
 
   export interface Detail {
-    cityAddress: string;
-    streetAddress: string;
+    city_address: string;
+    street_address: string;
     type: string;
   }
 
@@ -341,10 +341,10 @@ export namespace Data {
     shared_with: string;
     connected_streaming_devices: ConnectedStreamingDevices[];
   }
-  
+
   export interface ConnectedStreamingDevices {
     id: number;
-    sream_name: string
+    stream_name: string
     direction: number
   }
 

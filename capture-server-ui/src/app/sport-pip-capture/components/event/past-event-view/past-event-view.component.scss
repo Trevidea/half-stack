@@ -16,6 +16,14 @@
 
 }
 
+.btn-outline-secondary {
+  background-color: transparent !important;
+
+  &.active {
+    border: 1px solid #216093 !important;
+  }
+}
+
 .custom-card-border {
   border: 1px solid rgba(217, 217, 217, 1);
   border-radius: 6px;
@@ -48,7 +56,7 @@ a {
 }
 
 .uploadbut {
-
+  background-color: #F5A30A !important;
   padding-top: 0.3rem;
   padding-right: 0.5rem;
   padding-bottom: 0.3rem;

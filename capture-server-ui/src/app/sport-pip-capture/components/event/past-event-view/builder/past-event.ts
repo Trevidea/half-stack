@@ -2,60 +2,69 @@ import { AbstractBuilder } from "app/blocks/strategies";
 import { Data } from "app/sport-pip-capture/models/capture-interface";
 import moment from "moment";
 import { PasEventView } from "../view/past-event-view";
+import { ConnectionDetailsView } from "../view/connections";
+import { Transformer } from "app/blocks/transformer";
 
 export class PastEventBuilder extends AbstractBuilder<
-  Data.Event,
+  Data.PastEvent,
   PasEventView
 > {
-  compose(m: Data.Event, v: PasEventView) {
+  compose(m: Data.PastEvent, v: PasEventView) {
     v.id = m.id;
+    v.type = m.type;
     v.title = m.title;
-    v.detail.cityAddress = m?.detail?.cityAddress;
-    v.detail.streetAdress = m?.detail?.streetAddress;
+    v.detail.cityAddress = m?.detail?.city_address;
+    v.detail.streetAddress = m?.detail?.street_address;
     v.detail.type = m?.detail?.type;
     v.dtEvent = m.dt_event;
-    v.levels.SelectedItem = m.level;
-    v.programs.SelectedItem = m.program;
-    v.sports.SelectedItem = m.sport;
+    v.level = m.level;
+    v.program = m.program;
+    v.sport = m.sport;
     v.time = m.tm_event;
-    v.venue.location = m?.venue?.location;
+    v.year = m.year
+    v.venue.location = m.venue.location;
+    const transformedDevices = this.transformConnectedStreamingDevices(m?.connected_streaming_devices);
+    Transformer.ComposeCollection(
+      transformedDevices,
+      v?.connectionDetailsView,
+      ConnectionDetailsBuilder
+    );
   }
 
-  formatTimeNumToStr(time: number): string {
-    const hours = Math.floor(time / 100);
-    const minutes = time % 100;
-    const formattedHours = hours < 10 ? '0' + hours : hours.toString();
-    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes.toString();
-    return formattedHours + ':' + formattedMinutes;
+  transformConnectedStreamingDevices(devices: any): Data.ConnectedStreamingDevices[] {
+    return devices.map(deviceArray => {
+      let deviceObj: Data.ConnectedStreamingDevices = {
+        id: deviceArray.find(field => field.field === "device_id")?.value ?? 0,
+        stream_name: deviceArray.find(field => field.field === "stream_name")?.value ?? "",
+        direction: deviceArray.find(field => field.field === "direction")?.value ?? 0
+      };
+      return deviceObj;
+    });
   }
 
-  decompose(v: PasEventView): Data.Event {
+
+  decompose(v: PasEventView): Data.PastEvent {
     return;
   }
-  formatTime(time: any): number {
-    if (!time) return 0;
-    const [hours, minutes] = time.split(':');
-    let formattedTime = hours + minutes;
-    return parseInt(formattedTime);
-  }
+
 
   view(): PasEventView {
     return new PasEventView();
   }
 }
 
-export class VenueBuilder extends AbstractBuilder<
-  Data.Event,
-  PasEventView
-> {
-  compose(m: Data.Event, v: PasEventView) {
-    v.venue[0].location = m.venue[0].location;
-  }
-  decompose(v: PasEventView): Data.Event {
-    return;
 
+export class ConnectionDetailsBuilder extends AbstractBuilder<Data.ConnectedStreamingDevices, ConnectionDetailsView> {
+  compose(m: Data.ConnectedStreamingDevices, v: ConnectionDetailsView) {
+    v.direction = m.direction;
+    v.id = m.id;
+    v.streamName = m.stream_name;
   }
-  view(): PasEventView {
-    return new PasEventView();
+  decompose(v: ConnectionDetailsView): Data.ConnectedStreamingDevices {
+    throw new Error("Method not implemented.");
   }
+  view(): ConnectionDetailsView {
+    return new ConnectionDetailsView();
+  }
+
 }

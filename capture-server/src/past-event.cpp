@@ -73,13 +73,16 @@ void PastEvent::listPastEvents(const Request &req, Response &rsp)
             appendField("type", 1, event["type"]);
             appendField("video_duration", 1, event["video_duration"]);
             appendField("shared_with", 1, event["shared_with"]);
-            appendField("venue_location", 1, event["venue"]["location"]);
-            appendField("cityAddress", 1, event["detail"]["cityAddress"]);
-            appendField("streetAddress", 1, event["detail"]["streetAddress"]);
+
+            Json::Value venue = event["venue"];
+            appendField(venue["field"].asString(), venue["type"].asInt(), venue["value"]);
+
+            Json::Value detail = event["detail"];
+            appendField(detail["field"].asString(), detail["type"].asInt(), detail["value"]);
 
             // Handle connected devices separately
             Json::Value connectedDevices(Json::arrayValue);
-            for (const auto &device : event["Connected_streaming_devices"])
+            for (const auto &device : event["connected_streaming_devices"])
             {
                 Json::Value deviceObject(Json::arrayValue);
                 Json::Value deviceField;
@@ -91,7 +94,7 @@ void PastEvent::listPastEvents(const Request &req, Response &rsp)
 
                 deviceField["field"] = "stream_name";
                 deviceField["type"] = 1;
-                deviceField["value"] = device["sream_name"];
+                deviceField["value"] = device["stream_name"];
                 deviceObject.append(deviceField);
 
                 deviceField["field"] = "direction";
@@ -101,7 +104,7 @@ void PastEvent::listPastEvents(const Request &req, Response &rsp)
 
                 connectedDevices.append(deviceObject);
             }
-            appendField("Connected_streaming_devices", 1, connectedDevices);
+            appendField("connected_streaming_devices", 1, connectedDevices);
 
             result.append(formattedEvent);
         }
@@ -162,17 +165,20 @@ void PastEvent::getEventById(const Request &req, Response &rsp)
             appendField("year", 1, e["year"]);
             appendField("dt_event", 1, e["dt_event"]);
             appendField("tm_event", 1, e["tm_event"]);
-            appendField("venue_location", 1, e["venue"]["location"]);
-            appendField("cityAddress", 1, e["detail"]["cityAddress"]);
-            appendField("streetAddress", 1, e["detail"]["streetAddress"]);
             appendField("status", 1, e["status"]);
             appendField("type", 1, e["type"]);
             appendField("video_duration", 1, e["video_duration"]);
             appendField("shared_with", 1, e["shared_with"]);
 
+            Json::Value venue = e["venue"];
+            appendField(venue["field"].asString(), venue["type"].asInt(), venue["value"]);
+
+            Json::Value detail = e["detail"];
+            appendField(detail["field"].asString(), detail["type"].asInt(), detail["value"]);
+
             // Handle connected devices separately
             Json::Value connectedDevices(Json::arrayValue);
-            for (const auto &device : e["Connected_streaming_devices"])
+            for (const auto &device : e["connected_streaming_devices"])
             {
                 Json::Value deviceObject(Json::arrayValue);
                 Json::Value deviceField;
@@ -184,7 +190,7 @@ void PastEvent::getEventById(const Request &req, Response &rsp)
 
                 deviceField["field"] = "stream_name";
                 deviceField["type"] = 1;
-                deviceField["value"] = device["sream_name"];
+                deviceField["value"] = device["stream_name"];
                 deviceObject.append(deviceField);
 
                 deviceField["field"] = "direction";
@@ -194,7 +200,7 @@ void PastEvent::getEventById(const Request &req, Response &rsp)
 
                 connectedDevices.append(deviceObject);
             }
-            appendField("Connected_streaming_devices", 1, connectedDevices);
+            appendField("connected_streaming_devices", 1, connectedDevices);
 
             Json::Value gatewayResponse;
             gatewayResponse["count"] = 1;
