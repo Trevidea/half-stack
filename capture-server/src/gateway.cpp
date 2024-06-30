@@ -17,6 +17,7 @@
 #include "past-event.h"
 #include "distribution-list.h"
 #include "log-handler.h"
+#include "tagging-engine.h"
 
 Gateway::Gateway()
 {
@@ -39,6 +40,7 @@ void Gateway::init()
     this->m_entities.push_back(new PastEvent());
     this->m_entities.push_back(new DistributionList());
     this->m_entities.push_back(new LogHandler());
+    this->m_entities.push_back(new TaggingEngine());
     for (auto &&e : this->m_entities)
     {
         e->report();
