@@ -36,4 +36,4 @@ target_link_libraries(half-stack PUBLIC
     omal
     pg-dal
     zmq
-    PRIVATE data-analytics)
+    data-analytics)
