@@ -13,4 +13,5 @@ target_link_libraries(capture-server PUBLIC
     pg-dal
     omal
     data-analytics
+    duckdb
     half-stack)
