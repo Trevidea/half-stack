@@ -27,7 +27,7 @@ file(GLOB DATA_ANALYTICS_SOURCES
 )
 
 add_library(data-analytics ${DATA_ANALYTICS_SOURCES})
-target_include_directories(data-analytics PUBLIC "./" PRIVATE ${source_dir}/src/include)
+target_include_directories(data-analytics PUBLIC "./" ${source_dir}/src/include)
 
 add_dependencies(data-analytics duckdb)
 if(APPLE)
