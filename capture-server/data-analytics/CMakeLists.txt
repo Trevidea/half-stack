@@ -27,11 +27,11 @@ file(GLOB DATA_ANALYTICS_SOURCES
 )
 
 add_library(data-analytics ${DATA_ANALYTICS_SOURCES})
-target_include_directories(data-analytics PUBLIC "./" ${source_dir}/src/include)
+target_include_directories(data-analytics PUBLIC "./" PRIVATE ${source_dir}/src/include)
 
 add_dependencies(data-analytics duckdb)
 if(APPLE)
-    target_link_libraries(data-analytics PUBLIC ${binary_dir}/build/release/src/libduckdb.dylib)
+    target_link_libraries(data-analytics PRIVATE ${binary_dir}/build/release/src/libduckdb.dylib)
 else()
-    target_link_libraries(data-analytics PUBLIC ${binary_dir}/build/release/src/libduckdb_static.a)
+    target_link_libraries(data-analytics PRIVATE ${binary_dir}/build/release/src/libduckdb_static.a)
 endif()
