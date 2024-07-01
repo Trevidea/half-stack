@@ -19,6 +19,7 @@ ExternalProject_Get_Property(duckdb source_dir)
 ExternalProject_Get_Property(duckdb binary_dir)
 include_directories(${source_dir}/src/include)
 
+message("DuckDB include directory = ${source_dir}/src/include}")
 message("DuckDB binary directory = ${binary_dir}")
 
 file(GLOB DATA_ANALYTICS_SOURCES
