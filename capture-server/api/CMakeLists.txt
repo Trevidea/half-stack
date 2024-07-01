@@ -13,5 +13,5 @@ target_link_libraries(capture-server PUBLIC
     pg-dal
     omal
     data-analytics
-    DuckDB
+    ${CMAKE_BINARY_DIR}/build/release/src/libduckdb_static.a
     half-stack)
