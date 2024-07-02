@@ -12,5 +12,6 @@ target_link_libraries(capture-server PUBLIC
     jsoncpp_lib
     pg-dal
     omal
-    data-analytics
     half-stack)
+    
+target_include_directories(capture-server PUBLIC ${CMAKE_BINARY_DIR}/half-stack)

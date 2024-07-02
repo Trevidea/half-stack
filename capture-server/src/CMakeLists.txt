@@ -29,7 +29,6 @@ set(HALF_STACK_SRC
     tagging-engine.cpp
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
-target_include_directories(half-stack PUBLIC "./" rest-client zmq)
 target_link_libraries(half-stack PUBLIC
     spdlog::spdlog
     rest-client
@@ -37,3 +36,4 @@ target_link_libraries(half-stack PUBLIC
     pg-dal
     zmq
     data-analytics)
+target_include_directories(half-stack PUBLIC "./" rest-client zmq ${CMAKE_BINARY_DIR}/data-analytics)

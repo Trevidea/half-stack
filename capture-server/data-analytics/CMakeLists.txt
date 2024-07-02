@@ -9,9 +9,9 @@ ExternalProject_Add(duckdb
     GIT_TAG v1.0.0
     CONFIGURE_COMMAND ""
     BUILD_COMMAND GEN=${GEN} BUILD_JSON=1 make
-    INSTALL_COMMAND ""
+    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/duckdb/src/duckdb/build/release/src/libduckdb_static.a ${CMAKE_BINARY_DIR}/lib/duckdb/libduckdb_static.a
     BUILD_IN_SOURCE 1
-    BUILD_BYPRODUCTS ${CMAKE_BINARY_DIR}/build/release/src/libduckdb_static.a
+    BUILD_BYPRODUCTS ${CMAKE_BINARY_DIR}/lib/duckdb/libduckdb_static.a
 )
 message("Cmake_Binary_Dir = ${CMAKE_BINARY_DIR}")
 
@@ -27,11 +27,13 @@ file(GLOB DATA_ANALYTICS_SOURCES
 )
 
 add_library(data-analytics ${DATA_ANALYTICS_SOURCES})
-target_include_directories(data-analytics PUBLIC "./" ${source_dir}/src/include)
 
 add_dependencies(data-analytics duckdb)
+set(DUCKDB_LIB_PATH ${CMAKE_BINARY_DIR}/lib/duckdb)
 if(APPLE)
-    target_link_libraries(data-analytics PRIVATE ${binary_dir}/build/release/src/libduckdb.dylib)
+    target_link_libraries(data-analytics PRIVATE ${DUCKDB_LIB_PATH}/libduckdb.dylib)
 else()
-    target_link_libraries(data-analytics PRIVATE /home/manish/git/half-stack/capture-server/build/duckdb/src/duckdb/build/release/src/libduckdb_static.a)
+    target_link_libraries(data-analytics PRIVATE ${DUCKDB_LIB_PATH}/libduckdb_static.a)
 endif()
+
+target_include_directories(data-analytics PUBLIC "./" ${source_dir}/src/include)
