@@ -6,7 +6,7 @@ find_package(cppzmq)
 # message(STATUS "ZeroMQ libraries: ${ZeroMQ_LIBRARY}")
 # include_directories(${ZeroMQ_INCLUDE_DIRS})
 
-add_library(zmq STATIC ${ZMQ_SRC})
+add_library(zmq SHARED ${ZMQ_SRC})
 target_include_directories(zmq PUBLIC "./")
 target_link_libraries(zmq PUBLIC
     spdlog::spdlog
