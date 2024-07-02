@@ -26,7 +26,7 @@ set(HALF_STACK_SRC
     past-event.cpp
     distributions.cpp
     log-handler.cpp
-    tagging-data.cpp
+    tagging-engine.cpp
     metatype.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
 target_include_directories(half-stack PUBLIC "./" rest-client zmq)
@@ -35,4 +35,5 @@ target_link_libraries(half-stack PUBLIC
     rest-client
     omal
     pg-dal
-    zmq)
+    zmq
+    data-analytics)
