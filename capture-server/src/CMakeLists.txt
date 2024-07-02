@@ -28,7 +28,7 @@ set(HALF_STACK_SRC
     log-handler.cpp
     tagging-engine.cpp
     metatype.cpp)
-add_library(half-stack STATIC ${HALF_STACK_SRC})
+add_library(half-stack SHARED ${HALF_STACK_SRC})
 target_include_directories(half-stack PUBLIC "./" rest-client zmq)
 target_link_libraries(half-stack PUBLIC
     spdlog::spdlog

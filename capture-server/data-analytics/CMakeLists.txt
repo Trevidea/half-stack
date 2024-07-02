@@ -26,7 +26,7 @@ file(GLOB DATA_ANALYTICS_SOURCES
     "*.cpp"
 )
 
-add_library(data-analytics ${DATA_ANALYTICS_SOURCES})
+add_library(data-analytics SHARED ${DATA_ANALYTICS_SOURCES})
 
 add_dependencies(data-analytics duckdb)
 set(DUCKDB_LIB_PATH ${CMAKE_BINARY_DIR}/lib/duckdb)
