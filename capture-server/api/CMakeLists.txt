@@ -14,3 +14,4 @@ target_link_libraries(capture-server PUBLIC
     omal
     data-analytics
     half-stack)
+    
