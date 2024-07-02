@@ -19,6 +19,7 @@ ExternalProject_Get_Property(duckdb source_dir)
 ExternalProject_Get_Property(duckdb binary_dir)
 include_directories(${source_dir}/src/include)
 
+message("DuckDB include directory = ${source_dir}/src/include")
 message("DuckDB binary directory = ${binary_dir}")
 
 file(GLOB DATA_ANALYTICS_SOURCES
@@ -26,7 +27,7 @@ file(GLOB DATA_ANALYTICS_SOURCES
 )
 
 add_library(data-analytics ${DATA_ANALYTICS_SOURCES})
-target_include_directories(data-analytics PUBLIC "./")
+target_include_directories(data-analytics PUBLIC "./" ${source_dir}/src/include)
 
 add_dependencies(data-analytics duckdb)
 if(APPLE)
