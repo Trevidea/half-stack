@@ -11,7 +11,7 @@ set(PG_DAL_SRC
   data-set.cpp
 )
 
-add_library(pg-dal SHARED ${PG_DAL_SRC}
+add_library(pg-dal STATIC ${PG_DAL_SRC}
 )
 target_link_libraries(pg-dal PUBLIC 
   spdlog::spdlog

@@ -3,7 +3,7 @@ set(REST_CLIENT_SRC
   client-factory.cpp
 )
 
-add_library(rest-client SHARED ${REST_CLIENT_SRC}
+add_library(rest-client STATIC ${REST_CLIENT_SRC}
 )
 target_link_libraries(rest-client PUBLIC 
   spdlog::spdlog

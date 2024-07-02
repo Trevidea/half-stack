@@ -5,7 +5,7 @@ set(OMAL_SRC
     virtual-app.cpp
     omal-exceptions.cpp
     watcher.cpp)
-add_library(omal SHARED ${OMAL_SRC})
+add_library(omal STATIC ${OMAL_SRC})
 target_include_directories(omal PUBLIC "./" rest-client pg-dal)
 target_link_libraries(omal PUBLIC
     spdlog::spdlog
