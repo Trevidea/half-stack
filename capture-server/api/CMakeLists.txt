@@ -12,5 +12,7 @@ target_link_libraries(capture-server PUBLIC
     jsoncpp_lib
     pg-dal
     omal
+    duckdb
+    data-analytics
     half-stack)
     
