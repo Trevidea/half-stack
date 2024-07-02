@@ -14,4 +14,3 @@ target_link_libraries(capture-server PUBLIC
     omal
     half-stack)
     
-target_include_directories(capture-server PUBLIC ${CMAKE_BINARY_DIR}/half-stack)
