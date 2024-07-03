@@ -3,11 +3,58 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
+#include <sstream>
 
 namespace fs = std::filesystem;
 
 using namespace duckdb;
+namespace fs = std::filesystem;
 
+std::vector<std::string> TagJson::list_files(const std::string &directory)
+{
+   std::vector<std::string> files;
+   for (const auto &entry : fs::directory_iterator(directory))
+   {
+      if (entry.is_regular_file() && entry.path().extension() == ".json")
+      {
+         files.push_back(entry.path().string());
+      }
+   }
+   return files;
+}
+std::string TagJson::read_file(const std::string& file_path) {
+    std::ifstream file(file_path);
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+    return buffer.str();
+}
+std::string read_file(const std::string& file_path) {
+    std::ifstream file(file_path);
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+    return buffer.str();
+}
+std::string TagJson::fetchTagsForEvent(const std::string &event_id_directory)
+{
+   std::vector<std::string> json_files = list_files(event_id_directory);
+
+    std::ostringstream oss;
+    oss << "[";
+
+    bool first_file = true;
+    for (const auto& json_file : json_files) {
+        if (!first_file) {
+            oss << ",";
+        }
+        first_file = false;
+
+        std::string json_content = read_file(json_file);
+        oss << json_content;
+    }
+
+    oss << "]";
+    return oss.str();
+}
 void TagJson::save(duckdb::Connection &conn, const std::string &json_str, const std::string &base_path)
 {
    const int pass = 0;
@@ -75,8 +122,6 @@ void TagJson::save(duckdb::Connection &conn, const std::string &json_str, const 
          fs::path dir_path = fs::path(base_path) / std::to_string(event_id);
          fs::create_directories(dir_path);
 
-         
-
          std::string filename = "event_" + timestamp + ".json";
          std::replace(filename.begin(), filename.end(), ' ', '_');
          std::replace(filename.begin(), filename.end(), ':', '-');
@@ -84,7 +129,7 @@ void TagJson::save(duckdb::Connection &conn, const std::string &json_str, const 
          std::ofstream outfile(dir_path / filename);
          outfile << json_str;
          outfile.close();
-         
+
          this->m_path = dir_path.generic_string() + "/" + filename;
          conn.Query("DELETE FROM events");
       }

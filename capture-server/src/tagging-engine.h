@@ -9,8 +9,8 @@ private:
     /* data */
 public:
     TaggingEngine(/* args */);
-    ~TaggingEngine();   
     void report() override;
+    ~TaggingEngine();   
 };
 
 
