@@ -1,3 +1,4 @@
+//event.h
 #ifndef EVENT_H
 #define EVENT_H
 
@@ -47,6 +48,8 @@ public:
     void updateStatus(const Event::EVENT_STATUS status);
 
     static std::vector<Json::Value> fetchPastEvents();
+    static void fetchPastEventsHelper(Request &request, Response &response);
+
     std::string createEventMessage() const;
 
     inline dtu_date getDTUDate() const

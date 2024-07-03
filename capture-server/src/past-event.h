@@ -16,6 +16,7 @@ public:
 private:
     void listPastEvents(const Request &req, Response &rsp);
     void getEventById(const Request &req, Response &rsp);
+    void savePastEventsToMinio(const Request &req, Response &rsp);
 };
 
 #endif // PAST_EVENT_H
