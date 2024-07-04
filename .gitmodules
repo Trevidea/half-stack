@@ -1,21 +1,21 @@
 [submodule "capture-server/dependency/cpprestsdk"]
-	path = capture-server/dependency/cpprestsdk
-	url = https://github.com/microsoft/cpprestsdk.git
+    path = capture-server/dependency/cpprestsdk
+    url = https://github.com/microsoft/cpprestsdk.git
 [submodule "capture-server/dependency/jsoncpp"]
-	path = capture-server/dependency/jsoncpp
-	url = https://github.com/open-source-parsers/jsoncpp.git
+    path = capture-server/dependency/jsoncpp
+    url = https://github.com/open-source-parsers/jsoncpp.git
 [submodule "capture-server/dependency/spdlog"]
-	path = capture-server/dependency/spdlog
-	url = https://github.com/gabime/spdlog.git
+    path = capture-server/dependency/spdlog
+    url = https://github.com/gabime/spdlog.git
 [submodule "capture-server/dependency/libzmq"]
-	path = capture-server/dependency/libzmq
-	url = https://github.com/zeromq/libzmq.git
+    path = capture-server/dependency/libzmq
+    url = https://github.com/zeromq/libzmq.git
 [submodule "capture-server/dependency/cppzmq"]
-	path = capture-server/dependency/cppzmq
-	url = https://github.com/zeromq/cppzmq.git
+    path = capture-server/dependency/cppzmq
+    url = https://github.com/zeromq/cppzmq.git
 [submodule "capture-server/dependency/googletest"]
-	path = capture-server/dependency/googletest
-	url = https://github.com/google/googletest.git
+    path = capture-server/dependency/googletest
+    url = https://github.com/google/googletest.git
 [submodule "capture-server/dependency/minio-cpp"]
-	path = capture-server/dependency/minio-cpp
-	url = https://github.com/minio/minio-cpp.git
+    path = capture-server/dependency/minio-cpp
+    url = https://github.com/minio/minio-cpp.git
