@@ -31,7 +31,11 @@ target_include_directories(data-analytics PUBLIC "./" ${source_dir}/src/include)
 
 add_dependencies(data-analytics duckdb)
 if(APPLE)
-    target_link_libraries(data-analytics PRIVATE ${binary_dir}/build/release/src/libduckdb.dylib)
+    target_link_libraries(data-analytics PRIVATE 
+        ${binary_dir}/build/release/src/libduckdb.dylib
+        jsoncpp_lib)
 else()
-    target_link_libraries(data-analytics PRIVATE ${binary_dir}/build/release/src/libduckdb.so)
+    target_link_libraries(data-analytics PRIVATE 
+        ${binary_dir}/build/release/src/libduckdb.so
+        jsoncpp_lib)
 endif()

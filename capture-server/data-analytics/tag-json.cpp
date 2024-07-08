@@ -4,6 +4,7 @@
 #include <fstream>
 #include <filesystem>
 #include <sstream>
+#include "json/json.h"
 
 namespace fs = std::filesystem;
 
@@ -22,38 +23,93 @@ std::vector<std::string> TagJson::list_files(const std::string &directory)
    }
    return files;
 }
-std::string TagJson::read_file(const std::string& file_path) {
-    std::ifstream file(file_path);
-    std::stringstream buffer;
-    buffer << file.rdbuf();
-    return buffer.str();
+std::string TagJson::read_file(const std::string &file_path)
+{
+   std::ifstream file(file_path);
+   std::stringstream buffer;
+   buffer << file.rdbuf();
+   return buffer.str();
 }
-std::string read_file(const std::string& file_path) {
-    std::ifstream file(file_path);
-    std::stringstream buffer;
-    buffer << file.rdbuf();
-    return buffer.str();
+
+std::vector<std::string> TagJson::query_json_data(const std::string &event_id_directory, const std::string &query)
+{
+   DuckDB db(nullptr); // Initialize DuckDB in-memory
+   Connection con(db); // Create a connection
+
+   // Load the JSON extension
+   con.Query("LOAD 'json';");
+
+   // Get list of all JSON files in the directory
+   std::vector<std::string> json_files = list_files(event_id_directory);
+
+   std::vector<std::string> results;
+
+   // Loop through each JSON file and process it
+   for (const auto &json_file : json_files)
+   {
+      // Read the JSON file content
+      std::string json_content = read_file(json_file);
+
+      // Create a temporary table for each JSON file
+      std::string temp_table_name = "temp_table_" + std::to_string(std::hash<std::string>{}(json_file));
+      std::string create_temp_table_query = "CREATE TEMP TABLE " + temp_table_name + " AS SELECT * FROM read_json_auto('" + json_file + "');";
+      con.Query(create_temp_table_query);
+
+      // Execute the query on the temporary table
+      std::string full_query = "SELECT * FROM " + temp_table_name + " WHERE " + query + ";";
+      auto result = con.Query(full_query);
+
+      if (result->HasError())
+      {
+         std::cerr << "Error querying JSON file " << json_file << ": " << result->GetError() << std::endl;
+         continue;
+      }
+
+      // Collect the result
+      if (result->type == QueryResultType::MATERIALIZED_RESULT)
+      {
+         auto materialized = (MaterializedQueryResult *)result.get();
+         for (idx_t row_idx = 0; row_idx < materialized->RowCount(); row_idx++)
+         {
+            std::ostringstream oss;
+            for (idx_t col_idx = 0; col_idx < materialized->ColumnCount(); col_idx++)
+            {
+               if (col_idx > 0)
+               {
+                  oss << ", ";
+               }
+               oss << materialized->GetValue(col_idx, row_idx).ToString();
+            }
+            results.push_back(oss.str());
+         }
+      }
+   }
+
+   return results;
 }
+
 std::string TagJson::fetchTagsForEvent(const std::string &event_id_directory)
 {
    std::vector<std::string> json_files = list_files(event_id_directory);
 
-    std::ostringstream oss;
-    oss << "[";
+   std::ostringstream oss;
+   oss << "[";
 
-    bool first_file = true;
-    for (const auto& json_file : json_files) {
-        if (!first_file) {
-            oss << ",";
-        }
-        first_file = false;
+   bool first_file = true;
+   for (const auto &json_file : json_files)
+   {
+      if (!first_file)
+      {
+         oss << ",";
+      }
+      first_file = false;
 
-        std::string json_content = read_file(json_file);
-        oss << json_content;
-    }
+      std::string json_content = read_file(json_file);
+      oss << json_content;
+   }
 
-    oss << "]";
-    return oss.str();
+   oss << "]";
+   return oss.str();
 }
 void TagJson::save(duckdb::Connection &conn, const std::string &json_str, const std::string &base_path)
 {
@@ -140,6 +196,60 @@ void TagJson::save(duckdb::Connection &conn, const std::string &json_str, const 
       }
 
    } while (pass);
+}
+void TagJson::update(const std::string &ts_file, const std::string &tag)
+{
+   try
+   {
+      std::ifstream input_file(ts_file, std::ifstream::binary);
+      if (!input_file.is_open())
+      {
+         throw std::runtime_error("Could not open JSON file.");
+      }
+
+      Json::Value json_data;
+      input_file >> json_data;
+      input_file.close();
+
+      // Parse the new tag JSON
+      Json::CharReaderBuilder reader_builder;
+      Json::CharReader *reader = reader_builder.newCharReader();
+      Json::Value new_tag;
+      std::string errors;
+
+      bool parsing_successful = reader->parse(tag.c_str(), tag.c_str() + tag.size(), &new_tag, &errors);
+      delete reader;
+
+      if (!parsing_successful)
+      {
+         throw std::runtime_error("Failed to parse tag JSON: " + errors);
+      }
+
+      // Append the new tag to the data array
+      if (json_data.isMember("data") && json_data["data"].isArray())
+      {
+         json_data["data"].append(new_tag);
+      }
+      else
+      {
+         throw std::runtime_error("The JSON file does not contain a valid data array.");
+      }
+
+      // Write the updated JSON back to the file
+      std::ofstream output_file(ts_file, std::ofstream::binary);
+      if (!output_file.is_open())
+      {
+         throw std::runtime_error("Could not open JSON file for writing.");
+      }
+
+      Json::StreamWriterBuilder writer;
+      output_file << Json::writeString(writer, json_data);
+      output_file.close();
+   }
+   catch (const std::exception &e)
+   {
+      std::cerr << "Error updating JSON file: " << e.what() << std::endl;
+   }
 }
 void TagJson::mark(const std::string &tag)
 {

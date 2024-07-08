@@ -19,6 +19,7 @@ public:
     TagJson(const std::string &basePath);
 
     void mark(const std::string &tag);
+    void update(const std::string &ts_file, const std::string &tag);
     const std::string &path() const
     {
         return this->m_path;
@@ -29,6 +30,8 @@ public:
         return this->m_err;
     }
     std::string fetchTagsForEvent(const std::string& event_id_directory);
+
+    std::vector<std::string> query_json_data(const std::string& event_id_directory, const std::string& query);
     ~TagJson();
 };
 
