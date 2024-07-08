@@ -86,9 +86,10 @@ void TaggingEngine::report()
                               {
                                   std::string data = req.data();
                                   std::string ts = req.getQueryValue("ts");
+                                  std::string event_id = req.getQueryValue("event_id");
 
                                   TagJson tag{"."};
-                                  tag.update(ts, data);
+                                  tag.update(event_id, ts, data);
                                   if (tag.err().empty())
                                   {
                                       Json::Value result = Json::objectValue;
