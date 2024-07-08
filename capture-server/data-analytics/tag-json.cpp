@@ -197,60 +197,80 @@ void TagJson::save(duckdb::Connection &conn, const std::string &json_str, const 
 
    } while (pass);
 }
-void TagJson::update(const std::string &ts_file, const std::string &tag)
+void TagJson::update(const std::string &event_id, const std::string &ts_file, const std::string &tag)
 {
-   try
+   const int pass = 0;
+   std::stringstream ss;
+   do
    {
-      std::ifstream input_file(ts_file, std::ifstream::binary);
-      if (!input_file.is_open())
+      try
       {
-         throw std::runtime_error("Could not open JSON file.");
+         fs::path dir_path = fs::path(this->m_basePath) / event_id;
+         std::string filename = ts_file + ".json";
+         std::ifstream input_file(dir_path / filename, std::ifstream::binary);
+         auto files = list_files(dir_path);
+         if (!input_file.is_open())
+         {
+            ss << "Could not open JSON file." << std::endl;
+            this->m_err = ss.str();
+            break;
+         }
+
+         Json::Value json_data;
+         input_file >> json_data;
+         input_file.close();
+
+         // Parse the new tag JSON
+         Json::CharReaderBuilder reader_builder;
+         Json::CharReader *reader = reader_builder.newCharReader();
+         Json::Value new_tag;
+         std::string errors;
+
+         bool parsing_successful = reader->parse(tag.c_str(), tag.c_str() + tag.size(), &new_tag, &errors);
+         delete reader;
+
+         if (!parsing_successful)
+         {
+            ss << "Failed to parse tag JSON: " + errors << std::endl;
+            this->m_err = ss.str();
+            break;
+         }
+
+         // Append the new tag to the data array
+         if (json_data.isMember("data") && json_data["data"].isArray())
+         {
+            json_data["data"].append(new_tag);
+         }
+         else
+         {
+            ss << "The JSON file does not contain a valid data array." << std::endl;
+            this->m_err = ss.str();
+            break;
+         }
+
+         // Write the updated JSON back to the file
+         std::ofstream output_file(dir_path / filename, std::ofstream::binary);
+         if (!output_file.is_open())
+         {
+            ss << "Could not open JSON file for writing." << std::endl;
+            this->m_err = ss.str();
+            break;
+         }
+
+         Json::StreamWriterBuilder writer;
+         output_file << Json::writeString(writer, json_data);
+         output_file.close();
+         this->m_path = dir_path.generic_string() + "/" + filename;
       }
-
-      Json::Value json_data;
-      input_file >> json_data;
-      input_file.close();
-
-      // Parse the new tag JSON
-      Json::CharReaderBuilder reader_builder;
-      Json::CharReader *reader = reader_builder.newCharReader();
-      Json::Value new_tag;
-      std::string errors;
-
-      bool parsing_successful = reader->parse(tag.c_str(), tag.c_str() + tag.size(), &new_tag, &errors);
-      delete reader;
-
-      if (!parsing_successful)
+      catch (const std::exception &e)
       {
-         throw std::runtime_error("Failed to parse tag JSON: " + errors);
+         ss << "Error updating JSON file: " << e.what() << std::endl;
+         this->m_err = ss.str();
+         break;
       }
-
-      // Append the new tag to the data array
-      if (json_data.isMember("data") && json_data["data"].isArray())
-      {
-         json_data["data"].append(new_tag);
-      }
-      else
-      {
-         throw std::runtime_error("The JSON file does not contain a valid data array.");
-      }
-
-      // Write the updated JSON back to the file
-      std::ofstream output_file(ts_file, std::ofstream::binary);
-      if (!output_file.is_open())
-      {
-         throw std::runtime_error("Could not open JSON file for writing.");
-      }
-
-      Json::StreamWriterBuilder writer;
-      output_file << Json::writeString(writer, json_data);
-      output_file.close();
-   }
-   catch (const std::exception &e)
-   {
-      std::cerr << "Error updating JSON file: " << e.what() << std::endl;
-   }
+   } while (pass);
 }
+
 void TagJson::mark(const std::string &tag)
 {
    duckdb::DuckDB db(nullptr); // In-memory database
@@ -258,6 +278,7 @@ void TagJson::mark(const std::string &tag)
    conn.Query("LOAD 'json';");
    this->save(conn, tag, this->m_basePath);
 }
+
 TagJson::TagJson(const std::string &basePath) : m_basePath{basePath}, m_path{""}, m_err{""}
 {
 }

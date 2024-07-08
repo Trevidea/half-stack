@@ -19,7 +19,7 @@ public:
     TagJson(const std::string &basePath);
 
     void mark(const std::string &tag);
-    void update(const std::string &ts_file, const std::string &tag);
+    void update(const std::string &event_id, const std::string &ts_file, const std::string &tag);
     const std::string &path() const
     {
         return this->m_path;
