@@ -18,6 +18,7 @@
 #include "distributions.h"
 #include "log-handler.h"
 #include "tagging-engine.h"
+#include "qeal.h"
 
 Gateway::Gateway()
 {
@@ -41,6 +42,7 @@ void Gateway::init()
     this->m_entities.push_back(new DistributionList());
     this->m_entities.push_back(new LogHandler());
     this->m_entities.push_back(new TaggingEngine());
+    this->m_entities.push_back(new QEAL());
     for (auto &&e : this->m_entities)
     {
         e->report();
@@ -91,7 +93,6 @@ Response &Gateway::request(std::string method, const std::string &path, const st
     else
         throw ExHandlerNotFound();
 }
-
 std::string Gateway::formatResponse(const std::vector<std::vector<Json::Value>> &data)
 {
     Json::Value root; // = Json::objectValue;

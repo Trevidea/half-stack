@@ -12,32 +12,6 @@ TaggingEngine::~TaggingEngine()
 
 void TaggingEngine::report()
 {
-
-    Gateway::instance().route("POST", "/api/tagging-engine/query", // Ensure the correct endpoint is handled
-                              [this](const Request &req, Response &rsp)
-                              {
-                                  Json::Value data = req.json();
-                                  std::string query = "json_extract(data, '$.data[*].baller') = 'Bumrah'"; // Change this query as needed
-
-                                  TagJson tag{"."};
-                                  std::vector<std::string> results = tag.query_json_data("10", query);
-
-                                //   if (tag.err().empty())
-                                //   {
-                                //       Json::Value tagsJson = Json::arrayValue;
-                                //       Json::Reader().parse(tags, tagsJson);
-                                //       std::vector<Json::Value> tagColl{tagsJson.begin(), tagsJson.end()};
-                                //       auto strResponse = Gateway::instance().formatResponse({tagColl});
-                                //       rsp.setData(strResponse);
-                                //   }
-                                //   else
-                                //   {
-                                //       Json::Value result = Json::objectValue;
-                                //       result["err"] = tag.err();
-                                //       auto strResponse = Gateway::instance().formatResponse({{result}});
-                                //       rsp.setError(tag.err());
-                                //   }
-                              });
     Gateway::instance().route("GET", "/api/tagging-engine/tags", // Ensure the correct endpoint is handled
                               [this](const Request &req, Response &rsp)
                               {
@@ -95,6 +69,29 @@ void TaggingEngine::report()
                                       Json::Value result = Json::objectValue;
                                       result["path"] = tag.path();
                                       auto strResponse = Gateway::instance().formatResponse({{result}});
+                                      rsp.setData(strResponse);
+                                  }
+                                  else
+                                  {
+                                      Json::Value result = Json::objectValue;
+                                      result["err"] = tag.err();
+                                      auto strResponse = Gateway::instance().formatResponse({{result}});
+                                      rsp.setError(tag.err());
+                                  }
+                              });
+
+    Gateway::instance().route("POST", "/api/tagging-engine/query", // Ensure the correct endpoint is handled
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  std::string json_query = req.data();
+                                  TagJson tag{"."};
+                                  std::string event_id = req.getQueryValue("event_id");
+                                  Json::Value results = tag.query(event_id, json_query);
+
+                                  if (tag.err().empty())
+                                  {
+                                      std::vector<Json::Value> vecResult{results.begin(), results.end()};
+                                      auto strResponse = Gateway::instance().formatResponse({vecResult});
                                       rsp.setData(strResponse);
                                   }
                                   else
