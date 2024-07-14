@@ -35,44 +35,44 @@ Json::Value TagJson::query(const std::string &event_id, const std::string &json_
 {
    Json::Value matchingTags = Json::arrayValue;
 
-   // duckdb::DuckDB db(nullptr);
-   // duckdb::Connection con(db);
+   duckdb::DuckDB db(nullptr);
+   duckdb::Connection con(db);
 
-   // fs::path base_path = fs::path(this->m_basePath) / event_id;
-   // std::vector<std::string> json_files;
-   // for (const auto &entry : fs::directory_iterator(base_path))
-   // {
-   //    if (entry.is_regular_file() && entry.path().extension() == ".json")
-   //    {
-   //       json_files.push_back(entry.path().string());
-   //    }
-   // }
+   fs::path base_path = fs::path(this->m_basePath) / event_id;
+   std::vector<std::string> json_files;
+   for (const auto &entry : fs::directory_iterator(base_path))
+   {
+      if (entry.is_regular_file() && entry.path().extension() == ".json")
+      {
+         json_files.push_back(entry.path().string());
+      }
+   }
 
-   // if (json_files.empty())
-   // {
-   //    std::cerr << "No JSON files found in directory: " << base_path << std::endl;
-   //    return Json::nullValue;
-   // }
+   if (json_files.empty())
+   {
+      std::cerr << "No JSON files found in directory: " << base_path << std::endl;
+      return Json::nullValue;
+   }
 
-   // std::ostringstream files_list;
-   // files_list << "read_json([";
-   // for (size_t i = 0; i < json_files.size(); ++i)
-   // {
-   //    files_list << "'" << json_files[i] << "'";
-   //    if (i != json_files.size() - 1)
-   //    {
-   //       files_list << ",";
-   //    }
-   // }
-   // files_list << "])";
+   std::ostringstream files_list;
+   files_list << "read_json([";
+   for (size_t i = 0; i < json_files.size(); ++i)
+   {
+      files_list << "'" << json_files[i] << "'";
+      if (i != json_files.size() - 1)
+      {
+         files_list << ",";
+      }
+   }
+   files_list << "])";
 
-   // std::ostringstream query;
-   // query << R"(SELECT timestamp, "original-stream-name" FROM )" << files_list.str() << " WHERE json_contains(data, '" << json_query << "')";
+   std::ostringstream query;
+   query << R"(SELECT timestamp, "original-stream-name" FROM )" << files_list.str() << " WHERE json_contains(data, '" << json_query << "')";
 
-   // std::cout << query.str() << std::endl;
-   // auto result = con.Query(query.str());
-   // std::cout << result->RowCount() << std::endl;
-   // std::cout << result->ColumnCount() << std::endl;
+   std::cout << query.str() << std::endl;
+   auto result = con.Query(query.str());
+   std::cout << result->RowCount() << std::endl;
+   std::cout << result->ColumnCount() << std::endl;
    // if (result->HasError())
    // {
    //    std::cerr << "Error querying JSON files: " << result->GetError() << std::endl;
