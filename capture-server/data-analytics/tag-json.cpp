@@ -81,20 +81,14 @@ Json::Value TagJson::query(const std::string &event_id, const std::string &json_
    duckdb::unique_ptr<duckdb::DataChunk> p_dataChunk = result->Fetch();
    while (p_dataChunk)
    {
-      auto vect = p_dataChunk->data;
-      for (auto &&i : vect)
-      {
-         i.Print();
-      }
-
-   //    auto ts = p_dataChunk->GetValue(0, 0);
-   //    auto streamName = p_dataChunk->GetValue(1, 0);
-   //    auto strTS = ts.GetValue<std::string>();
-   //    auto strStreamName = streamName.GetValue<std::string>();
-   //    Json::Value jsMatch = Json::objectValue;
-   //    jsMatch["timestamp"] = strTS;
-   //    jsMatch["original-stream-name"] = strStreamName;
-   //    matchingTags.append(jsMatch);
+      auto ts = p_dataChunk->GetValue(0, 0);
+      auto streamName = p_dataChunk->GetValue(1, 0);
+      auto strTS = ts.GetValue<std::string>();
+      auto strStreamName = streamName.GetValue<std::string>();
+      Json::Value jsMatch = Json::objectValue;
+      jsMatch["timestamp"] = strTS;
+      jsMatch["original-stream-name"] = strStreamName;
+      matchingTags.append(jsMatch);
       p_dataChunk = result->Fetch();
    }
 
