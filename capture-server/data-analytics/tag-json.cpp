@@ -33,69 +33,70 @@ std::string TagJson::read_file(const std::string &file_path)
 
 Json::Value TagJson::query(const std::string &event_id, const std::string &json_query)
 {
-   duckdb::DuckDB db(nullptr);
-   duckdb::Connection con(db);
-
-   fs::path base_path = fs::path(this->m_basePath) / event_id;
-   std::vector<std::string> json_files;
-   for (const auto &entry : fs::directory_iterator(base_path))
-   {
-      if (entry.is_regular_file() && entry.path().extension() == ".json")
-      {
-         json_files.push_back(entry.path().string());
-      }
-   }
-
-   if (json_files.empty())
-   {
-      std::cerr << "No JSON files found in directory: " << base_path << std::endl;
-      return Json::nullValue;
-   }
-
-   std::ostringstream files_list;
-   files_list << "read_json([";
-   for (size_t i = 0; i < json_files.size(); ++i)
-   {
-      files_list << "'" << json_files[i] << "'";
-      if (i != json_files.size() - 1)
-      {
-         files_list << ",";
-      }
-   }
-   files_list << "])";
-
-   std::ostringstream query;
-   query << R"(SELECT timestamp, "original-stream-name" FROM )" << files_list.str() << " WHERE json_contains(data, '" << json_query << "')";
-
-   std::cout << query.str() << std::endl;
-   auto result = con.Query(query.str());
-   std::cout << result->RowCount() << std::endl;
-   std::cout << result->ColumnCount() << std::endl;
-   if (result->HasError())
-   {
-      std::cerr << "Error querying JSON files: " << result->GetError() << std::endl;
-      return Json::nullValue;
-   }
    Json::Value matchingTags = Json::arrayValue;
-   duckdb::unique_ptr<duckdb::DataChunk> p_dataChunk = result->Fetch();
-   while (p_dataChunk)
-   {
-      auto vect = p_dataChunk->data;
-      for (auto &&i : vect)
-      {
-         i.Print();
-      }
 
-      auto ts = p_dataChunk->GetValue(0, 0);
-      auto streamName = p_dataChunk->GetValue(1, 0);
-      auto strTS = ts.GetValue<std::string>();
-      auto strStreamName = streamName.GetValue<std::string>();
-      Json::Value jsMatch = Json::objectValue;
-      jsMatch["timestamp"] = strTS;
-      jsMatch["original-stream-name"] = strStreamName;
-      matchingTags.append(jsMatch);
-      p_dataChunk = result->Fetch();
-   }
+   // duckdb::DuckDB db(nullptr);
+   // duckdb::Connection con(db);
+
+   // fs::path base_path = fs::path(this->m_basePath) / event_id;
+   // std::vector<std::string> json_files;
+   // for (const auto &entry : fs::directory_iterator(base_path))
+   // {
+   //    if (entry.is_regular_file() && entry.path().extension() == ".json")
+   //    {
+   //       json_files.push_back(entry.path().string());
+   //    }
+   // }
+
+   // if (json_files.empty())
+   // {
+   //    std::cerr << "No JSON files found in directory: " << base_path << std::endl;
+   //    return Json::nullValue;
+   // }
+
+   // std::ostringstream files_list;
+   // files_list << "read_json([";
+   // for (size_t i = 0; i < json_files.size(); ++i)
+   // {
+   //    files_list << "'" << json_files[i] << "'";
+   //    if (i != json_files.size() - 1)
+   //    {
+   //       files_list << ",";
+   //    }
+   // }
+   // files_list << "])";
+
+   // std::ostringstream query;
+   // query << R"(SELECT timestamp, "original-stream-name" FROM )" << files_list.str() << " WHERE json_contains(data, '" << json_query << "')";
+
+   // std::cout << query.str() << std::endl;
+   // auto result = con.Query(query.str());
+   // std::cout << result->RowCount() << std::endl;
+   // std::cout << result->ColumnCount() << std::endl;
+   // if (result->HasError())
+   // {
+   //    std::cerr << "Error querying JSON files: " << result->GetError() << std::endl;
+   //    return Json::nullValue;
+   // }
+   // duckdb::unique_ptr<duckdb::DataChunk> p_dataChunk = result->Fetch();
+   // while (p_dataChunk)
+   // {
+   //    auto vect = p_dataChunk->data;
+   //    for (auto &&i : vect)
+   //    {
+   //       i.Print();
+   //    }
+
+   //    auto ts = p_dataChunk->GetValue(0, 0);
+   //    auto streamName = p_dataChunk->GetValue(1, 0);
+   //    auto strTS = ts.GetValue<std::string>();
+   //    auto strStreamName = streamName.GetValue<std::string>();
+   //    Json::Value jsMatch = Json::objectValue;
+   //    jsMatch["timestamp"] = strTS;
+   //    jsMatch["original-stream-name"] = strStreamName;
+   //    matchingTags.append(jsMatch);
+   //    p_dataChunk = result->Fetch();
+   // }
 
 
    return matchingTags;
@@ -212,76 +213,76 @@ void TagJson::save(duckdb::Connection &conn, const std::string &json_str, const 
 }
 void TagJson::update(const std::string &event_id, const std::string &ts_file, const std::string &tag)
 {
-   const int pass = 0;
-   std::stringstream ss;
-   do
-   {
-      try
-      {
-         fs::path dir_path = fs::path(this->m_basePath) / event_id;
-         std::string filename = ts_file + ".json";
-         std::ifstream input_file(dir_path / filename, std::ifstream::binary);
-         auto files = list_files(dir_path);
-         if (!input_file.is_open())
-         {
-            ss << "Could not open JSON file." << std::endl;
-            this->m_err = ss.str();
-            break;
-         }
+   // const int pass = 0;
+   // std::stringstream ss;
+   // do
+   // {
+   //    try
+   //    {
+   //       fs::path dir_path = fs::path(this->m_basePath) / event_id;
+   //       std::string filename = ts_file + ".json";
+   //       std::ifstream input_file(dir_path / filename, std::ifstream::binary);
+   //       auto files = list_files(dir_path);
+   //       if (!input_file.is_open())
+   //       {
+   //          ss << "Could not open JSON file." << std::endl;
+   //          this->m_err = ss.str();
+   //          break;
+   //       }
 
-         Json::Value json_data;
-         input_file >> json_data;
-         input_file.close();
+   //       Json::Value json_data;
+   //       input_file >> json_data;
+   //       input_file.close();
 
-         // Parse the new tag JSON
-         Json::CharReaderBuilder reader_builder;
-         Json::CharReader *reader = reader_builder.newCharReader();
-         Json::Value new_tag;
-         std::string errors;
+   //       // Parse the new tag JSON
+   //       Json::CharReaderBuilder reader_builder;
+   //       Json::CharReader *reader = reader_builder.newCharReader();
+   //       Json::Value new_tag;
+   //       std::string errors;
 
-         bool parsing_successful = reader->parse(tag.c_str(), tag.c_str() + tag.size(), &new_tag, &errors);
-         delete reader;
+   //       bool parsing_successful = reader->parse(tag.c_str(), tag.c_str() + tag.size(), &new_tag, &errors);
+   //       delete reader;
 
-         if (!parsing_successful)
-         {
-            ss << "Failed to parse tag JSON: " + errors << std::endl;
-            this->m_err = ss.str();
-            break;
-         }
+   //       if (!parsing_successful)
+   //       {
+   //          ss << "Failed to parse tag JSON: " + errors << std::endl;
+   //          this->m_err = ss.str();
+   //          break;
+   //       }
 
-         // Append the new tag to the data array
-         if (json_data.isMember("data") && json_data["data"].isArray())
-         {
-            json_data["data"].append(new_tag);
-         }
-         else
-         {
-            ss << "The JSON file does not contain a valid data array." << std::endl;
-            this->m_err = ss.str();
-            break;
-         }
+   //       // Append the new tag to the data array
+   //       if (json_data.isMember("data") && json_data["data"].isArray())
+   //       {
+   //          json_data["data"].append(new_tag);
+   //       }
+   //       else
+   //       {
+   //          ss << "The JSON file does not contain a valid data array." << std::endl;
+   //          this->m_err = ss.str();
+   //          break;
+   //       }
 
-         // Write the updated JSON back to the file
-         std::ofstream output_file(dir_path / filename, std::ofstream::binary);
-         if (!output_file.is_open())
-         {
-            ss << "Could not open JSON file for writing." << std::endl;
-            this->m_err = ss.str();
-            break;
-         }
+   //       // Write the updated JSON back to the file
+   //       std::ofstream output_file(dir_path / filename, std::ofstream::binary);
+   //       if (!output_file.is_open())
+   //       {
+   //          ss << "Could not open JSON file for writing." << std::endl;
+   //          this->m_err = ss.str();
+   //          break;
+   //       }
 
-         Json::StreamWriterBuilder writer;
-         output_file << Json::writeString(writer, json_data);
-         output_file.close();
-         this->m_path = dir_path.generic_string() + "/" + filename;
-      }
-      catch (const std::exception &e)
-      {
-         ss << "Error updating JSON file: " << e.what() << std::endl;
-         this->m_err = ss.str();
-         break;
-      }
-   } while (pass);
+   //       Json::StreamWriterBuilder writer;
+   //       output_file << Json::writeString(writer, json_data);
+   //       output_file.close();
+   //       this->m_path = dir_path.generic_string() + "/" + filename;
+   //    }
+   //    catch (const std::exception &e)
+   //    {
+   //       ss << "Error updating JSON file: " << e.what() << std::endl;
+   //       this->m_err = ss.str();
+   //       break;
+   //    }
+   // } while (pass);
 }
 
 void TagJson::mark(const std::string &tag)
