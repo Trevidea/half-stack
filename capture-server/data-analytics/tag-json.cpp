@@ -73,14 +73,14 @@ Json::Value TagJson::query(const std::string &event_id, const std::string &json_
    auto result = con.Query(query.str());
    std::cout << result->RowCount() << std::endl;
    std::cout << result->ColumnCount() << std::endl;
-   // if (result->HasError())
-   // {
-   //    std::cerr << "Error querying JSON files: " << result->GetError() << std::endl;
-   //    return Json::nullValue;
-   // }
-   // duckdb::unique_ptr<duckdb::DataChunk> p_dataChunk = result->Fetch();
-   // while (p_dataChunk)
-   // {
+   if (result->HasError())
+   {
+      std::cerr << "Error querying JSON files: " << result->GetError() << std::endl;
+      return Json::nullValue;
+   }
+   duckdb::unique_ptr<duckdb::DataChunk> p_dataChunk = result->Fetch();
+   while (p_dataChunk)
+   {
    //    auto vect = p_dataChunk->data;
    //    for (auto &&i : vect)
    //    {
@@ -96,7 +96,7 @@ Json::Value TagJson::query(const std::string &event_id, const std::string &json_
    //    jsMatch["original-stream-name"] = strStreamName;
    //    matchingTags.append(jsMatch);
    //    p_dataChunk = result->Fetch();
-   // }
+   }
 
 
    return matchingTags;
