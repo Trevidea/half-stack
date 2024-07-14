@@ -55,7 +55,7 @@ ExternalProject_Add(duckdb
     BUILD_COMMAND GEN=${GEN} BUILD_JSON=1 make
     INSTALL_COMMAND ""
     BUILD_IN_SOURCE 1
-    BUILD_BYPRODUCTS ${CMAKE_BINARY_DIR}/duckdb/src/duckdb/build/release/src/libduckdb_static.a
+    BUILD_BYPRODUCTS ${CMAKE_BINARY_DIR}/duckdb/src/duckdb/build/release/src/libduckdb.so
 )
 message("Cmake_Binary_Dir = ${CMAKE_BINARY_DIR}")
 
