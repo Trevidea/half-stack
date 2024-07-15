@@ -40,6 +40,7 @@ import { CaptureDashboardComponent } from "./capture-dashboard/capture-dashboard
 import { DashboardHeaderComponent } from "./capture-dashboard/dashboard-header/dashboard-header.component";
 import { InlineFormeModule } from "./sport-pip-capture/blocks/inline-modal/inline-form-module";
 import { KeycloakAngularModule, KeycloakService } from "keycloak-angular";
+import { initializeKeycloak } from "./init/keycloak-init.factory";
 
 const appRoutes: Routes = [
   // {
@@ -181,18 +182,16 @@ const appRoutes: Routes = [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // ! IMPORTANT: Provider used to create fake backend, comment while using real API
-    fakeBackendProvider,
+    // fakeBackendProvider,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    },
     TimerService,
     Timer,
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
-// import { INGXLoggerConfig } from 'ngx-logger';
-
-// const loggerConfig: LoggerConfig = {
-//   level: 'DEBUG',
-//   serverLogLevel: 'OFF',
-//   serverLoggingUrl: '/api/logs',
-//   disableConsoleLogging: false
-// };

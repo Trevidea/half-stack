@@ -13,8 +13,8 @@ export const environment = {
   rtmpUrl: "rtmp://drake.in:1935",
   playerUrl: "https://drake.in:3334",
   keycloakUrl: 'https://keycloak.drake.in:5555',
-  strapiServerUrl: "http://drake.in:1337"
-
+  strapiServerUrl: "http://drake.in:1337",
+  keycloakRedirectUrl: 'http://localhost:4200'
 };
 
 /*
