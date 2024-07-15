@@ -115,7 +115,8 @@ Json::Value TagJson::query(const std::string &event_id, const std::string &json_
 
 std::string TagJson::fetchTagsForEvent(const std::string &event_id_directory)
 {
-   std::vector<std::string> json_files = list_files(event_id_directory);
+   fs::path dir_path = fs::path(this->m_basePath) / event_id_directory;
+   std::vector<std::string> json_files = list_files(dir_path);
 
    std::ostringstream oss;
    oss << "[";
