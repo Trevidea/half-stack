@@ -11,6 +11,7 @@ set(Boost_DEBUG ON)
 
 find_package(PostgreSQL REQUIRED)
 find_package(OpenSSL REQUIRED)
+# find_package(miniocpp REQUIRED)
 
 # if (WIN32)
 #     set(PostgreSQL_LIBRARIES "C:/Program Files/PostgreSQL/15/lib")
