@@ -6,7 +6,7 @@
 #include "spdlog/spdlog.h"
 #include "json/json.h"
 
-PastEvent::PastEvent() : EntityBase("pastevent")
+PastEvent::PastEvent() : EntityBase("event")
 {
 }
 
@@ -39,21 +39,22 @@ void PastEvent::report()
                               {
                                   this->remove(req, rsp);
                               });
+    Gateway::instance().route("POST", "/api/past-event/save", // New route to save past events to Minio
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  this->savePastEventsToMinio(req, rsp);
+                              });
 }
 
-void PastEvent::listPastEvents(const Request &req, Response &rsp)
-{
-    try
-    {
+void PastEvent::listPastEvents(const Request &req, Response &rsp) {
+    try {
         std::vector<Json::Value> pastEvents = Event::fetchPastEvents();
 
         Json::Value result(Json::arrayValue);
-        for (const auto &event : pastEvents)
-        {
+        for (const auto &event : pastEvents) {
             Json::Value formattedEvent(Json::arrayValue);
 
-            auto appendField = [&formattedEvent](const std::string &field, int type, const Json::Value &value)
-            {
+            auto appendField = [&formattedEvent](const std::string &field, int type, const Json::Value &value) {
                 Json::Value fieldObject;
                 fieldObject["field"] = field;
                 fieldObject["type"] = type;
@@ -61,13 +62,13 @@ void PastEvent::listPastEvents(const Request &req, Response &rsp)
                 formattedEvent.append(fieldObject);
             };
 
-            appendField("id", 1, event["id"]);
+            appendField("id", 0, event["id"]);
             appendField("sport", 1, event["sport"]);
             appendField("level", 1, event["level"]);
             appendField("program", 1, event["program"]);
-            appendField("year", 1, event["year"]);
-            appendField("dt_event", 1, event["dt_event"]);
-            appendField("tm_event", 1, event["tm_event"]);
+            appendField("year", 0, event["year"]);
+            appendField("dt_event", 4, event["dt_event"]);
+            appendField("tm_event", 0, event["tm_event"]);
             appendField("title", 1, event["title"]);
             appendField("status", 1, event["status"]);
             appendField("type", 1, event["type"]);
@@ -82,8 +83,7 @@ void PastEvent::listPastEvents(const Request &req, Response &rsp)
 
             // Handle connected devices separately
             Json::Value connectedDevices(Json::arrayValue);
-            for (const auto &device : event["connected_streaming_devices"])
-            {
+            for (const auto &device : event["connected_streaming_devices"]) {
                 Json::Value deviceObject(Json::arrayValue);
                 Json::Value deviceField;
 
@@ -118,9 +118,7 @@ void PastEvent::listPastEvents(const Request &req, Response &rsp)
 
         rsp.setData(responseStr); // Use setData to set the response content
         rsp.setStatus(200);       // Set the status code to 200 OK
-    }
-    catch (const std::exception &e)
-    {
+    } catch (const std::exception &e) {
         spdlog::error("Failed to fetch past events: {}", e.what());
         rsp.setData("Internal Server Error");
         rsp.setStatus(500); // Set the status code to 500 Internal Server Error
@@ -218,4 +216,10 @@ void PastEvent::getEventById(const Request &req, Response &rsp)
     // If event with the given ID is not found
     rsp.setData("Event not found");
     rsp.setStatus(404); // Not Found
+}
+
+
+void PastEvent::savePastEventsToMinio(const Request &req, Response &rsp)
+{
+    
 }

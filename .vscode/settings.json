@@ -134,7 +134,9 @@
     "format": "cpp",
     "result": "cpp",
     "csignal": "cpp",
-    "forward_list": "cpp"
+    "forward_list": "cpp",
+    "cinttypes": "cpp",
+    "shared_mutex": "cpp"
   },
   "cmake.sourceDirectory": "/Users/shreyapathak/git/half-stack/capture-server/build/_deps/libpqxx-src/src"
 }
