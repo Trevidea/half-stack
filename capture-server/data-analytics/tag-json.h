@@ -3,6 +3,7 @@
 
 #include "duckdb.hpp"
 #include <vector>
+#include "json/json.h"
 
 class TagJson
 {
@@ -31,7 +32,7 @@ public:
     }
     std::string fetchTagsForEvent(const std::string& event_id_directory);
 
-    std::vector<std::string> query_json_data(const std::string& event_id_directory, const std::string& query);
+    Json::Value query(const std::string &event_id, const std::string &json_query);
     ~TagJson();
 };
 
