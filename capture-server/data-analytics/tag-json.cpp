@@ -33,65 +33,82 @@ std::string TagJson::read_file(const std::string &file_path)
 
 Json::Value TagJson::query(const std::string &event_id, const std::string &json_query)
 {
+
+   const int pass = 0;
+   std::stringstream ss;
    Json::Value matchingTags = Json::arrayValue;
 
-   duckdb::DuckDB db(nullptr);
-   duckdb::Connection con(db);
-
-   fs::path base_path = fs::path(this->m_basePath) / event_id;
-   std::vector<std::string> json_files;
-   for (const auto &entry : fs::directory_iterator(base_path))
+   do
    {
-      if (entry.is_regular_file() && entry.path().extension() == ".json")
+      try
       {
-         json_files.push_back(entry.path().string());
+
+         duckdb::DuckDB db(nullptr);
+         duckdb::Connection con(db);
+
+         fs::path base_path = fs::path(this->m_basePath) / event_id;
+         std::vector<std::string> json_files;
+         for (const auto &entry : fs::directory_iterator(base_path))
+         {
+            if (entry.is_regular_file() && entry.path().extension() == ".json")
+            {
+               json_files.push_back(entry.path().string());
+            }
+         }
+
+         if (json_files.empty())
+         {
+            ss << "No JSON files found in directory: " << base_path << std::endl;
+            this->m_err = ss.str();
+            break;
+         }
+
+         std::ostringstream files_list;
+         files_list << "read_json([";
+         for (size_t i = 0; i < json_files.size(); ++i)
+         {
+            files_list << "'" << json_files[i] << "'";
+            if (i != json_files.size() - 1)
+            {
+               files_list << ",";
+            }
+         }
+         files_list << "])";
+
+         std::ostringstream query;
+         query << R"(SELECT timestamp, "original-stream-name" FROM )" << files_list.str() << " WHERE json_contains(data, '" << json_query << "')";
+
+         std::cout << query.str() << std::endl;
+         auto result = con.Query(query.str());
+         std::cout << result->RowCount() << std::endl;
+         std::cout << result->ColumnCount() << std::endl;
+         if (result->HasError())
+         {
+            ss << "Error querying JSON files: " << result->GetError() << std::endl;
+            this->m_err = ss.str();
+            break;
+         }
+         duckdb::unique_ptr<duckdb::DataChunk> p_dataChunk = result->Fetch();
+         while (p_dataChunk)
+         {
+            auto ts = p_dataChunk->GetValue(0, 0);
+            auto streamName = p_dataChunk->GetValue(1, 0);
+            auto strTS = ts.GetValue<std::string>();
+            auto strStreamName = streamName.GetValue<std::string>();
+            Json::Value jsMatch = Json::objectValue;
+            jsMatch["timestamp"] = strTS;
+            jsMatch["original-stream-name"] = strStreamName;
+            matchingTags.append(jsMatch);
+            p_dataChunk = result->Fetch();
+         }
       }
-   }
-
-   if (json_files.empty())
-   {
-      std::cerr << "No JSON files found in directory: " << base_path << std::endl;
-      return Json::nullValue;
-   }
-
-   std::ostringstream files_list;
-   files_list << "read_json([";
-   for (size_t i = 0; i < json_files.size(); ++i)
-   {
-      files_list << "'" << json_files[i] << "'";
-      if (i != json_files.size() - 1)
+      catch (const std::exception &e)
       {
-         files_list << ",";
+         this->m_err = e.what();
+         break;
       }
-   }
-   files_list << "])";
 
-   std::ostringstream query;
-   query << R"(SELECT timestamp, "original-stream-name" FROM )" << files_list.str() << " WHERE json_contains(data, '" << json_query << "')";
-
-   std::cout << query.str() << std::endl;
-   auto result = con.Query(query.str());
-   std::cout << result->RowCount() << std::endl;
-   std::cout << result->ColumnCount() << std::endl;
-   if (result->HasError())
-   {
-      std::cerr << "Error querying JSON files: " << result->GetError() << std::endl;
-      return Json::nullValue;
-   }
-   duckdb::unique_ptr<duckdb::DataChunk> p_dataChunk = result->Fetch();
-   while (p_dataChunk)
-   {
-      auto ts = p_dataChunk->GetValue(0, 0);
-      auto streamName = p_dataChunk->GetValue(1, 0);
-      auto strTS = ts.GetValue<std::string>();
-      auto strStreamName = streamName.GetValue<std::string>();
-      Json::Value jsMatch = Json::objectValue;
-      jsMatch["timestamp"] = strTS;
-      jsMatch["original-stream-name"] = strStreamName;
-      matchingTags.append(jsMatch);
-      p_dataChunk = result->Fetch();
-   }
-
+   } while (pass);
 
    return matchingTags;
 }

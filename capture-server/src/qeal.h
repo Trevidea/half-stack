@@ -5,10 +5,15 @@
 class QEAL : public Handler
 {
 private:
+    std::string m_err;
 public:
     QEAL();
     void report() override;
     ~QEAL();
+    const std::string &err() const
+    {
+        return this->m_err;
+    }
 };
 
 const std::string M3U8_TEMPLATE = R"V0G0N(
