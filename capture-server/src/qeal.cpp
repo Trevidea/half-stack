@@ -11,6 +11,7 @@
 #include "timestamp.h"
 
 #include <map>
+#include "db-manager.h"
 
 QEAL::QEAL()
 {
@@ -21,7 +22,7 @@ void QEAL::report()
     Gateway::instance().route("POST", "/api/query-engine/create-playlist",
                               [this](const Request &req, Response &rsp)
                               {
-                                  const std::string dumps = "/Users/manishverma/git/duckdb_query_tool";
+                                  const std::string dumps = DBManager::instance().getEnv(OM_DUMPS, "/Users/manishverma/git/duckdb_query_tool");
                                   HLSVideo customPlaylist;
                                   customPlaylist.parse(M3U8_TEMPLATE);
 
