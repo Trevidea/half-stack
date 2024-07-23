@@ -9,7 +9,7 @@
 #include "event-manager.h"
 #include "past-event.h"
 #include "client-factory.h"
-#include "minio-bridge.h"
+// #include "minio-bridge.h"
 
 
 Event::Event() : EntityBase("event")
@@ -48,7 +48,7 @@ void Event::report()
     Gateway::instance().route("PUT", "/api/event/assets", // To request UPDATE
                               [this](const Request &req, Response &rsp)
                               {
-                                  MinioBridge client{};
+                                //   MinioBridge client{};
                               });
     Gateway::instance().route("DELETE", "/api/event", // To request DELETE
                               [this](const Request &req, Response &rsp)
