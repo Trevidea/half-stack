@@ -74,7 +74,7 @@ Json::Value TagJson::query(const std::string &event_id, const std::string &json_
          files_list << "])";
 
          std::ostringstream query;
-         query << R"(SELECT timestamp, "original-stream-name" FROM )" << files_list.str() << " WHERE json_contains(data, '" << json_query << "')";
+         query << R"(SELECT timestamp, "original_stream_name" FROM )" << files_list.str() << " WHERE json_contains(data, '" << json_query << "')";
 
          std::cout << query.str() << std::endl;
 
