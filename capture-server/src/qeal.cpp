@@ -39,7 +39,7 @@ void QEAL::report()
                                               std::map<std::string, HLSVideo> chunkLists;
                                               for (auto &&tag : taggingData)
                                               {
-                                                  std::string stream = tag["original-stream-name"].asString();
+                                                  std::string stream = tag["original_stream_name"].asString();
                                                   std::string timestampStr = tag["timestamp"].asString();
                                                   Timestamp timestamp{timestampStr};
 
