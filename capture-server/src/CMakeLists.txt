@@ -30,7 +30,7 @@ set(HALF_STACK_SRC
     metatype.cpp
     qeal.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
-target_include_directories(half-stack PUBLIC "./" rest-client zmq)
+target_include_directories(half-stack PUBLIC "./" rest-client zmq mioal )
 target_link_libraries(half-stack PUBLIC
     spdlog::spdlog
     rest-client
@@ -38,4 +38,5 @@ target_link_libraries(half-stack PUBLIC
     pg-dal
     zmq
     data-analytics
-    query-engine)
+    query-engine
+    mioal)

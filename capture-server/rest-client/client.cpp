@@ -74,6 +74,37 @@ int Client::get(std::string &success, std::string &failure, std::string username
         .wait();
     return result;
 }
+int Client::put(const std::string &data, std::string &success, std::string &failure, std::string username, std::string password, int timeout)
+{
+    int result = -1;
+    std::lock_guard<std::mutex> lock(mutex);
+
+    std::string credentials = username + ":" + password;
+    std::string credentials_encoded = utility::conversions::to_base64({credentials.begin(), credentials.end()});
+
+    http_request request(methods::PUT);
+    request.headers().add(U("Authorization"), U("Basic ") + utility::conversions::to_string_t(credentials_encoded));
+    request.headers().set_content_type(U("application/json"));
+    json::value postData = json::value::parse(data);
+    request.set_body(postData);
+
+    client.request(request)
+        .then([&failure](http_response response)
+              {
+            if (response.status_code() == status_codes::OK) {
+                return response.extract_string();
+            } else {
+                const std::string err = "HTTP request failed";
+                failure = err;
+                return response.extract_string();
+            } })
+        .then([&success, &result](utility::string_t body)
+              { 
+                result = 0; 
+                success = body; })
+        .wait();
+    return result;
+}
 int Client::post(const std::string &data, std::string &success, std::string &failure, std::string username, std::string password, int timeout)
 {
     int result = -1;

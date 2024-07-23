@@ -33,7 +33,6 @@ std::string TagJson::read_file(const std::string &file_path)
 
 Json::Value TagJson::query(const std::string &event_id, const std::string &json_query)
 {
-
    const int pass = 0;
    std::stringstream ss;
    Json::Value matchingTags = Json::arrayValue;
@@ -42,7 +41,6 @@ Json::Value TagJson::query(const std::string &event_id, const std::string &json_
    {
       try
       {
-
          duckdb::DuckDB db(nullptr);
          duckdb::Connection con(db);
 
@@ -79,9 +77,12 @@ Json::Value TagJson::query(const std::string &event_id, const std::string &json_
          query << R"(SELECT timestamp, "original-stream-name" FROM )" << files_list.str() << " WHERE json_contains(data, '" << json_query << "')";
 
          std::cout << query.str() << std::endl;
+
          auto result = con.Query(query.str());
+
          std::cout << result->RowCount() << std::endl;
          std::cout << result->ColumnCount() << std::endl;
+
          if (result->HasError())
          {
             ss << "Error querying JSON files: " << result->GetError() << std::endl;
@@ -93,12 +94,15 @@ Json::Value TagJson::query(const std::string &event_id, const std::string &json_
          {
             auto ts = p_dataChunk->GetValue(0, 0);
             auto streamName = p_dataChunk->GetValue(1, 0);
+
             auto strTS = ts.GetValue<std::string>();
             auto strStreamName = streamName.GetValue<std::string>();
+            
             Json::Value jsMatch = Json::objectValue;
             jsMatch["timestamp"] = strTS;
             jsMatch["original-stream-name"] = strStreamName;
             matchingTags.append(jsMatch);
+            
             p_dataChunk = result->Fetch();
          }
       }
@@ -115,7 +119,8 @@ Json::Value TagJson::query(const std::string &event_id, const std::string &json_
 
 std::string TagJson::fetchTagsForEvent(const std::string &event_id_directory)
 {
-   std::vector<std::string> json_files = list_files(event_id_directory);
+   fs::path dir_path = fs::path(this->m_basePath) / event_id_directory;
+   std::vector<std::string> json_files = list_files(dir_path);
 
    std::ostringstream oss;
    oss << "[";
@@ -144,7 +149,6 @@ void TagJson::save(duckdb::Connection &conn, const std::string &json_str, const 
    {
       try
       {
-
          auto create_result = conn.Query("CREATE TABLE IF NOT EXISTS events (event_id INTEGER, stream_name VARCHAR, timestamp TIMESTAMP, duration VARCHAR, data JSON)");
          if (create_result->HasError())
          {

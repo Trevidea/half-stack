@@ -1,6 +1,7 @@
 #include "tagging-engine.h"
 #include "gateway.h"
 #include "tag-json.h"
+#include "db-manager.h"
 
 TaggingEngine::TaggingEngine(/* args */)
 {
@@ -16,7 +17,8 @@ void TaggingEngine::report()
                               [this](const Request &req, Response &rsp)
                               {
                                   const std::string event_id = req.getQueryValue("event-id");
-                                  TagJson tag{"."};
+                                  const std::string tags_dir = DBManager::instance().getEnv("TAGS_DIR", "/Users/manishverma/git/half-stack/capture-server");
+                                  TagJson tag{tags_dir};
                                   const std::string tags = tag.fetchTagsForEvent(event_id);
                                   if (tag.err().empty())
                                   {
@@ -38,7 +40,8 @@ void TaggingEngine::report()
                               [this](const Request &req, Response &rsp)
                               {
                                   std::string json_str = req.data();
-                                  TagJson tag{"."};
+                                  const std::string tags_dir = DBManager::instance().getEnv("TAGS_DIR", "/Users/manishverma/git/half-stack/capture-server");
+                                  TagJson tag{tags_dir};
                                   tag.mark(json_str);
                                   if (tag.err().empty())
                                   {
@@ -62,7 +65,8 @@ void TaggingEngine::report()
                                   std::string ts = req.getQueryValue("ts");
                                   std::string event_id = req.getQueryValue("event_id");
 
-                                  TagJson tag{"."};
+                                  const std::string tags_dir = DBManager::instance().getEnv("TAGS_DIR", "/Users/manishverma/git/half-stack/capture-server");
+                                  TagJson tag{tags_dir};
                                   tag.update(event_id, ts, data);
                                   if (tag.err().empty())
                                   {
@@ -84,7 +88,8 @@ void TaggingEngine::report()
                               [this](const Request &req, Response &rsp)
                               {
                                   std::string json_query = req.data();
-                                  TagJson tag{"."};
+                                  const std::string tags_dir = DBManager::instance().getEnv("TAGS_DIR", "/Users/manishverma/git/half-stack/capture-server");
+                                  TagJson tag{tags_dir};
                                   std::string event_id = req.getQueryValue("event_id");
                                   Json::Value results = tag.query(event_id, json_query);
 
