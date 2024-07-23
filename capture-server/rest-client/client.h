@@ -30,6 +30,7 @@ public:
     int get(std::string &success, std::string &failure, int timeout = 10);
     int get(std::string &success, std::string &failure, std::string username, std::string password, int timeout = 10);
     int post(const std::string &data, std::string &success, std::string &failure, std::string username, std::string password, int timeout = 10);
+    int put(const std::string &data, std::string &success, std::string &failure, std::string username, std::string password, int timeout = 10);
     int del(const std::string &data, std::string &success, std::string &failure, std::string username, std::string password, int timeout = 10);
     void wait();
 };

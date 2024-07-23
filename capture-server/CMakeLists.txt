@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.16.0)
 
 
+
+if(APPLE)
+    set(CMAKE_OSX_ARCHITECTURES "arm64" CACHE STRING "Build architecture for macOS")
+endif()
+
 project(capture-server VERSION 1.0.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -55,7 +60,8 @@ ExternalProject_Add(duckdb
     BUILD_COMMAND GEN=${GEN} BUILD_JSON=1 make
     INSTALL_COMMAND ""
     BUILD_IN_SOURCE 1
-    BUILD_BYPRODUCTS ${CMAKE_BINARY_DIR}/duckdb/src/duckdb/build/release/src/libduckdb.so
+    # BUILD_BYPRODUCTS ${CMAKE_BINARY_DIR}/duckdb/src/duckdb/build/release/src/libduckdb.so
+    BUILD_BYPRODUCTS ${CMAKE_BINARY_DIR}/duckdb/src/duckdb/build/release/src/libduckdb.dylib
 )
 message("Cmake_Binary_Dir = ${CMAKE_BINARY_DIR}")
 
@@ -90,5 +96,6 @@ add_subdirectory(api)
 add_subdirectory(zmq)
 add_subdirectory(data-analytics)
 add_subdirectory(query-engine)
+add_subdirectory(mioal)
 add_subdirectory(tests)
 # add_subdirectory(tests)
