@@ -1,5 +1,5 @@
-#ifndef MINIO-BRIDGE_H
-#define MINIO-BRIDGE_H
+#ifndef MINIO_BRIDGE_H
+#define MINIO_BRIDGE_H
 #include <iostream>
 #include <vector>
 
@@ -28,4 +28,4 @@ public:
     ~MinioBridge();
 };
 
-#endif // MINIO-BRIDGE_H
+#endif // MINIO_BRIDGE_H
