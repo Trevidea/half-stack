@@ -14,7 +14,6 @@ export const environment = {
   playerUrl: "https://drake.in:3334",
   keycloakUrl: 'https://keycloak.drake.in:5555',
   strapiServerUrl: "http://drake.in:1337"
-
 };
 
 /*
