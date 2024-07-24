@@ -29,13 +29,12 @@ endif()
 
 # Add dependencies
 find_package(fmt REQUIRED)
-find_package(OpenSSL REQUIRED)
 find_package(miniocpp REQUIRED)
 
 # Add your library sources
 add_library(mioal minio-bridge.cpp)
 
 # Link the dependencies
-target_link_libraries(mioal PRIVATE fmt::fmt miniocpp::miniocpp ${OpenSSL_LIBRARIES})
+target_link_libraries(mioal PUBLIC fmt::fmt miniocpp::miniocpp)
 target_include_directories(mioal PUBLIC "./")
 

@@ -13,5 +13,6 @@ target_link_libraries(capture-server PUBLIC
     pg-dal
     omal
     data-analytics
-    half-stack)
+    half-stack
+    mioal)
     
