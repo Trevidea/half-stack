@@ -13,6 +13,5 @@ target_link_libraries(capture-server PUBLIC
     pg-dal
     omal
     data-analytics
-    half-stack
-    miniocpp::miniocpp)
+    half-stack)
     

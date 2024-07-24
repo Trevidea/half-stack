@@ -16,7 +16,6 @@ set(Boost_DEBUG ON)
 
 find_package(PostgreSQL REQUIRED)
 find_package(OpenSSL REQUIRED)
-# find_package(miniocpp REQUIRED)
 
 # if (WIN32)
 #     set(PostgreSQL_LIBRARIES "C:/Program Files/PostgreSQL/15/lib")
@@ -78,23 +77,7 @@ else()
 endif()
 
 
-if(APPLE)
-    set(fmt_DIR "$ENV{VCPKG_ROOT}/packages/fmt_arm64-osx/share/fmt")
-    set(miniocpp_DIR "$ENV{VCPKG_ROOT}/packages/minio-cpp_arm64-osx/share/miniocpp")
-    set(unofficial-curlpp_DIR "$ENV{VCPKG_ROOT}/packages/curlpp_arm64-osx/share/unofficial-curlpp")
-    set(unofficial-inih_DIR "$ENV{VCPKG_ROOT}/packages/inih_arm64-osx/share/unofficial-inih")
-    set(nlohmann_json_DIR "$ENV{VCPKG_ROOT}/packages/nlohmann-json_arm64-osx/share/nlohmann_json")
-elseif(UNIX)
-    set(fmt_DIR "$ENV{VCPKG_ROOT}/packages/fmt_x64-linux/share/fmt")
-    set(miniocpp_DIR "$ENV{VCPKG_ROOT}/packages/minio-cpp_x64-linux/share/miniocpp")
-    set(unofficial-curlpp_DIR "$ENV{VCPKG_ROOT}/packages/curlpp_x64-linux/share/unofficial-curlpp")
-    set(unofficial-inih_DIR "$ENV{VCPKG_ROOT}/packages/inih_x64-linux/share/unofficial-inih")
-    set(nlohmann_json_DIR "$ENV{VCPKG_ROOT}/packages/nlohmann-json_x64-linux/share/nlohmann_json")
-endif()
 
-
-find_package(fmt REQUIRED)
-find_package(miniocpp REQUIRED)
 
 
 add_git_submodule(dependency/jsoncpp)
