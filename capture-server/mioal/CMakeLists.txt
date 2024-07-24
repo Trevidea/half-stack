@@ -29,6 +29,7 @@ endif()
 
 # Add dependencies
 find_package(fmt REQUIRED)
+find_package(OpenSSL REQUIRED)
 find_package(miniocpp REQUIRED)
 
 # Add your library sources
