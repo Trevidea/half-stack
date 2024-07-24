@@ -35,6 +35,6 @@ find_package(miniocpp REQUIRED)
 add_library(mioal minio-bridge.cpp)
 
 # Link the dependencies
-target_link_libraries(mioal PRIVATE fmt::fmt miniocpp::miniocpp)
+target_link_libraries(mioal PRIVATE fmt::fmt miniocpp::miniocpp OpenSSL::SSL OpenSSL::Crypto)
 target_include_directories(mioal PUBLIC "./")
 
