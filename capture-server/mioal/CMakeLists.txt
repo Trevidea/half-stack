@@ -3,20 +3,29 @@ cmake_minimum_required(VERSION 3.15)
 
 
 project(mioal)
-set(fmt_DIR "$ENV{VCPKG_ROOT}/packages/fmt_arm64-osx/share/fmt")
-set(miniocpp_DIR "$ENV{VCPKG_ROOT}/packages/minio-cpp_arm64-osx/share/miniocpp")
-set(unofficial-curlpp_DIR "$ENV{VCPKG_ROOT}/packages/curlpp_arm64-osx/share/unofficial-curlpp")
-set(unofficial-inih_DIR "$ENV{VCPKG_ROOT}/packages/inih_arm64-osx/share/unofficial-inih")
-set(nlohmann_json_DIR "$ENV{VCPKG_ROOT}/packages/nlohmann-json_arm64-osx/share/nlohmann_json")
 
-# Set vcpkg toolchain only for this subdirectory
-if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-    set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
-        CACHE STRING "Vcpkg toolchain file")
+if(APPLE)
+    set(fmt_DIR "$ENV{VCPKG_ROOT}/installed/arm64-osx/share/fmt")
+    set(miniocpp_DIR "$ENV{VCPKG_ROOT}/installed/arm64-osx/share/miniocpp")
+    set(unofficial-curlpp_DIR "$ENV{VCPKG_ROOT}/installed/arm64-osx/share/unofficial-curlpp")
+    set(unofficial-inih_DIR "$ENV{VCPKG_ROOT}/installed/arm64-osx/share/unofficial-inih")
+    set(nlohmann_json_DIR "$ENV{VCPKG_ROOT}/installed/arm64-osx/share/nlohmann_json")
+elseif(WIN32)
+    set(fmt_DIR "$ENV{VCPKG_ROOT}/installed/x64-windows/share/fmt")
+    set(miniocpp_DIR "$ENV{VCPKG_ROOT}/installed/x64-windows/share/miniocpp")
+    set(unofficial-curlpp_DIR "$ENV{VCPKG_ROOT}/installed/x64-windows/share/unofficial-curlpp")
+    set(unofficial-inih_DIR "$ENV{VCPKG_ROOT}/installed/x64-windows/share/unofficial-inih")
+    set(nlohmann_json_DIR "$ENV{VCPKG_ROOT}/installed/x64-windows/share/nlohmann_json")
 endif()
 
-# Ensure CMake uses the toolchain file
-include("${CMAKE_TOOLCHAIN_FILE}")
+# # Set vcpkg toolchain only for this subdirectory
+# if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+#     set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+#         CACHE STRING "Vcpkg toolchain file")
+# endif()
+
+# # Ensure CMake uses the toolchain file
+# include("${CMAKE_TOOLCHAIN_FILE}")
 
 # Add dependencies
 find_package(fmt REQUIRED)
