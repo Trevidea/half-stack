@@ -9,7 +9,6 @@
 #include "event-manager.h"
 #include "past-event.h"
 #include "client-factory.h"
-#include "minio-bridge.h"
 #include "db-manager.h"
 
 Event::Event() : EntityBase("event")
@@ -48,26 +47,11 @@ void Event::report()
     Gateway::instance().route("POST", "/api/event/assets", // To request UPDATE
                               [this](const Request &req, Response &rsp)
                               {
-                                  const std::string tags_dir = DBManager::instance().getEnv("TAGS_DIR", "/Users/shreyapathak/tags");
-                                  MinioBridge client{tags_dir};
-                                  const Json::Value data = req.json();
-                                  const std::string event_id = data.get("event-id", "").asString();
-                                  client.upload(event_id);
-
-                                  if (client.err().empty())
-                                  {
-                                      Json::Value result = Json::objectValue;
-                                      result["path"] = client.path();
-                                      auto strResponse = Gateway::instance().formatResponse({{result}});
-                                      rsp.setData(strResponse);
-                                  }
-                                  else
-                                  {
-                                      Json::Value result = Json::objectValue;
-                                      result["err"] = client.err();
-                                      auto strResponse = Gateway::instance().formatResponse({{result}});
-                                      rsp.setError(client.err());
-                                  }
+                                  const std::string err = "API Not Implemented.";
+                                  Json::Value result = Json::objectValue;
+                                  result["err"] = err;
+                                  auto strResponse = Gateway::instance().formatResponse({{result}});
+                                  rsp.setError(err);
                               });
     Gateway::instance().route("DELETE", "/api/event", // To request DELETE
                               [this](const Request &req, Response &rsp)
