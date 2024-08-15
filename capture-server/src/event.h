@@ -44,6 +44,12 @@ public:
     std::string cityAddress() const;
     void setCityAddress(const std::string &value);
 
+    std::string assets() const;
+    void setAssets(const std::string &value);
+
+    std::string sharing() const;
+    void setSharing(const std::string &value);
+
 public:
     void updateStatus(const Event::EVENT_STATUS status);
 
