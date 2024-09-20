@@ -40,7 +40,6 @@ void MetaType::report()
                               });
 }
 
-
 MetaType::~MetaType()
 {
 }

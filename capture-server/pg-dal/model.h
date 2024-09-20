@@ -5,12 +5,10 @@
 #include "spdlog/spdlog.h"
 #include "stringutils.h"
 
-
 class Model
 {
 private:
     Json::Value m_result;
-
 
 public:
     Model() = default;

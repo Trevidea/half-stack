@@ -2,15 +2,14 @@
 #define METATYPE_H
 #include "entity-base.h"
 
-
 class MetaType: public EntityBase
 {
 private:
 
-
 public:
     MetaType();
     void report();
+    
     std::string name()
     {
         return this->m_model.get<std::string>("name");
