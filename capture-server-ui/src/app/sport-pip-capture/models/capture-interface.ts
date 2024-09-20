@@ -421,6 +421,8 @@ export namespace Data {
     role: string;
     address: string;
   }
+
+  
 }
 
 export namespace Views {

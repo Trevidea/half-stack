@@ -34,7 +34,7 @@ export class EventBuilder extends AbstractBuilder<
     return {
       id: v.id,
       title: v.title,
-      detail: {
+      detail: { 
         city_address: v.detail.cityAddress,
         street_address: v.detail.streetAdress,
         type: v.detail.type
