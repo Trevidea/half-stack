@@ -19,6 +19,9 @@
 #include "log-handler.h"
 #include "tagging-engine.h"
 #include "qeal.h"
+#include "coach.h"
+// #include "player.h"
+// #include "team.h"
 
 Gateway::Gateway()
 {
@@ -43,6 +46,9 @@ void Gateway::init()
     this->m_entities.push_back(new LogHandler());
     this->m_entities.push_back(new TaggingEngine());
     this->m_entities.push_back(new QEAL());
+    this->m_entities.push_back(new Coach());
+    // this->m_entities.push_back(new Player());
+    // this->m_entities.push_back(new Team());
     for (auto &&e : this->m_entities)
     {
         e->report();

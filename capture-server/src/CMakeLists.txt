@@ -28,7 +28,8 @@ set(HALF_STACK_SRC
     log-handler.cpp
     tagging-engine.cpp
     metatype.cpp
-    qeal.cpp)
+    qeal.cpp
+    coach.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
 target_include_directories(half-stack PUBLIC "./" rest-client zmq)
 target_link_libraries(half-stack PUBLIC
@@ -38,4 +39,5 @@ target_link_libraries(half-stack PUBLIC
     pg-dal
     zmq
     data-analytics
-    query-engine)
+    query-engine
+    )

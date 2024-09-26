@@ -8,6 +8,8 @@
 #include <sstream>
 #include "event-manager.h"
 #include "past-event.h"
+#include "client-factory.h"
+#include "db-manager.h"
 
 Event::Event() : EntityBase("event")
 {
@@ -42,13 +44,22 @@ void Event::report()
                               {
                                   this->update(req, rsp);
                               });
+    Gateway::instance().route("POST", "/api/event/assets", // To request UPDATE
+                              [this](const Request &req, Response &rsp)
+                              {
+                                  const std::string err = "API Not Implemented.";
+                                  Json::Value result = Json::objectValue;
+                                  result["err"] = err;
+                                  auto strResponse = Gateway::instance().formatResponse({{result}});
+                                  rsp.setError(err);
+                              });
     Gateway::instance().route("DELETE", "/api/event", // To request DELETE
                               [this](const Request &req, Response &rsp)
                               {
                                   this->remove(req, rsp);
                               });
-    
-    Gateway::instance().route("POST", "/api/event/send", 
+
+    Gateway::instance().route("POST", "/api/event/send",
                               [this](const Request &req, Response &rsp)
                               {
                                   std::string eventMessage = this->createEventMessage();
@@ -71,7 +82,7 @@ std::string Event::venueLocation() const
 
 void Event::setVenueLocation(const std::string &value)
 {
-    m_model.set(value, "venue","location");
+    m_model.set(value, "venue", "location");
 }
 
 std::string Event::streetAddress() const
@@ -111,7 +122,8 @@ void Event::updateStatus(const Event::EVENT_STATUS status)
     this->update();
 }
 
-bool Event::isPastEvent(const std::string& dtEvent) {
+bool Event::isPastEvent(const std::string &dtEvent)
+{
     std::tm tm = {};
     std::istringstream ss(dtEvent);
     ss >> std::get_time(&tm, "%Y-%m-%d");
@@ -121,9 +133,11 @@ bool Event::isPastEvent(const std::string& dtEvent) {
     return difftime(now, event_time) > 0;
 }
 
-std::vector<Json::Value> Event::fetchPastEvents() {
+std::vector<Json::Value> Event::fetchPastEvents()
+{
     std::vector<Json::Value> pastEvents;
-    try {
+    try
+    {
         // Create a JSON object representing the criteria
         Json::Value criteria(Json::arrayValue);
         Json::Value criterion;
@@ -143,18 +157,19 @@ std::vector<Json::Value> Event::fetchPastEvents() {
         Response response;
 
         spdlog::info("Executing list to fetch past events with query: {}", queryString);
-        
+
         // Create an instance of Event to call the list method
         Event eventInstance;
         eventInstance.list(request, response); // Call the list method on the instance
 
         // Directly use the response data without additional parsing
-        const std::string& responseDataStr = response.data();
+        const std::string &responseDataStr = response.data();
         spdlog::info("Fetched events response: {}", responseDataStr);
 
         Json::Value responseData;
         Json::Reader reader;
-        if (!reader.parse(responseDataStr, responseData)) {
+        if (!reader.parse(responseDataStr, responseData))
+        {
             spdlog::error("Failed to parse response data: {}", reader.getFormattedErrorMessages());
             return pastEvents;
         }
@@ -163,9 +178,11 @@ std::vector<Json::Value> Event::fetchPastEvents() {
 
         // Filter the events to ensure only past events are included
         std::time_t now = std::time(nullptr);
-        for (const auto& event : events) {
+        for (const auto &event : events)
+        {
             Json::Value eventObj(Json::objectValue);
-            for (const auto& field : event) {
+            for (const auto &field : event)
+            {
                 eventObj[field["field"].asString()] = field["value"];
             }
 
@@ -175,20 +192,24 @@ std::vector<Json::Value> Event::fetchPastEvents() {
             ss >> std::get_time(&tm, "%Y-%m-%d");
             std::time_t event_time = std::mktime(&tm);
 
-            if (difftime(now, event_time) > 0) {
+            if (difftime(now, event_time) > 0)
+            {
                 pastEvents.push_back(eventObj);
             }
         }
 
         spdlog::info("Fetched {} past events", pastEvents.size());
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception &e)
+    {
         spdlog::error("Error fetching past events: {}", e.what());
     }
 
     return pastEvents;
 }
 
-std::string Event::createEventMessage() const {
+std::string Event::createEventMessage() const
+{
     Json::Value eventMessage;
     eventMessage["id"] = this->id();
     eventMessage["title"] = this->title();
