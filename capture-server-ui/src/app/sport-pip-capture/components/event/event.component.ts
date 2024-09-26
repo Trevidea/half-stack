@@ -28,9 +28,7 @@ export class EventComponent implements OnInit {
   startIndex: number = 0;
   endIndex: number;
 
-  constructor(private router: Router, private tabStateService: TabStateService, private modalService: NgbModal) {
-
-  }
+  constructor(private router: Router, private tabStateService: TabStateService, private modalService: NgbModal) {}
 
   ngOnInit(): void {
     this.tabStateService.activeTab$.subscribe(activeTab => {
@@ -43,11 +41,9 @@ export class EventComponent implements OnInit {
     this.onTabChange.emit();
   }
 
-
   CreateOnDemandEvent() {
     this.router.navigate(['on-demand-event'])
   }
-
 
   changeViewMode() {
     this.gridView = !this.gridView
@@ -58,11 +54,9 @@ export class EventComponent implements OnInit {
     this.onTabChange.emit();
   }
 
-
   onFilter(filter: Data.FilterParams) {
     this.filter.emit(filter)
   }
-
 
   // modal  Open 
   modalOpenSM() {
@@ -83,10 +77,6 @@ export class EventComponent implements OnInit {
     this.startIndex = 0;
     this.endIndex = this.pageSize;
   }
-
-
-
-
 
 }
 

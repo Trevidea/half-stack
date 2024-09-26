@@ -1,4 +1,4 @@
-import { Views } from "app/sport-pip-capture/models/capture-interface";
+import { Data, Views } from "app/sport-pip-capture/models/capture-interface";
 import { Collection, Range } from "app/blocks/collection";
 
 export class ConnectionDetailsView implements Views.Datasource {
@@ -26,5 +26,13 @@ export class ConnectionDetailsView implements Views.Datasource {
   public set direction(v: number) {
     this._direction = v;
   }
+ // Convert ConnectionDetailsView to ConnectedStreamingDevices
+ public toConnectedStreamingDevices(): Data.ConnectedStreamingDevices {
+  return {
+    id: this.id,
+    stream_name: this.streamName,
+    direction: this.direction
+  };
+}
 
 }

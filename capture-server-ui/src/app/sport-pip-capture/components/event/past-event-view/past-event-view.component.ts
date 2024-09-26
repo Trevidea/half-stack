@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModelServiceService } from 'app/sport-pip-capture/models/model-service.service';
 import { environment } from 'environments/environment';
 
 @Component({
@@ -9,13 +10,13 @@ import { environment } from 'environments/environment';
   encapsulation: ViewEncapsulation.None
 })
 export class PastEventViewComponent implements OnInit {
-  @Input() datasource: any;
-
+  @Input() datasource!: any;
+  @Output() onUpload = new EventEmitter();
   activeIndex: number = 0;
   streamName: string | null = null;
   url: string;
-
-  constructor() {
+  minIoUrl: string;
+  constructor(private ngbModel: NgbModal, private modelServiceService: ModelServiceService) {
   }
 
   ngOnInit(): void {
@@ -39,5 +40,21 @@ export class PastEventViewComponent implements OnInit {
 
   }
 
+  modalOpenVC(modalVC: any) {
+    this.modelServiceService.uploadPastEvent(this.datasource.eventId).subscribe(
+      (data) => {
+        console.log(data);
+
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+
+    this.minIoUrl = `${environment.minioUrl}-${this.datasource.eventId}`
+    this.ngbModel.open(modalVC, {
+      centered: true
+    });
+  }
 
 }

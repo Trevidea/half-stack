@@ -63,7 +63,7 @@ export class AuthenticationService {
    */
   login(email: string, password: string) {
     return this._http
-      .post<any>(`${environment.spModelUrl}/users/authenticate`, { email, password })
+      .post<any>(`http://localhost:4000/users/authenticate`, { email, password })
       .pipe(
         map(user => {
           // login successful if there's a jwt token in the response

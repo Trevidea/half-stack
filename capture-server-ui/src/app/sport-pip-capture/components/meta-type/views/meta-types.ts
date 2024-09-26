@@ -2,7 +2,15 @@ import { Collection, Range } from "app/blocks/collection";
 import { Views } from "app/sport-pip-capture/models/capture-interface";
 
 export class MetaTypeCollectionStrategyView implements Views.Datasource {
-  id: number;
+  
+  private _id :number;
+  public get id() :number {
+    return this._id;
+  }
+  public set id(v :number) {
+    this._id = v;
+  }
+  
 
   private _metatype: Range<MetatypeView>;
   public get metatype(): Range<MetatypeView> {

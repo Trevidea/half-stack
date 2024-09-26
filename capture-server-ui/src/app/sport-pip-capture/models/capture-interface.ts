@@ -63,11 +63,7 @@ export namespace Data {
 
   export interface CustomizationSettings { }
 
-  export interface Detail {
-    city_address: string;
-    street_address: string;
-    type: string;
-  }
+  export interface Detail { }
 
   export interface Device extends Base {
     id: number;
@@ -189,6 +185,7 @@ export namespace Data {
     level?: string;
     sport?: string;
     status?: string;
+    type?: string;
   }
 
   export interface HostConnectionDeviceDetail extends Base {
@@ -389,10 +386,12 @@ export namespace Data {
 
   export interface Type { }
 
- 
+
 
   export interface Venue {
     location: string;
+    street_address: string;
+    city_address: string;
   }
 
   export interface VideoResolutionSettings { }

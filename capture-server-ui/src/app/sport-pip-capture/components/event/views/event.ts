@@ -148,6 +148,22 @@ export class EventView implements Views.Datasource {
 }
 
 export class VenueView {
+  private _streetAddress: string;
+  public get streetAddress(): string {
+    return this._streetAddress;
+  }
+  public set streetAddress(v: string) {
+    this._streetAddress = v;
+  }
+
+  private _cityAddress: string;
+  public get cityAddress(): string {
+    return this._cityAddress;
+  }
+  public set cityAddress(v: string) {
+    this._cityAddress = v;
+  }
+
   private _location: string;
   public get location(): string {
     return this._location;

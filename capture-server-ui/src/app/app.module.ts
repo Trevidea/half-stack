@@ -183,12 +183,12 @@ const appRoutes: Routes = [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // ! IMPORTANT: Provider used to create fake backend, comment while using real API
     // fakeBackendProvider,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
-      multi: true,
-      deps: [KeycloakService]
-    },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: initializeKeycloak,
+    //   multi: true,
+    //   deps: [KeycloakService]
+    // },
     TimerService,
     Timer,
   ],

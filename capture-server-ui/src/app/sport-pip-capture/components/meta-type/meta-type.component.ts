@@ -23,7 +23,7 @@ export class MetaTypeComponent implements OnInit {
   constructor(
     private el: ElementRef,
     private dataFactory: DataFactoryService
-  ) {}
+  ) { }
 
   private _metaType: {
     id: number;
@@ -92,6 +92,7 @@ export class MetaTypeComponent implements OnInit {
     this.datasource.metatype[i].color = "white";
     this.listHeader = item.name;
     this.metaType = item;
+    console.log(item, this.metaType)
   }
   isAdded: boolean = false;
   findValue(e) {

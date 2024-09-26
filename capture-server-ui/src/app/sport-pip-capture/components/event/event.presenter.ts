@@ -20,6 +20,7 @@ import { TabStateService } from "./event-utility/nav";
 export class EventPresenter implements OnInit {
   query: Data.FilterParams = {
     sport: null,
+    type: 'on-demand'
   };
   activeTab: string;
   ds!: EventRange;

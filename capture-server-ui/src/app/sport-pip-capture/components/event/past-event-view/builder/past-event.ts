@@ -10,12 +10,13 @@ export class PastEventBuilder extends AbstractBuilder<
   PasEventView
 > {
   compose(m: Data.PastEvent, v: PasEventView) {
+    v.eventId = m.id;
     v.id = m.id;
     v.type = m.type;
     v.title = m.title;
-    v.detail.cityAddress = m?.detail?.city_address;
-    v.detail.streetAddress = m?.detail?.street_address;
-    v.detail.type = m?.detail?.type;
+    v.venue.cityAddress = m?.venue?.city_address;
+    v.venue.streetAddress = m?.venue?.street_address;
+    v.venue.location = m?.venue?.location;
     v.dtEvent = m.dt_event;
     v.level = m.level;
     v.program = m.program;
@@ -45,6 +46,7 @@ export class PastEventBuilder extends AbstractBuilder<
 
   decompose(v: PasEventView): Data.PastEvent {
     return;
+
   }
 
 

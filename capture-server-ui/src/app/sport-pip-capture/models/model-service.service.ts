@@ -33,6 +33,7 @@ export class ModelServiceService {
     this.saveEventDevice = this.saveEventDevice.bind(this);
     this.eventUploadAuthentication = this.eventUploadAuthentication.bind(this);
     this.saveDistributionList = this.saveDistributionList.bind(this);
+    this.uploadPastEvent = this.uploadPastEvent.bind(this);
   }
 
   create(type: string, entity: any): Observable<any> {
@@ -43,6 +44,11 @@ export class ModelServiceService {
         return this._httpClient.post<any>(url, modata);
       })
     );
+  }
+
+  postData(type: string, entity: any): Observable<any> {
+    const url = `${this.modelsServerUrl}/${type}`;
+    return this._httpClient.post<any>(url, entity);
   }
 
   read(type: string): Observable<any> {
@@ -65,7 +71,9 @@ export class ModelServiceService {
     key: string,
     keyType: string
   ): Observable<any> {
+
     const url = `${this.modelsServerUrl}/${type}?${keyType}=${key}`;
+    console.log("hello", url)
     return this._httpClient.get<any>(url);
   }
 
@@ -157,13 +165,9 @@ export class ModelServiceService {
   }
 
 
-  private _data<M, I extends Data.Base>(
-    resource: string,
-    type: new (I: Data.Base) => M
-  ): Observable<M[]> {
+  private _data<M, I extends Data.Base>(resource: string, type: new (I: Data.Base) => M): Observable<M[]> {
     return this._getList<I>(resource).pipe(
       map((data: I[]) => {
-        console.log(data)
         return data.map((datum: I) => new type(datum));
       })
     );
@@ -231,50 +235,15 @@ export class ModelServiceService {
   }
   saveEvent(data: Data.Event): Observable<Data.Event> {
     if (data.id) {
-      return this.update("event", data, data.id).pipe(
-        map((x) => {
-          const chnagedData = this.logService.flattenObject(data);
-          const newChanges = this.logService.getChangeLog(
-            this.model,
-            chnagedData
-          );
-          this.logService.logPut("update-log", {
-            eventId: data.id,
-            details: newChanges,
-            // actitviy: this.changedFormValue,
-          });
-          return x;
-        })
-      );
+      return this.update("event", data, data.id)
     } else {
-      return this.create("event", data).pipe(
-        map((x) => {
-          const timestamp = new Date()
-            .toISOString()
-            .replace("T", " ")
-            .replace("Z", "");
-          const user = JSON.parse(localStorage.getItem("currentUser"));
-          const logData = {
-            eventId: x["Gateway Response"]["result"][0][0].value,
-            category: "Event",
-            subject: "Created Event",
-            user: user.firstName + " " + user.lastName,
-            action: `Created Event Name as ${data.title} `,
-            timestamp: timestamp,
-            details: [
-              {
-                time: "09:00 am",
-                activity: `Create an on-demand event named as ${data.title}`,
-              },
-            ],
-            activity: [],
-          };
-          const chnagedData = this.logService.flattenObject(data);
-          this.logService.logPost("new-log", logData);
-          return x;
-        })
-      );
+      return this.create("event", data)
     }
+  }
+  uploadPastEvent(event_id: number): Observable<any> {
+    let data = { "event-id": event_id }
+    console.log(data);
+    return this.postData("event/assets", data);
   }
 
   saveMetaType(data: Data.MetaType): Observable<Data.MetaType> {
@@ -310,6 +279,7 @@ export class ModelServiceService {
     const url = `${environment.spModelUrl}/event/open-preview`;
     return this._httpClient.post<any>(url, data);
   }
+
 
   closePreview(data: { eventId: number }): Observable<any> {
     const url = `${environment.spModelUrl}/event/close-preview`;
