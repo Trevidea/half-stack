@@ -58,6 +58,7 @@ export class ModelServiceService {
 
   readOne(type: string, id: number): Observable<any> {
     const url = `${this.modelsServerUrl}/${type}?id=${id}`;
+    console.log(url);
     return this._httpClient.get<any>(url);
   }
 
@@ -73,7 +74,6 @@ export class ModelServiceService {
   ): Observable<any> {
 
     const url = `${this.modelsServerUrl}/${type}?${keyType}=${key}`;
-    console.log("hello", url)
     return this._httpClient.get<any>(url);
   }
 

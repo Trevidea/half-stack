@@ -128,14 +128,14 @@ export class PasEventView implements Views.Datasource {
         this._type = v;
     }
 
-    private _connectionDetailsView: Range<ConnectionDetailsView>;
-    public get connectionDetailsView(): Range<ConnectionDetailsView> {
+    private _connectionDetailsView: Collection<ConnectionDetailsView>;
+    public get connectionDetailsView(): Collection<ConnectionDetailsView> {
         if (!this._connectionDetailsView) {
-            this._connectionDetailsView = new Range<ConnectionDetailsView>();
+            this._connectionDetailsView = new Collection<ConnectionDetailsView>();
         }
         return this._connectionDetailsView;
     }
-    public set connectionDetailsView(v: Range<ConnectionDetailsView>) {
+    public set connectionDetailsView(v: Collection<ConnectionDetailsView>) {
         this._connectionDetailsView = v;
     }
 

@@ -20,14 +20,18 @@ export class AdapterService {
     return this._httpClient.get<any>(url);
   }
 
-  constructor(private _httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient) { }
   cppToNg(cppObj: { field: string; type: number; value: any }[]): {
     field: string;
     value: any;
   } {
     let ngObj: any = {};
     for (const obj of cppObj) {
-      ngObj[obj.field] = obj.value;
+      if (obj.type === 6) {
+        ngObj[obj.field] = obj.value.map((item: any) => this.cppToNg(item));
+      } else {
+        ngObj[obj.field] = obj.value;
+      }
     }
     return ngObj;
   }
