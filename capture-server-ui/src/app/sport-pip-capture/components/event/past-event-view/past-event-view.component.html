@@ -4,8 +4,10 @@
             <a [routerLink]="'/event'"> <i class="feather " data-feather="arrow-left" [size]="24"></i></a>
             <div class="d-flex justify-content-between align-items-center">
 
-                <button class="uploadbut btn-warning mr-1" type="submit">Upload to
+                <button class="uploadbut btn-warning mr-1" type="submit" (click)="modalOpenVC(modalVC)">Upload to
                     server</button>
+                <!-- <input type="file" #fileInput id="account-upload" hidden accept="image/*"  (click)="fileInput.click()" 
+                                (change)="uploadImage($event)"> -->
                 <div ngbDropdown>
                     <button class="btn btn-sm btn-light menuitem-but float-right" id="menuDropdown" ngbDropdownToggle>
                         <i class="bi bi-three-dots-vertical" style="font-size: 1.5rem;"></i>
@@ -64,7 +66,8 @@
                             </p>
                             <p class="card-text ">
                                 <i class="bi bi-geo-alt-fill"></i>
-                                {{datasource?.venue?.location}}
+                                {{datasource?.venue?.location}}, {{datasource?.venue?.streetAddress}},
+                                {{datasource?.venue?.cityAddress}}
                             </p>
                         </div>
                     </div>
@@ -84,7 +87,7 @@
                                     Shared with
                                 </p>
                                 <p class="card-text">
-                                    +12 more
+                                    --
                                 </p>
                             </div>
 
@@ -105,7 +108,7 @@
                                 {{datasource?.program}}
                             </p>
                             <p class="card-text  margin-bottom ">
-                                <i class="bi bi-geo-alt-fill"></i>
+                                <i class="feather " data-feather="bar-chart" width="13" hight="13"></i>
                                 {{datasource?.level}}
                             </p>
                         </div>
@@ -117,3 +120,24 @@
 
     </div>
 </div>
+
+<ng-template #modalVC let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Event uploadedd</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+        <div class="row">
+            <div class="col-12 d-flex items-align-center justify-content-between">
+                <p>
+                    <a href=" {{minIoUrl}}">{{minIoUrl}}</a>
+                </p>
+                <button type="button" class="btn btn-warning" rippleEffect>Open</button>
+            </div>
+        </div>
+
+    </div>
+
+</ng-template>

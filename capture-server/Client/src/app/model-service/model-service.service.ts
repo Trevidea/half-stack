@@ -173,11 +173,13 @@ export class ModelServiceService {
     const url = `${this.pgUrl}/meta-type?key='${key}'`
     return this._httpClient.get<MetaTypeModel>(url);
   }
+
   MetaTypeJsonById(id: number)
     : Observable<Data.MetaType> {
     const url = `${this.pgUrl}/meta-type?id=${id}`
     return this._httpClient.get<MetaTypeModel>(url);
   }
+  
   gethtml(employeeId: string, payrollId: string): Observable<any> {
     console.log(employeeId, payrollId)
     const url = `${this.pgUrl}/salary-slip?employee=${employeeId}&payroll=${payrollId}`

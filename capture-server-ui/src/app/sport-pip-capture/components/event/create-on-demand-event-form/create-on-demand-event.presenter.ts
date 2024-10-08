@@ -43,13 +43,7 @@ export class CreateOnDemandEventPresenter implements OnInit {
     if (Object.is(route.snapshot.component, this.constructor))
       this.ds.id = route.snapshot.params["id"];
 
-    this.actions = new PresenterAction(
-      "event",
-      this.ds,
-      this.modelServiceService.saveEvent,
-      EventBuilder,
-      router
-    );
+    this.actions = new PresenterAction("event",this.ds,this.modelServiceService.saveEvent,EventBuilder,router);
     this.actions.data.subscribe((data: any) => {
       if (data) {
         let ondemandEvent = { event_id: data.id, owner_id: 1 };

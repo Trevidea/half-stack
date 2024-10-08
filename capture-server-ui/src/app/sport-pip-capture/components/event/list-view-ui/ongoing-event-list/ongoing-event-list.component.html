@@ -22,7 +22,7 @@
                 <td>{{item.type}}</td>
                 <td>{{dateTimeService.formatEventDate(item.dtEvent)}}</td>
                 <td class="cursor-pointer">{{dateTimeService.formatTime(item.time)}}</td>
-                <td>{{item.venue.location}}</td>
+                <td>{{ item.venue.location }}, {{ item.venue.streetAddress }}, {{ item.venue.cityAddress }}</td>
                 <td class="">
                     <app-menu-button [dropdownItems]="dropdownItems"></app-menu-button>
                 </td>

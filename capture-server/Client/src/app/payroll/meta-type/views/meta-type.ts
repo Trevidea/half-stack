@@ -1,11 +1,17 @@
-import { Collection,Range} from "src/app/blocks/collection";
+import { Collection, Range } from "src/app/blocks/collection";
 import { SelectItemView } from "src/app/blocks/collection-item";
 import { Views } from "src/app/model-service/payroll-interface";
 
 
 export class MetaTypeView implements Views.Datasource {
-    id: number;
 
+    private _id: number;
+    public get id(): number {
+        return this._id;
+    }
+    public set id(v: number) {
+        this._id = v;
+    }
 
     private _name: string;
     public get name(): string {
@@ -15,7 +21,6 @@ export class MetaTypeView implements Views.Datasource {
         this._name = v;
     }
 
-
     private _key: string;
     public get key(): string {
         return this._key;
@@ -23,6 +28,7 @@ export class MetaTypeView implements Views.Datasource {
     public set key(v: string) {
         this._key = v;
     }
+    
     private _value: string[];
     public get value(): string[] {
         // if (!this._value) {
@@ -47,8 +53,14 @@ export class MetaTypeView implements Views.Datasource {
 
 }
 export class TypeView implements Views.Datasource {
-    id: number;
 
+    private _id: number;
+    public get id(): number {
+        return this._id;
+    }
+    public set id(v: number) {
+        this._id = v;
+    }
 
     private _name: string;
     public get name(): string {
@@ -66,11 +78,9 @@ export class TypeView implements Views.Datasource {
     public set key(v: string) {
         this._key = v;
     }
+
     private _value: string[];
     public get value(): string[] {
-        // if (!this._value) {
-        //     this._value = new Collection<string>();
-        // }
         return this._value;
     }
     public set value(v: string[]) {

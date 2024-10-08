@@ -13,9 +13,9 @@ export class EventRangeBuilder extends AbstractBuilder<Data.Event, EventView> {
         v.sport = m.sport;
         v.status = m.status;
         v.title = m.title;
-        v.detail.cityAddress = m?.detail?.city_address;
-        v.detail.streetAdress = m?.detail?.street_address;
-        v.detail.type = m?.detail?.type;
+        v.venue.cityAddress = m?.venue?.city_address;
+        v.venue.streetAddress = m?.venue?.street_address;
+        v.venue.location = m?.venue?.location;
         v.year = m.year;
         v.venue.location = m?.venue?.location;
         v.time = m.tm_event;

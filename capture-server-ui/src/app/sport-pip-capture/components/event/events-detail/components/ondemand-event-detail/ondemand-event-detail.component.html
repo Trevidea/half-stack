@@ -2,12 +2,12 @@
     <div class="col-12 ">
         <h6 class="inprogess" *ngIf="datasource?._countdown">{{datasource?._countdown}}</h6>
         <h6 class="inprogess" *ngIf="datasource?.ongoingCountdown">{{datasource?.ongoingCountdown}}</h6>
-        
+
         <h5 class="card-title ">{{datasource?._title}}</h5>
         <div class="badge on-demand-event">{{datasource?._type| eventTypeTransform}}</div>
     </div>
     <div class="col-12 sub-heading-box">
-        <h5 class="sub-heading "> Event Details</h5>
+        <h5 class="sub-heading"> Event Details</h5>
     </div>
     <div class="col-12 col-box ">
         <div class="d-flex flex-column">
@@ -17,10 +17,11 @@
                     {{dateTimeservice.formatDateTime(datasource?._dtEvent, datasource?._time)}}
                 </p>
             </div>
-            <div class=" d-flex align-items-center">
-                <i class="feather " data-feather="map-pin" width="13" hight="13"></i>&nbsp;&nbsp;
-                <p>
-                    {{datasource?.venue?.location}}
+            <div class=" d-flex align-items-top">
+                <i class="feather flex-shrink-0 " data-feather="map-pin" width="13" hight="13"></i>&nbsp;&nbsp;
+                <p class="m-0">
+                    {{datasource?.venue?.location}}, {{datasource?.venue?.streetAddress}},
+                    {{datasource?.venue?.cityAddress}}
                 </p>
             </div>
         </div>

@@ -120,6 +120,7 @@ export class DataFactoryService {
         const metaTypes: Data.MetaType[] = [];
 
         result.forEach((item: any[]) => {
+          console.log(item)
           const idField = item.find((field) => field.field === "id");
           const nameField = item.find((field) => field.field === "name");
           const valuesField = item.find((field) => field.field === "values");

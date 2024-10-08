@@ -32,7 +32,7 @@ export class AccountComponent implements OnInit {
     }
   }
 
-  openChangePwdModle() {
+  openChangePwdModel() {
     this.ngbModle.open(ChangePasswordPresenter, {
       centered: true
     })

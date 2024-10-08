@@ -33,7 +33,6 @@ export class EventsDetailComponent implements OnInit {
     }
   }
 
-
   get currentEvent() {
     return this.datasource[this.currentIndex];
   }

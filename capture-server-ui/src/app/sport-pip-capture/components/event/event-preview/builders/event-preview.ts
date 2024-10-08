@@ -7,20 +7,19 @@ export class EventPreviewBuilder extends AbstractBuilder<Data.ConnectionPreview,
   compose(m: Data.ConnectionPreview, v: EventPreview) {
     console.log(":::::model of preview", m)
     v.title = m.title
-    m.title = v.title;
-    m.program = v.program;
-     Transformer.ComposeCollection(
+    v.title = m.title;
+    v.program = m.program
+    Transformer.ComposeCollection(
       m?.activeDevice,
       v?.previewActiveDevice,
       ActiveDeviceBuilder
     );
-    m.level = v.level;
-    m.status = v.status;
-    m.dtEvent = v.dtEvent;
-    m.time = v.time;
-    m.type = v.type;
-    // m.detail = v.detail;
-    m.venue = v.venue;
+    v.level = m.level;
+    v.status = m.status;
+    v.dtEvent = m.dtEvent;
+    v.time = m.time;
+    v.type = m.type;
+    v.venue = m.venue;
   }
   decompose(v: EventPreview): Data.ConnectionPreview {
     throw new Error("Method not implemented.");
@@ -32,10 +31,10 @@ export class EventPreviewBuilder extends AbstractBuilder<Data.ConnectionPreview,
 export class ActiveDeviceBuilder extends AbstractBuilder<Data.ActiveDevice, ActiveDeviceView> {
   compose(m: Data.ActiveDevice, v: ActiveDeviceView) {
     // m.deviceId = v.deviceId;
-    m.deviceType = v.deviceType;
-    m.location = v.location;
-    m.network = v.network;
-    m.name = v.user;
+    v.deviceType = m.deviceType
+    v.location = m.location
+    v.network = m.network;
+     v.user = m.name
   }
   decompose(v: ActiveDeviceView): Data.ActiveDevice {
     throw new Error("Method not implemented.");

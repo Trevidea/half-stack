@@ -20,7 +20,6 @@ export class EventRunnerService {
   }
 
   setStartedEventMetaData(value: any) {
-    // console.log(value)
     this.startedEventId.next(value)
     this.startedEventMetaData.next(value)
   }

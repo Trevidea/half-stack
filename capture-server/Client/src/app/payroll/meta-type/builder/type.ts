@@ -3,12 +3,6 @@ import { TypeView } from "../views/meta-type";
 import { Data } from "src/app/model-service/payroll-interface";
 import { MetaTypeModel } from "src/app/model-service/meta-type";
 
-
-
-
-
-
-
 export class TypeBuilder implements AbstractBuilder<MetaTypeModel, TypeView>{
     compose(m: MetaTypeModel, v: TypeView) {
         console.log(v)

@@ -43,19 +43,19 @@ export class PresenterAction<M, V> implements Views.FormActions {
       (success: boolean, data: any, err: any = null) => {
         if (!success) {
           this.onComplete.emit(false);
-
           this.state = { error: true, data: err };
           // this.opensweetalertsave();
         } else {
           this.onComplete.emit(true);
-          this.state = { error: false, data: data };
-          //navigate
-          if (this.resource !== null) {
-            this.router.navigate([this.resource]);
-          }
-          const id = data["Gateway Response"]["result"][0][0]["value"];
+          console.log("url::::::::::::::::::Saved Responsed", data);
+
+          const id = data?.["Gateway Response"]?.["result"]?.[0]?.[0]?.["value"];
           if (id != null) {
             this.data.emit({ id: id });
+          }
+
+          if (this.resource !== null) {
+            this.router.navigate([this.resource]);
           }
         }
       }

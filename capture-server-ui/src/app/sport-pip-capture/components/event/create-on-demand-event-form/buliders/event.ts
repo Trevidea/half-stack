@@ -8,17 +8,17 @@ export class EventBuilder extends AbstractBuilder<
   OnDemandEventFormView
 > {
   compose(m: Data.Event, v: OnDemandEventFormView) {
+    console.log(m)
     v.id = m.id;
     v.title = m.title;
-    v.detail.cityAddress = m?.detail?.city_address;
-    v.detail.streetAdress = m?.detail?.street_address;
-    v.detail.type = m?.detail?.type;
+    v.venue.cityAddress = m?.venue?.city_address;
+    v.venue.streetAddress = m?.venue?.street_address;
+    v.venue.location = m?.venue?.location;
     v.dtEvent = m.dt_event;
     v.levels.SelectedItem = m.level;
     v.programs.SelectedItem = m.program;
     v.sports.SelectedItem = m.sport;
     v.time = this.formatTimeNumToStr(m.tm_event);
-    v.venue.location = m?.venue?.location;
   }
 
   formatTimeNumToStr(time: number): string {
@@ -34,11 +34,7 @@ export class EventBuilder extends AbstractBuilder<
     return {
       id: v.id,
       title: v.title,
-      detail: { 
-        city_address: v.detail.cityAddress,
-        street_address: v.detail.streetAdress,
-        type: v.detail.type
-      },
+      detail: {},
       dt_event: v.dtEvent,
       level: v.levels.SelectedItem,
       program: v.programs.SelectedItem,
@@ -47,6 +43,8 @@ export class EventBuilder extends AbstractBuilder<
       tm_event: time,
       venue: {
         location: v.venue.location,
+        street_address: v.venue.streetAddress,
+        city_address: v.venue.cityAddress
       },
       status: "upcoming",
       type: "on-demand",

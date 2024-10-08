@@ -10,22 +10,22 @@ export class PastEventBuilder extends AbstractBuilder<
   PasEventView
 > {
   compose(m: Data.PastEvent, v: PasEventView) {
+    console.log("past event view ", m)
+    v.eventId = m.id;
     v.id = m.id;
     v.type = m.type;
     v.title = m.title;
-    v.detail.cityAddress = m?.detail?.city_address;
-    v.detail.streetAddress = m?.detail?.street_address;
-    v.detail.type = m?.detail?.type;
+    v.venue.cityAddress = m?.venue?.city_address;
+    v.venue.streetAddress = m?.venue?.street_address;
+    v.venue.location = m?.venue?.location;
     v.dtEvent = m.dt_event;
     v.level = m.level;
     v.program = m.program;
     v.sport = m.sport;
     v.time = m.tm_event;
     v.year = m.year
-    v.venue.location = m.venue.location;
-    const transformedDevices = this.transformConnectedStreamingDevices(m?.connected_streaming_devices);
     Transformer.ComposeCollection(
-      transformedDevices,
+      m?.connected_streaming_devices,
       v?.connectionDetailsView,
       ConnectionDetailsBuilder
     );
@@ -45,6 +45,7 @@ export class PastEventBuilder extends AbstractBuilder<
 
   decompose(v: PasEventView): Data.PastEvent {
     return;
+
   }
 
 
@@ -56,6 +57,7 @@ export class PastEventBuilder extends AbstractBuilder<
 
 export class ConnectionDetailsBuilder extends AbstractBuilder<Data.ConnectedStreamingDevices, ConnectionDetailsView> {
   compose(m: Data.ConnectedStreamingDevices, v: ConnectionDetailsView) {
+    console.log("past event ", m)
     v.direction = m.direction;
     v.id = m.id;
     v.streamName = m.stream_name;

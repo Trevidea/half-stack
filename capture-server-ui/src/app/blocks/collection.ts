@@ -15,6 +15,7 @@ interface AddingNewEvent {
 export class Range<T> extends Array<T> {
   _rangeObject: string = "1";
   private itemAddedDispatcher = new EventDispatcher<ItemAddedEvent<T>>();
+  items: any;
   public onItemAdded(
     handler: Handler<ItemAddedEvent<T>>,
     preRun: boolean = false

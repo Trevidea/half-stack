@@ -10,4 +10,6 @@ export const environment = {
   rtmpUrl: "rtmp://drake.in:1935",
   playerUrl: "https://drake.in:3334",
   keycloakUrl: 'https://keycloak.drake.in:5555',
+  keycloakRedirectUrl: 'http://localhost:4200',
+  minioUrl: 'http://192.168.1.50:9002/event'
 };

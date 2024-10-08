@@ -13,7 +13,7 @@ import { ModelServiceService } from "app/sport-pip-capture/models/model-service.
 
 @Component({
   selector: 'app-sharing-presenter',
-  template: `<app-sharing [datasource]="ds"></app-sharing>`,
+  template: `<app-sharing [datasource]="ds" (onRefresh)="this.loadDistributionsData()"></app-sharing>`,
   styleUrls: ['./sharing.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
@@ -24,8 +24,11 @@ export class SharingPresenter implements OnInit {
     this.ds = new SharingRangeView()
   }
   ngOnInit(): void {
-    Transformer.ComposeCollectionAsync(this.modelService.distributionsListJson(), this.ds.distribution, ShareBuilder);
+    this.loadDistributionsData();
   }
 
+  loadDistributionsData() {
+    Transformer.ComposeCollectionAsync(this.modelService.distributionsListJson(), this.ds.distribution, ShareBuilder);
+  }
 
 }
