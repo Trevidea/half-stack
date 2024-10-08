@@ -1,1 +1,0 @@
-Capture Server UI

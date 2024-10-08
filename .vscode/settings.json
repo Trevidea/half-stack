@@ -138,5 +138,5 @@
     "cinttypes": "cpp",
     "shared_mutex": "cpp"
   },
-  "cmake.sourceDirectory": "/Users/shreyapathak/git/half-stack/capture-server/build/_deps/libpqxx-src/src"
+  "cmake.sourceDirectory": "C:/git/spip-app-using-vuexy/half-stack/capture-server"
 }
