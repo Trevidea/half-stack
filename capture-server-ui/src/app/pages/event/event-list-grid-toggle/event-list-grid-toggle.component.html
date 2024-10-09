@@ -1,1 +1,82 @@
-<p>event-list-grid-toggle works!</p>
+<mat-card class="mat-card-top universal-card">
+    <mat-card-header class="universal-card-header">
+        <app-event-filter-presenter class="w-100" (filter)="onfilterChange($event )"></app-event-filter-presenter>
+    </mat-card-header>
+    <mat-card-content class="b-t-1 p-0 universal-card-content">
+
+        <div class="tab-container">
+            <!-- Tabs Navigation -->
+            <ul class="tab-list">
+                @for ( tab of tabs;track tab.id) {
+                <li (click)="onTabChange(tab.id)" [class.active]="tab.id === datasource.activeTab">
+                    <a class="tab-link">{{ tab.label }}</a>
+                </li>
+                }
+
+                <li class="d-flex align-items-center m-l-auto p-r-0 ">
+                    <button mat-button class="grid-list-btn" (click)="datasource.gridView=false"
+                        [class.active]="!datasource.gridView">
+                        <mat-icon class="m-0">menu</mat-icon>
+                    </button>
+                </li>
+                <li class="d-flex align-items-center p-l-2  m-r-0 ">
+                    <button mat-button class="grid-list-btn" (click)="datasource.gridView=true"
+                        [class.active]="datasource.gridView">
+                        <mat-icon class="m-0">grid_view</mat-icon>
+                    </button>
+                </li>
+                <li class="d-flex align-items-center p-l-2 p-r-0 ">
+                    <button mat-fab extended class="mat-btn" [routerLink]="'/events/create-event'">
+                        <mat-icon>add_circle</mat-icon>Create Event</button>
+                </li>
+            </ul>
+            <div class="tab-content">
+                @switch (datasource.activeTab) {
+
+                @case ('on-going') {
+                @if (!datasource.gridView) {
+                <!-- <app-ongoing-event-list [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)"></app-ongoing-event-list> -->
+                } @else {
+                <app-ongoing-event-grid
+                    [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)"></app-ongoing-event-grid>
+                }
+                }
+
+                @case ('upcoming') {
+                @if (!datasource.gridView) {
+                <!-- <app-upcoming-event-list [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)"
+                    (onDelete)="openDeleteDialog($event)">
+                </app-upcoming-event-list> -->
+                } @else {
+                <app-upcoming-event-grid [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)">
+                </app-upcoming-event-grid>
+                }
+                }
+
+                @case ('past') {
+                @if (!datasource.gridView) {
+                <!-- <app-past-event-list [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)" (onDelete)="onDelete.emit($event)">
+                </app-past-event-list> -->
+                } @else {
+                <app-past-event-grid [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)"
+                    (onDelete)="onDelete.emit($event)">
+                </app-past-event-grid>
+                }
+                }
+
+                @default {
+                <p>No events available.</p>
+                }
+
+                }
+            </div>
+
+        </div>
+
+    </mat-card-content>
+    <!-- <mat-paginator [length]="datasource.eventView.Filtered.length" [pageSize]=" 10" (page)="onPageChange($event)"
+        [pageSizeOptions]="[5,10,50,100]">
+    </mat-paginator> -->
+
+
+</mat-card>

@@ -1,4 +1,4 @@
-import { Data } from "./full-stack-interface";
+import { Data } from "./half-stack-interface";
 
 export class DataBase<T extends Data.Base> {
     protected _model: T;

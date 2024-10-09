@@ -1,0 +1,87 @@
+@if (datasource) {<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-md-12">
+            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">&nbsp;</mat-label>
+            <mat-form-field appearance="outline" class="w-100 hide-hint p-0">
+                <input matInput class="p-b-0  mat-subtitle-2 " placeholder="Search here..." (keyup)="applyFilter($event)" />
+                <mat-icon matSuffix>
+                    <i-tabler name="search" class="icon-20"></i-tabler>
+                </mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Sport
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-select [(ngModel)]="datasource.sports.SelectedItem" placeholder="Select sport">
+                    <mat-option selected value="All" (click)="clearFilter('sports')" >All</mat-option>
+                    @for (item of datasource.sports; track item) {
+                    <mat-option [value]="item">{{item}}</mat-option>
+                    }
+                </mat-select>
+                @if(datasource.sports.SelectedItem){
+                <button mat-icon-button matSuffix aria-label="Clear" (click)="clearFilter('sports')">
+                    <mat-icon>clear</mat-icon>
+                </button>
+                }
+            </mat-form-field>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Level
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-select [(ngModel)]="datasource.levels.SelectedItem" placeholder="Select level">
+                    <mat-option selected value="All" (click)="clearFilter('levels')">All</mat-option>
+                    @for (item of datasource.levels; track item) {
+                    <mat-option [value]="item">{{item}}</mat-option>
+                    }
+                </mat-select>
+                @if(datasource.levels.SelectedItem){
+                <button mat-icon-button matSuffix aria-label="Clear" (click)="clearFilter('levels')">
+                    <mat-icon>clear</mat-icon>
+                </button>
+                }
+            </mat-form-field>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Program
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-select [(ngModel)]="datasource.programs.SelectedItem" placeholder="Select program">
+                    <mat-option selected value="All" (click)="clearFilter('programs')" >All</mat-option>
+                    @for (item of datasource.programs; track item) {
+                    <mat-option [value]="item">{{item}}</mat-option>
+                    }
+                </mat-select>
+                @if(datasource.programs.SelectedItem){
+                <button mat-icon-button matSuffix aria-label="Clear" (click)="clearFilter('programs')">
+                    <mat-icon>clear</mat-icon>
+                </button>
+                }
+            </mat-form-field>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Year
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-select [(ngModel)]="datasource.years.SelectedItem" placeholder="Select year">
+                    <mat-option selected value="All" (click)="clearFilter('years')" >All</mat-option>
+                    @for (item of datasource.years; track item) {
+                    <mat-option [value]="item">{{item}}</mat-option>
+                    }
+                </mat-select>
+                @if(datasource.years.SelectedItem){
+                <button mat-icon-button matSuffix aria-label="Clear" (click)="clearFilter('years')">
+                    <mat-icon>clear</mat-icon>
+                </button>
+                }
+            </mat-form-field>
+        </div>
+        <div class="col-12 d-flex align-items-center justify-content-end">
+            @if(isAnyItemSelected()){
+            <a (click)="allClear.emit()" class="clearAllbtn">Clear
+                Filter</a>
+            }
+        </div>
+    </div>
+</div>}

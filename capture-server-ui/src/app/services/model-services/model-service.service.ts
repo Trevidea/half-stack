@@ -3,10 +3,9 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { AdapterService } from "./adapter.service";
 import { first, map, mergeMap, Observable } from "rxjs";
-import { Data } from "../models-interfaces/full-stack-interface";
-import { MetaTypeModel } from "../models-interfaces/metatype";
-import { CoachData } from "../models-interfaces/coach";
-
+import { Data } from "../models-interfaces/half-stack-interface";
+import { MetaTypeData} from "../models-interfaces/metatype";
+import { EventData } from "../models-interfaces/event";
 
 
 @Injectable({
@@ -17,7 +16,6 @@ export class ModelService {
   private modelsServerUrl: string = environment.cpServerBaseUrl;
 
   constructor(private _httpClient: HttpClient, private _adapter: AdapterService) {
-    this.saveCoach = this.saveCoach.bind(this);
     // this.MetaType = this.MetaType.bind(this)
   }
 
@@ -126,36 +124,62 @@ export class ModelService {
   private _selectOne<M, I extends Data.Base>(resource: string, id: number, type: new (I: Data.Base) => M): Observable<M> {
     return this._selectData(resource, id, type).pipe(map((data: M[]) => data[0]));
   }
+  private getEntitiesByDynamicQuery(type: string, key: string, keyType: string): Observable<any> {
+    const url = `${this.modelsServerUrl}/${type}?${keyType}=${key}`;
+    return this._httpClient.get<any>(url);
+  }
+  private _getSelectedQueryType<I extends Data.Base>(
+    resource: string,
+    key: string,
+    keyType: string
+  ): Observable<I[]> {
+    return this._adapter.demodulate(resource,
+      this.getEntitiesByDynamicQuery(resource, key, keyType)
+    ).pipe(
+      map((models) =>
+        models.map((model: any) => {
+          return model as I;
+        })
+      )
+    );
+  }
 
+  private _selectQueryData<M, I extends Data.Base>(
+    resource: string,
+    key: string,
+    keyType: string,
+    type: new (I: Data.Base) => M
+  ): Observable<M[]> {
+    return this._getSelectedQueryType<I>(resource, key, keyType).pipe(
+      map((data: I[]) => data.map((datum: I) => new type(datum)))
+    );
+  }
+
+  private _selectQueryOne<M, I extends Data.Base>(
+    resource: string,
+    key: string,
+    keyType: string,
+    type: new (I: Data.Base) => M
+  ): Observable<M> {
+    return this._selectQueryData(resource, key, keyType, type).pipe(
+      map((data: M[]) => data[0])
+    );
+  }
   //============================================================All reuseable realated  funtions declared  avobe=========================================//
 
-  saveCoach(data: Data.Coach): Observable<Data.Coach> {
-    console.log(data)
-    if (data.id) {
-      return this.update("coach", data, data.id)
-    } else {
-      return this.create("coach", data)
-    }
-  }
   //============================================================ All Data Post realated  funtions Below =========================================//
 
 
 
 
   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ All Data retrival realated  funtions Below ++++++++++++++++++++++++++++++++++++++++//
-
-  MetaTypeJsonByKey(key: string)
-    : Observable<Data.MetaType> {
-    const url = `${this.modelsServerUrl}/meta-type?key='${key}'`
-    return this._httpClient.get<MetaTypeModel>(url);
+  eventList(): Observable<Data.Event[]> {
+    return this._data("events", EventData);
   }
 
-  coachList(): Observable<Data.Coach[]> {
-    return this._data("coaches", CoachData);
-  }
 
-  coachJson(id: number): Observable<Data.Coach> {
-    return this._selectOne("coach", id, CoachData);
+  MetaTypeByKey(key: string): Observable<Data.MetaType> {
+    return this._selectQueryOne("meta-type", `'${key}'`, "key", MetaTypeData);
   }
 
   EventYear() {

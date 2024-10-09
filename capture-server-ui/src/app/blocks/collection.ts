@@ -1,5 +1,5 @@
 
-import { Views } from '@core/services/models-interfaces/full-stack-interface';
+import { Views } from '../services/models-interfaces/half-stack-interface';
 import { EventDispatcher, Handler } from './event-dispatcher'
 
 export interface ItemSelectedEvent<T> {
