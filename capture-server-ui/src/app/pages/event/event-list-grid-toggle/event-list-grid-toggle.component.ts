@@ -8,6 +8,12 @@ import { OngoingEventGridComponent } from "./grid-components/ongoing-event-grid/
 import { UpcomingEventGridComponent } from "./grid-components/upcoming-event-grid/upcoming-event-grid.component";
 import { PastEventGridComponent } from "./grid-components/past-event-grid/past-event-grid.component";
 import { EventFilterPresenter } from "./event-filter/event-filter.presenter";
+import { OngoingEventListComponent } from "./list-components/ongoing-event-list/ongoing-event-list.component";
+import { PastEventListComponent } from "./list-components/past-event-list/past-event-list.component";
+import { UpcomingEventListComponent } from "./list-components/upcoming-event-list/upcoming-event-list.component";
+import { PageEvent } from '@angular/material/paginator';
+import { EventView } from './views/events';
+import { DeleteDialogComponent } from '../../blocks/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-event-list-grid-toggle',
@@ -19,7 +25,10 @@ import { EventFilterPresenter } from "./event-filter/event-filter.presenter";
     OngoingEventGridComponent,
     UpcomingEventGridComponent,
     PastEventGridComponent,
-    EventFilterPresenter
+    EventFilterPresenter,
+    OngoingEventListComponent,
+    PastEventListComponent,
+    UpcomingEventListComponent
   ],
   templateUrl: './event-list-grid-toggle.component.html',
   styleUrl: './event-list-grid-toggle.component.scss'
@@ -44,7 +53,7 @@ export class EventListGridToggleComponent {
   ngOnInit(): void {
   }
 
-  
+
   onTabChange(tabId: string) {
     this.datasource.activeTab = tabId;
     this.filter.emit(this.query);
@@ -53,5 +62,22 @@ export class EventListGridToggleComponent {
   onfilterChange(filter: Data.DropdownFilter) {
     this.query = filter
     this.filter.emit(this.query);
+  }
+
+  onPageChange(event: PageEvent) {
+    this.pageSize = event.pageSize
+    this.startIndex = event.pageIndex * this.pageSize;
+    this.endIndex = this.startIndex + this.pageSize;
+  }
+
+  openDeleteDialog(entity: EventView): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      data: { entityName: `${entity.title}`, title: 'Event' },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.event === 'delete') {
+        // this.onDelete.emit(entity.id);
+      }
+    });
   }
 }

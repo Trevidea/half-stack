@@ -5,9 +5,12 @@
             <img class="left img-fluid" src="./assets/images/blog/blog-img1.jpg" />
             <img class="right img-fluid" src="./assets/images/backgrounds/blog-bg-2x.jpg" />
         </div>
-        <div class="card-overlay  d-flex align-items-top">
+        <div class="card-overlay">
             <div class="w-100 text-container">
                 <p> In progress in 01:20:03</p>
+            </div>
+            <div class="w-100  d-flex align-items-center justify-content-end">
+                <app-action-menu [dropdownItems]="dropdownItems(item)"></app-action-menu>
             </div>
         </div>
         <mat-card-content class="card-body">

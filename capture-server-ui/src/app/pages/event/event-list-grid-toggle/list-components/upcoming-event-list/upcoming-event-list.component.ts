@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { OffCanvasComponent } from 'src/app/pages/blocks/off-canvas/off-canvas.component';
-import { UpcomingEventDetailPresenter } from '../../../event-details/upcoming-event-detail/upcoming-event-detail.presenter';
 import { OffCanvasService } from 'src/app/pages/blocks/off-canvas/off-canvas.service';
 import { Router } from '@angular/router';
 import { UI } from 'src/app/pages/blocks/ui-interface';
@@ -18,7 +17,7 @@ import { CapitalizeFirstPipe } from "../../../../../pipe/capitalize-first-letter
     standalone: true,
     templateUrl: './upcoming-event-list.component.html',
     styleUrl: './upcoming-event-list.component.scss',
-    imports: [MatIconModule, OffCanvasComponent, ActionMenuComponent, UpcomingEventDetailPresenter, MatToolbarModule, MatButtonModule, CommonModule, MatMenuModule, MatTableModule, CapitalizeFirstPipe]
+    imports: [MatIconModule, OffCanvasComponent, ActionMenuComponent, MatToolbarModule, MatButtonModule, CommonModule, MatMenuModule, MatTableModule, CapitalizeFirstPipe]
 })
 export class UpcomingEventListComponent {
   @Input() datasource: any;

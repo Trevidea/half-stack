@@ -35,7 +35,8 @@
 
                 @case ('on-going') {
                 @if (!datasource.gridView) {
-                <!-- <app-ongoing-event-list [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)"></app-ongoing-event-list> -->
+                <app-ongoing-event-list
+                    [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)"></app-ongoing-event-list>
                 } @else {
                 <app-ongoing-event-grid
                     [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)"></app-ongoing-event-grid>
@@ -44,9 +45,9 @@
 
                 @case ('upcoming') {
                 @if (!datasource.gridView) {
-                <!-- <app-upcoming-event-list [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)"
+                <app-upcoming-event-list [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)"
                     (onDelete)="openDeleteDialog($event)">
-                </app-upcoming-event-list> -->
+                </app-upcoming-event-list>
                 } @else {
                 <app-upcoming-event-grid [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)">
                 </app-upcoming-event-grid>
@@ -55,8 +56,9 @@
 
                 @case ('past') {
                 @if (!datasource.gridView) {
-                <!-- <app-past-event-list [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)" (onDelete)="onDelete.emit($event)">
-                </app-past-event-list> -->
+                <app-past-event-list [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)"
+                    (onDelete)="onDelete.emit($event)">
+                </app-past-event-list>
                 } @else {
                 <app-past-event-grid [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)"
                     (onDelete)="onDelete.emit($event)">
@@ -74,9 +76,9 @@
         </div>
 
     </mat-card-content>
-    <!-- <mat-paginator [length]="datasource.eventView.Filtered.length" [pageSize]=" 10" (page)="onPageChange($event)"
+    <mat-paginator [length]="datasource.eventView.Filtered.length" [pageSize]=" 10" (page)="onPageChange($event)"
         [pageSizeOptions]="[5,10,50,100]">
-    </mat-paginator> -->
+    </mat-paginator>
 
 
 </mat-card>
