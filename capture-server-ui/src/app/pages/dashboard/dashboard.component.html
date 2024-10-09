@@ -1,0 +1,137 @@
+<div class="p-1">
+    <div class="row mb-1 d-flex">
+      <div class="col-md-8">
+        <h3 class="f-w-400">
+          Two events are happening right now:
+        </h3>
+      </div>
+      <div class="col-md-4 d-flex justify-content-end">
+        <div class="dropdown-container">
+            <button class="dropdown-button">
+              All 
+              <span class="dropdown-arrow">
+                 <mat-icon>keyboard_arrow_down</mat-icon>
+              </span>
+            </button>
+          </div>
+      </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+    <mat-card class="cardWithShadow">
+        <mat-card-content class="p-20">
+          <mat-card-title class="lh-lg mat-headline-4 f-s-20 f-w-500"
+            >Task manager
+            </mat-card-title
+          >
+          <h4 class="f-w-300">Application running in the background</h4>
+          <div class="m-b-15 m-t-20">
+            <h2>5</h2>
+            <button mat-raised-button color="primary">View Task</button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+        <div class="col-md-4">
+          <mat-card class="bg-primary text-white">
+            <mat-card-content class="p-20">
+                <mat-card-title>Sep 15</mat-card-title>
+            </mat-card-content>
+             <div class="p-20">
+                <mat-chip>
+                    <i-tabler name="clock-hour-4" class="icon-18 "></i-tabler>00:22:08</mat-chip>
+                <h2 class="m-b-2">McQuaid vs Fairfort</h2>
+                <h4 class="m-t-4 d-flex">
+                    <i-tabler name="map-pin" class="icon-18"></i-tabler>
+                    <span >Fairport High School, 33 Union Street, Fairport</span>
+                </h4>
+             </div>
+          </mat-card>
+        </div>
+        <div class="col-md-4">
+            <mat-card class="bg-accent text-white">
+                <mat-card-content class="p-20">
+                    <mat-card-title>Sep 15</mat-card-title>
+                </mat-card-content>
+                 <div class="p-20">
+                    <mat-chip>
+                       <i-tabler name="clock-hour-4" class="icon-18 "></i-tabler> 
+                       <span> 00:22:08</span>
+                    </mat-chip>
+                    <h2 class="m-b-2">Riverhawks vs Huskers</h2>
+                    <h4 class="m-t-4 d-flex ">
+                        <i-tabler name="map-pin" class="icon-18 "></i-tabler>
+                        <span >Fairport High School, 33 Union Street, Fairport</span>
+                    </h4>
+                 </div>
+              </mat-card>
+        </div>      
+</div>
+<div class="row">
+    <div class="col-md-9">
+        <mat-card class="cardWithShadow">
+            <mat-card-header>
+              <div class="d-sm-flex w-100">
+                <div>
+                  <mat-card-title>Connection</mat-card-title>
+                </div>
+              </div>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="table-responsive m-t-20">
+                <table mat-table class="w-100">
+                  <!-- Position Column -->
+                 <tr>
+                    <th>Action</th>
+                    <th>Event</th>
+                    <th>Role</th>
+                    <th>User Name</th>
+                    <th>Transmit Status</th>
+                    <th>Device ID</th>
+                    <th>Device Type</th>
+                    <th>Network</th>
+                 </tr>
+                 <tr>
+                     <td><button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <!-- Edit Team -->
+                        <button mat-menu-item>
+                          <mat-icon>pause</mat-icon>
+                          <span>Pause</span>
+                        </button>
+                        <!-- Create Event -->
+                        <button mat-menu-item style="color: red">
+                            <mat-icon style="color: red">block</mat-icon>
+                            <span>Block</span>
+                          </button>
+                          <!-- Delete Team -->
+                        <button mat-menu-item style="color: red">
+                          <mat-icon style="color: red">delete</mat-icon>
+                          <span>Remove</span>
+                        </button>
+                      </mat-menu></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                 </tr>
+                </table>
+              </div>
+            </mat-card-content>
+            <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+            </mat-paginator>
+          </mat-card>
+    </div>
+    <div class="col-md-3">
+        <app-pie-chart></app-pie-chart>
+    </div>
+</div>
