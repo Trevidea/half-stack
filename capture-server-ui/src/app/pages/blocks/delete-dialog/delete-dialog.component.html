@@ -1,0 +1,10 @@
+<div class="p-x-24 text-center">
+    <h1 style="color: red;"> <i-tabler name="exclamation-circle" style="width: 100px; height: 100px; stroke-width: 1px; color: rgba(222, 46, 33, 1);"
+            ></i-tabler></h1>
+    <h2 class="mat-subtitle-1">Delete {{title}}</h2>
+    <p class="mat-body-1">Are you sure you want to <span style="color: red;">delete</span> {{title.toLowerCase()}} {{entityName}}?</p>
+</div>
+<mat-dialog-actions class="p-x-24 p-b-24 d-flex align-items-center justify-content-center ">
+    <button mat-flat-button mat-dialog-close style="border: 1px solid rgba(195, 195, 195, 1); background-color: transparent; color: var(--color-dyanamic) ;">No</button>
+    <button mat-raised-button class="m-l-8 text-white" (click)="doAction('delete')" style="background-color: rgba(222, 46, 33, 1);">Yes, Sure</button>
+</mat-dialog-actions>

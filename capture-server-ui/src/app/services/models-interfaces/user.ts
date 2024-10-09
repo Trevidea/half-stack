@@ -1,13 +1,13 @@
-import { Data } from "./full-stack-interface";
+import { Data } from "./half-stack-interface";
 import { DataBase } from "./model";
 
 export class UserProfileData extends DataBase<Data.UserProfile>{
 
     
-    public get id() : number {
+    public override get id() : number {
         return this._model.id;
     }
-    public set id(v : number) {
+    public override set id(v : number) {
         this._model.id = v;
     }
 

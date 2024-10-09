@@ -72,3 +72,13 @@
 
 //This is for the icons (Required file)
 @import "icons/font-awesome/css/fontawesome-all.css";
+
+
+:root {
+  --border-color-dynamic: #c3c3c3;
+}
+
+.dark-theme {
+  --dark-background: #232323;
+  --border-color-dynamic: #444444;
+}

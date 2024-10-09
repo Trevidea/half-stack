@@ -1,0 +1,27 @@
+@import'../grid-view.scss';
+
+.mat-mdc-raised-button {
+    padding: 4px 8px;
+    height: fit-content !important;
+}
+
+.badge-text {
+    width: fit-content;
+    background-color: var(--bg-color-chip);
+    color: var(--color-dyanamic);
+    padding: 2px 7px;
+    border-radius: 6px;
+}
+
+.text-truncate {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.text-ellipsis {
+    max-width:90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

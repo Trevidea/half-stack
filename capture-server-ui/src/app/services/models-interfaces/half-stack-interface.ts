@@ -7,11 +7,13 @@ export namespace Data {
     _path?: number;
   }
   export interface DropdownFilter {
-    year?: string;
-    program?: string;
-    level?: string;
-    sport?: string;
-    title?: string
+    title?: string | null;
+    program?: string | null;
+    sport?: string | null;
+    year?: any;
+    level?: string | null;
+    status?: string | null;
+    type?: string;
   }
   export interface MetaType extends Base {
     id: number;
@@ -67,83 +69,38 @@ export namespace Data {
     facebook?: string;
   }
 
-
   export interface Event extends Base {
-    id: number;
-    sport: string;
-    level: string;
-    program: string;
-    year: number;
-    dt_event: string;
-    tm_event: number;
-    venue: Venue;
-    detail: Detail;
-    title: string;
-    status: string;
+    sport?: string;
+    level?: string;
+    program?: string;
+    year?: number;
+    dt_event?: string;
+    tm_event?: number;
+    venue?: Venue;
+    detail?: Detail;
+    title?: string;
+    status?: string;
     type: string;
-    assets: Assets;
-    sharing: Sharing;
   }
+  export interface Detail { }
 
-  export interface Detail extends Base { 
+  export interface Assets {
 
   }
-  export interface Assets extends Base {
+  export interface Sharing {
 
-   }
-  export interface Sharing extends Base {
-
-   }
-
-  export interface Venue extends Base {
+  }
+  export interface Venue {
+    location: string;
     type: string;
-    streetAdress: string;
-    cityAddress: string;
+    street_address: string;
+    city_address: string;
+  }
+  export interface Detail extends Base {
+
   }
 
-  export interface Team extends Base {
-    id: number;
-    name: string;
-    logo: string;
-    sport: string;
-    level: string;
-    program: string;
-    year: string;
-    social_links: SocialLinks;
-    stats: TeamStats;
-  }
 
-  export interface TeamSocialLink extends Base { }
-
-  export interface TeamStats extends Base { }
-
-  export interface Player extends Base {
-    id: number;
-    sport: string;
-    level: string;
-    program: string;
-    year: string;
-    first_name: string;
-    last_name: string;
-    hometown: string;
-    height: number;
-    weight: number;
-    high_school: string;
-    prev_school: string;
-    majors: string;
-    mobile: string;
-    email: string;
-    city: string;
-    social_links: SocialLinks;
-    picture: string;
-    bio: string;
-    stats: string;
-    media: Media;
-  }
-
-  export interface PlayerSocialLink extends Base { }
-
-  export interface Media extends Base { }
 
 }
 

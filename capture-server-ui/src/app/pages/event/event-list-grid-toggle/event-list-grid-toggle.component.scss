@@ -1,0 +1,17 @@
+@import"../../../../@core/scss/custom-tab.scss";
+
+.universal-card {
+
+    .universal-card-header {
+        padding: 21px 21px 0px 21px;
+        border-bottom: 1px solid var(--border-color-dynamic);
+    }
+
+    .universal-card-content {
+        ::ng-deep .mat-mdc-tab-label-container {
+            padding: 5px 24px 0 24px;
+            border-bottom: 1px solid var(--border-color-dynamic) !important;
+        }
+    }
+
+}

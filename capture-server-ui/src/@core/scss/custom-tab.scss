@@ -1,0 +1,79 @@
+.tab-container {
+    width: 100%;
+    margin-bottom: 1rem;
+
+    .tab-list {
+        display: flex;
+        border-bottom: 1px solid var(--border-color-dynamic)    ;
+        list-style-type: none;
+        padding-left: 1rem;
+        margin-bottom: 0;
+
+        li {
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+            cursor: pointer;
+            padding: 5px 15px;
+            border: 1px solid transparent;
+            border-radius: 0.25rem 0.25rem 0 0;
+            font-weight: 500;
+        }
+
+        li.active {
+            color: #1e4db7;
+            background-color: transparent;
+            border-bottom: 2px solid #1e4db7;
+        }
+
+
+    }
+
+}
+
+.tab-content {
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-top: -1px;
+}
+
+
+/* Responsive adjustments for small screens */
+@media (max-width: 768px) {
+    .tab-list {
+        flex-wrap: wrap;
+    }
+
+    .tab-list li {
+        margin-right: 0;
+        padding: 5px 10px;
+    }
+
+    .btn-outline-secondary,
+    .btn-primary {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/****************************
+     * Below is not part of the custom tab.
+     * This section is added here for project design approaches.
+****************************/
+
+.grid-list-btn {
+    display: flex;
+    align-items: center;
+    border-color: transparent;
+    min-width: 0 !important;
+    padding: 0.4rem 0.7rem;
+
+    .mat-icon {
+        font-size: 20px !important;
+    }
+}
+
+.grid-list-btn.active {
+    background-color: #DBDBDB80;
+}
