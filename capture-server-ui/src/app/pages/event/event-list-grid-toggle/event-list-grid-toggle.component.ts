@@ -76,7 +76,7 @@ export class EventListGridToggleComponent {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result?.event === 'delete') {
-        // this.onDelete.emit(entity.id);
+        this.onDelete.emit(entity.id);
       }
     });
   }

@@ -9,12 +9,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 @Component({
   selector: 'app-past-event-list',
   standalone: true,
-  imports: [MatIconModule, MatToolbarModule,MatButtonModule, CommonModule, MatMenuModule, MatTableModule],
+  imports: [MatIconModule, MatToolbarModule, MatButtonModule, CommonModule, MatMenuModule, MatTableModule],
   templateUrl: './past-event-list.component.html',
   styleUrl: './past-event-list.component.scss'
 })
 export class PastEventListComponent {
   @Input() datasource: any;
-  @Output() onDelete: EventEmitter<number> = new EventEmitter<number>();
-  displayedColumns: string[] = ['event-type', 'date',  'event-name', 'file-type', 'file-size','sport', "teams-involved","shared-with" ,"action"];
+  @Output() onDelete = new EventEmitter();
+  displayedColumns: string[] = ['event-type', 'date', 'event-name', 'file-type', 'file-size', 'sport', "teams-involved", "shared-with", "action"];
 }

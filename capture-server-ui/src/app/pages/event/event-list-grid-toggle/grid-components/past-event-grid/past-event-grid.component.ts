@@ -7,16 +7,18 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { DateTimeFormatPipe } from 'src/app/pipe/date-time-format';
 import { OffCanvasComponent } from 'src/app/pages/blocks/off-canvas/off-canvas.component';
 import { OffCanvasService } from 'src/app/pages/blocks/off-canvas/off-canvas.service';
+import { UI } from 'src/app/pages/blocks/ui-interface';
+import { ActionMenuComponent } from "../../../../blocks/action-menu/action-menu.component";
 
 @Component({
   selector: 'app-past-event-grid',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, OffCanvasComponent, TablerIconsModule, MatMenuModule, MatIconModule, DateTimeFormatPipe],
+  imports: [MatCardModule, MatButtonModule, OffCanvasComponent, TablerIconsModule, MatMenuModule, MatIconModule, DateTimeFormatPipe, ActionMenuComponent],
   templateUrl: './past-event-grid.component.html',
   styleUrl: './past-event-grid.component.scss'
 })
 export class PastEventGridComponent {
-  @Output() onDelete: EventEmitter<number> = new EventEmitter<number>();
+  @Output() onDelete = new EventEmitter();
   @ViewChild(OffCanvasComponent) offCanvas: OffCanvasComponent;
   @Input() datasource: any
   selectedEventId: number
@@ -33,5 +35,14 @@ export class PastEventGridComponent {
       console.log('Overlay closed from service');
     });
   }
-
+  dropdownItems(item: any): UI.DropDownMenuItem[] {
+    return [
+      {
+        label: "Delete event",
+        icon: "delete",
+        color: "#de2e21",
+        action: () => this.onDelete.emit(item),
+      },
+    ];
+  }
 }

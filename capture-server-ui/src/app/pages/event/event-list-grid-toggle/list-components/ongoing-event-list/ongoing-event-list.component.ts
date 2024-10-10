@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
@@ -13,9 +13,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   styleUrl: './ongoing-event-list.component.scss'
 })
 export class OngoingEventListComponent implements OnInit {
-  ngOnInit(): void {
-    console.log(this.datasource);
-  }
+
+  @Output() onDelete = new EventEmitter();
   @Input() datasource: any;
   displayedColumns: string[] = ['in-progress', 'event-name', 'event-type', 'date', 'location', "sport", "teams-involved"];
+  ngOnInit(): void {
+
+  }
 }
