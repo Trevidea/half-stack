@@ -3,7 +3,7 @@
     <th>Event name</th>
     <th>Event type</th>
     <th>Date</th>
-    <th>Time</th> 
+    <th>Time</th>
     <th>Location</th>
     <th>Sport</th>
     <!-- <th>Teams involved</th> -->
@@ -13,15 +13,16 @@
   <tr>
     <td style="cursor:pointer;" (click)="viewDetial(element)">
       <span class=" f-s-16  m-b-8 d-flex align-items-center text-ellipsis">
-                <span class="text-truncate">{{element.title}}</span>
-            </span> 
+        <span class="text-truncate">{{element.title}}</span>
+      </span>
     </td>
     <td>{{element.type | capitalizeFirst}}</td>
     <td>{{element.dtEvent}}</td>
     <td>{{formatTime(element.time)}}</td>
     <td>
       <span class=" f-s-16  m-b-8 d-flex align-items-center text-ellipsis">
-         <span class="text-truncate">{{element.venue.location}}, {{element.venue.streetAddress}}, {{element.venue.cityAddress}}</span>
+        <span class="text-truncate">{{element.venue.location}}, {{element.venue.streetAddress}},
+          {{element.venue.cityAddress}}</span>
       </span>
     </td>
     <td> {{element.sport}}</td>
@@ -34,9 +35,10 @@
 
 </table>
 
-<!-- <app-off-canvas #offCanvas>
-  @if(IsOpenDetail){
+<app-off-canvas #offCanvas>
+  <h2>hhhhhh</h2>
+  <!-- @if(IsOpenDetail){
   <app-upcoming-event-detail-presenter [eventId]="seletctedItem.id"
     [dropdownItems]="dropdownItems(seletctedItem)"></app-upcoming-event-detail-presenter>
-  }
-</app-off-canvas> -->
+  } -->
+</app-off-canvas>

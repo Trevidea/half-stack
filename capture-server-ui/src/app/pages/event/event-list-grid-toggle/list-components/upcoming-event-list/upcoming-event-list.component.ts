@@ -13,17 +13,17 @@ import { ActionMenuComponent } from 'src/app/pages/blocks/action-menu/action-men
 import { CapitalizeFirstPipe } from "../../../../../pipe/capitalize-first-letter";
 
 @Component({
-    selector: 'app-upcoming-event-list',
-    standalone: true,
-    templateUrl: './upcoming-event-list.component.html',
-    styleUrl: './upcoming-event-list.component.scss',
-    imports: [MatIconModule, OffCanvasComponent, ActionMenuComponent, MatToolbarModule, MatButtonModule, CommonModule, MatMenuModule, MatTableModule, CapitalizeFirstPipe]
+  selector: 'app-upcoming-event-list',
+  standalone: true,
+  templateUrl: './upcoming-event-list.component.html',
+  styleUrl: './upcoming-event-list.component.scss',
+  imports: [MatIconModule, OffCanvasComponent, ActionMenuComponent, MatToolbarModule, MatButtonModule, CommonModule, MatMenuModule, MatTableModule, CapitalizeFirstPipe]
 })
 export class UpcomingEventListComponent {
   @Input() datasource: any;
   displayedColumns: string[] = ['event-type', 'date', 'time', 'event-name', 'location', 'sport', "teams involved", "action"];
   @Output() onDelete = new EventEmitter();
-  @ViewChild(OffCanvasComponent) offCanvas: OffCanvasComponent;
+  @ViewChild(OffCanvasComponent) offCanvas!: OffCanvasComponent;
   seletctedItem: any;
   constructor(public offCanvasService: OffCanvasService, private router: Router) { }
 
@@ -35,6 +35,7 @@ export class UpcomingEventListComponent {
     this.IsOpenDetail = true
     this.seletctedItem = item;
     this.offCanvas.openOffCanvas();
+    // this.offCanvasService.onOpenOffCanvas();
     this.offCanvasService.onClose().subscribe(() => {
       this.IsOpenDetail = false;
       console.log('Overlay closed from service');

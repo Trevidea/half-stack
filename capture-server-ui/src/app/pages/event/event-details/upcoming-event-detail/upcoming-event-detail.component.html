@@ -1,0 +1,82 @@
+@if(datasource) {
+<div class="row">
+    <div class="col-12">
+        <div class="card-img">
+            <img class="left img-fluid" src="./assets/images/blog/McQuaid_BlackGold.png" />
+            <img class="right img-fluid" src="./assets/images/blog/AQ Logo.png" />
+        </div>
+        <div class="close-menu-btn">
+            <button mat-icon-button aria-label="Clear" (click)="close()" style="background-color: var(--color-dyanamic);">
+                <mat-icon style="color: #3b3b3b;">clear</mat-icon>
+            </button>
+            <div>
+                <app-action-menu [dropdownItems]="dropdownItems"></app-action-menu>
+            </div>
+            
+        </div>
+        <h3 class="m-l-8 m-t-0 m-b-8 mat-subtitle-1">{{datasource?.title}}</h3>
+        <div class="d-flex align-items-center">
+        <div class="badge-text m-l-8" style="background-color: var(--bg-color-chip);
+            color: var(--color-dyanamic);">
+            {{datasource?.type | capitalizeFirst}}
+        </div>
+        <div class="badge-text m-l-8" style="background-color: var(--bg-color-chip);
+            color: var(--color-dyanamic)">
+            {{datasource?.sport | capitalizeFirst}}
+        </div>
+    </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="item-heading mat-subtitle-2 m-b-2">
+            <h4 class="m-b-4">Event details</h4>
+        </div>
+        <div class="item-details">
+            <div class="w-100 d-flex align-items-top mat-body-1 ">
+                <i-tabler name="clock" class="icon-18 flex-shrink-0"></i-tabler>
+                @if(datasource?.dtEvent){
+                <p> {{ datasource?.dtEvent |
+                    dateTimeFormat:datasource?.time }}</p>
+                }
+            </div>
+            <div class="w-100 d-flex align-items-top mat-body-1">
+                <i-tabler name="map-pin" class="icon-18 flex-shrink-0"></i-tabler>
+                <p>
+                    {{datasource?.venue?.location}}, {{datasource?.venue?.streetAddress}},
+                    {{datasource?.venue?.cityAddress}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="item-heading mat-subtitle-2">
+            <h4 class="m-b-4">Team info</h4>
+        </div>
+        <div class="item-details">
+            <div class="w-100 d-flex align-items-center mat-body-1">
+                <i-tabler name="ball-football" class="icon-18"></i-tabler>
+                <p>{{datasource?.sport}}</p>
+            </div>
+            <div class="w-100 d-flex align-items-center mat-body-1">
+                <mat-icon>man</mat-icon>
+                <p>{{datasource?.program}}</p>
+            </div>
+            <div class="w-100 d-flex align-items-center mat-body-1">
+                <mat-icon fontSet="material-icons-outlined">stairs</mat-icon>
+                <p>{{datasource?.level}}</p>
+            </div>
+                <div class="d-flex align-items-center  mat-body-1">
+                    <mat-icon fontSet="material-icons-outlined">sports</mat-icon>
+                    <p>{{datasource?.headCoachName?.SelectedItem?.value}}</p>
+                </div>
+                @if (datasource.assistantCoachName.SelectedItem) {
+                <div class="d-flex align-items-center mat-body-1">
+                    <mat-icon fontSet="material-icons-outlined">sports</mat-icon>
+                    <p>{{datasource?.assistantCoachName?.SelectedItem?.value}}</p>
+                </div>
+                }
+        </div>
+    </div>
+</div>
+}

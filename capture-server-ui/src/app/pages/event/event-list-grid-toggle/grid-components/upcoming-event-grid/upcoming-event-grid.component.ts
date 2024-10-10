@@ -13,13 +13,14 @@ import { UI } from 'src/app/pages/blocks/ui-interface';
 import { ActionMenuComponent } from 'src/app/pages/blocks/action-menu/action-menu.component';
 import { CapitalizeFirstPipe } from "../../../../../pipe/capitalize-first-letter";
 import { CommonModule } from '@angular/common';
+import { UpcomingEventDetailPresenter } from "../../../event-details/upcoming-event-detail/upcoming-event-detail.presenter";
 
 @Component({
   selector: 'app-upcoming-event-grid',
   standalone: true,
   templateUrl: './upcoming-event-grid.component.html',
   styleUrl: './upcoming-event-grid.component.scss',
-  imports: [MatCardModule, CommonModule, OffCanvasComponent, MatButtonModule, TablerIconsModule, ActionMenuComponent, MatIconModule, MatTooltipModule, DateTimeFormatPipe, CapitalizeFirstPipe]
+  imports: [MatCardModule, CommonModule, OffCanvasComponent, MatButtonModule, TablerIconsModule, ActionMenuComponent, MatIconModule, MatTooltipModule, DateTimeFormatPipe, CapitalizeFirstPipe, UpcomingEventDetailPresenter]
 })
 export class UpcomingEventGridComponent {
   @Input() datasource: any;

@@ -40,6 +40,8 @@ export function HttpLoaderFactory(http: HttpClient): any {
 }
 
 import { NgxEchartsModule } from 'ngx-echarts';
+import { DummyDataService } from 'src/dummy-data/dummy-data.service';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -76,7 +78,9 @@ export const appConfig: ApplicationConfig = {
           useFactory: HttpLoaderFactory,
           deps: [HttpClient],
         },
-      })
+      }),
+
+      InMemoryWebApiModule.forRoot(DummyDataService, { delay: 1000, passThruUnknownUrl: true })
     ),
   ],
 };

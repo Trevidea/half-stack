@@ -7,19 +7,7 @@
         </div>
         <div class="card-overlay  d-flex align-items-top">
             <div class="w-100  d-flex align-items-center justify-content-end">
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                    <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item>
-                        <mat-icon>share</mat-icon>
-                        <span>Share even</span>
-                    </button>
-                    <button mat-menu-item style="color: #de2e21;" (click)="onDelete.emit(item.id)">
-                        <mat-icon style="color: #de2e21;">delete</mat-icon>
-                        <span>Delete event</span>
-                    </button>
-                </mat-menu>
+                <app-action-menu [dropdownItems]="dropdownItems(item)"></app-action-menu>
 
             </div>
         </div>
@@ -32,7 +20,7 @@
                     <div class="badge-text m-l-6">
                         {{ item.sport }}
                     </div>
-                  </div>
+                </div>
                 <button mat-raised-button color="primary" (click)="viewDetial(item.id)">View</button>
             </div>
             <span class=" f-s-16 f-w-600 m-b-8 d-flex align-items-center">

@@ -4,7 +4,7 @@ import { environment } from "src/environments/environment";
 import { AdapterService } from "./adapter.service";
 import { first, map, mergeMap, Observable } from "rxjs";
 import { Data } from "../models-interfaces/half-stack-interface";
-import { MetaTypeData} from "../models-interfaces/metatype";
+import { MetaTypeData } from "../models-interfaces/metatype";
 import { EventData } from "../models-interfaces/event";
 
 
@@ -176,7 +176,9 @@ export class ModelService {
   eventList(): Observable<Data.Event[]> {
     return this._data("events", EventData);
   }
-
+  eventJson(id: number): Observable<Data.Event> {
+    return this._selectOne("event", id, EventData);
+  }
 
   MetaTypeByKey(key: string): Observable<Data.MetaType> {
     return this._selectQueryOne("meta-type", `'${key}'`, "key", MetaTypeData);
