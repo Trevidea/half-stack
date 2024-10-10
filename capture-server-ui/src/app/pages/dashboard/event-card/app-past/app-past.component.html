@@ -1,0 +1,75 @@
+
+  <mat-card class="event-card m-t-8 m-r-10" style="border: 1px solid #c3c3c3; ">
+    <!-- Header Section -->
+    <mat-card-header class="d-flex justify-content-between" style="background-color: #e9f4ec; color: #434343;">
+      <mat-card-title>
+        On-demand event
+      </mat-card-title>
+    </mat-card-header>
+  
+    <mat-divider></mat-divider>
+  
+    <!-- Content Section -->
+    <mat-card-content>
+      <div class="row">
+        <!-- Date Section -->
+        <div class="col-2 date-section">
+          <h6>SAT</h6>
+          <h3>10</h3>
+        </div>
+  
+        <!-- Event Details Section -->
+        <div class="col-7 event-details">
+          <h6>McQuaid vs Fairport</h6>
+           <span>Football</span>
+        </div>
+       <div class="col-3 mt-1 d-flex justify-content-end">
+        <button mat-icon-button [matMenuTriggerFor]="eventMenu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #eventMenu="matMenu">
+            <button mat-menu-item>
+                <mat-icon>visibility</mat-icon>
+                <span>View Event</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>edit</mat-icon>
+                <span>Edit Event</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>share</mat-icon>
+                <span>Share Event</span>
+              </button>
+              <button mat-menu-item style="color: red">
+                <mat-icon style="color: red">delete</mat-icon>
+                <span>Remove Event</span>
+              </button>
+        </mat-menu>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="row">
+      <div class="col-2 mt-1 d-flex justify-content-center align-items-center">
+        <mat-icon>access_time</mat-icon>
+      </div>
+      <div class="col-10 mt-1">
+        <h3 class="date-text">Saturday, Sept 10th</h3>
+        <div class="d-flex">
+          <span class="time-text">2:00 pm, Varsity</span>
+        </div>
+      </div>
+
+      <div class="col-2 mt-1 d-flex justify-content-center align-items-center">
+        <mat-icon>video_file</mat-icon>
+      </div>
+      <div class="col-10 mt-1">
+        <h3 class="add-text">TAR File</h3>
+        <div class="d-flex">
+          <span class="add-text-span">1.5 GB</span>
+        </div>
+      </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
