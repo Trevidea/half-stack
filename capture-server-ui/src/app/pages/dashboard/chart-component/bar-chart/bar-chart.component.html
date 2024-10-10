@@ -1,0 +1,41 @@
+<mat-card class="cardWithShadow">
+    <mat-card-content class="p-32">
+      <div class="d-flex d-md-block align-items-center">
+        <mat-card-title>Connection throughout the event</mat-card-title>
+      </div>
+      <div id="chart" class="d-flex flex-column m-t-30">
+        <apx-chart
+          [series]="ConnectDevice.series"
+          [dataLabels]="ConnectDevice.dataLabels"
+          [chart]="ConnectDevice.chart"
+          [fill]="ConnectDevice.fill"
+          [plotOptions]="ConnectDevice.plotOptions"
+          [grid]="ConnectDevice.grid"
+          [xaxis]="ConnectDevice.xaxis"
+          [yaxis]="ConnectDevice.yaxis"
+          [stroke]="ConnectDevice.stroke"
+          [stroke]="ConnectDevice.stroke"
+          [dataLabels]="ConnectDevice.dataLabels"
+          [tooltip]="ConnectDevice.tooltip"
+          [legend]="ConnectDevice.legend"
+        ></apx-chart>
+      </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <h6 class="mat-body-2 m-b-0 d-flex gap-6 align-items-center">
+          <span class="m-r-5"
+            ><i-tabler name="circle-filled" class="text-accent icon-12 d-flex"></i-tabler></span
+          >Mobile
+        </h6>
+        <h6 class="mat-body-2 m-b-0 d-flex gap-6 align-items-center">
+          <span class="m-r-5"
+            ><i-tabler name="circle-filled" class="text-primary icon-12 d-flex"></i-tabler></span
+          >Camera
+        </h6>
+        <h6 class="mat-body-2 m-b-0 d-flex gap-6 align-items-center">
+            <span class="m-r-5"
+              ><i-tabler name="circle-filled" class="text-warning icon-12 d-flex"></i-tabler></span
+            >iPad
+          </h6>
+      </div>
+    </mat-card-content>
+  </mat-card>

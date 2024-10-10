@@ -1,1 +1,18 @@
-<p>event-card works!</p>
+    <mat-card class="cardWithShadow">
+      <mat-card-content>
+        <mat-card-title>Events</mat-card-title>
+        <mat-tab-group class="m-b-8" style="max-height: 400px; overflow-y: auto;">
+          <mat-tab label="Ongoing" class="m-t-8">
+            <app-app-ongoning></app-app-ongoning>
+          </mat-tab>
+          <mat-tab label="Upcoming" class="m-t-8">
+            <app-app-upcoming></app-app-upcoming>
+          </mat-tab>
+          <mat-tab label="Past" class="m-t-8">
+            <app-app-past></app-app-past>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+</mat-card>
+
+  

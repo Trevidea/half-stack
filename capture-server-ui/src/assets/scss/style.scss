@@ -80,6 +80,7 @@
   --card-border-color: #FDFDFD;
   --dark-light-background: #fff;
   --color-dyanamic: initial;
+  --color-dyanamic: #434343;
 }
 
 .dark-theme {
@@ -108,4 +109,5 @@
 
 .bordered-card {
   border: 1px solid var(--card-border-color) !important;
+  --color-dyanamic: #fff;
 }

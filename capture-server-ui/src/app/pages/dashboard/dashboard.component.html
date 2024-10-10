@@ -1,18 +1,27 @@
 <div class="p-1">
-    <div class="row mb-1 d-flex">
-      <div class="col-md-8">
+    <div class="row mb-1 d-flex align-items-center">
+      <div class="col-8">
         <h3 class="f-w-400">
           Two events are happening right now:
         </h3>
       </div>
-      <div class="col-md-4 d-flex justify-content-end">
+      <div class="col-4 d-flex justify-content-end">
         <div class="dropdown-container">
-            <button class="dropdown-button">
-              All 
-              <span class="dropdown-arrow">
-                 <mat-icon>keyboard_arrow_down</mat-icon>
-              </span>
+            <button mat-raisd-button class="d-flex align-items-center rounded" [matMenuTriggerFor]="menu" style="width: 100%;">
+              All
+              <mat-icon>arrow_drop_down</mat-icon>
             </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                McQuaid vs Fairfort
+              </button>
+              <button mat-menu-item>
+                Riverhawks vs Huskers
+              </button>
+              <button mat-menu-item>
+                All
+              </button>
+            </mat-menu>
           </div>
       </div>
 </div>
@@ -25,9 +34,9 @@
             >Task manager
             </mat-card-title
           >
-          <h4 class="f-w-300">Application running in the background</h4>
-          <div class="m-b-15 m-t-20">
-            <h2>5</h2>
+          <h4 class="f-w-300 m-4">Application running in the background</h4>
+          <div class="m-b-10 m-t-20">
+            <h2 class="m-t-4">5</h2>
             <button mat-raised-button color="primary">View Task</button>
           </div>
         </mat-card-content>
@@ -39,12 +48,16 @@
                 <mat-card-title>Sep 15</mat-card-title>
             </mat-card-content>
              <div class="p-20">
-                <mat-chip>
-                    <i-tabler name="clock-hour-4" class="icon-18 "></i-tabler>00:22:08</mat-chip>
+              <span class="timer-container d-flex" >
+                <i-tabler name="clock-hour-1" class="icon-20 p-r-4"></i-tabler>
+                <span class="timer-text">00:22:08</span>
+              </span>
+                         
                 <h2 class="m-b-2">McQuaid vs Fairfort</h2>
                 <h4 class="m-t-4 d-flex">
-                    <i-tabler name="map-pin" class="icon-18"></i-tabler>
-                    <span >Fairport High School, 33 Union Street, Fairport</span>
+                    <i-tabler name="map-pin" class="icon-18" 
+                    style="background-color: rgba(253, 253, 253, 0.1); border-radius: 2px; height: 20px; width: 20px;"></i-tabler>
+                    <span class="p-l-4" >Fairport High School, 33 Union Street, Fairport</span>
                 </h4>
              </div>
           </mat-card>
@@ -55,21 +68,22 @@
                     <mat-card-title>Sep 15</mat-card-title>
                 </mat-card-content>
                  <div class="p-20">
-                    <mat-chip>
-                       <i-tabler name="clock-hour-4" class="icon-18 "></i-tabler> 
-                       <span> 00:22:08</span>
-                    </mat-chip>
+                  <span class="timer-container" >
+                    <i-tabler name="clock-hour-1" class="icon-20 p-r-4"></i-tabler>
+                    <span class="timer-text">00:22:08</span>
+                  </span>
                     <h2 class="m-b-2">Riverhawks vs Huskers</h2>
                     <h4 class="m-t-4 d-flex ">
-                        <i-tabler name="map-pin" class="icon-18 "></i-tabler>
-                        <span >Fairport High School, 33 Union Street, Fairport</span>
+                        <i-tabler name="map-pin" class="icon-18"
+                        style="background-color: rgba(253, 253, 253, 0.1); border-radius: 2px; height: 20px; width: 20px;"></i-tabler>
+                        <span class="p-l-4">Fairport High School, 33 Union Street, Fairport</span>
                     </h4>
                  </div>
               </mat-card>
         </div>      
 </div>
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
         <mat-card class="cardWithShadow">
             <mat-card-header>
               <div class="d-sm-flex w-100">
@@ -79,9 +93,9 @@
               </div>
             </mat-card-header>
             <mat-card-content>
-              <div class="table-responsive m-t-20">
-                <table mat-table class="w-100">
-                  <!-- Position Column -->
+              <div class="table-responsive m-t-20" style="max-height: 300px; overflow-y: auto;">
+                <table mat-table class="w-100" >
+                 
                  <tr>
                     <th>Action</th>
                     <th>Event</th>
@@ -92,46 +106,61 @@
                     <th>Device Type</th>
                     <th>Network</th>
                  </tr>
-                 <tr>
+                 @for(item of datasource; track item){
+                 <tr >
                      <td><button mat-icon-button [matMenuTriggerFor]="menu">
                         <mat-icon>more_vert</mat-icon>
                       </button>
                       <mat-menu #menu="matMenu">
-                        <!-- Edit Team -->
+                     
                         <button mat-menu-item>
                           <mat-icon>pause</mat-icon>
                           <span>Pause</span>
                         </button>
-                        <!-- Create Event -->
+                    
                         <button mat-menu-item style="color: red">
                             <mat-icon style="color: red">block</mat-icon>
                             <span>Block</span>
                           </button>
-                          <!-- Delete Team -->
+                    
                         <button mat-menu-item style="color: red">
                           <mat-icon style="color: red">delete</mat-icon>
                           <span>Remove</span>
                         </button>
                       </mat-menu></td>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                     <td></td>
-                 </tr>
+    
+                     <td>{{item.event}}</td>
+                     <td>{{item.role}}</td>
+                     <td>{{item.userName}}</td>
+                     <td >
+                      <div class="d-flex ">
+                      <i-tabler name="{{item.icon}}" class="icon-20 "></i-tabler>
+                      <span class="p-l-4">{{item.transmitStatus}}</span>
+                    </div></td>
+                     <td>{{item.deviceId}}</td>
+                     <td>{{item.deviceType}}</td>
+                     <td>{{item.network}}</td>
+                 </tr>}
                 </table>
               </div>
             </mat-card-content>
-            <mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              aria-label="Select page">
+            <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
             </mat-paginator>
           </mat-card>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <app-pie-chart></app-pie-chart>
     </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <app-line-chart></app-line-chart>
+  </div>
+  <div class="col-md-4">
+    <app-bar-chart></app-bar-chart>
+  </div>
+  <div class="col-md-4">
+    <app-event-card></app-event-card>
+  </div>
 </div>

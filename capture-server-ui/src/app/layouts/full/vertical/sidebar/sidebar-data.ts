@@ -1,15 +1,15 @@
 import { NavItem } from './nav-item/nav-item';
 
 export const navItems: NavItem[] = [
-  {
-    navCap: 'Home',
-  },
+  // {
+  //   navCap: 'Home',
+  // },
  
-  {
-    displayName: 'Analytical',
-    iconName: 'chart-pie-2',
-    route: '/dashboards/dashboard1',
-  },
+  // {
+  //   displayName: 'Analytical',
+  //   iconName: 'chart-pie-2',
+  //   route: '/dashboards/dashboard1',
+  // },
   // {
   //   displayName: 'eCommerce',
   //   iconName: 'basket',
@@ -26,7 +26,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Dashboard',
     iconName: 'home',
-    route: 'dashboard' 
+    route: 'dashboard/dashboard' 
   },
   {
     displayName: "Events",
