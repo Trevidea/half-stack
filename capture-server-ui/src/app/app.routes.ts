@@ -24,12 +24,23 @@ export const routes: Routes = [
             (m) => m.DashboardsRoutes
           ),
       },
+      {
+         path: 'dashboard',
+         loadChildren: ()=>
+          import('./pages/dashboard/dashboard.routes').then((m)=>m.DashboardRoutes),
+      },
      
       
       {
         path: 'events',
         loadChildren: () => import('./pages/event/event.routes').then(
           (m) => m.EventsRoutes
+        )
+      },
+      {
+        path: 'connections',
+        loadChildren: () => import('./pages/connection/connection.routes').then(
+          (m)=> m.ConnectionRoutes
         )
       },
 
