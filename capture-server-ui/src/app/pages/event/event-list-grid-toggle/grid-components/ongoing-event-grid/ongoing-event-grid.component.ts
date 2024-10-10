@@ -7,11 +7,13 @@ import { CapitalizeFirstPipe } from "../../../../../pipe/capitalize-first-letter
 import { DateTimeFormatPipe } from "../../../../../pipe/date-time-format";
 import { ActionMenuComponent } from "../../../../blocks/action-menu/action-menu.component";
 import { UI } from 'src/app/pages/blocks/ui-interface';
+import { OngoingEventDetailPresenter } from "../../../event-details/components/ongoing-event-detail/ongoing-event-detail.presenter";
+import { UpcomingEventDetailPresenter } from "../../../event-details/components/upcoming-event-detail/upcoming-event-detail.presenter";
 
 @Component({
   selector: 'app-ongoing-event-grid',
   standalone: true,
-  imports: [MaterialModule, TablerIconsModule, CapitalizeFirstPipe, DateTimeFormatPipe, ActionMenuComponent],
+  imports: [MaterialModule, TablerIconsModule, CapitalizeFirstPipe, DateTimeFormatPipe, ActionMenuComponent, OngoingEventDetailPresenter, OffCanvasComponent, UpcomingEventDetailPresenter],
   templateUrl: './ongoing-event-grid.component.html',
   styleUrl: './ongoing-event-grid.component.scss'
 })
@@ -21,12 +23,13 @@ export class OngoingEventGridComponent {
   selectedEventId: number
   IsOpenDetail: boolean = false;
   @Output() onDelete = new EventEmitter();
+  seletctedItem: any;
   constructor(public offCanvasService: OffCanvasService) { }
 
-  viewDetial(id: number) {
-    this.selectedEventId = id
-    this.offCanvas.openOffCanvas();
+  viewDetial(item: any) {
     this.IsOpenDetail = true
+    this.seletctedItem = item;
+    this.offCanvas.openOffCanvas();
     this.offCanvasService.onClose().subscribe(() => {
       this.IsOpenDetail = false;
       console.log('Overlay closed from service');

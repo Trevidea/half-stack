@@ -25,12 +25,9 @@ export class OngoingEventDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get pagedItems() {
-    return this.datasource.eventViewCollection.slice(this.startIndex, this.startIndex + 1);
-  }
-
   close() {
     this.offCanvasService.closeOverlay();
   }
+
 
 }

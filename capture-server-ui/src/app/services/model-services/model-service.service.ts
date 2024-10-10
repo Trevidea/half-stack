@@ -6,6 +6,7 @@ import { first, map, mergeMap, Observable } from "rxjs";
 import { Data } from "../models-interfaces/half-stack-interface";
 import { MetaTypeData } from "../models-interfaces/metatype";
 import { EventData } from "../models-interfaces/event";
+import { PastEventData } from "../models-interfaces/past-event";
 
 
 @Injectable({
@@ -17,6 +18,7 @@ export class ModelService {
 
   constructor(private _httpClient: HttpClient, private _adapter: AdapterService) {
     // this.MetaType = this.MetaType.bind(this)
+    this.saveEvent = this.saveEvent.bind(this);
   }
 
   create(type: string, entity: any): Observable<any> {
@@ -169,7 +171,15 @@ export class ModelService {
 
   //============================================================ All Data Post realated  funtions Below =========================================//
 
+  saveEvent(data: Data.Event): Observable<Data.Event> {
+    console.log(data);
 
+    if (data.id) {
+      return this.update("event", data, data.id)
+    } else {
+      return this.create("event", data)
+    }
+  }
 
 
   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ All Data retrival realated  funtions Below ++++++++++++++++++++++++++++++++++++++++//
@@ -178,6 +188,10 @@ export class ModelService {
   }
   eventJson(id: number): Observable<Data.Event> {
     return this._selectOne("event", id, EventData);
+  }
+
+  getSpecificPastEvent(id: number): Observable<Data.PastEvent> {
+    return this._selectOne('past-event/detail', id, PastEventData)
   }
 
   MetaTypeByKey(key: string): Observable<Data.MetaType> {

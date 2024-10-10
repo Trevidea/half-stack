@@ -26,7 +26,7 @@
                     </button>
                 </li>
                 <li class="d-flex align-items-center p-l-2 p-r-0 ">
-                    <button mat-fab extended class="mat-btn" [routerLink]="'/events/create-event'">
+                    <button mat-fab extended class="mat-btn" [routerLink]="'/events/create/on-demand-event'">
                         <mat-icon>add_circle</mat-icon>Create On-Demand Event</button>
                 </li>
             </ul>
@@ -58,7 +58,7 @@
                 @case ('past') {
                 @if (!datasource.gridView) {
                 <app-past-event-list [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)"
-                (onDelete)="openDeleteDialog($event)">
+                    (onDelete)="openDeleteDialog($event)">
                 </app-past-event-list>
                 } @else {
                 <app-past-event-grid [datasource]="datasource.eventView.Filtered.slice(startIndex,endIndex)"

@@ -1,5 +1,7 @@
 import { Routes } from "@angular/router";
 import { EventListGridTogglePresenter } from "./event-list-grid-toggle/events-list-grid-toggle.presenter";
+import { OnDemandEventFormPresenter } from "./event-form/on-demand-event-form/on-demand-event-form.presenter";
+import { PastEventDetailPresenter } from "./event-details/components/past-event-detail/past-event-detail.presenter";
 
 export const EventsRoutes: Routes = [
     {
@@ -11,6 +13,9 @@ export const EventsRoutes: Routes = [
                 pathMatch: 'full',
             },
             { path: 'events-list', component: EventListGridTogglePresenter },
+            { path: 'create/on-demand-event', component: OnDemandEventFormPresenter },
+            { path: 'edit/on-demand-event/:id', component: OnDemandEventFormPresenter },
+            { path: 'past-event-details/:id', component: PastEventDetailPresenter },
         ]
     }
 ]

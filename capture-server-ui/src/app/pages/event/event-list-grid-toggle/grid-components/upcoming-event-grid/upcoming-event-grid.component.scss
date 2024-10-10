@@ -1,4 +1,12 @@
 @import'../grid-view.scss';
+.text-container {
+    padding-left: 10px;
+    background-color: #FEF6E7;
+
+    p {
+        margin: 0;
+    }
+}
 
 .mat-mdc-raised-button {
     padding: 4px 8px;

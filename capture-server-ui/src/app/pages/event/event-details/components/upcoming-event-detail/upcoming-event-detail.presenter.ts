@@ -4,12 +4,11 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MaterialModule } from 'src/app/material.module';
 import { UpcomingEventDetailComponent } from './upcoming-event-detail.component';
-import { EventDetailView } from '../views/event-detail';
 import { ModelService } from 'src/app/services/model-services/model-service.service';
 import { Transformer } from 'src/app/blocks/transformer';
-import { EventDetailsBuilder } from '../builders/event-detail';
 import { UI } from 'src/app/pages/blocks/ui-interface';
-import { SelectItemView } from 'src/app/blocks/collection-item';
+import { EventDetailView } from '../../views/event-detail';
+import { EventDetailsBuilder } from '../../builders/event-detail';
 
 @Component({
   selector: 'app-upcoming-event-detail-presenter',
@@ -37,7 +36,9 @@ export class UpcomingEventDetailPresenter {
 
   ngOnInit(): void {
     if (this.eventId) {
+
       Transformer.ComposeObjectAsync(this.modelService.eventJson(this.eventId), this.ds, EventDetailsBuilder)
+      
     }
   }
 

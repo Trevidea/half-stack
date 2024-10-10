@@ -92,15 +92,33 @@ export namespace Data {
   }
   export interface Venue {
     location: string;
-    type: string;
     street_address: string;
     city_address: string;
   }
-  export interface Detail extends Base {
 
+  export interface PastEvent extends Base {
+    id: number;
+    title: string;
+    sport: string;
+    level: string;
+    program: string;
+    year: number;
+    dt_event: string;
+    tm_event: number;
+    venue: Venue;
+    detail: Detail;
+    status: string;
+    type: string;
+    video_duration: string;
+    shared_with: string;
+    connected_streaming_devices: ConnectedStreamingDevices[];
   }
 
-
+  export interface ConnectedStreamingDevices {
+    id: number;
+    stream_name: string
+    direction: number
+  }
 
 }
 

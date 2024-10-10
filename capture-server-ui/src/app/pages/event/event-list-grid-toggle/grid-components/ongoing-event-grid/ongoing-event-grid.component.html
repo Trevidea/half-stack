@@ -23,7 +23,7 @@
                         {{item.sport | capitalizeFirst}}
                     </div>
                 </div>
-                <button mat-raised-button color="primary" (click)="viewDetial(item.id)">View</button>
+                <button mat-raised-button color="primary" (click)="viewDetial(item)">View</button>
             </div>
             <span class=" f-s-16 f-w-600 m-b-8 d-flex align-items-center ellipsis">
                 {{item.title}}
@@ -44,9 +44,10 @@
     }
 </div>
 
-<!-- 
+
 <app-off-canvas #offCanvas>
     @if(IsOpenDetail){
-    <app-ongoing-event-detail-presenter [selectedEventId]="selectedEventId"></app-ongoing-event-detail-presenter>
+    <app-upcoming-event-detail-presenter [eventId]="seletctedItem.id"
+        [dropdownItems]="dropdownItems(seletctedItem)"></app-upcoming-event-detail-presenter>
     }
-</app-off-canvas> -->
+</app-off-canvas>

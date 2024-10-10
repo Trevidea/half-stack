@@ -6,43 +6,42 @@ import { MatMenuModule } from '@angular/material/menu';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { DateTimeFormatPipe } from 'src/app/pipe/date-time-format';
 import { OffCanvasComponent } from 'src/app/pages/blocks/off-canvas/off-canvas.component';
-import { OffCanvasService } from 'src/app/pages/blocks/off-canvas/off-canvas.service';
 import { UI } from 'src/app/pages/blocks/ui-interface';
 import { ActionMenuComponent } from "../../../../blocks/action-menu/action-menu.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-past-event-grid',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, OffCanvasComponent, TablerIconsModule, MatMenuModule, MatIconModule, DateTimeFormatPipe, ActionMenuComponent],
+  imports: [MatCardModule, MatButtonModule, TablerIconsModule, MatMenuModule, MatIconModule, DateTimeFormatPipe, ActionMenuComponent],
   templateUrl: './past-event-grid.component.html',
   styleUrl: './past-event-grid.component.scss'
 })
 export class PastEventGridComponent {
   @Output() onDelete = new EventEmitter();
-  @ViewChild(OffCanvasComponent) offCanvas: OffCanvasComponent;
   @Input() datasource: any
-  selectedEventId: number
-  IsOpenDetail: boolean = false;
 
-  constructor(public offCanvasService: OffCanvasService) { }
+
+  constructor(private router: Router) { }
 
   viewDetial(id: number) {
-    this.selectedEventId = id
-    this.offCanvas.openOffCanvas();
-    this.IsOpenDetail = true
-    this.offCanvasService.onClose().subscribe(() => {
-      this.IsOpenDetail = false;
-      console.log('Overlay closed from service');
-    });
+    this.router.navigate([`events/past-event-details/${id}`])
   }
+
   dropdownItems(item: any): UI.DropDownMenuItem[] {
     return [
+      { label: "Edit {t}", icon: "edit", action: () => this.editOnDemandEvent(item.id) },
+      { label: "Share Event", icon: "share", action: () => { } },
       {
-        label: "Delete event",
-        icon: "delete",
-        color: "#de2e21",
-        action: () => this.onDelete.emit(item),
+        label: "Upload to server",
+        icon: "cloud_download",
+        action: () => { },
       },
+      { label: "Remove Event", icon: "delete", color: "#de2e21", action: () => this.onDelete.emit(item) },
     ];
+  }
+
+  editOnDemandEvent(id: number) {
+    this.router.navigate([`events/edit/on-demand-event/${id}`]);
   }
 }
