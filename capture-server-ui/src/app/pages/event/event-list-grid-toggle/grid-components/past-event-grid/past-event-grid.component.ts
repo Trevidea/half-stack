@@ -9,11 +9,12 @@ import { OffCanvasComponent } from 'src/app/pages/blocks/off-canvas/off-canvas.c
 import { UI } from 'src/app/pages/blocks/ui-interface';
 import { ActionMenuComponent } from "../../../../blocks/action-menu/action-menu.component";
 import { Router } from '@angular/router';
+import { CapitalizeFirstPipe } from "../../../../../pipe/capitalize-first-letter";
 
 @Component({
   selector: 'app-past-event-grid',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, TablerIconsModule, MatMenuModule, MatIconModule, DateTimeFormatPipe, ActionMenuComponent],
+  imports: [MatCardModule, MatButtonModule, TablerIconsModule, MatMenuModule, MatIconModule, DateTimeFormatPipe, ActionMenuComponent, CapitalizeFirstPipe],
   templateUrl: './past-event-grid.component.html',
   styleUrl: './past-event-grid.component.scss'
 })

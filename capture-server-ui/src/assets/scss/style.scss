@@ -107,7 +107,11 @@
 }
 
 
-.bordered-card {
-  border: 1px solid var(--card-border-color) !important;
-  --color-dyanamic: #fff;
+
+
+.info-badge {
+  background-color: #8FAB0766;
+  padding: 3px 8px;
+  border-radius: 8px;
+  color: #0F0F0F;
 }

@@ -73,5 +73,7 @@ export class UpcomingEventGridComponent {
     ];
   }
 
-
+  onClickPreview(eventId: number) {
+    this.router.navigate([`/events/preview/${eventId}`]);
+  }
 }

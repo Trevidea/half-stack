@@ -1,0 +1,37 @@
+<div class="card-header">
+    <h4 class="card-title mb-0">Active Devices</h4>
+    <button type="button" class="btn btn-warning mt-0">Add device to
+        event</button>
+</div>
+<div class="card-body p-0 activeDevice">
+    <div class="table-responsive">
+        <table class="table" style="min-width: max-content;">
+            <thead>
+                <tr style="text-transform: uppercase;">
+                    <th>Name</th>
+                    <th>Device ID</th>
+                    <th>Device Type</th>
+                    <th>Status</th>
+                    <th>Location</th>
+                    <th>Network</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of datasource;" [ngClass]="{'cursor-pointer': item?.direction == 1}">
+                    <td>{{item?.name}}</td>
+                    <td>{{item?.activeDeviceId}}</td>
+                    <td>{{item?.deviceType}}</td>
+                    <td>{{item?.status}}</td>
+                    <td>{{item?.location}}</td>
+                    <td>{{item?.network}}</td>
+                    <td><button type="button" class="btn btn-icon btn-danger" rippleEffect>
+                            <span></span></button>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

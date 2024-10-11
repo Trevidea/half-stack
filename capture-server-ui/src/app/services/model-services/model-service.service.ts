@@ -22,9 +22,7 @@ export class ModelService {
   }
 
   create(type: string, entity: any): Observable<any> {
-    console.log(type)
     const url = `${this.modelsServerUrl}/${type}`
-    console.log(entity)
     return this._adapter.modulateOne(type, entity).pipe(mergeMap(modata => {
       console.log(modata)
       return this._httpClient.post<any>(url, modata);
@@ -181,7 +179,10 @@ export class ModelService {
     }
   }
 
-
+  openPreview(data: { eventId: number }): Observable<any> {
+    const url = `${this.modelsServerUrl}/event/open-preview`;
+    return this._httpClient.post<any>(url, data);
+  }
   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ All Data retrival realated  funtions Below ++++++++++++++++++++++++++++++++++++++++//
   eventList(): Observable<Data.Event[]> {
     return this._data("events", EventData);

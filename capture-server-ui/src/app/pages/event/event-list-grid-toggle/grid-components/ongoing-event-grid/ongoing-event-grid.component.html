@@ -15,19 +15,19 @@
         </div>
         <mat-card-content class="card-body">
             <div class="w-100 d-flex align-items-center justify-content-between m-b-8 m-t-8">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div class="badge-text">
-                        {{item.type | capitalizeFirst}}
-                    </div>
-                    <div class="badge-text m-l-6">
-                        {{item.sport | capitalizeFirst}}
-                    </div>
+                <div class="info-badge">
+                    {{item.type | capitalizeFirst}}
                 </div>
-                <button mat-raised-button color="primary" (click)="viewDetial(item)">View</button>
+                <button mat-button color="primary" (click)="viewDetial(item)">Details</button>
             </div>
             <span class=" f-s-16 f-w-600 m-b-8 d-flex align-items-center ellipsis">
                 {{item.title}}
             </span>
+            <div class="d-flex align-items-center m-b-8">
+                <span class=" f-s-14 d-flex align-items-top">
+                    <i-tabler name="trophy" class="icon-18 m-r-4 flex-shrink-0"></i-tabler> {{item.sport |
+                    capitalizeFirst}}</span>
+            </div>
             <div class="d-flex align-items-center m-b-8">
                 <span class=" f-s-14 d-flex align-items-center">
                     <i-tabler name="clock-hour-5" class="icon-18 m-r-4"></i-tabler>{{ item.dtEvent |

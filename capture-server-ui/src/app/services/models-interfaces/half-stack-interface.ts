@@ -120,6 +120,29 @@ export namespace Data {
     direction: number
   }
 
+  export interface Preview extends Base {
+    dtEvent: string;
+    level: string;
+    program: string;
+    sport: string;
+    status: string;
+    title: string;
+    detail: Detail;
+    year: number;
+    venue: Venue;
+    time: number;
+    type: string;
+    activeDevice: ActiveDevice[];
+  }
+
+  export interface ActiveDevice {
+    name: string;
+    location: string;
+    deviceId: string;
+    deviceType: string;
+    status: string;
+    network: string;
+  }
 }
 
 
