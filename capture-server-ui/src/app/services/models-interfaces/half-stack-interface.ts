@@ -143,6 +143,27 @@ export namespace Data {
     status: string;
     network: string;
   }
+
+  export interface AddDeviceToEvent extends Base {
+    id: number;
+    user_id: number;
+    device_id: number;
+    pin: string;
+    event_id: number;
+    location: string;
+    stream_name: string;
+    stream_id: string;
+    app_name: string;
+    direction: number;
+  }
+
+  export interface Device extends Base {
+    id: number;
+    type: string;
+    name: string;
+    code: string;
+    pin: string;
+  }
 }
 
 
