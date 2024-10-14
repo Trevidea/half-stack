@@ -1,0 +1,84 @@
+<mat-card>
+    <div class="table-responsive">
+        <table>
+          <tr>
+              <th class="p-l-20">
+              <div class="d-flex">
+                <span class=" f-w-500" text-align="center">NAME OF FILE</span>
+                <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler>
+              </div> 
+              </th>
+              <th >
+                <div class="d-flex"><span class=" f-w-500" text-align="center">TYPE OF FILE</span>
+              </div> </th>
+              <th>
+                <div class="d-flex">
+                  <span class=" f-w-500" text-align="center">STORAGE</span>
+                  <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler></div> </th>
+              <th>
+                <div class="d-flex">
+                  <span class=" f-w-500" text-align="center">SHARED WITH</span>
+                  <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler></div> </th>
+              <th>
+                <div class="d-flex"><span class=" f-w-500" text-align="center">SHARED ON</span> 
+                  <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler></div> </th>
+          </tr>
+          <tr>
+              <td class="p-l-20">VS Football Practice</td>
+              <td>ZIP</td>
+              <td>210 MB</td>
+              <td>
+                <div class="avatar-group d-flex">
+                    <div
+                      class="avatar"
+                    >
+                      <img src="assets/images/half-stack-images/boy.jpg" alt="Avatar" width="33" height="33" />
+                    </div>
+                    <div
+                      class="avatar"
+                    >
+                      <img src="assets/images/half-stack-images/boy.jpg" alt="Avatar" width="33" height="33" />
+                    </div>
+                    <div
+                      class="avatar"
+                    >
+                      <img src="assets/images/half-stack-images/boy.jpg" alt="Avatar" width="33" height="33" />
+                    </div>
+                  </div>
+              </td>
+              <td>19 May 2022</td>
+          </tr>
+
+          <tr>
+            <td class="p-l-20">VS Football Practice</td>
+            <td>TAR</td>
+            <td>1.5 GB</td>
+            <td>
+              <div class="avatar-group d-flex">
+                  <div
+                    class="avatar"
+                  >
+                    <img src="assets/images/half-stack-images/boy.jpg" alt="Avatar" width="33" height="33" />
+                  </div>
+                  <div
+                    class="avatar"
+                  >
+                    <img src="assets/images/half-stack-images/boy.jpg" alt="Avatar" width="33" height="33" />
+                  </div>
+                  <div
+                    class="avatar"
+                  >
+                    <img src="assets/images/half-stack-images/boy.jpg" alt="Avatar" width="33" height="33" />
+                  </div>
+                </div>
+            </td>
+            <td>19 May 2022</td>
+        </tr>
+        </table>
+      </div>
+      <mat-paginator [length]="50"
+        [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+      aria-label="Select page">
+    </mat-paginator>
+</mat-card>

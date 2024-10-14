@@ -36,8 +36,17 @@ export const navItems: NavItem[] = [
   {
     displayName: "Connection",
     iconName: 'link',
-    route: 'connections/previous-event-connection'
+    route: 'connections/connection'
   },
+  {
+    displayName: "Logs",
+    iconName: 'timeline',
+    route: 'logs/logs-list'
+  },{
+    displayName: "Shared",
+    iconName: 'share',
+    route: 'share/share-list'
+  }
   // {
   //   navCap: 'Apps',
   // },

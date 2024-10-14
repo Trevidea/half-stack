@@ -100,6 +100,44 @@ export namespace Data {
 
   }
 
+  export interface Log extends Base {
+    category: string;
+    subject: string;
+    user: string;
+    action: string;
+    timestamp: string;
+    details: any[];
+    lapse: string;
+    level: string;
+    message: string;
+    tid: string;
+  }
+
+  export interface PreviousEventsConnection extends Base {
+    eventName: string;
+    date: string;
+    total_connections: string;
+    duration: string;
+    most_connected_device: string;
+  }
+  
+  export interface Connection extends Base {
+    id: number;
+    userId: number;
+    networkQuality: NetWorkQuality;
+    ipAdd: string;
+    isDisabled: boolean;
+    type: Type;
+    dttConnected: string;
+    priority: Priority;
+    location: string;
+  }
+
+  export enum NetWorkQuality { }
+
+  export enum Priority { }
+
+  export enum Type { }
 
 
 }

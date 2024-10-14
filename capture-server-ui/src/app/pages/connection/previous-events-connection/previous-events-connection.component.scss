@@ -1,5 +1,6 @@
 
 table {
+    border-collapse: collapse;
     width: 100%;
 }
 
@@ -20,4 +21,20 @@ th {
 
 select{
     border-radius: 10px;
+}
+
+.keys1{
+    background-color:rgba(233, 240, 245, 1);
+    color: #3a3a3a;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 6px 10px;
+}
+
+.keys2{
+    background-color:rgba(254, 246, 231, 1);
+    color: #3a3a3a;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 6px 10px;
 }
