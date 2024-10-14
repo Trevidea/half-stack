@@ -1,0 +1,7 @@
+@if (isEventStarted) {
+<router-outlet></router-outlet>
+} @else {
+<app-previous-events-connection-presenter
+  (startEvent)="_isEventStarted($event)"
+></app-previous-events-connection-presenter>
+}

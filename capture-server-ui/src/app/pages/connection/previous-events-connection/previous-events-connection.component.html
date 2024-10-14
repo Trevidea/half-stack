@@ -1,10 +1,11 @@
 <mat-card>
     <div class="row p-1 d-flex align-items-center">
-      <h3 class="col-8 p-l-30">Previous Events Connection</h3>
+      <h2 class="col-8 p-l-30">Previous Events Connection</h2>
       <div class="col-4 p-t-10 p-r-30 d-flex justify-content-end">
-                <select class="p-t-8 p-b-8 p-l-30 p-r-10 ">    
+                <!-- <select class="p-t-8 p-b-8 p-l-30 p-r-10 ">    
                     <option>All</option>
-                </select> 
+                </select>  -->
+                <button mat-raised-button color="primary" (click)="start.emit()">Start live event</button>
       </div>
     </div>
 
@@ -12,25 +13,45 @@
   
     <div class="table-responsive">
       <table>
-        <tr class="d-flex justify-content-between">
-            <th class="f-w-200"> <span text-align="center">NAME OF EVENT</span>
-             <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler> </th>
-            <th class="f-w-200"><span text-align="center">DATE</span>
-                <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler> </th>
-            <th class="f-w-200"><span text-align="center">TOTAL CONNECTION</span>
-                <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler> </th>
-            <th class="f-w-200"><span text-align="center">DURATION</span> 
-                <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler> </th>
-            <th class="f-w-200"><span text-align="center">PRIMARY DEVICE</span></th>
-        </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <th class="p-l-20">
+            <div class="d-flex">
+              <span class=" f-s-15 f-w-500" text-align="center">Name of Event</span>
+              <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler>
+            </div> 
+            </th>
+            <th class="f-w-200">
+              <div class="d-flex"><span class=" f-s-15 f-w-500" text-align="center">Date</span>
+                <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler></div> </th>
+            <th class="f-w-200">
+              <div class="d-flex">
+                <span class=" f-s-15 f-w-500" text-align="center">Total Connection</span>
+                <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler></div> </th>
+            <th class="f-w-200">
+              <div class="d-flex"><span class="f-s-15 f-w-500" text-align="center">Duration</span> 
+                <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler></div> </th>
+            <th class="f-w-200">
+              <div class="d-flex"><span class="f-s-15 f-w-500" text-align="center">Primary Device</span>
+              </div></th>
+        </tr>
+        <tr class="p-t-10" >
+            <td class="p-l-20">McQuaid vs FF</td>
+            <td>25 May 2022</td>
+            <td>16</td>
+            <td>02:00:00</td>
+            <td>
+              <div >
+                <span class="keys1 m-r-8">Coach Steven &nbsp; iPad22</span>
+                 <span class="keys2 m-l-8">Harry &nbsp; cc18</span>
+              </div>
+            </td>
         </tr>
       </table>
+      <mat-paginator [length]="50"
+        [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+      aria-label="Select page">
+    </mat-paginator>
     </div>
   </mat-card>
   

@@ -9,7 +9,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/dashboards/dashboard1',
+        redirectTo: '/dashboard/dashboard',
         pathMatch: 'full',
       },
       {
@@ -42,6 +42,18 @@ export const routes: Routes = [
         loadChildren: () => import('./pages/connection/connection.routes').then(
           (m)=> m.ConnectionRoutes
         )
+      },
+      {
+         path: 'logs',
+         loadChildren: ()=> import('./pages/logs/log.routes').then(
+          (m)=> m.LogsRoutes
+        )
+      },
+      {
+        path: 'share',
+        loadChildren: ()=> import('./pages/shared/shared.routes').then(
+          (m)=> m.SharedRoutes)
+
       },
 
 
