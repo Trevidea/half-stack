@@ -13,7 +13,7 @@ import { UI } from 'src/app/pages/blocks/ui-interface';
 import { ActionMenuComponent } from 'src/app/pages/blocks/action-menu/action-menu.component';
 import { CapitalizeFirstPipe } from "../../../../../pipe/capitalize-first-letter";
 import { CommonModule } from '@angular/common';
-import { UpcomingEventDetailPresenter } from "../../../event-details/upcoming-event-detail/upcoming-event-detail.presenter";
+import { UpcomingEventDetailPresenter } from "../../../event-details/components/upcoming-event-detail/upcoming-event-detail.presenter";
 
 @Component({
   selector: 'app-upcoming-event-grid',
@@ -43,7 +43,7 @@ export class UpcomingEventGridComponent {
 
 
   edit(id: number) {
-    this.router.navigate([`events/edit-event/${id}`]);
+    this.router.navigate([`events/edit/on-demand-event/${id}`]);
   }
 
   dropdownItems(item: any): UI.DropDownMenuItem[] {
@@ -73,5 +73,7 @@ export class UpcomingEventGridComponent {
     ];
   }
 
-
+  onClickPreview(eventId: number) {
+    this.router.navigate([`/events/preview/${eventId}`]);
+  }
 }

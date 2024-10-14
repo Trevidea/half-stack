@@ -1,0 +1,60 @@
+<mat-card>
+    <mat-card-content class="p-0">
+        <div class="row g-0">
+            <div class="col-lg-4 col-md-12 col-12  highlight-box d-flex flex-column">
+                <div class="d-flex align-items-center">
+                    <span class="bullet bullet-sm bullet-success" style="margin-right: 5px;"></span>
+                    <p>Open for device connection</p>
+                </div>
+                <div class="time-countdown-box m-b-16">
+                    <div class="time-box">
+                        <p class="small m-b-0">Event Start in:</p>
+                        <h2 class=" m-0 large">
+                            {{datasource?.countdown}}
+                        </h2>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center m-b-8 p-1">
+                    <div class="avatar avatar-xl">
+                        <img src="./assets/images/half-stack-images/mcquaid_blackgold.png" alt="avatar" />
+                    </div>
+
+                    <div class="m-l-8">
+                        <h4 class="m-b-0">{{datasource?.title}}</h4>
+                        <p class="small m-0">{{datasource?.type}}</p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center m-b-8 p-1">
+                    <div class="event-info">
+                        <div class="header">
+                            <h3 class="m-0">Event details</h3>
+                        </div>
+                        <div class="content-body">
+                            <div class="w-100 d-flex align-items-top mat-body-1 m-b-8 ">
+                                <i-tabler name="clock" class="icon-18 flex-shrink-0"></i-tabler>
+                                <p class="m-0">{{ datasource?.dtEvent |
+                                    dateTimeFormat:datasource?.time }}
+                                    {{datasource?.level}}
+                                </p>
+
+                            </div>
+                            <div class="w-100 d-flex align-items-top mat-body-1">
+                                <i-tabler name="map-pin" class="icon-18 flex-shrink-0"></i-tabler>
+                                <p class="m-0">
+                                    {{datasource?.venue?.location}},{{datasource?.venue?.streetAddress}}
+                                    {{datasource?.venue?.cityAddress}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-12 col-12 p-0">
+
+                <app-active-devices [eventId]="eventId"
+                    [datasource]="datasource?.previewActiveDevice"></app-active-devices>
+
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

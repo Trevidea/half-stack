@@ -11,13 +11,14 @@ import { Router } from '@angular/router';
 import { UI } from 'src/app/pages/blocks/ui-interface';
 import { ActionMenuComponent } from 'src/app/pages/blocks/action-menu/action-menu.component';
 import { CapitalizeFirstPipe } from "../../../../../pipe/capitalize-first-letter";
+import { UpcomingEventDetailPresenter } from "../../../event-details/components/upcoming-event-detail/upcoming-event-detail.presenter";
 
 @Component({
   selector: 'app-upcoming-event-list',
   standalone: true,
   templateUrl: './upcoming-event-list.component.html',
   styleUrl: './upcoming-event-list.component.scss',
-  imports: [MatIconModule, OffCanvasComponent, ActionMenuComponent, MatToolbarModule, MatButtonModule, CommonModule, MatMenuModule, MatTableModule, CapitalizeFirstPipe]
+  imports: [MatIconModule, OffCanvasComponent, ActionMenuComponent, MatToolbarModule, MatButtonModule, CommonModule, MatMenuModule, MatTableModule, CapitalizeFirstPipe, UpcomingEventDetailPresenter]
 })
 export class UpcomingEventListComponent {
   @Input() datasource: any;
@@ -26,8 +27,6 @@ export class UpcomingEventListComponent {
   @ViewChild(OffCanvasComponent) offCanvas!: OffCanvasComponent;
   seletctedItem: any;
   constructor(public offCanvasService: OffCanvasService, private router: Router) { }
-
-
 
   IsOpenDetail: boolean = false;
 

@@ -1,0 +1,51 @@
+.highlight-box {
+    background-color: #8FAB070D;
+    overflow: hidden;
+    padding-inline-start: 2rem;
+    padding-right: 10px;
+}
+
+.bullet {
+    width: 0.714rem;
+    height: 0.714rem;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.bullet.bullet-success {
+    background-color: #28c76f;
+}
+
+.time-countdown-box {
+    font-size: 16px;
+    width: 100%;
+    padding-right: 10px;
+
+    .time-box {
+        border-radius: 12px;
+        background-color: #8FAB0733;
+        padding: 14px;
+    }
+
+    .large {
+        font-family: 'Outfit';
+        font-size: 24px;
+        font-weight: 400;
+        text-align: left;
+        margin-bottom: 0;
+    }
+}
+
+.avatar.avatar-xl img {
+    width: 70px;
+    height: 70px;
+}
+
+.avatar img {
+    border-radius: 50%;
+}
+
+.event-info {
+    border-top: 1px solid var(--border-color-dynamic);
+    border-bottom: 1px solid var(--border-color-dynamic);
+}

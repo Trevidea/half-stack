@@ -92,12 +92,26 @@ export namespace Data {
   }
   export interface Venue {
     location: string;
-    type: string;
     street_address: string;
     city_address: string;
   }
-  export interface Detail extends Base {
 
+  export interface PastEvent extends Base {
+    id: number;
+    title: string;
+    sport: string;
+    level: string;
+    program: string;
+    year: number;
+    dt_event: string;
+    tm_event: number;
+    venue: Venue;
+    detail: Detail;
+    status: string;
+    type: string;
+    video_duration: string;
+    shared_with: string;
+    connected_streaming_devices: ConnectedStreamingDevices[];
   }
 
   export interface Log extends Base {
@@ -138,8 +152,35 @@ export namespace Data {
   export enum Priority { }
 
   export enum Type { }
+  export interface ConnectedStreamingDevices {
+    id: number;
+    stream_name: string
+    direction: number
+  }
 
+  export interface Preview extends Base {
+    dtEvent: string;
+    level: string;
+    program: string;
+    sport: string;
+    status: string;
+    title: string;
+    detail: Detail;
+    year: number;
+    venue: Venue;
+    time: number;
+    type: string;
+    activeDevice: ActiveDevice[];
+  }
 
+  export interface ActiveDevice {
+    name: string;
+    location: string;
+    deviceId: string;
+    deviceType: string;
+    status: string;
+    network: string;
+  }
 }
 
 

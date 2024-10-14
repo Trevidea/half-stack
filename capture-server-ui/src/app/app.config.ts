@@ -80,7 +80,9 @@ export const appConfig: ApplicationConfig = {
         },
       }),
 
-      InMemoryWebApiModule.forRoot(DummyDataService, { delay: 1000, passThruUnknownUrl: true })
+      InMemoryWebApiModule.forRoot(DummyDataService, { delay: 1000, passThruUnknownUrl: true })),
+    provideRouter(routes, withComponentInputBinding(),
     ),
+
   ],
 };

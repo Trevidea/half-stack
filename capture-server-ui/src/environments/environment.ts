@@ -6,7 +6,9 @@ export const environment = {
   production: false,
   hmr: false,
   apiUrl: 'http://localhost:4000',
-  cpServerBaseUrl: 'http://drake.in:1437/api'
+  cpServerBaseUrl: 'http://drake.in:1437/api',
+  hlsUrl: "http://drake.in:59919", //for play Dump m3u8
+  spRelayUrl: "http://drake.in:3001", //for web socket 
 };
 
 /*

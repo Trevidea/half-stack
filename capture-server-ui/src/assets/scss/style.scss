@@ -76,11 +76,42 @@
 
 :root {
   --border-color-dynamic: #c3c3c3;
+  --bg-color-chip: rgba(233, 240, 245, 1);
+  --card-border-color: #FDFDFD;
+  --dark-light-background: #fff;
+  --color-dyanamic: initial;
   --color-dyanamic: #434343;
 }
 
 .dark-theme {
+
+  --color-dyanamic: #fff;
+  --dark-light-background: #232323;
+  --card-border-color: none;
   --dark-background: #232323;
   --border-color-dynamic: #444444;
-  --color-dyanamic: #fff;
+  --bg-color-chip: rgba(26, 151, 245, 0.2);
+
+  mat-icon-button {
+    color: var(--color-dyanamic) !important;
+  }
+
+  mat-icon {
+    color: var(--color-dyanamic) !important;
+  }
+
+  .mat-toolbar .mat-mdc-button-base.mat-mdc-button-base.mat-unthemed {
+    --mdc-text-button-label-text-color: #fff !important;
+    --mdc-outlined-button-label-text-color: #fff !important;
+  }
+}
+
+
+
+
+.info-badge {
+  background-color: #8FAB0766;
+  padding: 3px 8px;
+  border-radius: 8px;
+  color: #0F0F0F;
 }

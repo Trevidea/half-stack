@@ -5,27 +5,32 @@
             <img class="left img-fluid" src="./assets/images/half-stack-images/mcquaid_blackgold.png" />
             <img class="right img-fluid" src="./assets/images/half-stack-images/aq-logo.png" />
         </div>
-        <div class="card-overlay  d-flex align-items-top">
+        <div class="card-overlay">
+            <div class="w-100 text-container">
+                <p> In progress in 01:20:03</p>
+            </div>
             <div class="w-100  d-flex align-items-center justify-content-end">
                 <app-action-menu [dropdownItems]="dropdownItems(item)"></app-action-menu>
             </div>
         </div>
         <mat-card-content class="card-body ">
             <div class="w-100 d-flex align-items-center justify-content-between m-b-8">
-                <div class="d-flex align-items-center">
-                    <div class="badge-text">
-                        {{item.type | capitalizeFirst}}
-                    </div>
-                    <div class="badge-text m-l-6">
-                        {{item.sport | capitalizeFirst}}
-                    </div>
+                <div class="info-badge">
+                    {{item.type | capitalizeFirst}}
                 </div>
-                <button mat-raised-button color="primary" (click)="viewDetial(item)">View</button>
+                <div>
+                    <button mat-button color="primary" class="m-r-8" (click)="viewDetial(item)">Details</button>
+                    <button mat-raised-button color="accent" (click)="onClickPreview(item.id)">Preview</button>
+                </div>
             </div>
             <span class=" f-s-16 f-w-600 m-b-8 d-flex align-items-center text-ellipsis">
                 <span class="text-truncate">{{item.title}}</span>
-
             </span>
+            <div class="d-flex align-items-center m-b-8">
+                <span class=" f-s-14 d-flex align-items-top">
+                    <i-tabler name="trophy" class="icon-18 m-r-4 flex-shrink-0"></i-tabler> {{item.sport |
+                    capitalizeFirst}}</span>
+            </div>
             <div class="d-flex align-items-center m-b-8">
                 <span class=" f-s-14 d-flex align-items-top">
                     <i-tabler name="clock-hour-5" class="icon-18 m-r-4 flex-shrink-0"></i-tabler>{{ item.dtEvent |
