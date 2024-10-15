@@ -28,46 +28,14 @@ export namespace Data {
   }
   export interface UserProfile extends Base {
     id: number;
-    first_name: string;
-    last_name: string;
+    firstname: string;
+    lastname: string;
     email: string;
     phone: string;
     role: string;
     address: string;
-    dob: number;
-    gender: string;
-    notifications: Notifications;
-  }
-  export interface Notifications extends Base {
-
-    relatedToEvents: string;
-    reminders: string;
-    pushNotifications: string;
-    vibrations: string;
   }
 
-
-  export interface Coach extends Base {
-    id: number;
-    sport: string;
-    title: string;
-    program: string;
-    year: string;
-    first_name: string;
-    last_name: string;
-    mobile: string;
-    email: string;
-    social_links: SocialLinks;
-    picture: string;
-    bio: string;
-    stats: string;
-  }
-  export interface SocialLinks {
-    instagram?: string;
-    youtube?: string;
-    twitter?: string;
-    facebook?: string;
-  }
 
   export interface Event extends Base {
     sport?: string;

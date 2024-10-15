@@ -10,7 +10,7 @@ import { ModelService } from 'src/app/services/model-services/model-service.serv
   selector: 'app-event-preview-presenter',
   standalone: true,
   imports: [EventPreviewComponent],
-  template: `<app-event-preview [datasource]="ds"><app-event-preview>`,
+  template: `<app-event-preview [datasource]="ds" [eventId]="eventId"><app-event-preview>`,
   styleUrl: './event-preview.component.scss'
 })
 export class EventPreviewPresenter implements OnInit {
