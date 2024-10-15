@@ -7,6 +7,7 @@ import { Data } from "../models-interfaces/half-stack-interface";
 import { MetaTypeData } from "../models-interfaces/metatype";
 import { EventData } from "../models-interfaces/event";
 import { PastEventData } from "../models-interfaces/past-event";
+import { PreviousEventsConnectionData } from "../models-interfaces/previous-events-connection";
 
 
 @Injectable({
@@ -201,6 +202,10 @@ export class ModelService {
 
   EventYear() {
     return ["2024", "2023", "2022", "2021", "2020"];
+  }
+
+  PreviousConnection(): Observable<Data.PreviousEventsConnection[]> {
+    return this._data("connections", PreviousEventsConnectionData);
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -20,4 +20,6 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 })
 export class PreviousEventsConnectionComponent {
   @Output() start = new EventEmitter();
+  @Input() datasource: any;
+
 }

@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     gap: 1rem;
+    
   
     .grid-card {
       position: relative;
@@ -45,3 +46,21 @@
         right: -46px;
       }
     }}
+
+    .status-good, .status-receiving {
+        display: flex;
+        align-items: center;
+      }
+      
+      .status-good mat-icon, .status-receiving mat-icon {
+        font-size: 12px;
+        margin-right: 4px;
+        color: green; /* Status colors */
+      }
+      
+      .status-receiving mat-icon {
+        color: #2196f3; /* Custom color for receiving */
+      }
+
+
+      

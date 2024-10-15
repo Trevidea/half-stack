@@ -27,6 +27,11 @@
              </div> 
          </th>
          <th>
+          <div class="d-flex">
+            <span class=" f-w-500" text-align="center">Device Type</span>
+          </div>
+         </th>
+         <th>
             <div class="d-flex">
                 <span class=" f-w-500" text-align="center">Network</span>
               </div> 
@@ -54,32 +59,44 @@
        </tr>
       
        <tr>
-         <td>Event</td>
-         <td>Create Event</td>
          <td>
-            <div class="d-flex align-items-center">
-                <div class="image-container">
-                 
-                  <img src='assets/images/half-stack-images/boy.jpg' class="image-fit" />
-                  
-               
-                  <!-- <div class="initials">
-                    <h1 class="m-0"></h1>
-                  </div> -->
-             
-                </div>
-                <div class="m-l-16">
-                  Coach Steve
-                </div>
-              </div>
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>pause</mat-icon>
+              <span>Pause</span>
+            </button>
+
+            <button mat-menu-item style="color: red">
+              <mat-icon style="color: red">block</mat-icon>
+              <span>Block</span>
+            </button>
+
+            <button mat-menu-item style="color: red">
+              <mat-icon style="color: red">delete</mat-icon>
+              <span>Remove</span>
+            </button>
+          </mat-menu>
          </td>
-         <td></td>
-         <td></td>
-         <td></td>
-         <td></td>
-         <td></td>
-         <td></td>
-         <td></td>
+         <td>Coach S.</td>
+         <td>
+          Subscriber
+         </td>
+         <td>Press Box</td>
+         <td>iPad15</td>
+         <td>iPad</td>
+         <td>Penfield-5..</td>
+         <td><span mat-button class="p-8" style="background-color: rgba(67, 196, 99, 0.1); color: rgba(67, 196, 99, 1); border-radius: 9px;">
+          Good
+       </span></td>
+         <td>192.168.1.10</td>
+         <td> <div class="d-flex">
+          <i-tabler name="arrow-down-left" class="icon-20"></i-tabler>
+          <span class="p-l-4">Receiving</span>
+        </div></td>
+        <td>2</td>
        </tr>
     </table>
    </div>
