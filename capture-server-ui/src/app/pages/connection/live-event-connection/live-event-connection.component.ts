@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -16,5 +16,5 @@ import { LiveConnectionGridListToogleComponent } from "./components/live-connect
   styleUrl: './live-event-connection.component.scss'
 })
 export class LiveEventConnectionComponent {
-
+  @Input() datasource: any;
 }

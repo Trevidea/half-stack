@@ -1,11 +1,11 @@
 
 <mat-card>
     <app-live-connection-header
+    [datasource]="datasource"
     class="w-100"
   ></app-live-connection-header>
 </mat-card>
-
-<mat-card>
-    <app-live-connection-grid-list-toogle></app-live-connection-grid-list-toogle>
-</mat-card>
+<div>
+    <app-live-connection-grid-list-toogle [datasource]="datasource"></app-live-connection-grid-list-toogle>
+</div>
 
