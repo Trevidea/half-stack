@@ -4,6 +4,8 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { ActiveDevicesComponent } from "./active-devices/active-devices.component";
 import { DateTimeFormatPipe } from "../../../pipe/date-time-format";
+import { MatDialog } from '@angular/material/dialog';
+import { AddDeviceToEventPresenter } from '../add-device-to-event/add-device-to-event.presenter';
 
 @Component({
   selector: 'app-event-preview',
@@ -18,4 +20,14 @@ export class EventPreviewComponent {
 
   private countdownInterval: any;
   @Output() closePreview = new EventEmitter()
+
+  constructor(private dialog: MatDialog) { }
+
+  onAddDeviceToevent() {
+    const dialogRef = this.dialog.open(AddDeviceToEventPresenter, {
+      maxWidth: '700px',
+      width: '100%',
+      
+    });
+  }
 }

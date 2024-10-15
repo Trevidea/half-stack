@@ -49,11 +49,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 col-md-12 col-12 p-0">
-
-                <app-active-devices [eventId]="eventId"
+            <div class="col-lg-8 col-md-12 col-12">
+                <app-active-devices (onAddDeviceToevent)="onAddDeviceToevent()"
                     [datasource]="datasource?.previewActiveDevice"></app-active-devices>
-
             </div>
         </div>
     </mat-card-content>
