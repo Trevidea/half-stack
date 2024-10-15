@@ -21,6 +21,7 @@ export class ModelService {
   constructor(private _httpClient: HttpClient, private _adapter: AdapterService) {
     // this.MetaType = this.MetaType.bind(this)
     this.saveEvent = this.saveEvent.bind(this);
+    this.addDeviceToEvent = this.addDeviceToEvent.bind(this);
   }
 
   create(type: string, entity: any): Observable<any> {
@@ -235,6 +236,12 @@ export class ModelService {
   deviceById(id: number): Observable<Data.Device> {
     return this._selectOne("devices", id, DeviceData);
   }
+
+  addDeviceToEvent(data: Data.AddDeviceToEvent): Observable<Data.AddDeviceToEvent> {
+    console.log(data)
+    return this.create("event-device", data);
+  }
+
   EventYear() {
     return ["2024", "2023", "2022", "2021", "2020"];
   }

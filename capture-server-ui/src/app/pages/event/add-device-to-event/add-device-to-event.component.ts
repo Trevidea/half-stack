@@ -5,13 +5,15 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { environment } from 'src/environments/environment';
 import { v4 as uuidv4 } from 'uuid';
+import { AddDeviceToEventPresenter } from './add-device-to-event.presenter';
+import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-add-device-to-event',
   standalone: true,
   imports: [MaterialModule, CommonModule, ReactiveFormsModule, FormsModule, TablerIconsModule],
   templateUrl: './add-device-to-event.component.html',
   styleUrl: './add-device-to-event.component.scss',
-  encapsulation:ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None
 })
 export class AddDeviceToEventComponent implements OnInit {
 
@@ -23,6 +25,7 @@ export class AddDeviceToEventComponent implements OnInit {
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter();
 
+  constructor() { }
   ngOnInit(): void {
     this.datasource.streamId = this.generateShortUUID(12);
   }
@@ -87,4 +90,6 @@ export class AddDeviceToEventComponent implements OnInit {
     return this.datasource.streamName;
   }
 
+
+  
 }

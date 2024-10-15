@@ -7,17 +7,20 @@ import { ArrayBuilder } from 'src/app/blocks/array.builder';
 import { Views } from 'src/app/services/models-interfaces/half-stack-interface';
 import { TypesPresenter } from 'src/app/blocks/types/types.presenter';
 import { AddDeviceView } from './view/add-device';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserProfileData } from 'src/app/services/models-interfaces/user-profile';
 import { SelectItemView } from 'src/app/blocks/collection-item';
 import { DeviceData } from 'src/app/services/models-interfaces/device';
 import { DevicesBuilder } from './builder/device';
+import { PresenterAction } from 'src/app/blocks/actions';
+import { AddDeviceBuilder } from './builder/add-device';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-device-to-event-presenter',
   standalone: true,
   imports: [AddDeviceToEventComponent],
-  template: `<app-add-device-to-event [datasource]="ds" ></app-add-device-to-event>`,
+  template: `<app-add-device-to-event [datasource]="ds"  (save)="actions.onSave()"  (cancel)="doAction()"></app-add-device-to-event>`,
   styleUrl: './add-device-to-event.component.scss',
   encapsulation: ViewEncapsulation.None
 })
@@ -29,10 +32,27 @@ export class AddDeviceToEventPresenter implements OnInit {
   // private options: GlobalConfig;
   ds!: AddDeviceView;
   actions!: Views.FormActions;
-  constructor(private modelService: ModelService, @Inject(MAT_DIALOG_DATA) public data: { eventId: number }) {
+  constructor(private modelService: ModelService,
+    @Inject(MAT_DIALOG_DATA) public data: { eventId: number },
+    public dialogRef: MatDialogRef<AddDeviceToEventPresenter>,
+    private router: Router) {
     this.ds = new AddDeviceView();
     this.ds.eventId = data.eventId;
-    console.log("eventId", data)
+    this.actions = new PresenterAction(
+      null,
+      this.ds,
+      this.modelService.addDeviceToEvent,
+      AddDeviceBuilder,
+      router
+    );
+    this.actions.onComplete.subscribe((result) => {
+      if (result) {
+        alert("Device Added")
+        this.doAction();
+      } else {
+        alert("not added")
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -80,4 +100,7 @@ export class AddDeviceToEventPresenter implements OnInit {
     });
   }
 
+  doAction(): void {
+    this.dialogRef.close();
+  }
 }

@@ -1,20 +1,25 @@
-<h1 class=" p-0 m-l-20">Add device to event</h1>
+<div class="p-0 m-l-20 d-flex align-items-center  justify-content-end ">
+    <button mat-icon-button class="d-flex align-items-center m-8" (click)="cancel.emit()">
+        <i-tabler name="x" class="icon-18"></i-tabler>
+    </button>
+</div>
+<h1 class="p-0 m-l-20">Add device to event</h1>
 <mat-dialog-content class="mat-typography">
     <div class="row">
         <div class="col-12 m-b-16 ">
             <div class="url-box">
                 {{constructRtmpUrl()}}
-                <button mat-icon-button class="d-flex align-items-center ">
-                    <i-tabler name="copy" class="icon-20"></i-tabler>
-                </button>
-            </div>
-            <!-- <button type="button" class="btn btn-flat-primary ml-auto" (click)="copyUrl(streamingUrl)">
-                <span [ngClass]="urlCopied ? 'icon-check' : 'icon-copy'" class="ficon feather mr-25"></span>
-                {{ urlCopied ? 'Copied' : 'Copy' }}
-            </button> -->
+                <div class="d-flex align-items-center ">
+                    <button mat-icon-button class="d-flex align-items-center " (click)="copyUrl(streamingUrl)">
+                        <i-tabler [name]="urlCopied ? 'check' : 'copy'" class="icon-18"></i-tabler>
+                    </button>
+                    <span class="m-l-8">{{ urlCopied ? 'Copied'
+                        : 'Copy' }}</span>
+                </div>
 
+            </div>
         </div>
-        <div class="col-12 m-b-16">
+        <div class="col-12 m-b-8">
             <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Type
             </mat-label>
             <mat-form-field appearance="outline" class="w-100">
@@ -25,7 +30,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-12 m-b-16">
+        <div class="col-12 m-b-8">
             <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Application
             </mat-label>
             <mat-form-field appearance="outline" class="w-100">
@@ -37,7 +42,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-12 m-b-16">
+        <div class="col-12 m-b-8">
             <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Device
             </mat-label>
             <mat-form-field appearance="outline" class="w-100">
@@ -48,14 +53,14 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-12 m-b-16">
+        <div class="col-12 m-b-8">
             <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">PIN
             </mat-label>
             <mat-form-field appearance="outline" class="w-100">
                 <input type="text" matInput name="pin" [(ngModel)]="datasource.pin" required autocomplete="off" />
             </mat-form-field>
         </div>
-        <div class="col-12 m-b-16">
+        <div class="col-12 m-b-8">
             <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Location
             </mat-label>
             <mat-form-field appearance="outline" class="w-100">
@@ -67,7 +72,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-12 m-b-16">
+        <div class="col-12 m-b-8">
             <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">User
             </mat-label>
             <mat-form-field appearance="outline" class="w-100">
@@ -78,14 +83,14 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-12 m-b-16">
+        <div class="col-12 m-b-8">
             <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Stream name
             </mat-label>
             <div class="highlighted-box">
                 {{updateStreamName()}}
             </div>
         </div>
-        <div class="col-12 m-b-16">
+        <div class="col-12 m-b-8">
             <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Stream ID
             </mat-label>
             <div class="highlighted-box ">
@@ -94,3 +99,8 @@
         </div>
     </div>
 </mat-dialog-content>
+<mat-dialog-actions class="p-x-24 p-b-24 d-flex align-items-center justify-content-end ">
+    <button mat-flat-button color="primary" (click)="save.emit()">
+        save
+    </button>
+</mat-dialog-actions>

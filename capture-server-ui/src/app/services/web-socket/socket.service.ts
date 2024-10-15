@@ -95,21 +95,21 @@ export class SocketService {
   private readonly SERVER_URL = environment.spRelayUrl;
 
   constructor() {
-    // this.socket = io(this.SERVER_URL, {
-    //   reconnection: true,
-    //   reconnectionAttempts: Infinity, // Keep trying to reconnect forever
-    //   reconnectionDelay: 1000, // Initial reconnection delay
-    //   reconnectionDelayMax: 5000, // Maximum reconnection delay
-    //   timeout: 20000 // Connection timeout
-    // });
+    this.socket = io(this.SERVER_URL, {
+      reconnection: true,
+      reconnectionAttempts: Infinity, // Keep trying to reconnect forever
+      reconnectionDelay: 1000, // Initial reconnection delay
+      reconnectionDelayMax: 5000, // Maximum reconnection delay
+      timeout: 20000 // Connection timeout
+    });
 
-    // this.socket.on('connect_error', (err) => {
-    //   console.error('Connection Error:', err);
-    // });
+    this.socket.on('connect_error', (err) => {
+      console.error('Connection Error:', err);
+    });
 
-    // this.socket.on('reconnect_failed', () => {
-    //   console.error('Reconnection Failed');
-    // });
+    this.socket.on('reconnect_failed', () => {
+      console.error('Reconnection Failed');
+    });
   }
 
   // Method to listen to specific topic messages
