@@ -4,7 +4,7 @@ export const navItems: NavItem[] = [
   // {
   //   navCap: 'Home',
   // },
- 
+
   // {
   //   displayName: 'Analytical',
   //   iconName: 'chart-pie-2',
@@ -26,7 +26,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Dashboard',
     iconName: 'home',
-    route: 'dashboard/dashboard' 
+    route: 'dashboard/dashboard'
   },
   {
     displayName: "Events",
@@ -42,10 +42,16 @@ export const navItems: NavItem[] = [
     displayName: "Logs",
     iconName: 'timeline',
     route: 'logs/logs-list'
-  },{
+  },
+  {
     displayName: "Shared",
     iconName: 'share',
     route: 'share/share-list'
+  },
+  {
+    displayName: "Settings",
+    iconName: 'setting',
+    route: 'settings/main-page'
   }
   // {
   //   navCap: 'Apps',

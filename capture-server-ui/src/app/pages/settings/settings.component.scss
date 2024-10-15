@@ -1,0 +1,40 @@
+.chat-app {
+  .mat-drawer {
+    width: 320px;
+  }
+}
+
+
+.nav-icon {
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+
+.mat-list-item {
+  height: 75px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+
+  span {
+    font-size: 18px;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: transparent !important;
+  }
+}
+
+.active {
+  border-left: 4px solid #1a97f5 !important;
+  border-radius: 0;
+  background-color: transparent;
+  .nav-icon {
+    color: #1a97f5;
+  }
+  span {
+    color: #1a97f5;
+  }
+
+}

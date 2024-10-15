@@ -1,0 +1,35 @@
+<mat-card class="mat-card-top chat-app cardWithShadow">
+    <mat-sidenav-container class="bg-white" [ngClass]="{
+        'side-panel-opened': sidePanelOpened,
+        'side-panel-closed': !sidePanelOpened
+      }">
+
+        <mat-sidenav #settingnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()"
+            (open)="sidePanelOpened = true" (close)="sidePanelOpened = false">
+            <ng-scrollbar class="position-relative" style="height: 100%">
+                <mat-nav-list class="p-t-16 ">
+                    @for (item of sideNavItem; track $index) {
+                    <a mat-list-item [routerLink]="item.route" class="mat-list-item" (click)="setActiveNav(item.id)"
+                        [ngClass]="{'active': activeNavId === item.id}">
+                        <i-tabler [name]="item.iconName" class="icon-18 nav-icon"></i-tabler>
+                        <span>{{item.displayName}}</span>
+                    </a>
+                    }
+                </mat-nav-list>
+            </ng-scrollbar>
+        </mat-sidenav>
+        <ng-scrollbar style="height: calc(100vh - 390px)" class="position-relative bg-white">
+            @if (isOver()) {
+            <mat-toolbar class="no-shadow chat-right-panel bg-white d-flex align-items-center p-y-8 b-b-1">
+                <button (click)="settingnav.toggle()" class="m-r-10" mat-icon-button>
+                    <mat-icon>short_text</mat-icon>
+                </button>
+            </mat-toolbar>
+            }
+
+            <div class="p-24">
+                <router-outlet></router-outlet>
+            </div>
+        </ng-scrollbar>
+    </mat-sidenav-container>
+</mat-card>

@@ -14,7 +14,7 @@ export class DummyDataService implements InMemoryDbService {
       // 'coaches': CoachesDummy.data,
       // 'players': PlayersDummy.data,
       // 'teams': TeamsDummy.data,
-      // 'events': eventsDummy.data
+      'events': eventsDummy.data
     }
   }
 }
