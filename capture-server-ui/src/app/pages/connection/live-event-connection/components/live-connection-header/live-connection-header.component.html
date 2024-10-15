@@ -1,77 +1,75 @@
-  
-    <div class="main-container">
-        <!-- Header Section -->
-        <mat-card class="header-card" style="border-radius: 0.428rem; background-color: #eaf2f9;">
-          <mat-card-title>
-            <div class="header-content d-flex justify-content-between align-items-center">
-              <!-- Title -->
-              <div>
-              <h4 class="light-text p-l-8">Live event streaming</h4>
-              </div>
-              <!-- Timer and Controls -->
-              <div class="d-flex align-items-center">
-                <h5 class="light-text" style="margin-right: 10px; width: 70px"> '00:00:44'</h5>
-      
-                <!-- Pause Button -->
-                <button mat-icon-button color="primary" aria-label="Pause">
-                  <mat-icon>pause_circle</mat-icon>
-                </button>
-      
-                <!-- Stop Button -->
-                <button mat-icon-button color="warn" aria-label="Stop">
-                  <mat-icon>stop_circle</mat-icon>
-                </button>
-              </div>
-            </div>
-          </mat-card-title>
-        </mat-card>
-      
-        <!-- Event Details Section -->
-         <div class="row">
-        <div class="event-details mt-3 col-md-8">
-          <mat-card-content>
-            <h3 class="event-title">McQuaid vs Fairport, Football</h3>
-      
-            <!-- Date and Location -->
-            <div class="row">
-              <div class="col-md-12">
-                <div class="d-flex ">
-                <mat-icon>schedule</mat-icon>
-                <p class="mb-0 text-nowrap" style="margin-left: 0.2em">Saturday, Sept 15th, 2:00 pm, Varsity</p>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="d-flex ">
-                <mat-icon>location_on</mat-icon>
-                <p class="mb-0 text-nowrap" style="margin-left: 0.2em">Fairport High School, 33 Union Street, Fairport</p>
-             </div>
-           </div>
-            </div>
-          </mat-card-content>
+<div class="main-container">
+  <!-- Header Section -->
+  <mat-card class="header-card" style="border-radius: 0.428rem; background-color: #eaf2f9;">
+    <mat-card-title>
+      <div class="header-content d-flex justify-content-between align-items-center">
+        <!-- Title -->
+        <h4 class="light-text p-l-8">Live event streaming</h4>
+        
+        <!-- Timer and Controls -->
+        <div class="d-flex align-items-center">
+          <h5 class="light-text mr-2" style="width: 70px;">00:00:44</h5>
+
+          <!-- Pause Button -->
+          <button mat-icon-button color="primary" aria-label="Pause">
+            <mat-icon>pause_circle</mat-icon>
+          </button>
+
+          <!-- Stop Button -->
+          <button mat-icon-button color="warn" aria-label="Stop">
+            <mat-icon>stop_circle</mat-icon>
+          </button>
         </div>
-      
-        <!-- Data Card -->
-        <div class="data-card mt-3 col-md-4">
-          <mat-card style="border-radius: 10px; padding: 1rem; display: flex; align-items: center; justify-content: space-between;">
+      </div>
+    </mat-card-title>
+  </mat-card>
+
+  <div class="row">
+    <!-- Event Details Section -->
+    <div class="col-md-6 mt-3">
+      <mat-card-content>
+        <h3 class="event-title">McQuaid vs Fairport, Football</h3>
+
+        <div class="event-info">
+          <div class="d-flex align-items-center mb-2">
+            <mat-icon>schedule</mat-icon>
+            <p class="mb-0 ml-2">Time</p> <!-- Add actual event time here -->
+          </div>
+          <div class="d-flex align-items-center">
+            <mat-icon>location_on</mat-icon>
+            <p class="mb-0 ml-2">Fairport High School, 33 Union Street, Fairport</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </div>
+
+    <!-- Data Section -->
+    <div class="col-md-6 mt-3">
+      <div class="row">
+        <!-- Data Card Template -->
+        <div  class="col-md-4">
+          <mat-card class="data-card" style="border: 1px solid #646464; border-radius: 10px; padding: 1rem;">
             <div class="d-flex align-items-center">
-              <!-- Data Icon -->
               <mat-icon>description</mat-icon>
-              <div class="ml-1">
-                <h6>Data</h6>
-                <div class="d-flex">
-                  <div class="mr-4">
-                    <p>Sent:</p>
-                    <strong>-</strong>
-                  </div>
-                  <div>
-                    <p>Received:</p>
-                    <strong>-</strong>
-                  </div>
-                </div>
+              <h3 class="ml-2">Data</h3>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+              <div>
+                <p>Sent:</p>
+                <strong>900mb</strong>
+              </div>
+              <div>
+                <p>Received:</p>
+                <strong>900mb</strong>
               </div>
             </div>
           </mat-card>
         </div>
-    </div>
       </div>
+    </div>
+  </div>
+</div>
+
+
+
       

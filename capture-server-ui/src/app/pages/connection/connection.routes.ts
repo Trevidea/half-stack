@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { PreviousEventsConnectionPresenter } from './previous-events-connection/previous-events-connection.presenter';
 import { ConnectionComponent } from './connection.component';
 import { LiveEventConnectionComponent } from './live-event-connection/live-event-connection.component';
 
