@@ -1,1 +1,21 @@
-<p>device works!</p>
+<div class="row device-perent">
+    <div class="col-12 d-flex align-items-center justify-content-end m-b-0">
+        <button mat-raised-button color="accent" (click)="addDevice()">Create new device</button>
+    </div>
+    <div class="col-12 grid">
+        @for (item of datasource.deviceView; track $index) {
+        <div class="card">
+            <div class="card-body">
+                <h3>{{item.deviceName}}</h3>
+                <div class=" d-flex align-items-center justify-content-between m-b-8">
+                    <div>{{item.deviceType}}</div>
+                    <div>{{item.deviceCode}}</div>
+                </div>
+                <button mat-stroked-button color="warn" class="w-100" (click)="onDelete.emit(item.id)">Remove</button>
+            </div>
+        </div>
+        }
+
+    </div>
+
+</div>

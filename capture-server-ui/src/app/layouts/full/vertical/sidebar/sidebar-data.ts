@@ -50,8 +50,8 @@ export const navItems: NavItem[] = [
   },
   {
     displayName: "Settings",
-    iconName: 'setting',
-    route: 'settings/main-page'
+    iconName: 'settings',
+    route: 'settings/main-page/account'
   }
   // {
   //   navCap: 'Apps',

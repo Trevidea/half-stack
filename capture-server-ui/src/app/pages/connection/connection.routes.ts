@@ -25,6 +25,7 @@ export const ConnectionRoutes: Routes = [
                         path: 'live-connections',
                         component: LiveEventConnectionComponent
                     }
+                    
                 ]
             }
         ]

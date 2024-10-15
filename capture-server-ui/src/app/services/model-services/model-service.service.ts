@@ -22,6 +22,7 @@ export class ModelService {
     // this.MetaType = this.MetaType.bind(this)
     this.saveEvent = this.saveEvent.bind(this);
     this.addDeviceToEvent = this.addDeviceToEvent.bind(this);
+    this.saveDevice = this.saveDevice.bind(this);
   }
 
   create(type: string, entity: any): Observable<any> {
@@ -197,7 +198,9 @@ export class ModelService {
       return this.create("event", data)
     }
   }
-
+  saveDevice(data: Data.Device): Observable<Data.Device> {
+    return this.create("devices", data);
+  }
   openPreview(data: { eventId: number }): Observable<any> {
     const url = `${this.modelsServerUrl}/event/open-preview`;
     return this._httpClient.post<any>(url, data);
