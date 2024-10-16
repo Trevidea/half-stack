@@ -4,7 +4,8 @@
     </button>
     <span class="example-spacer"></span>
     <button mat-button color="warn" class="m-l-8">
-        <i-tabler class="icon-20 m-r-4" name="block"> </i-tabler>
+        <!-- <i-tabler class="icon-20 m-r-4" name="block"> </i-tabler> -->
+         <mat-icon class="icon-18 m-r-4">block</mat-icon>
         <span>Block</span>
     </button>
     <button  mat-raised-button color="accent" class="m-l-8">
@@ -16,8 +17,7 @@
         <div class="d-flex align-items-center">
             <i-tabler class="icon-20 m-r-4" name="caret-right"></i-tabler>
             <span>Start Recording</span>
-        </div>
-        
+        </div> 
     </button>
 </mat-toolbar>
 
@@ -29,11 +29,11 @@
             <mat-card-content>
                 <div class="d-flex align-items-center justify-content-between mb-1">
                     <h3 class="">Testing</h3>
-                    <div class="info-badge">
-                        
-                    </div>
+                    <div class="info-badge"> 
+                    
+                   </div>
                 </div>
-
+                
                 @if (url) {
                   <app-hls-player [videoSrc]="url"></app-hls-player>
                 }
@@ -47,7 +47,7 @@
           <div class="d-flex align-items-center justify-content-between mb-1" >
             <h3 class="m-l-16">Streaming information</h3>
             <div>
-              <a class="clearAllbtn" href="">See Full Detail</a>
+              <a class="clearAllbtn">See Full Detail</a>
             </div>
           </div>
           <div class="d-flex justify-content-between align-items-left">
@@ -108,7 +108,8 @@
       <div class="col-12 col-md-12">
         <mat-card>
           <mat-card-content>
-            <table>
+            <div style="max-height: 300px; overflow-y: auto">
+            <table >
               <tr>
                 <th>Video Time</th>
                 <th>Video Resolution/Quality</th>
@@ -124,6 +125,7 @@
                 <td>4:16 pm</td>
               </tr>
             </table>
+          </div>
           </mat-card-content>
         </mat-card>
       </div>
@@ -190,7 +192,7 @@
               
                   <div class="m-l-16">
                     <div class="d-flex m-t-10 ">
-                       <i-tabler class="d-flex icon-18 m-l-2" name="chart-bar-popular" style="color: rgb(219, 31, 31);"></i-tabler>
+                       <i-tabler class="d-flex icon-18 m-l-2" name="cell-signal-5" style="color: rgb(219, 31, 31);"></i-tabler>
                      <h4 class="m-l-4 m-b-2 m-t-0">Poor</h4>
                      </div>
                     <p class="m-b-0 m-t-0">Internet Connection</p>

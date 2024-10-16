@@ -1,0 +1,26 @@
+@if(control.invalid && (control.dirty || control.touched)){
+<div class="alert">
+  @if(control.errors?.['required']){
+  <div class="text-color">
+    <p class="text-color">{{ controlName }} is required.</p>
+  </div>
+  } @if(control.errors?.['minlength']){
+  <div class="text-color">
+    {{ controlName }} must be at least 6 characters long.
+  </div>
+  } @if(control.errors?.['forbiddenName']){
+  <div class="text-color">Invalid value for {{ controlName }}.</div>
+  } @if(control.errors?.['pattern']){
+  <div class="text-color">{{ patternmassage }}.</div>
+  }
+   @if(control.errors?.['email']){
+  <div class="text-color">Invalid value for {{ controlName }}.</div>
+  }
+   @if(control.errors?.['alreadyExist']){
+  <div class="text-color">This {{ controlName }} already exists.</div>
+  }
+  @if(control.errors?.['date']){
+    <div class="text-color">Invalid date for {{ controlName }}.</div>
+  }
+</div>
+}

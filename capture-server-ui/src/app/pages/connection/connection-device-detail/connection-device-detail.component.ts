@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { HlsPlayerComponent } from '../../blocks/hls-player/hls-player.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-connection-device-detail',
@@ -13,5 +14,10 @@ import { HlsPlayerComponent } from '../../blocks/hls-player/hls-player.component
 })
 export class ConnectionDeviceDetailComponent {
   url: string;
+  constructor(private router: Router){}
+
+  // open(){
+  //   this.router.navigate(['configuration'])
+  // }
 
 }

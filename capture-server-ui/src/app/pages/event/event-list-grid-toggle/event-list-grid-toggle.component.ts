@@ -82,13 +82,5 @@ export class EventListGridToggleComponent {
     });
   }
 
-  OpenEventStartEndDialog(action: string) {
-    const dialogRef = this.dialog.open(EventStartEndDialogsComponent, {
-      data: { action: action },
-      maxWidth: '500px',
-      width: '100%',
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-    });
-  }
+
 }

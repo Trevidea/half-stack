@@ -3,6 +3,7 @@ import { ConnectionComponent } from './connection.component';
 import { LiveEventConnectionComponent } from './live-event-connection/live-event-connection.component';
 import { ConnectionDeviceDetailPresenter } from './connection-device-detail/connection-device-detail.presenter';
 import { LiveEventConnectionPresenter } from './live-event-connection/live-event-connection.presenter';
+import { StreamingConfigurationComponent } from './connection-device-detail/streaming-configuration/streaming-configuration.component';
 
 
 export const ConnectionRoutes: Routes = [
@@ -30,7 +31,12 @@ export const ConnectionRoutes: Routes = [
                     {
                         path: 'streaming-device-details',
                         component: ConnectionDeviceDetailPresenter
-                    }
+                    },
+                    // {
+                    //     path: 'configuration',
+                    //     component: StreamingConfigurationComponent
+                    // }
+                    
                 ]
             }
         ]
