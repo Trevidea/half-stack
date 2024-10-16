@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="card-header">
+        <div class="d-flex align-items-center justify-content-between">
+            <h5>Application Configuration</h5>
+            <button mat-button (click)="addApplication()">
+                <div class="d-flex align-items-center">
+                    <i-tabler name="plus" class="icon-18"></i-tabler>
+                    <span>&nbsp; Add</span>
+                </div>
+            </button>
+        </div>
+    </div>
+    <div class="container text-start">
+        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 h5-0">
+            @for (item of datasource.applicationName; track $index) {
+            <div class="col custum-column">
+                <div>
+                    <h6>Application Name </h6>
+                    @if (item) {
+                    <h5>{{item}}</h5>
+                    }
+                    @if (item == null) {
+                    <h5>&lt;not set&gt;</h5>
+                    }
+                    <hr style="margin-top:1px; margin-bottom: 1px;">
+                </div>
+            </div>
+            }
+
+        </div>
+    </div>
+</div>

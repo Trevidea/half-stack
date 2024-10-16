@@ -170,6 +170,10 @@ export namespace Data {
     code: string;
     pin: string;
   }
+
+  export interface Application extends Base {
+    app_name: string;
+  }
 }
 
 
