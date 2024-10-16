@@ -27,17 +27,18 @@ export const ConnectionRoutes: Routes = [
                         path: 'live-connections',
                         component: LiveEventConnectionPresenter
                     },
-                    {
-                        path: 'streaming-device-details',
-                        component: ConnectionDeviceDetailPresenter
-                    },
+
                     // {
                     //     path: 'configuration',
                     //     component: StreamingConfigurationComponent
                     // }
-                    
+
                 ]
-            }
+            },
+            {
+                path: 'streaming-device-details',
+                component: ConnectionDeviceDetailPresenter
+            },
         ]
     }
 ]
