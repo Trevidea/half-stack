@@ -8,6 +8,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { TablerIconsModule } from 'angular-tabler-icons';
 
 @Component({
   selector: 'app-live-gird',
@@ -19,14 +20,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatIconModule,
     MatSelectModule,
     MatTabsModule,
-    MatBadgeModule,],
+    MatBadgeModule,
+    TablerIconsModule],
   templateUrl: './live-gird.component.html',
   styleUrl: './live-gird.component.scss'
 })
 export class LiveGirdComponent implements OnInit {
-device: any;
+
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
 

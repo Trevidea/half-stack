@@ -13,7 +13,6 @@ export class ConnectionComponent {
 
   isEventStarted: boolean;
  _isEventStarted(e: boolean) {
-    console.log(e);
     this.isEventStarted = e;
   }
 }

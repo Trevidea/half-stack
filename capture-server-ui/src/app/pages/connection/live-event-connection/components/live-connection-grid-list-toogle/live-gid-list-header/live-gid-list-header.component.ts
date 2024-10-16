@@ -22,11 +22,11 @@ export class LiveGidListHeaderComponent implements OnInit {
   activeTabIndex: number = 0;
   selectedIndex: number = 0;
   tabs = [
-    { id: 'roster', label: 'Rosters' },
-    { id: 'schedule', label: 'Schedules' },
-    { id: 'statistic', label: 'Statistics' }
+    { id: 'all', label: 'All' },
+    { id: 'subscriber', label: 'Subscriber' },
+    { id: 'publisher', label: 'Publisher' }
   ];
-  activeTab: string = 'roster';
+  activeTab: string = 'all';
 
   constructor( private route: ActivatedRoute) { }
 

@@ -1,6 +1,6 @@
 <div class="p-2 connection-list-grid-header" style="margin: 0">
     <div class="d-flex align-items-center justify-content-between">
-      <div class="b-t-1 p-0">
+      <div >
         <div class="tab-container">
           <ul class="tab-list">
           @for ( tab of tabs;track tab.id) {
@@ -16,7 +16,7 @@
           <!-- Grid button -->
           <button
             mat-icon-button
-            [ngClass]="{ 'grid-box': listOrGrid === 'grid' }"
+            [ngClass]="{ 'grid-box': listOrGrid == 'grid' }"
             (click)="listGrid('grid')">
             <mat-icon>grid_view</mat-icon>
           </button>
@@ -24,18 +24,21 @@
           <!-- List button -->
           <button
             mat-icon-button
-            [ngClass]="{ 'list-box': listOrGrid === 'list' }"
+            [ngClass]="{ 'list-box': listOrGrid == 'list' }"
             (click)="listGrid('list')">
-            <mat-icon>view_list</mat-icon>
+            <mat-icon>menu</mat-icon>
           </button>
   
           <!-- Add Device button -->
-          <button
+          <!-- <button
             mat-raised-button
             color="primary"
             class="ml-1">
-            Add Device
-          </button>
+            Add device to event
+          </button> -->
+
+          <button mat-fab extended class="mat-btn" >
+            Add device to event</button>
         </div>
       </div>
     </div>

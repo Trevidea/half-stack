@@ -31,12 +31,7 @@ export class LiveEventConnectionPresenter implements OnInit{
   }
 
   ngOnInit(): void {
-    //TODO:SOCKET.IO.ERROR
-    // Transformer._ComposeLiveObjectAsync(
-    //   this.socketService._onLiveEvent(),
-    //   this.socketDs,
-    //   LiveEventBuilder
-    // );
+  
     this.ds = this.socketDs;
 
     this.socketSubscription = this.socketService.onTopicMessage('live-event').subscribe((message) => {
@@ -81,17 +76,5 @@ export class LiveEventConnectionPresenter implements OnInit{
     });
 
   }
-  // ListType(e: any) {
-  //   this.ds = this.socketDs;
-  //   let type = e;
-  //   if (e == "sub") {
-  //     type = "Subscriber";
-  //   } else if (e == "pub") {
-  //     type = "Publisher";
-  //   } else if (e == "all") {
-  //     type = "all";
-  //     this.ds = this.socketDs;
-  //     return this.ds;
-  //   }
-  // }
+
 }
