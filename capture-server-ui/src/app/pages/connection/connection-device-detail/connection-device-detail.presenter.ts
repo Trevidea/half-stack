@@ -8,7 +8,7 @@ import { StreamingConfigurationComponent } from './streaming-configuration/strea
   selector: 'app-connection-device-detail-presenter',
   standalone: true,
   imports: [ConnectionDeviceDetailComponent, StreamingConfigurationComponent],
-  template: `<app-connection-device-detail></app-connection-device-detail>`,
+  template: `<app-connection-device-detail [url]="url"></app-connection-device-detail>`,
   styleUrl: './connection-device-detail.component.scss'
 })
 export class ConnectionDeviceDetailPresenter implements OnInit {

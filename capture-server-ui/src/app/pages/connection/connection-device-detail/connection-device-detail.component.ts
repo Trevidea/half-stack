@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { HlsPlayerComponent } from '../../blocks/hls-player/hls-player.component';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrl: './connection-device-detail.component.scss'
 })
 export class ConnectionDeviceDetailComponent {
-  url: string;
+  @Input() url: string;
   constructor(private router: Router){}
 
   // open(){

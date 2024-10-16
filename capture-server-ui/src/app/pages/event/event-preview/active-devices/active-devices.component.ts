@@ -25,7 +25,7 @@ export class ActiveDevicesComponent {
   detail(item: any) {
     if (item.direction === 1) {
       console.log("sreaming device")
-      this.router.navigate(['connections/connection/streaming-device-details'], {
+      this.router.navigate(['connections/streaming-device-details'], {
         queryParams: { devicedetail: JSON.stringify(item) }
       });
     }
