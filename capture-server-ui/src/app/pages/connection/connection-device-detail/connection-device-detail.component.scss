@@ -50,4 +50,31 @@
     margin-top: 100%;
     border-top: 1px solid transparent;
   }
+  .clearAllbtn {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #216093;
+    margin-bottom: 10px;
+}
+
   
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td {
+  padding: 8px;
+  text-align: left;
+  border-top: 1px solid #444444;
+}
+
+
+th {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left:6px;
+  padding-right: 2px;
+  text-align: left;
+  font-size: 14px;
+}
