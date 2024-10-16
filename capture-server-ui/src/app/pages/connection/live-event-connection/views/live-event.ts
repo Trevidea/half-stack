@@ -174,8 +174,7 @@ export class ConnectionDetailsView implements Views.Datasource {
     public set id(v: number) {
         this._id = v;
     }
-    
-    
+       
     private _event_id : number;
     public get event_id() : number {
         return this._event_id;

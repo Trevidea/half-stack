@@ -3,11 +3,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MaterialModule } from 'src/app/material.module';
+import { ValidationAlertComponent } from "../../../blocks/validation-alert/validation-alert.component";
 
 @Component({
   selector: 'app-on-demand-event-form',
   standalone: true,
-  imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule,],
+  imports: [MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, ValidationAlertComponent],
   providers: [provideNativeDateAdapter()],
   templateUrl: './on-demand-event-form.component.html',
   styleUrl: './on-demand-event-form.component.scss'

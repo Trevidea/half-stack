@@ -13,6 +13,8 @@ import { LiveGidListHeaderComponent } from "./live-gid-list-header/live-gid-list
 import { LiveGirdComponent } from "./live-gird/live-gird.component";
 import { LiveListComponent } from "./live-list/live-list.component";
 import { SocketService } from 'src/app/services/web-socket/socket.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddDeviceToEventPresenter } from 'src/app/pages/event/add-device-to-event/add-device-to-event.presenter';
 
 @Component({
   selector: 'app-live-connection-grid-list-toogle',
@@ -47,8 +49,9 @@ export class LiveConnectionGridListToogleComponent {
   constructor(
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private socketService: SocketService
-  ) {
+    private socketService: SocketService, 
+    private dialog: MatDialog)
+   {
 
   }
 
@@ -115,4 +118,6 @@ export class LiveConnectionGridListToogleComponent {
   onPubSubAll(event: any) {
     this.pubSubAll.emit(event);
   }
+
+ 
 }

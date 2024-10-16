@@ -12,6 +12,7 @@ import { RouterOutlet } from '@angular/router';
 export class ConnectionComponent {
 
   isEventStarted: boolean;
+
  _isEventStarted(e: boolean) {
     this.isEventStarted = e;
   }

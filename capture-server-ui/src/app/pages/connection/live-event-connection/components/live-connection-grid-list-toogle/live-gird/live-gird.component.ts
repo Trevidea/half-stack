@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -26,7 +26,8 @@ import { TablerIconsModule } from 'angular-tabler-icons';
   styleUrl: './live-gird.component.scss'
 })
 export class LiveGirdComponent implements OnInit {
-
+  @Input() datasource='ds'
+  
   ngOnInit(): void {
   }
 

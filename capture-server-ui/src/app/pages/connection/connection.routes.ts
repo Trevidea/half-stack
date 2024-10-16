@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { ConnectionComponent } from './connection.component';
 import { LiveEventConnectionComponent } from './live-event-connection/live-event-connection.component';
 import { ConnectionDeviceDetailPresenter } from './connection-device-detail/connection-device-detail.presenter';
+import { StreamingConfigurationComponent } from './connection-device-detail/streaming-configuration/streaming-configuration.component';
 
 
 export const ConnectionRoutes: Routes = [
@@ -29,7 +30,12 @@ export const ConnectionRoutes: Routes = [
                     {
                         path: 'player',
                         component: ConnectionDeviceDetailPresenter
-                    }
+                    },
+                    // {
+                    //     path: 'configuration',
+                    //     component: StreamingConfigurationComponent
+                    // }
+                    
                 ]
             }
         ]
