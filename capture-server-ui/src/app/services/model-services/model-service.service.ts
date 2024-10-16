@@ -7,14 +7,8 @@ import { Data } from "../models-interfaces/half-stack-interface";
 import { MetaTypeData } from "../models-interfaces/metatype";
 import { EventData } from "../models-interfaces/event";
 import { PastEventData } from "../models-interfaces/past-event";
-<<<<<<< HEAD
-import { PreviousEventsConnectionData } from "../models-interfaces/previous-events-connection";
 import { UserProfileData } from "../models-interfaces/user-profile";
 import { DeviceData } from "../models-interfaces/device";
-=======
-import { UserProfileData } from "../models-interfaces/user-profile";
-import { DeviceData } from "../models-interfaces/device";
->>>>>>> 1c52543a70fce3cd865d125fdc08ef95b36140ab
 
 
 @Injectable({
