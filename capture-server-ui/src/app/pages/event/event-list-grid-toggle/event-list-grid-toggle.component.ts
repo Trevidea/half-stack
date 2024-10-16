@@ -14,6 +14,7 @@ import { UpcomingEventListComponent } from "./list-components/upcoming-event-lis
 import { PageEvent } from '@angular/material/paginator';
 import { EventView } from './views/events';
 import { DeleteDialogComponent } from '../../blocks/delete-dialog/delete-dialog.component';
+import { EventStartEndDialogsComponent } from '../../notifications-dialogs/event-start-end-dialogs/event-start-end-dialogs.component';
 
 @Component({
   selector: 'app-event-list-grid-toggle',
@@ -78,6 +79,16 @@ export class EventListGridToggleComponent {
       if (result?.event === 'delete') {
         this.onDelete.emit(entity.id);
       }
+    });
+  }
+
+  OpenEventStartEndDialog(action: string) {
+    const dialogRef = this.dialog.open(EventStartEndDialogsComponent, {
+      data: { action: action },
+      maxWidth: '500px',
+      width: '100%',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
     });
   }
 }

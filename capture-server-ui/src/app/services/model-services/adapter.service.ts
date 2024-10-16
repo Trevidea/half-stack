@@ -25,7 +25,11 @@ export class AdapterService {
   cppToNg(cppObj: { field: string, type: number, value: any }[]): { field: string, value: any } {
     let ngObj: any = {};
     for (const obj of cppObj) {
-      ngObj[obj.field] = obj.value;
+      if (obj.type === 6) {
+        ngObj[obj.field] = obj.value.map((item: any) => this.cppToNg(item));
+      } else {
+        ngObj[obj.field] = obj.value;
+      }
     }
     return ngObj;
   }

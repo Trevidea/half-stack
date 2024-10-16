@@ -22,15 +22,18 @@
             </thead>
             <tbody>
                 @for (item of datasource; track $index) {
-                <tr [ngClass]="{'cursor-pointer': item?.direction == 1}">
+                <tr [ngClass]="{'cursor-pointer': item?.direction == 1}" (click)="detail(item)">
                     <td>{{item?.name}} </td>
                     <td>{{item?.activeDeviceId}}</td>
                     <td>{{item?.deviceType}}</td>
                     <td>{{item?.status}}</td>
                     <td>{{item?.location}}</td>
                     <td>{{item?.network}}</td>
-                    <td><button type="button" class="btn btn-icon btn-danger" rippleEffect>
-                            <span></span></button>
+                    <td>
+                        <button mat-icon-button color="warn" class="d-flex"
+                            aria-label="Example icon button with a heart icon">
+                            <i-tabler name="trash" class="icon-20"></i-tabler>
+                        </button>
                     </td>
 
                 </tr>

@@ -17,6 +17,7 @@ export class ApplicationComponent implements OnInit {
 
   @Input() datasource: any;
   @Output() onAddApp = new EventEmitter();
+  @Output() onDelete = new EventEmitter();
 
   constructor(private dialog: MatDialog) {
 

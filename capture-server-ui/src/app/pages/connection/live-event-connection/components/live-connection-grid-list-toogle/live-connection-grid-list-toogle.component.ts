@@ -30,11 +30,10 @@ import { SocketService } from 'src/app/services/web-socket/socket.service';
   styleUrl: './live-connection-grid-list-toogle.component.scss'
 })
 export class LiveConnectionGridListToogleComponent {
-
   @Input() datasource: any;
-  gridView : boolean = true;
- 
-  changeViewMode(isGrid: boolean){
+  gridView: boolean = true;
+
+  changeViewMode(isGrid: boolean) {
     this.gridView = isGrid;
   }
 

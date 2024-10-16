@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventPreviewComponent } from './event-preview.component';
 import { SocketService } from 'src/app/services/web-socket/socket.service';
 import { ActiveDeviceView, EventPreview } from './views/event-preview';
 import { Subscription } from 'rxjs';
 import { ModelService } from 'src/app/services/model-services/model-service.service';
-
+import Swal from "sweetalert2";
 @Component({
   selector: 'app-event-preview-presenter',
   standalone: true,
   imports: [EventPreviewComponent],
-  template: `<app-event-preview [datasource]="ds" [eventId]="eventId"><app-event-preview>`,
-  styleUrl: './event-preview.component.scss'
+  template: `<app-event-preview [datasource]="ds" [eventId]="eventId" (closePreview)='onClosePreview()'><app-event-preview>`,
+  styleUrl: './event-preview.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class EventPreviewPresenter implements OnInit {
   eventId: number;
@@ -20,11 +21,14 @@ export class EventPreviewPresenter implements OnInit {
   private socketSubscription: Subscription;
   status: string;
 
-  constructor(private route: ActivatedRoute, private socketService: SocketService, private modelService: ModelService) {
+  constructor(private route: ActivatedRoute, private socketService: SocketService,
+    private modelService: ModelService,
+    private router: Router) {
     this.route.params.subscribe(params => {
       this.eventId = +params['id'];
       console.log('ID:', this.eventId);
     });
+    this.ds = new EventPreview();
   }
 
   ngOnInit(): void {
@@ -74,5 +78,53 @@ export class EventPreviewPresenter implements OnInit {
     );
   }
 
+
+  onClosePreview() {
+    Swal.fire({
+      title: 'Close Preview',
+      text: "Are you sure you want to close the preview?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#7367F0',
+      cancelButtonColor: '#E42728',
+      confirmButtonText: 'Yes, Sure',
+      customClass: {
+        confirmButton: 'confirm-btn',
+        cancelButton: 'btn btn-outline-secondary ml-1'
+      }
+    }).then((result) => {
+      if (result.value) {
+        this._closePreview();
+      }
+    });
+  }
+
+  _closePreview() {
+    this.modelService.closePreview({ eventId: this.eventId }).subscribe(
+      (data: any) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Preview Closed',
+          text: 'Preview of this event is closed by Garry',
+          showConfirmButton: false,
+          showCancelButton: true,
+          cancelButtonText: 'Ok',
+          customClass: {
+            cancelButton: 'btn btn-outline-secondary'
+          }
+        }).then(
+          (result) => {
+            if (result.isDismissed) {
+              this.router.navigate(['events/events-list'])
+            }
+          }
+        )
+
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
 
 }

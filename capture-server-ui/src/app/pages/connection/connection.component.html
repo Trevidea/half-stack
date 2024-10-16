@@ -1,7 +1,7 @@
 @if (isEventStarted) {
 <router-outlet></router-outlet>
-} @else {
+}
+@if (!isEventStarted){
 <app-previous-events-connection-presenter
-  (startEvent)="_isEventStarted($event)"
-></app-previous-events-connection-presenter>
+  (startEvent)="_isEventStarted($event)"></app-previous-events-connection-presenter>
 }

@@ -208,6 +208,11 @@ export class ModelService {
     return this._httpClient.post<any>(url, data);
   }
 
+  closePreview(data: { eventId: number }): Observable<any> {
+    const url = `${this.modelsServerUrl}/event/close-preview`;
+    return this._httpClient.post<any>(url, data);
+  }
+
   getApplications(): Observable<any> {
     const url = `${this.modelsServerUrl}/omal/apps?vhost=spip`;
     return this._httpClient
