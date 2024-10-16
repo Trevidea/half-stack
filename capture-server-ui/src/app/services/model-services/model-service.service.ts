@@ -198,9 +198,11 @@ export class ModelService {
       return this.create("event", data)
     }
   }
+
   saveDevice(data: Data.Device): Observable<Data.Device> {
     return this.create("devices", data);
   }
+
   openPreview(data: { eventId: number }): Observable<any> {
     const url = `${this.modelsServerUrl}/event/open-preview`;
     return this._httpClient.post<any>(url, data);
@@ -211,6 +213,21 @@ export class ModelService {
     return this._httpClient
       .get<any>(url)
       .pipe(map((response) => response["Gateway Response"]["applications"]));
+  }
+
+  createApp(data: { "app-name": string }): Observable<any> {
+    const url = `${this.modelsServerUrl}/omal/create-app`;
+    return this._httpClient.post(url, data);
+  }
+
+
+  deleteApp(data: { "app-name": string }): Observable<any> {
+    const url = `${this.modelsServerUrl}/omal/app`;
+    const httpOptions = {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
+      body: data,
+    };
+    return this._httpClient.delete<any>(url, httpOptions);
   }
   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ All Data retrival realated  funtions Below ++++++++++++++++++++++++++++++++++++++++//
   eventList(): Observable<Data.Event[]> {

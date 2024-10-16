@@ -1,0 +1,22 @@
+<div class="p-0 m-l-20 d-flex align-items-center  justify-content-end ">
+    <button mat-icon-button class="d-flex align-items-center" (click)="close()">
+        <i-tabler name="x" class="icon-18"></i-tabler>
+    </button>
+</div>
+<h2 class="p-0 m-l-20">Application Configuration </h2>
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-12 m-b-8">
+            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Application Name
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-100">
+                <input type="text" matInput name="applicationName" autocomplete="off"
+                    [(ngModel)]="datasource.appName" />
+            </mat-form-field>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="p-x-24 p-b-24 d-flex align-items-center justify-content-end ">
+    <button mat-raised-button (click)="close()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="onSave()">save</button>
+</mat-dialog-actions>
