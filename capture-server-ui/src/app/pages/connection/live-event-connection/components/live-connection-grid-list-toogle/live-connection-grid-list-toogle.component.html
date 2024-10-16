@@ -1,11 +1,11 @@
 <mat-card class="mat-card-top universal-card">
     <mat-card-header class="universal-card-header">
-        <app-live-gid-list-header  (messageListOrGrid)="listGrid($event)"
+        <app-live-gid-list-header (messageListOrGrid)="listGrid($event)"
             style="width: 100%;"></app-live-gid-list-header>
     </mat-card-header>
  <mat-card-content>
     @if(listOrGrid == 'grid'){
-  <app-live-gird []
+  <app-live-gird
     ></app-live-gird>}
   @if(listOrGrid == 'list'){
   <app-live-list></app-live-list>
