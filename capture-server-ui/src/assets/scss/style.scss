@@ -104,6 +104,11 @@
     --mdc-text-button-label-text-color: #fff !important;
     --mdc-outlined-button-label-text-color: #fff !important;
   }
+
+  div:where(.swal2-container) div:where(.swal2-popup) {
+    background-color: #232323 !important;
+    color: #fff !important;
+  }
 }
 
 

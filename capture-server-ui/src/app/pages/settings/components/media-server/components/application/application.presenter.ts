@@ -6,10 +6,10 @@ import { ApplicationComponent } from "./application.component";
 @Component({
   selector: 'app-application-presenter',
   standalone: true,
-  template: `<app-application [datasource]='ds' (onAddApp)="fetchingapplications()"></app-application>`,
+  template: `<app-application [datasource]='ds' (onAddApp)="fetchingapplications()"  (onDelete)="onDelete($event)"></app-application>`,
   styleUrls: ['./application.component.scss'],
   imports: [ApplicationComponent],
-  encapsulation:ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None
 })
 export class ApplicationPresernter implements OnInit {
   ds: ApplicationView;
@@ -21,26 +21,6 @@ export class ApplicationPresernter implements OnInit {
   ngOnInit(): void {
     this.fetchingapplications()
   }
-
-
-
-  // modalOpenMd() {
-  //   const modalRef = this.modalService.open(ApplicationFormComponent, {
-  //     centered: true,
-  //     size: "lg",
-  //     backdrop: "static",
-  //     keyboard: false,
-  //   });
-  //   modalRef.shown.subscribe(o => {
-  //     const inst: ApplicationFormComponent = modalRef.componentInstance;
-  //     inst.onAddNewApp.subscribe(res => {
-  //       console.log(res)
-  //       if (res) {
-  //         this.fetchingapplications()
-  //       }
-  //     });
-  //   })
-  // }
 
   fetchingapplications() {
     this.modalService.getApplications().subscribe(

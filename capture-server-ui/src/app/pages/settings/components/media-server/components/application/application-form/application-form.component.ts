@@ -16,7 +16,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class ApplicationFormComponent implements OnInit {
   datasource: ApplicationView;
-  constructor(private modelService: ModelService,public dialogRef: MatDialogRef<ApplicationFormComponent>) {
+  constructor(private modelService: ModelService, public dialogRef: MatDialogRef<ApplicationFormComponent>) {
     this.datasource = new ApplicationView()
   }
   ngOnInit(): void {
@@ -28,6 +28,7 @@ export class ApplicationFormComponent implements OnInit {
     this.modelService.createApp({ 'app-name': this.datasource.appName }).subscribe(
       (data) => {
         console.log(data);
+        this.close()
       },
       (error) => {
         console.log(error)

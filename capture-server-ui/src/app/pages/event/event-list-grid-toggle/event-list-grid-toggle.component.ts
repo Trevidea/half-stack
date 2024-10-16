@@ -14,6 +14,7 @@ import { UpcomingEventListComponent } from "./list-components/upcoming-event-lis
 import { PageEvent } from '@angular/material/paginator';
 import { EventView } from './views/events';
 import { DeleteDialogComponent } from '../../blocks/delete-dialog/delete-dialog.component';
+import { EventStartEndDialogsComponent } from '../../notifications-dialogs/event-start-end-dialogs/event-start-end-dialogs.component';
 
 @Component({
   selector: 'app-event-list-grid-toggle',
@@ -80,4 +81,6 @@ export class EventListGridToggleComponent {
       }
     });
   }
+
+
 }

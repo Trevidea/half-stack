@@ -26,17 +26,17 @@ export class PastEventDetailComponent implements OnInit {
 
 
   constructor(private location: Location) {
-    console.log(this.datasource)
-    setTimeout(() => {
-      const defaultdevice = this.datasource?.connectionDetailsView[0]
-      this.url = `${environment.hlsUrl}/${defaultdevice.streamName}/llhls.m3u8`
-      console.log(defaultdevice)
-    }, 90)
+
   }
 
   ngOnInit(): void {
-    console.log(this.datasource);
 
+    setTimeout(() => {
+      console.log(this.datasource);
+      const defaultdevice = this.datasource?.connectionDetailsView[0]
+      this.url = `${environment.hlsUrl}/${defaultdevice?.streamName}/llhls.m3u8`
+      console.log(defaultdevice)
+    }, 1000)
   }
 
   setStreamName(streamName: string, index: number) {

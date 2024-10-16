@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-content class="p-0">
-        <div class="row g-0">
+        <div class="row g-0" style="min-height:80vh;">
             <div class="col-lg-4 col-md-12 col-12  highlight-box d-flex flex-column">
                 <div class="d-flex align-items-center">
                     <span class="bullet bullet-sm bullet-success" style="margin-right: 5px;"></span>
@@ -27,20 +27,21 @@
                 <div class="d-flex align-items-center m-b-8 p-1">
                     <div class="event-info">
                         <div class="header">
-                            <h3 class="m-0">Event details</h3>
+                            <h2 class="m-8">Event details</h2>
                         </div>
                         <div class="content-body">
-                            <div class="w-100 d-flex align-items-top mat-body-1 m-b-8 ">
+                            <div class="w-100 d-flex align-items-top m-b-8 ">
                                 <i-tabler name="clock" class="icon-18 flex-shrink-0"></i-tabler>
-                                <p class="m-0">{{ datasource?.dtEvent |
+                                @if(datasource?.dtEvent ){
+                                <p>{{ datasource?.dtEvent |
                                     dateTimeFormat:datasource?.time }}
                                     {{datasource?.level}}
                                 </p>
-
+                                }
                             </div>
-                            <div class="w-100 d-flex align-items-top mat-body-1">
+                            <div class="w-100 d-flex align-items-top">
                                 <i-tabler name="map-pin" class="icon-18 flex-shrink-0"></i-tabler>
-                                <p class="m-0">
+                                <p>
                                     {{datasource?.venue?.location}},{{datasource?.venue?.streetAddress}}
                                     {{datasource?.venue?.cityAddress}}
                                 </p>
@@ -48,6 +49,8 @@
                         </div>
                     </div>
                 </div>
+                <button mat-stroked-button color="warn" class="w-100 m-t-auto m-b-8" (click)="closePreview.emit()">Close
+                    Preview</button>
             </div>
             <div class="col-lg-8 col-md-12 col-12">
                 <app-active-devices (onAddDeviceToevent)="onAddDeviceToevent()"

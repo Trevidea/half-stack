@@ -46,6 +46,7 @@ export class ConnectionDetailsBuilder extends AbstractBuilder<Data.ConnectedStre
     v.direction = m.direction;
     v.id = m.id;
     v.streamName = m.stream_name;
+    console.log("past event device details ", v)
   }
   decompose(v: ConnectionDetailsView): Data.ConnectedStreamingDevices {
     throw new Error("Method not implemented.");

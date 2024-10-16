@@ -26,7 +26,7 @@ import { TablerIconsModule } from 'angular-tabler-icons';
   styleUrl: './live-gird.component.scss'
 })
 export class LiveGirdComponent implements OnInit {
-  @Input() datasource='ds'
+  @Input() datasource: any;
   
   ngOnInit(): void {
   }

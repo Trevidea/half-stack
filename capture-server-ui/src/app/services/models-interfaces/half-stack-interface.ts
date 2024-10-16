@@ -81,7 +81,11 @@ export namespace Data {
     shared_with: string;
     connected_streaming_devices: ConnectedStreamingDevices[];
   }
-
+  export interface ConnectedStreamingDevices {
+    id: number;
+    stream_name: string
+    direction: number
+  }
   export interface Log extends Base {
     category: string;
     subject: string;
@@ -102,7 +106,7 @@ export namespace Data {
     duration: string;
     most_connected_device: string;
   }
-  
+
   export interface Connection extends Base {
     id: number;
     userId: number;
@@ -120,11 +124,7 @@ export namespace Data {
   export enum Priority { }
 
   export enum Type { }
-  export interface ConnectedStreamingDevices {
-    id: number;
-    stream_name: string
-    direction: number
-  }
+
 
   export interface Preview extends Base {
     dtEvent: string;

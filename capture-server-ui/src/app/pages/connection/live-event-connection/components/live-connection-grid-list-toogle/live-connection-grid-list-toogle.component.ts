@@ -32,11 +32,10 @@ import { AddDeviceToEventPresenter } from 'src/app/pages/event/add-device-to-eve
   styleUrl: './live-connection-grid-list-toogle.component.scss'
 })
 export class LiveConnectionGridListToogleComponent {
-
   @Input() datasource: any;
-  gridView : boolean = true;
- 
-  changeViewMode(isGrid: boolean){
+  gridView: boolean = true;
+
+  changeViewMode(isGrid: boolean) {
     this.gridView = isGrid;
   }
 

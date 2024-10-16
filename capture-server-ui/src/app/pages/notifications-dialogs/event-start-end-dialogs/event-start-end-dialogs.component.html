@@ -1,0 +1,70 @@
+@if (action=="start") {
+<div class="p-0 m-l-20 d-flex align-items-center  justify-content-end ">
+  <button mat-icon-button class="d-flex align-items-center" (click)="close()">
+    <i-tabler name="x" class="icon-18"></i-tabler>
+  </button>
+</div>
+<h2 class="p-0 m-l-20">Event started</h2>
+<mat-dialog-actions class="p-x-24 p-b-24">
+  <mat-card class="overflow-hidden w-100" style="box-shadow: none;">
+    <mat-card-header class="course-header d-flex p-8" style="background-color: #1e4db7; color: #fff;">
+      <h3 class="">On-Demand Event</h3>
+    </mat-card-header>
+    <mat-card-content class="p-16" style="  background-color: #2160930D;">
+      <div class="d-flex align-items-center justify-content-between">
+        <h6 class="card-title m-0"> {{this.ds.title}}</h6>
+        <button mat-flat-button style="background-color: #1a97f5; color: #fff;"
+          [routerLink]="'connections/connection/live-connections'">Go to
+          Event</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <!-- <button mat-flat-button color="primary" mat-dialog-close>Ok</button> -->
+</mat-dialog-actions>
+}@else if (action=="stop") {
+<div class="p-0 m-l-20 d-flex align-items-center  justify-content-end ">
+  <button mat-icon-button class="d-flex align-items-center" (click)="close()">
+    <i-tabler name="x" class="icon-18"></i-tabler>
+  </button>
+</div>
+<h2 class="p-0 m-l-20">Event ended</h2>
+<mat-dialog-actions class="p-x-24 p-b-24">
+  <div class="col-12">
+    <div class="d-flex align-items-center justify-content-between m-t-8">
+      <img src="assets/images/half-stack-images/event-card.png" class="img-fluid" alt="..." style="
+          max-width: 131px;
+          max-height: 58px;
+          border-radius: 4px;
+          margin-right: 7px;
+        " />
+      <div>
+        <h6 class="m-0">
+          {{ eventDetail.eventName }}
+        </h6>
+        <div class="d-flex align-items-center justify-content-between">
+          <p class="m-0">Duration - {{ eventDetail.duration }}</p>
+          <p class="m-0">Size - {{ eventDetail.size }} files</p>
+          <p></p>
+        </div>
+      </div>
+      <button mat-flat-button style="background-color: #1a97f5; color: #fff;" (click)="endViewBtn()">View</button>
+    </div>
+  </div>
+  <!-- <mat-card class="overflow-hidden w-100" style="box-shadow: none;">
+    <mat-card-header class="course-header d-flex p-8" style="background-color: #1e4db7; color: #fff;">
+      <h3 class="">On-Demand Event</h3>
+    </mat-card-header>
+    <mat-card-content class="p-16" style="  background-color: #2160930D;">
+      <div class="d-flex align-items-center justify-content-between">
+        <h6 class="card-title m-0"> {{this.ds.title}}</h6>
+        <button mat-flat-button style="background-color: #1a97f5; color: #fff;"
+          [routerLink]="'connections/connection/live-connections'">Go to
+          Event</button>
+      </div>
+
+    </mat-card-content> -->
+  <!-- </mat-card> -->
+  <!-- <button mat-flat-button color="primary" mat-dialog-close>Ok</button> -->
+</mat-dialog-actions>
+
+}

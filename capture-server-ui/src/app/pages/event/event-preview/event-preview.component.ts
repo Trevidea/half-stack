@@ -31,4 +31,30 @@ export class EventPreviewComponent {
 
     });
   }
+
+  ngOnInit(): void {
+    console.log(this.datasource)
+    setInterval(() => {
+      this.calculateUpcomingCountdown(this.datasource)
+    }, 50)
+  }
+
+  calculateUpcomingCountdown(item: any) {
+    const now = new Date();
+    const eventDateTime = new Date(item?.dtEvent);
+    eventDateTime.setHours(Math.floor(item?.time / 100));
+    eventDateTime.setMinutes(item?.time % 100);
+    const diff = eventDateTime.getTime() - now.getTime();
+    if (diff >= 0) {
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      this.datasource.countdown = `${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
+    }
+  }
+
+  padZero(num: number): string {
+    return num < 10 ? `0${num}` : `${num}`;
+  }
 }

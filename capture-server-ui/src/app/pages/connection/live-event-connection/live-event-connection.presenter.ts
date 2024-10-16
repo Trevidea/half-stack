@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -9,6 +9,7 @@ import { LiveEventConnectionComponent } from "./live-event-connection.component"
 import { ConnectionDetailsView, liveEventDetail } from './views/live-event';
 import { SocketService } from 'src/app/services/web-socket/socket.service';
 import { Subscription } from 'rxjs';
+import { EventRunnerService } from 'src/app/services/event-runner/event-runner.service';
 
 
 @Component({
@@ -18,20 +19,21 @@ import { Subscription } from 'rxjs';
   template: `<app-live-event-connection [datasource]='ds'></app-live-event-connection>`,
   styleUrl: './live-event-connection.component.scss'
 })
-export class LiveEventConnectionPresenter implements OnInit{
+export class LiveEventConnectionPresenter implements OnInit, OnDestroy {
 
   ds!: liveEventDetail;
   socketDs!: liveEventDetail;
   private socketSubscription: Subscription;
   constructor(
-    private socketService: SocketService
+    private socketService: SocketService,
+    private eventRunnerService: EventRunnerService
   ) {
     this.ds = new liveEventDetail();
     this.socketDs = new liveEventDetail();
   }
 
   ngOnInit(): void {
-  
+
     this.ds = this.socketDs;
 
     this.socketSubscription = this.socketService.onTopicMessage('live-event').subscribe((message) => {
@@ -39,7 +41,7 @@ export class LiveEventConnectionPresenter implements OnInit{
       console.log(data)
       const liveEventData: any = data.result[0][0];
       console.log(liveEventData)
-      // this.eventRunnerService.setstartedEventId(liveEventData["event_id"])
+      this.eventRunnerService.setstartedEventId(liveEventData["event_id"])
       this.ds.id = liveEventData["event_id"]
       this.ds.title = liveEventData["title"];
       this.ds.level = liveEventData["level"];
@@ -75,6 +77,13 @@ export class LiveEventConnectionPresenter implements OnInit{
 
     });
 
+  }
+
+  ngOnDestroy(): void {
+    if (this.socketSubscription) {
+      console.log("Socket unsubscribed..", this.socketSubscription)
+      this.socketSubscription.unsubscribe();
+    }
   }
 
 }

@@ -1,118 +1,127 @@
 <div class="table-responsive">
-    <table >
-       <tr>
-        <th>
+  <table>
+    <tr>
+      <th>
+        <div class="d-flex">
+          <span class=" f-w-500" text-align="center">Action</span>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex">
+          <span class=" f-w-500" text-align="center">Name</span>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex">
+          <span class=" f-w-500" text-align="center">Role</span>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex">
+          <span class=" f-w-500" text-align="center">Location</span>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex">
+          <span class=" f-w-500" text-align="center">Device ID</span>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex">
+          <span class=" f-w-500" text-align="center">Device Type</span>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex">
+          <span class=" f-w-500" text-align="center">Network</span>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex">
+          <span class=" f-w-500" text-align="center">Quality</span>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex">
+          <span class=" f-w-500" text-align="center">IP Address</span>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex">
+          <span class=" f-w-500" text-align="center">Transmit Status</span>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex">
+          <span class="f-w-500">Retries</span>
+        </div>
+      </th>
+    </tr>
 
-        </th>
-         <th>
-           <div class="d-flex">
-               <span class=" f-w-500" text-align="center">Action</span>
-             </div> 
-         </th>
-         <th>
-           <div class="d-flex">
-               <span class=" f-w-500" text-align="center">Name</span>
-             </div> 
-         </th>
-         <th>
-           <div class="d-flex">
-               <span class=" f-w-500" text-align="center">Role</span>
-             </div> 
-         </th>
-         <th>
-           <div class="d-flex">
-               <span class=" f-w-500" text-align="center">Location</span>
-             </div> 
-         </th>
-         <th>
-           <div class="d-flex">
-               <span class=" f-w-500" text-align="center">Device ID</span>
-             </div> 
-         </th>
-         <th>
-          <div class="d-flex">
-            <span class=" f-w-500" text-align="center">Device Type</span>
-          </div>
-         </th>
-         <th>
-            <div class="d-flex">
-                <span class=" f-w-500" text-align="center">Network</span>
-              </div> 
-          </th>
-          <th>
-            <div class="d-flex">
-                <span class=" f-w-500" text-align="center">Quality</span>
-              </div> 
-          </th>
-          <th>
-            <div class="d-flex">
-                <span class=" f-w-500" text-align="center">IP Address</span>
-              </div> 
-          </th>
-          <th>
-            <div class="d-flex">
-                <span class=" f-w-500" text-align="center">Transmit Status</span>
-              </div> 
-          </th>
-          <th>
-            <div class="d-flex">
-                <span class="f-w-500" >Retries</span>
-            </div>
-          </th>
-       </tr>
-      
-       <tr>
-         <td>
-          <mat-icon style="color: rgba(33, 96, 147, 1);">star</mat-icon>
-         </td>
-         <td>
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
+    @for (item of datasource?.connectionDetails; track $index) {
+    <tr [ngClass]="item?.role == 'Publisher' ? 'cursor-pointer' : 'cursor-none'" (click)="detail(item)">
+      <td>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>pause</mat-icon>
+            <span>Pause</span>
           </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-              <mat-icon>visibility</mat-icon>
-              <span>View stream</span>
-            </button>
 
-            <button mat-menu-item>
-              <mat-icon>play_arrow</mat-icon>
-              <span>Start Recording</span>
-            </button>
+          <button mat-menu-item style="color: red">
+            <mat-icon style="color: red">block</mat-icon>
+            <span>Block</span>
+          </button>
 
-            <button mat-menu-item>
-              <mat-icon>star</mat-icon>
-              <span>Remove as primary device</span>
-            </button>
+          <button mat-menu-item style="color: red">
+            <mat-icon style="color: red">delete</mat-icon>
+            <span>Remove</span>
+          </button>
+        </mat-menu>
+      </td>
+      <td>{{item?.name}}</td>
+      <td>
+        {{ item?.role }}
+      </td>
+      <td>{{ item?.location }}</td>
+      <td>---</td>
+      <td> {{ item?.device }}</td>
+      <td> {{ item?.network }}</td>
+      <td><span mat-button class="p-8" [ngClass]="{
+          'badge-light-danger': item?.quality === 0,
+          'badge-light-success': item?.quality === 2
+        }">
+          {{ item?.quality }}
+        </span></td>
+      <td>{{ item?.ipAddress }}</td>
+      <td>
+        <div class="d-flex">
+          @switch (item?.transmitStatus) {
+          @case ('Streaming') {
+          <i-tabler name="arrow-up-right" class="icon-20" style="color: #F5A30A;"></i-tabler>
+          }
+          @case ('Receiving') {
+          <i-tabler name="arrow-down-left" class="icon-20" style="color: #216093;"></i-tabler>
+          }
+          @case ('Paused') {
+          <i-tabler name="player-pause" class="icon-20"></i-tabler>
+          }
+          @case ('Blocked') {
+          <i-tabler name="circle-half" class="icon-20" style="color: red;"></i-tabler>
+          }
+          }
 
-            <button mat-menu-item >
-              <mat-icon>sensors</mat-icon>
-              <span>Relay</span>
-            </button>
+          <span class="p-l-4"> {{ item.transmitStatus }}</span>
+        </div>
+      </td>
+      <td> {{ item.received }}</td>
+      <td>
+        {{ item.retries }}
+      </td>
+    </tr>
+    }
 
-            <button mat-menu-item style="color: red">
-              <mat-icon style="color: red">delete</mat-icon>
-              <span>Remove</span>
-            </button>
-          </mat-menu>
-         </td>
-         <td>Coach S.</td>
-         <td>
-          Subscriber
-         </td>
-         <td>Press Box</td>
-         <td>iPad15</td>
-         <td>iPad</td>
-         <td>Penfield-5..</td>
-         <td><span mat-button class="p-t-4 p-b-4 p-r-8 p-l-8" style="background-color: rgba(67, 196, 99, 0.1); color: rgba(67, 196, 99, 1); border-radius: 9px;">
-          Good
-       </span></td>
-         <td>192.168.1.10</td>
-         <td> <div class="d-flex">
-          <i-tabler name="arrow-down-left" class="icon-20"></i-tabler>
-          <span class="p-l-4">Receiving</span>
-        </div></td>
-        <td>2</td>
-       </tr>
-    </table>
-   </div>
+  </table>
+</div>
