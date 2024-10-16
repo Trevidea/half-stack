@@ -25,9 +25,10 @@ export class EventPreviewComponent {
 
   onAddDeviceToevent() {
     const dialogRef = this.dialog.open(AddDeviceToEventPresenter, {
+      data: { eventId: this.eventId },
       maxWidth: '700px',
       width: '100%',
-      
+
     });
   }
 }

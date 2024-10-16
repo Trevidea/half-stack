@@ -9,6 +9,8 @@ export const environment = {
   cpServerBaseUrl: 'http://drake.in:1437/api',
   hlsUrl: "http://drake.in:59919", //for play Dump m3u8
   spRelayUrl: "http://drake.in:3001", //for web socket 
+  rtmpUrl: "rtmp://drake.in:1935",
+  playerUrl: "https://drake.in:3334",
 };
 
 /*

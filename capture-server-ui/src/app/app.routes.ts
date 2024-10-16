@@ -25,12 +25,10 @@ export const routes: Routes = [
           ),
       },
       {
-         path: 'dashboard',
-         loadChildren: ()=>
-          import('./pages/dashboard/dashboard.routes').then((m)=>m.DashboardRoutes),
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./pages/dashboard/dashboard.routes').then((m) => m.DashboardRoutes),
       },
-     
-      
       {
         path: 'events',
         loadChildren: () => import('./pages/event/event.routes').then(
@@ -38,21 +36,27 @@ export const routes: Routes = [
         )
       },
       {
-        path: 'connections',
-        loadChildren: () => import('./pages/connection/connection.routes').then(
-          (m)=> m.ConnectionRoutes
+        path: 'settings',
+        loadChildren: () => import('./pages/settings/settings.routes').then(
+          (m) => m.SettingsRoutes
         )
       },
       {
-         path: 'logs',
-         loadChildren: ()=> import('./pages/logs/log.routes').then(
-          (m)=> m.LogsRoutes
+        path: 'connections',
+        loadChildren: () => import('./pages/connection/connection.routes').then(
+          (m) => m.ConnectionRoutes
+        )
+      },
+      {
+        path: 'logs',
+        loadChildren: () => import('./pages/logs/log.routes').then(
+          (m) => m.LogsRoutes
         )
       },
       {
         path: 'share',
-        loadChildren: ()=> import('./pages/shared/shared.routes').then(
-          (m)=> m.SharedRoutes)
+        loadChildren: () => import('./pages/shared/shared.routes').then(
+          (m) => m.SharedRoutes)
 
       },
 

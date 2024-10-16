@@ -1,0 +1,31 @@
+.highlighted-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px;
+    border-radius: 4px;
+    background-color: #F3F3F5;
+}
+
+
+.url-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    border-radius: 4px;
+    margin: 14px 0px;
+    background-color: #F3F3F5;
+}
+
+.dark-theme {
+    .url-box {
+        background-color: #313131 !important;
+        color: #FDFDFD;
+    }
+
+    .highlighted-box {
+        background-color: #313131 !important;
+        color: #FDFDFD;
+    }
+}

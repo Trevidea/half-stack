@@ -30,7 +30,6 @@ export const ConnectionRoutes: Routes = [
                         path: 'player',
                         component: ConnectionDeviceDetailPresenter
                     }
-                   
                 ]
             }
         ]
