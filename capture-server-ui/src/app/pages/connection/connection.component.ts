@@ -22,7 +22,7 @@ export class ConnectionComponent {
     // this.previousEventsConnection = PreviousEventsConnection;
     this.eventRunnerService.isEventStarted$.subscribe(
       (res) => {
-        console.log(res);
+        // console.log(res);
         this.isEventStarted = res;
       }
     );

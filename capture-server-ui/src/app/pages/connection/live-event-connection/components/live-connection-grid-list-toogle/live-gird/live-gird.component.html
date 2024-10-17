@@ -1,6 +1,6 @@
-<div class="grid-view p-1">
+ <div class="grid-view p-1">
 
-  @for(item of datasource.connectionDetails; track item){
+  @for(item of datasource?.connectionDetails; track item){
   <mat-card class="grid-card"> 
    <mat-card-header
       class="d-flex align-items-center justify-content-between mat-card-header"
@@ -13,7 +13,8 @@
 
      
     </mat-card-header>
-    <mat-card-content >
+    <mat-card-content > 
+
       <!-- <div class="row">
         <div class="col-md-6">
           <mat-icon
@@ -32,71 +33,82 @@
       
     </div>
     </div> -->
+
+
     <div class="row">
-      <div class="col-xxxl-3 col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
         <mat-card
           class="card"
           [ngClass]="item?.role == 'Publisher' ? 'cursor-pointer' : 'cursor-none'"
           style="height: 14rem; width: 24rem; border: 1px solid transparent"
           
         >
-          <img *ngIf="item?.role === 'Publisher'" 
-            src="" alt="Image" 
+        @if(item?.role === 'Publisher'){
+          <img *ngIf="" 
+            src="assets/images/backgrounds/football_1.png" alt="Image" 
             style="height: 100%; width: 100%; border-radius: 0.428rem"/>
-         
+        }
     
           <!-- For devices without images -->
+           @if(item.role == 'Subscriber'){
           <div
-            *ngIf="item.role == 'Subscriber'"
             class="d-flex justify-content-center align-items-center"
             style="height: 100%; width: 100%;"
           >
-            <div #tab *ngIf="item?.device == 'iPad15' || item.device == 'iPad22'">
+           @if(item?.device == 'iPad15' || item.device == 'iPad22'){
+            <div #tab >
               <mat-icon style="font-size: 4rem">tablet_mac</mat-icon>
-            </div>
-            <div #phone *ngIf="item?.deviceType == 'iPhone'">
+            </div>}
+            @if(item?.deviceType == 'iPhone'){
+            <div #phone >
               <mat-icon style="font-size: 4rem">smartphone</mat-icon>
-            </div>
-          </div>
+            </div>}
+          </div>}
     
           <!-- Quality Badge -->
           <div style="position: absolute; bottom: 0.3em; left: 0.3em">
-            <span *ngIf="item?.quality == 2" 
-              class="badge bg-success text-light">
+            @if(item?.quality == 2){
+            <span *ngIf="" 
+              class=" badge badge-light-success  text-light">
               <mat-icon style="color: rgb(0, 102, 46)">circle</mat-icon> Good
-            </span>
-            <span *ngIf="item?.quality == 0" 
-              class="badge bg-danger text-light">
+            </span>}
+            @if(item?.quality == 0){
+            <span  
+              class="badge badge-light-danger text-light">
               <mat-icon style="color: rgb(181, 0, 0)">circle</mat-icon> Poor
-            </span>
+            </span>}
           </div>
     
           <!-- Transmit Status Badge -->
           <div class="d-flex" style="position: absolute; bottom: 0.3em; right: 0.3em">
             <ng-container>
               <!-- Publisher Streaming -->
-              <span *ngIf="item?.role === 'Publisher'" class="badge bg-warning text-dark">
+               @if(item?.role === 'Publisher'){
+               <span  class="badge  text-dark">
                 <mat-icon>arrow_upward</mat-icon> Streaming
-              </span>
+              </span> }
     
               <!-- Subscriber Receiving -->
-              <span *ngIf="item?.role === 'Subscriber'" class="badge bg-primary text-light">
+               @if(item?.role === 'Subscriber'){
+              <span  class="badge bg-primary text-light">
                 <mat-icon>arrow_downward</mat-icon> Receiving
-              </span>
+              </span>}
     
               <!-- Transmit Status -->
-              <span *ngIf="item?.transmitStatus === 'Paused'" class="badge bg-secondary text-light">
+               @if(item?.transmitStatus === 'Paused'){
+              <span  class="badge bg-secondary text-light">
                 <mat-icon>pause</mat-icon> Paused
-              </span>
-              <span *ngIf="item?.transmitStatus === 'Blocked'" class="badge bg-warning text-dark">
+              </span>}
+
+              @if(item?.transmitStatus === 'Blocked'){
+              <span class="badge badge-light-danger text-dark">
                 <mat-icon>block</mat-icon> Blocked
-              </span>
+              </span>}
             </ng-container>
           </div>
         </mat-card>
       </div>
-    </div>
-    
+    </div> 
     </mat-card-content>
     <!-- <mat-card-actions class="d-flex align-items-center justify-content-between">
      <div class="d-flex align-items-center">
@@ -166,6 +178,7 @@
  </mat-card>
 }
 </div>
+
 
 
 
