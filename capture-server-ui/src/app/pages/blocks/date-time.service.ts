@@ -141,6 +141,8 @@ export class DateTimeService {
           hours
         )}:${this._padZero(minutes)}:${this._padZero(seconds)}`;
         event.ongoingCountdown = formattedTime;
+      } else {
+        event.ongoingCountdown = "Not stared yet"
       }
     });
   }

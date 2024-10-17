@@ -15,11 +15,12 @@ import { DevicesBuilder } from './builder/device';
 import { PresenterAction } from 'src/app/blocks/actions';
 import { AddDeviceBuilder } from './builder/add-device';
 import { Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-device-to-event-presenter',
   standalone: true,
-  imports: [AddDeviceToEventComponent],
+  imports: [AddDeviceToEventComponent, MatSnackBarModule],
   template: `<app-add-device-to-event [datasource]="ds"  (save)="actions.onSave()"  (cancel)="doAction()"></app-add-device-to-event>`,
   styleUrl: './add-device-to-event.component.scss',
   encapsulation: ViewEncapsulation.None
@@ -35,7 +36,8 @@ export class AddDeviceToEventPresenter implements OnInit {
   constructor(private modelService: ModelService,
     @Inject(MAT_DIALOG_DATA) public data: { eventId: number },
     public dialogRef: MatDialogRef<AddDeviceToEventPresenter>,
-    private router: Router) {
+    private router: Router,
+    private snack: MatSnackBar) {
     this.ds = new AddDeviceView();
     this.ds.eventId = data.eventId;
     this.actions = new PresenterAction(
@@ -47,10 +49,15 @@ export class AddDeviceToEventPresenter implements OnInit {
     );
     this.actions.onComplete.subscribe((result) => {
       if (result) {
-        alert("Device Added")
+
         this.doAction();
+        this.snack.open("Device added", '', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'left'
+        });
       } else {
-        alert("not added")
+        console.error("Not Added device to event")
       }
     });
   }
@@ -103,4 +110,6 @@ export class AddDeviceToEventPresenter implements OnInit {
   doAction(): void {
     this.dialogRef.close();
   }
+
+
 }

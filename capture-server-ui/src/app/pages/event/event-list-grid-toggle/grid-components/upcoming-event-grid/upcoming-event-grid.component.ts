@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,6 +14,7 @@ import { ActionMenuComponent } from 'src/app/pages/blocks/action-menu/action-men
 import { CapitalizeFirstPipe } from "../../../../../pipe/capitalize-first-letter";
 import { CommonModule } from '@angular/common';
 import { UpcomingEventDetailPresenter } from "../../../event-details/components/upcoming-event-detail/upcoming-event-detail.presenter";
+import { DateTimeService } from 'src/app/pages/blocks/date-time.service';
 
 @Component({
   selector: 'app-upcoming-event-grid',
@@ -22,14 +23,26 @@ import { UpcomingEventDetailPresenter } from "../../../event-details/components/
   styleUrl: './upcoming-event-grid.component.scss',
   imports: [MatCardModule, CommonModule, OffCanvasComponent, MatButtonModule, TablerIconsModule, ActionMenuComponent, MatIconModule, MatTooltipModule, DateTimeFormatPipe, CapitalizeFirstPipe, UpcomingEventDetailPresenter]
 })
-export class UpcomingEventGridComponent {
+export class UpcomingEventGridComponent implements OnDestroy, OnChanges {
   @Input() datasource: any;
   @Output() onDelete = new EventEmitter();
   @ViewChild(OffCanvasComponent) offCanvas: OffCanvasComponent;
   seletctedItem: any;
-  constructor(public offCanvasService: OffCanvasService, private router: Router) { }
-
+  private countdownInterval: any;
   IsOpenDetail: boolean = false;
+  constructor(public offCanvasService: OffCanvasService, private router: Router, private dateTimeservice: DateTimeService,) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // if (changes.datasource && changes.datasource.currentValue) {
+    this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+    }
+    this.countdownInterval = setInterval(() => {
+      this.dateTimeservice.calculateUpcomingCountdown(this.datasource);
+    }, 50);
+    // }
+  }
 
   viewDetial(item: any) {
     this.IsOpenDetail = true
@@ -66,4 +79,11 @@ export class UpcomingEventGridComponent {
   onClickPreview(eventId: number) {
     this.router.navigate([`/events/preview/${eventId}`]);
   }
+
+  ngOnDestroy(): void {
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+    }
+  }
+
 }

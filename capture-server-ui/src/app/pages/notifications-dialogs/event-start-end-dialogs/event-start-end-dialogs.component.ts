@@ -63,4 +63,9 @@ export class EventStartEndDialogsComponent implements OnInit {
     this.roter.navigate([`events/past-event-details/${this.eventId}`])
     this.dialogRef.close();
   }
+
+  goToEvent(){
+    this.roter.navigate([`connections/connection/live-connections`])
+    this.dialogRef.close();
+  }
 }
