@@ -52,7 +52,12 @@ export const navItems: NavItem[] = [
     displayName: "Settings",
     iconName: 'settings',
     route: 'settings/main-page/account'
-  }
+  },
+  {
+    displayName: 'Meta Type',
+    iconName: 'brand-framer',
+    route: 'meta-type'
+  },
   // {
   //   navCap: 'Apps',
   // },

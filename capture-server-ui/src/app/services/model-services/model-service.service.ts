@@ -199,6 +199,17 @@ export class ModelService {
     }
   }
 
+  MetaType(data: Data.MetaType): Observable<Data.MetaType> {
+    console.log(data)
+    if (data.id) {
+      console.log("updating meta type ")
+      return this.update("meta-type", data, data.id)
+    }
+    else {
+      return this.create("meta-type", data);
+    }
+  }
+
   saveDevice(data: Data.Device): Observable<Data.Device> {
     return this.create("devices", data);
   }
@@ -240,6 +251,9 @@ export class ModelService {
   }
   eventJson(id: number): Observable<Data.Event> {
     return this._selectOne("event", id, EventData);
+  }
+  ALLMetaTypeJson(): Observable<Data.MetaType[]> {
+    return this._data(`meta-type`, MetaTypeData)
   }
 
   getSpecificPastEvent(id: number): Observable<Data.PastEvent> {
