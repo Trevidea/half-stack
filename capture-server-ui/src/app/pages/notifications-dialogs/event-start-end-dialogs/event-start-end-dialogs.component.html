@@ -12,7 +12,7 @@
     </mat-card-header>
     <mat-card-content class="p-16" style="  background-color: #2160930D;">
       <div class="d-flex align-items-center justify-content-between">
-        <h6 class="card-title m-0"> {{this.ds.title}}</h6>
+        <h4 class="card-title m-0"> {{this.ds.title}}</h4>
         <button mat-flat-button style="background-color: #1a97f5; color: #fff;" (click)="goToEvent()">Go to
           Event</button>
       </div>
@@ -37,9 +37,9 @@
           margin-right: 7px;
         " />
       <div>
-        <h6 class="m-0">
+        <h4 class="m-0">
           {{ eventDetail.eventName }}
-        </h6>
+        </h4>
         <div class="d-flex align-items-center justify-content-between">
           <p class="m-0">Duration - {{ eventDetail.duration }}</p>
           <p class="m-0">Size - {{ eventDetail.size }} files</p>

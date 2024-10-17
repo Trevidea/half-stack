@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { OffCanvasComponent } from 'src/app/pages/blocks/off-canvas/off-canvas.component';
@@ -9,6 +9,7 @@ import { ActionMenuComponent } from "../../../../blocks/action-menu/action-menu.
 import { UI } from 'src/app/pages/blocks/ui-interface';
 import { OngoingEventDetailPresenter } from "../../../event-details/components/ongoing-event-detail/ongoing-event-detail.presenter";
 import { UpcomingEventDetailPresenter } from "../../../event-details/components/upcoming-event-detail/upcoming-event-detail.presenter";
+import { DateTimeService } from 'src/app/pages/blocks/date-time.service';
 
 @Component({
   selector: 'app-ongoing-event-grid',
@@ -17,14 +18,28 @@ import { UpcomingEventDetailPresenter } from "../../../event-details/components/
   templateUrl: './ongoing-event-grid.component.html',
   styleUrl: './ongoing-event-grid.component.scss'
 })
-export class OngoingEventGridComponent {
+export class OngoingEventGridComponent implements OnChanges, OnDestroy {
   @ViewChild(OffCanvasComponent) offCanvas: OffCanvasComponent;
   @Input() datasource: any
   selectedEventId: number
   IsOpenDetail: boolean = false;
   @Output() onDelete = new EventEmitter();
   seletctedItem: any;
-  constructor(public offCanvasService: OffCanvasService) { }
+  private countdownInterval: any;
+  constructor(public offCanvasService: OffCanvasService, private dateTimeservice: DateTimeService,) { }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    this.dateTimeservice.updateCountdownForOngoingEvents(this.datasource);
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+    }
+    this.countdownInterval = setInterval(() => {
+      this.dateTimeservice.updateCountdownForOngoingEvents(this.datasource);
+    }, 50);
+
+  }
 
   viewDetial(item: any) {
     this.IsOpenDetail = true
@@ -45,6 +60,11 @@ export class OngoingEventGridComponent {
         action: () => this.onDelete.emit(item),
       },
     ];
+  }
+  ngOnDestroy(): void {
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+    }
   }
 
 }

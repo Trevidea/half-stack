@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { UI } from 'src/app/pages/blocks/ui-interface';
+import { ModelService } from 'src/app/services/model-services/model-service.service';
 
 @Component({
   selector: 'app-active-devices',
@@ -20,7 +21,7 @@ export class ActiveDevicesComponent {
     { label: 'Block', icon: 'slash', action: () => { } },
     { label: 'Remove', icon: 'trash', action: () => { } },
   ]
-  constructor(private router: Router) { }
+  constructor(private router: Router, private modelService: ModelService) { }
 
   detail(item: any) {
     if (item.direction === 1) {
@@ -29,5 +30,12 @@ export class ActiveDevicesComponent {
         queryParams: { devicedetail: JSON.stringify(item) }
       });
     }
+  }
+
+
+  deleteSelected(id: number) {
+    this.modelService.delete('devices', id).subscribe((data) => {
+      console.log(data)
+    })
   }
 }

@@ -117,7 +117,7 @@
         </mat-label>
         <mat-form-field appearance="outline" class="w-100">
           <mat-select
-            placeholder="Select Sport"
+            placeholder="Select Sport" name="sport"
             [(ngModel)]="datasource?.sports.SelectedItem"
           >
             @for (item of datasource?.sports; track $index) {
@@ -132,7 +132,7 @@
         </mat-label>
         <mat-form-field appearance="outline" class="w-100">
           <mat-select
-            placeholder="Select Program"
+            placeholder="Select Program" name="program"
             [(ngModel)]="datasource?.programs.SelectedItem"
           >
             @for (item of datasource?.programs; track $index) {
@@ -147,7 +147,7 @@
         </mat-label>
         <mat-form-field appearance="outline" class="w-100">
           <mat-select
-            placeholder="Select Level"
+            placeholder="Select Level" name="levels"
             [(ngModel)]="datasource?.levels.SelectedItem"
           >
             @for (item of datasource?.levels; track $index) {
