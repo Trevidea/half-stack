@@ -20,6 +20,7 @@ export class LiveGidListHeaderComponent implements OnInit {
   @Output() messageListOrGrid = new EventEmitter<string>();
   @Output() pubSubAll = new EventEmitter<string>();
   @Input() eventId: number = 0;
+  // @Input() datasource: any;
   listOrGrid: string = "list";
   activeTabIndex: number = 0;
   selectedIndex: number = 0;
