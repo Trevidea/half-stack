@@ -30,14 +30,18 @@ export class EventBuilder extends AbstractBuilder<
   }
 
   decompose(v: OnDemandEventFormView): Data.Event {
+    console.log(v);
+
     const time = this.formatTime(v.time)
+    // Format the event date to 'YYYY-MM-DD' format
+    const eventDate = new Date(v.dtEvent).toISOString().slice(0, 10);
     return {
       id: v.id,
       title: v.title,
       detail: {
         id: 0
       },
-      dt_event: v.dtEvent,
+      dt_event: eventDate,
       level: v.levels.SelectedItem,
       program: v.programs.SelectedItem,
       sport: v.sports.SelectedItem,
