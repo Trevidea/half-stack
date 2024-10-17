@@ -1,7 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import { MatCardImage, MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -13,7 +14,7 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 @Component({
   selector: 'app-live-gird',
   standalone: true,
-  imports: [MatCardModule, MatMenuModule,
+  imports: [CommonModule, MatCardModule, MatCardImage, MatMenuModule,
     MatDividerModule,
     MatButtonModule,
     MatToolbarModule,
