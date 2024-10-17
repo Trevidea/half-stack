@@ -10,6 +10,7 @@ import { UI } from 'src/app/pages/blocks/ui-interface';
 import { OngoingEventDetailPresenter } from "../../../event-details/components/ongoing-event-detail/ongoing-event-detail.presenter";
 import { UpcomingEventDetailPresenter } from "../../../event-details/components/upcoming-event-detail/upcoming-event-detail.presenter";
 import { DateTimeService } from 'src/app/pages/blocks/date-time.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ongoing-event-grid',
@@ -26,7 +27,7 @@ export class OngoingEventGridComponent implements OnChanges, OnDestroy {
   @Output() onDelete = new EventEmitter();
   seletctedItem: any;
   private countdownInterval: any;
-  constructor(public offCanvasService: OffCanvasService, private dateTimeservice: DateTimeService,) { }
+  constructor(public offCanvasService: OffCanvasService, private dateTimeservice: DateTimeService,private router:Router) { }
 
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -53,6 +54,8 @@ export class OngoingEventGridComponent implements OnChanges, OnDestroy {
 
   dropdownItems(item: any): UI.DropDownMenuItem[] {
     return [
+      { label: "Edit {t}", icon: "edit", action: () => this.editOnDemandEvent(item.id) },
+
       {
         label: "Delete event",
         icon: "delete",
@@ -66,5 +69,7 @@ export class OngoingEventGridComponent implements OnChanges, OnDestroy {
       clearInterval(this.countdownInterval);
     }
   }
-
+  editOnDemandEvent(id: number) {
+    this.router.navigate([`events/edit/on-demand-event/${id}`]);
+  }
 }
