@@ -6,6 +6,7 @@ import { ActiveDevicesComponent } from "./active-devices/active-devices.componen
 import { DateTimeFormatPipe } from "../../../pipe/date-time-format";
 import { MatDialog } from '@angular/material/dialog';
 import { AddDeviceToEventPresenter } from '../add-device-to-event/add-device-to-event.presenter';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-event-preview',
@@ -21,7 +22,7 @@ export class EventPreviewComponent {
   private countdownInterval: any;
   @Output() closePreview = new EventEmitter()
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog,private location: Location) { }
 
   onAddDeviceToevent() {
     const dialogRef = this.dialog.open(AddDeviceToEventPresenter, {
@@ -56,5 +57,10 @@ export class EventPreviewComponent {
 
   padZero(num: number): string {
     return num < 10 ? `0${num}` : `${num}`;
+  }
+
+
+goBack() {
+    this.location.back();
   }
 }
