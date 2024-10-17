@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
+import { MetaTypePresenter } from './pages/meta-type/meta-type.presenter';
 
 export const routes: Routes = [
   {
@@ -40,6 +41,10 @@ export const routes: Routes = [
         loadChildren: () => import('./pages/settings/settings.routes').then(
           (m) => m.SettingsRoutes
         )
+      },
+      {
+        path: 'meta-type',
+        component: MetaTypePresenter
       },
       {
         path: 'connections',

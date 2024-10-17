@@ -1,0 +1,58 @@
+<mat-card appearance="outlined">
+    <mat-card-content class="d-flex align-items-center p-16" style="border-bottom: 1px  solid #b9b9c3 ; ">
+        <h2 class="m-0">Meta Types</h2>
+    </mat-card-content>
+    <mat-card-content class="p-t-0 p-b-0">
+        <div class="row m-t-16">
+            <div class="col-3 left-side">
+                @for (item of sort(datasource.values); track item; let i = $index) {
+                <div class="d-flex align-items-center">
+                    <div class="bd-highlight custome-stepper-header">
+                        <span [class.active]="activeDiv == item._name" class="number-tab" (click)="getMetaType(item)">
+                            {{ i + 1 }}
+                        </span>
+                    </div>
+                    <h4>{{ item._name }}</h4>
+                </div>
+                }
+
+            </div>
+
+            <div class="col-9 right-content">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16" style="color: var(--color-dyanamic);">Enter {{activeDiv}}
+                </mat-label>
+                <div class="d-flex align-items-center">
+                    <mat-form-field appearance="outline" class="w-100 m-r-8 m-b-0">
+                        <input matInput #jobTitle required type="text" (keyup)="onKeyUp()"
+                            style=" color: rgba(45, 45, 45, 0.87);" name="value" />
+                    </mat-form-field>
+                    <button mat-mini-fab class="d-flex m-b-16" color="primary" (click)="addNewValue(jobTitle)">
+                        <i-tabler name="plus" class="icon-20"></i-tabler>
+                    </button>
+                </div>
+                @if (alert) {
+                <div class="w-100 m-b-16" style=" color: red; font-weight: 600;">
+                    {{value}} Already Exists
+                </div>
+                }
+                <!-- @If(alert){
+               
+                } -->
+
+                @for (item of metaType ; track item;let i = $index) {
+                <div class="d-flex align-items-center">
+                    <mat-form-field appearance="outline" class="w-100 m-r-8">
+                        <input class="custom-input" matInput required type="text" 
+                            [value]="item" name="email" style="color: grey; "/>
+                    </mat-form-field>
+                    <div class="delete-btn" (click)="deleteMetaType(item)">
+                        <i-tabler name="trash"></i-tabler>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </mat-card-content>
+
+
+</mat-card>
