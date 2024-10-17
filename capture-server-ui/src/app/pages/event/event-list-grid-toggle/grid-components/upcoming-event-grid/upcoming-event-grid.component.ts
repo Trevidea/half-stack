@@ -53,19 +53,9 @@ export class UpcomingEventGridComponent {
         icon: "edit",
         action: () => this.edit(item.id),
       },
-      {
-        label: "Print summary",
-        icon: "print",
-        action: () => { },
-      },
-      {
-        label: "Task list",
-        icon: "list",
-        action: () => { },
-      },
       { label: "Share Event", icon: "share", action: () => { } },
       {
-        label: "Delete event",
+        label: "Remove Event",
         icon: "delete",
         color: "#de2e21",
         action: () => this.onDelete.emit(item),
