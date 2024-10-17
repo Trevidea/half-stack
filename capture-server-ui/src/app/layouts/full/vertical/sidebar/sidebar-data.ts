@@ -36,7 +36,7 @@ export const navItems: NavItem[] = [
   {
     displayName: "Connection",
     iconName: 'link',
-    route: 'connections/connection'
+    route: 'connections/connection/live-connections'
   },
   {
     displayName: "Logs",
