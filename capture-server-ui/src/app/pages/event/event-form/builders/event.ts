@@ -34,7 +34,8 @@ export class EventBuilder extends AbstractBuilder<
 
     const time = this.formatTime(v.time)
     // Format the event date to 'YYYY-MM-DD' format
-    const eventDate = new Date(v.dtEvent).toISOString().slice(0, 10);
+    // Format the event date to 'YYYY-MM-DD' in local time zone
+    const eventDate = new Date(v.dtEvent).toLocaleDateString('en-CA');
     return {
       id: v.id,
       title: v.title,
