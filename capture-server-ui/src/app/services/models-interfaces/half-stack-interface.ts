@@ -174,6 +174,17 @@ export namespace Data {
   export interface Application extends Base {
     app_name: string;
   }
+
+  export interface LoggedInUser extends Base {
+    id: number;
+    username: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    address: string;
+    role: string;
+  }
 }
 
 

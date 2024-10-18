@@ -9,6 +9,7 @@ import { EventData } from "../models-interfaces/event";
 import { PastEventData } from "../models-interfaces/past-event";
 import { UserProfileData } from "../models-interfaces/user-profile";
 import { DeviceData } from "../models-interfaces/device";
+import { LoggedInUserData } from "../models-interfaces/user-loggedIn";
 
 
 @Injectable({
@@ -280,7 +281,9 @@ export class ModelService {
     console.log(data)
     return this.create("event-device", data);
   }
-
+  LoggedInUserDetails(userName: string): Observable<Data.LoggedInUser[]> {
+    return this._data(`user/account?username=${userName}`, LoggedInUserData)
+  }
   EventYear() {
     return ["2024", "2023", "2022", "2021", "2020"];
   }

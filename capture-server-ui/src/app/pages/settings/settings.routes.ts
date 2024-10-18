@@ -7,6 +7,7 @@ import { SharingComponent } from "./components/sharing/sharing.component";
 import { PreferencesComponent } from "./components/preferences/preferences.component";
 import { MediaServerComponent } from "./components/media-server/media-server.component";
 import { AboutComponent } from "./components/about/about.component";
+import { AccountPresenter } from "./components/account/account.presenter";
 
 export const SettingsRoutes: Routes = [
     {
@@ -28,7 +29,7 @@ export const SettingsRoutes: Routes = [
                     },
                     {
                         path: "account",
-                        component: AccountComponent
+                        component: AccountPresenter
                     },
                     {
                         path: "user",
