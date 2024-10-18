@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SharedComponent } from "./shared.component";
 
 @Component({
@@ -8,6 +8,11 @@ import { SharedComponent } from "./shared.component";
   template: `<app-shared></app-shared>`,
   styleUrl: './shared.component.scss'
 })
-export class SharedPresenter {
+export class SharedPresenter implements OnInit {
+  
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
 
 }

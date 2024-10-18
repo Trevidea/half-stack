@@ -112,10 +112,26 @@
 
   </mat-menu> -->
 
+
+
+  <!-- ------------------------------------------------------------------->
+  <!-- Theme toggle -->
+  <!-- ------------------------------------------------------------------->
+
+  <button
+      class="d-flex align-items-center justify-content-center"
+      mat-icon-button
+      (click)="setTheme()">
+      <i-tabler class="d-flex icon-21" 
+          [name]="isDarkMode ? 'moon' : 'sun'">
+      </i-tabler>
+  </button>
+
+
   <!-- --------------------------------------------------------------- -->
   <!-- Messages Dropdown -->
   <!-- --------------------------------------------------------------- -->
-  <button class="d-flex align-items-center justify-content-center" mat-icon-button [matMenuTriggerFor]="msgmenu" aria-label="Notifications">
+  <!-- <button class="d-flex align-items-center justify-content-center" mat-icon-button [matMenuTriggerFor]="msgmenu" aria-label="Notifications">
     <i-feather class="d-flex icon-18" name="message-square" matBadge="2" matBadgeSize="small"
       matBadgeColor="accent"></i-feather>
   </button>
@@ -148,28 +164,50 @@
         See all messages
       </button>
     </div>
-  </mat-menu>
+  </mat-menu> -->
 
   <!-- --------------------------------------------------------------- -->
   <!-- Notification Dropdown -->
   <!-- --------------------------------------------------------------- -->
-  <button class="d-flex align-items-center justify-content-center" mat-icon-button [matMenuTriggerFor]="notificationmenu" aria-label="Notifications">
-    <i-feather class="d-flex icon-18" name="bell" matBadge="1" matBadgeSize="small" matBadgeColor="primary"></i-feather>
+  <button
+    class="d-flex align-items-center justify-content-center"
+    mat-icon-button
+    [matMenuTriggerFor]="notificationmenu"
+    aria-label="Notifications"
+  >
+    <i-feather
+      class="d-flex icon-18"
+      name="bell"
+      matBadge="1"
+      matBadgeSize="small"
+      matBadgeColor="primary"
+    ></i-feather>
   </button>
   <mat-menu #notificationmenu="matMenu" class="topbar-dd cardWithShadow">
     <div class="d-flex align-items-center p-x-32 p-y-16">
-      <h6 class="f-s-16 f-w-600 m-0">Notifications</h6>
+      <h6 class="f-s-16 f-w-600 m-0 mat-subtitle-1">Notifications</h6>
       <span class="m-l-auto">
-        <span class="bg-primary text-white p-x-8 p-y-4 f-w-500 rounded f-s-12">5 new</span>
+        <span
+          class="bg-light-primary mat-subtitle-1 p-x-8 p-y-4 f-w-500 rounded f-s-12"
+          >3 new</span
+        >
       </span>
     </div>
     @for(notification of notifications; track notification) {
     <button mat-menu-item class="p-x-32 p-y-16">
       <div class="d-flex align-items-center">
-        <div class="flex-shrink-0 d-flex align-items-center justify-content-center icon-48 rounded-circle bg-light-{{ notification.bg }}">
-          <i-tabler name="{{ notification.icon }}" class="icon-20 d-flex text-{{ notification.color }}"></i-tabler>
+        <div
+          class="flex-shrink-0 d-flex align-items-center justify-content-center icon-48 rounded-circle bg-light-{{
+            notification.bg
+          }}"
+        >
+        <img class="d-flex align-items-center justify-content-center icon-48 rounded-circle" [src]="notification.img" alt="person Img" />
+          <!-- <i-tabler
+            name="{{ notification.icon }}"
+            class="icon-20 d-flex text-{{ notification.color }}"
+          ></i-tabler> -->
         </div>
-        <div class="m-l-16">
+        <div class="m-l-16"> 
           <h5 class="f-s-14 f-w-600 m-0 mat-subtitle-1">
             {{ notification.title }}
           </h5>
@@ -180,7 +218,7 @@
     }
 
     <div class="p-y-12 p-x-32">
-      <button mat-stroked-button color="primary" class="w-100">
+      <button mat-stroked-button class="w-100 bg-light-primary">
         See all notifications
       </button>
     </div>
@@ -204,11 +242,11 @@
             width="95"
           />
           <div class="m-l-16">
-            <h6 class="f-s-14 f-w-600 m-0 mat-subtitle-2">Mathew Anderson</h6>
-            <span class="f-s-14 d-block m-b-4 mat-body-1">Designer</span>
+            <h6 class="f-s-14 f-w-600 m-0 mat-subtitle-2">Kate Anderson</h6>
+            <span class="f-s-14 d-block m-b-4 mat-body-1">Admin</span>
             <span class="d-flex align-items-center mat-body-1">
               <i-tabler name="mail" class="icon-15 m-r-4"></i-tabler>
-              info&#64;Flexy.com
+              info&#64;spip.com
             </span>
           </div>
         </div>
@@ -243,6 +281,7 @@
         <a
           class="p-y-16 text-decoration-none d-block text-hover-primary"
           style="cursor: pointer"
+          (click)="openSetting.emit()"
           
         >
           <div class="d-flex align-items-center">

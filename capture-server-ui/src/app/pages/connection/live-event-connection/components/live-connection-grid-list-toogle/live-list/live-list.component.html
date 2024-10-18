@@ -58,8 +58,8 @@
       </th>
     </tr>
 
-    @for (item of datasource?.connectionDetails; track $index) {
-    <tr [ngClass]="item?.role == 'Publisher' ? 'cursor-pointer' : 'cursor-none'" (click)="detail(item)">
+    @for (element of datasource?.connectionDetails; track $index) {
+    <tr [ngClass]="element?.role == 'Publisher' ? 'cursor-pointer' : 'cursor-none'" (click)="detail(element)">
       <td>
         <button mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
@@ -81,24 +81,24 @@
           </button>
         </mat-menu>
       </td>
-      <td>{{item?.name}}</td>
+      <td>{{element?.name}}</td>
       <td>
-        {{ item?.role }}
+        {{ element?.role }}
       </td>
-      <td>{{ item?.location }}</td>
+      <td>{{ element?.location }}</td>
       <td>---</td>
-      <td> {{ item?.device }}</td>
-      <td> {{ item?.network }}</td>
+      <td> {{ element?.device }}</td>
+      <td> {{ element?.network }}</td>
       <td><span mat-button class="p-8" [ngClass]="{
-          'badge-light-danger': item?.quality === 0,
-          'badge-light-success': item?.quality === 2
+          'badge-light-danger': element?.quality === 0,
+          'badge-light-success': element?.quality === 2
         }">
-          {{ item?.quality }}
+          {{ element?.quality }}
         </span></td>
-      <td>{{ item?.ipAddress }}</td>
+      <td>{{ element?.ipAddress }}</td>
       <td>
         <div class="d-flex">
-          @switch (item?.transmitStatus) {
+          @switch (element?.transmitStatus) {
           @case ('Streaming') {
           <i-tabler name="arrow-up-right" class="icon-20" style="color: #F5A30A;"></i-tabler>
           }
@@ -113,12 +113,12 @@
           }
           }
 
-          <span class="p-l-4"> {{ item.transmitStatus }}</span>
+          <span class="p-l-4"> {{ element.transmitStatus }}</span>
         </div>
       </td>
-      <td> {{ item.received }}</td>
+      <td> {{ element.received }}</td>
       <td>
-        {{ item.retries }}
+        {{ element.retries }}
       </td>
     </tr>
     }

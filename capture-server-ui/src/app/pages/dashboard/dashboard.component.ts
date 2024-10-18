@@ -17,7 +17,6 @@ export interface ConnectionData{
   event: string;
   role: string;
   userName: string;
-  icon: string;
   deviceId: string;
   transmitStatus: string;
   deviceType: string;
@@ -31,7 +30,6 @@ const ELEMENT_DATA: ConnectionData[] = [
     userName: 'Coach Smith',
     role: 'Subscriber',
     deviceId: 'iPad15',
-    icon: 'arrow-down-left',
     transmitStatus: 'Receiving',
     deviceType: 'iPad',
     network: 'Penfield-5.0G'
@@ -42,7 +40,6 @@ const ELEMENT_DATA: ConnectionData[] = [
     userName: 'Coach Jones',
     role: 'Subscriber',
     deviceId: 'iPad22',
-    icon: 'arrow-down-left',
     transmitStatus: 'Receiving',
     deviceType: 'iPad',
     network: 'Penfield-5.0G'
@@ -53,7 +50,6 @@ const ELEMENT_DATA: ConnectionData[] = [
     userName: 'Coach Mills',
     role: 'Subscriber',
     deviceId: 'iPad15',
-    icon: 'arrow-up-right',
     transmitStatus: 'Streaming',
     deviceType: 'iPad',
     network: 'Penfield-5.0G'
@@ -64,7 +60,6 @@ const ELEMENT_DATA: ConnectionData[] = [
     userName: 'Harry',
     role: 'Subscriber',
     deviceId: 'iPad03',
-    icon: 'arrow-down-left',
     transmitStatus: 'Receiving',
     deviceType: 'iPad',
     network: 'Penfield-5.0G'
@@ -75,8 +70,7 @@ const ELEMENT_DATA: ConnectionData[] = [
     userName: 'Coach Mills',
     role: 'Subscriber',
     deviceId: 'cc18',
-    icon: 'arrow-down-left',
-    transmitStatus: 'Receiving',
+    transmitStatus: 'Streaming',
     deviceType: 'Camcorder',
     network: 'Penfield-5.0G'
   },
@@ -86,7 +80,6 @@ const ELEMENT_DATA: ConnectionData[] = [
     userName: 'Coach Smith',
     role: 'Subscriber',
     deviceId: 'iPad03',
-    icon: 'arrow-down-left',
     transmitStatus: 'Receiving',
     deviceType: 'iPad',
     network: 'Penfield-5.0G'

@@ -20,7 +20,7 @@ export class LiveListComponent {
 
   detail(item: any) {
     if (item.direction === 1) {
-      console.log("sreaming device")
+      console.log("streaming device")
       this.router.navigate(['connections/streaming-device-details'], {
         queryParams: { devicedetail: JSON.stringify(item) }
       });

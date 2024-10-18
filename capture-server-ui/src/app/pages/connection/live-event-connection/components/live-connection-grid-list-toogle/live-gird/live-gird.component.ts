@@ -9,6 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TablerIconsModule } from 'angular-tabler-icons';
 
 @Component({
@@ -29,8 +30,19 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 export class LiveGirdComponent implements OnInit {
   @Input() datasource: any;
   
+  constructor(private router: Router,
+    private route: ActivatedRoute){}
   ngOnInit(): void {
   }
 
+  detail(item: any) {
+    const id = item.id;
+    const isOpen = item.role;
+    if (isOpen == "Publisher") {
+      this.router.navigate(['connections/streaming-device-details'],{
+        queryParams: { devicedetail: JSON.stringify(item) }
+      });
+    }
+  }
 
 }

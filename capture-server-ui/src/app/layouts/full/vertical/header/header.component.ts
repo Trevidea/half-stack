@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { FeatherModule } from 'angular-feather';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { AppSettings } from 'src/app/config';
 
 
 interface messages {
@@ -30,7 +31,7 @@ interface messages {
 interface notifications {
   id: number;
   bg: string;
-  icon: string;
+  img: string;
   title: string;
   subtitle: string;
   color: string
@@ -68,6 +69,8 @@ interface quicklinks {
 export class HeaderComponent {
   searchText: string = '';
   navItems = navItems;
+  isDarkMode: boolean = true;
+  options = this.settings.getOptions();
 
   navItemsData = navItems.filter((navitem) => navitem.displayName);
 
@@ -76,6 +79,8 @@ export class HeaderComponent {
   @Output() toggleMobileNav = new EventEmitter<void>();
   @Output() toggleMobileFilterNav = new EventEmitter<void>();
   @Output() toggleCollapsed = new EventEmitter<void>();
+  @Output() optionsChange = new EventEmitter<AppSettings>();
+  @Output() openSetting = new EventEmitter();
 
   showFiller = false;
 
@@ -113,7 +118,8 @@ export class HeaderComponent {
   constructor(
     private vsidenav: CoreService,
     public dialog: MatDialog,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private settings: CoreService,
   ) {
     translate.setDefaultLang('en');
   }
@@ -124,6 +130,18 @@ export class HeaderComponent {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  setTheme() {
+    if (this.options.theme === 'light') {
+      this.isDarkMode = false;
+      this.options.theme = 'dark'
+      this.optionsChange.emit(this.options)
+    } else if (this.options.theme === 'dark') {
+      this.isDarkMode = true;
+      this.options.theme = 'light'
+      this.optionsChange.emit(this.options);
+    }
   }
 
   changeLanguage(lang: any): void {
@@ -173,43 +191,43 @@ export class HeaderComponent {
     {
       id: 1,
       bg: 'primary',
-      icon: 'layout-grid',      
-      title: 'Launch Admin',
-      color:"primary",
-      subtitle: 'Just see the my new admin!',
+      img: '/assets/images/half-stack-images/boy.jpg',
+      title: 'Noah',
+      color: "primary",
+      subtitle: 'Device name is added to event',
     },
     {
       id: 2,
       bg: 'accent',
-      icon: 'calendar',
-      title: 'Event today',
-      color:"accent",
-      subtitle: 'Just a reminder that you have event',
+      img: '/assets/images/profile/girl.jpg',
+      title: 'Kate',
+      color: "accent",
+      subtitle: 'Shared file with 5 other people',
     },
     {
       id: 3,
       bg: 'error',
-      icon: 'settings',
-      title: 'Settings',
-      color:"error",
-      subtitle: 'You can customize this template',
+      img: '/assets/images/half-stack-images/boy.jpg',
+      title: 'Noah',
+      color: "error",
+      subtitle: 'Sent on demand event to upload',
     },
-    {
-      id: 4,
-      bg: 'success',
-      icon: 'layout',
-      title: 'Launch Admin',
-      color:"success",
-      subtitle: 'Just see the my new admin!',
-    },
-    {
-      id: 5,
-      bg: 'warning',
-      icon: 'settings',
-      title: 'Event today',
-      color:"warning",
-      subtitle: 'Just a reminder that you have event',
-    },
+    // {
+    //   id: 4,
+    //   bg: 'success',
+    //   img: '/assets/images/backgrounds/boy.jpg',
+    //   title: 'Launch Admin',
+    //   color:"success",
+    //   subtitle: 'Just see the my new admin!',
+    // },
+    // {
+    //   id: 5,
+    //   bg: 'warning',
+    //   img: '/assets/images/backgrounds/boy.jpg',
+    //   title: 'Event today',
+    //   color:"warning",
+    //   subtitle: 'Just a reminder that you have event',
+    // },
   ];
 
   profiledd: profiledd[] = [
