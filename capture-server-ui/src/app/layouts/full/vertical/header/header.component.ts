@@ -215,23 +215,23 @@ export class HeaderComponent {
   profiledd: profiledd[] = [
     {
       id: 1,
-      img: '/assets/images/svgs/icon-account.svg',
+      img: 'person',
       title: 'My Profile',
-      subtitle: 'Account Settings',
+      subtitle: '',
       link: '/',
     },
+    // {
+    //   id: 2,
+    //   img: 'settings',
+    //   title: 'Settings',
+    //   subtitle: '',
+    //   link: '/apps/email/inbox',
+    // },
     {
       id: 2,
-      img: '/assets/images/svgs/icon-inbox.svg',
-      title: 'My Inbox',
-      subtitle: 'Messages & Email',
-      link: '/apps/email/inbox',
-    },
-    {
-      id: 3,
-      img: '/assets/images/svgs/icon-tasks.svg',
-      title: 'My Tasks',
-      subtitle: 'To-do and Daily Tasks',
+      img: 'credit_card',
+      title: 'License',
+      subtitle: '',
       link: '/apps/taskboard',
     },
   ];
