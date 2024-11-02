@@ -53,4 +53,12 @@ export class DeviceFormView implements Views.Datasource {
         this._pin = v;
     }
     
+    private _ip_add : string;
+    public get ip_add() : string {
+        return this._ip_add;
+    }
+    public set ip_add(v : string) {
+        this._ip_add = v;
+    }
+    
 }

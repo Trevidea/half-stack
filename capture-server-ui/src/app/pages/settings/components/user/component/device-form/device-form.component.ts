@@ -17,6 +17,4 @@ export class DeviceFormComponent {
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter();
 
-
-
 }

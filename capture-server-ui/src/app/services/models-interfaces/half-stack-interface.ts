@@ -161,6 +161,8 @@ export namespace Data {
     stream_id: string;
     app_name: string;
     direction: number;
+    ip_address: string;
+    tagging_panel: string;
   }
 
   export interface Device extends Base {
@@ -169,6 +171,7 @@ export namespace Data {
     name: string;
     code: string;
     pin: string;
+    ip_add: string;
   }
 
   export interface Application extends Base {

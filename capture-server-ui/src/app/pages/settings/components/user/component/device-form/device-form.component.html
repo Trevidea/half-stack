@@ -51,6 +51,14 @@
                 <app-validation-alert controlName="PIN" [control]="ngmdpin">
                 </app-validation-alert>
             </div>
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">IP Address
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text" matInput  name="ip_add"
+                        [(ngModel)]="datasource.ip_add" autocomplete="off" />
+                </mat-form-field>
+            </div>
         </div>
     </form>
 

@@ -4,7 +4,6 @@ import { DataBase } from "./model";
 
 export class DeviceData extends DataBase<Data.Device> {
 
-    private _type: string;
     public get type(): string {
         return this._model.type;
     }
@@ -12,7 +11,6 @@ export class DeviceData extends DataBase<Data.Device> {
         this._model.type = v;
     }
 
-    private _name: string;
     public get name(): string {
         return this._model.name;
     }
@@ -20,7 +18,6 @@ export class DeviceData extends DataBase<Data.Device> {
         this._model.name = v;
     }
 
-    private _code: string;
     public get code(): string {
         return this._model.code;
     }
@@ -28,7 +25,6 @@ export class DeviceData extends DataBase<Data.Device> {
         this._model.code = v;
     }
 
-    private _pin: string;
     public get pin(): string {
         return this._model.pin;
     }
@@ -36,6 +32,11 @@ export class DeviceData extends DataBase<Data.Device> {
         this._model.pin = v;
     }
 
-
+    public get ip_add(): string {
+        return this._model.ip_add;
+    }
+    public set ip_add(v: string) {
+        this._model.ip_add = v;
+    }
 
 }

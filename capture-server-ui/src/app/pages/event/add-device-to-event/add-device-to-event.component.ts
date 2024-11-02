@@ -22,6 +22,7 @@ export class AddDeviceToEventComponent implements OnInit {
   urlCopied: boolean = false;
   iconName: string = 'copy';
   streamingUrl: string;
+  type: string;
   // private options: GlobalConfig;
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter();
@@ -35,14 +36,14 @@ export class AddDeviceToEventComponent implements OnInit {
     const deviceName = this.datasource.deviceName.SelectedItem?.key
     const pin = this.datasource.pin ? `/${this.datasource.pin}` : '';
     const appName = this.datasource.appNamesCollection?.SelectedItem?.trim().replace(/\s+/g, '').toLowerCase() ?? '';
-    const type = this.datasource.type.SelectedItem;
+     this.type = this.datasource.type.SelectedItem;
     let rtmpUrl = `${environment.rtmpUrl}/`;
     let player = `${environment.playerUrl}/`
     let streamingUrl = '';
 
-    if (type === 'Player') {
+    if ( this.type === 'Player') {
       streamingUrl = player;
-    } else if (type === 'Streaming') {
+    } else if ( this.type === 'Streaming') {
       streamingUrl = rtmpUrl;
     }
 
@@ -92,5 +93,5 @@ export class AddDeviceToEventComponent implements OnInit {
   }
 
 
-  
+
 }

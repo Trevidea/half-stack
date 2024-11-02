@@ -13,7 +13,8 @@ export class DeviceFormBuilder implements AbstractBuilder<Data.Device, DeviceFor
             type: v.type.SelectedItem,
             name: v.deviceName,
             code: v.deviceCode,
-            pin: v.pin
+            pin: v.pin,
+            ip_add: v.ip_add
         };
     }
     view(): DeviceFormView {

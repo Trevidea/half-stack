@@ -20,6 +20,16 @@ export class AddDeviceView implements Views.Datasource {
         this._appName = v;
     }
 
+
+    private _ipAddress: string;
+    public get ipAddress(): string {
+        return this._ipAddress;
+    }
+    public set ipAddress(v: string) {
+        this._ipAddress = v;
+    }
+
+
     private _appNamesCollection: Collection<string>;
     public get appNamesCollection(): Collection<string> {
         if (!this._appNamesCollection) {
@@ -111,5 +121,18 @@ export class AddDeviceView implements Views.Datasource {
     public set type(v: Collection<string>) {
         this._type = v;
     }
+
+
+    private _taggingPanels: Collection<string>;
+    public get taggingPanels(): Collection<string> {
+        if (!this._taggingPanels) {
+            return this._taggingPanels = new Collection<string>();
+        }
+        return this._taggingPanels;
+    }
+    public set taggingPanels(v: Collection<string>) {
+        this._taggingPanels = v;
+    }
+
 
 }

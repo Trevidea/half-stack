@@ -288,7 +288,7 @@ export class ModelService {
     return ["2024", "2023", "2022", "2021", "2020"];
   }
   type() {
-    return ["Streaming", "Player"];
+    return ["Streaming", "Player","Tagging Panel"];
   }
 
 }

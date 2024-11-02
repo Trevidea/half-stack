@@ -24,7 +24,10 @@ export class AddDeviceBuilder extends AbstractBuilder<Data.AddDeviceToEvent, Add
             stream_name: v.streamName,
             stream_id: v.streamId,
             app_name: v.appNamesCollection.SelectedItem,
-            direction: _direction
+            direction: _direction,
+            ip_address: v.ipAddress,
+            tagging_panel: v.taggingPanels.SelectedItem
+
         }
     }
     view(): AddDeviceView {

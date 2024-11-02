@@ -32,10 +32,7 @@ export class DeviceFormPresenter implements OnInit {
     );
     this.actions.onComplete.subscribe((result) => {
       if (result) {
-        alert("Device Added")
         this.doAction();
-      } else {
-        alert("not added")
       }
     });
   }

@@ -6,117 +6,155 @@
 <h1 class="p-0 m-l-20">Add device to event</h1>
 <mat-dialog-content class="mat-typography">
     <form #AddStreamkeyForm="ngForm">
-    <div class="row">
-        <div class="col-12 m-b-16 ">
-            <div class="url-box">
-                {{constructRtmpUrl()}}
-                <div class="d-flex align-items-center ">
-                    <button mat-icon-button class="d-flex align-items-center " (click)="copyUrl(streamingUrl)">
-                        <i-tabler [name]="urlCopied ? 'check' : 'copy'" class="icon-18"></i-tabler>
-                    </button>
-                    <span class="m-l-8">{{ urlCopied ? 'Copied'
-                        : 'Copy' }}</span>
-                </div>
+        <div class="row">
+            <div class="col-12 m-b-16 ">
+                <div class="url-box">
+                    {{constructRtmpUrl()}}
+                    <div class="d-flex align-items-center ">
+                        <button mat-icon-button class="d-flex align-items-center " (click)="copyUrl(streamingUrl)">
+                            <i-tabler [name]="urlCopied ? 'check' : 'copy'" class="icon-18"></i-tabler>
+                        </button>
+                        <span class="m-l-8">{{ urlCopied ? 'Copied'
+                            : 'Copy' }}</span>
+                    </div>
 
+                </div>
             </div>
-        </div>
-        <div class="col-12 m-b-8">
-            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Type
-            </mat-label>
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-select placeholder="Select type" name="type" required [(ngModel)]="datasource.type.SelectedItem" #ngmType="ngModel">
-                    @for (item of datasource.type; track $index) {
-                    <mat-option [value]="item">{{item}}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
-            <app-validation-alert controlName="Type" [control]="ngmType">
-            </app-validation-alert>
-        </div>
-        <div class="col-12 m-b-8">
-            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Application
-            </mat-label>
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-select placeholder="Select application" name="appname" required
-                    [(ngModel)]="datasource.appNamesCollection.SelectedItem" #ngmAppname="ngModel">
-                    @for (item of datasource.appNamesCollection; track $index) {
-                    <mat-option [value]="item">{{item}}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
-            <app-validation-alert controlName="Application Name" [control]="ngmAppname">
-            </app-validation-alert>
-        </div>
-        <div class="col-12 m-b-8">
-            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Device
-            </mat-label>
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-select placeholder="Select Device" name="dname" [(ngModel)]="datasource.deviceName.SelectedItem" 
-                required #ngmdeviceName="ngModel">
-                    @for (item of datasource.deviceName; track $index) {
-                    <mat-option [value]="item">{{item.value}}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
-            <app-validation-alert controlName="Device Name" [control]="ngmdeviceName">
-            </app-validation-alert>
-        </div>
-        <div class="col-12 m-b-8">
-            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">PIN
-            </mat-label>
-            <mat-form-field appearance="outline" class="w-100">
-                <input type="text" matInput name="pin" [(ngModel)]="datasource.pin" required  #ngmPIN="ngModel" autocomplete="off" />
-            </mat-form-field>
-            <app-validation-alert controlName="PIN" [patternmassage]="'Only numerical value is allowed e.g.. 010101'"
-                [control]="ngmPIN">
-            </app-validation-alert>
-        </div>
-        <div class="col-12 m-b-8">
-            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Location
-            </mat-label>
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-select placeholder="Select location" name="location"
-                    [(ngModel)]="datasource.location.SelectedItem" required #ngmlocation="ngModel">
-                    @for (item of datasource.location; track $index) {
-                    <mat-option [value]="item">{{item}}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
-            <app-validation-alert controlName="Location" [control]="ngmlocation">
-            </app-validation-alert>
-        </div>
-        <div class="col-12 m-b-8">
-            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">User
-            </mat-label>
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-select placeholder="Select user" name="userName" [(ngModel)]="datasource.userName.SelectedItem" required #ngmUser="ngModel">
-                    @for (item of datasource.userName; track $index) {
-                    <mat-option [value]="item">{{item.value }}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
-            <app-validation-alert controlName="User Name" [control]="ngmUser">
-            </app-validation-alert>
-        </div>
-        <div class="col-12 m-b-8">
-            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Stream name
-            </mat-label>
-            <div class="highlighted-box">
-                {{updateStreamName()}}
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Type
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-select placeholder="Select type" name="type" required
+                        [(ngModel)]="datasource.type.SelectedItem" #ngmType="ngModel">
+                        @for (item of datasource.type; track $index) {
+                        <mat-option [value]="item">{{item}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <app-validation-alert controlName="Type" [control]="ngmType">
+                </app-validation-alert>
             </div>
-        </div>
-        <div class="col-12 m-b-8">
-            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Stream ID
-            </mat-label>
-            <div class="highlighted-box ">
-                {{datasource.streamId}}
+            <!------------------------------- Show Only when selected type is  tagging-panel------------------->
+            @if(type==="Tagging Panel"){
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Tagging Panel
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-select placeholder="Tagging Panel" name="tagging-panel" required
+                        [(ngModel)]="datasource.taggingPanels.SelectedItem" #ngmtaggingPanels="ngModel">
+                        @for (item of datasource.taggingPanels; track $index) {
+                        <mat-option [value]="item">{{item}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <app-validation-alert controlName="Tagging Panel" [control]="ngmtaggingPanels">
+                </app-validation-alert>
             </div>
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">IP Address
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text" matInput name="ipAdress" [(ngModel)]="datasource.ipAddress" required
+                        #ipAddressRef="ngModel" autocomplete="off" />
+                </mat-form-field>
+                <app-validation-alert controlName="IP Address" [control]="ipAddressRef">
+                </app-validation-alert>
+            </div>
+            }
+
+            <!-------------------------------Above  Show Only when selected type is  tagging-panel------------------->
+
+            <!-------------------------------Below show  only if  type selected type is not tagging-panel------------->
+            @if(type!="Tagging Panel"){
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Application
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-select placeholder="Select application" name="appname" required
+                        [(ngModel)]="datasource.appNamesCollection.SelectedItem" #ngmAppname="ngModel">
+                        @for (item of datasource.appNamesCollection; track $index) {
+                        <mat-option [value]="item">{{item}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <app-validation-alert controlName="Application Name" [control]="ngmAppname">
+                </app-validation-alert>
+            </div>
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Device
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-select placeholder="Select Device" name="dname"
+                        [(ngModel)]="datasource.deviceName.SelectedItem" required #ngmdeviceName="ngModel">
+                        @for (item of datasource.deviceName; track $index) {
+                        <mat-option [value]="item">{{item.value}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <app-validation-alert controlName="Device Name" [control]="ngmdeviceName">
+                </app-validation-alert>
+            </div>
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">PIN
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text" matInput name="pin" [(ngModel)]="datasource.pin" required #ngmPIN="ngModel"
+                        autocomplete="off" />
+                </mat-form-field>
+                <app-validation-alert controlName="PIN"
+                    [patternmassage]="'Only numerical value is allowed e.g.. 010101'" [control]="ngmPIN">
+                </app-validation-alert>
+            </div>
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Location
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-select placeholder="Select location" name="location"
+                        [(ngModel)]="datasource.location.SelectedItem" required #ngmlocation="ngModel">
+                        @for (item of datasource.location; track $index) {
+                        <mat-option [value]="item">{{item}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <app-validation-alert controlName="Location" [control]="ngmlocation">
+                </app-validation-alert>
+            </div>
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">User
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-select placeholder="Select user" name="userName" [(ngModel)]="datasource.userName.SelectedItem"
+                        required #ngmUser="ngModel">
+                        @for (item of datasource.userName; track $index) {
+                        <mat-option [value]="item">{{item.value }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <app-validation-alert controlName="User Name" [control]="ngmUser">
+                </app-validation-alert>
+            </div>
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Stream name
+                </mat-label>
+                <div class="highlighted-box">
+                    {{updateStreamName()}}
+                </div>
+            </div>
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Stream ID
+                </mat-label>
+                <div class="highlighted-box ">
+                    {{datasource.streamId}}
+                </div>
+            </div>
+            }
+
         </div>
-    </div>
-</form>
+    </form>
 </mat-dialog-content>
 <mat-dialog-actions class="p-x-24 p-b-24 d-flex align-items-center justify-content-end">
-    <button mat-flat-button style="background-color: #1a97f5; color: #fff;" (click)="save.emit()" [disabled]="!AddStreamkeyForm.valid">
+    <button mat-flat-button style="background-color: #1a97f5; color: #fff;" (click)="save.emit()"
+        [disabled]="!AddStreamkeyForm.valid">
         Save
     </button>
 </mat-dialog-actions>
