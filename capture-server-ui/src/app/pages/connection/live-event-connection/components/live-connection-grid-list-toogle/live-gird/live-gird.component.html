@@ -7,44 +7,46 @@
       <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
         <mat-card
           class="card"
-          [ngClass]="item?.role == 'Publisher' ? 'cursor-pointer' : 'cursor-none'"
+          [ngClass]="item?.role === 'Publisher' ? 'cursor-pointer' : 'cursor-none'"
           style="height: 14rem; width: 24rem; border: 1px solid transparent"
-          
-        >
+          (click)="detail(item)">
+
         @if(item?.role === 'Publisher'){
-          <img *ngIf="" 
+          <img 
             src="assets/images/backgrounds/football_1.png" alt="Image" 
             style="height: 100%; width: 100%; border-radius: 0.428rem"/>
         }
     
           <!-- For devices without images -->
-           @if(item.role == 'Subscriber'){
+           @if(item?.role === 'Subscriber'){
           <div
             class="d-flex justify-content-center align-items-center"
             style="height: 100%; width: 100%;"
           >
-           @if(item?.device == 'iPad15' || item.device == 'iPad22'){
-            <div #tab >
+           @if(item?.device === 'iPad15' || item.device === 'iPad22'){
+            <div>
               <mat-icon style="font-size: 4rem">tablet_mac</mat-icon>
             </div>}
-            @if(item?.deviceType == 'iPhone'){
-            <div #phone >
+            @if(item?.deviceType === 'iPhone'){
+            <div>
               <mat-icon style="font-size: 4rem">smartphone</mat-icon>
             </div>}
           </div>}
     
           <!-- Quality Badge -->
           <div style="position: absolute; bottom: 0.3em; left: 0.3em">
-            @if(item?.quality == 2){
-            <span *ngIf="" 
-              class=" badge badge-light-success  text-light">
-              <mat-icon style="color: rgb(0, 102, 46)">circle</mat-icon> Good
-            </span>}
-            @if(item?.quality == 0){
-            <span  
-              class="badge badge-light-danger text-light">
-              <mat-icon style="color: rgb(181, 0, 0)">circle</mat-icon> Poor
-            </span>}
+            @if(item?.quality === 2){
+            <div
+              class="d-flex align-items-center p-8" style="border-radius: 10px; color: rgba(73, 69, 79, 1); background-color: #cdf697 ;">
+              <mat-icon style="color: rgb(0, 102, 46); font-size: 10px">circle</mat-icon> 
+              <span>&#x25CF;Good</span>
+            </div>}
+            @if(item?.quality === 0){
+            <div  
+              class=" d-flex align-items-center p-8" style="border-radius: 10px; color: rgba(73, 69, 79, 1); background-color: #f49999 ;">
+              <mat-icon style="color: rgb(181, 0, 0)">circle</mat-icon>
+              <span>&#x25CF;Poor</span>
+            </div>}
           </div>
     
           <!-- Transmit Status Badge -->
@@ -52,52 +54,37 @@
             <ng-container>
               <!-- Publisher Streaming -->
                @if(item?.role === 'Publisher'){
-               <span  class="badge  text-dark">
-                <mat-icon>arrow_upward</mat-icon> Streaming
-              </span> }
+               <div class="d-flex align-items-center p-8"  style="border-radius: 10px; color: #454444; background-color: rgba(255, 252, 243, 1) ;">
+                <mat-icon style="color: rgba(245, 163, 10, 1);">arrow_upward</mat-icon>
+                <span>&#x25CF;Streaming</span> 
+              </div> }
     
               <!-- Subscriber Receiving -->
                @if(item?.role === 'Subscriber'){
-              <span  class="badge bg-primary text-light">
-                <mat-icon>arrow_downward</mat-icon> Receiving
-              </span>}
+              <div  class="d-flex align-items-center p-8" style="border-radius: 10px; color: #454444; background-color: rgba(233, 240, 245, 1) ;">
+                <mat-icon style="color: rgba(33, 96, 147, 1);">arrow_downward</mat-icon>
+                <span>&#x25CF;Receiving</span> 
+              </div>}
     
               <!-- Transmit Status -->
                @if(item?.transmitStatus === 'Paused'){
-              <span  class="badge bg-secondary text-light">
-                <mat-icon>pause</mat-icon> Paused
-              </span>}
+              <div  class="d-flex align-items-center p-8" style="border-radius: 10px; color: #454444; background-color: #807f7f; ">
+                <mat-icon style="color: #434242;">pause</mat-icon> 
+                <span>&#x25CF;Paused</span>
+              </div>}
 
               @if(item?.transmitStatus === 'Blocked'){
-              <span class="badge badge-light-danger text-dark">
-                <mat-icon>block</mat-icon> Blocked
-              </span>}
+              <div class="d-flex align-items-center p-8" style="border-radius: 10px; color: #434242; background-color: #807f7f;">
+                <mat-icon style="color: #434242;">block</mat-icon> 
+                <span>&#x25CF;Blocked</span>
+              </div>}
             </ng-container>
           </div>
         </mat-card>
       </div>
     </div> 
     </mat-card-content>
-    <!-- <mat-card-actions class="d-flex align-items-center justify-content-between">
-     <div class="d-flex align-items-center">
-      <span class="p-8 status-good" mat-button style="background-color: rgba(67, 196, 99, 0.1); border-radius: 9px;">
-        <div class="d-flex"> -->
-         <!-- <i-tabler name="point" class="icon-20" style="fill: rgb(38, 199, 38);"></i-tabler>  -->
-      <!--<mat-icon>circle</mat-icon>
-       <span>Good</span>
-      </div>
-      </span>
-     </div>
-     <div class="d-flex align-items-center">
-      <span class="p-8 status-receiving" mat-button style="background-color: rgba(233, 240, 245, 1);  border-radius: 9px;">
-        <div class="d-flex">
-          <i-tabler name="arrow-down-left" class="icon-20"></i-tabler>
-          <span>Received</span>
-        </div>
-      </span>
-      
-     </div>
-    </mat-card-actions>  -->
+  
 
 
     

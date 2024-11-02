@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LogListComponent } from "./log-list.component";
 
 @Component({
@@ -8,6 +8,10 @@ import { LogListComponent } from "./log-list.component";
   template: `<app-log-list></app-log-list>`,
   styleUrl: './log-list.component.scss'
 })
-export class LogListPresenter {
+export class LogListPresenter implements OnInit {
+  
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
 }

@@ -54,7 +54,7 @@ td {
   width: 20%;
   padding: 8px;
   text-align: left;
-  border-top: 1px solid rgba(231, 231, 231, 1);
+  border-top: 1px solid rgba(46, 46, 46, 1);
 }
 
 
@@ -93,6 +93,9 @@ th {
 .dynamic-select:focus {
   outline: none;
   border: 1px solid #007bff; /* Add focus border */
+}
+.icon-red{
+  color: red;
 }
 
 // .text-turncate{
