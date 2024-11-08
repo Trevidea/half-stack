@@ -41,9 +41,13 @@
                 </mat-label>
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-select placeholder="Tagging Panel" name="tagging-panel" required
-                        [(ngModel)]="datasource.taggingPanels.SelectedItem" #ngmtaggingPanels="ngModel">
-                        @for (item of datasource.taggingPanels; track $index) {
-                        <mat-option [value]="item">{{item}}</mat-option>
+                        [(ngModel)]="datasource.tagPanels.SelectedItem" #ngmtaggingPanels="ngModel">
+                        @for (item of datasource.tagPanels; track $index) {
+                        <mat-option class="d-flex justify-content-" [value]="item">
+                          <div class="d-flex align-items-center">
+                            <span>{{item.value}}</span>
+                          </div>
+                        </mat-option>
                         }
                     </mat-select>
                 </mat-form-field>

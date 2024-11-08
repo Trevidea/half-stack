@@ -10,6 +10,7 @@ import { PastEventData } from "../models-interfaces/past-event";
 import { UserProfileData } from "../models-interfaces/user-profile";
 import { DeviceData } from "../models-interfaces/device";
 import { LoggedInUserData } from "../models-interfaces/user-loggedIn";
+import { TagPanelData } from "../models-interfaces/tagging-panel";
 
 
 @Injectable({
@@ -275,6 +276,10 @@ export class ModelService {
 
   deviceById(id: number): Observable<Data.Device> {
     return this._selectOne("devices", id, DeviceData);
+  }
+
+  tagPanelList(): Observable<Data.TaggingPanel[]> {
+    return this._data("tagging-panels", TagPanelData);
   }
 
   addDeviceToEvent(data: Data.AddDeviceToEvent): Observable<Data.AddDeviceToEvent> {

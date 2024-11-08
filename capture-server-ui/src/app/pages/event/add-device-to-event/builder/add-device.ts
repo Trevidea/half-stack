@@ -8,6 +8,8 @@ export class AddDeviceBuilder extends AbstractBuilder<Data.AddDeviceToEvent, Add
 
     }
     decompose(v: AddDeviceView): Data.AddDeviceToEvent {
+        console.log('TagPanel' , v.tagPanels.SelectedItem);
+        
         let _direction: number;
         if (v.type.SelectedItem === 'Streaming') {
             _direction = 1
@@ -16,8 +18,8 @@ export class AddDeviceBuilder extends AbstractBuilder<Data.AddDeviceToEvent, Add
         }
         return {
             id: v.id,
-            user_id: v.userName.SelectedItem.key,
-            device_id: v.deviceName.SelectedItem.key,
+            user_id: v.userName.SelectedItem?.key,
+            device_id: v.deviceName.SelectedItem?.key,
             pin: v.pin,
             event_id: v.eventId,
             location: v.location.SelectedItem,
@@ -26,7 +28,7 @@ export class AddDeviceBuilder extends AbstractBuilder<Data.AddDeviceToEvent, Add
             app_name: v.appNamesCollection.SelectedItem,
             direction: _direction,
             ip_address: v.ipAddress,
-            tagging_panel: v.taggingPanels.SelectedItem
+            tagging_panel: v.tagPanels.SelectedItem?.value,
 
         }
     }

@@ -55,6 +55,7 @@ export class AddDeviceToEventComponent implements OnInit {
       streamingUrl += `${deviceName}${pin}`;
     }
 
+
     this.streamingUrl = streamingUrl;
     return streamingUrl;
   }

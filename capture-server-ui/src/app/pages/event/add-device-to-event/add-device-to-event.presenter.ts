@@ -16,6 +16,7 @@ import { PresenterAction } from 'src/app/blocks/actions';
 import { AddDeviceBuilder } from './builder/add-device';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { TagPanelData } from 'src/app/services/models-interfaces/tagging-panel';
 
 @Component({
   selector: 'app-add-device-to-event-presenter',
@@ -77,6 +78,14 @@ export class AddDeviceToEventPresenter implements OnInit {
         return new SelectItemView(deviceItem.id, deviceItem.name);
       }
     );
+
+    Transformer.ComposeCollectionViewAsync(this.modelService.tagPanelList(), this.ds.tagPanels, 
+      (tagData: TagPanelData)=>{
+        return new SelectItemView(tagData.id , tagData.sport)
+      }
+     
+    );
+
 
     this.ds.deviceName.onItemSelected((e: { selectedItem: SelectItemView }) => {
       Transformer.ComposeObjectAsync(

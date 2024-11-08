@@ -64,6 +64,8 @@ export namespace Data {
     city_address: string;
   }
 
+ 
+
   export interface PastEvent extends Base {
     id: number;
     title: string;
@@ -172,6 +174,16 @@ export namespace Data {
     code: string;
     pin: string;
     ip_add: string;
+  }
+
+  export interface TaggingPanel extends Base {
+    id: number;
+    sport: string;
+    logo: string;
+    ver_major: number;
+    ver_minor: number;
+    ver_patch: number;
+    tags: string;
   }
 
   export interface Application extends Base {
