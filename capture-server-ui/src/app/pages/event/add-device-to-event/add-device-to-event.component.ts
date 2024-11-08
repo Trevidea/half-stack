@@ -8,10 +8,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { AddDeviceToEventPresenter } from './add-device-to-event.presenter';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ValidationAlertComponent } from "../../blocks/validation-alert/validation-alert.component";
+import { CapitalizeFirstPipe } from 'src/app/pipe/capitalize-first-letter';
 @Component({
   selector: 'app-add-device-to-event',
   standalone: true,
-  imports: [MaterialModule, CommonModule, ReactiveFormsModule, FormsModule, TablerIconsModule, ValidationAlertComponent],
+  imports: [MaterialModule, CommonModule, ReactiveFormsModule, FormsModule, TablerIconsModule, ValidationAlertComponent, CapitalizeFirstPipe],
   templateUrl: './add-device-to-event.component.html',
   styleUrl: './add-device-to-event.component.scss',
   encapsulation: ViewEncapsulation.None

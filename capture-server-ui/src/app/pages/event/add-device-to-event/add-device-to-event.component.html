@@ -45,7 +45,7 @@
                         @for (item of datasource.tagPanels; track $index) {
                         <mat-option class="d-flex justify-content-" [value]="item">
                           <div class="d-flex align-items-center">
-                            <span>{{item.value}}</span>
+                            <span>{{ item.value | capitalizeFirst }}</span>
                           </div>
                         </mat-option>
                         }
