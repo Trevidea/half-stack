@@ -22,7 +22,7 @@ export class PreviousEventsConnectionPresenter implements OnInit {
   }
   ngOnInit(): void {
     // Transformer.ComposeCollectionAsync(this.modelService.PreviousConnection(), this.ds.PreviousConnections, PreviousConnectionBuilder)
-    console.log(this.ds)
+    // console.log(this.ds)
   }
  
 }

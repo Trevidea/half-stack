@@ -11,7 +11,7 @@ import { LogListComponent } from "./log-list.component";
 export class LogListPresenter implements OnInit {
   
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+   
   }
 
 }
