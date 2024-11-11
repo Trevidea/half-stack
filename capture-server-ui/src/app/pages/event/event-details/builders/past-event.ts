@@ -1,15 +1,15 @@
 import { AbstractBuilder } from "src/app/blocks/strategies";
 import { Data } from "src/app/services/models-interfaces/half-stack-interface";
-import { PasEventView } from "../views/past-event-view";
+import { PastEventView } from "../views/past-event-view";
 import { Transformer } from "src/app/blocks/transformer";
 import { ConnectionDetailsView } from "../views/connections";
 
 
 export class PastEventBuilder extends AbstractBuilder<
   Data.PastEvent,
-  PasEventView
+  PastEventView
 > {
-  compose(m: Data.PastEvent, v: PasEventView) {
+  compose(m: Data.PastEvent, v: PastEventView) {
     console.log("past event view ", m)
     v.eventId = m.id;
     v.id = m.id;
@@ -31,12 +31,12 @@ export class PastEventBuilder extends AbstractBuilder<
     );
   }
 
-  decompose(v: PasEventView): Data.PastEvent {
+  decompose(v: PastEventView): Data.PastEvent {
     throw new Error("Method not implemented.");
   }
 
-  view(): PasEventView {
-    return new PasEventView();
+  view(): PastEventView {
+    return new PastEventView();
   }
 }
 

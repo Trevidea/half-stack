@@ -33,9 +33,7 @@ export class LiveEventConnectionPresenter implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.ds = this.socketDs;
-
     this.socketSubscription = this.socketService.onTopicMessage('live-event').subscribe((message) => {
       const data: any = JSON.parse(message["data"]);
       console.log(data)
@@ -74,7 +72,6 @@ export class LiveEventConnectionPresenter implements OnInit, OnDestroy {
         connectionDetails.activeDeviceId = element["device_id"]
         this.ds.connectionDetails.Add(connectionDetails);
       });
-
     });
 
   }

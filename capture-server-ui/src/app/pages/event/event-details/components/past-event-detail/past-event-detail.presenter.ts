@@ -4,7 +4,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { PastEventDetailComponent } from './past-event-detail.component';
 import { ModelService } from 'src/app/services/model-services/model-service.service';
 import { ActivatedRoute } from '@angular/router';
-import { PasEventView } from '../../views/past-event-view';
+import { PastEventView } from '../../views/past-event-view';
 import { Transformer } from 'src/app/blocks/transformer';
 import { PastEventBuilder } from '../../builders/past-event';
 import { EventRunnerService } from 'src/app/services/event-runner/event-runner.service';
@@ -18,10 +18,10 @@ import { EventRunnerService } from 'src/app/services/event-runner/event-runner.s
   styleUrl: './past-event-detail.component.scss'
 })
 export class PastEventDetailPresenter implements OnInit {
-  ds!: PasEventView;
+  ds!: PastEventView;
   eventId: number
   constructor(private modelService: ModelService, private route: ActivatedRoute, private eventRunnerService: EventRunnerService,) {
-    this.ds = new PasEventView();
+    this.ds = new PastEventView();
     this.route.params.subscribe(params => {
       this.eventId = params['id']
       this.ds.id = params['id'];

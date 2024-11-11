@@ -2,7 +2,6 @@ import { Views } from "src/app/services/models-interfaces/half-stack-interface";
 
 
 export class ConnectionDetailsView implements Views.Datasource {
-
   private _id: number;
   public get id(): number {
     return this._id;
@@ -10,7 +9,6 @@ export class ConnectionDetailsView implements Views.Datasource {
   public set id(v: number) {
     this._id = v;
   }
-
   private _streamName: string;
   public get streamName(): string {
     return this._streamName;
@@ -26,7 +24,4 @@ export class ConnectionDetailsView implements Views.Datasource {
   public set direction(v: number) {
     this._direction = v;
   }
- 
-
-
 }

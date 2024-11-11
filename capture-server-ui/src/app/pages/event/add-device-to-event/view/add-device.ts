@@ -123,14 +123,14 @@ export class AddDeviceView implements Views.Datasource {
     }
 
 
-    private _taggingPanels: Collection<string>;
-    public get taggingPanels(): Collection<string> {
+    private _taggingPanels: Collection<SelectItemView>;
+    public get taggingPanels(): Collection<SelectItemView> {
         if (!this._taggingPanels) {
-            return this._taggingPanels = new Collection<string>();
+            return this._taggingPanels = new Collection<SelectItemView>();
         }
         return this._taggingPanels;
     }
-    public set taggingPanels(v: Collection<string>) {
+    public set taggingPanels(v: Collection<SelectItemView>) {
         this._taggingPanels = v;
     }
 

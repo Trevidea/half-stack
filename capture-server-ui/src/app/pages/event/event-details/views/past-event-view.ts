@@ -3,7 +3,7 @@ import { Views } from "src/app/services/models-interfaces/half-stack-interface";
 import { ConnectionDetailsView } from "./connections";
 import { Collection } from "src/app/blocks/collection";
 
-export class PasEventView implements Views.Datasource {
+export class PastEventView implements Views.Datasource {
     private _id: number;
     public get id(): number {
         return this._id;
