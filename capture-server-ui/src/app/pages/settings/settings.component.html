@@ -5,7 +5,7 @@
       }">
 
         <mat-sidenav #settingnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()"
-            (open)="sidePanelOpened = true" (close)="sidePanelOpened = false">
+            (open)="sidePanelOpened = true" (close)="sidePanelOpened = false" style="border-right : 1px solid #E7E7E7;">
             <ng-scrollbar class="position-relative" style="height: 100%">
                 <mat-nav-list class="p-t-16 ">
                     @for (item of sideNavItem; track $index) {

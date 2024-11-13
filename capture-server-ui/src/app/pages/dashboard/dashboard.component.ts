@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -93,13 +93,17 @@ const ELEMENT_DATA: ConnectionData[] = [
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
   startIndex: number = 0;
   pageSize: number = 5;
   endIndex: number = this.pageSize;
 
   datasource = ELEMENT_DATA;
+
+  ngOnInit(): void {
+      console.log(this.datasource);
+  }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

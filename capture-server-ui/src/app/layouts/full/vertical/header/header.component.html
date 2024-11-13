@@ -2,15 +2,22 @@
   <!-- --------------------------------------------------------------- -->
   <!-- Desktop Menu -->
   @if(showToggle) {
-  <button mat-icon-button (click)="toggleCollapsed.emit()" class="d-flex justify-content-center">
+  <button
+    mat-icon-button
+    (click)="toggleCollapsed.emit()"
+    class="d-flex justify-content-center"
+  >
     <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
   </button>
   }
 
-
   <!-- Mobile Menu -->
   @if(!showToggle) {
-  <button mat-icon-button (click)="toggleMobileNav.emit()" class="d-flex justify-content-center">
+  <button
+    mat-icon-button
+    (click)="toggleMobileNav.emit()"
+    class="d-flex justify-content-center"
+  >
     <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
   </button>
   }
@@ -25,10 +32,10 @@
   </button>
 
   <div class="d-none d-lg-flex"> -->
-    <!-- --------------------------------------------------------------- -->
-    <!--  Links -->
-    <!-- --------------------------------------------------------------- -->
-    <!-- <button mat-button [matMenuTriggerFor]="appsmenu" aria-label="Notifications">
+  <!-- --------------------------------------------------------------- -->
+  <!--  Links -->
+  <!-- --------------------------------------------------------------- -->
+  <!-- <button mat-button [matMenuTriggerFor]="appsmenu" aria-label="Notifications">
       <div class="d-flex align-items-center">
         Apps <i-tabler name="chevron-down" class="icon-16 m-l-4"></i-tabler>
       </div>
@@ -83,7 +90,7 @@
     <a mat-button [routerLink]="['/apps/email/inbox']">Email</a>
   </div> -->
 
- <span class="flex-1-auto"></span> 
+  <span class="flex-1-auto"></span>
 
   <!-- Mobile Menu -->
   <!-- <button
@@ -111,8 +118,6 @@
     }
 
   </mat-menu> -->
-
-
 
   <!-- ------------------------------------------------------------------->
   <!-- Theme toggle -->
@@ -201,13 +206,17 @@
             notification.bg
           }}"
         >
-        <img class="d-flex align-items-center justify-content-center icon-48 rounded-circle" [src]="notification.img" alt="person Img" />
+          <img
+            class="d-flex align-items-center justify-content-center icon-48 rounded-circle"
+            [src]="notification.img"
+            alt="person Img"
+          />
           <!-- <i-tabler
             name="{{ notification.icon }}"
             class="icon-20 d-flex text-{{ notification.color }}"
           ></i-tabler> -->
         </div>
-        <div class="m-l-16"> 
+        <div class="m-l-16">
           <h5 class="f-s-14 f-w-600 m-0 mat-subtitle-1">
             {{ notification.title }}
           </h5>
@@ -227,8 +236,16 @@
   <!-- --------------------------------------------------------------- -->
   <!-- profile Dropdown -->
   <!-- --------------------------------------------------------------- -->
-  <button mat-icon-button [matMenuTriggerFor]="profilemenu" aria-label="Notifications">
-    <img src="/assets/images/profile/girl.jpg" class="rounded-circle object-cover icon-35 profile-dd" width="35" />
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="profilemenu"
+    aria-label="Notifications"
+  >
+    <img
+      src="/assets/images/profile/girl.jpg"
+      class="rounded-circle object-cover icon-35 profile-dd"
+      width="35"
+    />
   </button>
   <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
     <ng-scrollbar class="position-relative" style="height: 468px">
@@ -277,21 +294,24 @@
           </div>
         </a>
         }
-        <!-- Theme Setting -->
+        <!---------------------------- Theme Setting for profile Page ----------------------------->
         <a
           class="p-y-16 text-decoration-none d-block text-hover-primary"
           style="cursor: pointer"
           (click)="openSetting.emit()"
-          
         >
           <div class="d-flex align-items-center">
-            <button class="text-primary bg-light-primary rounded"
-                    style="border: none">
+            <button
+              class="text-primary bg-light-primary rounded"
+              style="border: none"
+            >
               <mat-icon>settings</mat-icon>
             </button>
 
-            <div class="m-l-16">
-              <h5 class="f-s-14 f-w-600 m-0 textprimary mat-subtitle-1 hover-text">
+            <div class="m-l-16 d-flex">
+              <h5
+                class="f-s-14 f-w-600 m-0 textprimary mat-subtitle-1 hover-text"
+              >
                 Settings
               </h5>
             </div>

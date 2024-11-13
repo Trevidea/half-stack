@@ -81,6 +81,23 @@
   --dark-light-background: #fff;
   --color-dyanamic: initial;
   --color-dyanamic: #434343;
+  --bg-placeholder: #F3F4F5;
+  --bg-color: #E7E7E7;
+
+
+
+  .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+    color: #313131;
+  }
+
+  .bg-light-primary {
+    background-color: #dcf0ff !important;
+  }
+
+  .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after,
+  .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-indeterminate::after {
+    color: #1e4db7;
+  }
 }
 
 .dark-theme {
@@ -91,6 +108,8 @@
   --dark-background: #232323;
   --border-color-dynamic: #444444;
   --bg-color-chip: rgba(26, 151, 245, 0.2);
+  --bg-placeholder: #727272;
+  --bg-color: #E7E7E7;
 
   mat-icon-button {
     color: var(--color-dyanamic) !important;
@@ -117,12 +136,36 @@
     background-color: #232323 !important;
     color: #fff !important;
   }
+
+  .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after, .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-indeterminate::after {
+    color: white;
 }
 
 .bg-light-primary {
   background-color: var(--bg-color-chip) !important;
 }
 
+.mat-mdc-select-placeholder {
+  color: var(--color-dyanamic) !important;
+}  
+  
+.mat-mdc-icon-button[disabled] .mat-mdc-paginator-icon {
+  fill: var(--border-color-dynamic);
+}
+
+.mat-mdc-icon-button .mat-mdc-paginator-icon {
+  fill: var(--color-dyanamic);
+}
+
+}
+
+.bg-light-primary {
+  background-color: var(--bg-color-chip) !important;
+}
+
+.mat-mdc-select-placeholder {
+  color: var(--color-dyanamic) !important;
+} 
 
 
 .info-badge {
