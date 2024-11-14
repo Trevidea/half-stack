@@ -10,7 +10,7 @@ export const environment = {
   hlsUrl: "http://drake.in:59919", //for play Dump m3u8
   spRelayUrl: "http://drake.in:3001", //for web socket 
   rtmpUrl: "rtmp://drake.in:1935",
-  playerUrl: "https://live.sp-halfstack.site",//for play live stream
+  playerUrl: "https://drake.in:3334",
 };
 
 /*
