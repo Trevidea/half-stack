@@ -46,6 +46,11 @@ export class OnDemandEventFormPresenter implements OnInit {
         this.modelService.eventJson(this.ds.id),
         this.ds,
         EventBuilder
+      ).then(() => {
+        if (this.ds.formType) {
+
+        }
+      }
       );
     }
     Transformer.ComposeObjectAsync(
