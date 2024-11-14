@@ -31,6 +31,11 @@ export class OnDemandEventFormPresenter implements OnInit {
     this.route.params.subscribe(params => {
       this.ds.id = params['id'];
     });
+    this.route.queryParams.subscribe(params => {
+      const type = params['type'];
+      this.ds.formType = type;
+      console.log('Type:', type);
+    });
     this.actions = new PresenterAction("events/events-list", this.ds, this.modelService.saveEvent, EventBuilder, router);
   }
 

@@ -15,6 +15,15 @@ export class OnDemandEventFormView implements Views.Datasource {
     }
 
 
+    private _formType: string;
+    public get formType(): string {
+        return this._formType;
+    }
+    public set formType(v: string) {
+        this._formType = v;
+    }
+
+
     private _eventId: number;
     public get eventId(): number {
         return this._eventId;
@@ -92,7 +101,7 @@ export class OnDemandEventFormView implements Views.Datasource {
 
     private _dtEvent: string;
     public get dtEvent(): string {
-       
+
         return this._dtEvent;
     }
     public set dtEvent(v: string) {

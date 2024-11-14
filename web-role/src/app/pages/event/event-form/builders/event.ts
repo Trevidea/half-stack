@@ -30,8 +30,11 @@ export class EventBuilder extends AbstractBuilder<
   }
 
   decompose(v: OnDemandEventFormView): Data.Event {
-    console.log(v);
 
+    if (v.formType === 'repeat') {
+      v.id = null
+      console.log("reaptev", v);
+    }
     const time = this.formatTime(v.time)
     // Format the event date to 'YYYY-MM-DD' format
     // Format the event date to 'YYYY-MM-DD' in local time zone
@@ -40,7 +43,6 @@ export class EventBuilder extends AbstractBuilder<
       id: v.id,
       title: v.title,
       detail: {
-        id: 0
       },
       dt_event: eventDate,
       level: v.levels.SelectedItem,
