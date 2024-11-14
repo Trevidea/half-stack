@@ -31,7 +31,7 @@ export class PastEventGridComponent {
 
   dropdownItems(item: any): UI.DropDownMenuItem[] {
     return [
-      { label: "Edit {t}", icon: "edit", action: () => this.editOnDemandEvent(item.id) },
+      { label: "Repeat event", icon: "event_repeat", action: () => this.repeatOnDemandEvent(item.id) },
       { label: "Share Event", icon: "share", action: () => { } },
       {
         label: "Upload to server",
@@ -42,7 +42,9 @@ export class PastEventGridComponent {
     ];
   }
 
-  editOnDemandEvent(id: number) {
-    this.router.navigate([`events/edit/on-demand-event/${id}`]);
+  repeatOnDemandEvent(id: number) {
+    this.router.navigate([`events/repeat-previous-event/${id}`,], {
+      queryParams: { type: 'repeat' }
+    });
   }
 }

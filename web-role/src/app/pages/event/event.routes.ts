@@ -18,6 +18,7 @@ export const EventsRoutes: Routes = [
             { path: 'edit/on-demand-event/:id', component: OnDemandEventFormPresenter },
             { path: 'past-event-details/:id', component: PastEventDetailPresenter },
             { path: 'preview/:id', component: EventPreviewPresenter },
+            { path: 'repeat-previous-event/:id', component: OnDemandEventFormPresenter }
         ]
     }
 ]
