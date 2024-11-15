@@ -17,7 +17,10 @@
                 <div class="info-badge">
                     {{item.type | capitalizeFirst}}
                 </div>
-                <button mat-button color="primary" (click)="viewDetial(item)">Details</button>
+                <div>
+                    <button mat-button class="m-r-8" color="primary" (click)="viewDetial(item)">Details</button>
+                    <button mat-flat-button color="primary" [routerLink]="'/connections/connection/live-connections'">View</button>
+                </div>
             </div>
             <span class=" f-s-16 f-w-600 m-b-8 d-flex align-items-center ellipsis">
                 {{item.title}}
