@@ -11,7 +11,7 @@ import { SharedComponent } from "./shared.component";
 export class SharedPresenter implements OnInit {
   
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    
   }
 
 

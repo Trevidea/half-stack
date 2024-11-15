@@ -84,6 +84,7 @@
   --bg-placeholder: #F3F4F5;
   --bg-color: #E7E7E7;
   --bg-lightDarkCard : rgba(247, 247, 247, 1);
+  --bg-darkcard: #E9F0F5 ;
 
 
   .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
@@ -111,6 +112,7 @@
   --bg-placeholder: #727272;
   --bg-color: #E7E7E7;
   --bg-lightDarkCard : rgba(247 ,247 ,247 ,14%);
+  --bg-darkcard: #2160934D;
 
   mat-icon-button {
     color: var(--color-dyanamic) !important;
