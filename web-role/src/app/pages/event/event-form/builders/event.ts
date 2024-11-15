@@ -9,6 +9,12 @@ export class EventBuilder extends AbstractBuilder<
 > {
   compose(m: Data.Event, v: OnDemandEventFormView) {
     console.log(m)
+    // If formType is 'repeat', set dt_event and tm_event to current date and time
+    if (v.formType === 'repeat') {
+      const now = new Date();
+      m.dt_event = this.formatDateToYYYYMMDD(now); // Convert to the format you need
+      m.tm_event = this.formatTimeToHHMM(now);      // Convert to the time format you need
+    }
     v.id = m.id;
     v.title = m.title;
     v.venue.cityAddress = m?.venue?.city_address;
@@ -19,6 +25,20 @@ export class EventBuilder extends AbstractBuilder<
     v.programs.SelectedItem = m.program;
     v.sports.SelectedItem = m.sport;
     v.time = this.formatTimeNumToStr(m.tm_event);
+  }
+
+
+  private formatDateToYYYYMMDD(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  private formatTimeToHHMM(date: Date): number {
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return parseInt(`${hours}${minutes}`);
   }
 
   formatTimeNumToStr(time: number): string {

@@ -29,7 +29,7 @@ export class SettingsComponent {
   sidePanelOpened = true;
   sideNavItem: SideNavItem[] = [
     { id: 1, displayName: 'Account', iconName: 'user', route: 'account' },
-    { id: 2, displayName: 'User', iconName: 'users', route: 'user' },
+    { id: 2, displayName: 'Device', iconName: 'devices', route: 'user' },
     { id: 3, displayName: 'Files', iconName: 'file', route: 'files' },
     { id: 4, displayName: 'Sharing', iconName: 'share', route: 'sharing' },
     { id: 5, displayName: 'Preferences', iconName: 'adjustments-alt', route: 'preferences' },

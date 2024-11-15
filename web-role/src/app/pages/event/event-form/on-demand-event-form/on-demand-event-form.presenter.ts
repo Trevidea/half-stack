@@ -46,7 +46,7 @@ export class OnDemandEventFormPresenter implements OnInit {
         this.modelService.eventJson(this.ds.id),
         this.ds,
         EventBuilder
-      );
+      )
     }
     Transformer.ComposeObjectAsync(
       this.modelService.MetaTypeByKey("PROGRAM"),
