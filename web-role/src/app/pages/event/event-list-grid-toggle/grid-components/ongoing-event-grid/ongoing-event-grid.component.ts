@@ -10,12 +10,13 @@ import { UI } from 'src/app/pages/blocks/ui-interface';
 import { OngoingEventDetailPresenter } from "../../../event-details/components/ongoing-event-detail/ongoing-event-detail.presenter";
 import { UpcomingEventDetailPresenter } from "../../../event-details/components/upcoming-event-detail/upcoming-event-detail.presenter";
 import { DateTimeService } from 'src/app/pages/blocks/date-time.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-ongoing-event-grid',
   standalone: true,
-  imports: [MaterialModule, TablerIconsModule, CapitalizeFirstPipe, DateTimeFormatPipe, ActionMenuComponent, OngoingEventDetailPresenter, OffCanvasComponent, UpcomingEventDetailPresenter],
+  imports: [MaterialModule,CommonModule,RouterModule, TablerIconsModule, CapitalizeFirstPipe, DateTimeFormatPipe, ActionMenuComponent, OngoingEventDetailPresenter, OffCanvasComponent, UpcomingEventDetailPresenter],
   templateUrl: './ongoing-event-grid.component.html',
   styleUrl: './ongoing-event-grid.component.scss'
 })
