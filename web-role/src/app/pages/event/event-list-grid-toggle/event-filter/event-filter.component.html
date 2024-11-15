@@ -1,7 +1,7 @@
 @if (datasource) {<div class="container-fluid">
     <div class="row">
         <div class="col-lg-4 col-md-12">
-            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">&nbsp;</mat-label>
+            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16 m-t-8">&nbsp;</mat-label>
             <mat-form-field appearance="outline" class="w-100 hide-hint p-0">
                 <input matInput class="p-b-0  mat-subtitle-2 " placeholder="Search here..." (keyup)="applyFilter($event)" />
                 <mat-icon matSuffix>
@@ -10,7 +10,7 @@
             </mat-form-field>
         </div>
         <div class="col-lg-2 col-md-6">
-            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Sport
+            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16 m-t-8">Sport
             </mat-label>
             <mat-form-field appearance="outline" class="w-100">
                 <mat-select [(ngModel)]="datasource.sports.SelectedItem" placeholder="Select sport">
@@ -27,7 +27,7 @@
             </mat-form-field>
         </div>
         <div class="col-lg-2 col-md-6">
-            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Level
+            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16 m-t-8">Level
             </mat-label>
             <mat-form-field appearance="outline" class="w-100">
                 <mat-select [(ngModel)]="datasource.levels.SelectedItem" placeholder="Select level">
@@ -44,7 +44,7 @@
             </mat-form-field>
         </div>
         <div class="col-lg-2 col-md-6">
-            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Program
+            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16 m-t-8">Program
             </mat-label>
             <mat-form-field appearance="outline" class="w-100">
                 <mat-select [(ngModel)]="datasource.programs.SelectedItem" placeholder="Select program">
@@ -61,7 +61,7 @@
             </mat-form-field>
         </div>
         <div class="col-lg-2 col-md-6">
-            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Year
+            <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16 m-t-8">Year
             </mat-label>
             <mat-form-field appearance="outline" class="w-100">
                 <mat-select [(ngModel)]="datasource.years.SelectedItem" placeholder="Select year">

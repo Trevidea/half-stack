@@ -19,6 +19,7 @@ export class AccountComponent implements OnInit {
   public avatarImage: string;
   ngOnInit(): void {
     this.avatarImage = './assets/images/profile/default-avtar.png';
+    console.log('Account Data :', this.datasource)
   }
 
 }

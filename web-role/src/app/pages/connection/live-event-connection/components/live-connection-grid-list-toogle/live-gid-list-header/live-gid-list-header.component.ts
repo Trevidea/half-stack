@@ -12,7 +12,7 @@ import { AddDeviceToEventPresenter } from 'src/app/pages/event/add-device-to-eve
 @Component({
   selector: 'app-live-gid-list-header',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, MatChipsModule, MatChipListbox, CommonModule, MatTabsModule, MatSelectModule],
+  imports: [MatIconModule, MatButtonModule,  CommonModule, MatTabsModule, ],
   templateUrl: './live-gid-list-header.component.html',
   styleUrl: './live-gid-list-header.component.scss'
 })
