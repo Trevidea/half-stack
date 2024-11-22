@@ -212,6 +212,7 @@ export class ModelService {
     }
   }
 
+
   saveDevice(data: Data.Device): Observable<Data.Device> {
     return this.create("devices", data);
   }
