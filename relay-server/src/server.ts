@@ -23,6 +23,7 @@ const connectZmq = async (sock: zmq.Subscriber) => {
     sock.subscribe("event-terminal");
     sock.subscribe("event-preview");
     sock.subscribe("live-event");
+    sock.subscribe("event-device");
     console.log('Connected to ZeroMQ publisher');
   } catch (err) {
     console.error('ZeroMQ connection error:', err);
