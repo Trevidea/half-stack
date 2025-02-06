@@ -50,10 +50,10 @@ Connection DBManager::getConnection(bool trx)
     {
         if (!Connection::has(c))
         {
-            auto server = this->getEnv("PG_SRV", "drake.in");
+            auto server = this->getEnv("PG_SRV", "postgres");
             auto db = this->getEnv("PG_DBS", "half-stack");
-            auto usr = this->getEnv("PG_USR", "sp_user");
-            auto pwd = this->getEnv("PG_PWD", "pipstrops");
+            auto usr = this->getEnv("PG_USR", "drake_8283");
+            auto pwd = this->getEnv("PG_PWD", "drake@8283");
             auto port = std::stoi(this->getEnv("PG_PORT", "5432"));
 
             return Connection::open(c, server, port, db, usr, pwd, trx);

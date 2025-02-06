@@ -1,0 +1,59 @@
+<mat-card>
+    <div class="row p-1 d-flex align-items-center">
+      <h2 class="col-8 p-l-30">Previous Events Connection</h2>
+      <div class="col-4 p-t-10 p-r-30 d-flex justify-content-end">
+                <!-- <select class="p-t-8 p-b-8 p-l-30 p-r-10 ">    
+                    <option>All</option>
+                </select>  -->
+                <!-- <button mat-raised-button color="primary" (click)="start.emit()">Start live event</button> -->
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+  
+    <div class="table-responsive">
+      <table>
+        <tr>
+            <th class="p-l-20">
+            <div class="d-flex">
+              <span class=" f-s-15 f-w-500" text-align="center">Name of Event</span>
+              <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler>
+            </div> 
+            </th>
+            <th class="f-w-200">
+              <div class="d-flex"><span class=" f-s-15 f-w-500" text-align="center">Date</span>
+                <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler></div> </th>
+            <th class="f-w-200">
+              <div class="d-flex">
+                <span class="f-s-15 f-w-500" text-align="center">Total Connection</span>
+                <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler></div> </th>
+            <th class="f-w-200">
+              <div class="d-flex"><span class="f-s-15 f-w-500" text-align="center">Duration</span> 
+                <i-tabler name="arrows-sort" class="icon-18 m-l-30"></i-tabler></div> </th>
+            <th class="f-w-200">
+              <div class="d-flex"><span class="f-s-15 f-w-500" text-align="center">Primary Device</span>
+              </div></th>
+        </tr>
+        <!-- @for(element of datasource; track element){ -->
+        <tr class="p-t-10 m-b-15" >
+            <td class="p-l-20 align-items-center ">McQuaid vs FF</td>
+            <td>25 May 2024</td>
+            <td>16</td>
+            <td>02:00:20</td>
+            <td>
+              <div >
+                <span class="keys1 m-r-8">Coach Steve &nbsp; iPad22</span>
+                 <span class="keys2 m-l-8">Harry &nbsp; cc18</span>
+              </div>
+            </td>
+        </tr>
+      <!-- } -->
+      </table>
+      <!-- <mat-paginator [length]="50"
+        [pageSize]="2"
+        [pageSizeOptions]="[2, 5 ,10 ,25 ,50]"
+      aria-label="Select page">
+    </mat-paginator> -->
+    </div>
+  </mat-card>
+  

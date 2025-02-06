@@ -1,0 +1,48 @@
+<div class="container-fluid profile-details">
+    <div class="card">
+        <div class="card-header">
+            <h3>Profile Details</h3>
+        </div>
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-md-6 col-12  offset-lg-3 offset-md-3 ">
+                    <div class="media mt-2 d-flex justify-content-center align-items-center text-align-center">
+                        <img class="user-avatar users-avatar-shadow rounded-circle my-25 cursor-pointer"
+                            [src]="avatarImage" alt="User avatar">
+                        <div class="media-body ml-1 m-t-8">
+                            <h3>{{datasource.firstName}} {{datasource?.lastName}}</h3>
+                            <p>{{datasource?.email}}</p>
+                        </div>
+                    </div>
+                    <div class=" row profile-info" >
+                        <div class="col-xl-6 col-12 m-t-16">
+                            <label for="userName">Username</label>
+                            <div class="profile-value" style="background-color: var(--bg-placeholder);">{{datasource?.userName}}</div>
+                        </div>
+                        <div class="col-xl-6 col-12  m-t-16">
+                            <label>Phone Number</label>
+                            <div class="profile-value" style="background-color: var(--bg-placeholder);" >{{datasource?.phoneNumber}}</div>
+                        </div>
+                        <div class="col-xl-6 col-12  m-t-16">
+                            <label>Role</label>
+                            <div class="profile-value" style="background-color: var(--bg-placeholder);">{{datasource?.role}}</div>
+                        </div>
+                        <div class="col-xl-6 col-12  m-t-16">
+                            <label>Address</label>
+                            <div class="profile-value" style="background-color: var(--bg-placeholder);">{{datasource?.address}}</div>
+                        </div>
+                        <div class="col-12 m-t-18 d-flex align-items-center justify-content-center ">
+                            <button mat-raised-button
+                                style="background-color: #1a97f5; color: #fff; margin-right: 10px;">Edit</button>
+                            <button mat-raised-button>Change
+                                Password</button>
+                            <!-- <button type="button" class="btn btn-outline-secondary" rippleEffect>Change
+                                Password</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

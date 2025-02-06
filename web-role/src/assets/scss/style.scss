@@ -1,0 +1,179 @@
+@use "@angular/material" as mat;
+@include mat.core();
+
+@import "themecolors/default_theme";
+@import "variables";
+@import "layouts/transitions";
+@import "helpers/color";
+@import "helpers/icon-size";
+
+//Theme colors
+
+@import "themecolors/default_theme";
+@include mat.all-component-themes($orangetheme);
+
+.dark-theme {
+  @include mat.all-component-colors($darkorangetheme);
+}
+
+// .dark-theme .aqua_theme {
+//   @include mat.all-component-colors($darkaquatheme);
+// }
+
+.blue_theme {
+  @import "themecolors/blue_theme";
+  @include mat.all-component-colors($bluetheme);
+}
+
+.aqua_theme {
+  @import "themecolors/aqua_theme";
+  @include mat.all-component-colors($aquatheme);
+}
+
+.purple_theme {
+  @import "themecolors/purple_theme";
+  @include mat.all-component-colors($purpletheme);
+}
+
+.green_theme {
+  @import "themecolors/green_theme";
+  @include mat.all-component-colors($greentheme);
+}
+
+.pink_theme {
+  @import "themecolors/pink_theme";
+  @include mat.all-component-colors($pinktheme);
+}
+
+//container layout
+@import "overrides/materialoverrides";
+@import "dark/dark";
+@import "container";
+@import "layouts/layouts";
+@import "grid/grid";
+@import "helpers/custom-flex";
+@import "helpers/index";
+
+// horizontal
+@import "horizontal/horizontal";
+
+// apps
+@import "apps/calendar";
+@import "apps/email";
+
+// pages
+@import "pages/dashboards";
+@import "pages/auth";
+@import "pages/common";
+@import "pages/landingpage";
+
+// RTL Theme
+@import "rtl/rtl";
+
+//This is for the icons (Required file)
+@import "icons/font-awesome/css/fontawesome-all.css";
+
+
+:root {
+  --border-color-dynamic: #c3c3c3;
+  --bg-color-chip: rgba(233, 240, 245, 1);
+  --card-border-color: #FDFDFD;
+  --dark-light-background: #fff;
+  --color-dyanamic: initial;
+  --color-dyanamic: #434343;
+  --bg-placeholder: #F3F4F5;
+  --bg-color: #E7E7E7;
+  --bg-lightDarkCard : rgba(247, 247, 247, 1);
+  --bg-darkcard: #E9F0F5 ;
+
+
+  .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+    color: #313131;
+  }
+
+  .bg-light-primary {
+    background-color: #dcf0ff !important;
+  }
+
+  .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after,
+  .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-indeterminate::after {
+    color: #1e4db7;
+  }
+}
+
+.dark-theme {
+
+  --color-dyanamic: #fff;
+  --dark-light-background: #232323;
+  --card-border-color: none;
+  --dark-background: #232323;
+  --border-color-dynamic: #444444;
+  --bg-color-chip: rgba(26, 151, 245, 0.2);
+  --bg-placeholder: #727272;
+  --bg-color: #E7E7E7;
+  --bg-lightDarkCard : rgba(247 ,247 ,247 ,14%);
+  --bg-darkcard: #2160934D;
+
+  mat-icon-button {
+    color: var(--color-dyanamic) !important;
+  }
+
+  i-feather {
+    color: var(--color-dyanamic);
+  }
+
+  i-tabler {
+    color: var(--color-dyanamic);
+  }
+
+  mat-icon {
+    color: var(--color-dyanamic) !important;
+  }
+
+  .mat-toolbar .mat-mdc-button-base.mat-mdc-button-base.mat-unthemed {
+    --mdc-text-button-label-text-color: #fff !important;
+    --mdc-outlined-button-label-text-color: #fff !important;
+  }
+
+  div:where(.swal2-container) div:where(.swal2-popup) {
+    background-color: #232323 !important;
+    color: #fff !important;
+  }
+
+  .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after, .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-indeterminate::after {
+    color: white;
+}
+
+.bg-light-primary {
+  background-color: var(--bg-color-chip) !important;
+}
+
+.mat-mdc-select-placeholder {
+  color: var(--color-dyanamic) !important;
+}  
+  
+.mat-mdc-icon-button[disabled] .mat-mdc-paginator-icon {
+  fill: var(--border-color-dynamic);
+}
+
+.mat-mdc-icon-button .mat-mdc-paginator-icon {
+  fill: var(--color-dyanamic);
+}
+
+}
+
+.bg-light-primary {
+  background-color: var(--bg-color-chip) !important;
+}
+
+.mat-mdc-select-placeholder {
+  color: var(--color-dyanamic) !important;
+} 
+
+
+.info-badge {
+  background-color: #8FAB0766;
+  padding: 3px 8px;
+  border-radius: 8px;
+  color: #0F0F0F;
+}

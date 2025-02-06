@@ -1,0 +1,6 @@
+@if (isEventStarted) {
+<router-outlet></router-outlet>
+}
+@if (!isEventStarted){
+<app-previous-events-connection-presenter></app-previous-events-connection-presenter>
+}

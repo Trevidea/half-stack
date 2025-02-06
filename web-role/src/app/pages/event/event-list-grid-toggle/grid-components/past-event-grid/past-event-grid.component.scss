@@ -1,0 +1,13 @@
+@import'../grid-view.scss';
+
+.mat-mdc-raised-button {
+    padding: 4px 8px;
+    height: fit-content !important;
+}
+
+.badge-text {
+    width: fit-content;
+    background-color: #E9F0F5;
+    padding: 2px 7px;
+    border-radius: 6px;
+}

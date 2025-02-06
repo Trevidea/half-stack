@@ -1,0 +1,139 @@
+ <div class="grid-view p-1">
+
+  @for(item of datasource?.connectionDetails; track item){
+  <mat-card class="grid-card"> 
+    <mat-card-content > 
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+        <mat-card
+          class="card"
+          [ngClass]="item?.role === 'Publisher' ? 'cursor-pointer' : 'cursor-none'"
+          style="height: 14rem; width: 24rem; border: 1px solid transparent"
+          (click)="detail(item)">
+
+        @if(item?.role === 'Publisher'){
+          <img 
+            src="assets/images/backgrounds/football_1.png" alt="Image" 
+            style="height: 100%; width: 100%; border-radius: 0.428rem"/>
+        }
+    
+          <!-- For devices without images -->
+           @if(item?.role === 'Subscriber'){
+          <div
+            class="d-flex justify-content-center align-items-center"
+            style="height: 100%; width: 100%;"
+          >
+           @if(item?.device === 'iPad15' || item.device === 'iPad22'){
+            <div>
+              <mat-icon style="font-size: 4rem">tablet_mac</mat-icon>
+            </div>}
+            @if(item?.deviceType === 'iPhone'){
+            <div>
+              <mat-icon style="font-size: 4rem">smartphone</mat-icon>
+            </div>}
+          </div>}
+    
+          <!-- Quality Badge -->
+          <div style="position: absolute; bottom: 0.3em; left: 0.3em">
+            @if(item?.quality === 2){
+            <div
+              class="d-flex align-items-center p-8" style="border-radius: 10px; color: rgba(73, 69, 79, 1); background-color: #cdf697 ;">
+              <mat-icon style="color: rgb(0, 102, 46); font-size: 10px">circle</mat-icon> 
+              <span>&#x25CF;Good</span>
+            </div>}
+            @if(item?.quality === 0){
+            <div  
+              class=" d-flex align-items-center p-8" style="border-radius: 10px; color: rgba(73, 69, 79, 1); background-color: #f49999 ;">
+              <mat-icon style="color: rgb(181, 0, 0)">circle</mat-icon>
+              <span>&#x25CF;Poor</span>
+            </div>}
+          </div>
+    
+          <!-- Transmit Status Badge -->
+          <div class="d-flex" style="position: absolute; bottom: 0.3em; right: 0.3em">
+            <ng-container>
+              <!-- Publisher Streaming -->
+               @if(item?.role === 'Publisher'){
+               <div class="d-flex align-items-center p-8"  style="border-radius: 10px; color: #454444; background-color: rgba(255, 252, 243, 1) ;">
+                <mat-icon style="color: rgba(245, 163, 10, 1);">arrow_upward</mat-icon>
+                <span>&#x25CF;Streaming</span> 
+              </div> }
+    
+              <!-- Subscriber Receiving -->
+               @if(item?.role === 'Subscriber'){
+              <div  class="d-flex align-items-center p-8" style="border-radius: 10px; color: #454444; background-color: rgba(233, 240, 245, 1) ;">
+                <mat-icon style="color: rgba(33, 96, 147, 1);">arrow_downward</mat-icon>
+                <span>&#x25CF;Receiving</span> 
+              </div>}
+    
+              <!-- Transmit Status -->
+               @if(item?.transmitStatus === 'Paused'){
+              <div  class="d-flex align-items-center p-8" style="border-radius: 10px; color: #454444; background-color: #807f7f; ">
+                <mat-icon style="color: #434242;">pause</mat-icon> 
+                <span>&#x25CF;Paused</span>
+              </div>}
+
+              @if(item?.transmitStatus === 'Blocked'){
+              <div class="d-flex align-items-center p-8" style="border-radius: 10px; color: #434242; background-color: #807f7f;">
+                <mat-icon style="color: #434242;">block</mat-icon> 
+                <span>&#x25CF;Blocked</span>
+              </div>}
+            </ng-container>
+          </div>
+        </mat-card>
+      </div>
+    </div> 
+    </mat-card-content>
+  
+
+
+    
+  </mat-card>
+  <mat-card class="p-t-4 p-b-4 p-l-10 p-r-10 info-card" style="background-color: rgba(233, 240, 245, 1);  z-index: 1;">
+    <div class="d-flex align-items-center justify-content-between p-t-4">
+     <div [ngClass]="item?.role == 'Publisher' ? 'cursor-pointer' : 'cursor-none'">
+      <mat-icon
+      class="m-t-10"
+      style="
+        height: 40%;
+        width: 30%;
+        font-size: 16px;
+        color: rgba(33, 96, 147, 1);
+      "
+      >tablet_mac</mat-icon
+    >
+        <span>
+          ipad
+        </span>
+     </div>
+
+     
+     <div>
+       <button mat-icon-button [matMenuTriggerFor]="menu">
+         <mat-icon>more_vert</mat-icon>
+       </button>
+       <mat-menu #menu="matMenu">
+         <button mat-menu-item >
+           <mat-icon>edit_square</mat-icon>
+           <span>Edit</span>
+         </button>
+         <button mat-menu-item style="color: #de2e21">
+           <mat-icon style="color: #de2e21">delete</mat-icon>
+           <span>Delete</span>
+         </button>
+       </mat-menu>
+     </div>
+   </div>
+     <div >
+       <h2 class="m-t-2 m-b-4">{{ item?.name }}</h2>
+       <h4 class="m-t-2 m-b-4 f-w-200">{{ item?.device }}</h4>
+       <h4 class="m-t-2 m-b-4 f-w-200">{{ item?.ipAddress }}</h4>
+       <h4 class="m-t-2 m-b-4 f-w-200">{{ item?.retries }} retries</h4>
+     </div>
+ </mat-card>
+}
+</div>
+
+
+
+

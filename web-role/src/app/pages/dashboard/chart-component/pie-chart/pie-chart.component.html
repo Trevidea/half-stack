@@ -1,0 +1,34 @@
+<mat-card class="cardWithShadow overflow-hidden">
+    <mat-card-content class="p-40">
+      <div class="d-flex align-items-center p-b-20">
+        <mat-card-title>Event streaming on</mat-card-title>
+      </div>
+      <div class="position-relative">
+      </div>
+      <div id="chart" class="d-flex flex-column m-t-30 position-relative">
+        <apx-chart
+        [series]="PieChart.series"
+        [chart]="PieChart.chart"
+        [legend]="PieChart.legend"
+        [labels]="PieChart.labels"
+        [dataLabels]="PieChart.dataLabels"
+        [colors]="PieChart.colors"
+        [stroke]="PieChart.stroke"
+        [tooltip]="PieChart.tooltip"
+        [plotOptions]="PieChart.plotOptions"
+        ></apx-chart>
+      </div>
+      <div class="d-flex align-items-center justify-content-between m-t-30">
+        <h6 class="mat-body-2 m-b-0 d-flex gap-6 align-items-center">
+          <span class="m-r-5"
+            ><i-tabler name="circle-filled" class="text-accent icon-12 d-flex"></i-tabler></span
+          >Riverhawks vs Huskers 
+        </h6>
+        <h6 class="mat-body-2 m-b-0 d-flex gap-6 align-items-center">
+          <span class="m-r-5"
+            ><i-tabler name="circle-filled" class="text-primary icon-12 d-flex"></i-tabler></span
+          >McQuaid vs Fairfort
+        </h6>
+      </div>
+    </mat-card-content>
+  </mat-card>

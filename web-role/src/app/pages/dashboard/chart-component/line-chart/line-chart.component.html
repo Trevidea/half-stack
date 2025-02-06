@@ -1,0 +1,33 @@
+<mat-card class="cardWithShadow">
+    <mat-card-content class="p-32">
+      <div class="d-flex d-md-block align-items-center">
+        <mat-card-title>Connection throughout the event</mat-card-title>
+      </div>
+      <div id="chart" class="d-flex flex-column m-t-30">
+        <apx-chart
+          [series]="ThroughoutEvent.series"
+          [dataLabels]="ThroughoutEvent.dataLabels"
+          [chart]="ThroughoutEvent.chart"
+          [legend]="ThroughoutEvent.legend"
+          [fill]="ThroughoutEvent.fill"
+          [xaxis]="ThroughoutEvent.xaxis"
+          [grid]="ThroughoutEvent.grid"
+          [stroke]="ThroughoutEvent.stroke"
+          [tooltip]="ThroughoutEvent.tooltip"
+          [markers]="ThroughoutEvent.markers"
+        ></apx-chart>
+      </div>
+      <div class="hstack align-items-center justify-content-center gap-10">
+        <h5 class="mat-body-1 m-0 d-flex align-items-center gap-6 text-accent text-ellipsis">
+          <span class="m-r-5 text-turncate"
+            ><i-tabler name="circle-filled" class="text-accent icon-12 d-flex"></i-tabler></span
+          >McQuaid vs Fairfort
+        </h5>
+        <h5 class="mat-body-1 m-0 d-flex align-items-center gap-6 text-primary text-ellipsis">
+          <span class="m-r-5 text-turncate"
+            ><i-tabler name="circle-filled" class="text-primary icon-12 d-flex"></i-tabler></span
+          >Riverhawks vs Huskers
+        </h5>
+      </div>
+    </mat-card-content>
+  </mat-card>

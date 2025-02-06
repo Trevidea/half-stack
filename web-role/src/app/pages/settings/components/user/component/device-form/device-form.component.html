@@ -1,0 +1,69 @@
+<div class="p-0 m-l-20 d-flex align-items-center  justify-content-end ">
+    <button mat-icon-button class="d-flex align-items-center" (click)="cancel.emit()">
+        <i-tabler name="x" class="icon-18"></i-tabler>
+    </button>
+</div>
+<h2 class="p-0 m-l-20">Create new device</h2>
+<mat-dialog-content class="mat-typography">
+    <form #deviceform="ngForm">
+        <div class="row">
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Device Name
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text" matInput name="EventName" [(ngModel)]="datasource.deviceName" required
+                        #ngmdevice="ngModel" autocomplete="off" />
+                </mat-form-field>
+                <app-validation-alert controlName="Device Name" [control]="ngmdevice">
+                </app-validation-alert>
+            </div>
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Device type
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-select placeholder="Select type" name="type" [(ngModel)]="datasource.type.SelectedItem"
+                        required #ngmdevicetype="ngModel">
+                        @for (item of datasource.type; track $index) {
+                        <mat-option [value]="item">{{item}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <app-validation-alert controlName="Device Type" [control]="ngmdevicetype">
+                </app-validation-alert>
+            </div>
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">Device code
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text" matInput name="EventName" name="code" [(ngModel)]="datasource.deviceCode"
+                        #ngmdeviceCode="ngModel" required />
+                </mat-form-field>
+                <app-validation-alert controlName="Device Code" [control]="ngmdeviceCode">
+                </app-validation-alert>
+            </div>
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">PIN
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text" matInput minlength="6" maxlength="6" required name="pin"
+                        [(ngModel)]="datasource.pin" #ngmdpin="ngModel" autocomplete="off" />
+                </mat-form-field>
+                <app-validation-alert controlName="PIN" [control]="ngmdpin">
+                </app-validation-alert>
+            </div>
+            <div class="col-12 m-b-8">
+                <mat-label class="mat-subtitle-2 f-w-600 d-block m-b-16">IP Address
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input type="text" matInput  name="ip_add"
+                        [(ngModel)]="datasource.ip_add" autocomplete="off" />
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+
+</mat-dialog-content>
+<mat-dialog-actions class="p-x-24 p-b-24 d-flex align-items-center justify-content-end ">
+    <button mat-raised-button style="background-color: #1a97f5; color: #fff;" (click)="save.emit(); "
+        [disabled]="!deviceform.valid">Save</button>
+</mat-dialog-actions>

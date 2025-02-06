@@ -1,0 +1,19 @@
+<button mat-icon-button [matMenuTriggerFor]="menu"  style=" background-color: rgba(205, 205, 205, 0.92);
+ margin: 2px; 
+border-radius: 8px; 
+height: 30px;
+width: 30px; 
+padding: 0; 
+display: flex ; 
+align-items: center;
+ justify-content: center;" >
+    <mat-icon class="m-0" style="font-size: 20px;">more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+    @for (item of dropdownItems; track $index) {
+    <button mat-menu-item [style.color]="item.color || 'inherit'" (click)="item.action()">
+        <mat-icon [style.color]="item.color || 'inherit'">{{ item.icon }}</mat-icon>
+        <span>{{ item.label }}</span>
+    </button>
+    }
+</mat-menu>

@@ -1,0 +1,115 @@
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-button {
+    padding: 4px 6px;
+    font-size: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70px;
+  }
+  
+  .dropdown-arrow {
+    margin-left: 10px;
+    font-size: 12px;
+  }
+  
+  .dropdown-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    width: 100px;
+  }
+  
+  .dropdown-list li {
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .dropdown-list li:hover {
+    background-color: #f1f1f1;
+  }
+
+  
+table {
+   border-collapse: collapse;
+    width: 100%;
+}
+
+
+td {
+  width: 20%;
+  padding: 8px;
+  text-align: left;
+  border-top: 1px solid rgba(46, 46, 46, 1);
+}
+
+
+th {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left:6px;
+    padding-right: 2px;
+    text-align: left;
+}
+.timer-container{
+  width: 100px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  padding: 4px 3px 4px 4px;
+  background-color: rgba(253, 253, 253, 0.1);
+}
+
+.dynamic-select {
+  padding: 8px 10px; /* Padding for better visual spacing */
+  border-radius: 8px;
+  width: auto; /* Initially set the width to auto */
+  min-width: 50px; /* Set a minimum width to avoid shrinking too much */
+  font-family: inherit;
+  font-size: 1rem;
+  appearance: none; /* Remove the default browser styling */
+  transition: width 0.3s ease; /* Smooth width transition */
+}
+
+.dynamic-select option {
+  width: max-content; /* Option width is set to content size */
+}
+
+.dynamic-select:focus {
+  outline: none;
+  border: 1px solid #007bff; /* Add focus border */
+}
+.icon-red{
+  color: red;
+}
+
+// .text-turncate{
+//   display: inline-block;
+//   white-space: nowrap;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+// }
+// .text-ellipsis {
+//   max-width: 10%;
+//   /* Set max-width as per your layout */
+//   white-space: nowrap;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+// }
+
+

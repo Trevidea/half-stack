@@ -1,0 +1,13 @@
+.text-turncate{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.text-ellipsis {
+    max-width: 90%;
+    /* Set max-width as per your layout */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

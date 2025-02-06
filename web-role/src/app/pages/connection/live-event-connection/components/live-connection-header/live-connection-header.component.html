@@ -1,0 +1,165 @@
+<div class="main-container">
+  <!-- Header Section -->
+  <mat-card
+    class="header-card"
+    style="border-radius: 0.428rem; background-color: var(--bg-darkcard)"
+  >
+    <mat-card-title>
+      <div class="header-content d-flex justify-content-between align-items-center">
+        <!-- Title -->
+          <h4 class="p-l-8">Live </h4>
+        <!-- Timer and Controls -->
+          <div class="d-flex align-items-center">
+            <h5 class="m-r-18">
+              {{ datasource?.ongoingCountdown }}
+            </h5>
+          <!-- Pause Button -->
+          <button mat-icon-button color="primary" aria-label="Pause">
+            <mat-icon>pause_circle</mat-icon>
+          </button>
+
+          <!-- Stop Button -->
+          <button mat-icon-button color="warn" aria-label="Stop">
+            <mat-icon>stop_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card-title>
+  </mat-card>
+
+  <div class="row">
+    <!-- Event Details Section -->
+    <div class="col-md-4 p-l-4 mt-3">
+      <mat-card-content class="p-t-40">
+        <h2 class="event-title m-b-8">{{ datasource?.title }}</h2>
+
+        <div class="event-info">
+          <div class="d-flex align-items-center mb-2">
+            <mat-icon class="mat-icon-size">schedule</mat-icon>
+            <span class="m-b-2 m-l-4"
+              >{{ datasource?.dtEvent | dateTimeFormat: datasource?.time}} </span
+            >
+            <!-- Add actual event time here -->
+          </div>
+
+          <div class="d-flex align-items-center">
+            <mat-icon class="mat-icon-size">location_on</mat-icon>
+            <span class="mb-0 m-t-2 m-l-4"
+              >Fairport High School, 33 Union Street, Fairport</span
+            >
+          </div>
+        </div>
+      </mat-card-content>
+    </div>
+
+    <!-- Data Section -->
+    <div class="col-md-8 mt-3">
+      <mat-card-content>
+        <div class="row">
+          <!-- Data Card Template -->
+          <div class="col-md-4">
+            <mat-card
+              class="data-card p-t-0"
+              style="
+                background-color: var(--bg-lightDarkCard ) ;
+                border-radius: 10px;
+                padding: 1rem;
+              "
+            >
+              <div class="d-flex align-items-center">
+                <mat-icon
+                  class="m-t-10"
+                  style="height: 60%; width: 16%; font-size: 30px"
+                  >description</mat-icon
+                >
+                <h3 class="ml-2 p-t-8 m-b-4">Data</h3>
+              </div>
+              <div class="d-flex justify-content-between mt-2">
+                <div>
+                  <p class="m-b-2">Sent:</p>
+                  <strong class="m-t-2">900mb</strong>
+                </div>
+                <div>
+                  <p class="m-b-2">Received:</p>
+                  <strong class="m-t-2">900mb</strong>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+
+          <div class="col-md-4">
+            <mat-card
+              class="data-card-device p-t-0"
+              style="
+                background-color: var(--bg-lightDarkCard );
+                border-radius: 10px;
+                padding: 1rem;
+              "
+            >
+              <div class="m-t-0" style="color: #8e8e8e; font-size: 14px">
+                <h3 class="m-t-4 m-b-8">Primary device</h3>
+              </div>
+              <div class="d-flex align-items-center">
+                <mat-icon
+                  class="m-t-10"
+                  style="
+                    height: 60%;
+                    width: 22%;
+                    font-size: 50px;
+                    color: rgba(33, 96, 147, 1);
+                  "
+                  >tablet_mac</mat-icon
+                >
+                <div class="d-flex flex-column m-l-8">
+                  <h3 class="m-t-15 m-b-2" style="font-size: 17px">iPad22</h3>
+                  <div class="d-flex align-items-center">
+                    <i-tabler name="arrow-down-left" class="icon-20"></i-tabler>
+                    <span style="font-size: 14px">Receiving</span>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+
+          <div class="col-md-4 p-l-2 m-r-1">
+            <mat-card
+              class="data-card-device p-t-0"
+              style="
+                background-color: var(--bg-lightDarkCard );
+                border-radius: 10px;
+                padding: 1rem;
+              "
+            >
+              <div class="m-t-0" style="color: #8e8e8e; font-size: 14px">
+                <h3 class="m-t-4 m-b-8 m-l-0 m-r-0">Primary Device</h3>
+              </div>
+              <div class="d-flex align-items-center">
+                <mat-icon
+                  class="m-t-10"
+                  style="
+                    height: 60%;
+                    width: 20%;
+                    font-size: 50px;
+                    color: rgba(245, 163, 10, 1);
+                  "
+                  >videocam</mat-icon
+                >
+                <div class="d-flex flex-column m-l-8">
+                  <h3 class="m-t-15 m-b-2" style="font-size: 17px">cc18</h3>
+                  <div class="d-flex align-items-center">
+                    <i-tabler
+                      name="circle-rectangle"
+                      class="icon-20"
+                    ></i-tabler>
+                    <!-- <mat-icon class="icon-18 d-flex">stop_circle</mat-icon> -->
+                    <span style="font-size: 14px">Stopped</span>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </mat-card-content>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="grid-view">
+    @for (item of datasource; track $index) {
+    <mat-card class="grid-card ">
+        <div class="card-img">
+            <img class="right img-fluid" src="./assets/images/half-stack-images/event-card.png" />
+        </div>
+        <div class="card-overlay  d-flex align-items-top">
+            <div class="w-100  d-flex align-items-center justify-content-end">
+                <app-action-menu [dropdownItems]="dropdownItems(item)"></app-action-menu>
+
+            </div>
+        </div>
+        <mat-card-content class="card-body ">
+            <div class="w-100 d-flex align-items-center justify-content-between m-b-8">
+                <div class="info-badge">
+                    {{ item.type | capitalizeFirst }}
+                </div>
+                <button mat-button color="primary" (click)="viewDetial(item.id)">Details</button>
+            </div>
+            <span class=" f-s-16 f-w-600 m-b-8 d-flex align-items-center">
+                {{item.title}}
+            </span>
+            <div class="d-flex align-items-center m-b-8">
+                <span class=" f-s-14 d-flex align-items-top">
+                    <i-tabler name="trophy" class="icon-18 m-r-4 flex-shrink-0"></i-tabler> {{item.sport |
+                    capitalizeFirst}}</span>
+            </div>
+            <div class="d-flex align-items-center m-b-8">
+                <span class=" f-s-14 d-flex align-items-center">
+                    <i-tabler name="clock-hour-5" class="icon-18 m-r-4"></i-tabler>{{ item.dtEvent |
+                    dateTimeFormat:item.time }}</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+                <span class=" f-s-14  d-flex align-items-center">
+                    <i-tabler name="file" class="icon-14 m-r-4"></i-tabler>TAR file
+                </span>
+                <span class=" f-s-14  d-flex align-items-center">
+                    Shared with 12 people
+                </span>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    }
+
+</div>
