@@ -19,7 +19,7 @@ app.use(cors());
 
 const connectZmq = async (sock: zmq.Subscriber) => {
   try {
-    sock.connect("tcp://127.0.0.1:4001");
+    sock.connect("tcp://service-gateway:4001");
     sock.subscribe("event-terminal");
     sock.subscribe("event-preview");
     sock.subscribe("live-event");

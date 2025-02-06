@@ -1,56 +1,42 @@
 version: '3.8'
-
 services:
-  capture-server-ui:
-    build:
-      context: ./capture-server-ui
-      dockerfile: Dockerfile
-    image: capture-server-ui:latest
-    container_name: capture-server-ui-container
-    ports:
-      - "80:80"
-    volumes:
-      - ./capture-server-ui:/app
-
-  # postgres:
-  #   image: postgres:latest
-  #   environment:
-  #     POSTGRES_DB: your_postgres_database
-  #     POSTGRES_USER: your_postgres_user
-  #     POSTGRES_PASSWORD: your_postgres_password
-  #   volumes:
-  #     - postgres-data:/var/lib/postgresql/data
-  #   ports:
-  #     - "5432:5432"
-
-  # capture-server:
-  #   build:
-  #     context: ./capture-server
-  #     dockerfile: Dockerfile
-  #   environment:
-  #     PG_SRV: postgres
-  #     PG_DBS: your_postgres_database
-  #     PG_USR: your_postgres_user
-  #     PG_PWD: your_postgres_password
-  #   ports:
-  #     - "8080:8080" 
-  #   depends_on:
-  #     - postgres
-
   llhls-server:
     build:
       context: ./llhls-server
       dockerfile: Dockerfile
-    image: llhls-server:latest
-    container_name: llhls-server-container
+    container_name: llhls-server
+    image: llhls-server
     ports:
-      - "59919:80"
+      - "59919:59919"  # Expose port 80 on llhls-server
     volumes:
-      - ./llhls-server:/app
-  
-  html-log:
+      - llhls-server-hls:/usr/share/nginx/html/hls
+    restart: unless-stopped
+
+  relay-server:
     build:
-      context: ./html_log
+      context: ./relay-server
       dockerfile: Dockerfile
+    container_name: relay-server
+    image: relay-server
     ports:
-      - "8081:8081" 
+       - "3001:3001"  # Expose WebSocket server
+       -  "4001:4001"  # Expose ZeroMQ publisher
+    volumes:
+      - relay-config:/etc/relay-server
+      - relay-server-logs:/var/log/relay-server  # Map to store logs locally
+    restart: unless-stopped
+    networks:
+      - private  # Ensure this server joins the same network
+
+volumes:
+  llhls-server-hls:
+    driver: local
+  relay-config:
+    driver: local
+  relay-server-logs:
+    driver: local
+
+networks:
+  private:
+    driver: bridge
+    external: true  # Use the already created private network

@@ -29,7 +29,8 @@ set(HALF_STACK_SRC
     tagging-engine.cpp
     metatype.cpp
     qeal.cpp
-    coach.cpp)
+    coach.cpp
+    player.cpp)
 add_library(half-stack STATIC ${HALF_STACK_SRC})
 target_include_directories(half-stack PUBLIC "./" rest-client zmq)
 target_link_libraries(half-stack PUBLIC
